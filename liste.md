@@ -30,10 +30,10 @@ babel-lang	: "francais"
 
 #Règles du jeu
 * Former des mots 7 lettres
-* chaque joueur pocède 7 tuiles random
+* chaque joueur possède 7 tuiles random
 * pre-selectionne des tuiles
 * les tuiles valent des points
-* la partie pocède 100 tuiles 
+* la partie possède 100 tuiles 
 * la victoire revient au joueur avec le plus de points une fois que les tuiles sont épuisées
 
 

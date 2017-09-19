@@ -36,6 +36,7 @@ babel-lang	: "francais"
 ##Les petits plus
 * verificateur à chaque tuile
 * indices
+* chat
 * jeter les tuiles
 * melanger les tuiles (réaffichage dans un autre sens)
 * timer 72h

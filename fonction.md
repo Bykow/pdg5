@@ -10,24 +10,24 @@ babel-lang	: "francais"
 ---
 
 
-#Designs Patterns
+# Designs Patterns
 * State (co/deco)
 
-#Fonctionnalités
-##Librairies
+# Fonctionnalités
+## Librairies
 * Java
 * JavaFx
 * Maven
 * Gson
 
-##Client
+## Client
 * connexion au server -> SSLSocket
 * identifiant
 * jouer
 * notification (pret à jouer sur partie x)
 * communication
 
-##Server
+## Server
 * mySQL
 * dico
 * gestion client
@@ -55,7 +55,7 @@ babel-lang	: "francais"
 * notification windows
 * pubs
 
-#Règles du jeu
+# Règles du jeu
 * Former des mots 7 lettres
 * chaque joueur possède 7 tuiles random
 * pre-séléctionne des tuiles

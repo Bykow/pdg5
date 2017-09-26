@@ -9,3 +9,12 @@ A remplir
 
 ## Fonctionnalités
 A remplir
+
+## Fonctionnement
+Le projet ce build à l'aide de Maven, utilisez la commande
+
+```
+$ mvn package
+```
+
+pour obtenir deux artefacts *.jar* qui sont executables. Un des artefact représente le client, l'autre artefact est le server.

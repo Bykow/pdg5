@@ -1,0 +1,98 @@
+\newcommand\auteur{***Author***}
+\newcommand\cours{PDG}
+\newcommand\ecole{IL - TIC - HEIG-VD}
+\newcommand\domaine{PDG5 (Nom \`a d\'efinir)}
+\newcommand\titre{WordOn HD - Windows}
+
+\newcommand\f[1]{\lstinputlisting[caption=#1]{#1}}
+
+
+\documentclass[a4paper,11pt]{article}
+%
+\author{\auteur}
+\title{\titre}
+\date{\today}
+
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{color}
+\usepackage{enumerate}
+\usepackage[utf8]{inputenc}
+\usepackage[frenchb]{babel}
+\usepackage{float}
+\usepackage{listingsutf8}
+\usepackage{geometry}
+\usepackage{amssymb,mathtools,pifont} 
+\usepackage{enumitem}
+\usepackage{xspace}
+\geometry{verbose,tmargin=2.5cm,bmargin=2cm,lmargin=2cm,rmargin=2.5cm}
+\selectlanguage{frenchb}
+\frenchbsetup{StandardLists=true}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\setlength\parindent{0pt}
+
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+%
+\floatname{algorithm}{Algorithme}
+\algrenewcommand\algorithmicrequire{\textbf{Données :}}
+\algrenewcommand\algorithmicensure{\textbf{Résultat :}}
+%
+\algnewcommand\algorithmicto{\textbf{to}}
+\algrenewtext{For}[3]{\algorithmicfor\ #1 $\gets$ #2 \algorithmicto\ #3 \algorithmicdo}
+%
+\algrenewcommand{\algorithmiccomment}[1]{\hfill{\color{blue}$\triangleright$ #1}}
+
+% headers & footers
+\pagestyle{fancy}
+
+\lhead{\domaine}
+\rhead{\titre}
+
+\lfoot{\auteur}
+\cfoot{}
+\rfoot{\thepage}
+\lstset{
+	inputencoding=utf8/latin1,
+	breaklines=true, 
+	language=c++,  
+	basicstyle=\small, 
+	numbers=left,   
+	firstnumber=1,
+	numberfirstline=true, 
+	keywordstyle=\color{blue}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	commentstyle=\color{black}\ttfamily,
+	morecomment=[l][\color{magenta}]{\#},
+	showstringspaces=false
+}
+
+\begin{document}
+	
+	% Entete première page
+	\thispagestyle{empty}
+	%
+	\noindent \cours \hfill \ecole{} \newline
+	\noindent \auteur \hfill \today \newline
+	\hrule
+	\vspace{7mm}
+	\noindent {\large \bf \domaine } \hfill \titre {\large \bf }\\[3mm]
+	\hrule
+	
+	\tableofcontents
+	\newpage
+	
+	\section{Introduction}
+	
+	\section{Présentation}
+	
+	... 
+		
+	\section{Conclusion}
+	
+	
+\end{document}
+

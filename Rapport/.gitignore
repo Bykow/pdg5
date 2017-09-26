@@ -1,6 +1,0 @@
-# Explude latex temp file
-
-*.aux
-*.toc
-*.gz
-*.pdf

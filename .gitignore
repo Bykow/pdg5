@@ -39,3 +39,9 @@ buildNumber.properties
 IntelliJ
 *.iml
 .idea
+
+# Explude latex temp file
+*.aux
+*.toc
+*.gz
+*.pdf

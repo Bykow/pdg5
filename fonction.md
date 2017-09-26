@@ -61,7 +61,10 @@ Ce tableau à pour but de répartir quel pièce de logiciel ce trouve sur quelle
 * la partie possède 114 tuiles 
 * la victoire revient au joueur avec le plus de points une fois que les tuiles sont épuisées
 
-
-
-
-
+# Problématiques
+* Base de donnée
+* Tirage au sort
+* Interface graphique
+* Communication
+* IA (joue contre la machine)
+* Notifications

@@ -68,3 +68,7 @@ Ce tableau à pour but de répartir quel pièce de logiciel ce trouve sur quelle
 * Communication
 * IA (joue contre la machine)
 * Notifications
+* Emplacements des tuiles avec multiplicateurs  
+Envoie d'une string lors d'un nouveau coup  
+Exemple : 0030000 pour la 3ème, x3
+* Echange de tuile

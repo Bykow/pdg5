@@ -1,15 +1,3 @@
----
-title 		: PDG - Fonctionnalités
-author		: Lawrence Stalder
-date 		: 19 Septembre 2017
-geometry 	: "margin=1in"
-algorithm 	: true
-fontsize	: 11pt
-lang		: true
-babel-lang	: "francais"
----
-
-
 # Designs Patterns
 * State (co/deco)
 
@@ -33,6 +21,16 @@ babel-lang	: "francais"
 * gestion client
 * historique /stats
 * stockage profil joueur (ID, etc)
+
+# Domaine
+Ce tableau à pour but de répartir quel pièce de logiciel ce trouve sur quelle application. Soit client, soit serveur, soit en commun
+
+| Client | Commun | Server |
+| - | - | - |
+| Graphic interface | Exchange Protocol | DB |
+| Game | | MultiThreading for each client |
+| | | Game Logic |
+| | | Dico |
 
 ## Implémentation
 ### Mode Partie

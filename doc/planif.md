@@ -1,4 +1,10 @@
 # Planification
+
+==> github issues & Milestones
+
+----------
+
+
 ## 1 :
 * Découverte du projet, constitution des groupes.
 

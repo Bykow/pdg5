@@ -70,6 +70,10 @@ public class Tournament {
 		throw new UnsupportedOperationException("Not implemented yet");
 	}
 	
+	public static Tournament newTournament() {
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+	
 	// tournament stuff
 	
 	public void setTitle(String title) {
@@ -99,7 +103,6 @@ public class Tournament {
 	// override stuff
 	@Override
 	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
-		return super.equals(obj);
+		throw new UnsupportedOperationException("Not implemented yet");
 	}
 }

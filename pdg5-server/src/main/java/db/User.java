@@ -69,6 +69,10 @@ public class User {
 		throw new UnsupportedOperationException("Not implemented yet");
 	}
 	
+	public static User newUser() {
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+	
 	// user stuff
 	
 	public void setEmail(String new_email) {
@@ -94,8 +98,7 @@ public class User {
 	// override stuff
 	@Override
 	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
-		return super.equals(obj);
+		throw new UnsupportedOperationException("Not implemented yet");
 	}
 
 	

@@ -45,3 +45,5 @@ IntelliJ
 *.toc
 *.gz
 *.pdf
+
+\.DS_Store

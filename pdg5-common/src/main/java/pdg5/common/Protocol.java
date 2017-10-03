@@ -8,12 +8,14 @@ public interface Protocol {
     /**
      * Socket
      */
-    String DEFAULT_SERVER = "127.0.0.1"; //to modify for tests
+    String DEFAULT_SERVER = "127.0.0.1"; // modify for tests
     int DEFAULT_PORT = 47298;
 
-    int NUMBEROFTUILES = 7;
-    int NUMBEROFEXTRATUILES = 2;
-    int NUMBEROFPLAYERS = 2;
+
+    int NUMBER_OF_TUILES_PER_PLAYER = 7;
+    int NUMBER_OF_EXTRA_TUILES = 2;
+    int NUMBER_OF_PLAYERS = 2;
+    int NUMBER_OF_TUILES_PER_GAME = 114;
 
     String LANG_FR = "FR";
 

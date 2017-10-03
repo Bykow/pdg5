@@ -8,14 +8,14 @@
 * Maven
 * Gson
 
-## Client
+## pdg5.client.Client
 * connexion au server -> SSLSocket
 * identifiant
 * jouer
 * notification (pret à jouer sur partie x)
 * communication
 
-## Server
+## pdg5.server.Server
 * mySQL
 * dico
 * gestion client
@@ -25,7 +25,7 @@
 # Domaine
 Ce tableau à pour but de répartir quel pièce de logiciel ce trouve sur quelle application. Soit client, soit serveur, soit en commun
 
-| Client | Commun | Server |
+| pdg5.client.Client | Commun | pdg5.server.Server |
 | - | - | - |
 | Graphic interface | Exchange Protocol | DB |
 | Game | | MultiThreading for each client |

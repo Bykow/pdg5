@@ -8,14 +8,14 @@
 * Maven
 * Gson
 
-## Client
+## pdg5.client.Client
 * connexion au server -> SSLSocket
 * identifiant
 * jouer
 * notification (pret à jouer sur partie x)
 * communication
 
-## Server
+## pdg5.server.Server
 * mySQL
 * dico
 * gestion client

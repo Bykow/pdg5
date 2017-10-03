@@ -90,6 +90,13 @@ public class User {
 	public void removeBlackList(User bl) {
 		throw new UnsupportedOperationException("Not implemented yet");
 	}
+	
+	// override stuff
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		return super.equals(obj);
+	}
 
 	
 	

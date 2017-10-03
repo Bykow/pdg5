@@ -14,12 +14,14 @@ public class Tournament {
 	private String title;
 	private Date creationTime;
 	private ArrayList<User> players;
+	private ArrayList<Game> games;
 	
 	public Tournament(int id) {
 		this.ID = id;
 		title = null;
 		creationTime = null;
 		players = new ArrayList<>();
+		games = new ArrayList<>();
 	}
 	
 	public Tournament(int id, String title, Date creationTime) {
@@ -27,6 +29,7 @@ public class Tournament {
 		this.title = title;
 		this.creationTime = creationTime;
 		players = new ArrayList<>();
+		games = new ArrayList<>();
 	}
 	
 	public Tournament(int id, String title, Date creationTime, ArrayList<User> players) {
@@ -34,6 +37,15 @@ public class Tournament {
 		this.title = title;
 		this.creationTime = creationTime;
 		this.players = players;
+		games = new ArrayList<>();
+	}
+	
+	public Tournament(int id, String title, Date creationTime, ArrayList<User> players, ArrayList<Game> games) {
+		this.ID = id;
+		this.title = title;
+		this.creationTime = creationTime;
+		this.players = players;
+		this.games = games;
 	}
 	
 	// database stuff
@@ -75,5 +87,19 @@ public class Tournament {
 	public void removePlayer(User player) {
 		throw new UnsupportedOperationException("Not implemented yet");
 	}
+	
+	public void addGame(Game game) {
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
 
+	public void removeGame(Game game) {
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+	
+	// override stuff
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		return super.equals(obj);
+	}
 }

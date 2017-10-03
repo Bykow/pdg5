@@ -9,6 +9,8 @@ package db;
 import java.sql.*;
 import java.util.ArrayList;
 
+import org.sql2o.Sql2o;
+
 /**
  *
  * @author Tony Clavien
@@ -24,14 +26,21 @@ public class DBConnection {
 
  	   //  Database credentials
  	 //TODO add your stuff
- 	 private static final String USER = "username";
- 	 private static final String PASS = "password";
+ 	 private static final String USER = "root";
+ 	 private static final String PASS = "";
+ 	 
+ 	private static Sql2o sql2o;
+
+    static{
+        sql2o = new Sql2o(DB_URL, USER, PASS);
+    }
     
     /** Creates a new instance of MyDBConnection */
     public DBConnection() {
-
     }
-
+    
+    
+    @Deprecated
     public void init(){
     
        try{
@@ -45,12 +54,17 @@ public class DBConnection {
         }
     }
     
+    public static Sql2o getConnection() {
+    	return sql2o;
+    }
     
+    @Deprecated
     public Connection getMyConnection(){
         return myConnection;
     }
     
     //TODO do query class
+    @Deprecated
     public static ArrayList<String[]> selectQuery(String[] colName, String dbTable) {
     	DBConnection dbc=new DBConnection();
         dbc.init();
@@ -88,6 +102,7 @@ public class DBConnection {
     }
     
     //TODO add where clause
+    @Deprecated
     private static String constructQuery(String[] colName, String dbTable) {
     	StringBuilder sb = new StringBuilder();
         sb.append("SELECT ");
@@ -102,7 +117,7 @@ public class DBConnection {
         return sb.toString();
     }
     
-    
+    @Deprecated
     public void close(ResultSet rs){
         
         if(rs !=null){
@@ -113,7 +128,7 @@ public class DBConnection {
         
         }
     }
-    
+    @Deprecated
      public void close(java.sql.Statement stmt){
         
         if(stmt !=null){
@@ -124,7 +139,7 @@ public class DBConnection {
         
         }
     }
-     
+     @Deprecated
   public void destroy(){
   
     if(myConnection !=null){

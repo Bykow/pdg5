@@ -11,8 +11,9 @@ import com.mysql.jdbc.NotImplemented;
  */
 public class User {
 
-	private final int ID;
+	private int ID;
 	private String email;
+	private String pass;
 	private ArrayList<User> friends;
 	private ArrayList<User> blacklist;
 
@@ -69,15 +70,53 @@ public class User {
 		throw new UnsupportedOperationException("Not implemented yet");
 	}
 	
+	// getter and setter
+	
+	public String getPassword() {
+		return pass;
+	}
+
+	public void setPassword(String password) {
+		this.pass = password;
+	}
+
+	public ArrayList<User> getFriends() {
+		return friends;
+	}
+
+	public void setFriends(ArrayList<User> friends) {
+		this.friends = friends;
+	}
+
+	public ArrayList<User> getBlacklist() {
+		return blacklist;
+	}
+
+	public void setBlacklist(ArrayList<User> blacklist) {
+		this.blacklist = blacklist;
+	}
+
+	public int getID() {
+		return ID;
+	}
+	
+	public void setID(int id) {
+		this.ID = id;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+	
+	public void setEmail(String new_email) {
+		this.email = new_email;
+	}
+
 	public static User newUser() {
 		throw new UnsupportedOperationException("Not implemented yet");
 	}
 	
 	// user stuff
-	
-	public void setEmail(String new_email) {
-		throw new UnsupportedOperationException("Not implemented yet");
-	}
 	
 	public void addFriend(User friend) {
 		throw new UnsupportedOperationException("Not implemented yet");
@@ -99,6 +138,12 @@ public class User {
 	@Override
 	public boolean equals(Object obj) {
 		throw new UnsupportedOperationException("Not implemented yet");
+	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return ID + ", " + email;
 	}
 
 	

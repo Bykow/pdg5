@@ -2,9 +2,7 @@ package pdg5.server;
 
 import org.junit.Test;
 import pdg5.common.Protocol;
-import pdg5.common.game.Tuile;
-
-import static org.junit.Assert.*;
+import pdg5.server.model.TuileStack;
 
 /**
  * Created on 10.10.17 by Bykow

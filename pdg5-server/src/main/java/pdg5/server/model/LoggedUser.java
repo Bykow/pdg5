@@ -1,6 +1,6 @@
 package pdg5.server.model;
 
-//import heiggen.server.state.ContextualClientHandler;
+import pdg5.server.model.ContextualClientHandler;
 
 /**
  * LoggedUser represents a user currently logged in

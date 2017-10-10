@@ -1,6 +1,5 @@
-package pdg5.server;
+package pdg5.server.model;
 
-import pdg5.common.Protocol;
 import pdg5.common.game.Tuile;
 
 import java.io.IOException;
@@ -27,7 +26,7 @@ public class TuileStack {
      *
      * @param lang langage of the game
      */
-    TuileStack(String lang) {
+    public TuileStack(String lang) {
         size = 0;
         r = new Random();
         try {

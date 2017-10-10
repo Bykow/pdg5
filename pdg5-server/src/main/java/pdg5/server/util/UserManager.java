@@ -17,7 +17,7 @@ import java.util.Random;
  *
  * In part from : http://stackoverflow.com/questions/18142745/how-do-i-generate-a-salt-in-java-for-salted-hash
  */
-public class UserManagement {
+public class UserManager {
     private static final Random RANDOM = new SecureRandom();
     private static final int ITERATIONS = 10000;
     private static final int KEY_LENGTH = 256;

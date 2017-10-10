@@ -1,5 +1,6 @@
 package pdg5.server.model;
 
+import pdg5.common.Protocol;
 import pdg5.common.game.Tuile;
 
 import java.io.IOException;
@@ -34,6 +35,7 @@ public class TuileStack {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         tuileLeft = size;
     }
 
@@ -59,7 +61,7 @@ public class TuileStack {
 
 
         // Adds the missing 12 Tuiles to get the 114 Tuiles of a game. Picks at random the remaining
-        for (int i = 12; i > 0; i--) {
+        for (int i = Protocol.NUMBER_OF_TUILES_PER_GAME-size; i > 0; i--) {
             char c = getRandChar();
             size++;
             stack.push(new Tuile(c, map.get(c)));
@@ -70,24 +72,13 @@ public class TuileStack {
     }
 
     /**
-     * Open and return a stream of the file
-     *
-     * @param fileName config file for a given langage
-     * @return stream of Strings
-     * @throws IOException
-     */
-    private Stream<String> readFile(String fileName) throws IOException {
-        return Files.lines(Paths.get(fileName));
-    }
-
-    /**
      * Returns a random character between 'A' included and 'Z' included
      * @return char picked at random
      */
     private char getRandChar() {
-        int low = 65;   //ASCII 'A'
-        int high = 91;  //ASCII 'Z' + 1
-        return (char)(r.nextInt(high-low) + low);
+        int low = (int)'A';   //ASCII 'A'
+        int high = (int)'Z';  //ASCII 'Z'
+        return (char)(r.nextInt(high + 1 - low) + low);
     }
 
     public Tuile getNextTuile() {

@@ -1,6 +1,11 @@
 package db;
 
 import java.util.Date;
+import java.util.List;
+
+import org.sql2o.Connection;
+
+import util.utils;
 
 /**
  * 
@@ -16,6 +21,8 @@ public class Game {
 	private Date created;
 	private Date last_activity;
 	private int tournament;
+	private static final String tableName = "game";
+	private static final String[] columns = {"ID", "title", "player1", "player2", "created", "last_activity", "tournament"};
 	
 	
 	public Game(int id) {
@@ -40,24 +47,74 @@ public class Game {
 	
 	
 	// database stuff
-	public static Game[] getAllGame() {
-		throw new UnsupportedOperationException("Not implemented yet");
+	public static List<Game> getAllGame() {
+		String sql =
+		        "SELECT " + utils.toSqlSelect(columns) +  " " +
+		        "FROM " + tableName;
+
+		    try(Connection con = DBConnection.getConnection().open()) {
+		        List<Game> games = con.createQuery(sql).executeAndFetch(Game.class);
+		        con.close();
+		        return games;
+		    }
 	}
 	
 	public static Game getGame(int id) {
-		throw new UnsupportedOperationException("Not implemented yet");
+		String sql =
+		        "SELECT " + utils.toSqlSelect(columns) +  " " +
+		        "FROM " + tableName + " " +
+		        "WHERE ID = :idparam";
+
+		    try(Connection con = DBConnection.getConnection().open()) {
+		        Game game = con.createQuery(sql).addParameter("idparam", id).executeAndFetchFirst(Game.class);
+		        con.close();
+		        return game;
+		    }
 	}
 	
 	public static boolean deleteGame(int id) {
-		throw new UnsupportedOperationException("Not implemented yet");
+		String sql = 
+				"DELETE FROM " + tableName+ "  WHERE ID = :idparam";
+		try (Connection con = DBConnection.getConnection().open()) {
+	        con.createQuery(sql).addParameter("idparam", id).executeUpdate();
+	        con.close();
+	        return true;
+	    } catch (Exception e) {
+			// TODO: handle exception
+	    	return false;
+		}
 	}
 	
 	public boolean deleteGame() {
-		throw new UnsupportedOperationException("Not implemented yet");
+		return deleteGame(ID);
 	}
 	
 	public boolean commitChange() {
-		throw new UnsupportedOperationException("Not implemented yet");
+		// ID, title, player1, player2, created, last_activity, tournament
+		String sql = 
+				"UPDATE " + tableName + " " +
+				"SET title = :titleparam AND " +
+				"title = :p1param AND " +
+				"title = :p2param AND " +
+				"title = :createdparam AND " +
+				"title = :lastactparam AND " +
+				"created = :tournamentparam " +
+				"WHERE ID = :idparam";
+		try (Connection con = DBConnection.getConnection().open()) {
+	        con.createQuery(sql).addParameter("titleparam", this.title)
+	        .addParameter("p1param", this.player1)
+	        .addParameter("p2param", this.player2)
+	        .addParameter("createdparam", this.created)
+	        .addParameter("lastactparam", this.last_activity)
+	        .addParameter("tournamentparam", this.tournament)
+	        .addParameter("idparam", this.ID)
+	        .executeUpdate();
+	        con.close();
+	        return true;
+	    } catch (Exception e) {
+			// TODO: handle exception
+	    	return false;
+		}
 	}
 	
 	// getter and setter

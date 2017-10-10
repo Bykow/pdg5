@@ -1,8 +1,14 @@
 package db;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import org.sql2o.Connection;
 
 import com.mysql.jdbc.NotImplemented;
+
+import test.testDB;
+import util.utils;
 
 /**
  * 
@@ -16,6 +22,8 @@ public class User {
 	private String pass;
 	private ArrayList<User> friends;
 	private ArrayList<User> blacklist;
+	private static final String tableName = "user";
+	private static final String[] columns = {"ID", "email", "pass"};
 
 	
 	public User(int id) {
@@ -41,33 +49,94 @@ public class User {
 	}
 	
 	// database stuff
+	// TODO miss friends, blacklist, and chat
 	
-	public static User[] getAllUser() {
-		throw new UnsupportedOperationException("Not implemented yet");
+	public static List<User> getAllUser() {
+		String sql =
+		        "SELECT " + utils.toSqlSelect(columns) + " " +
+		        "FROM " + tableName;
+
+		    try (Connection con = DBConnection.getConnection().open()) {
+		        List<User> users = con.createQuery(sql).executeAndFetch(User.class);
+		        con.close();
+		        return users;
+		    }
+		    
 	}
-	
+
 	public static User getUser(int id) {
-		throw new UnsupportedOperationException("Not implemented yet");
+		String sql = 
+				"SELECT " + utils.toSqlSelect(columns) + " " +
+				"FROM " + tableName + " " +
+				"WHERE ID = :idparam";
+		try (Connection con = DBConnection.getConnection().open()) {
+	        User user = con.createQuery(sql).addParameter("idparam", id).executeAndFetchFirst(User.class);
+	        con.close();
+	        return user;
+	    }
 	}
 	
 	public static User getUser(String email) {
-		throw new UnsupportedOperationException("Not implemented yet");
+		String sql = 
+				"SELECT " + utils.toSqlSelect(columns) + " " +
+				"FROM " + tableName+ " " +
+				"WHERE email = :emailparam";
+		try (Connection con = DBConnection.getConnection().open()) {
+	        User user = con.createQuery(sql).addParameter("emailparam", email).executeAndFetchFirst(User.class);
+	        con.close();
+	        return user;
+	    }
 	}
 	
 	public boolean deleteUser() {
-		throw new UnsupportedOperationException("Not implemented yet");
+		// .executeUpdate();
+		return deleteUser(ID);
+		
 	}
 	
 	public static boolean deleteUser(int id) {
-		throw new UnsupportedOperationException("Not implemented yet");
+		String sql = 
+				"DELETE FROM " + tableName+ "  WHERE ID = :idparam";
+		try (Connection con = DBConnection.getConnection().open()) {
+	        con.createQuery(sql).addParameter("idparam", id).executeUpdate();
+	        con.close();
+	        return true;
+	    } catch (Exception e) {
+			// TODO: handle exception
+	    	return false;
+		}
 	}
 	
 	public static boolean deleteUser(String email) {
-		throw new UnsupportedOperationException("Not implemented yet");
+		String sql = 
+				"DELETE FROM " + tableName+ "  WHERE email = :emailparam";
+		try (Connection con = DBConnection.getConnection().open()) {
+	        con.createQuery(sql).addParameter("emailparam", email).executeUpdate();
+	        con.close();
+	        return true;
+	    } catch (Exception e) {
+			// TODO: handle exception
+	    	return false;
+		}
 	}
 	
 	public boolean commitChange() {
-		throw new UnsupportedOperationException("Not implemented yet");
+		String sql = 
+				"UPDATE " + tableName + " " +
+				"SET email = :emailparam AND " +
+				"pass = :passparam " +
+				"WHERE ID = :idparam";
+		try (Connection con = DBConnection.getConnection().open()) {
+	        con.createQuery(sql).addParameter("emailparam", this.email)
+	        .addParameter("passparam", this.pass)
+	        .addParameter("idparam", this.ID)
+	        .executeUpdate();
+	        con.close();
+	        return true;
+	    } catch (Exception e) {
+			// TODO: handle exception
+	    	return false;
+		}
 	}
 	
 	// getter and setter

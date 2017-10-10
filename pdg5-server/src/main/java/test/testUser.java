@@ -13,6 +13,7 @@ import org.sql2o.Sql2o;
 
 import db.DBConnection;
 import db.User;
+import util.utils;
 
 public class testUser {
 		

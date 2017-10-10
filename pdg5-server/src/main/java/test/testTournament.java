@@ -15,7 +15,8 @@ public class testTournament {
 
 	@Test
 	public void testGetTournament() {
-		Sql2o sql2o = DBConnection.getConnection();
+		System.out.println("test get tournament");
+		/*Sql2o sql2o = DBConnection.getConnection();
 		 String sql =
 			        "SELECT ID, title, created " +
 			        "FROM tournament";
@@ -25,7 +26,7 @@ public class testTournament {
 			        for(Tournament t : tournaments) {
 			        	System.out.println(t.toString());
 			        }
-			    }
+			    }*/
 		
 	}
 

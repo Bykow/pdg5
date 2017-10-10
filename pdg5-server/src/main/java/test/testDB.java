@@ -19,6 +19,7 @@ public class testDB {
 	
 	public static Connection con = null;
 	
+	//TODO see if beforeClass and afterClass are finally useful
 	@BeforeClass
 	public static void initialize() {
 		System.out.println("initialize");

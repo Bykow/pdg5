@@ -5,9 +5,6 @@ import java.util.List;
 
 import org.sql2o.Connection;
 
-import com.mysql.jdbc.NotImplemented;
-
-import test.testDB;
 import util.utils;
 
 /**
@@ -124,7 +121,7 @@ public class User {
 	public boolean commitChange() {
 		String sql = 
 				"UPDATE " + tableName + " " +
-				"SET email = :emailparam AND " +
+				"SET email = :emailparam, " +
 				"pass = :passparam " +
 				"WHERE ID = :idparam";
 		try (Connection con = DBConnection.getConnection().open()) {
@@ -136,6 +133,7 @@ public class User {
 	        return true;
 	    } catch (Exception e) {
 			// TODO: handle exception
+	    	e.printStackTrace();
 	    	return false;
 		}
 	}
@@ -145,16 +143,16 @@ public class User {
 				"INSERT INTO " + tableName + " (email, pass) " +
 			    "VALUES (:emailparam,:passparam)";
 		try (Connection con = DBConnection.getConnection().open()) {
-	        int id = (int) con.createQuery(sql).addParameter("emailparam", email)
+	        Integer id = con.createQuery(sql).addParameter("emailparam", email)
 	        .addParameter("passparam", pass)
 	        .executeUpdate()
-	        .getKey();
+	        .getKey(Integer.class);
 	        con.close();
 	        return new User(id, email, pass);
 	    } catch (Exception e) {
-			// TODO: handle exception
-	    	return null;
+			e.printStackTrace();
 		}
+		return null;
 	}
 	
 	// getter and setter
@@ -220,13 +218,21 @@ public class User {
 	// override stuff
 	@Override
 	public boolean equals(Object obj) {
-		throw new UnsupportedOperationException("Not implemented yet");
+		if(!(obj instanceof User))
+		{
+			return false;
+		}
+			
+		User b = (User) obj;
+		return this.ID == b.ID &&
+				this.email.equals(b.email) && 
+				this.pass.equals(b.pass);
 	}
 	
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return ID + ", " + email;
+		return ID + ", " + email + ", " + pass;
 	}
 
 	

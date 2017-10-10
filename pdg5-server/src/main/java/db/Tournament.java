@@ -1,7 +1,6 @@
 package db;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -105,7 +104,7 @@ public class Tournament {
 	public boolean commitChange() {
 		String sql = 
 				"UPDATE " + tableName + " " +
-				"SET title = :titleparam AND " +
+				"SET title = :titleparam, " +
 				"created = :createdparam " +
 				"WHERE ID = :idparam";
 		try (Connection con = DBConnection.getConnection().open()) {

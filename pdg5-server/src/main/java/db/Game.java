@@ -1,6 +1,5 @@
 package db;
 
-import java.util.Date;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -96,11 +95,11 @@ public class Game {
 		// ID, title, player1, player2, created, last_activity, tournament
 		String sql = 
 				"UPDATE " + tableName + " " +
-				"SET title = :titleparam AND " +
-				"player1 = :p1param AND " +
-				"player2 = :p2param AND " +
-				"created = :createdparam AND " +
-				"last_activity = :lastactparam AND " +
+				"SET title = :titleparam, " +
+				"player1 = :p1param, " +
+				"player2 = :p2param, " +
+				"created = :createdparam, " +
+				"last_activity = :lastactparam, " +
 				"tournament = :tournamentparam " +
 				"WHERE ID = :idparam";
 		try (Connection con = DBConnection.getConnection().open()) {

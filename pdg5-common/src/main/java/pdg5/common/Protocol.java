@@ -17,6 +17,6 @@ public interface Protocol {
     int NUMBER_OF_PLAYERS = 2;
     int NUMBER_OF_TUILES_PER_GAME = 114;
 
-    String LANG_FR = "FR";
+    String LANG_FR = "fr";
 
 }

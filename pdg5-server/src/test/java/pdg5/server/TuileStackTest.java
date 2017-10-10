@@ -1,6 +1,7 @@
 package pdg5.server;
 
 import org.junit.Test;
+import pdg5.common.Protocol;
 import pdg5.common.game.Tuile;
 
 import static org.junit.Assert.*;
@@ -9,7 +10,7 @@ import static org.junit.Assert.*;
  * Created on 10.10.17 by Bykow
  */
 public class TuileStackTest {
-    private TuileStack tuileStack = new TuileStack("fr");
+    private TuileStack tuileStack = new TuileStack(Protocol.LANG_FR);
 
     @Test
     public void getNextTuile() throws Exception {

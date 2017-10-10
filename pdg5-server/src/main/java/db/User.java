@@ -25,7 +25,7 @@ public class User {
 	private static final String tableName = "user";
 	private static final String[] columns = {"ID", "email", "pass"};
 
-	
+	//TODO add method to create a user with the last id and return it, see createUser
 	public User(int id) {
 		ID = id;
 		email = null;
@@ -33,9 +33,10 @@ public class User {
 		blacklist = new ArrayList<>();
 	}
 	
-	public User(int id, String email) {
+	public User(int id, String email, String pass) {
 		ID = id;
 		this.email = email;
+		this.pass = pass;
 		friends = new ArrayList<>();
 		blacklist = new ArrayList<>();
 	}
@@ -139,6 +140,23 @@ public class User {
 		}
 	}
 	
+	public static User createUser(String email, String pass) {
+		String sql = 
+				"INSERT INTO " + tableName + " (email, pass) " +
+			    "VALUES (:emailparam,:passparam)";
+		try (Connection con = DBConnection.getConnection().open()) {
+	        int id = (int) con.createQuery(sql).addParameter("emailparam", email)
+	        .addParameter("passparam", pass)
+	        .executeUpdate()
+	        .getKey();
+	        con.close();
+	        return new User(id, email, pass);
+	    } catch (Exception e) {
+			// TODO: handle exception
+	    	return null;
+		}
+	}
+	
 	// getter and setter
 	
 	public String getPassword() {
@@ -179,10 +197,6 @@ public class User {
 	
 	public void setEmail(String new_email) {
 		this.email = new_email;
-	}
-
-	public static User newUser() {
-		throw new UnsupportedOperationException("Not implemented yet");
 	}
 	
 	// user stuff

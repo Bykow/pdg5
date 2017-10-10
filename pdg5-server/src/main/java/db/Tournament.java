@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.sql2o.Connection;
 
 import util.utils;
@@ -17,7 +18,7 @@ public class Tournament {
 	
 	private int ID;
 	private String title;
-	private Date created;
+	private DateTime created;
 	private ArrayList<User> players;
 	private ArrayList<Game> games;
 	private static final String tableName = "tournament";
@@ -31,7 +32,7 @@ public class Tournament {
 		games = new ArrayList<>();
 	}
 	
-	public Tournament(int id, String title, Date creationTime) {
+	public Tournament(int id, String title, DateTime creationTime) {
 		this.ID = id;
 		this.title = title;
 		this.created = creationTime;
@@ -39,7 +40,7 @@ public class Tournament {
 		games = new ArrayList<>();
 	}
 	
-	public Tournament(int id, String title, Date creationTime, ArrayList<User> players) {
+	public Tournament(int id, String title, DateTime creationTime, ArrayList<User> players) {
 		this.ID = id;
 		this.title = title;
 		this.created = creationTime;
@@ -47,7 +48,7 @@ public class Tournament {
 		games = new ArrayList<>();
 	}
 	
-	public Tournament(int id, String title, Date creationTime, ArrayList<User> players, ArrayList<Game> games) {
+	public Tournament(int id, String title, DateTime creationTime, ArrayList<User> players, ArrayList<Game> games) {
 		this.ID = id;
 		this.title = title;
 		this.created = creationTime;
@@ -120,6 +121,24 @@ public class Tournament {
 		}
 	}
 	
+	public static Tournament newTournament(String title) {
+		String sql = 
+				"INSERT INTO " + tableName + " (title, created) " +
+			    "VALUES (:titleparam,:createdparam)";
+		try (Connection con = DBConnection.getConnection().open()) {
+			DateTime now = DateTime.now();
+	        int id = (int) con.createQuery(sql).addParameter("titleparam", title)
+	    	        .addParameter("createdparam", now)
+	        .executeUpdate()
+	        .getKey();
+	        con.close();
+	        return new Tournament(id, title, now);
+	    } catch (Exception e) {
+			// TODO: handle exception
+	    	return null;
+		}
+	}
+	
 	// getter and setter
 	
 	public int getID() {
@@ -138,11 +157,11 @@ public class Tournament {
 		this.title = title;
 	}
 
-	public Date getCreated() {
+	public DateTime getCreated() {
 		return created;
 	}
 
-	public void setCreated(Date created) {
+	public void setCreated(DateTime created) {
 		this.created = created;
 	}
 
@@ -162,11 +181,6 @@ public class Tournament {
 		this.games = games;
 	}
 
-	public static Tournament newTournament() {
-		throw new UnsupportedOperationException("Not implemented yet");
-	}
-	
-	
 	
 	// tournament stuff
 	

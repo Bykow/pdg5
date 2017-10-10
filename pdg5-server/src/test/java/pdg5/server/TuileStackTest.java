@@ -1,0 +1,20 @@
+package pdg5.server;
+
+import org.junit.Test;
+import pdg5.common.game.Tuile;
+
+import static org.junit.Assert.*;
+
+/**
+ * Created on 10.10.17 by Bykow
+ */
+public class TuileStackTest {
+    private TuileStack tuileStack = new TuileStack("fr");
+
+    @Test
+    public void getNextTuile() throws Exception {
+        for (int i = 0; i < tuileStack.getSize(); i++) {
+            System.out.println(i + " " + tuileStack.getNextTuile());
+        }
+    }
+}

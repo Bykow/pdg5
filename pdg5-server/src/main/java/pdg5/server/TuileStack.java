@@ -17,6 +17,8 @@ import java.util.stream.Stream;
  */
 public class TuileStack {
     private Stack<Tuile> stack = new Stack<>();
+    private int size;
+    private int tuileLeft;
     private HashMap<Character, Integer> map = new HashMap<>();
     private Random r;
 
@@ -26,12 +28,14 @@ public class TuileStack {
      * @param lang langage of the game
      */
     TuileStack(String lang) {
+        size = 0;
         r = new Random();
         try {
             initStack(lang);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+        tuileLeft = size;
     }
 
     /**
@@ -40,22 +44,25 @@ public class TuileStack {
      * @param lang langage of the game
      * @throws IOException
      */
-    private void initStack(String lang) throws IOException {
-        String fileName = "../resources/" + lang + "_stackInit.txt";
-        readFile(fileName)
-                .forEach(s -> {
-                    // Fills the map with letter and values. '0' stands for a joker
-                    map.put(s.charAt(0), Integer.parseInt(s.substring(5,6)));
+    private void initStack(String lang) throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        Stream<String> lines = Files.lines(Paths.get(classLoader.getResource(lang + "/" + lang + "_stackInit").toURI()));
 
-                    // For each line of the config file, adds the number of letters to stack
-                    for (int i = Integer.parseInt(s.substring(2,3)); i < 0; i--) {
-                        stack.push(new Tuile(s.charAt(0), Integer.parseInt(s.substring(5,6))));
+                // Fills the map with letter and values. '0' stands for a joker
+        lines   .peek(s -> map.put(s.charAt(0), Integer.parseInt(s.substring(5,7))))
+                // For each line of the config file, adds the number of letters to stack
+                .forEach(s -> {
+                    for (int i = Integer.parseInt(s.substring(2,4)); i > 0; i--) {
+                        size++;
+                        this.stack.push(new Tuile(s.charAt(0), Integer.parseInt(s.substring(5,7))));
                     }
                 });
 
+
         // Adds the missing 12 Tuiles to get the 114 Tuiles of a game. Picks at random the remaining
-        for (int i = Protocol.NUMBER_OF_TUILES_PER_GAME - stack.size(); i > 0; i--) {
+        for (int i = 12; i > 0; i--) {
             char c = getRandChar();
+            size++;
             stack.push(new Tuile(c, map.get(c)));
         }
 
@@ -82,5 +89,18 @@ public class TuileStack {
         int low = 65;   //ASCII 'A'
         int high = 91;  //ASCII 'Z' + 1
         return (char)(r.nextInt(high-low) + low);
+    }
+
+    public Tuile getNextTuile() {
+        tuileLeft--;
+        return stack.pop();
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public int getTuileLeft() {
+        return tuileLeft;
     }
 }

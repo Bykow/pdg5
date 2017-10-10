@@ -1,16 +1,13 @@
 package pdg5.common;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.io.BufferedWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created on 10.10.17 by Bykow
@@ -23,7 +20,7 @@ public class TSTTest {
         long start = System.nanoTime();
         ClassLoader classLoader = TSTTest.class.getClassLoader();
 
-        Stream<String> lines = Files.lines(Paths.get(classLoader.getResource("dico/french.dic").toURI()));
+        Stream<String> lines = Files.lines(Paths.get(classLoader.getResource("dico/fr_dico.dic").toURI()));
         lines.forEach(e -> tree.put(e));
         lines.close();
 

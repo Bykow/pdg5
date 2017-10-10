@@ -29,5 +29,17 @@ public class testTournament {
 			    }*/
 		
 	}
+	
+	@Test
+	public void testEqualsTournament() {
+		//TODO
+		assertTrue(false);
+	}
+	
+	@Test
+	public void testBasicTournament() {
+		//TODO
+		assertTrue(false);
+	}
 
 }

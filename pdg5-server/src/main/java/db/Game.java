@@ -201,7 +201,19 @@ public class Game {
 	// override stuff
 	@Override
 	public boolean equals(Object obj) {
-		throw new UnsupportedOperationException("Not implemented yet");
+		if(!(obj instanceof Game))
+		{
+			return false;
+		}
+			
+		Game b = (Game) obj;
+		return this.ID == b.ID &&
+				this.title.equals(b.title) &&
+				this.player1 == b.player1 && 
+				this.player2 == b.player2 && 
+				this.created.equals(b.created) &&
+				this.last_activity.equals(b.last_activity) &&
+				this.tournament == b.tournament;
 	}
 	
 	@Override

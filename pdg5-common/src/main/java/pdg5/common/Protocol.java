@@ -5,7 +5,18 @@ package pdg5.common;
  */
 public interface Protocol {
 
-    public int NUMBEROFTUILES = 7;
-    public int NUMBEROFEXTRATUILES = 2;
-    public int NUMBEROFPLAYERS = 2;
+    /**
+     * Socket
+     */
+    String DEFAULT_SERVER = "127.0.0.1"; // modify for tests
+    int DEFAULT_PORT = 47298;
+
+
+    int NUMBER_OF_TUILES_PER_PLAYER = 7;
+    int NUMBER_OF_EXTRA_TUILES = 2;
+    int NUMBER_OF_PLAYERS = 2;
+    int NUMBER_OF_TUILES_PER_GAME = 114;
+
+    String LANG_FR = "fr";
+
 }

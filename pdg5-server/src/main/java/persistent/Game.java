@@ -2,6 +2,7 @@ package persistent;
 
 import org.joda.time.DateTime;
 
+
 public class Game {
 	private int ID;
 	private String title;
@@ -62,6 +63,28 @@ public class Game {
 	}
 	public void setTournament(int tournament) {
 		this.tournament = tournament;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Game))
+		{
+			return false;
+		}
+			
+		Game b = (Game) obj;
+		return this.ID == b.ID &&
+				this.title.equals(b.title) &&
+				this.player1 == b.player1 && 
+				this.player2 == b.player2 && 
+				this.created.equals(b.created) &&
+				this.lastActivity.equals(b.lastActivity) &&
+				this.tournament == b.tournament;
+	}
+	
+	@Override
+	public String toString() {
+		throw new UnsupportedOperationException("Not implemented yet");
 	}
 
 }

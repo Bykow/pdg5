@@ -1,5 +1,6 @@
 package persistent;
 
+
 public class User {
 	private int ID;
 	private String email;
@@ -39,5 +40,24 @@ public class User {
 
 	public void setPass(String pass) {
 		this.pass = pass;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof User))
+		{
+			return false;
+		}
+			
+		User b = (User) obj;
+		return this.ID == b.ID &&
+				this.email.equals(b.email) && 
+				this.pass.equals(b.pass);
+	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return ID + ", " + email + ", " + pass;
 	}
 }

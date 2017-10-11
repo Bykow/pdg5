@@ -14,7 +14,7 @@ import org.sql2o.Sql2o;
 import db.DBConnection;
 
 @RunWith(Suite.class)
-@SuiteClasses({testGame.class, testTournament.class, testUser.class})
+@SuiteClasses({testManageUser.class})
 public class testDB {
 	
 	public static Connection con = null;

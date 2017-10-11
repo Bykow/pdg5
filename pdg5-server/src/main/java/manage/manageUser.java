@@ -11,15 +11,16 @@ import persistent.User;
 //TODO test it
 public class manageUser {
 	
-	public Integer addUser(String email, String pass) {
+	public User addUser(String email, String pass) {
 		Session session = manager.getFactory().openSession();
 		Transaction tx = null;
-		Integer usrID = null;
+		User user = new User(email, pass);
+		Integer usrID;
 		
 		try {
 	         tx = session.beginTransaction();
-	         User user = new User(email, pass);
 	         usrID = (Integer) session.save(user); 
+	         user.setID(usrID);
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -28,7 +29,7 @@ public class manageUser {
 	         session.close(); 
 	      }
 		
-		return usrID;
+		return user;
 	}
 	
 	public List<User> listUser() {

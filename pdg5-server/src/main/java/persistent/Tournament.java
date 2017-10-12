@@ -1,12 +1,14 @@
 package persistent;
 
+import java.util.Date;
+
 import org.joda.time.DateTime;
 
 public class Tournament {
 	private int ID;
 	private String title;
-	private DateTime created;
-	public Tournament(int iD, String title, DateTime created) {
+	private Date created;
+	public Tournament(int iD, String title, Date created) {
 		super();
 		ID = iD;
 		this.title = title;
@@ -24,10 +26,10 @@ public class Tournament {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public DateTime getCreated() {
+	public Date getCreated() {
 		return created;
 	}
-	public void setCreated(DateTime created) {
+	public void setCreated(Date created) {
 		this.created = created;
 	}
 

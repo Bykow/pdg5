@@ -1,13 +1,13 @@
 package persistent;
 
-import org.joda.time.DateTime;
+import java.util.Date;
 
 public class BlackList {
 	private int ID;
 	private int fromUser;
 	private int toUser;
-	private DateTime lastModified;
-	public BlackList(int iD, int fromUser, int toUser, DateTime lastModified) {
+	private Date lastModified;
+	public BlackList(int iD, int fromUser, int toUser, Date lastModified) {
 		super();
 		ID = iD;
 		this.fromUser = fromUser;
@@ -32,10 +32,10 @@ public class BlackList {
 	public void setToUser(int toUser) {
 		this.toUser = toUser;
 	}
-	public DateTime getLastModified() {
+	public Date getLastModified() {
 		return lastModified;
 	}
-	public void setLastModified(DateTime lastModified) {
+	public void setLastModified(Date lastModified) {
 		this.lastModified = lastModified;
 	}
 

@@ -1,6 +1,6 @@
 package persistent;
 
-import org.joda.time.DateTime;
+import java.util.Date;
 
 
 public class Game {
@@ -8,10 +8,10 @@ public class Game {
 	private String title;
 	private int player1;
 	private int player2;
-	private DateTime created;
-	private DateTime lastActivity;
+	private Date created;
+	private Date lastActivity;
 	private int tournament;
-	public Game(int iD, String title, int player1, int player2, DateTime created, DateTime lastActivity,
+	public Game(int iD, String title, int player1, int player2, Date created, Date lastActivity,
 			int tournament) {
 		super();
 		ID = iD;
@@ -46,16 +46,16 @@ public class Game {
 	public void setPlayer2(int player2) {
 		this.player2 = player2;
 	}
-	public DateTime getCreated() {
+	public Date getCreated() {
 		return created;
 	}
-	public void setCreated(DateTime created) {
+	public void setCreated(Date created) {
 		this.created = created;
 	}
-	public DateTime getLastActivity() {
+	public Date getLastActivity() {
 		return lastActivity;
 	}
-	public void setLastActivity(DateTime lastActivity) {
+	public void setLastActivity(Date lastActivity) {
 		this.lastActivity = lastActivity;
 	}
 	public int getTournament() {

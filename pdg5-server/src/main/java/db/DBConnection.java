@@ -22,7 +22,7 @@ public class DBConnection {
     
     // JDBC driver name and database URL
  	 private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
- 	 private static final String DB_URL = "jdbc:mysql://localhost/pdg?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+ 	 private static final String DB_URL = "jdbc:mysql://127.0.0.1/pdg?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
  	   //  Database credentials
  	 //TODO add your stuff

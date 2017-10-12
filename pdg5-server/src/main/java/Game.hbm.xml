@@ -4,7 +4,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 
 <hibernate-mapping>
-   <class name = "Game" table = "game">
+   <class name = "persistent.Game" table = "game">
       
       <meta attribute = "class-description">
          This class contains the game detail. 
@@ -17,8 +17,8 @@
       <property name = "title" column = "title" type = "string"/>
       <property name = "player1" column = "player1" type = "int"/>
       <property name = "player2" column = "player2" type = "int"/>
-      <property name = "created" column = "created" type = "datetime"/>
-      <property name = "lastActivity" column = "last_activity" type = "datetime"/>
+      <property name = "created" column = "created" type = "timestamp"/>
+      <property name = "lastActivity" column = "last_activity" type = "timestamp"/>
       <property name = "tournament" column = "tournament" type = "int"/>
       
    </class>

@@ -4,7 +4,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 
 <hibernate-mapping>
-   <class name = "Friend" table = "friend">
+   <class name = "persistent.Friend" table = "friend">
       
       <meta attribute = "class-description">
          This class contains the friend detail. 
@@ -16,7 +16,7 @@
       
       <property name = "fromUser" column = "fromUser" type = "int"/>
       <property name = "toUser" column = "toUser" type = "int"/>
-      <property name = "lastModified" column = "last_mod" type = "datetime"/>
+      <property name = "lastModified" column = "last_mod" type = "timestamp"/>
       
    </class>
 </hibernate-mapping>

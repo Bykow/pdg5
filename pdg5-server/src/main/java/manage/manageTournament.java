@@ -1,4 +1,4 @@
-package persistent;
+package manage;
 
 public class manageTournament {
 

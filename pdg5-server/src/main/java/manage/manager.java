@@ -19,5 +19,14 @@ public class manager {
 		}
 		return factory;
 	}
+	
+	// TODO if we can simplify things
+	public void updateObject() {
+		
+	}
+	
+	public void deleteObject() {
+		
+	}
 
 }

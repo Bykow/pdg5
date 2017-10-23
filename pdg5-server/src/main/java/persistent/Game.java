@@ -22,6 +22,28 @@ public class Game {
 		this.lastActivity = lastActivity;
 		this.tournament = tournament;
 	}
+	
+	public Game(String title, int player1, int player2, int tournament) {
+		super();
+		this.title = title;
+		this.player1 = player1;
+		this.player2 = player2;
+		this.created = new Date();
+		this.lastActivity = new Date();
+		this.tournament = tournament;
+	}
+	
+	public Game(String title, int player1, int player2) {
+		super();
+		this.title = title;
+		this.player1 = player1;
+		this.player2 = player2;
+		this.created = new Date();
+		this.lastActivity = new Date();
+	}
+	
+	public Game() {
+	}
 	public int getID() {
 		return ID;
 	}
@@ -84,7 +106,7 @@ public class Game {
 	
 	@Override
 	public String toString() {
-		throw new UnsupportedOperationException("Not implemented yet");
+		return ID  + ", " + title  + ", " + player1  + ", " + player2  + ", " + created  + ", " + lastActivity  + ", " + tournament;
 	}
 
 }

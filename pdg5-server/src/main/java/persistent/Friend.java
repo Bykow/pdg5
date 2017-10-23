@@ -14,6 +14,16 @@ public class Friend {
 		this.toUser = toUser;
 		this.lastModified = lastModified;
 	}
+	
+	public Friend(int fromUser, int toUser) {
+		super();
+		this.fromUser = fromUser;
+		this.toUser = toUser;
+		this.lastModified = new Date();
+	}
+	
+	public Friend() {
+	}
 	public int getID() {
 		return ID;
 	}
@@ -37,6 +47,26 @@ public class Friend {
 	}
 	public void setLastModified(Date lastModified) {
 		this.lastModified = lastModified;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Friend))
+		{
+			return false;
+		}
+			
+		Friend b = (Friend) obj;
+		
+		return this.ID == b.getID() &&
+				this.fromUser == b.getFromUser() &&
+				this.toUser == b.getToUser() &&
+				this.lastModified.equals(b.getLastModified());
+	}
+	
+	@Override
+	public String toString() {
+		return ID  + ", " + fromUser  + ", " + toUser  + ", " + lastModified;
 	}
 
 }

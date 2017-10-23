@@ -17,6 +17,9 @@ public class User {
 		this.email = email;
 		this.pass = pass;
 	}
+	
+	public User() {
+	}
 
 	public int getID() {
 		return ID;
@@ -57,7 +60,6 @@ public class User {
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return ID + ", " + email + ", " + pass;
 	}
 }

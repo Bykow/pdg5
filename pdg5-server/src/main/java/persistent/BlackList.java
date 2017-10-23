@@ -14,6 +14,15 @@ public class BlackList {
 		this.toUser = toUser;
 		this.lastModified = lastModified;
 	}
+	
+	public BlackList(int fromUser, int toUser) {
+		this.fromUser = fromUser;
+		this.toUser = toUser;
+		this.lastModified = new Date();
+	}
+	
+	public BlackList() {
+	}
 	public int getID() {
 		return ID;
 	}
@@ -38,5 +47,24 @@ public class BlackList {
 	public void setLastModified(Date lastModified) {
 		this.lastModified = lastModified;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof BlackList))
+		{
+			return false;
+		}
+			
+		BlackList b = (BlackList) obj;
+		
+		return this.ID == b.getID() &&
+				this.fromUser == b.getFromUser() &&
+				this.toUser == b.getToUser() &&
+				this.lastModified.equals(b.getLastModified());
+	}
 
+	@Override
+	public String toString() {
+		return ID  + ", " + fromUser  + ", " + toUser  + ", " + lastModified;
+	}
 }

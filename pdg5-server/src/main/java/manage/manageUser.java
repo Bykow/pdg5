@@ -39,7 +39,7 @@ public class manageUser {
 	      
 	      try {
 	         tx = session.beginTransaction();
-	         users = session.createQuery("FROM user").list(); 
+	         users = session.createQuery("FROM User").list(); 
 	         
 	         tx.commit();
 	      } catch (HibernateException e) {

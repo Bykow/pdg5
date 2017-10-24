@@ -58,7 +58,7 @@
       </role>
     </association>
     <entity entityType="CLASS" id="67298" isAbstract="false" name="Message" visibility="PUBLIC">
-      <attribute const="false" defaultValue="" isStatic="false" name="timestamp" type="java.sql.Timestamp" visibility="PRIVATE"/>
+      <attribute const="false" defaultValue="" isStatic="false" name="created" type="java.sql.Timestamp" visibility="PRIVATE"/>
       <attribute const="false" defaultValue="" isStatic="false" name="content" type="String" visibility="PRIVATE"/>
     </entity>
     <entity entityType="CLASS" id="67297" isAbstract="false" name="Chat" visibility="PUBLIC"/>

@@ -4,17 +4,20 @@ package pdg5.persistent;
 public class User {
 	private int ID;
 	private String email;
+	private String username;
 	private String pass;
 	
-	public User(int iD, String email, String pass) {
+	public User(int iD, String email,String username, String pass) {
 		super();
 		ID = iD;
 		this.email = email;
+		this.setUsername(username);
 		this.pass = pass;
 	}
 
-	public User(String email, String pass) {
+	public User(String email, String username, String pass) {
 		this.email = email;
+		this.setUsername(username);
 		this.pass = pass;
 	}
 	
@@ -45,6 +48,14 @@ public class User {
 		this.pass = pass;
 	}
 	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if(!(obj instanceof User))
@@ -55,11 +66,12 @@ public class User {
 		User b = (User) obj;
 		return this.ID == b.ID &&
 				this.email.equals(b.email) && 
+				this.username.equals(b.username) &&
 				this.pass.equals(b.pass);
 	}
 	
 	@Override
 	public String toString() {
-		return ID + ", " + email + ", " + pass;
+		return ID + ", " + email + ", "+ username + ", " + pass;
 	}
 }

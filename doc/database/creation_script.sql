@@ -13,7 +13,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(60) NOT NULL,
-  `username` varchar(60) DEFAULT NULL, 
+  `username` varchar(60) NOT NULL, 
   `pass` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `email` (`email`),

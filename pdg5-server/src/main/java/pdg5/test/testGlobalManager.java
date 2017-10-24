@@ -33,10 +33,10 @@ public class testGlobalManager {
 		manageUser mu = new manageUser();
 		
 		// create some users
-		User usr1 = mu.addUser("Sauron@mordor.org", "1234");
-		User usr2 = mu.addUser("Saruman@isengard.org", "pass");
-		User usr3 = mu.addUser("aragorn@gondor.net", "0000");
-		User usr4 = mu.addUser("gandalf@wizard.com", "grey");
+		User usr1 = mu.addUser("Sauron@mordor.org","Sauron", "1234");
+		User usr2 = mu.addUser("Saruman@isengard.org","saruman", "pass");
+		User usr3 = mu.addUser("aragorn@gondor.net","aragorn", "0000");
+		User usr4 = mu.addUser("gandalf@wizard.com","gandalf", "grey");
 		
 		// list users
 		List<User> lu = mu.listUser();
@@ -46,11 +46,13 @@ public class testGlobalManager {
 		}
 		
 		// get a specific user
-		System.out.println(mu.getUser("sauron@mordor.org"));
+		System.out.println(mu.getUserByEmail("sauron@mordor.org"));
+		System.out.println(mu.getUserByUsername("saruman"));
 		
 		// update user
 		usr4.setPass("white");
 		usr4.setEmail("gandalf.white@wizard.com");
+		usr4.setUsername("XxGandalfxX");
 		mu.updateUser(usr4);
 		
 		lu = mu.listUser();

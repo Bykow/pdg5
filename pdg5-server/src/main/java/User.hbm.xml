@@ -15,6 +15,7 @@
       </id>
       
       <property name = "email" column = "email" type = "string"/>
+      <property name = "username" column = "username" type = "string"/>
       <property name = "pass" column = "pass" type = "string"/>
       
    </class>

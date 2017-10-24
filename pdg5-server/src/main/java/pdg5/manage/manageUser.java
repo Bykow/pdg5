@@ -9,13 +9,13 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import pdg5.persistent.User;
 
-//TODO test it
 public class manageUser {
 	
 	public User addUser(String email, String pass) {
 		Session session = manager.getFactory().openSession();
 		Transaction tx = null;
 		String hashedPass = BCrypt.hashpw(pass, BCrypt.gensalt());
+		email = email.toLowerCase();
 		User user = new User(email, hashedPass);
 		Integer usrID;
 		
@@ -69,6 +69,24 @@ public class manageUser {
 	      }
 	      return users;
 	}
+	
+	/**
+     * Check whether the given password is correct for the user with
+     * the given username
+     *
+     * @param username the username
+     * @param password the password
+     * @return true if correct, false otherwise
+     */
+    public boolean isCorrectPassword(String email, String password) {
+        User u = getUser(email);
+        if (u == null) return false;
+        return isExpectedPassword(password, u.getPass());
+    }
+    
+    private boolean isExpectedPassword(String candidate, String hashed) {
+    	return BCrypt.checkpw(candidate, hashed);
+    }
 	
 	public void updateUser(User user) {
 		Session session = manager.getFactory().openSession();

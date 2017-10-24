@@ -45,6 +45,9 @@ public class testGlobalManager {
 			System.out.println(user);
 		}
 		
+		// get a specific user
+		System.out.println(mu.getUser("sauron@mordor.org"));
+		
 		// update user
 		usr4.setPass("white");
 		usr4.setEmail("gandalf.white@wizard.com");

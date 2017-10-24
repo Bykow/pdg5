@@ -21,7 +21,7 @@ public class testPersistentTournament {
 		Tournament b = new Tournament(1, "a", d1);
 		Tournament c = new Tournament(2, "a", d1);
 		Tournament d = new Tournament(1, "b", d1);
-		Date d2 = new Date();
+		Date d2 = new Date(2000,01,01);
 		Tournament e = new Tournament(1, "a", d2);
 		
 		assertTrue(a.equals(b));

@@ -1,4 +1,4 @@
-package test;
+package pdg5.test;
 
 import static org.junit.Assert.*;
 
@@ -7,8 +7,8 @@ import java.util.Random;
 
 import org.junit.Test;
 
-import manage.manageFriend;
-import persistent.Friend;
+import pdg5.manage.manageFriend;
+import pdg5.persistent.Friend;
 
 public class testPersistentFriend {
 

@@ -1,4 +1,4 @@
-package test;
+package pdg5.test;
 
 import static org.junit.Assert.*;
 
@@ -7,8 +7,8 @@ import java.util.Random;
 
 import org.junit.Test;
 
-import manage.manageBlackList;
-import persistent.BlackList;
+import pdg5.manage.manageBlackList;
+import pdg5.persistent.BlackList;
 
 public class testPersistentBlackList {
 

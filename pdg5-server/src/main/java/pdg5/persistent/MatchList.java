@@ -1,4 +1,4 @@
-package persistent;
+package pdg5.persistent;
 
 public class MatchList {
 	private int ID;

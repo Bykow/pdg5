@@ -1,4 +1,4 @@
-package manage;
+package pdg5.manage;
 
 import java.util.List;
 
@@ -6,21 +6,19 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import persistent.User;
+import pdg5.persistent.Game;
 
-//TODO test it
-public class manageUser {
-	
-	public User addUser(String email, String pass) {
+public class manageGame {
+	public Game addGame(String title, int player1, int player2, int tournament) {
 		Session session = manager.getFactory().openSession();
 		Transaction tx = null;
-		User user = new User(email, pass);
-		Integer usrID;
+		Game game = new Game(title, player1, player2, tournament);
+		Integer gID;
 		
 		try {
 	         tx = session.beginTransaction();
-	         usrID = (Integer) session.save(user); 
-	         user.setID(usrID);
+	         gID = (Integer) session.save(game); 
+	         game.setID(gID);
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -29,17 +27,38 @@ public class manageUser {
 	         session.close(); 
 	      }
 		
-		return user;
+		return game;
 	}
 	
-	public List<User> listUser() {
+	public Game addGame(String title, int player1, int player2) {
+		Session session = manager.getFactory().openSession();
+		Transaction tx = null;
+		Game game = new Game(title, player1, player2);
+		Integer gID;
+		
+		try {
+	         tx = session.beginTransaction();
+	         gID = (Integer) session.save(game); 
+	         game.setID(gID);
+	         tx.commit();
+	      } catch (HibernateException e) {
+	         if (tx!=null) tx.rollback();
+	         e.printStackTrace(); 
+	      } finally {
+	         session.close(); 
+	      }
+		
+		return game;
+	}
+	
+	public List<Game> listGame() {
 		 Session session = manager.getFactory().openSession();
 	      Transaction tx = null;
-	      List<User> users = null;
+	      List<Game> games = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-	         users = session.createQuery("FROM User").list(); 
+	         games = session.createQuery("FROM Game").list(); 
 	         
 	         tx.commit();
 	      } catch (HibernateException e) {
@@ -48,16 +67,16 @@ public class manageUser {
 	      } finally {
 	         session.close(); 
 	      }
-	      return users;
+	      return games;
 	}
 	
-	public void updateUser(User user) {
+	public void updateGame(Game game) {
 		Session session = manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-			 session.update(user); 
+			 session.update(game); 
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -67,13 +86,13 @@ public class manageUser {
 	      }
 	}
 	
-	public void deleteUser(User user) {
+	public void deleteGame(Game game) {
 		Session session = manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-	         session.delete(user); 
+	         session.delete(game); 
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -82,5 +101,4 @@ public class manageUser {
 	         session.close(); 
 	      }
 	}
-
 }

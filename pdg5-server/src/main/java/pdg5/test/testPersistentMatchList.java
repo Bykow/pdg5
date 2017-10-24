@@ -1,4 +1,4 @@
-package test;
+package pdg5.test;
 
 import static org.junit.Assert.*;
 
@@ -6,8 +6,8 @@ import java.util.Random;
 
 import org.junit.Test;
 
-import manage.manageMatchList;
-import persistent.MatchList;
+import pdg5.manage.manageMatchList;
+import pdg5.persistent.MatchList;
 
 public class testPersistentMatchList {
 

@@ -1,4 +1,4 @@
-package manage;
+package pdg5.manage;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import persistent.Tournament;
+import pdg5.persistent.Tournament;
 
 public class manageTournament {
 	

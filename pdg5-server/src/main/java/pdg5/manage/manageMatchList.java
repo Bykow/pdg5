@@ -1,4 +1,4 @@
-package manage;
+package pdg5.manage;
 
 import java.util.List;
 
@@ -6,19 +6,21 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import persistent.BlackList;
+import pdg5.persistent.MatchList;
+import pdg5.persistent.Tournament;
 
-public class manageBlackList {
-	public BlackList addBlackList(int fromUser, int toUser) {
+public class manageMatchList {
+	
+	public MatchList addMatchList(int tournament, int user) {
 		Session session = manager.getFactory().openSession();
 		Transaction tx = null;
-		BlackList blacklist = new BlackList(fromUser, toUser);
-		Integer tntID;
+		MatchList matchList = new MatchList(tournament, user);
+		Integer mlID;
 		
 		try {
 	         tx = session.beginTransaction();
-	         tntID = (Integer) session.save(blacklist); 
-	         blacklist.setID(tntID);
+	         mlID = (Integer) session.save(matchList); 
+	         matchList.setID(mlID);
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -27,17 +29,17 @@ public class manageBlackList {
 	         session.close(); 
 	      }
 		
-		return blacklist;
+		return matchList;
 	}
 	
-	public List<BlackList> listBlackList() {
+	public List<MatchList> listMatchList() {
 		 Session session = manager.getFactory().openSession();
 	      Transaction tx = null;
-	      List<BlackList> blackLists = null;
+	      List<MatchList> matchLists = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-	         blackLists = session.createQuery("FROM BlackList").list(); 
+	         matchLists = session.createQuery("FROM MatchList").list(); 
 	         
 	         tx.commit();
 	      } catch (HibernateException e) {
@@ -46,16 +48,16 @@ public class manageBlackList {
 	      } finally {
 	         session.close(); 
 	      }
-	      return blackLists;
+	      return matchLists;
 	}
 	
-	public void updateBlackList(BlackList blackList) {
+	public void updateMatchList(MatchList matchList) {
 		Session session = manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-			 session.update(blackList); 
+			 session.update(matchList); 
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -65,13 +67,13 @@ public class manageBlackList {
 	      }
 	}
 	
-	public void deleteBlackList(BlackList blacklist) {
+	public void deleteMatchList(MatchList matchList) {
 		Session session = manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-	         session.delete(blacklist); 
+	         session.delete(matchList); 
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -80,4 +82,5 @@ public class manageBlackList {
 	         session.close(); 
 	      }
 	}
+
 }

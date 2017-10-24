@@ -1,4 +1,4 @@
-package manage;
+package pdg5.manage;
 
 import java.util.List;
 
@@ -6,19 +6,19 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import persistent.Game;
+import pdg5.persistent.Friend;
 
-public class manageGame {
-	public Game addGame(String title, int player1, int player2, int tournament) {
+public class manageFriend {
+	public Friend addFriend(int fromUser, int toUser) {
 		Session session = manager.getFactory().openSession();
 		Transaction tx = null;
-		Game game = new Game(title, player1, player2, tournament);
-		Integer gID;
+		Friend friend = new Friend(fromUser, toUser);
+		Integer tntID;
 		
 		try {
 	         tx = session.beginTransaction();
-	         gID = (Integer) session.save(game); 
-	         game.setID(gID);
+	         tntID = (Integer) session.save(friend); 
+	         friend.setID(tntID);
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -27,38 +27,17 @@ public class manageGame {
 	         session.close(); 
 	      }
 		
-		return game;
+		return friend;
 	}
 	
-	public Game addGame(String title, int player1, int player2) {
-		Session session = manager.getFactory().openSession();
-		Transaction tx = null;
-		Game game = new Game(title, player1, player2);
-		Integer gID;
-		
-		try {
-	         tx = session.beginTransaction();
-	         gID = (Integer) session.save(game); 
-	         game.setID(gID);
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
-	      }
-		
-		return game;
-	}
-	
-	public List<Game> listGame() {
+	public List<Friend> listFriend() {
 		 Session session = manager.getFactory().openSession();
 	      Transaction tx = null;
-	      List<Game> games = null;
+	      List<Friend> friends = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-	         games = session.createQuery("FROM Game").list(); 
+	         friends = session.createQuery("FROM Friend").list(); 
 	         
 	         tx.commit();
 	      } catch (HibernateException e) {
@@ -67,16 +46,16 @@ public class manageGame {
 	      } finally {
 	         session.close(); 
 	      }
-	      return games;
+	      return friends;
 	}
 	
-	public void updateGame(Game game) {
+	public void updateFriend(Friend friend) {
 		Session session = manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-			 session.update(game); 
+			 session.update(friend); 
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -86,13 +65,13 @@ public class manageGame {
 	      }
 	}
 	
-	public void deleteGame(Game game) {
+	public void deleteFriend(Friend friend) {
 		Session session = manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-	         session.delete(game); 
+	         session.delete(friend); 
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();

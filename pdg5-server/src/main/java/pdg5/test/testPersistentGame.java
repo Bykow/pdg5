@@ -1,4 +1,4 @@
-package test;
+package pdg5.test;
 
 import static org.junit.Assert.*;
 
@@ -7,8 +7,8 @@ import java.util.Random;
 
 import org.junit.Test;
 
-import manage.manageGame;
-import persistent.Game;
+import pdg5.manage.manageGame;
+import pdg5.persistent.Game;
 
 public class testPersistentGame {
 

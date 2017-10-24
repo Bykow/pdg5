@@ -1,26 +1,28 @@
-package manage;
+package pdg5.manage;
 
 import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.mindrot.jbcrypt.BCrypt;
 
-import persistent.MatchList;
-import persistent.Tournament;
+import pdg5.persistent.User;
 
-public class manageMatchList {
+//TODO test it
+public class manageUser {
 	
-	public MatchList addMatchList(int tournament, int user) {
+	public User addUser(String email, String pass) {
 		Session session = manager.getFactory().openSession();
 		Transaction tx = null;
-		MatchList matchList = new MatchList(tournament, user);
-		Integer mlID;
+		String hashedPass = BCrypt.hashpw(pass, BCrypt.gensalt());
+		User user = new User(email, hashedPass);
+		Integer usrID;
 		
 		try {
 	         tx = session.beginTransaction();
-	         mlID = (Integer) session.save(matchList); 
-	         matchList.setID(mlID);
+	         usrID = (Integer) session.save(user); 
+	         user.setID(usrID);
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -29,17 +31,34 @@ public class manageMatchList {
 	         session.close(); 
 	      }
 		
-		return matchList;
+		return user;
 	}
 	
-	public List<MatchList> listMatchList() {
+	/**
+     * Get the User whose username is given from the DB
+     *
+     * @param username the username
+     * @return a corresponding User instance
+     */
+    public User getUser(String email) {
+    	Session session = manager.getFactory().openSession();
+        email = email.toLowerCase();
+        session.beginTransaction();
+        User u = session.createQuery("from User where email=:email", User.class)
+                .setParameter("email", email).uniqueResult();
+        session.getTransaction().commit();
+
+        return u;
+    }
+	
+	public List<User> listUser() {
 		 Session session = manager.getFactory().openSession();
 	      Transaction tx = null;
-	      List<MatchList> matchLists = null;
+	      List<User> users = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-	         matchLists = session.createQuery("FROM MatchList").list(); 
+	         users = session.createQuery("FROM User").list(); 
 	         
 	         tx.commit();
 	      } catch (HibernateException e) {
@@ -48,16 +67,16 @@ public class manageMatchList {
 	      } finally {
 	         session.close(); 
 	      }
-	      return matchLists;
+	      return users;
 	}
 	
-	public void updateMatchList(MatchList matchList) {
+	public void updateUser(User user) {
 		Session session = manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-			 session.update(matchList); 
+			 session.update(user); 
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -67,13 +86,13 @@ public class manageMatchList {
 	      }
 	}
 	
-	public void deleteMatchList(MatchList matchList) {
+	public void deleteUser(User user) {
 		Session session = manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-	         session.delete(matchList); 
+	         session.delete(user); 
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();

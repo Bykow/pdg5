@@ -1,4 +1,4 @@
-package manage;
+package pdg5.manage;
 
 import java.util.List;
 
@@ -6,19 +6,19 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import persistent.Friend;
+import pdg5.persistent.BlackList;
 
-public class manageFriend {
-	public Friend addFriend(int fromUser, int toUser) {
+public class manageBlackList {
+	public BlackList addBlackList(int fromUser, int toUser) {
 		Session session = manager.getFactory().openSession();
 		Transaction tx = null;
-		Friend friend = new Friend(fromUser, toUser);
+		BlackList blacklist = new BlackList(fromUser, toUser);
 		Integer tntID;
 		
 		try {
 	         tx = session.beginTransaction();
-	         tntID = (Integer) session.save(friend); 
-	         friend.setID(tntID);
+	         tntID = (Integer) session.save(blacklist); 
+	         blacklist.setID(tntID);
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -27,17 +27,17 @@ public class manageFriend {
 	         session.close(); 
 	      }
 		
-		return friend;
+		return blacklist;
 	}
 	
-	public List<Friend> listFriend() {
+	public List<BlackList> listBlackList() {
 		 Session session = manager.getFactory().openSession();
 	      Transaction tx = null;
-	      List<Friend> friends = null;
+	      List<BlackList> blackLists = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-	         friends = session.createQuery("FROM Friend").list(); 
+	         blackLists = session.createQuery("FROM BlackList").list(); 
 	         
 	         tx.commit();
 	      } catch (HibernateException e) {
@@ -46,16 +46,16 @@ public class manageFriend {
 	      } finally {
 	         session.close(); 
 	      }
-	      return friends;
+	      return blackLists;
 	}
 	
-	public void updateFriend(Friend friend) {
+	public void updateBlackList(BlackList blackList) {
 		Session session = manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-			 session.update(friend); 
+			 session.update(blackList); 
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -65,13 +65,13 @@ public class manageFriend {
 	      }
 	}
 	
-	public void deleteFriend(Friend friend) {
+	public void deleteBlackList(BlackList blacklist) {
 		Session session = manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-	         session.delete(friend); 
+	         session.delete(blacklist); 
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();

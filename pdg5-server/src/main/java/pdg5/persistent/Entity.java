@@ -1,4 +1,4 @@
-package persistent;
+package pdg5.persistent;
 
 // TODO after it works
 public class Entity {

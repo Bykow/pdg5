@@ -1,4 +1,4 @@
-package pdg5.manage;
+package pdg5.server.manage;
 
 import java.util.List;
 
@@ -6,8 +6,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import pdg5.persistent.MatchList;
-import pdg5.persistent.Tournament;
+import pdg5.server.persistent.MatchList;
 
 public class manageMatchList {
 	

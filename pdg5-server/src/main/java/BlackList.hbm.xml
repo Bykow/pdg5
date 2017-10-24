@@ -4,7 +4,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 
 <hibernate-mapping>
-   <class name = "pdg5.persistent.BlackList" table = "blacklist">
+   <class name = "pdg5.server.persistent.BlackList" table = "blacklist">
       
       <meta attribute = "class-description">
          This class contains the blacklist detail. 

@@ -1,4 +1,4 @@
-package pdg5.manage;
+package pdg5.server.manage;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import pdg5.persistent.Game;
+import pdg5.server.persistent.Game;
 
 public class manageGame {
 	public Game addGame(String title, int player1, int player2, int tournament) {

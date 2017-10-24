@@ -1,4 +1,4 @@
-package pdg5.persistent;
+package pdg5.server.persistent;
 
 import java.util.Date;
 

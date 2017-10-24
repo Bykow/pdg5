@@ -60,12 +60,14 @@ public class TuileStack {
                 });
 
 
+        /*
         // Adds the missing 12 Tuiles to get the 114 Tuiles of a game. Picks at random the remaining
         for (int i = Protocol.NUMBER_OF_TUILES_PER_GAME-size; i > 0; i--) {
             char c = getRandChar();
             size++;
             stack.push(new Tuile(c, map.get(c)));
         }
+        */
 
         // Shuffles the stack
         Collections.shuffle(stack, r);

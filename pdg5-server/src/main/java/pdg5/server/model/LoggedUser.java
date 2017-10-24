@@ -1,6 +1,7 @@
 package pdg5.server.model;
 
 import pdg5.server.model.ContextualClientHandler;
+import pdg5.server.persistent.User;
 
 /**
  * LoggedUser represents a user currently logged in
@@ -9,8 +10,6 @@ import pdg5.server.model.ContextualClientHandler;
 public class LoggedUser {
     private final Integer userId;
     private final String username;
-
-    private final int privilege;
 
     private final ContextualClientHandler context;
 
@@ -21,9 +20,8 @@ public class LoggedUser {
      * @param context the context in which we execute this
      */
     public LoggedUser(User u, ContextualClientHandler context) {
-        userId = u.getId_user();
+        userId = u.getID();
         username = u.getUsername();
-        privilege = u.getPrivilege();
         this.context = context;
     }
 
@@ -52,15 +50,6 @@ public class LoggedUser {
      */
     public Integer getUserId() {
         return userId;
-    }
-
-    /**
-     * Get the privilege of this user
-     *
-     * @return the privilege as an int
-     */
-    public int getPrivilege() {
-        return privilege;
     }
 
 }

@@ -1,13 +1,10 @@
-package pdg5.test;
+package pdg5.server;
 
 import static org.junit.Assert.*;
 
-import java.util.Random;
-
 import org.junit.Test;
 
-import pdg5.manage.manageMatchList;
-import pdg5.persistent.MatchList;
+import pdg5.server.persistent.MatchList;
 
 public class testPersistentMatchList {
 

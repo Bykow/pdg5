@@ -1,14 +1,12 @@
-package pdg5.test;
+package pdg5.server;
 
 import static org.junit.Assert.*;
 
 import java.util.Date;
-import java.util.Random;
 
 import org.junit.Test;
 
-import pdg5.manage.manageGame;
-import pdg5.persistent.Game;
+import pdg5.server.persistent.Game;
 
 public class testPersistentGame {
 

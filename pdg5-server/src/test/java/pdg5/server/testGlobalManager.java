@@ -32,6 +32,8 @@ public class testGlobalManager {
 		manageTournament mt = new manageTournament();
 		manageUser mu = new manageUser();
 		
+		System.out.println("***** Global tests ****");
+		
 		// create some users
 		User usr1 = mu.addUser("Sauron@mordor.org","Sauron", "1234");
 		User usr2 = mu.addUser("Saruman@isengard.org","saruman", "pass");
@@ -240,17 +242,19 @@ public class testGlobalManager {
 		manageChat mc = new manageChat();
 		manageMessage mm = new manageMessage();
 		
+		System.out.println("***** Global Chat tests ****");
+		
 		// create user
-		User usr1 = mu.addUser("Sauron@mordor.org","Sauron", "1234");
-		User usr2 = mu.addUser("Saruman@isengard.org","saruman", "pass");
-		User usr3 = mu.addUser("gandalf@wizard.com","gandalf", "grey");
+		User usr1 = mu.addUser("Jean-Claude@tst.org","JC", "1234");
+		User usr2 = mu.addUser("Jean-Michel@tst.org","JM", "pass");
+		User usr3 = mu.addUser("Jean-Edouard@tst.com","JE", "grey");
 		
 		// create tournament
-		Tournament t1 = mt.addTournament("Mordor Championship");
+		Tournament t1 = mt.addTournament("keke Championship");
 		
 		// create game
-		Game g1 = mg.addGame("Wizard battle", usr2.getID(), usr3.getID());
-		Game g2 = mg.addGame("Evil battle", usr1.getID(), usr2.getID(),t1.getID());
+		Game g1 = mg.addGame("JJ battle", usr2.getID(), usr3.getID());
+		Game g2 = mg.addGame("Jean battle", usr1.getID(), usr2.getID(),t1.getID());
 		
 		// create chat
 		Chat c1 = mc.addChatGame(g1.getID());

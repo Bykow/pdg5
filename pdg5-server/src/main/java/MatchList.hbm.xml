@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name = "pdg5.persistent.MatchList" table = "matchlist">
+      
+      <meta attribute = "class-description">
+         This class contains the matchlist detail. 
+      </meta>
+      
+      <id name = "ID" type = "int" column = "ID">
+         <generator class="native"/>
+      </id>
+      
+      <property name = "user" column = "userID" type = "int"/>
+      <property name = "tournament" column = "tournamentID" type = "int"/>
+      
+   </class>
+</hibernate-mapping>

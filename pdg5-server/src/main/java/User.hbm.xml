@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name = "pdg5.persistent.User" table = "user">
+      
+      <meta attribute = "class-description">
+         This class contains the user detail. 
+      </meta>
+      
+      <id name = "ID" type = "int" column = "ID">
+         <generator class="native"/>
+      </id>
+      
+      <property name = "email" column = "email" type = "string"/>
+      <property name = "pass" column = "pass" type = "string"/>
+      
+   </class>
+</hibernate-mapping>

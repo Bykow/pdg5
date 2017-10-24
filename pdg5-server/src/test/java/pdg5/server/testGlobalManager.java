@@ -5,21 +5,23 @@ import java.util.List;
 import org.junit.Test;
 
 import pdg5.server.manage.manageBlackList;
+import pdg5.server.manage.manageChat;
 import pdg5.server.manage.manageFriend;
 import pdg5.server.manage.manageGame;
 import pdg5.server.manage.manageMatchList;
+import pdg5.server.manage.manageMessage;
 import pdg5.server.manage.manageTournament;
 import pdg5.server.manage.manageUser;
 import pdg5.server.persistent.BlackList;
+import pdg5.server.persistent.Chat;
 import pdg5.server.persistent.Friend;
 import pdg5.server.persistent.Game;
 import pdg5.server.persistent.MatchList;
+import pdg5.server.persistent.Message;
 import pdg5.server.persistent.Tournament;
 import pdg5.server.persistent.User;
 
 public class testGlobalManager {
-	
-	//TODO test list function
 	
 	@Test
 	public void testGlobal() {
@@ -228,6 +230,83 @@ public class testGlobalManager {
 			System.out.println(user);
 		}
 		
+	}
+	
+	@Test
+	public void testGlobalChat() {
+		manageGame mg = new manageGame();
+		manageTournament mt = new manageTournament();
+		manageUser mu = new manageUser();
+		manageChat mc = new manageChat();
+		manageMessage mm = new manageMessage();
+		
+		// create user
+		User usr1 = mu.addUser("Sauron@mordor.org","Sauron", "1234");
+		User usr2 = mu.addUser("Saruman@isengard.org","saruman", "pass");
+		User usr3 = mu.addUser("gandalf@wizard.com","gandalf", "grey");
+		
+		// create tournament
+		Tournament t1 = mt.addTournament("Mordor Championship");
+		
+		// create game
+		Game g1 = mg.addGame("Wizard battle", usr2.getID(), usr3.getID());
+		Game g2 = mg.addGame("Evil battle", usr1.getID(), usr2.getID(),t1.getID());
+		
+		// create chat
+		Chat c1 = mc.addChatGame(g1.getID());
+		Chat c2 = mc.addChatTournament(t1.getID());
+		
+		// list chat
+		List<Chat> lc = mc.listChats();
+		System.out.println("***** Initial chat ****");
+		for (Chat chat : lc) {
+			System.out.println(chat);
+		}
+		
+		// update chat
+		c1.setGame(g2.getID());
+		lc = mc.listChats();
+		System.out.println("***** update chat ****");
+		for (Chat chat : lc) {
+			System.out.println(chat);
+		}
+		
+		// create message
+		Message m1 = mm.addMessage("What's up", usr1.getID(), c1.getID());
+		Message m2 = mm.addMessage("nothing, you ?", usr2.getID(), c1.getID());
+		
+		// list message
+		System.out.println("***** Initial Message ****");
+		List<Message> lm = mm.listMessages();
+		for (Message message : lm) {
+			System.out.println(message);
+		}
+		
+		// update message
+		m2.setContent("the sky");
+		mm.updateMessage(m2);
+		
+		System.out.println("***** Initial Message ****");
+		lm = mm.listMessages();
+		for (Message message : lm) {
+			System.out.println(message);
+		}
+		
+		// destroy message
+		mm.deleteMessage(m2);
+		mm.deleteMessage(m1);
+		
+		// destroy chat
+		mc.deleteChat(c1);
+		mc.deleteChat(c2);
+		
+		// destroy everything else
+		mg.deleteGame(g1);
+		mg.deleteGame(g2);
+		mt.deleteTournament(t1);
+		mu.deleteUser(usr1);
+		mu.deleteUser(usr2);
+		mu.deleteUser(usr3);
 	}
 
 }

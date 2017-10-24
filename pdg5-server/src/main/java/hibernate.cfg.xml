@@ -29,6 +29,9 @@
    <mapping resource="MatchList.hbm.xml"/>
    <mapping resource="Tournament.hbm.xml"/>
    <mapping resource="User.hbm.xml"/>
+   <mapping resource="Message.hbm.xml"/>
+   <mapping resource="Chat.hbm.xml"/>
+   
 
 </session-factory>
 </hibernate-configuration>

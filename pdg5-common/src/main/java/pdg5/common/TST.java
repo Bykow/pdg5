@@ -1,3 +1,5 @@
+package pdg5.common;
+
 /**
  * Class representing a Ternary Search Tree, used to stock a diconnary
  */
@@ -17,6 +19,9 @@ public class TST {
             this.c = c;
             this.isWord = false;
             this.nodeHeight = 0;
+            this.left = null;
+            this.right = null;
+            this.center = null;
         }
     }
 
@@ -59,10 +64,10 @@ public class TST {
      * @param d index of the char in the word (for recursive purposes)
      * @return Node for recursive calls
      */
-    private Node get(Node x, String key, int d) {
+    private boolean get(Node x, String key, int d) {
 
         if (x == null) {
-            return null;
+            return false;
         }
 
         char c = key.charAt(d);
@@ -71,10 +76,14 @@ public class TST {
             return get(x.left, key, d);
         } else if (c > x.c) {
             return get(x.right, key, d);
-        } else if (d != key.length() - 1) {
-            return get(x.center, key, d + 1);
         } else {
-            return x;
+            if (x.isWord && d == key.length() - 1) {
+                return true;
+            } else if (d == key.length() - 1) {
+                return false;
+            } else {
+                return get(x.center, key, d + 1);
+            }
         }
     }
 
@@ -188,19 +197,6 @@ public class TST {
      * @return true is the word is in the tree
      */
     public boolean contains(String key) {
-        Node x = get(root, key, 0);
-
-        if (x == null) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Return the height of current Node
-     * @return height
-     */
-    public int height() {
-        return height(root);
+       return get(root, key, 0);
     }
 }

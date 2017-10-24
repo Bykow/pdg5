@@ -1,4 +1,4 @@
-package pdg5.manage;
+package pdg5.server.manage;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

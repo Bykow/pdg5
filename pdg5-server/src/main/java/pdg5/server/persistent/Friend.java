@@ -1,13 +1,13 @@
-package pdg5.persistent;
+package pdg5.server.persistent;
 
 import java.util.Date;
 
-public class BlackList {
+public class Friend {
 	private int ID;
 	private int fromUser;
 	private int toUser;
 	private Date lastModified;
-	public BlackList(int iD, int fromUser, int toUser, Date lastModified) {
+	public Friend(int iD, int fromUser, int toUser, Date lastModified) {
 		super();
 		ID = iD;
 		this.fromUser = fromUser;
@@ -15,13 +15,14 @@ public class BlackList {
 		this.lastModified = lastModified;
 	}
 	
-	public BlackList(int fromUser, int toUser) {
+	public Friend(int fromUser, int toUser) {
+		super();
 		this.fromUser = fromUser;
 		this.toUser = toUser;
 		this.lastModified = new Date();
 	}
 	
-	public BlackList() {
+	public Friend() {
 	}
 	public int getID() {
 		return ID;
@@ -50,21 +51,22 @@ public class BlackList {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if(!(obj instanceof BlackList))
+		if(!(obj instanceof Friend))
 		{
 			return false;
 		}
 			
-		BlackList b = (BlackList) obj;
+		Friend b = (Friend) obj;
 		
 		return this.ID == b.getID() &&
 				this.fromUser == b.getFromUser() &&
 				this.toUser == b.getToUser() &&
 				this.lastModified.equals(b.getLastModified());
 	}
-
+	
 	@Override
 	public String toString() {
 		return ID  + ", " + fromUser  + ", " + toUser  + ", " + lastModified;
 	}
+
 }

@@ -1,13 +1,10 @@
-package pdg5.test;
+package pdg5.server;
 
 import static org.junit.Assert.*;
 
-import java.util.Random;
-
 import org.junit.Test;
 
-import pdg5.manage.manageUser;
-import pdg5.persistent.User;
+import pdg5.server.persistent.User;
 
 
 public class testPersistentUser {

@@ -1,4 +1,4 @@
-package pdg5.manage;
+package pdg5.server.manage;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import pdg5.persistent.Friend;
+import pdg5.server.persistent.Friend;
 
 public class manageFriend {
 	public Friend addFriend(int fromUser, int toUser) {

@@ -1,23 +1,21 @@
-package pdg5.test;
-
-import static org.junit.Assert.*;
+package pdg5.server;
 
 import java.util.List;
 
 import org.junit.Test;
 
-import pdg5.manage.manageBlackList;
-import pdg5.manage.manageFriend;
-import pdg5.manage.manageGame;
-import pdg5.manage.manageMatchList;
-import pdg5.manage.manageTournament;
-import pdg5.manage.manageUser;
-import pdg5.persistent.BlackList;
-import pdg5.persistent.Friend;
-import pdg5.persistent.Game;
-import pdg5.persistent.MatchList;
-import pdg5.persistent.Tournament;
-import pdg5.persistent.User;
+import pdg5.server.manage.manageBlackList;
+import pdg5.server.manage.manageFriend;
+import pdg5.server.manage.manageGame;
+import pdg5.server.manage.manageMatchList;
+import pdg5.server.manage.manageTournament;
+import pdg5.server.manage.manageUser;
+import pdg5.server.persistent.BlackList;
+import pdg5.server.persistent.Friend;
+import pdg5.server.persistent.Game;
+import pdg5.server.persistent.MatchList;
+import pdg5.server.persistent.Tournament;
+import pdg5.server.persistent.User;
 
 public class testGlobalManager {
 	

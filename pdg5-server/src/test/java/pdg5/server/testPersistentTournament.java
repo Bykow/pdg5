@@ -1,14 +1,12 @@
-package pdg5.test;
+package pdg5.server;
 
 import static org.junit.Assert.*;
 
 import java.util.Date;
-import java.util.Random;
 
 import org.junit.Test;
 
-import pdg5.manage.manageTournament;
-import pdg5.persistent.Tournament;
+import pdg5.server.persistent.Tournament;
 
 public class testPersistentTournament {
 

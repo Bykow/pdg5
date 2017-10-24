@@ -1,4 +1,4 @@
-package pdg5.manage;
+package pdg5.server.manage;
 
 import java.util.List;
 
@@ -6,20 +6,19 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import pdg5.persistent.Tournament;
+import pdg5.server.persistent.BlackList;
 
-public class manageTournament {
-	
-	public Tournament addTournament(String title) {
+public class manageBlackList {
+	public BlackList addBlackList(int fromUser, int toUser) {
 		Session session = manager.getFactory().openSession();
 		Transaction tx = null;
-		Tournament tournament = new Tournament(title);
+		BlackList blacklist = new BlackList(fromUser, toUser);
 		Integer tntID;
 		
 		try {
 	         tx = session.beginTransaction();
-	         tntID = (Integer) session.save(tournament); 
-	         tournament.setID(tntID);
+	         tntID = (Integer) session.save(blacklist); 
+	         blacklist.setID(tntID);
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -28,17 +27,17 @@ public class manageTournament {
 	         session.close(); 
 	      }
 		
-		return tournament;
+		return blacklist;
 	}
 	
-	public List<Tournament> listTournaments() {
+	public List<BlackList> listBlackList() {
 		 Session session = manager.getFactory().openSession();
 	      Transaction tx = null;
-	      List<Tournament> tournaments = null;
+	      List<BlackList> blackLists = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-	         tournaments = session.createQuery("FROM Tournament").list(); 
+	         blackLists = session.createQuery("FROM BlackList").list(); 
 	         
 	         tx.commit();
 	      } catch (HibernateException e) {
@@ -47,16 +46,16 @@ public class manageTournament {
 	      } finally {
 	         session.close(); 
 	      }
-	      return tournaments;
+	      return blackLists;
 	}
 	
-	public void updateTournament(Tournament tournament) {
+	public void updateBlackList(BlackList blackList) {
 		Session session = manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-			 session.update(tournament); 
+			 session.update(blackList); 
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -66,13 +65,13 @@ public class manageTournament {
 	      }
 	}
 	
-	public void deleteTournament(Tournament tournament) {
+	public void deleteBlackList(BlackList blacklist) {
 		Session session = manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-	         session.delete(tournament); 
+	         session.delete(blacklist); 
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -81,5 +80,4 @@ public class manageTournament {
 	         session.close(); 
 	      }
 	}
-
 }

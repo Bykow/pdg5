@@ -11,12 +11,13 @@ import pdg5.server.persistent.User;
 
 public class manageUser {
 	
-	public User addUser(String email, String pass) {
+	public User addUser(String email,String username, String pass) {
 		Session session = manager.getFactory().openSession();
 		Transaction tx = null;
 		String hashedPass = BCrypt.hashpw(pass, BCrypt.gensalt());
 		email = email.toLowerCase();
-		User user = new User(email, hashedPass);
+		username = username.toLowerCase();
+		User user = new User(email,username, hashedPass);
 		Integer usrID;
 		
 		try {
@@ -35,17 +36,34 @@ public class manageUser {
 	}
 	
 	/**
-     * Get the User whose username is given from the DB
+     * Get the User whose email is given from the DB
      *
-     * @param username the username
+     * @param email the email
      * @return a corresponding User instance
      */
-    public User getUser(String email) {
+    public User getUserByEmail(String email) {
     	Session session = manager.getFactory().openSession();
         email = email.toLowerCase();
         session.beginTransaction();
         User u = session.createQuery("from User where email=:email", User.class)
                 .setParameter("email", email).uniqueResult();
+        session.getTransaction().commit();
+
+        return u;
+    }
+    
+    /**
+     * Get the User whose username is given from the DB
+     *
+     * @param username the username
+     * @return a corresponding User instance
+     */
+    public User getUserByUsername(String username) {
+    	Session session = manager.getFactory().openSession();
+        username = username.toLowerCase();
+        session.beginTransaction();
+        User u = session.createQuery("from User where username=:username", User.class)
+                .setParameter("username", username).uniqueResult();
         session.getTransaction().commit();
 
         return u;
@@ -78,8 +96,8 @@ public class manageUser {
      * @param password the password
      * @return true if correct, false otherwise
      */
-    public boolean isCorrectPassword(String email, String password) {
-        User u = getUser(email);
+    public boolean isCorrectPassword(String username, String password) {
+        User u = getUserByUsername(username);
         if (u == null) return false;
         return isExpectedPassword(password, u.getPass());
     }

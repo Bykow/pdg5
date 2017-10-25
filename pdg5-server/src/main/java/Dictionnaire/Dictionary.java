@@ -9,21 +9,28 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author Maxime Guillod
+ * Class representing a dictionary of all the french word.
+ * We can just search a word on it.
  */
-public class Dictionnaire {
+public class Dictionary {
 
     private TreeSet<String> dico;
+    //path to the dictionary file
+    private String path = "../Dico/french.dic";
 
-    public Dictionnaire() {
+    /**
+     * Constructor
+     * Build a dictionary (TreeSet of String) containing all the french words.
+     * All the word doesn't contain accent.
+     */
+    public Dictionary() {
 
         BufferedReader br = null;
         FileReader fr = null;
         dico = new TreeSet<>();
 
         try {
-            fr = new FileReader("../Dico/french.dic");
+            fr = new FileReader(path);
             br = new BufferedReader(fr);
 
             String sCurrentLine;
@@ -31,9 +38,9 @@ public class Dictionnaire {
                 dico.add(sCurrentLine);
             }
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(Dictionnaire.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Dictionary.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(Dictionnaire.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Dictionary.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 if (br != null) {
@@ -43,12 +50,17 @@ public class Dictionnaire {
                     fr.close();
                 }
             } catch (IOException ex) {
-                Logger.getLogger(Dictionnaire.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Dictionary.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
     
-    public boolean  contrain(String wordTested) {
+    /**
+     * 
+     * @param wordTested
+     * @return true if wordTested is contained in the dictionnary
+     */
+    public boolean  contain(String wordTested) {
         return dico.contains(wordTested);
     }
 

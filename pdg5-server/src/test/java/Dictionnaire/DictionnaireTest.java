@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
  */
 public class DictionnaireTest {
     
-    Dictionnaire dico;
+    Dictionary dico;
     
     public DictionnaireTest() {
     }
@@ -28,7 +28,7 @@ public class DictionnaireTest {
     
     @Before
     public void setUp() {
-        dico = new Dictionnaire();
+        dico = new Dictionary();
     }
     
     @After
@@ -37,16 +37,16 @@ public class DictionnaireTest {
     
     @Test
     public void containTrue() {
-        assertTrue(dico.contrain("maison"));
-        assertTrue(dico.contrain("chatte"));
-        assertTrue(dico.contrain("salut"));
-        assertTrue(dico.contrain("zzzz"));
+        assertTrue(dico.contain("maison"));
+        assertTrue(dico.contain("chatte"));
+        assertTrue(dico.contain("salut"));
+        assertTrue(dico.contain("zzzz"));
     }
 
     @Test
     public void containFalse() {
-        assertFalse(dico.contrain("zzz"));
-        assertFalse(dico.contrain("tony"));
+        assertFalse(dico.contain("zzz"));
+        assertFalse(dico.contain("tony"));
     }
     
 }

@@ -1,7 +1,7 @@
 package pdg5.common;
 
 /**
- * Class representing a Ternary Search Tree, used to stock a diconnary
+ * Class representing a Ternary Search Tree, used to stock a dictionary
  */
 public class TST {
     /**

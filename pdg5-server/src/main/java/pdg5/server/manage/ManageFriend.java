@@ -6,20 +6,19 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import pdg5.server.persistent.MatchList;
+import pdg5.server.persistent.Friend;
 
-public class manageMatchList {
-	
-	public MatchList addMatchList(int tournament, int user) {
-		Session session = manager.getFactory().openSession();
+public class ManageFriend {
+	public Friend addFriend(int fromUser, int toUser) {
+		Session session = Manager.getFactory().openSession();
 		Transaction tx = null;
-		MatchList matchList = new MatchList(tournament, user);
-		Integer mlID;
+		Friend friend = new Friend(fromUser, toUser);
+		Integer tntID;
 		
 		try {
 	         tx = session.beginTransaction();
-	         mlID = (Integer) session.save(matchList); 
-	         matchList.setID(mlID);
+	         tntID = (Integer) session.save(friend); 
+	         friend.setID(tntID);
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -28,17 +27,17 @@ public class manageMatchList {
 	         session.close(); 
 	      }
 		
-		return matchList;
+		return friend;
 	}
 	
-	public List<MatchList> listMatchList() {
-		 Session session = manager.getFactory().openSession();
+	public List<Friend> listFriend() {
+		 Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
-	      List<MatchList> matchLists = null;
+	      List<Friend> friends = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-	         matchLists = session.createQuery("FROM MatchList").list(); 
+	         friends = session.createQuery("FROM Friend").list(); 
 	         
 	         tx.commit();
 	      } catch (HibernateException e) {
@@ -47,16 +46,16 @@ public class manageMatchList {
 	      } finally {
 	         session.close(); 
 	      }
-	      return matchLists;
+	      return friends;
 	}
 	
-	public void updateMatchList(MatchList matchList) {
-		Session session = manager.getFactory().openSession();
+	public void updateFriend(Friend friend) {
+		Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-			 session.update(matchList); 
+			 session.update(friend); 
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -66,13 +65,13 @@ public class manageMatchList {
 	      }
 	}
 	
-	public void deleteMatchList(MatchList matchList) {
-		Session session = manager.getFactory().openSession();
+	public void deleteFriend(Friend friend) {
+		Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-	         session.delete(matchList); 
+	         session.delete(friend); 
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -81,5 +80,4 @@ public class manageMatchList {
 	         session.close(); 
 	      }
 	}
-
 }

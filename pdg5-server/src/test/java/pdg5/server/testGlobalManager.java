@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.junit.Test;
 
-import pdg5.server.manage.manageBlackList;
-import pdg5.server.manage.manageFriend;
-import pdg5.server.manage.manageGame;
-import pdg5.server.manage.manageMatchList;
-import pdg5.server.manage.manageTournament;
-import pdg5.server.manage.manageUser;
+import pdg5.server.manage.ManageBlackList;
+import pdg5.server.manage.ManageFriend;
+import pdg5.server.manage.ManageGame;
+import pdg5.server.manage.ManageMatchList;
+import pdg5.server.manage.ManageTournament;
+import pdg5.server.manage.ManageUser;
 import pdg5.server.persistent.BlackList;
 import pdg5.server.persistent.Friend;
 import pdg5.server.persistent.Game;
@@ -23,12 +23,12 @@ public class testGlobalManager {
 	
 	@Test
 	public void testGlobal() {
-		manageBlackList mbl = new manageBlackList();
-		manageFriend mf = new manageFriend();
-		manageGame mg = new manageGame();
-		manageMatchList mml = new manageMatchList();
-		manageTournament mt = new manageTournament();
-		manageUser mu = new manageUser();
+		ManageBlackList mbl = new ManageBlackList();
+		ManageFriend mf = new ManageFriend();
+		ManageGame mg = new ManageGame();
+		ManageMatchList mml = new ManageMatchList();
+		ManageTournament mt = new ManageTournament();
+		ManageUser mu = new ManageUser();
 		
 		// create some users
 		User usr1 = mu.addUser("Sauron@mordor.org","Sauron", "1234");

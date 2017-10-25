@@ -9,10 +9,10 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import pdg5.server.persistent.User;
 
-public class manageUser {
+public class ManageUser {
 	
 	public User addUser(String email,String username, String pass) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 		Transaction tx = null;
 		String hashedPass = BCrypt.hashpw(pass, BCrypt.gensalt());
 		email = email.toLowerCase();
@@ -42,7 +42,7 @@ public class manageUser {
      * @return a corresponding User instance
      */
     public User getUserByEmail(String email) {
-    	Session session = manager.getFactory().openSession();
+    	Session session = Manager.getFactory().openSession();
         email = email.toLowerCase();
         session.beginTransaction();
         User u = session.createQuery("from User where email=:email", User.class)
@@ -59,7 +59,7 @@ public class manageUser {
      * @return a corresponding User instance
      */
     public User getUserByUsername(String username) {
-    	Session session = manager.getFactory().openSession();
+    	Session session = Manager.getFactory().openSession();
         username = username.toLowerCase();
         session.beginTransaction();
         User u = session.createQuery("from User where username=:username", User.class)
@@ -70,7 +70,7 @@ public class manageUser {
     }
 	
 	public List<User> listUser() {
-		 Session session = manager.getFactory().openSession();
+		 Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
 	      List<User> users = null;
 	      
@@ -107,7 +107,7 @@ public class manageUser {
     }
 	
 	public void updateUser(User user) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {
@@ -123,7 +123,7 @@ public class manageUser {
 	}
 	
 	public void deleteUser(User user) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {

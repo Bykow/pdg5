@@ -8,9 +8,9 @@ import org.hibernate.Transaction;
 
 import pdg5.server.persistent.Game;
 
-public class manageGame {
+public class ManageGame {
 	public Game addGame(String title, int player1, int player2, int tournament) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 		Transaction tx = null;
 		Game game = new Game(title, player1, player2, tournament);
 		Integer gID;
@@ -31,7 +31,7 @@ public class manageGame {
 	}
 	
 	public Game addGame(String title, int player1, int player2) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 		Transaction tx = null;
 		Game game = new Game(title, player1, player2);
 		Integer gID;
@@ -52,7 +52,7 @@ public class manageGame {
 	}
 	
 	public List<Game> listGame() {
-		 Session session = manager.getFactory().openSession();
+		 Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
 	      List<Game> games = null;
 	      
@@ -71,7 +71,7 @@ public class manageGame {
 	}
 	
 	public void updateGame(Game game) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {
@@ -87,7 +87,7 @@ public class manageGame {
 	}
 	
 	public void deleteGame(Game game) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name = "pdg5.server.persistent.Tournament" table = "tournament">
+      
+      <meta attribute = "class-description">
+         This class contains the tournament detail. 
+      </meta>
+      
+      <id name = "ID" type = "int" column = "ID">
+         <generator class="native"/>
+      </id>
+      
+      <property name = "title" column = "title" type = "string"/>
+      <property name = "created" column = "created" type = "timestamp"/>
+      
+   </class>
+</hibernate-mapping>

@@ -3,8 +3,8 @@ package pdg5.common.protocole;
 import java.awt.Image;
 
 /**
- * Class sended through the connection representing
- * a attempt to sign up by a client.
+ * Class sended through the connection by a client representing
+ * an attempt to sign up by a client.
  */
 public class SignUp implements IServerRequest {
 
@@ -14,9 +14,9 @@ public class SignUp implements IServerRequest {
 
     /**
      * Constructor
-     * @param login
-     * @param password
-     * @param image 
+     * @param login trying to sign up
+     * @param password trying to sign up
+     * @param image used as profil
      */
     public SignUp(String login, String password, Image image) {
         this.login = login;
@@ -25,13 +25,15 @@ public class SignUp implements IServerRequest {
     }
 
     /**
-     * @return a profil images
+     * return a profil image
+     * @return a profil image
      */
     public Image getImage() {
         return image;
     }
 
     /**
+     * return the login
      * @return the login
      */
     public String getLogin() {
@@ -39,14 +41,17 @@ public class SignUp implements IServerRequest {
     }
 
     /**
-     * @return a password
+     * return the password
+     * @return the password
      */
     public String getPassword() {
         return password;
     }
 
     /**
-     * 
+     * Method immediately used when the server receive the object.
+     * Try to create a new account in the server stockage 
+     * with the password, login and image given
      */
     @Override
     public void execute() {

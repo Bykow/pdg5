@@ -3,7 +3,7 @@ package pdg5.common.protocole;
 import java.awt.Image;
 
 /**
- * Class sended through the connection representing
+ * Class sended through the connection by a client representing
  * a attempt to sign in by a client.
  */
 public class SignIn implements IServerRequest {
@@ -13,8 +13,8 @@ public class SignIn implements IServerRequest {
 
     /**
      * Constructor
-     * @param login
-     * @param password 
+     * @param login trying to sign in
+     * @param password trying to sign in
      */
     public SignIn(String login, String password) {
         this.login = login;
@@ -22,6 +22,7 @@ public class SignIn implements IServerRequest {
     }
 
     /**
+     * return the login
      * @return the login
      */
     public String getLogin() {
@@ -29,6 +30,7 @@ public class SignIn implements IServerRequest {
     }
 
     /**
+     * return the password
      * @return the password
      */
     public String getPassword() {
@@ -36,7 +38,7 @@ public class SignIn implements IServerRequest {
     }
 
     /**
-     * Method immediately used when the server or client receive the object.
+     * Method immediately used when the server receive the object.
      * The server will try to authenticate an anonymous client
      * with the given login and password.
      * If it succes, the client will be logged and increase in privileges.

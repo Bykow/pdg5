@@ -2,7 +2,7 @@ package pdg5.common.protocole;
 
 /**
  * 
- * Class sended through the connection representing 
+ * Class sended through the connection  by the server representing
  * a full game with two players.
  */
 public class Game implements IClientRequest {
@@ -18,6 +18,7 @@ public class Game implements IClientRequest {
     }
 
     /**
+     * return the unique ID of a game
      * @return the unique ID of a game
      */
     public int getGameId() {
@@ -25,7 +26,9 @@ public class Game implements IClientRequest {
     }
 
     /**
-     * method immediately used when the server or client receive the object.
+     * method immediately used when the client receive the object.
+     * When the client receive these Game class he can read the current state 
+     * of these game and actualize his UI.
      */
     @Override
     public void clientExecute() {

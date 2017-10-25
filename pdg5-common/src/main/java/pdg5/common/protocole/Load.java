@@ -3,7 +3,7 @@ package pdg5.common.protocole;
 import java.util.List;
 
 /**
- * Class sended through the connection representing
+ * Class sended through the connection by the server representing
  * the list of available games a player have.
  */
 public class Load implements IClientRequest {
@@ -20,6 +20,7 @@ public class Load implements IClientRequest {
     }
 
     /**
+     * return the list of available games of a player
      * @return the list of available games of a player
      */
     public List<Game> getGames() {
@@ -27,7 +28,7 @@ public class Load implements IClientRequest {
     }
 
     /**
-     * Method immediately used when the server or client receive the object.
+     * Method immediately used when the client receive the object.
      * Actualize the UI in the client with all the games in all categories.
      */
     @Override

@@ -3,7 +3,7 @@ package pdg5.common.protocole;
 import java.util.Date;
 
 /**
- * Class sended through the connection representing,
+ * Class sended through the connection by a client or the server representing,
  * if the message comes from a client, a message.
  * If the message comes from the server, an historic.
  */
@@ -25,6 +25,7 @@ public class Chat implements IServerRequest, IClientRequest {
     }
 
     /**
+     * return a unique ID for the message.
      * @return a unique ID for the message.
      */
     public int getGameId() {
@@ -32,6 +33,7 @@ public class Chat implements IServerRequest, IClientRequest {
     }
 
     /**
+     * return a String representing the message.
      * @return a String representing the message.
      */
     public String getMessage() {
@@ -39,7 +41,7 @@ public class Chat implements IServerRequest, IClientRequest {
     }
 
     /**
-     * Method immediately used when the server or client receive the object.
+     * Method immediately used when the server receive the object.
      * It will deliver the message to the clients concerned.
      */
     @Override
@@ -48,7 +50,7 @@ public class Chat implements IServerRequest, IClientRequest {
     }
 
     /**
-     * Method immediately used when the server or client receive the object.
+     * Method immediately used when the client receive the object.
      * It will actualize the messages in the client 
      */
     @Override

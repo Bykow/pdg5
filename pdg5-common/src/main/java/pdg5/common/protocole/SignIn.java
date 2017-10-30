@@ -1,6 +1,5 @@
 package pdg5.common.protocole;
 
-import java.awt.Image;
 import java.io.Serializable;
 
 /**

@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -30,42 +29,34 @@ public class Main {
     }
 
     @Test
-    public void testTest() {
+    public void testServerClient() {
         try {
-            ServerSocket serverSocket = new ServerSocket(1000);
-            Socket client = new Socket("127.0.0.1", 1000);
-
-            Socket server = serverSocket.accept();
-
-            server(server);
-            client(client);
-            
+            startServer();
             Thread.sleep(2000);
-                    
+            startClient();
 
-        } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InterruptedException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void server(Socket socket) {
+    public void startServer() {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
+                    ServerSocket serverSocket = new ServerSocket(1000);
+                    Socket socket = serverSocket.accept();
+
                     ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
                     ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
-                    
+
                     IServerRequest o = (IServerRequest) in.readObject();
                     System.out.println(o);
                     System.out.println("--------------------");
                     o.execute();
                     System.out.println("--------------------");
-                    
-                    
-                    
+
                 } catch (IOException ex) {
                     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ClassNotFoundException ex) {
@@ -75,24 +66,18 @@ public class Main {
         }).start();
     }
 
-    public void client(Socket socket) {
-        
-        SignIn sign = new SignIn("maxime", "myPass");
-        
-        new Thread(() -> {
-            try {
-                ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-                ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
-                
-                out.writeObject(sign);
-                
-                in.readObject();
-                
-            } catch (IOException ex) {
-                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }).start();
+    public void startClient() {
+        try {
+            Socket socket = new Socket("127.0.0.1", 1000);
+
+            SignIn sign = new SignIn("maxime", "myPass");
+
+            ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+            ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+
+            out.writeObject(sign);
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

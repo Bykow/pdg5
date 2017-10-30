@@ -36,6 +36,7 @@ public class ClientNetworkManager {
    }
    
    public IServerRequest receive(){
+       return null;
       
       
    }

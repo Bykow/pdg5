@@ -1,13 +1,14 @@
 package pdg5.common.protocole;
 
 import java.awt.Image;
+import java.io.Serializable;
 
 /**
  * Class use to login into our application
  *
  * @author Maxime Guillod
  */
-public class SignIn implements IServerRequest {
+public class SignIn implements IServerRequest, Serializable {
 
     private String login;
     private String password;
@@ -27,7 +28,13 @@ public class SignIn implements IServerRequest {
 
     @Override
     public void execute() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("pdg5.common.protocole.SignIn.execute()");
+        System.out.println(getPassword());
+    }
+
+    @Override
+    public String toString() {
+        return "SignIn{" + "login=" + login + ", password=" + password + '}';
     }
 
 }

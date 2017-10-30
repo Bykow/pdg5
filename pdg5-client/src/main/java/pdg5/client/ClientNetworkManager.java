@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jdk.nashorn.internal.ir.RuntimeNode;
 import pdg5.common.Config;
 import pdg5.common.protocole.IClientRequest;
 import pdg5.common.protocole.IServerRequest;
@@ -21,8 +22,13 @@ public class ClientNetworkManager {
    private Socket clientSocket;
    private ObjectOutputStream out;
    private ObjectInputStream in;
+   
+   private ClientRequestManager requestManager;
 
    public ClientNetworkManager() {
+      
+      requestManager = new ClientRequestManager();
+      
       try {
          clientSocket = new Socket(Config.serverAddress, Config.serverPort);
          this.out = new ObjectOutputStream(clientSocket.getOutputStream());
@@ -33,12 +39,12 @@ public class ClientNetworkManager {
       }
    }
 
-   public void send(IClientRequest request) throws IOException {
-      out.writeObject(request);
+   public void send(Object o) throws IOException {
+      out.writeObject(o);
    }
 
-   public IServerRequest receive() throws IOException, ClassNotFoundException {
-      return (IServerRequest) in.readObject();
+   public void receive() throws IOException, ClassNotFoundException {
+      requestManager.execute(in.readObject());
    }
 
 }

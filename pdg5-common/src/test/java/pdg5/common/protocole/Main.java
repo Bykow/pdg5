@@ -7,6 +7,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -51,10 +52,11 @@ public class Main {
                     ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
                     ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
 
-                    IServerRequest o = (IServerRequest) in.readObject();
+                    Object o = in.readObject();
+                    Class myClass = o.getClass();
+                    System.out.println("o.getClass : " + myClass);
+
                     System.out.println(o);
-                    System.out.println("--------------------");
-                    o.execute();
                     System.out.println("--------------------");
 
                 } catch (IOException ex) {

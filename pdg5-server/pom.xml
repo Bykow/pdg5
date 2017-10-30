@@ -32,6 +32,16 @@
             <artifactId>hibernate-core</artifactId>
             <version>5.2.10.Final</version>
         </dependency>
+        <dependency>
+            <groupId>pdg5</groupId>
+            <artifactId>pdg5-client</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>pdg5</groupId>
+            <artifactId>pdg5-client</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

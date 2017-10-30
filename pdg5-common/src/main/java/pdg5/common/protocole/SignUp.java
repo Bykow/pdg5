@@ -1,13 +1,14 @@
 package pdg5.common.protocole;
 
-import java.awt.Image;
+import java.awt.*;
+import java.io.Serializable;
 
 /**
  * Class use to register
  *
  * @author Maxime Guillod
  */
-public class SignUp implements IServerRequest {
+public class SignUp implements Serializable {
 
     private String login;
     private String password;
@@ -31,8 +32,4 @@ public class SignUp implements IServerRequest {
         return password;
     }
 
-    @Override
-    public void execute() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

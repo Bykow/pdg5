@@ -1,10 +1,11 @@
 package pdg5.common.protocole;
 
+import java.io.Serializable;
+
 /**
- *
  * @author Maxime Guillod
  */
-public class ValidationWord implements IClientRequest {
+public class ValidationWord implements Serializable {
 
     private boolean isValid;
 
@@ -14,11 +15,6 @@ public class ValidationWord implements IClientRequest {
 
     public boolean isIsValid() {
         return isValid;
-    }
-
-    @Override
-    public void clientExecute() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

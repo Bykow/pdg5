@@ -1,10 +1,11 @@
 package pdg5.common.protocole;
 
+import java.io.Serializable;
+
 /**
- *
  * @author Maxime Guillod
  */
-public class Chat implements IServerRequest, IClientRequest {
+public class Chat implements Serializable {
 
     private String message;
     private int gameId;
@@ -20,16 +21,6 @@ public class Chat implements IServerRequest, IClientRequest {
 
     public String getMessage() {
         return message;
-    }
-
-    @Override
-    public void execute() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void clientExecute() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

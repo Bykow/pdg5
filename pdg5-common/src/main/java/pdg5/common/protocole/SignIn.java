@@ -7,7 +7,7 @@ import java.io.Serializable;
  *
  * @author Maxime Guillod
  */
-public class SignIn implements IServerRequest, Serializable {
+public class SignIn implements Serializable {
 
     private String login;
     private String password;
@@ -23,12 +23,6 @@ public class SignIn implements IServerRequest, Serializable {
 
     public String getPassword() {
         return password;
-    }
-
-    @Override
-    public void execute() {
-        System.out.println("pdg5.common.protocole.SignIn.execute()");
-        System.out.println(getPassword());
     }
 
     @Override

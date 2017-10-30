@@ -1,7 +1,8 @@
 package pdg5.common.game;
 
-import java.util.ArrayList;
 import pdg5.common.Protocol;
+
+import java.util.ArrayList;
 
 /**
  * Created on 03.10.17 by Bykow
@@ -22,6 +23,7 @@ public class Composition {
 
     /**
      * Returns the Arraylist of Tuiles
+     *
      * @return
      */
     public ArrayList<Tuile> getComp() {

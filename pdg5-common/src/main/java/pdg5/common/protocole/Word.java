@@ -1,11 +1,13 @@
 package pdg5.common.protocole;
 
+import java.io.Serializable;
+
 /**
  * A word which is enter by a player
  *
  * @author Maxime Guillod
  */
-public class Word implements IServerRequest {
+public class Word implements Serializable {
 
     private String word;
     private Play play;
@@ -33,11 +35,6 @@ public class Word implements IServerRequest {
 
     public String getWord() {
         return word;
-    }
-
-    @Override
-    public void execute() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

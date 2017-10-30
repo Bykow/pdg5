@@ -1,10 +1,11 @@
 package pdg5.common.protocole;
 
+import java.io.Serializable;
+
 /**
- *
  * @author Maxime Guillod
  */
-public class Game implements IClientRequest {
+public class Game implements Serializable {
 
     private int gameId;
 
@@ -14,11 +15,6 @@ public class Game implements IClientRequest {
 
     public int getGameId() {
         return this.gameId;
-    }
-
-    @Override
-    public void clientExecute() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -1,9 +1,7 @@
 package pdg5.server;
 
-import pdg5.common.protocole.Chat;
-import pdg5.common.protocole.Game;
-import pdg5.common.protocole.Load;
-import pdg5.common.protocole.ValidationWord;
+import pdg5.common.protocole.SignIn;
+import pdg5.common.protocole.SignUp;
 
 /**
  * @author Maxime Guillod
@@ -11,39 +9,23 @@ import pdg5.common.protocole.ValidationWord;
 public class ServerRequestManager {
 
     public void execute(Object o) {
-        if (o instanceof Load) {
-            loadAllGames((Load) o);
-        } else if (o instanceof Game) {
-            loadGame((Game) o);
-        } else if (o instanceof ValidationWord) {
-            validateWord((ValidationWord) o);
-        } else if (o instanceof Chat) {
-            getChat((Chat) o);
+        if (o instanceof SignUp) {
+            signUp((SignUp) o);
+        } else if (o instanceof SignIn) {
+            signIn((SignIn) o);
+        } else {
+            System.err.println("Unknow type");
         }
     }
 
-    public void loadAllGames(Load load) {
-        // TODO
-        // getting all the games
-
+    private void signIn(SignIn signIn) {
+        // TODO Implement signIn
+        System.out.println(signIn);
     }
 
-    public void loadGame(Game game) {
-        System.out.println("ServerRequestManager.loadGame");
-        // TODO
-        // getting one game information
-
+    private void signUp(SignUp signUp) {
+        // TODO Implement signUp
+        System.out.println(signUp);
     }
 
-    public void validateWord(ValidationWord validation) {
-        // TODO
-        // validation of a word
-
-    }
-
-    public void getChat(Chat chat) {
-        // TODO
-        // chat entry
-
-    }
 }

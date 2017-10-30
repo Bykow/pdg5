@@ -23,7 +23,7 @@ public class ServerNetworkManager {
     private ServerRequestManager requestManager;
 
     public ServerNetworkManager() {
-        // TODO
+        // TODO accept multiple connection
         // Accept only one connection for the moment
         requestManager = new ServerRequestManager();
         try {

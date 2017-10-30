@@ -2,7 +2,7 @@ package pdg5.server;
 
 import org.junit.jupiter.api.Test;
 import pdg5.client.ClientNetworkManager;
-import pdg5.common.protocole.Game;
+import pdg5.common.protocole.SignIn;
 
 import java.io.IOException;
 
@@ -20,7 +20,7 @@ class ServerNetworkManagerTest {
         new Thread(() -> {
             try {
                 netManager = new ServerNetworkManager();
-                Thread.sleep(1000);
+                Thread.sleep(100);
                 System.out.println("SRV wait receive");
                 netManager.receive();
                 System.out.println("SRV end");
@@ -37,9 +37,9 @@ class ServerNetworkManagerTest {
         ClientNetworkManager client = new ClientNetworkManager();
         try {
             System.out.println("CLIENT send");
-            client.send(new Game(42));
+            client.send(new SignIn("maxime", "myPass"));
             System.out.println("CLIENT sleep");
-            Thread.sleep(2000);
+            Thread.sleep(200);
             System.out.println("CLIENT end");
         } catch (IOException e) {
             e.printStackTrace();

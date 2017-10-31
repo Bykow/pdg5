@@ -1,5 +1,7 @@
 package pdg5.server;
 
+import pdg5.common.protocol.Message;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -58,7 +60,11 @@ public class ClientHandler implements Runnable {
     private void send() {
         new Thread(() -> {
             while (true) {
-                out.writeObject(queueOut.poll());
+                try {
+                    out.writeObject(queueOut.poll());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }).start();
     }

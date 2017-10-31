@@ -11,11 +11,13 @@ USE pdg;
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `ID` int(11) NOT NULL,
-  `email` varchar(60) DEFAULT NULL,
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(60) NOT NULL,
+  `username` varchar(60) NOT NULL, 
   `pass` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`ID`),
-  UNIQUE KEY `email` (`email`)
+  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -29,9 +31,9 @@ CREATE TABLE `user` (
 
 DROP TABLE IF EXISTS `blacklist`;
 CREATE TABLE `blacklist` (
-  `ID` int(11) NOT NULL,
-  `fromUser` int(11) DEFAULT NULL,
-  `toUser` int(11) DEFAULT NULL,
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `fromUser` int(11) NOT NULL,
+  `toUser` int(11) NOT NULL,
   `last_mod` datetime NOT NULL,
   PRIMARY KEY (`ID`),
   FOREIGN KEY (`fromUser`) REFERENCES `user` (`ID`),
@@ -49,9 +51,9 @@ CREATE TABLE `blacklist` (
 
 DROP TABLE IF EXISTS `friend`;
 CREATE TABLE `friend` (
-  `ID` int(11) NOT NULL,
-  `fromUser` int(11) DEFAULT NULL,
-  `toUser` int(11) DEFAULT NULL,
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `fromUser` int(11) NOT NULL,
+  `toUser` int(11) NOT NULL,
   `last_mod` datetime NOT NULL,
   PRIMARY KEY (`ID`),
   FOREIGN KEY (`fromUser`) REFERENCES `user` (`ID`),
@@ -69,7 +71,7 @@ CREATE TABLE `friend` (
 
 DROP TABLE IF EXISTS `tournament`;
 CREATE TABLE `tournament` (
-  `ID` int(11) NOT NULL,
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(45) NOT NULL,
   `created` datetime NOT NULL,
   PRIMARY KEY (`ID`)
@@ -86,7 +88,7 @@ CREATE TABLE `tournament` (
 
 DROP TABLE IF EXISTS `matchlist`;
 CREATE TABLE `matchlist` (
-  `ID` int(11) NOT NULL,
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
   `userID` int(11) NOT NULL,
   `TournamentID` int(11) NOT NULL,
   PRIMARY KEY (`ID`),
@@ -104,7 +106,7 @@ CREATE TABLE `matchlist` (
 
 DROP TABLE IF EXISTS `game`;
 CREATE TABLE `game` (
-  `ID` int(11) NOT NULL,
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(45) NOT NULL,
   `player1` int(11) NOT NULL,
   `player2` int(11) NOT NULL,

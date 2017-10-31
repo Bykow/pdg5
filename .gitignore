@@ -40,6 +40,10 @@ IntelliJ
 *.iml
 .idea
 
+Eclipse
+.classpath
+.project
+
 # Explude latex temp file
 *.aux
 *.toc

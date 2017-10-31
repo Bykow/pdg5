@@ -14,7 +14,7 @@ public interface Protocol {
     final int NUMBER_OF_TUILES_PER_PLAYER = 7;
     final int NUMBER_OF_EXTRA_TUILES = 2;
     final int NUMBER_OF_PLAYERS = 2;
-    final int NUMBER_OF_TUILES_PER_GAME = 114;
+    final int NUMBER_OF_TUILES_PER_GAME = 116;
 
     final String LANG_FR = "fr";
 

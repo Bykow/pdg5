@@ -25,7 +25,7 @@ public class ClientNetworkManager {
       requestManager = new ClientRequestManager();
       
       try {
-         clientSocket = new Socket(Config.serverAddress, Config.serverPort);
+         clientSocket = new Socket(Config.SERVER_ADDRESS, Config.SERVER_PORT);
          this.out = new ObjectOutputStream(clientSocket.getOutputStream());
          this.in = new ObjectInputStream(clientSocket.getInputStream());
 

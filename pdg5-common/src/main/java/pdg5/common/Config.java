@@ -4,6 +4,6 @@ package pdg5.common;
  *
  */
 public class Config {
-    public final static String serverAddress = "127.0.0.1";
-    public final static int serverPort = 44555;
+    public final static String SERVER_ADDRESS = "10.192.91.189";
+    public final static int SERVER_PORT = 44555;
 }

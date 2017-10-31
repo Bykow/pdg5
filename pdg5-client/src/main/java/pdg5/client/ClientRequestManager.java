@@ -35,6 +35,7 @@ public class ClientRequestManager {
    public void validateWord(ValidationWord validation) {
       // validation of a word
 
+      System.out.println("Valid : " + validation.isIsValid());
    }
 
    public void getChat(Chat chat) {

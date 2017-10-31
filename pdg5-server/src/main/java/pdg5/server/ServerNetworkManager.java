@@ -27,7 +27,7 @@ public class ServerNetworkManager {
         // Accept only one connection for the moment
         requestManager = new ServerRequestManager();
         try {
-            serverSocket = new ServerSocket(Config.serverPort);
+            serverSocket = new ServerSocket(Config.SERVER_PORT);
             socket = serverSocket.accept();
             this.out = new ObjectOutputStream(socket.getOutputStream());
             this.in = new ObjectInputStream(socket.getInputStream());

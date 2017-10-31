@@ -3,7 +3,7 @@ package pdg5.client;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import pdg5.common.protocole.SignIn;
+import pdg5.common.protocol.SignIn;
 
 public class Client {
     public static void main(String... args){

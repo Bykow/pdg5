@@ -1,7 +1,7 @@
 package pdg5.server;
 
-import pdg5.common.protocole.SignIn;
-import pdg5.common.protocole.SignUp;
+import pdg5.common.protocol.SignIn;
+import pdg5.common.protocol.SignUp;
 
 /**
  * @author Maxime Guillod
@@ -9,6 +9,9 @@ import pdg5.common.protocole.SignUp;
 public class ServerRequestManager {
 
     public void execute(Object o) {
+
+        o.getClass();
+
         if (o instanceof SignUp) {
             signUp((SignUp) o);
         } else if (o instanceof SignIn) {

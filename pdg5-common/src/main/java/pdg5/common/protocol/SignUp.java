@@ -1,20 +1,27 @@
-package pdg5.common.protocole;
+package pdg5.common.protocol;
 
+import java.awt.*;
 import java.io.Serializable;
 
 /**
- * Class use to login into our application
+ * Class use to register
  *
  * @author Maxime Guillod
  */
-public class SignIn implements Serializable {
+public class SignUp implements Serializable {
 
     private String login;
     private String password;
+    private Image image;
 
-    public SignIn(String login, String password) {
+    public SignUp(String login, String password, Image image) {
         this.login = login;
         this.password = password;
+        this.image = image;
+    }
+
+    public Image getImage() {
+        return image;
     }
 
     public String getLogin() {
@@ -23,11 +30,6 @@ public class SignIn implements Serializable {
 
     public String getPassword() {
         return password;
-    }
-
-    @Override
-    public String toString() {
-        return "SignIn{" + "login=" + login + ", password=" + password + '}';
     }
 
 }

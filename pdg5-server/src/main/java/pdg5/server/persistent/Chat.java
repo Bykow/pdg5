@@ -3,17 +3,17 @@ package pdg5.server.persistent;
 public class Chat {
 	
 	private int ID;
-	private int tournament;
-	private int game;
+	private Tournament tournament;
+	private Game game;
 	
-	public Chat(int id, int tournament, int game) {
+	public Chat(int id, Tournament tournament, Game game) {
 		super();
 		ID = id;
 		this.tournament = tournament;
 		this.game = game;
 	}
 	
-	public Chat(int tournament, int game) {
+	public Chat(Tournament tournament, Game game) {
 		super();
 		this.tournament = tournament;
 		this.game = game;
@@ -30,19 +30,19 @@ public class Chat {
 		ID = iD;
 	}
 
-	public int getTournament() {
+	public Tournament getTournament() {
 		return tournament;
 	}
 
-	public void setTournament(int tournament) {
+	public void setTournament(Tournament tournament) {
 		this.tournament = tournament;
 	}
 
-	public int getGame() {
+	public Game getGame() {
 		return game;
 	}
 
-	public void setGame(int game) {
+	public void setGame(Game game) {
 		this.game = game;
 	}
 	
@@ -56,8 +56,8 @@ public class Chat {
 		Chat b = (Chat) obj;
 		
 		return this.ID == b.getID() &&
-				this.tournament == b.getTournament() &&
-				this.game == b.getGame();
+				this.tournament.equals(b.getTournament()) &&
+				this.game.equals(b.getGame());
 	}
 	
 	@Override

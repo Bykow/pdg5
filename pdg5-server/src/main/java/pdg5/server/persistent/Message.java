@@ -7,10 +7,10 @@ public class Message {
 	private int ID;
 	private String content;
 	private Date created;
-	private int user;
-	private int chat;
+	private User user;
+	private Chat chat;
 	
-	public Message(int id, String content, Date created, int user, int chat) {
+	public Message(int id, String content, Date created, User user, Chat chat) {
 		super();
 		ID = id;
 		this.content = content;
@@ -19,7 +19,7 @@ public class Message {
 		this.chat = chat;
 	}
 	
-	public Message(String content, Date created, int user, int chat) {
+	public Message(String content, Date created, User user, Chat chat) {
 		super();
 		this.content = content;
 		this.created = created;
@@ -54,19 +54,19 @@ public class Message {
 		this.created = created;
 	}
 
-	public int getUser() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUser(int user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 
-	public int getChat() {
+	public Chat getChat() {
 		return chat;
 	}
 
-	public void setChat(int chat) {
+	public void setChat(Chat chat) {
 		this.chat = chat;
 	}
 	
@@ -80,8 +80,8 @@ public class Message {
 		Message b = (Message) obj;
 		
 		return this.ID == b.getID() &&
-				this.chat == b.getChat() &&
-				this.user == b.getUser() &&
+				this.chat.equals(b.getChat()) &&
+				this.user.equals(b.getUser()) &&
 				this.content.equals(b.getContent()) &&
 				this.created.equals(b.getCreated());
 	}

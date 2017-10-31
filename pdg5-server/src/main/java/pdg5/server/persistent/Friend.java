@@ -4,10 +4,11 @@ import java.util.Date;
 
 public class Friend {
 	private int ID;
-	private int fromUser;
-	private int toUser;
+	private User fromUser;
+	private User toUser;
 	private Date lastModified;
-	public Friend(int iD, int fromUser, int toUser, Date lastModified) {
+	@Deprecated
+	public Friend(int iD, User fromUser, User toUser, Date lastModified) {
 		super();
 		ID = iD;
 		this.fromUser = fromUser;
@@ -15,7 +16,7 @@ public class Friend {
 		this.lastModified = lastModified;
 	}
 	
-	public Friend(int fromUser, int toUser) {
+	public Friend(User fromUser, User toUser) {
 		super();
 		this.fromUser = fromUser;
 		this.toUser = toUser;
@@ -30,16 +31,16 @@ public class Friend {
 	public void setID(int iD) {
 		ID = iD;
 	}
-	public int getFromUser() {
+	public User getFromUser() {
 		return fromUser;
 	}
-	public void setFromUser(int fromUser) {
+	public void setFromUser(User fromUser) {
 		this.fromUser = fromUser;
 	}
-	public int getToUser() {
+	public User getToUser() {
 		return toUser;
 	}
-	public void setToUser(int toUser) {
+	public void setToUser(User toUser) {
 		this.toUser = toUser;
 	}
 	public Date getLastModified() {
@@ -59,8 +60,8 @@ public class Friend {
 		Friend b = (Friend) obj;
 		
 		return this.ID == b.getID() &&
-				this.fromUser == b.getFromUser() &&
-				this.toUser == b.getToUser() &&
+				this.fromUser.equals(b.getFromUser()) &&
+				this.toUser.equals(b.getToUser()) &&
 				this.lastModified.equals(b.getLastModified());
 	}
 	

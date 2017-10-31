@@ -2,15 +2,16 @@ package pdg5.server.persistent;
 
 public class MatchList {
 	private int ID;
-	private int tournament;
-	private int user;
-	public MatchList(int iD, int tournament, int user) {
+	private Tournament tournament;
+	private User user;
+	
+	public MatchList(int iD, Tournament tournament, User user) {
 		super();
 		ID = iD;
 		this.tournament = tournament;
 		this.user = user;
 	}
-	public MatchList(int tournament, int user) {
+	public MatchList(Tournament tournament, User user) {
 		super();
 		this.tournament = tournament;
 		this.user = user;
@@ -24,16 +25,16 @@ public class MatchList {
 	public void setID(int iD) {
 		ID = iD;
 	}
-	public int getTournament() {
+	public Tournament getTournament() {
 		return tournament;
 	}
-	public void setTournament(int tournament) {
+	public void setTournament(Tournament tournament) {
 		this.tournament = tournament;
 	}
-	public int getUser() {
+	public User getUser() {
 		return user;
 	}
-	public void setUser(int user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 	

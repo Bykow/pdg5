@@ -1,11 +1,16 @@
 package pdg5.server.persistent;
 
+import java.util.Set;
 
 public class User {
 	private int ID;
 	private String email;
 	private String username;
 	private String pass;
+	private Set<BlackList> blacklists;
+	private Set<Friend> friends;
+	private Set<MatchList> matchlists;
+	
 	
 	public User(int iD, String email,String username, String pass) {
 		super();
@@ -54,6 +59,30 @@ public class User {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public Set<BlackList> getBlacklists() {
+		return blacklists;
+	}
+
+	public void setBlacklists(Set<BlackList> blacklists) {
+		this.blacklists = blacklists;
+	}
+
+	public Set<Friend> getFriends() {
+		return friends;
+	}
+
+	public void setFriends(Set<Friend> friends) {
+		this.friends = friends;
+	}
+
+	public Set<MatchList> getMatchlists() {
+		return matchlists;
+	}
+
+	public void setMatchlists(Set<MatchList> matchlists) {
+		this.matchlists = matchlists;
 	}
 
 	@Override

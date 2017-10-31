@@ -6,12 +6,12 @@ import java.util.Date;
 public class Game {
 	private int ID;
 	private String title;
-	private int player1;
-	private int player2;
+	private User player1;
+	private User player2;
 	private Date created;
 	private Date lastActivity;
 	private int tournament;
-	public Game(int iD, String title, int player1, int player2, Date created, Date lastActivity,
+	public Game(int iD, String title, User player1, User player2, Date created, Date lastActivity,
 			int tournament) {
 		super();
 		ID = iD;
@@ -23,7 +23,7 @@ public class Game {
 		this.tournament = tournament;
 	}
 	
-	public Game(String title, int player1, int player2, int tournament) {
+	public Game(String title, User player1, User player2, int tournament) {
 		super();
 		this.title = title;
 		this.player1 = player1;
@@ -33,7 +33,7 @@ public class Game {
 		this.tournament = tournament;
 	}
 	
-	public Game(String title, int player1, int player2) {
+	public Game(String title, User player1, User player2) {
 		super();
 		this.title = title;
 		this.player1 = player1;
@@ -56,16 +56,16 @@ public class Game {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public int getPlayer1() {
+	public User getPlayer1() {
 		return player1;
 	}
-	public void setPlayer1(int player1) {
+	public void setPlayer1(User player1) {
 		this.player1 = player1;
 	}
-	public int getPlayer2() {
+	public User getPlayer2() {
 		return player2;
 	}
-	public void setPlayer2(int player2) {
+	public void setPlayer2(User player2) {
 		this.player2 = player2;
 	}
 	public Date getCreated() {

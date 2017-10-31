@@ -7,7 +7,12 @@ import pdg5.common.protocol.*;
  */
 public class ServerRequestManager {
 
-    public void execute(Object o) {
+    /**
+     *
+     * @param o
+     * @return Message to be send
+     */
+    public Message execute(Object o) {
 
         if (o instanceof SignUp) {
             new ProcessSignUp((SignUp) o).execute();
@@ -27,6 +32,8 @@ public class ServerRequestManager {
         } else {
             System.err.println("Unknow type");
         }
+
+        return null;
     }
 
 }

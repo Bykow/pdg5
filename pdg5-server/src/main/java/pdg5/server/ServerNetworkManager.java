@@ -17,31 +17,17 @@ public class ServerNetworkManager {
 
     private ServerSocket serverSocket;
     private Socket socket;
-    private ObjectOutputStream out;
-    private ObjectInputStream in;
-
-    private ServerRequestManager requestManager;
 
     public ServerNetworkManager() {
-        // TODO accept multiple connection
-        // Accept only one connection for the moment
         requestManager = new ServerRequestManager();
         try {
             serverSocket = new ServerSocket(Config.SERVER_PORT);
-            socket = serverSocket.accept();
-            this.out = new ObjectOutputStream(socket.getOutputStream());
-            this.in = new ObjectInputStream(socket.getInputStream());
-
+            while(true) {
+                socket = serverSocket.accept();
+                new Thread(new ClientHandler(socket)).start();
+            }
         } catch (IOException ex) {
             Logger.getLogger(ServerNetworkManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    public void send(Object o) throws IOException {
-        out.writeObject(o);
-    }
-
-    public void receive() throws IOException, ClassNotFoundException {
-        requestManager.execute(in.readObject());
     }
 }

@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * @author Maxime Guillod
  */
-public class Play implements Serializable {
+public class Play extends Message {
 
     public Play() {
     }

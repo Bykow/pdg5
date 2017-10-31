@@ -7,18 +7,18 @@ import java.io.Serializable;
  *
  * @author Maxime Guillod
  */
-public class SignIn implements Serializable {
+public class SignIn extends Message {
 
-    private String login;
+    private String username;
     private String password;
 
-    public SignIn(String login, String password) {
-        this.login = login;
+    public SignIn(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
     public String getPassword() {
@@ -27,7 +27,7 @@ public class SignIn implements Serializable {
 
     @Override
     public String toString() {
-        return "SignIn{" + "login=" + login + ", password=" + password + '}';
+        return "SignIn{" + "Username=" + username + ", password=" + password + '}';
     }
 
 }

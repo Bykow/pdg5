@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * @author Maxime Guillod
  */
-public class ValidationWord implements Serializable {
+public class ValidationWord extends Message {
 
     private boolean isValid;
 

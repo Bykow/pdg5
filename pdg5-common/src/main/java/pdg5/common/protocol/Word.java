@@ -7,7 +7,7 @@ import java.io.Serializable;
  *
  * @author Maxime Guillod
  */
-public class Word implements Serializable {
+public class Word extends Message {
 
     private String word;
     private Play play;

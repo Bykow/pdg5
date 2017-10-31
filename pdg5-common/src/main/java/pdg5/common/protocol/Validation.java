@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * @author Maxime Guillod
  */
-public class Validation implements Serializable {
+public class Validation extends Message {
 
     public Validation() {
     }

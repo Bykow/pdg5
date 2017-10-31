@@ -19,4 +19,5 @@ public interface Protocol {
     final String LANG_FR = "fr";
 
     final int OK = 200;
+    final int ERROR = 400;
 }

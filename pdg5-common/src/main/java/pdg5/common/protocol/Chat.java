@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * @author Maxime Guillod
  */
-public class Chat implements Serializable {
+public class Chat extends Message {
 
     private String message;
     private int gameId;

@@ -8,24 +8,24 @@ import java.io.Serializable;
  *
  * @author Maxime Guillod
  */
-public class SignUp implements Serializable {
+public class SignUp extends Message {
 
-    private String login;
+    private String email;
+    private String username;
     private String password;
-    private Image image;
 
-    public SignUp(String login, String password, Image image) {
-        this.login = login;
+    public SignUp(String email, String login, String password) {
+        this.email = email;
+        this.username = login;
         this.password = password;
-        this.image = image;
     }
 
-    public Image getImage() {
-        return image;
+    public String getEmail() {
+        return email;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
     public String getPassword() {

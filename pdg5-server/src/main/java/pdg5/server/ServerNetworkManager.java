@@ -19,7 +19,6 @@ public class ServerNetworkManager {
     private Socket socket;
 
     public ServerNetworkManager() {
-        requestManager = new ServerRequestManager();
         try {
             serverSocket = new ServerSocket(Config.SERVER_PORT);
             while(true) {

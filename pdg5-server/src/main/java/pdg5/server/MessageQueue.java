@@ -2,7 +2,6 @@ package pdg5.server;
 
 import pdg5.common.protocol.Message;
 
-import java.util.Queue;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
@@ -18,10 +17,17 @@ public class MessageQueue {
     }
 
     public void add(Message m) {
-        queue.add(m);
+        if (m != null) {
+            queue.add(m);
+        }
     }
 
-    public Message poll() {
-        return queue.poll();
+    public Message take() {
+        try {
+            return queue.take();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

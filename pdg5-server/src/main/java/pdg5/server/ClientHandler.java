@@ -42,7 +42,11 @@ public class ClientHandler implements Runnable {
         send();
 
         // Process message
-        queueOut.add(requestManager.execute(queueIn.poll()));
+        queueOut.add(
+                requestManager.execute(
+                        queueIn.take()
+                )
+        );
     }
 
     public ServerRequestManager getRequestManager() {
@@ -61,7 +65,7 @@ public class ClientHandler implements Runnable {
         new Thread(() -> {
             while (true) {
                 try {
-                    out.writeObject(queueOut.poll());
+                    out.writeObject(queueOut.take());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

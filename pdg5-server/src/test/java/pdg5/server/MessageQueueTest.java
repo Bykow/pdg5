@@ -1,31 +1,33 @@
 package pdg5.server;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class MessageQueueTest extends Assert {
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+
+public class MessageQueueTest {
 
     private MessageQueue queue;
 
     @Before
-    void setUp() {
+    public void setUp() {
         queue = new MessageQueue();
     }
 
     @Test
-    public void testPoolIsBlockingIfEmpty() {
+    public void testPoolIsBlockingIfEmpty() throws InterruptedException {
         new Thread(() -> {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            assertTrue(true);
+            /*
+             * The queue must be empty, and queue.take() must wait.
+             */
+            queue.take();
+            fail("Must wait");
         }).start();
 
-        queue.poll();
-        fail("Must wait");
+        Thread.sleep(500);
+        assertTrue(true);
     }
 
 }

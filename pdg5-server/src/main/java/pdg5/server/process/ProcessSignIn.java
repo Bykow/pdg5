@@ -13,7 +13,7 @@ import pdg5.server.manage.ManageUser;
 public class ProcessSignIn implements GenericProcess {
     private SignIn signIn;
     private ManageUser manageUser;
-    private ManageGame manageGame
+    private ManageGame manageGame;
 
     public ProcessSignIn(SignIn signIn) {
         this.signIn = signIn;

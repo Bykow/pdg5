@@ -9,5 +9,15 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.default_schema">pdg</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        
+        <!-- List of XML mapping files -->
+	   <mapping resource="BlackList.hbm.xml"/>
+	   <mapping resource="Friend.hbm.xml"/>
+	   <mapping resource="Game.hbm.xml"/>
+	   <mapping resource="MatchList.hbm.xml"/>
+	   <mapping resource="Tournament.hbm.xml"/>
+	   <mapping resource="User.hbm.xml"/>
+	   <mapping resource="Message.hbm.xml"/>
+	   <mapping resource="Chat.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

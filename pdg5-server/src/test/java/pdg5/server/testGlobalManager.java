@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import pdg5.server.manage.ManageBlackList;
+import pdg5.server.manage.ManageBlacklist;
 import pdg5.server.manage.ManageChat;
 import pdg5.server.manage.ManageFriend;
 import pdg5.server.manage.ManageGame;
@@ -12,7 +12,7 @@ import pdg5.server.manage.ManageMatchlist;
 import pdg5.server.manage.ManageMessage;
 import pdg5.server.manage.ManageTournament;
 import pdg5.server.manage.ManageUser;
-import pdg5.server.persistent.BlackList;
+import pdg5.server.persistent.Blacklist;
 import pdg5.server.persistent.Chat;
 import pdg5.server.persistent.Friend;
 import pdg5.server.persistent.Game;
@@ -25,7 +25,7 @@ public class testGlobalManager {
 	
 	@Test
 	public void testGlobal() {
-		ManageBlackList mbl = new ManageBlackList();
+		ManageBlacklist mbl = new ManageBlacklist();
 		ManageFriend mf = new ManageFriend();
 		ManageGame mg = new ManageGame();
 		ManageMatchlist mml = new ManageMatchlist();
@@ -95,37 +95,37 @@ public class testGlobalManager {
 		}
 		
 		// create black list
-		BlackList b1 = mbl.addBlackList(usr4, usr2);
-		BlackList b2 = mbl.addBlackList(usr3, usr2);
-		BlackList b3 = mbl.addBlackList(usr3, usr1);
+		Blacklist b1 = mbl.addBlacklist(usr4, usr2);
+		Blacklist b2 = mbl.addBlacklist(usr3, usr2);
+		Blacklist b3 = mbl.addBlacklist(usr3, usr1);
 		
-		// list blacklist
+		// list Blacklist
 		
-		System.out.println("***** Initial blacklist ****");
-		List<BlackList> lb = mbl.listBlackList();
-		for (BlackList blackList : lb) {
-			System.out.println(blackList);
+		System.out.println("***** Initial Blacklist ****");
+		List<Blacklist> lb = mbl.listBlacklist();
+		for (Blacklist Blacklist : lb) {
+			System.out.println(Blacklist);
 		}
 		
-		// update blacklist
+		// update Blacklist
 		b1.setUserByToUser(usr1);
-		mbl.updateBlackList(b1);
+		mbl.updateBlacklist(b1);
 		
-		System.out.println("***** update blacklist ****");
-		lb = mbl.listBlackList();
-		for (BlackList blackList : lb) {
-			System.out.println(blackList);
+		System.out.println("***** update Blacklist ****");
+		lb = mbl.listBlacklist();
+		for (Blacklist Blacklist : lb) {
+			System.out.println(Blacklist);
 		}
 		
 		// destroy black list
-		mbl.deleteBlackList(b2);
-		mbl.deleteBlackList(b3);
-		mbl.deleteBlackList(b1);
+		mbl.deleteBlacklist(b2);
+		mbl.deleteBlacklist(b3);
+		mbl.deleteBlacklist(b1);
 		
-		System.out.println("***** destroy blacklist ****");
-		lb = mbl.listBlackList();
-		for (BlackList blackList : lb) {
-			System.out.println(blackList);
+		System.out.println("***** destroy Blacklist ****");
+		lb = mbl.listBlacklist();
+		for (Blacklist Blacklist : lb) {
+			System.out.println(Blacklist);
 		}
 		
 		// create tournament

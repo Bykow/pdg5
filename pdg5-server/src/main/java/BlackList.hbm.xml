@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Generated 6 nov. 2017 22:46:44 by Hibernate Tools 5.2.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
-    <class catalog="pdg" dynamic-insert="false" dynamic-update="false" mutable="true" name="Blacklist" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="blacklist">
+    <class catalog="pdg" dynamic-insert="false" dynamic-update="false" mutable="true" name="pdg5.server.persistent.Blacklist" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="blacklist">
         <id name="id" type="java.lang.Integer">
             <column name="ID"/>
             <generator class="identity"/>
         </id>
-        <many-to-one class="User" embed-xml="true" fetch="select" insert="true" name="userByToUser" not-found="exception" optimistic-lock="true" unique="false" update="true">
+        <many-to-one class="pdg5.server.persistent.User" embed-xml="true" fetch="select" insert="true" name="userByToUser" not-found="exception" optimistic-lock="true" unique="false" update="true">
             <column name="toUser" not-null="true"/>
         </many-to-one>
-        <many-to-one class="User" embed-xml="true" fetch="select" insert="true" name="userByFromUser" not-found="exception" optimistic-lock="true" unique="false" update="true">
+        <many-to-one class="pdg5.server.persistent.User" embed-xml="true" fetch="select" insert="true" name="userByFromUser" not-found="exception" optimistic-lock="true" unique="false" update="true">
             <column name="fromUser" not-null="true"/>
         </many-to-one>
         <property generated="never" lazy="false" name="lastMod" optimistic-lock="true" type="timestamp" unique="false">

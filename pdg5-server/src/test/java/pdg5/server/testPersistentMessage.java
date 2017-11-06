@@ -6,7 +6,9 @@ import java.util.Date;
 
 import org.junit.Test;
 
+import pdg5.server.persistent.Chat;
 import pdg5.server.persistent.Message;
+import pdg5.server.persistent.User;
 
 public class testPersistentMessage {
 
@@ -15,14 +17,21 @@ public class testPersistentMessage {
 		Date d1 = new Date();
 		Date d2 = new Date(2000,01,01);
 		
+		User u1 = new User("a", "b");
+		User u2 = new User("c","d");
 		
-		Message a = new Message(1, "a", d1, 1, 1);
-		Message b = new Message(1, "a", d1, 1, 1);
-		Message c = new Message(2, "a", d1, 1, 1);
-		Message d = new Message(1, "b", d1, 1, 1);
-		Message e = new Message(1, "a", d2, 1, 1);
-		Message f = new Message(1, "a", d1, 2, 1);
-		Message g = new Message(1, "a", d1, 2, 2);
+		Chat c1 = new Chat();
+		c1.setId(1);
+		Chat c2 = new Chat();
+		c2.setId(2);
+		
+		
+		Message a = new Message(c1, u1, "a", d1);
+		Message b = new Message(c1, u1, "a", d1);
+		Message c = new Message(c2, u1, "a", d1);
+		Message d = new Message(c1, u2, "a", d1);
+		Message e = new Message(c1, u1, "b", d1);
+		Message f = new Message(c1, u1, "a", d2);
 		
 		
 		assertTrue(a.equals(b));
@@ -30,6 +39,5 @@ public class testPersistentMessage {
 		assertFalse(a.equals(d));
 		assertFalse(a.equals(e));
 		assertFalse(a.equals(f));
-		assertFalse(a.equals(g));
 	}
 }

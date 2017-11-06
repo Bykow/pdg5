@@ -4,21 +4,29 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import pdg5.server.persistent.MatchList;
+import pdg5.server.persistent.Matchlist;
+import pdg5.server.persistent.Tournament;
+import pdg5.server.persistent.User;
 
 public class testPersistentMatchList {
 
 	@Test
 	public void testEqualsMatchList() {
-		MatchList a = new MatchList(1, 2, 3);
-		MatchList b = new MatchList(1, 2, 3);
-		MatchList c = new MatchList(4, 2, 3);
-		MatchList d = new MatchList(1, 5, 3);
-		MatchList e = new MatchList(1, 2, 6);
+		Tournament t1 = new Tournament();
+		t1.setId(1);
+		Tournament t2 = new Tournament();
+		t2.setId(2);
+		
+		User u1 = new User("a", "b");
+		User u2 = new User("c","d");
+		
+		Matchlist a = new Matchlist(t1, u1);
+		Matchlist b = new Matchlist(t1, u1);
+		Matchlist c = new Matchlist(t2, u1);
+		Matchlist d = new Matchlist(t1, u2);
 		
 		assertTrue(a.equals(b));
 		assertFalse(a.equals(c));
 		assertFalse(a.equals(d));
-		assertFalse(a.equals(e));
 	}
 }

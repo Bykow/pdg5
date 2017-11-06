@@ -4,19 +4,21 @@ import java.util.List;
 
 import org.junit.Test;
 
-import pdg5.server.manage.manageBlackList;
-import pdg5.server.manage.manageChat;
-import pdg5.server.manage.manageFriend;
-import pdg5.server.manage.manageGame;
+import pdg5.server.manage.ManageBlackList;
+import pdg5.server.manage.ManageChat;
+import pdg5.server.manage.ManageFriend;
+import pdg5.server.manage.ManageGame;
+import pdg5.server.manage.ManageMatchlist;
 import pdg5.server.manage.manageMatchList;
-import pdg5.server.manage.manageMessage;
-import pdg5.server.manage.manageTournament;
-import pdg5.server.manage.manageUser;
+import pdg5.server.manage.ManageMessage;
+import pdg5.server.manage.ManageTournament;
+import pdg5.server.manage.ManageUser;
 import pdg5.server.persistent.BlackList;
 import pdg5.server.persistent.Chat;
 import pdg5.server.persistent.Friend;
 import pdg5.server.persistent.Game;
 import pdg5.server.persistent.MatchList;
+import pdg5.server.persistent.Matchlist;
 import pdg5.server.persistent.Message;
 import pdg5.server.persistent.Tournament;
 import pdg5.server.persistent.User;
@@ -25,12 +27,12 @@ public class testGlobalManager {
 	
 	@Test
 	public void testGlobal() {
-		manageBlackList mbl = new manageBlackList();
-		manageFriend mf = new manageFriend();
-		manageGame mg = new manageGame();
-		manageMatchList mml = new manageMatchList();
-		manageTournament mt = new manageTournament();
-		manageUser mu = new manageUser();
+		ManageBlackList mbl = new ManageBlackList();
+		ManageFriend mf = new ManageFriend();
+		ManageGame mg = new ManageGame();
+		ManageMatchlist mml = new ManageMatchlist();
+		ManageTournament mt = new ManageTournament();
+		ManageUser mu = new ManageUser();
 		
 		System.out.println("***** Global tests ****");
 		
@@ -64,9 +66,9 @@ public class testGlobalManager {
 		}
 		
 		// create friendship
-		Friend f1 = mf.addFriend(usr2.getID(), usr4.getID());
-		Friend f2 = mf.addFriend(usr3.getID(), usr4.getID());
-		Friend f3 = mf.addFriend(usr2.getID(), usr3.getID());
+		Friend f1 = mf.addFriend(usr2, usr4);
+		Friend f2 = mf.addFriend(usr3, usr4);
+		Friend f3 = mf.addFriend(usr2, usr3);
 		
 		// list friendships
 		List<Friend> lf = mf.listFriend();
@@ -76,7 +78,7 @@ public class testGlobalManager {
 		}
 		
 		// update friendship
-		f1.setToUser(usr1.getID());
+		f1.setUserByToUser(usr1);
 		mf.updateFriend(f1);
 		lf = mf.listFriend();
 		System.out.println("***** updated friendship ****");
@@ -95,9 +97,9 @@ public class testGlobalManager {
 		}
 		
 		// create black list
-		BlackList b1 = mbl.addBlackList(usr4.getID(), usr2.getID());
-		BlackList b2 = mbl.addBlackList(usr3.getID(), usr2.getID());
-		BlackList b3 = mbl.addBlackList(usr3.getID(), usr1.getID());
+		BlackList b1 = mbl.addBlackList(usr4, usr2);
+		BlackList b2 = mbl.addBlackList(usr3, usr2);
+		BlackList b3 = mbl.addBlackList(usr3, usr1);
 		
 		// list blacklist
 		
@@ -108,7 +110,7 @@ public class testGlobalManager {
 		}
 		
 		// update blacklist
-		b1.setToUser(usr1.getID());
+		b1.setUserByToUser(usr1);
 		mbl.updateBlackList(b1);
 		
 		System.out.println("***** update blacklist ****");
@@ -149,41 +151,41 @@ public class testGlobalManager {
 		}
 		
 		// create matchlist
-		MatchList ml1 = mml.addMatchList(t1.getID(), usr1.getID());
-		MatchList ml2 = mml.addMatchList(t1.getID(), usr2.getID());
-		MatchList ml3 = mml.addMatchList(t1.getID(), usr3.getID());
+		Matchlist ml1 = mml.addMatchlist(t1, usr1);
+		Matchlist ml2 = mml.addMatchlist(t1, usr2);
+		Matchlist ml3 = mml.addMatchlist(t1, usr3);
 		
 		// List matchlist
-		List<MatchList> lm = mml.listMatchList();
+		List<Matchlist> lm = mml.listMatchlist();
 		System.out.println("***** created matchlist ****");
-		for (MatchList matchList : lm) {
+		for (Matchlist matchList : lm) {
 			System.out.println(matchList);
 		}
 		
 		// update matchlist
-		ml3.setUser(usr4.getID());
-		mml.updateMatchList(ml3);
+		ml3.setUser(usr4);
+		mml.updateMatchlist(ml3);
 		
-		lm = mml.listMatchList();
+		lm = mml.listMatchlist();
 		System.out.println("***** updated matchlist ****");
-		for (MatchList matchList : lm) {
+		for (Matchlist matchList : lm) {
 			System.out.println(matchList);
 		}
 		
 		// destroy matchlist
-		mml.deleteMatchList(ml3);
-		mml.deleteMatchList(ml2);
-		mml.deleteMatchList(ml1);
+		mml.deleteMatchlist(ml3);
+		mml.deleteMatchlist(ml2);
+		mml.deleteMatchlist(ml1);
 		
-		lm = mml.listMatchList();
+		lm = mml.listMatchlist();
 		System.out.println("***** deleted matchlist ****");
-		for (MatchList matchList : lm) {
+		for (Matchlist matchList : lm) {
 			System.out.println(matchList);
 		}
 		
 		// create game
-		Game g1 = mg.addGame("Wizard battle", usr2.getID(), usr4.getID());
-		Game g2 = mg.addGame("Evil battle", usr1.getID(), usr2.getID(),t1.getID());
+		Game g1 = mg.addGame("Wizard battle", usr2, usr4);
+		Game g2 = mg.addGame("Evil battle", usr1, usr2,t1);
 		
 		List<Game> lg = mg.listGame();
 		System.out.println("***** created games ****");
@@ -236,11 +238,11 @@ public class testGlobalManager {
 	
 	@Test
 	public void testGlobalChat() {
-		manageGame mg = new manageGame();
-		manageTournament mt = new manageTournament();
-		manageUser mu = new manageUser();
-		manageChat mc = new manageChat();
-		manageMessage mm = new manageMessage();
+		ManageGame mg = new ManageGame();
+		ManageTournament mt = new ManageTournament();
+		ManageUser mu = new ManageUser();
+		ManageChat mc = new ManageChat();
+		ManageMessage mm = new ManageMessage();
 		
 		System.out.println("***** Global Chat tests ****");
 		
@@ -253,12 +255,12 @@ public class testGlobalManager {
 		Tournament t1 = mt.addTournament("keke Championship");
 		
 		// create game
-		Game g1 = mg.addGame("JJ battle", usr2.getID(), usr3.getID());
-		Game g2 = mg.addGame("Jean battle", usr1.getID(), usr2.getID(),t1.getID());
+		Game g1 = mg.addGame("JJ battle", usr2, usr3);
+		Game g2 = mg.addGame("Jean battle", usr1, usr2,t1);
 		
 		// create chat
-		Chat c1 = mc.addChatGame(g1.getID());
-		Chat c2 = mc.addChatTournament(t1.getID());
+		Chat c1 = mc.addChatGame(g1);
+		Chat c2 = mc.addChatTournament(t1);
 		
 		// list chat
 		List<Chat> lc = mc.listChats();
@@ -268,7 +270,7 @@ public class testGlobalManager {
 		}
 		
 		// update chat
-		c1.setGame(g2.getID());
+		c1.setGame(g2);
 		lc = mc.listChats();
 		System.out.println("***** update chat ****");
 		for (Chat chat : lc) {
@@ -276,8 +278,8 @@ public class testGlobalManager {
 		}
 		
 		// create message
-		Message m1 = mm.addMessage("What's up", usr1.getID(), c1.getID());
-		Message m2 = mm.addMessage("nothing, you ?", usr2.getID(), c1.getID());
+		Message m1 = mm.addMessage("What's up", usr1, c1);
+		Message m2 = mm.addMessage("nothing, you ?", usr2, c1);
 		
 		// list message
 		System.out.println("***** Initial Message ****");

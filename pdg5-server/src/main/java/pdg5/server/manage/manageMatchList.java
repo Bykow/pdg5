@@ -11,10 +11,10 @@ import pdg5.server.persistent.Tournament;
 import pdg5.server.persistent.User;
 import pdg5.server.persistent.Matchlist;
 
-public class manageMatchlist {
+public class ManageMatchlist {
 	
 	public Matchlist addMatchlist(Tournament tournament, User user) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 		Transaction tx = null;
 		Matchlist Matchlist = new Matchlist(tournament, user);
 		Integer mlID;
@@ -35,7 +35,7 @@ public class manageMatchlist {
 	}
 	
 	public List<Matchlist> listMatchlist() {
-		 Session session = manager.getFactory().openSession();
+		 Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
 	      List<Matchlist> Matchlists = null;
 	      
@@ -54,7 +54,7 @@ public class manageMatchlist {
 	}
 	
 	public void updateMatchlist(Matchlist Matchlist) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {
@@ -70,7 +70,7 @@ public class manageMatchlist {
 	}
 	
 	public void deleteMatchlist(Matchlist Matchlist) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {

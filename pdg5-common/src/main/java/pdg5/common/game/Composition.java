@@ -1,20 +1,56 @@
 package pdg5.common.game;
 
+import java.util.Arrays;
+
 
 /**
  *
  */
 public class Composition {
 
-   private enum square {
-      NORMAL, DOUBLE, TRIPLE, BONUS
+   private enum Square {
+      NORMAL {
+         @Override
+         public int getFinalValue(Tile tile) {
+            return tile.getValue();
+         }
+         
+      }, DOUBLE {
+         @Override
+         public int getFinalValue(Tile tile) {
+            return tile.getValue() * 2;
+         }
+         
+      }, TRIPLE {
+         @Override
+         public int getFinalValue(Tile tile) {
+            return tile.getValue() * 3;
+         }
+         
+      }, BONUS {
+         @Override
+         public int getFinalValue(Tile tile) {
+            return tile.getValue() + 10;
+         }
+         
+      };
+      public abstract int getFinalValue(Tile tile);
    }
 
    private static final int WORD_MAX_SIZE = 7;
    private final Tile[] word;
+   private Square[] bonus;
 
    public Composition() {
       word = new Tile[WORD_MAX_SIZE];
+      bonus = new Square[WORD_MAX_SIZE];
+   }
+   
+   public void setBonus(Square[] bonusList) throws IllegalArgumentException {
+      if(bonusList.length != WORD_MAX_SIZE) {
+         throw new IllegalArgumentException(String.format("the length of array bonus parameter is not %d", WORD_MAX_SIZE));
+      }
+      bonus = Arrays.copyOf(bonusList, WORD_MAX_SIZE);
    }
 
    public boolean push(Tile tile) {
@@ -45,7 +81,18 @@ public class Composition {
       if(!isValid()) {
          throw new IllegalStateException("This isn't a valid word");
       }
-      return 0;
+      int score = 0;
+      for (int i = 0; i < WORD_MAX_SIZE; i++) {
+         score += bonus[i].getFinalValue(word[i]);
+      }
+      if(board.getBonus().isEmpty()) {
+         score *= 2;
+      } else {
+         for (Tile bonusTile : board.getBonus()) {
+            score -= bonusTile.getValue();
+         }
+      }
+      return score;
    }
 
    private boolean isValid() {

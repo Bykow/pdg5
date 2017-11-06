@@ -101,5 +101,27 @@ public class Tournament implements java.io.Serializable {
 	public void setGames(Set games) {
 		this.games = games;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Tournament))
+		{
+			return false;
+		}
+			
+		Tournament b = (Tournament) obj;
+		
+		return id == b.getId() &&
+				chats.equals(b.getChats()) &&
+				created.equals(b.getCreated()) &&
+				games.equals(b.getGames()) &&
+				matchlists.equals(b.getMatchlists()) &&
+				title.equals(b.getTitle());
+	}
+	
+	@Override
+	public String toString() {
+		return id + ", " + title + ", " + created;
+	}
 
 }

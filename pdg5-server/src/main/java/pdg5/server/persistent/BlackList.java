@@ -75,5 +75,25 @@ public class BlackList implements java.io.Serializable {
 	public void setLastMod(Date lastMod) {
 		this.lastMod = lastMod;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof BlackList))
+		{
+			return false;
+		}
+			
+		BlackList b = (BlackList) obj;
+		
+		return id == b.getId() &&
+				userByFromUser.equals(b.getUserByFromUser()) &&
+				userByToUser.equals(b.getUserByToUser()) &&
+				lastMod.equals(lastMod);
+	}
+	
+	@Override
+	public String toString() {
+		return id + ", " + userByFromUser + ", " + userByToUser + ", " + lastMod;
+	}
 
 }

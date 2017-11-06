@@ -74,5 +74,25 @@ public class Chat implements java.io.Serializable {
 	public void setMessages(Set messages) {
 		this.messages = messages;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Chat))
+		{
+			return false;
+		}
+			
+		Chat b = (Chat) obj;
+		
+		return id == b.getId() && 
+				game.equals(b.getGame()) &&
+				tournament.equals(b.getTournament()) &&
+				messages.equals(b.getMessages());
+	}
+	
+	@Override
+	public String toString() {
+		return id + ", " + game + ", " + tournament;
+	}
 
 }

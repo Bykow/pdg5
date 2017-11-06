@@ -168,4 +168,23 @@ public class User implements java.io.Serializable {
 		this.gamesForPlayer1 = gamesForPlayer1;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof User))
+		{
+			return false;
+		}
+			
+		User b = (User) obj;
+		
+		return id == b.getId() &&
+				username.equals(b.getUsername()) &&
+				pass.equals(b.getPass()) &&
+				email.equals(b.getEmail());
+	}
+	
+	@Override
+	public String toString() {
+		return id + ", " + username + ", " + email;
+	}
 }

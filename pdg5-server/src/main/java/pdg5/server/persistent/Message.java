@@ -86,5 +86,26 @@ public class Message implements java.io.Serializable {
 	public void setCreated(Date created) {
 		this.created = created;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Message))
+		{
+			return false;
+		}
+			
+		Message b = (Message) obj;
+		
+		return id == b.getId() &&
+				chat.equals(b.getChat()) &&
+				content.equals(b.getContent()) &&
+				created.equals(b.getCreated()) &&
+				user.equals(b.getUser());
+	}
+	
+	@Override
+	public String toString() {
+		return id + ", " + chat + ", " +  content + ", " +  created + ", " + user;
+	}
 
 }

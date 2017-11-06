@@ -133,5 +133,29 @@ public class Game implements java.io.Serializable {
 	public void setChats(Set chats) {
 		this.chats = chats;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Game))
+		{
+			return false;
+		}
+			
+		Game b = (Game) obj;
+		
+		return id == b.getId() && 
+				tournament.equals(b.getTournament()) &&
+				userByPlayer1.equals(b.getUserByPlayer1()) &&
+				userByPlayer2.equals(b.getUserByPlayer2()) &&
+				title.equals(b.getTitle()) &&
+				created.equals(b.getCreated()) &&
+				lastActivity.equals(b.getLastActivity()) &&
+				chats.equals(b.getChats());
+	}
+	
+	@Override
+	public String toString() {
+		return id + ", " + title + ", " +  tournament + ", " + userByPlayer1 + ", " + userByPlayer2 + ", " + created;
+	}
 
 }

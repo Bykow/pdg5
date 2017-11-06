@@ -75,5 +75,25 @@ public class Friend implements java.io.Serializable {
 	public void setLastMod(Date lastMod) {
 		this.lastMod = lastMod;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Friend))
+		{
+			return false;
+		}
+			
+		Friend b = (Friend) obj;
+		
+		return id == b.getId() &&
+				userByFromUser.equals(b.getUserByFromUser()) &&
+				userByToUser.equals(b.getUserByToUser()) &&
+				lastMod.equals(lastMod);
+	}
+	
+	@Override
+	public String toString() {
+		return id + ", " + userByFromUser + ", " + userByToUser + ", " + lastMod;
+	}
 
 }

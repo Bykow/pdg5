@@ -60,5 +60,24 @@ public class Matchlist implements java.io.Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Matchlist))
+		{
+			return false;
+		}
+			
+		Matchlist b = (Matchlist) obj;
+		
+		return id == b.getId() &&
+				tournament.equals(b.getTournament()) &&
+				user.equals(b.getUser());
+	}
+	
+	@Override
+	public String toString() {
+		return id + ", " + tournament + ", " + user;
+	}
 
 }

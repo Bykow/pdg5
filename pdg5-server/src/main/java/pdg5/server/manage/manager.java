@@ -3,7 +3,7 @@ package pdg5.server.manage;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class manager {
+public class Manager {
 	
 	private static SessionFactory factory = null;
 	

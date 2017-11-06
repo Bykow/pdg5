@@ -10,9 +10,9 @@ import org.hibernate.Transaction;
 import pdg5.server.persistent.Friend;
 import pdg5.server.persistent.User;
 
-public class manageFriend {
+public class ManageFriend {
 	public Friend addFriend(User fromUser, User toUser) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 		Transaction tx = null;
 		Friend friend = new Friend(fromUser, toUser, new Date());
 		Integer tntID;
@@ -33,7 +33,7 @@ public class manageFriend {
 	}
 	
 	public List<Friend> listFriend() {
-		 Session session = manager.getFactory().openSession();
+		 Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
 	      List<Friend> friends = null;
 	      
@@ -52,7 +52,7 @@ public class manageFriend {
 	}
 	
 	public void updateFriend(Friend friend) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {
@@ -68,7 +68,7 @@ public class manageFriend {
 	}
 	
 	public void deleteFriend(Friend friend) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {

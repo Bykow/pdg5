@@ -10,9 +10,9 @@ import org.hibernate.Transaction;
 import pdg5.server.persistent.BlackList;
 import pdg5.server.persistent.User;
 
-public class manageBlackList {
+public class ManageBlackList {
 	public BlackList addBlackList(User fromUser, User toUser) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 		Transaction tx = null;
 		BlackList blacklist = new BlackList(fromUser, toUser, new Date());
 		Integer tntID;
@@ -33,7 +33,7 @@ public class manageBlackList {
 	}
 	
 	public List<BlackList> listBlackList() {
-		 Session session = manager.getFactory().openSession();
+		 Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
 	      List<BlackList> blackLists = null;
 	      
@@ -52,7 +52,7 @@ public class manageBlackList {
 	}
 	
 	public void updateBlackList(BlackList blackList) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {
@@ -68,7 +68,7 @@ public class manageBlackList {
 	}
 	
 	public void deleteBlackList(BlackList blacklist) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {

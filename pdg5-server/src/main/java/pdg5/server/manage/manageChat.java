@@ -10,9 +10,9 @@ import pdg5.server.persistent.Chat;
 import pdg5.server.persistent.Game;
 import pdg5.server.persistent.Tournament;
 
-public class manageChat {
+public class ManageChat {
 	public Chat addChatTournament(Tournament tournament) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 		Transaction tx = null;
 		
 		Chat chat = new Chat();
@@ -35,7 +35,7 @@ public class manageChat {
 	}
 	
 	public Chat addChatGame(Game game) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 		Transaction tx = null;
 		Chat chat = new Chat();
 		chat.setGame(game);
@@ -57,7 +57,7 @@ public class manageChat {
 	}
 	
 	public List<Chat> listChats() {
-		 Session session = manager.getFactory().openSession();
+		 Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
 	      List<Chat> chats = null;
 	      
@@ -76,7 +76,7 @@ public class manageChat {
 	}
 	
 	public void updateChat(Chat chat) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {
@@ -92,7 +92,7 @@ public class manageChat {
 	}
 	
 	public void deleteChat(Chat chat) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {

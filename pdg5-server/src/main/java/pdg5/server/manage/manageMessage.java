@@ -11,9 +11,9 @@ import pdg5.server.persistent.Chat;
 import pdg5.server.persistent.Message;
 import pdg5.server.persistent.User;
 
-public class manageMessage {
+public class ManageMessage {
 	public Message addMessage(String content, User user, Chat chat) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 		Transaction tx = null;
 		Message message = new Message(chat,user,content,new Date());
 		Integer mID;
@@ -34,7 +34,7 @@ public class manageMessage {
 	}
 	
 	public List<Message> listMessages() {
-		 Session session = manager.getFactory().openSession();
+		 Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
 	      List<Message> messages = null;
 	      
@@ -53,7 +53,7 @@ public class manageMessage {
 	}
 	
 	public void updateMessage(Message message) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {
@@ -69,7 +69,7 @@ public class manageMessage {
 	}
 	
 	public void deleteMessage(Message message) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {

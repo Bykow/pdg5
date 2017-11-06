@@ -9,10 +9,10 @@ import org.hibernate.Transaction;
 
 import pdg5.server.persistent.Tournament;
 
-public class manageTournament {
+public class ManageTournament {
 	
 	public Tournament addTournament(String title) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 		Transaction tx = null;
 		Tournament tournament = new Tournament(title, new Date());
 		Integer tntID;
@@ -33,7 +33,7 @@ public class manageTournament {
 	}
 	
 	public List<Tournament> listTournaments() {
-		 Session session = manager.getFactory().openSession();
+		 Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
 	      List<Tournament> tournaments = null;
 	      
@@ -52,7 +52,7 @@ public class manageTournament {
 	}
 	
 	public void updateTournament(Tournament tournament) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {
@@ -68,7 +68,7 @@ public class manageTournament {
 	}
 	
 	public void deleteTournament(Tournament tournament) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {

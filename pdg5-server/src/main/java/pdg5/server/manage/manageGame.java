@@ -11,9 +11,9 @@ import pdg5.server.persistent.Game;
 import pdg5.server.persistent.Tournament;
 import pdg5.server.persistent.User;
 
-public class manageGame {
+public class ManageGame {
 	public Game addGame(String title, User player1, User player2, Tournament tournament) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 		Transaction tx = null;
 		Game game = new Game();
 		game.setTitle(title);
@@ -39,7 +39,7 @@ public class manageGame {
 	}
 	
 	public Game addGame(String title, User player1, User player2) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 		Transaction tx = null;
 		Game game = new Game();
 		game.setTitle(title);
@@ -64,7 +64,7 @@ public class manageGame {
 	}
 	
 	public List<Game> listGame() {
-		 Session session = manager.getFactory().openSession();
+		 Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
 	      List<Game> games = null;
 	      
@@ -83,7 +83,7 @@ public class manageGame {
 	}
 	
 	public void updateGame(Game game) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {
@@ -99,7 +99,7 @@ public class manageGame {
 	}
 	
 	public void deleteGame(Game game) {
-		Session session = manager.getFactory().openSession();
+		Session session = Manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {

@@ -1,9 +1,5 @@
 package pdg5.common.game;
 
-import pdg5.common.Protocol;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -15,7 +11,7 @@ public class Composition {
    }
 
    private static final int WORD_MAX_SIZE = 7;
-   private Tile[] word;
+   private final Tile[] word;
 
    public Composition() {
       word = new Tile[WORD_MAX_SIZE];
@@ -45,7 +41,10 @@ public class Composition {
       return temp;
    }
 
-   public int getValue(Game.Board board) {
+   public int getValue(Game.Board board) throws IllegalStateException {
+      if(!isValid()) {
+         throw new IllegalStateException("This isn't a valid word");
+      }
       return 0;
    }
 

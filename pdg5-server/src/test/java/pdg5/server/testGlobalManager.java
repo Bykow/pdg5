@@ -12,6 +12,7 @@ import pdg5.server.manage.ManageMatchlist;
 import pdg5.server.manage.ManageMessage;
 import pdg5.server.manage.ManageTournament;
 import pdg5.server.manage.ManageUser;
+import pdg5.server.manage.Manager;
 import pdg5.server.persistent.Blacklist;
 import pdg5.server.persistent.Chat;
 import pdg5.server.persistent.Friend;
@@ -232,6 +233,8 @@ public class testGlobalManager {
 			System.out.println(user);
 		}
 		
+		Manager.closeConversation();
+		
 	}
 	
 	@Test
@@ -311,6 +314,8 @@ public class testGlobalManager {
 		mu.deleteUser(usr1);
 		mu.deleteUser(usr2);
 		mu.deleteUser(usr3);
+		
+		Manager.closeConversation();
 	}
 
 }

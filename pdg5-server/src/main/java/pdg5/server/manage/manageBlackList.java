@@ -12,7 +12,7 @@ import pdg5.server.persistent.User;
 
 public class ManageBlacklist {
 	public Blacklist addBlacklist(User fromUser, User toUser) {
-		Session session = Manager.getFactory().openSession();
+		Session session = Manager.getSession();
 		Transaction tx = null;
 		Blacklist Blacklist = new Blacklist(fromUser, toUser, new Date());
 		Integer tntID;
@@ -25,15 +25,13 @@ public class ManageBlacklist {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 		
 		return Blacklist;
 	}
 	
 	public List<Blacklist> listBlacklist() {
-		 Session session = Manager.getFactory().openSession();
+		 Session session = Manager.getSession();
 	      Transaction tx = null;
 	      List<Blacklist> Blacklists = null;
 	      
@@ -45,14 +43,12 @@ public class ManageBlacklist {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 	      return Blacklists;
 	}
 	
 	public void updateBlacklist(Blacklist Blacklist) {
-		Session session = Manager.getFactory().openSession();
+		Session session = Manager.getSession();
 	      Transaction tx = null;
 	      
 	      try {
@@ -62,13 +58,11 @@ public class ManageBlacklist {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 	}
 	
 	public void deleteBlacklist(Blacklist Blacklist) {
-		Session session = Manager.getFactory().openSession();
+		Session session = Manager.getSession();
 	      Transaction tx = null;
 	      
 	      try {
@@ -78,8 +72,6 @@ public class ManageBlacklist {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 	}
 }

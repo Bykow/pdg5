@@ -13,7 +13,7 @@ import pdg5.server.persistent.User;
 
 public class ManageMessage {
 	public Message addMessage(String content, User user, Chat chat) {
-		Session session = Manager.getFactory().openSession();
+		Session session = Manager.getSession();
 		Transaction tx = null;
 		Message message = new Message(chat,user,content,new Date());
 		Integer mID;
@@ -26,15 +26,13 @@ public class ManageMessage {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 		
 		return message;
 	}
 	
 	public List<Message> listMessages() {
-		 Session session = Manager.getFactory().openSession();
+		 Session session = Manager.getSession();
 	      Transaction tx = null;
 	      List<Message> messages = null;
 	      
@@ -46,14 +44,12 @@ public class ManageMessage {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 	      return messages;
 	}
 	
 	public void updateMessage(Message message) {
-		Session session = Manager.getFactory().openSession();
+		Session session = Manager.getSession();
 	      Transaction tx = null;
 	      
 	      try {
@@ -63,13 +59,11 @@ public class ManageMessage {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 	}
 	
 	public void deleteMessage(Message message) {
-		Session session = Manager.getFactory().openSession();
+		Session session = Manager.getSession();
 	      Transaction tx = null;
 	      
 	      try {
@@ -79,8 +73,6 @@ public class ManageMessage {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 	}
 }

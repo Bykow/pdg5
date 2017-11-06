@@ -12,7 +12,7 @@ import pdg5.server.persistent.Tournament;
 
 public class ManageChat {
 	public Chat addChatTournament(Tournament tournament) {
-		Session session = Manager.getFactory().openSession();
+		Session session = Manager.getSession();
 		Transaction tx = null;
 		
 		Chat chat = new Chat();
@@ -27,15 +27,13 @@ public class ManageChat {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 		
 		return chat;
 	}
 	
 	public Chat addChatGame(Game game) {
-		Session session = Manager.getFactory().openSession();
+		Session session = Manager.getSession();
 		Transaction tx = null;
 		Chat chat = new Chat();
 		chat.setGame(game);
@@ -49,15 +47,13 @@ public class ManageChat {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 		
 		return chat;
 	}
 	
 	public List<Chat> listChats() {
-		 Session session = Manager.getFactory().openSession();
+		 Session session = Manager.getSession();
 	      Transaction tx = null;
 	      List<Chat> chats = null;
 	      
@@ -69,14 +65,12 @@ public class ManageChat {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 	      return chats;
 	}
 	
 	public void updateChat(Chat chat) {
-		Session session = Manager.getFactory().openSession();
+		Session session = Manager.getSession();
 	      Transaction tx = null;
 	      
 	      try {
@@ -86,13 +80,11 @@ public class ManageChat {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 	}
 	
 	public void deleteChat(Chat chat) {
-		Session session = Manager.getFactory().openSession();
+		Session session = Manager.getSession();
 	      Transaction tx = null;
 	      
 	      try {
@@ -102,8 +94,6 @@ public class ManageChat {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 	}
 }

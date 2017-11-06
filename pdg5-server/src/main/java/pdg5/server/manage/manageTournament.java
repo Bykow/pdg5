@@ -12,7 +12,7 @@ import pdg5.server.persistent.Tournament;
 public class ManageTournament {
 	
 	public Tournament addTournament(String title) {
-		Session session = Manager.getFactory().openSession();
+		Session session = Manager.getSession();
 		Transaction tx = null;
 		Tournament tournament = new Tournament(title, new Date());
 		Integer tntID;
@@ -25,15 +25,13 @@ public class ManageTournament {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 		
 		return tournament;
 	}
 	
 	public List<Tournament> listTournaments() {
-		 Session session = Manager.getFactory().openSession();
+		 Session session = Manager.getSession();
 	      Transaction tx = null;
 	      List<Tournament> tournaments = null;
 	      
@@ -45,14 +43,12 @@ public class ManageTournament {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 	      return tournaments;
 	}
 	
 	public void updateTournament(Tournament tournament) {
-		Session session = Manager.getFactory().openSession();
+		Session session = Manager.getSession();
 	      Transaction tx = null;
 	      
 	      try {
@@ -62,13 +58,11 @@ public class ManageTournament {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 	}
 	
 	public void deleteTournament(Tournament tournament) {
-		Session session = Manager.getFactory().openSession();
+		Session session = Manager.getSession();
 	      Transaction tx = null;
 	      
 	      try {
@@ -78,8 +72,6 @@ public class ManageTournament {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 	}
 

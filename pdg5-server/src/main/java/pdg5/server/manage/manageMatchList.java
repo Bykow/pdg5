@@ -14,7 +14,7 @@ import pdg5.server.persistent.Matchlist;
 public class ManageMatchlist {
 	
 	public Matchlist addMatchlist(Tournament tournament, User user) {
-		Session session = Manager.getFactory().openSession();
+		Session session = Manager.getSession();
 		Transaction tx = null;
 		Matchlist Matchlist = new Matchlist(tournament, user);
 		Integer mlID;
@@ -27,15 +27,13 @@ public class ManageMatchlist {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 		
 		return Matchlist;
 	}
 	
 	public List<Matchlist> listMatchlist() {
-		 Session session = Manager.getFactory().openSession();
+		 Session session = Manager.getSession();
 	      Transaction tx = null;
 	      List<Matchlist> Matchlists = null;
 	      
@@ -47,14 +45,12 @@ public class ManageMatchlist {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 	      return Matchlists;
 	}
 	
 	public void updateMatchlist(Matchlist Matchlist) {
-		Session session = Manager.getFactory().openSession();
+		Session session = Manager.getSession();
 	      Transaction tx = null;
 	      
 	      try {
@@ -64,13 +60,11 @@ public class ManageMatchlist {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 	}
 	
 	public void deleteMatchlist(Matchlist Matchlist) {
-		Session session = Manager.getFactory().openSession();
+		Session session = Manager.getSession();
 	      Transaction tx = null;
 	      
 	      try {
@@ -80,8 +74,6 @@ public class ManageMatchlist {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 	}
 

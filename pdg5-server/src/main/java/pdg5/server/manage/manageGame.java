@@ -13,7 +13,7 @@ import pdg5.server.persistent.User;
 
 public class ManageGame {
 	public Game addGame(String title, User player1, User player2, Tournament tournament) {
-		Session session = Manager.getFactory().openSession();
+		Session session = Manager.getSession();
 		Transaction tx = null;
 		Game game = new Game();
 		game.setTitle(title);
@@ -21,6 +21,7 @@ public class ManageGame {
 		game.setUserByPlayer2(player2);
 		game.setTournament(tournament);
 		game.setCreated(new Date());
+		game.setLastActivity(new Date());
 		Integer gID;
 		
 		try {
@@ -31,21 +32,20 @@ public class ManageGame {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 		
 		return game;
 	}
 	
 	public Game addGame(String title, User player1, User player2) {
-		Session session = Manager.getFactory().openSession();
+		Session session = Manager.getSession();
 		Transaction tx = null;
 		Game game = new Game();
 		game.setTitle(title);
 		game.setUserByPlayer1(player1);
 		game.setUserByPlayer2(player2);
 		game.setCreated(new Date());
+		game.setLastActivity(new Date());
 		Integer gID;
 		
 		try {
@@ -56,15 +56,13 @@ public class ManageGame {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 		
 		return game;
 	}
 	
 	public List<Game> listGame() {
-		 Session session = Manager.getFactory().openSession();
+		 Session session = Manager.getSession();
 	      Transaction tx = null;
 	      List<Game> games = null;
 	      
@@ -76,14 +74,12 @@ public class ManageGame {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 	      return games;
 	}
 	
 	public void updateGame(Game game) {
-		Session session = Manager.getFactory().openSession();
+		Session session = Manager.getSession();
 	      Transaction tx = null;
 	      
 	      try {
@@ -93,13 +89,11 @@ public class ManageGame {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 	}
 	
 	public void deleteGame(Game game) {
-		Session session = Manager.getFactory().openSession();
+		Session session = Manager.getSession();
 	      Transaction tx = null;
 	      
 	      try {
@@ -109,8 +103,6 @@ public class ManageGame {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 	}
 }

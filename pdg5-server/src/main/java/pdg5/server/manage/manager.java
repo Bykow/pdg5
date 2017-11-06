@@ -1,13 +1,15 @@
 package pdg5.server.manage;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class Manager {
 	
 	private static SessionFactory factory = null;
+	private static Session session = null;
 	
-	public static SessionFactory getFactory() {
+	private static SessionFactory getFactory() {
 		if(factory == null) {
 			try {
 		         factory = new Configuration().configure().buildSessionFactory();
@@ -19,14 +21,27 @@ public class Manager {
 		}
 		return factory;
 	}
-	
-	// TODO if we can simplify things
-	public void updateObject() {
-		
+	/**
+	 * Used to get a global session
+	 * @return
+	 */
+	public static Session getSession() {
+		if(session == null) {
+			session = Manager.getFactory().openSession();
+		}
+		return session;
 	}
 	
-	public void deleteObject() {
-		
+	/**
+	 * To call when we are done talking to the DB
+	 */
+	public static void closeConversation() {
+		if(session != null) {
+			session.close();
+		}
 	}
-
+	
+	
+	
+	
 }

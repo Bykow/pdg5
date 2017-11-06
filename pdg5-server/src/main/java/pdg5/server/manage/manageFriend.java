@@ -12,7 +12,7 @@ import pdg5.server.persistent.User;
 
 public class ManageFriend {
 	public Friend addFriend(User fromUser, User toUser) {
-		Session session = Manager.getFactory().openSession();
+		Session session = Manager.getSession();
 		Transaction tx = null;
 		Friend friend = new Friend(fromUser, toUser, new Date());
 		Integer tntID;
@@ -25,15 +25,13 @@ public class ManageFriend {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 		
 		return friend;
 	}
 	
 	public List<Friend> listFriend() {
-		 Session session = Manager.getFactory().openSession();
+		 Session session = Manager.getSession();
 	      Transaction tx = null;
 	      List<Friend> friends = null;
 	      
@@ -45,14 +43,12 @@ public class ManageFriend {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 	      return friends;
 	}
 	
 	public void updateFriend(Friend friend) {
-		Session session = Manager.getFactory().openSession();
+		Session session = Manager.getSession();
 	      Transaction tx = null;
 	      
 	      try {
@@ -62,13 +58,11 @@ public class ManageFriend {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 	}
 	
 	public void deleteFriend(Friend friend) {
-		Session session = Manager.getFactory().openSession();
+		Session session = Manager.getSession();
 	      Transaction tx = null;
 	      
 	      try {
@@ -78,8 +72,6 @@ public class ManageFriend {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 	}
 }

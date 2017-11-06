@@ -6,13 +6,13 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import pdg5.server.persistent.BlackList;
+import pdg5.server.persistent.Blacklist;
 import pdg5.server.persistent.User;
 
-public class testPersistentBlackList {
+public class testPersistentBlacklist {
 
 	@Test
-	public void testEqualBlackList() {
+	public void testEqualBlacklist() {
 		Date d1 = new Date();
 		Date d2 = new Date(2000,01,01);
 		User u1 = new User("a", "b");
@@ -23,11 +23,11 @@ public class testPersistentBlackList {
 		u3.setPass("p3");
 		
 		
-		BlackList a = new BlackList(u1, u2, d1);
-		BlackList b = new BlackList(u1, u2, d1);
-		BlackList c = new BlackList(u3, u2, d1);
-		BlackList d = new BlackList(u1, u3, d1);
-		BlackList e = new BlackList(u1, u2, d2);
+		Blacklist a = new Blacklist(u1, u2, d1);
+		Blacklist b = new Blacklist(u1, u2, d1);
+		Blacklist c = new Blacklist(u3, u2, d1);
+		Blacklist d = new Blacklist(u1, u3, d1);
+		Blacklist e = new Blacklist(u1, u2, d2);
 		
 		assertTrue(a.equals(b));
 		assertFalse(a.equals(c));

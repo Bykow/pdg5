@@ -18,17 +18,17 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "blacklist", catalog = "pdg")
-public class BlackList implements java.io.Serializable {
+public class Blacklist implements java.io.Serializable {
 
 	private Integer id;
 	private User userByToUser;
 	private User userByFromUser;
 	private Date lastMod;
 
-	public BlackList() {
+	public Blacklist() {
 	}
 
-	public BlackList(User userByToUser, User userByFromUser, Date lastMod) {
+	public Blacklist(User userByToUser, User userByFromUser, Date lastMod) {
 		this.userByToUser = userByToUser;
 		this.userByFromUser = userByFromUser;
 		this.lastMod = lastMod;
@@ -78,12 +78,12 @@ public class BlackList implements java.io.Serializable {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if(!(obj instanceof BlackList))
+		if(!(obj instanceof Blacklist))
 		{
 			return false;
 		}
 			
-		BlackList b = (BlackList) obj;
+		Blacklist b = (Blacklist) obj;
 		
 		return id == b.getId() &&
 				userByFromUser.equals(b.getUserByFromUser()) &&

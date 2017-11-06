@@ -88,7 +88,7 @@ public class BlackList implements java.io.Serializable {
 		return id == b.getId() &&
 				userByFromUser.equals(b.getUserByFromUser()) &&
 				userByToUser.equals(b.getUserByToUser()) &&
-				lastMod.equals(lastMod);
+				lastMod.equals(b.getLastMod());
 	}
 	
 	@Override

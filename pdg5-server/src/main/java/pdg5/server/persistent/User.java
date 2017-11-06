@@ -178,8 +178,8 @@ public class User implements java.io.Serializable {
 		User b = (User) obj;
 		
 		return id == b.getId() &&
-				username.equals(b.getUsername()) &&
-				pass.equals(b.getPass()) &&
+				((username == null && b.getUsername() == null ) || username.equals(b.getUsername())) &&
+				((pass == null && b.getPass() == null ) || pass.equals(b.getPass())) &&
 				email.equals(b.getEmail());
 	}
 	

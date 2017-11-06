@@ -144,12 +144,12 @@ public class Game implements java.io.Serializable {
 		Game b = (Game) obj;
 		
 		return id == b.getId() && 
-				tournament.equals(b.getTournament()) &&
-				userByPlayer1.equals(b.getUserByPlayer1()) &&
-				userByPlayer2.equals(b.getUserByPlayer2()) &&
-				title.equals(b.getTitle()) &&
-				created.equals(b.getCreated()) &&
-				lastActivity.equals(b.getLastActivity()) &&
+				((tournament == null && b.getTournament() == null) || tournament.equals(b.getTournament())) &&
+				((userByPlayer1 == null && b.getUserByPlayer1() == null ) || userByPlayer1.equals(b.getUserByPlayer1())) &&
+				((userByPlayer2 == null && b.getUserByPlayer2() == null ) || userByPlayer2.equals(b.getUserByPlayer2())) &&
+				((title == null && b.getTitle() == null ) || title.equals(b.getTitle())) &&
+				((created == null && b.getCreated() == null ) || created.equals(b.getCreated())) &&
+				((lastActivity == null && b.getLastActivity() == null ) || lastActivity.equals(b.getLastActivity())) &&
 				chats.equals(b.getChats());
 	}
 	

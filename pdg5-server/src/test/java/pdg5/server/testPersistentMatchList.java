@@ -19,6 +19,8 @@ public class testPersistentMatchList {
 		
 		User u1 = new User("a", "b");
 		User u2 = new User("c","d");
+		u1.setPass("p1");
+		u2.setPass("p2");
 		
 		Matchlist a = new Matchlist(t1, u1);
 		Matchlist b = new Matchlist(t1, u1);

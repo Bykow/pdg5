@@ -17,6 +17,10 @@ public class testPersistentUser {
 		User b = new User("a", "b");
 		User c = new User("c", "b");
 		User d = new User("a", "c");
+		a.setPass("p1");
+		b.setPass("p1");
+		c.setPass("p2");
+		d.setPass("p3");
 		
 		assertTrue(a.equals(b));
 		assertFalse(a.equals(c));

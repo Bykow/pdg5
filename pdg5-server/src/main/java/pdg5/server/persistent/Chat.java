@@ -85,8 +85,8 @@ public class Chat implements java.io.Serializable {
 		Chat b = (Chat) obj;
 		
 		return id == b.getId() && 
-				game.equals(b.getGame()) &&
-				tournament.equals(b.getTournament()) &&
+				((game == null && b.getGame() == null ) || game.equals(b.getGame())) &&
+				((tournament == null && b.getTournament() == null ) || tournament.equals(b.getTournament())) &&
 				messages.equals(b.getMessages());
 	}
 	

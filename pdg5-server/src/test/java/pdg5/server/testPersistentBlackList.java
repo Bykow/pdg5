@@ -18,6 +18,9 @@ public class testPersistentBlackList {
 		User u1 = new User("a", "b");
 		User u2 = new User("c","d");
 		User u3 = new User("e","f");
+		u1.setPass("p1");
+		u2.setPass("p2");
+		u3.setPass("p3");
 		
 		
 		BlackList a = new BlackList(u1, u2, d1);

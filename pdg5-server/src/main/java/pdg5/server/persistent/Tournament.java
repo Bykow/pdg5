@@ -113,10 +113,10 @@ public class Tournament implements java.io.Serializable {
 		
 		return id == b.getId() &&
 				chats.equals(b.getChats()) &&
-				created.equals(b.getCreated()) &&
+				((created == null && b.getCreated() == null ) || created.equals(b.getCreated())) &&
 				games.equals(b.getGames()) &&
 				matchlists.equals(b.getMatchlists()) &&
-				title.equals(b.getTitle());
+				((title == null && b.getTitle() == null ) || title.equals(b.getTitle()));
 	}
 	
 	@Override

@@ -16,5 +16,5 @@ public class Game implements Serializable {
     public int getGameId() {
         return this.gameId;
     }
-
+    
 }

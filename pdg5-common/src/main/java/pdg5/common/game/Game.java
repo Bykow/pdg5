@@ -1,7 +1,6 @@
 package pdg5.common.game;
 
 import java.util.List;
-import pdg5.common.Protocol;
 
 /**
  * Class representing the model of the game.
@@ -9,6 +8,10 @@ import pdg5.common.Protocol;
  * (bonus and normal letters) manipulated by a player.
  */
 public class Game {
+   public enum PlayerBoard {
+      PLAYER1, PLAYER2
+   } 
+   
    public class Board {
       private List<Tile> bonus;
       private List<Tile> letters;
@@ -22,13 +25,24 @@ public class Game {
       }
    }
    
-   private Board[] board;
+   private int gameId;
+   private Board[] boards;
+   private Composition composition;
    
    public Game() {
-      
+      boards = new Board[PlayerBoard.values().length];
+      for (Board board : boards) {
+         board = new Board();
+      }
    }
    
-   public Game(Protocol.Game game) {
+   public Game(pdg5.common.protocole.Game game) {
       
    }
+
+   public Board getBoard(PlayerBoard player) {
+      return boards[player.ordinal()];
+   }
+   
+   
 }

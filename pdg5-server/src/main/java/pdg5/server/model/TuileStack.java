@@ -1,4 +1,4 @@
-package pdg5.server.model;
+      package pdg5.server.model;
 
 import pdg5.common.Protocol;
 import pdg5.common.game.Tile;

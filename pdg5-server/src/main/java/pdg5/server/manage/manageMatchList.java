@@ -6,20 +6,23 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import pdg5.server.persistent.MatchList;
+import pdg5.server.persistent.Matchlist;
+import pdg5.server.persistent.Tournament;
+import pdg5.server.persistent.User;
+import pdg5.server.persistent.Matchlist;
 
-public class manageMatchList {
+public class manageMatchlist {
 	
-	public MatchList addMatchList(int tournament, int user) {
+	public Matchlist addMatchlist(Tournament tournament, User user) {
 		Session session = manager.getFactory().openSession();
 		Transaction tx = null;
-		MatchList matchList = new MatchList(tournament, user);
+		Matchlist Matchlist = new Matchlist(tournament, user);
 		Integer mlID;
 		
 		try {
 	         tx = session.beginTransaction();
-	         mlID = (Integer) session.save(matchList); 
-	         matchList.setID(mlID);
+	         mlID = (Integer) session.save(Matchlist); 
+	         Matchlist.setId(mlID);
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -28,17 +31,17 @@ public class manageMatchList {
 	         session.close(); 
 	      }
 		
-		return matchList;
+		return Matchlist;
 	}
 	
-	public List<MatchList> listMatchList() {
+	public List<Matchlist> listMatchlist() {
 		 Session session = manager.getFactory().openSession();
 	      Transaction tx = null;
-	      List<MatchList> matchLists = null;
+	      List<Matchlist> Matchlists = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-	         matchLists = session.createQuery("FROM MatchList").list(); 
+	         Matchlists = session.createQuery("FROM Matchlist").list(); 
 	         
 	         tx.commit();
 	      } catch (HibernateException e) {
@@ -47,16 +50,16 @@ public class manageMatchList {
 	      } finally {
 	         session.close(); 
 	      }
-	      return matchLists;
+	      return Matchlists;
 	}
 	
-	public void updateMatchList(MatchList matchList) {
+	public void updateMatchlist(Matchlist Matchlist) {
 		Session session = manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-			 session.update(matchList); 
+			 session.update(Matchlist); 
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -66,13 +69,13 @@ public class manageMatchList {
 	      }
 	}
 	
-	public void deleteMatchList(MatchList matchList) {
+	public void deleteMatchlist(Matchlist Matchlist) {
 		Session session = manager.getFactory().openSession();
 	      Transaction tx = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-	         session.delete(matchList); 
+	         session.delete(Matchlist); 
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();

@@ -1,5 +1,6 @@
 package pdg5.server.manage;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -7,18 +8,19 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import pdg5.server.persistent.Friend;
+import pdg5.server.persistent.User;
 
 public class manageFriend {
-	public Friend addFriend(int fromUser, int toUser) {
+	public Friend addFriend(User fromUser, User toUser) {
 		Session session = manager.getFactory().openSession();
 		Transaction tx = null;
-		Friend friend = new Friend(fromUser, toUser);
+		Friend friend = new Friend(fromUser, toUser, new Date());
 		Integer tntID;
 		
 		try {
 	         tx = session.beginTransaction();
 	         tntID = (Integer) session.save(friend); 
-	         friend.setID(tntID);
+	         friend.setId(tntID);
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();

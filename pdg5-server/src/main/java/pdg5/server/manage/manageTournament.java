@@ -1,5 +1,6 @@
 package pdg5.server.manage;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -13,13 +14,13 @@ public class manageTournament {
 	public Tournament addTournament(String title) {
 		Session session = manager.getFactory().openSession();
 		Transaction tx = null;
-		Tournament tournament = new Tournament(title);
+		Tournament tournament = new Tournament(title, new Date());
 		Integer tntID;
 		
 		try {
 	         tx = session.beginTransaction();
 	         tntID = (Integer) session.save(tournament); 
-	         tournament.setID(tntID);
+	         tournament.setId(tntID);
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();

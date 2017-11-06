@@ -7,19 +7,21 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import pdg5.server.persistent.Chat;
 import pdg5.server.persistent.Message;
+import pdg5.server.persistent.User;
 
 public class manageMessage {
-	public Message addMessage(String content, int user, int chat) {
+	public Message addMessage(String content, User user, Chat chat) {
 		Session session = manager.getFactory().openSession();
 		Transaction tx = null;
-		Message message = new Message(content, new Date(), user, chat);
+		Message message = new Message(chat,user,content,new Date());
 		Integer mID;
 		
 		try {
 	         tx = session.beginTransaction();
 	         mID = (Integer) session.save(message); 
-	         message.setID(mID);
+	         message.setId(mID);
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();

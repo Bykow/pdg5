@@ -1,5 +1,6 @@
 package pdg5.server.manage;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -7,18 +8,19 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import pdg5.server.persistent.BlackList;
+import pdg5.server.persistent.User;
 
 public class manageBlackList {
-	public BlackList addBlackList(int fromUser, int toUser) {
+	public BlackList addBlackList(User fromUser, User toUser) {
 		Session session = manager.getFactory().openSession();
 		Transaction tx = null;
-		BlackList blacklist = new BlackList(fromUser, toUser);
+		BlackList blacklist = new BlackList(fromUser, toUser, new Date());
 		Integer tntID;
 		
 		try {
 	         tx = session.beginTransaction();
 	         tntID = (Integer) session.save(blacklist); 
-	         blacklist.setID(tntID);
+	         blacklist.setId(tntID);
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();

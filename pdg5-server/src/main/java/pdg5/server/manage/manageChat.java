@@ -7,9 +7,11 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import pdg5.server.persistent.Chat;
+import pdg5.server.persistent.Game;
+import pdg5.server.persistent.Tournament;
 
 public class manageChat {
-	public Chat addChatTournament(int tournament) {
+	public Chat addChatTournament(Tournament tournament) {
 		Session session = manager.getFactory().openSession();
 		Transaction tx = null;
 		
@@ -20,7 +22,7 @@ public class manageChat {
 		try {
 	         tx = session.beginTransaction();
 	         cid = (Integer) session.save(chat); 
-	         chat.setID(cid);
+	         chat.setId(cid);
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -32,7 +34,7 @@ public class manageChat {
 		return chat;
 	}
 	
-	public Chat addChatGame(int game) {
+	public Chat addChatGame(Game game) {
 		Session session = manager.getFactory().openSession();
 		Transaction tx = null;
 		Chat chat = new Chat();
@@ -42,7 +44,7 @@ public class manageChat {
 		try {
 	         tx = session.beginTransaction();
 	         cid = (Integer) session.save(chat); 
-	         chat.setID(cid);
+	         chat.setId(cid);
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();

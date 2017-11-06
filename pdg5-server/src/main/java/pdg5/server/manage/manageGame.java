@@ -1,5 +1,6 @@
 package pdg5.server.manage;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -7,18 +8,25 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import pdg5.server.persistent.Game;
+import pdg5.server.persistent.Tournament;
+import pdg5.server.persistent.User;
 
 public class manageGame {
-	public Game addGame(String title, int player1, int player2, int tournament) {
+	public Game addGame(String title, User player1, User player2, Tournament tournament) {
 		Session session = manager.getFactory().openSession();
 		Transaction tx = null;
-		Game game = new Game(title, player1, player2, tournament);
+		Game game = new Game();
+		game.setTitle(title);
+		game.setUserByPlayer1(player1);
+		game.setUserByPlayer2(player2);
+		game.setTournament(tournament);
+		game.setCreated(new Date());
 		Integer gID;
 		
 		try {
 	         tx = session.beginTransaction();
 	         gID = (Integer) session.save(game); 
-	         game.setID(gID);
+	         game.setId(gID);
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -30,16 +38,20 @@ public class manageGame {
 		return game;
 	}
 	
-	public Game addGame(String title, int player1, int player2) {
+	public Game addGame(String title, User player1, User player2) {
 		Session session = manager.getFactory().openSession();
 		Transaction tx = null;
-		Game game = new Game(title, player1, player2);
+		Game game = new Game();
+		game.setTitle(title);
+		game.setUserByPlayer1(player1);
+		game.setUserByPlayer2(player2);
+		game.setCreated(new Date());
 		Integer gID;
 		
 		try {
 	         tx = session.beginTransaction();
 	         gID = (Integer) session.save(game); 
-	         game.setID(gID);
+	         game.setId(gID);
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();

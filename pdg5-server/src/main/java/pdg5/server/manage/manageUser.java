@@ -17,13 +17,16 @@ public class manageUser {
 		String hashedPass = BCrypt.hashpw(pass, BCrypt.gensalt());
 		email = email.toLowerCase();
 		username = username.toLowerCase();
-		User user = new User(email,username, hashedPass);
+		User user = new User();
+		user.setEmail(email);
+		user.setUsername(username);
+		user.setPass(hashedPass);
 		Integer usrID;
 		
 		try {
 	         tx = session.beginTransaction();
 	         usrID = (Integer) session.save(user); 
-	         user.setID(usrID);
+	         user.setId(usrID);
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();

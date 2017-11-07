@@ -1,6 +1,14 @@
 package pdg5.server;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.List;
+
+import javax.sql.rowset.serial.SerialException;
 
 import org.junit.Test;
 
@@ -335,6 +343,57 @@ public class testGlobalManager {
 		for (Game game : lg) {
 			System.out.println(game);
 		}	
+		
+		Manager.closeConversation();
+	}
+	
+	@Test
+	public void testGameSerialization() {
+		ManageGame mg = new ManageGame();
+		ManageUser mu = new ManageUser();
+		
+		
+		User usr1 = mu.addUser("Jean-Claude@tst.org","JC", "1234");
+		User usr2 = mu.addUser("Jean-Michel@tst.org","JM", "pass");
+		User usr3 = mu.addUser("Jean-Edouard@tst.com","JE", "grey");
+		
+		Game g1 = mg.addGame("JJ battle", usr2, usr3,"abc");
+		Game g2 = mg.addGame("Jean battle", usr1, usr2,"def");
+		
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		ObjectOutput out = null;
+		try {
+		  out = new ObjectOutputStream(bos);   
+		  out.writeObject(usr1);
+		  out.flush();
+		  byte[] bUsr1 = bos.toByteArray();
+		  Blob serUsr1 = new javax.sql.rowset.serial.SerialBlob(bUsr1);
+		  g1.setGameState(serUsr1);
+		  mg.updateGame(g1);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SerialException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			  try {
+			    bos.close();
+			  } catch (IOException ex) {
+			    // ignore close exception
+			  }
+			}
+		
+		mg.deleteGame(g1);
+		mg.deleteGame(g2);
+		
+		mu.deleteUser(usr1);
+		mu.deleteUser(usr2);
+		mu.deleteUser(usr1);
+		
 		
 		Manager.closeConversation();
 	}

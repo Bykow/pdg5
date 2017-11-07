@@ -83,7 +83,7 @@ public class ClientHandler implements Runnable {
                     queueIn.add((Message) in.readObject());
                 }
             } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
+                System.err.println("Connection close");
             }
         }).start();
     }

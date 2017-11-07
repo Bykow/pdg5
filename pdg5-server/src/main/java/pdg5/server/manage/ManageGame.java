@@ -38,7 +38,6 @@ public class ManageGame {
 		return game;
 	}
 	
-	//TODO use first add game
 	public Game addGame(String title, User player1, User player2, String remainingLetters) {
 		Session session = Manager.getSession();
 		Transaction tx = null;

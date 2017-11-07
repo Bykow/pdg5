@@ -17,7 +17,10 @@ public class Game implements Serializable {
     private Date lastActivity;
     private int tournament;
     private int score;
+    private int idPlayer;
+    private String namePlayer;
     private int opponentScore;
+    private int idPlayer2;
     private String opponentName;
     private int nbLeftTile;
     private List<Tile> addedTile;
@@ -26,7 +29,7 @@ public class Game implements Serializable {
     private boolean bonusIsMine;
     
     public Game(int ID, String title, Date created, Date lastActivity, 
-                int tournament, int score, int opponentScore, 
+                int tournament, int score, String namePlayer, int opponentScore, 
                 String opponentName, int nbLeftTile, List<Tile> addedTile,
                 Composition.Square square, List<Tile> bonusLetters,
                 boolean bonusIsMine) {
@@ -36,6 +39,7 @@ public class Game implements Serializable {
         this.lastActivity = lastActivity;
         this.tournament = tournament;
         this.score = score;
+        this.namePlayer = namePlayer;
         this.opponentScore = opponentScore;
         this.opponentName = opponentName;
         this.nbLeftTile = nbLeftTile;
@@ -69,6 +73,10 @@ public class Game implements Serializable {
     public int getScore() {
        return score;
     }
+
+   public String getNamePlayer() {
+      return namePlayer;
+   }
 
    public int getOpponentScore() {
       return opponentScore;

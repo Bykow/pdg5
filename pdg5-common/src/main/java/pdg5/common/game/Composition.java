@@ -77,7 +77,7 @@ public class Composition {
       return temp;
    }
 
-   public int getValue(Game.Board board) throws IllegalStateException {
+   public int getValue(Board board) throws IllegalStateException {
       if(!isValid()) {
          throw new IllegalStateException("This isn't a valid word");
       }

@@ -1,6 +1,14 @@
 package pdg5.server;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.List;
+
+import javax.sql.rowset.serial.SerialException;
 
 import org.junit.Test;
 
@@ -183,8 +191,8 @@ public class testGlobalManager {
 		}
 		
 		// create game
-		Game g1 = mg.addGame("Wizard battle", usr2, usr4);
-		Game g2 = mg.addGame("Evil battle", usr1, usr2,t1);
+		Game g1 = mg.addGame("Wizard battle", usr2, usr4,"abc");
+		Game g2 = mg.addGame("Evil battle", usr1, usr2,t1,"def");
 		
 		List<Game> lg = mg.listGame();
 		System.out.println("***** created games ****");
@@ -256,8 +264,8 @@ public class testGlobalManager {
 		Tournament t1 = mt.addTournament("keke Championship");
 		
 		// create game
-		Game g1 = mg.addGame("JJ battle", usr2, usr3);
-		Game g2 = mg.addGame("Jean battle", usr1, usr2,t1);
+		Game g1 = mg.addGame("JJ battle", usr2, usr3,"abc");
+		Game g2 = mg.addGame("Jean battle", usr1, usr2,t1,"def");
 		
 		// create chat
 		Chat c1 = mc.addChatGame(g1);
@@ -327,14 +335,41 @@ public class testGlobalManager {
 		User usr2 = mu.addUser("Jean-Michel@tst.org","JM", "pass");
 		User usr3 = mu.addUser("Jean-Edouard@tst.com","JE", "grey");
 		
-		Game g1 = mg.addGame("JJ battle", usr2, usr3);
-		Game g2 = mg.addGame("Jean battle", usr1, usr2);
+		Game g1 = mg.addGame("JJ battle", usr2, usr3,"abc");
+		Game g2 = mg.addGame("Jean battle", usr1, usr2,"def");
 		
 		List<Game> lg = mg.getGamesByUsername(usr2);
 		System.out.println("***** get games ****");
 		for (Game game : lg) {
 			System.out.println(game);
 		}	
+		
+		Manager.closeConversation();
+	}
+	
+	@Test
+	public void testGameSerialization() {
+		ManageGame mg = new ManageGame();
+		ManageUser mu = new ManageUser();
+		
+		
+		User usr1 = mu.addUser("Jean-Claude@tst.org","JC", "1234");
+		User usr2 = mu.addUser("Jean-Michel@tst.org","JM", "pass");
+		User usr3 = mu.addUser("Jean-Edouard@tst.com","JE", "grey");
+		
+		Game g1 = mg.addGame("JJ battle", usr2, usr3,"abc");
+		Game g2 = mg.addGame("Jean battle", usr1, usr2,"def");
+		
+		g1.setGameState(usr1);
+		mg.updateGame(g1);
+		
+		mg.deleteGame(g1);
+		mg.deleteGame(g2);
+		
+		mu.deleteUser(usr1);
+		mu.deleteUser(usr2);
+		mu.deleteUser(usr1);
+		
 		
 		Manager.closeConversation();
 	}

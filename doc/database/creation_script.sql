@@ -1,7 +1,7 @@
 --
 -- Create schema pdg
 --
-
+DROP DATABASE IF EXISTS pdg;
 CREATE DATABASE IF NOT EXISTS pdg;
 USE pdg;
 
@@ -113,6 +113,8 @@ CREATE TABLE `game` (
   `created` datetime NOT NULL,
   `last_activity` datetime NOT NULL,
   `tournament` int(11) DEFAULT NULL,
+  `remaining_letters` VARCHAR(100) NOT NULL,
+  `game_state` BLOB,
   PRIMARY KEY (`ID`),
   FOREIGN KEY (`player1`) REFERENCES `user` (`ID`),
   FOREIGN KEY (`player2`) REFERENCES `user` (`ID`),

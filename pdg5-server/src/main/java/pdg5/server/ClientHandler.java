@@ -42,11 +42,13 @@ public class ClientHandler implements Runnable {
         send();
 
         // Process message
-        queueOut.add(
-                requestManager.execute(
-                        queueIn.take()
-                )
-        );
+        while (true) {
+            queueOut.add(
+                    requestManager.execute(
+                            queueIn.take()
+                    )
+            );
+        }
     }
 
     public ServerRequestManager getRequestManager() {
@@ -84,7 +86,5 @@ public class ClientHandler implements Runnable {
             }
         }).start();
     }
-
-    // todo addQUeuout
 
 }

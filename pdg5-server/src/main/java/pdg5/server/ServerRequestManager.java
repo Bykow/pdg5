@@ -1,6 +1,9 @@
 package pdg5.server;
 
-import pdg5.common.protocol.*;
+import pdg5.common.protocol.ErrorMessage;
+import pdg5.common.protocol.Message;
+import pdg5.common.protocol.SignIn;
+import pdg5.common.protocol.SignUp;
 import pdg5.server.process.ProcessSignIn;
 import pdg5.server.process.ProcessSignUp;
 
@@ -10,23 +13,21 @@ import pdg5.server.process.ProcessSignUp;
 public class ServerRequestManager {
 
     /**
-     *
      * @param o
      * @return Message to be send
      */
     public Message execute(Object o) {
 
         if (o instanceof SignUp) {
-            new ProcessSignUp((SignUp) o).execute();
+            return new ProcessSignUp((SignUp) o).execute();
 
         } else if (o instanceof SignIn) {
-            new ProcessSignIn((SignIn) o).execute();
+            return new ProcessSignIn((SignIn) o).execute();
 
-        } else {
-            System.err.println("Unknow type");
         }
 
-        return null;
+        return new ErrorMessage("Unhandled ErrorMessage is ServerRequestManager, default reached");
+
     }
 
 }

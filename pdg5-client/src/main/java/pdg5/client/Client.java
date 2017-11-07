@@ -43,7 +43,6 @@ public class Client extends Application {
         this.queueOut = new MessageQueue();
         this.launch = true;
 
-        System.out.println("Client.initRootLayout");
         initRootLayout();
 
         // Try connect

@@ -23,6 +23,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import pdg5.client.Client;
+import pdg5.common.protocol.SignIn;
 
 import java.io.IOException;
 
@@ -46,6 +47,9 @@ public class SignInController {
     @FXML
     private void handleLogin(ActionEvent actionEvent) {
         Stage stage = (Stage)btnLogin.getScene().getWindow();
+
+        SignIn signIn = new SignIn(username.getText(), password.getText());
+
         stage.hide();
         loadGame(stage);
     }

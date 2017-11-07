@@ -18,9 +18,6 @@ public class Client extends Application {
     private AnchorPane gameLayout;
 
     public static void main(String[] args) {
-
-        ClientNetworkManager netManager = new ClientNetworkManager();
-
         launch(args);
     }
 

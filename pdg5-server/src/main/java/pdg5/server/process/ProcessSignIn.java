@@ -6,6 +6,7 @@ import pdg5.common.protocol.Message;
 import pdg5.common.protocol.SignIn;
 import pdg5.server.manage.ManageGame;
 import pdg5.server.manage.ManageUser;
+import pdg5.server.persistent.User;
 
 /**
  * Created on 31.10.17 by Bykow
@@ -23,7 +24,8 @@ public class ProcessSignIn implements GenericProcess {
     @Override
     public Message execute() {
         if(manageUser.isCorrectPassword(signIn.getUsername(), signIn.getPassword())) {
-            return new Load(manageGame.getGame(signIn.getUsername()));
+            return new Load();
+            //manageGame.getGamesByUsername(manageUser.getUserByUsername(signIn.getUsername()))
         } else {
             return new ErrorMessage("Password invalid in SignIn for user " + signIn.getUsername());
         }

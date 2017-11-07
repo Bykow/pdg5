@@ -20,11 +20,15 @@ public class ProcessSignUp implements GenericProcess {
 
     @Override
     public Message execute() {
-        int code = manager.addUser(signUp.getEmail(), signUp.getUsername(), signUp.getPassword());
+        manager.addUser(signUp.getEmail(), signUp.getUsername(), signUp.getPassword());
+
+        //todo change that its just for demo
+        int code = Protocol.OK;
 
         switch (code) {
             case Protocol.OK :
                 return new Load();
+                //todo this is not suppose to be empty
             case Protocol.ERROR :
                 return new ErrorMessage("Unexpected ErrorMessage in SignUp code: " + Protocol.ERROR);
             default :

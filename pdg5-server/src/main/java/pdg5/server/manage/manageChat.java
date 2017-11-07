@@ -1,59 +1,81 @@
 package pdg5.server.manage;
 
-import java.util.Date;
 import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import pdg5.server.persistent.Blacklist;
-import pdg5.server.persistent.User;
+import pdg5.server.persistent.Chat;
+import pdg5.server.persistent.Game;
+import pdg5.server.persistent.Tournament;
 
-public class ManageBlacklist {
-	public Blacklist addBlacklist(User fromUser, User toUser) {
+public class ManageChat {
+	public Chat addChatTournament(Tournament tournament) {
 		Session session = Manager.getSession();
 		Transaction tx = null;
-		Blacklist Blacklist = new Blacklist(fromUser, toUser, new Date());
-		Integer tntID;
+		
+		Chat chat = new Chat();
+		chat.setTournament(tournament);
+		Integer cid;
 		
 		try {
 	         tx = session.beginTransaction();
-	         tntID = (Integer) session.save(Blacklist); 
-	         Blacklist.setId(tntID);
+	         cid = (Integer) session.save(chat); 
+	         chat.setId(cid);
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
 	      }
 		
-		return Blacklist;
+		return chat;
 	}
 	
-	public List<Blacklist> listBlacklist() {
+	public Chat addChatGame(Game game) {
+		Session session = Manager.getSession();
+		Transaction tx = null;
+		Chat chat = new Chat();
+		chat.setGame(game);
+		Integer cid;
+		
+		try {
+	         tx = session.beginTransaction();
+	         cid = (Integer) session.save(chat); 
+	         chat.setId(cid);
+	         tx.commit();
+	      } catch (HibernateException e) {
+	         if (tx!=null) tx.rollback();
+	         e.printStackTrace(); 
+	      }
+		
+		return chat;
+	}
+	
+	public List<Chat> listChats() {
 		 Session session = Manager.getSession();
 	      Transaction tx = null;
-	      List<Blacklist> Blacklists = null;
+	      List<Chat> chats = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-	         Blacklists = session.createQuery("FROM Blacklist").list(); 
+	         chats = session.createQuery("FROM Chat").list(); 
 	         
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
 	      }
-	      return Blacklists;
+	      return chats;
 	}
 	
-	public void updateBlacklist(Blacklist Blacklist) {
+	public void updateChat(Chat chat) {
 		Session session = Manager.getSession();
 	      Transaction tx = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-			 session.update(Blacklist); 
+			 session.update(chat); 
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -61,13 +83,13 @@ public class ManageBlacklist {
 	      }
 	}
 	
-	public void deleteBlacklist(Blacklist Blacklist) {
+	public void deleteChat(Chat chat) {
 		Session session = Manager.getSession();
 	      Transaction tx = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-	         session.delete(Blacklist); 
+	         session.delete(chat); 
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();

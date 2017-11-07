@@ -48,4 +48,7 @@ Eclipse
 *.aux
 *.toc
 *.gz
-*.pdf
+
+#OSX bullshit
+*.DS_Store
+

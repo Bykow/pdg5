@@ -23,7 +23,7 @@ public class ProcessSignIn implements GenericProcess {
     @Override
     public Message execute() {
         if(manageUser.isCorrectPassword(signIn.getUsername(), signIn.getPassword())) {
-            return new Load(manageGame(signIn.getUsername()));
+            return new Load(manageGame.getGame(signIn.getUsername()));
         } else {
             return new ErrorMessage("Password invalid in SignIn for user " + signIn.getUsername());
         }

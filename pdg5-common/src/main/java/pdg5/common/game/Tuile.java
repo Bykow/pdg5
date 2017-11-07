@@ -1,11 +1,13 @@
 package pdg5.common.game;
 
+import java.io.Serializable;
+
 /**
  * Created on 03.10.17 by Bykow
  * A Tuile represents a letter and its value on in the game. The value is
  * directly linked to the langage of the game
  */
-public class Tuile {
+public class Tuile implements Serializable {
     private char letter;
     private int value;
 

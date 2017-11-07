@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane id="main" prefHeight="50.0" prefWidth="55.0" stylesheets="@../css/tile.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="letter" layoutX="8.0" layoutY="12.0" prefHeight="30.0" prefWidth="31.0" text="A" textFill="#2c3e50">
+         <font>
+            <Font name="Helvetica Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="point" alignment="CENTER_RIGHT" layoutX="24.0" layoutY="5.0" prefHeight="16.0" prefWidth="24.0" text="1" textFill="#2c3e50">
+         <font>
+            <Font name="Helvetica Bold" size="16.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

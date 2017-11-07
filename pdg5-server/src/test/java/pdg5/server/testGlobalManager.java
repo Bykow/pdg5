@@ -183,8 +183,8 @@ public class testGlobalManager {
 		}
 		
 		// create game
-		Game g1 = mg.addGame("Wizard battle", usr2, usr4);
-		Game g2 = mg.addGame("Evil battle", usr1, usr2,t1);
+		Game g1 = mg.addGame("Wizard battle", usr2, usr4,"abc");
+		Game g2 = mg.addGame("Evil battle", usr1, usr2,t1,"def");
 		
 		List<Game> lg = mg.listGame();
 		System.out.println("***** created games ****");
@@ -256,8 +256,8 @@ public class testGlobalManager {
 		Tournament t1 = mt.addTournament("keke Championship");
 		
 		// create game
-		Game g1 = mg.addGame("JJ battle", usr2, usr3);
-		Game g2 = mg.addGame("Jean battle", usr1, usr2,t1);
+		Game g1 = mg.addGame("JJ battle", usr2, usr3,"abc");
+		Game g2 = mg.addGame("Jean battle", usr1, usr2,t1,"def");
 		
 		// create chat
 		Chat c1 = mc.addChatGame(g1);
@@ -327,8 +327,8 @@ public class testGlobalManager {
 		User usr2 = mu.addUser("Jean-Michel@tst.org","JM", "pass");
 		User usr3 = mu.addUser("Jean-Edouard@tst.com","JE", "grey");
 		
-		Game g1 = mg.addGame("JJ battle", usr2, usr3);
-		Game g2 = mg.addGame("Jean battle", usr1, usr2);
+		Game g1 = mg.addGame("JJ battle", usr2, usr3,"abc");
+		Game g2 = mg.addGame("Jean battle", usr1, usr2,"def");
 		
 		List<Game> lg = mg.getGamesByUsername(usr2);
 		System.out.println("***** get games ****");

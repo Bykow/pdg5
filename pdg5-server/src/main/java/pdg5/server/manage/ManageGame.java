@@ -12,7 +12,7 @@ import pdg5.server.persistent.Tournament;
 import pdg5.server.persistent.User;
 
 public class ManageGame {
-	public Game addGame(String title, User player1, User player2, Tournament tournament) {
+	public Game addGame(String title, User player1, User player2, Tournament tournament, String remainingLetters) {
 		Session session = Manager.getSession();
 		Transaction tx = null;
 		Game game = new Game();
@@ -22,6 +22,7 @@ public class ManageGame {
 		game.setTournament(tournament);
 		game.setCreated(new Date());
 		game.setLastActivity(new Date());
+		game.setRemainingLetters(remainingLetters);
 		Integer gID;
 		
 		try {
@@ -37,7 +38,8 @@ public class ManageGame {
 		return game;
 	}
 	
-	public Game addGame(String title, User player1, User player2) {
+	//TODO use first add game
+	public Game addGame(String title, User player1, User player2, String remainingLetters) {
 		Session session = Manager.getSession();
 		Transaction tx = null;
 		Game game = new Game();
@@ -46,6 +48,7 @@ public class ManageGame {
 		game.setUserByPlayer2(player2);
 		game.setCreated(new Date());
 		game.setLastActivity(new Date());
+		game.setRemainingLetters(remainingLetters);
 		Integer gID;
 		
 		try {

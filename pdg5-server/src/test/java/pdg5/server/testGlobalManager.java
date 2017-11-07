@@ -317,5 +317,26 @@ public class testGlobalManager {
 		
 		Manager.closeConversation();
 	}
+	
+	@Test
+	public void testGetGames() {
+		ManageGame mg = new ManageGame();
+		ManageUser mu = new ManageUser();
+		
+		User usr1 = mu.addUser("Jean-Claude@tst.org","JC", "1234");
+		User usr2 = mu.addUser("Jean-Michel@tst.org","JM", "pass");
+		User usr3 = mu.addUser("Jean-Edouard@tst.com","JE", "grey");
+		
+		Game g1 = mg.addGame("JJ battle", usr2, usr3);
+		Game g2 = mg.addGame("Jean battle", usr1, usr2);
+		
+		List<Game> lg = mg.getGamesByUsername(usr2);
+		System.out.println("***** get games ****");
+		for (Game game : lg) {
+			System.out.println(game);
+		}	
+		
+		Manager.closeConversation();
+	}
 
 }

@@ -1,5 +1,6 @@
 package pdg5.server.persistent;
 
+import java.sql.Blob;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -30,6 +31,8 @@ public class Game implements java.io.Serializable {
 	private String title;
 	private Date created;
 	private Date lastActivity;
+	private String remainingLetters;
+	private Blob gameState;
 	private Set chats = new HashSet(0);
 
 	public Game() {
@@ -104,6 +107,16 @@ public class Game implements java.io.Serializable {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
+	@Column(name = "remaining_letters", nullable = false, length = 100)
+	public String getRemainingLetters() {
+		return this.remainingLetters;
+	}
+
+	public void setRemainingLetters(String remainingLetters) {
+		this.remainingLetters = remainingLetters;
+	}
+	
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "created", nullable = false, length = 19)
@@ -134,6 +147,15 @@ public class Game implements java.io.Serializable {
 		this.chats = chats;
 	}
 	
+	@Column(name = "game_state", nullable = true)
+	public Blob getGameState() {
+		return this.gameState;
+	}
+
+	public void setGameState(Blob gameState) {
+		this.gameState = gameState;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if(!(obj instanceof Game))
@@ -148,6 +170,7 @@ public class Game implements java.io.Serializable {
 				((userByPlayer1 == null && b.getUserByPlayer1() == null ) || userByPlayer1.equals(b.getUserByPlayer1())) &&
 				((userByPlayer2 == null && b.getUserByPlayer2() == null ) || userByPlayer2.equals(b.getUserByPlayer2())) &&
 				((title == null && b.getTitle() == null ) || title.equals(b.getTitle())) &&
+				((remainingLetters == null && b.getRemainingLetters() == null ) || remainingLetters.equals(b.getRemainingLetters())) &&
 				((created == null && b.getCreated() == null ) || created.equals(b.getCreated())) &&
 				((lastActivity == null && b.getLastActivity() == null ) || lastActivity.equals(b.getLastActivity())) &&
 				chats.equals(b.getChats());

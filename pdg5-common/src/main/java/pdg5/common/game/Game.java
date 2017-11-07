@@ -15,6 +15,11 @@ public class Game {
    public class Board {
       private List<Tile> bonus;
       private List<Tile> letters;
+      private String playerName;
+      
+      public Board(String playerName) {
+         this.playerName = playerName;
+      }
       
       public List<Tile> getBonus() {
          return bonus;
@@ -29,10 +34,10 @@ public class Game {
    private Board[] boards;
    private Composition composition;
    
-   public Game() {
+   public Game(String playerName) {
       boards = new Board[PlayerBoard.values().length];
       for (Board board : boards) {
-         board = new Board();
+         board = new Board(playerName);
       }
    }
    

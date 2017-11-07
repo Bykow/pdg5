@@ -8,7 +8,7 @@ import java.util.Arrays;
  */
 public class Composition {
 
-   private enum Square {
+   public enum Square {
       NORMAL {
          @Override
          public int getFinalValue(Tile tile) {
@@ -83,7 +83,9 @@ public class Composition {
       }
       int score = 0;
       for (int i = 0; i < WORD_MAX_SIZE; i++) {
-         score += bonus[i].getFinalValue(word[i]);
+         if(word[i] != null) {
+            score += bonus[i].getFinalValue(word[i]);
+         }
       }
       if(board.getBonus().isEmpty()) {
          score *= 2;

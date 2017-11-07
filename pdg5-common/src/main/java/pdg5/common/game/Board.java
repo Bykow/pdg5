@@ -7,11 +7,11 @@ import java.util.ArrayList;
  */
 public class Board {
     private ArrayList<Integer> positionValue;
-    private ArrayList<Tuile> extraTuile;
+    private ArrayList<Tile> extraTile;
 
-    public Board(ArrayList<Integer> positionValue, ArrayList<Tuile> extraTuile) {
+    public Board(ArrayList<Integer> positionValue, ArrayList<Tile> extraTile) {
         this.positionValue = positionValue;
-        this.extraTuile = extraTuile;
+        this.extraTile = extraTile;
     }
 
     public int getPositionValue(int position) {
@@ -22,11 +22,11 @@ public class Board {
         this.positionValue = positionValue;
     }
 
-    public ArrayList<Tuile> getExtraTuile() {
-        return extraTuile;
+    public ArrayList<Tile> getExtraTile() {
+        return extraTile;
     }
 
-    public void setExtraTuile(ArrayList<Tuile> extraTuile) {
-        this.extraTuile = extraTuile;
+    public void setExtraTile(ArrayList<Tile> extraTile) {
+        this.extraTile = extraTile;
     }
 }

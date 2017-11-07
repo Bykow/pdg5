@@ -20,8 +20,7 @@ import javafx.scene.SnapshotParameters;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import pdg5.client.view.Tile;
-import pdg5.common.game.Tuile;
+import pdg5.common.game.Tile;
 
 import java.util.List;
 
@@ -34,8 +33,8 @@ public class GameController {
 
     @FXML
     public void initialize() {
-        deckList.get(0).getChildren().addAll(new Tile(new Tuile('A', 2)));
-        deckList.get(1).getChildren().addAll(new Tile(new Tuile('F', 1)));
+        deckList.get(0).getChildren().addAll(new pdg5.client.view.Tile(new Tile('A', 2)));
+        deckList.get(1).getChildren().addAll(new pdg5.client.view.Tile(new Tile('F', 1)));
 
         for(AnchorPane ap : deckList) {
             ap.setOnDragDetected(this::handleOnDragDetected);
@@ -54,7 +53,7 @@ public class GameController {
             return;
         }
 
-        Tile tile = (Tile)source.getChildren().get(0);
+        pdg5.client.view.Tile tile = (pdg5.client.view.Tile)source.getChildren().get(0);
         Dragboard db = source.startDragAndDrop(TransferMode.MOVE);
 
         SnapshotParameters parameters = new SnapshotParameters();
@@ -91,7 +90,7 @@ public class GameController {
 
         boolean success = false;
         if (db.hasContent(tileFormat)) {
-            source.getChildren().setAll(new Tile((Tuile)db.getContent(tileFormat)));
+            source.getChildren().setAll(new pdg5.client.view.Tile((Tile)db.getContent(tileFormat)));
             success = true;
         }
 

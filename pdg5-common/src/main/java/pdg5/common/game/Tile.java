@@ -4,10 +4,10 @@ import java.io.Serializable;
 
 /**
  * Created on 03.10.17 by Bykow
- * A Tuile represents a letter and its value on in the game. The value is
+ * A Tile represents a letter and its value on in the game. The value is
  * directly linked to the langage of the game
  */
-public class Tuile implements Serializable {
+public class Tile implements Serializable {
     private char letter;
     private int value;
 
@@ -17,13 +17,13 @@ public class Tuile implements Serializable {
      * @param letter
      * @param value
      */
-    public Tuile(char letter, int value) {
+    public Tile(char letter, int value) {
         this.letter = letter;
         this.value = value;
     }
 
     /**
-     * Returns the letter of a Tuile
+     * Returns the letter of a Tile
      *
      * @return char letter
      */
@@ -32,7 +32,7 @@ public class Tuile implements Serializable {
     }
 
     /**
-     * Returns the value of a letter on a Tuile
+     * Returns the value of a letter on a Tile
      *
      * @return int value
      */

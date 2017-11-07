@@ -2,6 +2,7 @@ package pdg5.server;
 
 import org.junit.Before;
 import org.junit.Test;
+import pdg5.server.util.MessageQueue;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;

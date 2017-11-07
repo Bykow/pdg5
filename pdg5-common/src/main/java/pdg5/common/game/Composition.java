@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * A composition is an array of 0 to 7 Tuiles that a user can send to play his turn
  */
 public class Composition {
-    private ArrayList<Tuile> comp;
+    private ArrayList<Tile> comp;
     private int value;
 
     /**
@@ -17,7 +17,7 @@ public class Composition {
      *
      * @param comp array of Tuiles
      */
-    public Composition(ArrayList<Tuile> comp) {
+    public Composition(ArrayList<Tile> comp) {
         this.comp = comp;
     }
 
@@ -26,7 +26,7 @@ public class Composition {
      *
      * @return
      */
-    public ArrayList<Tuile> getComp() {
+    public ArrayList<Tile> getComp() {
         return comp;
     }
 

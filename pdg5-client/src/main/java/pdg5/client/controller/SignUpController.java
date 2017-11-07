@@ -1,7 +1,7 @@
 /**
  -----------------------------------------------------------------------------------
  Laboratoire : <nn>
- Fichier     : LoginController.java
+ Fichier     : SignInController.java
  Auteur(s)   : Andrea Cotza
  Date        : 06.11.2017
  
@@ -24,7 +24,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class RegisterController {
+public class SignUpController {
 
     @FXML
     private TextField username;
@@ -37,10 +37,10 @@ public class RegisterController {
     @FXML
     private Hyperlink switchLogin;
 
-    private Scene loginScene;
+    private Scene signInScene;
 
-    RegisterController(Scene loginScene) {
-        this.loginScene = loginScene;
+    SignUpController(Scene signInScene) {
+        this.signInScene = signInScene;
     }
 
     @FXML
@@ -50,7 +50,7 @@ public class RegisterController {
     @FXML
     private void handleSwitch(ActionEvent actionEvent) {
         Stage stage = (Stage)btnRegister.getScene().getWindow();
-        stage.setScene(loginScene);
+        stage.setScene(signInScene);
 
     }
 }

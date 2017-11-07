@@ -21,19 +21,18 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import pdg5.client.Client;
-import pdg5.common.game.Tuile;
 
 import java.io.IOException;
 
 public class Tile extends AnchorPane {
-    private Tuile model;
+    private pdg5.common.game.Tile model;
 
     @FXML
     private Label letter;
     @FXML
     private Label point;
 
-    public Tile(Tuile model) {
+    public Tile(pdg5.common.game.Tile model) {
         super();
 
         this.model = model;
@@ -59,7 +58,7 @@ public class Tile extends AnchorPane {
         point.setText(String.valueOf(model.getValue()));
     }
 
-    public Tuile getModel() {
+    public pdg5.common.game.Tile getModel() {
         return model;
     }
 }

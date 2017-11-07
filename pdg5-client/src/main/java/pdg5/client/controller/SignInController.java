@@ -1,7 +1,7 @@
 /**
  -----------------------------------------------------------------------------------
  Laboratoire : <nn>
- Fichier     : LoginController.java
+ Fichier     : SignInController.java
  Auteur(s)   : Andrea Cotza
  Date        : 06.11.2017
  
@@ -26,7 +26,7 @@ import pdg5.client.Client;
 
 import java.io.IOException;
 
-public class LoginController {
+public class SignInController {
 
     @FXML
     private TextField username;
@@ -37,7 +37,7 @@ public class LoginController {
     @FXML
     private Hyperlink btnSignup;
 
-    private Scene registerScene;
+    private Scene signUpScene;
 
     @FXML
     public void initialize() {
@@ -54,24 +54,24 @@ public class LoginController {
     private void handleSwitch(ActionEvent actionEvent) {
         Stage stage = (Stage)btnLogin.getScene().getWindow();
 
-        if(registerScene == null) {
+        if(signUpScene == null) {
             Scene currentScene = btnLogin.getScene();
 
             try {
                 FXMLLoader loader = new FXMLLoader();
-                RegisterController controller = new RegisterController(currentScene);
-                loader.setLocation(LoginController.class.getResource("/fxml/registerView.fxml"));
+                SignUpController controller = new SignUpController(currentScene);
+                loader.setLocation(SignInController.class.getResource("/fxml/registerView.fxml"));
                 loader.setController(controller);
                 AnchorPane rootLayout = loader.load();
 
-                registerScene = new Scene(rootLayout);
+                signUpScene = new Scene(rootLayout);
 
-                stage.setScene(registerScene);
+                stage.setScene(signUpScene);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        stage.setScene(registerScene);
+        stage.setScene(signUpScene);
     }
 
     private void loadGame(Stage stage) {

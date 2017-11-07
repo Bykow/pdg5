@@ -1,32 +1,60 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package pdg5.common.game;
 
-import java.util.ArrayList;
+import java.io.Serializable;
+import java.util.List;
 
 /**
- * Created on 03.10.17 by Bykow
+ *
+ * @author Jimmy Verdasca
  */
-public class Board {
-    private ArrayList<Integer> positionValue;
-    private ArrayList<Tile> extraTile;
 
-    public Board(ArrayList<Integer> positionValue, ArrayList<Tile> extraTile) {
-        this.positionValue = positionValue;
-        this.extraTile = extraTile;
-    }
+public class Board implements Serializable{
 
-    public int getPositionValue(int position) {
-        return positionValue.get(position);
-    }
+   private List<Tile> bonus;
+   private List<Tile> letters;
+   private final int playerId;
+   private final String playerName;
+   private int score;
 
-    public void setPositionValue(ArrayList<Integer> positionValue) {
-        this.positionValue = positionValue;
-    }
+   public Board(String playerName, int playerId) {
+      this.playerName = playerName;
+      this.playerId = playerId;
+   }
 
-    public ArrayList<Tile> getExtraTile() {
-        return extraTile;
-    }
+   public List<Tile> getBonus() {
+      return bonus;
+   }
 
-    public void setExtraTile(ArrayList<Tile> extraTile) {
-        this.extraTile = extraTile;
-    }
+   public List<Tile> getLetters() {
+      return letters;
+   }
+
+   public String getPlayerName() {
+      return playerName;
+   }
+
+   public int getScore() {
+      return score;
+   }
+
+   public int getPlayerId() {
+      return playerId;
+   }
+   
+   public void setBonus(List<Tile> bonus) {
+      this.bonus = bonus;
+   }
+
+   public void setScore(int score) {
+      this.score = score;
+   }
+
+   public void setLetters(List<Tile> letters) {
+      this.letters = letters;
+   }
 }

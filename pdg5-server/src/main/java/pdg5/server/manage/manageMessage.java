@@ -7,53 +7,54 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import pdg5.server.persistent.Blacklist;
+import pdg5.server.persistent.Chat;
+import pdg5.server.persistent.Message;
 import pdg5.server.persistent.User;
 
-public class ManageBlacklist {
-	public Blacklist addBlacklist(User fromUser, User toUser) {
+public class ManageMessage {
+	public Message addMessage(String content, User user, Chat chat) {
 		Session session = Manager.getSession();
 		Transaction tx = null;
-		Blacklist Blacklist = new Blacklist(fromUser, toUser, new Date());
-		Integer tntID;
+		Message message = new Message(chat,user,content,new Date());
+		Integer mID;
 		
 		try {
 	         tx = session.beginTransaction();
-	         tntID = (Integer) session.save(Blacklist); 
-	         Blacklist.setId(tntID);
+	         mID = (Integer) session.save(message); 
+	         message.setId(mID);
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
 	      }
 		
-		return Blacklist;
+		return message;
 	}
 	
-	public List<Blacklist> listBlacklist() {
+	public List<Message> listMessages() {
 		 Session session = Manager.getSession();
 	      Transaction tx = null;
-	      List<Blacklist> Blacklists = null;
+	      List<Message> messages = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-	         Blacklists = session.createQuery("FROM Blacklist").list(); 
+	         messages = session.createQuery("FROM Message").list(); 
 	         
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
 	      }
-	      return Blacklists;
+	      return messages;
 	}
 	
-	public void updateBlacklist(Blacklist Blacklist) {
+	public void updateMessage(Message message) {
 		Session session = Manager.getSession();
 	      Transaction tx = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-			 session.update(Blacklist); 
+			 session.update(message); 
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -61,13 +62,13 @@ public class ManageBlacklist {
 	      }
 	}
 	
-	public void deleteBlacklist(Blacklist Blacklist) {
+	public void deleteMessage(Message message) {
 		Session session = Manager.getSession();
 	      Transaction tx = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-	         session.delete(Blacklist); 
+	         session.delete(message); 
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();

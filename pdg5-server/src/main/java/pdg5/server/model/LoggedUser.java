@@ -20,7 +20,7 @@ public class LoggedUser {
      * @param context the context in which we execute this
      */
     public LoggedUser(User u, ContextualClientHandler context) {
-        userId = u.getID();
+        userId = u.getId();
         username = u.getUsername();
         this.context = context;
     }

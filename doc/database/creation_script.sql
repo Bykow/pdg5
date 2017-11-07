@@ -123,3 +123,33 @@ CREATE TABLE `game` (
 -- Dumping data for table `game`
 --
 
+--
+-- Definition of table `chat`
+--
+
+DROP TABLE IF EXISTS `chat`;
+CREATE TABLE `chat` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `tournament` int(11) DEFAULT NULL,
+  `game` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  FOREIGN KEY (`tournament`) REFERENCES `tournament` (`ID`),
+  FOREIGN KEY (`game`) REFERENCES `game` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Definition of table `message`
+--
+
+DROP TABLE IF EXISTS `message`;
+CREATE TABLE `message` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `content` varchar(45) NOT NULL,
+  `created` DATETIME NOT NULL,
+  `user` int(11) NOT NULL,
+  `chat` int(11) NOT NULL,
+  PRIMARY KEY (`ID`),
+  FOREIGN KEY (`user`) REFERENCES `user` (`ID`),
+  FOREIGN KEY (`chat`) REFERENCES `chat` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+

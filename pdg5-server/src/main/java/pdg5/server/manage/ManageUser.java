@@ -12,24 +12,25 @@ import pdg5.server.persistent.User;
 public class ManageUser {
 	
 	public User addUser(String email,String username, String pass) {
-		Session session = Manager.getFactory().openSession();
+		Session session = Manager.getSession();
 		Transaction tx = null;
 		String hashedPass = BCrypt.hashpw(pass, BCrypt.gensalt());
 		email = email.toLowerCase();
 		username = username.toLowerCase();
-		User user = new User(email,username, hashedPass);
+		User user = new User();
+		user.setEmail(email);
+		user.setUsername(username);
+		user.setPass(hashedPass);
 		Integer usrID;
 		
 		try {
 	         tx = session.beginTransaction();
 	         usrID = (Integer) session.save(user); 
-	         user.setID(usrID);
+	         user.setId(usrID);
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 		
 		return user;
@@ -42,7 +43,7 @@ public class ManageUser {
      * @return a corresponding User instance
      */
     public User getUserByEmail(String email) {
-    	Session session = Manager.getFactory().openSession();
+    	Session session = Manager.getSession();
         email = email.toLowerCase();
         session.beginTransaction();
         User u = session.createQuery("from User where email=:email", User.class)
@@ -59,7 +60,7 @@ public class ManageUser {
      * @return a corresponding User instance
      */
     public User getUserByUsername(String username) {
-    	Session session = Manager.getFactory().openSession();
+    	Session session = Manager.getSession();
         username = username.toLowerCase();
         session.beginTransaction();
         User u = session.createQuery("from User where username=:username", User.class)
@@ -70,7 +71,7 @@ public class ManageUser {
     }
 	
 	public List<User> listUser() {
-		 Session session = Manager.getFactory().openSession();
+		 Session session = Manager.getSession();
 	      Transaction tx = null;
 	      List<User> users = null;
 	      
@@ -82,8 +83,6 @@ public class ManageUser {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 	      return users;
 	}
@@ -107,7 +106,7 @@ public class ManageUser {
     }
 	
 	public void updateUser(User user) {
-		Session session = Manager.getFactory().openSession();
+		Session session = Manager.getSession();
 	      Transaction tx = null;
 	      
 	      try {
@@ -117,13 +116,11 @@ public class ManageUser {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 	}
 	
 	public void deleteUser(User user) {
-		Session session = Manager.getFactory().openSession();
+		Session session = Manager.getSession();
 	      Transaction tx = null;
 	      
 	      try {
@@ -133,8 +130,6 @@ public class ManageUser {
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
 	      }
 	}
 

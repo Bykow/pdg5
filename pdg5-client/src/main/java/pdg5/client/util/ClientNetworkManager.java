@@ -1,13 +1,13 @@
 package pdg5.client.util;
 
+import pdg5.common.Protocol;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import pdg5.common.Config;
 
 /**
  *
@@ -25,7 +25,7 @@ public class ClientNetworkManager {
       requestManager = new ClientRequestManager();
       
       try {
-         clientSocket = new Socket(Config.SERVER_ADDRESS, Config.SERVER_PORT);
+         clientSocket = new Socket(Protocol.DEFAULT_SERVER, Protocol.DEFAULT_PORT);
          this.out = new ObjectOutputStream(clientSocket.getOutputStream());
          this.in = new ObjectInputStream(clientSocket.getInputStream());
 

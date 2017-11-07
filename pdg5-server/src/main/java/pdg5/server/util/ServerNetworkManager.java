@@ -1,6 +1,6 @@
 package pdg5.server.util;
 
-import pdg5.common.Config;
+import pdg5.common.Protocol;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -18,7 +18,7 @@ public class ServerNetworkManager {
 
     public ServerNetworkManager() {
         try {
-            serverSocket = new ServerSocket(Config.SERVER_PORT);
+            serverSocket = new ServerSocket(Protocol.DEFAULT_PORT);
             while(true) {
                 socket = serverSocket.accept();
                 new Thread(new ClientHandler(socket)).start();

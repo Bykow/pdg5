@@ -360,32 +360,8 @@ public class testGlobalManager {
 		Game g1 = mg.addGame("JJ battle", usr2, usr3,"abc");
 		Game g2 = mg.addGame("Jean battle", usr1, usr2,"def");
 		
-		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		ObjectOutput out = null;
-		try {
-		  out = new ObjectOutputStream(bos);   
-		  out.writeObject(usr1);
-		  out.flush();
-		  byte[] bUsr1 = bos.toByteArray();
-		  Blob serUsr1 = new javax.sql.rowset.serial.SerialBlob(bUsr1);
-		  g1.setGameState(serUsr1);
-		  mg.updateGame(g1);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SerialException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			  try {
-			    bos.close();
-			  } catch (IOException ex) {
-			    // ignore close exception
-			  }
-			}
+		g1.setGameState(usr1);
+		mg.updateGame(g1);
 		
 		mg.deleteGame(g1);
 		mg.deleteGame(g2);

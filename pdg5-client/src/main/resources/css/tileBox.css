@@ -1,0 +1,20 @@
+Pane {
+     -fx-background-color: #3498db;
+     -fx-background-radius: 5px;
+     -fx-border-color: #2c3e50;
+     -fx-border-width: 1px;
+     -fx-border-radius: 4px;
+ }
+
+Pane.bonus {
+    -fx-background-color: #c02b70;
+}
+
+Pane.multiplier {
+    -fx-background-color: #9c29b7;
+}
+
+Pane.disabled Label {
+    -fx-text-fill: #1e70a5;
+}
+

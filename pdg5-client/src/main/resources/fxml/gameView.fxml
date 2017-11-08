@@ -119,13 +119,13 @@
       </HBox>
       <HBox id="deck" layoutY="473.0" prefHeight="70.0" prefWidth="524.0">
          <children>
-            <AnchorPane fx:id="ubox0" prefHeight="200.0" prefWidth="200.0" />
-            <AnchorPane fx:id="ubox1" prefHeight="200.0" prefWidth="200.0" />
-            <AnchorPane fx:id="ubox2" prefHeight="200.0" prefWidth="200.0" />
-            <AnchorPane fx:id="ubox3" prefHeight="200.0" prefWidth="200.0" />
-            <AnchorPane fx:id="ubox4" prefHeight="200.0" prefWidth="200.0" />
-            <AnchorPane fx:id="ubox5" prefHeight="200.0" prefWidth="200.0" />
-            <AnchorPane fx:id="ubox6" prefHeight="200.0" prefWidth="200.0" />
+            <Pane fx:id="ubox0" prefHeight="200.0" prefWidth="200.0" />
+            <Pane fx:id="ubox1" prefHeight="200.0" prefWidth="200.0" />
+            <Pane fx:id="ubox2" prefHeight="200.0" prefWidth="200.0" />
+            <Pane fx:id="ubox3" prefHeight="200.0" prefWidth="200.0" />
+            <Pane fx:id="ubox4" prefHeight="200.0" prefWidth="200.0" />
+            <Pane fx:id="ubox5" prefHeight="200.0" prefWidth="200.0" />
+            <Pane fx:id="ubox6" prefHeight="200.0" prefWidth="200.0" />
 
             <fx:define>
                <ArrayList fx:id="deckList" >

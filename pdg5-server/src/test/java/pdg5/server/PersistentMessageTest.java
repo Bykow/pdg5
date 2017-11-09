@@ -10,7 +10,7 @@ import pdg5.server.persistent.Chat;
 import pdg5.server.persistent.Message;
 import pdg5.server.persistent.User;
 
-public class testPersistentMessage {
+public class PersistentMessageTest {
 
 	@Test
 	public void testEqualsMessage() {

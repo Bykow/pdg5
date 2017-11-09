@@ -6,13 +6,13 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import pdg5.server.persistent.Friend;
+import pdg5.server.persistent.Blacklist;
 import pdg5.server.persistent.User;
 
-public class testPersistentFriend {
+public class PersistentBlacklistTest {
 
 	@Test
-	public void testEqualFriend() {
+	public void testEqualBlacklist() {
 		Date d1 = new Date();
 		Date d2 = new Date(2000,01,01);
 		User u1 = new User("a", "b");
@@ -22,11 +22,12 @@ public class testPersistentFriend {
 		u2.setPass("p2");
 		u3.setPass("p3");
 		
-		Friend a = new Friend(u1, u2, d1);
-		Friend b = new Friend(u1, u2, d1);
-		Friend c = new Friend(u3, u2, d1);
-		Friend d = new Friend(u1, u3, d1);
-		Friend e = new Friend(u1, u2, d2);
+		
+		Blacklist a = new Blacklist(u1, u2, d1);
+		Blacklist b = new Blacklist(u1, u2, d1);
+		Blacklist c = new Blacklist(u3, u2, d1);
+		Blacklist d = new Blacklist(u1, u3, d1);
+		Blacklist e = new Blacklist(u1, u2, d2);
 		
 		assertTrue(a.equals(b));
 		assertFalse(a.equals(c));

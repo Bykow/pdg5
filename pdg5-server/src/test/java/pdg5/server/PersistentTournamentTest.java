@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import pdg5.server.persistent.Tournament;
 
-public class testPersistentTournament {
+public class PersistentTournamentTest {
 
 	@Test
 	public void testEqualsTournament() {

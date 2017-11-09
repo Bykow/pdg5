@@ -7,7 +7,7 @@ import org.junit.Test;
 import pdg5.server.persistent.User;
 
 
-public class testPersistentUser {
+public class PersistentUserTest {
 
 	@Test
 	public void testEqualsUser() {

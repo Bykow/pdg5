@@ -22,7 +22,7 @@ import pdg5.server.persistent.Message;
 import pdg5.server.persistent.Tournament;
 import pdg5.server.persistent.User;
 
-public class testGlobalManager {
+public class GlobalManagerTest {
 	
 	@Test
 	public void testGlobal() {
@@ -32,7 +32,9 @@ public class testGlobalManager {
 		ManageMatchlist mml = new ManageMatchlist();
 		ManageTournament mt = new ManageTournament();
 		ManageUser mu = new ManageUser();
-		
+		ManageChat mc = new ManageChat();
+		ManageMessage mm = new ManageMessage();
+
 		System.out.println("***** Global tests ****");
 		
 		// create some users
@@ -40,7 +42,7 @@ public class testGlobalManager {
 		User usr2 = mu.addUser("Saruman@isengard.org","saruman", "pass");
 		User usr3 = mu.addUser("aragorn@gondor.net","aragorn", "0000");
 		User usr4 = mu.addUser("gandalf@wizard.com","gandalf", "grey");
-		
+
 		// list users
 		List<User> lu = mu.listUser();
 		System.out.println("***** Initial users ****");
@@ -201,6 +203,54 @@ public class testGlobalManager {
 		for (Game game : lg) {
 			System.out.println(game);
 		}
+
+		// create chat
+		Chat c1 = mc.addChatGame(g1);
+		Chat c2 = mc.addChatTournament(t1);
+
+		// list chat
+		List<Chat> lc = mc.listChats();
+		System.out.println("***** Initial chat ****");
+		for (Chat chat : lc) {
+			System.out.println(chat);
+		}
+
+		// update chat
+		c1.setGame(g2);
+		lc = mc.listChats();
+		System.out.println("***** update chat ****");
+		for (Chat chat : lc) {
+			System.out.println(chat);
+		}
+
+		// create message
+		Message m1 = mm.addMessage("What's up", usr1, c1);
+		Message m2 = mm.addMessage("nothing, you ?", usr2, c1);
+
+		// list message
+		System.out.println("***** Initial Message ****");
+		List<Message> lmm = mm.listMessages();
+		for (Message message : lmm) {
+			System.out.println(message);
+		}
+
+		// update message
+		m2.setContent("the sky");
+		mm.updateMessage(m2);
+
+		System.out.println("***** Initial Message ****");
+		lmm = mm.listMessages();
+		for (Message message : lmm) {
+			System.out.println(message);
+		}
+
+		// destroy message
+		mm.deleteMessage(m2);
+		mm.deleteMessage(m1);
+
+		// destroy chat
+		mc.deleteChat(c1);
+		mc.deleteChat(c2);
 		
 		// destroy game
 		mg.deleteGame(g1);
@@ -234,88 +284,5 @@ public class testGlobalManager {
 		}
 		
 		Manager.closeConversation();
-		
 	}
-	
-	@Test
-	public void testGlobalChat() {
-		ManageGame mg = new ManageGame();
-		ManageTournament mt = new ManageTournament();
-		ManageUser mu = new ManageUser();
-		ManageChat mc = new ManageChat();
-		ManageMessage mm = new ManageMessage();
-		
-		System.out.println("***** Global Chat tests ****");
-		
-		// create user
-		User usr1 = mu.addUser("Jean-Claude@tst.org","JC", "1234");
-		User usr2 = mu.addUser("Jean-Michel@tst.org","JM", "pass");
-		User usr3 = mu.addUser("Jean-Edouard@tst.com","JE", "grey");
-		
-		// create tournament
-		Tournament t1 = mt.addTournament("keke Championship");
-		
-		// create game
-		Game g1 = mg.addGame("JJ battle", usr2, usr3);
-		Game g2 = mg.addGame("Jean battle", usr1, usr2,t1);
-		
-		// create chat
-		Chat c1 = mc.addChatGame(g1);
-		Chat c2 = mc.addChatTournament(t1);
-		
-		// list chat
-		List<Chat> lc = mc.listChats();
-		System.out.println("***** Initial chat ****");
-		for (Chat chat : lc) {
-			System.out.println(chat);
-		}
-		
-		// update chat
-		c1.setGame(g2);
-		lc = mc.listChats();
-		System.out.println("***** update chat ****");
-		for (Chat chat : lc) {
-			System.out.println(chat);
-		}
-		
-		// create message
-		Message m1 = mm.addMessage("What's up", usr1, c1);
-		Message m2 = mm.addMessage("nothing, you ?", usr2, c1);
-		
-		// list message
-		System.out.println("***** Initial Message ****");
-		List<Message> lm = mm.listMessages();
-		for (Message message : lm) {
-			System.out.println(message);
-		}
-		
-		// update message
-		m2.setContent("the sky");
-		mm.updateMessage(m2);
-		
-		System.out.println("***** Initial Message ****");
-		lm = mm.listMessages();
-		for (Message message : lm) {
-			System.out.println(message);
-		}
-		
-		// destroy message
-		mm.deleteMessage(m2);
-		mm.deleteMessage(m1);
-		
-		// destroy chat
-		mc.deleteChat(c1);
-		mc.deleteChat(c2);
-		
-		// destroy everything else
-		mg.deleteGame(g1);
-		mg.deleteGame(g2);
-		mt.deleteTournament(t1);
-		mu.deleteUser(usr1);
-		mu.deleteUser(usr2);
-		mu.deleteUser(usr3);
-		
-		Manager.closeConversation();
-	}
-
 }

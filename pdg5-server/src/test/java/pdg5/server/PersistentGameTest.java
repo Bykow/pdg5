@@ -9,7 +9,7 @@ import org.junit.Test;
 import pdg5.server.persistent.Game;
 import pdg5.server.persistent.User;
 
-public class testPersistentGame {
+public class PersistentGameTest {
 
 	@Test
 	public void testEqualsGame() {

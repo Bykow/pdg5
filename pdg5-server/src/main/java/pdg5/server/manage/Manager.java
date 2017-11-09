@@ -12,9 +12,9 @@ public class Manager {
 	private static SessionFactory getFactory() {
 		if(factory == null) {
 			try {
-		         factory = new Configuration().configure().buildSessionFactory();
+				factory = new Configuration().configure().buildSessionFactory();
 		      } catch (Throwable ex) { 
-		         System.err.println("Failed to create sessionFactory object." + ex);
+		         System.err.println("Failed to create sessionFactory object. " + ex);
 		         ex.printStackTrace();
 		         throw new ExceptionInInitializerError(ex); 
 		      }
@@ -40,8 +40,4 @@ public class Manager {
 			session.close();
 		}
 	}
-	
-	
-	
-	
 }

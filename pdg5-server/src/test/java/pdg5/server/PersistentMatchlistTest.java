@@ -8,7 +8,7 @@ import pdg5.server.persistent.Matchlist;
 import pdg5.server.persistent.Tournament;
 import pdg5.server.persistent.User;
 
-public class testPersistentMatchlist {
+public class PersistentMatchlistTest {
 
 	@Test
 	public void testEqualsMatchList() {

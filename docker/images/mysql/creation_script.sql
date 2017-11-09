@@ -1,7 +1,7 @@
 --
 -- Create schema pdg
 --
-
+DROP DATABASE IF EXISTS pdg;
 CREATE DATABASE IF NOT EXISTS pdg;
 USE pdg;
 
@@ -93,7 +93,7 @@ CREATE TABLE `matchlist` (
   `TournamentID` int(11) NOT NULL,
   PRIMARY KEY (`ID`),
   FOREIGN KEY (`userID`) REFERENCES `user`(`ID`),
-  FOREIGN KEY (`TournamentID`) REFERENCES `Tournament`(`ID`)
+  FOREIGN KEY (`TournamentID`) REFERENCES `tournament`(`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --

@@ -12,7 +12,7 @@ import pdg5.server.persistent.Game;
 import pdg5.server.persistent.Message;
 import pdg5.server.persistent.Tournament;
 
-public class testPersistentChat {
+public class PersistentChatTest {
 
 	@Test
 	public void testEqualsChat() {

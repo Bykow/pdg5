@@ -1,4 +1,4 @@
-package pdg5.client;
+package pdg5.client.util;
 
 import pdg5.common.protocol.Chat;
 import pdg5.common.protocol.Game;

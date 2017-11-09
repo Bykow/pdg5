@@ -6,6 +6,7 @@ import pdg5.common.protocol.Message;
 import pdg5.common.protocol.SignIn;
 import pdg5.server.manage.ManageGame;
 import pdg5.server.manage.ManageUser;
+import pdg5.server.persistent.User;
 
 /**
  * Created on 31.10.17 by Bykow

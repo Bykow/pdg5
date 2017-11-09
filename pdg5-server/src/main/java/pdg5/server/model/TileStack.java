@@ -1,7 +1,7 @@
-package pdg5.server.model;
+      package pdg5.server.model;
 
 import pdg5.common.Protocol;
-import pdg5.common.game.Tuile;
+import pdg5.common.game.Tile;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,10 +15,10 @@ import java.util.stream.Stream;
 /**
  * Created on 03.10.17 by Bykow
  */
-public class TuileStack {
-    private Stack<Tuile> stack = new Stack<>();
+public class TileStack {
+    private Stack<Tile> stack = new Stack<>();
     private int size;
-    private int tuileLeft;
+    private int tileLeft;
     private HashMap<Character, Integer> map = new HashMap<>();
     private Random r;
 
@@ -27,7 +27,7 @@ public class TuileStack {
      *
      * @param lang langage of the game
      */
-    public TuileStack(String lang) {
+    public TileStack(String lang) {
         size = 0;
         r = new Random();
         try {
@@ -36,7 +36,7 @@ public class TuileStack {
             e.printStackTrace();
         }
 
-        tuileLeft = size;
+        tileLeft = size;
     }
 
     /**
@@ -55,7 +55,7 @@ public class TuileStack {
                 .forEach(s -> {
                     for (int i = Integer.parseInt(s.substring(2,4)); i > 0; i--) {
                         size++;
-                        this.stack.push(new Tuile(s.charAt(0), Integer.parseInt(s.substring(5,7))));
+                        this.stack.push(new Tile(s.charAt(0), Integer.parseInt(s.substring(5,7))));
                     }
                 });
 
@@ -65,7 +65,7 @@ public class TuileStack {
         for (int i = Protocol.NUMBER_OF_TUILES_PER_GAME-size; i > 0; i--) {
             char c = getRandChar();
             size++;
-            stack.push(new Tuile(c, map.get(c)));
+            stack.push(new Tile(c, map.get(c)));
         }
         */
 
@@ -83,8 +83,8 @@ public class TuileStack {
         return (char)(r.nextInt(high + 1 - low) + low);
     }
 
-    public Tuile getNextTuile() {
-        tuileLeft--;
+    public Tile getNextTuile() {
+        tileLeft--;
         return stack.pop();
     }
 
@@ -92,7 +92,7 @@ public class TuileStack {
         return size;
     }
 
-    public int getTuileLeft() {
-        return tuileLeft;
+    public int getTileLeft() {
+        return tileLeft;
     }
 }

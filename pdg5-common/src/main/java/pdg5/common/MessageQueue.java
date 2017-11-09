@@ -1,4 +1,4 @@
-package pdg5.server;
+package pdg5.common;
 
 import pdg5.common.protocol.Message;
 

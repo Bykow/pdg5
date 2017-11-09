@@ -1,10 +1,8 @@
-package pdg5.server;
+package pdg5.server.util;
 
-import pdg5.common.Config;
+import pdg5.common.Protocol;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
@@ -19,8 +17,9 @@ public class ServerNetworkManager {
     private Socket socket;
 
     public ServerNetworkManager() {
+        System.out.println("START ServerNetworkManager");
         try {
-            serverSocket = new ServerSocket(Config.SERVER_PORT);
+            serverSocket = new ServerSocket(Protocol.DEFAULT_PORT);
             while(true) {
                 socket = serverSocket.accept();
                 new Thread(new ClientHandler(socket)).start();

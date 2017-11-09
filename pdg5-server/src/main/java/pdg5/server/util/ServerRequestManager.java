@@ -1,4 +1,4 @@
-package pdg5.server;
+package pdg5.server.util;
 
 import pdg5.common.protocol.ErrorMessage;
 import pdg5.common.protocol.Message;

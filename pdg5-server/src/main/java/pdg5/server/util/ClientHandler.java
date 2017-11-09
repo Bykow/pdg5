@@ -1,5 +1,6 @@
-package pdg5.server;
+package pdg5.server.util;
 
+import pdg5.common.MessageQueue;
 import pdg5.common.protocol.Message;
 
 import java.io.IOException;
@@ -82,7 +83,7 @@ public class ClientHandler implements Runnable {
                     queueIn.add((Message) in.readObject());
                 }
             } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
+                System.err.println("Connection close");
             }
         }).start();
     }

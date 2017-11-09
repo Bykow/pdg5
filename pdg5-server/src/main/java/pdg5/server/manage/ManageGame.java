@@ -78,6 +78,26 @@ public class ManageGame {
 	      return games;
 	}
 	
+	public List<Game> getGamesByUsername(User username) {
+		Session session = Manager.getSession();
+	      Transaction tx = null;
+	      List<Game> games = null;
+	      
+	      try {
+	         tx = session.beginTransaction();
+	         games = session.createQuery("FROM Game WHERE player1 =:p1 OR player2 =:p2")
+	        		 .setParameter("p1", username.getId())
+	        		 .setParameter("p2", username.getId())
+	        		 .list(); 
+	         
+	         tx.commit();
+	      } catch (HibernateException e) {
+	         if (tx!=null) tx.rollback();
+	         e.printStackTrace(); 
+	      }
+	      return games;
+	}
+	
 	public void updateGame(Game game) {
 		Session session = Manager.getSession();
 	      Transaction tx = null;

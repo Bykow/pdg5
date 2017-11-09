@@ -17,6 +17,7 @@ public class ServerNetworkManager {
     private Socket socket;
 
     public ServerNetworkManager() {
+        System.out.println("START ServerNetworkManager");
         try {
             serverSocket = new ServerSocket(Protocol.DEFAULT_PORT);
             while(true) {

@@ -43,6 +43,7 @@ IntelliJ
 Eclipse
 .classpath
 .project
+.settings
 
 # Explude latex temp file
 *.aux

@@ -5,18 +5,18 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class Manager {
-	
+
 	private static SessionFactory factory = null;
 	private static Session session = null;
-	
+
 	private static SessionFactory getFactory() {
 		if(factory == null) {
 			try {
 				factory = new Configuration().configure().buildSessionFactory();
-		      } catch (Throwable ex) { 
+		      } catch (Throwable ex) {
 		         System.err.println("Failed to create sessionFactory object. " + ex);
 		         ex.printStackTrace();
-		         throw new ExceptionInInitializerError(ex); 
+		         throw new ExceptionInInitializerError(ex);
 		      }
 		}
 		return factory;
@@ -31,7 +31,7 @@ public class Manager {
 		}
 		return session;
 	}
-	
+
 	/**
 	 * To call when we are done talking to the DB
 	 */

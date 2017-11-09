@@ -25,7 +25,7 @@ public class ClientListener implements Runnable {
         System.out.println("ClientListener.run");
         try {
             while (true) {
-                queue.add((Message) in.readObject());
+                queue.add((Message)in.readObject());
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

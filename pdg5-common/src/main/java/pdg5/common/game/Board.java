@@ -6,6 +6,7 @@
 package pdg5.common.game;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,6 +24,9 @@ public class Board implements Serializable{
    public Board(String playerName, int playerId) {
       this.playerName = playerName;
       this.playerId = playerId;
+      
+      bonus = new ArrayList<>();
+      letters = new ArrayList<>();
    }
 
    public List<Tile> getBonus() {

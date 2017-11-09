@@ -109,9 +109,7 @@ public class Composition {
             sizeOfWord++;
          }
       }
-      if(sizeOfWord < 2) {
-         return false;
-      }
-      return true;
+      
+      return sizeOfWord >= 2;
    }
 }

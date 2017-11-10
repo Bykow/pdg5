@@ -13,9 +13,9 @@ public class ProcessSignUp implements GenericProcess {
     private SignUp signUp;
     private ManageUser manager;
 
-    public ProcessSignUp(SignUp signUp) {
+    public ProcessSignUp(SignUp signUp, ManageUser manageUser) {
         this.signUp = signUp;
-        this.manager = new ManageUser();
+        this.manager = manageUser;
     }
 
     @Override

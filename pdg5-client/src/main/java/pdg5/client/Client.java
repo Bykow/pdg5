@@ -9,8 +9,6 @@ import pdg5.client.controller.MainController;
 import pdg5.common.Protocol;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class Client extends Application {

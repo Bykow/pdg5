@@ -16,7 +16,7 @@ public class ProcessSignIn implements GenericProcess {
     private ManageUser manageUser;
     private ManageGame manageGame;
 
-    public ProcessSignIn(SignIn signIn) {
+    public ProcessSignIn(SignIn signIn, ManageUser manageUser) {
         this.signIn = signIn;
         this.manageUser = manageUser;
     }
@@ -25,8 +25,10 @@ public class ProcessSignIn implements GenericProcess {
     public Message execute() {
         if(manageUser.isCorrectPassword(signIn.getUsername(), signIn.getPassword())) {
             //return new Load(manageGame(signIn.getUsername()));
+            System.out.println("login correct");
             return null;
         } else {
+            System.out.println("login failed");
             return new ErrorMessage("Password invalid in SignIn for user " + signIn.getUsername());
         }
     }

@@ -12,10 +12,12 @@ import java.net.Socket;
  */
 public class ClientListener implements Runnable {
 
+    private Socket socket;
     private MessageQueue queue;
     private ObjectInputStream in;
 
     public ClientListener(Socket socket) throws IOException {
+        this.socket = socket;
         this.in = new ObjectInputStream(socket.getInputStream());
         this.queue = new MessageQueue();
     }
@@ -28,8 +30,15 @@ public class ClientListener implements Runnable {
                 queue.add((Message)in.readObject());
             }
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
         }
+    }
+
+    public boolean isConnected() {
+        return socket.isConnected();
+    }
+
+    public Message take() {
+        return queue.take();
     }
 
 }

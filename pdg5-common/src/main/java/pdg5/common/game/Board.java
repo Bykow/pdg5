@@ -10,17 +10,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author Jimmy Verdasca
+ * Class representing one side of the game (one per player)
+ * It contains the letters of one player (bonus and normal letters), and a score
  */
 public class Board implements Serializable{
 
-   private List<Tile> bonus;
-   private List<Tile> letters;
-   private final int playerId;
-   private final String playerName;
-   private int score;
+   private List<Tile> bonus; // bonus letters
+   private List<Tile> letters; // normal letters
+   private final int playerId; // id of the player associated
+   private final String playerName; // name of the player associated
+   private int score; // score of the player associated
 
+   /**
+    * Constructor
+    * 
+    * @param playerName name of the associated player
+    * @param playerId unique id of the associated player
+    */
    public Board(String playerName, int playerId) {
       this.playerName = playerName;
       this.playerId = playerId;
@@ -29,34 +35,74 @@ public class Board implements Serializable{
       letters = new ArrayList<>();
    }
 
+   /**
+    * return the list of bonus letters
+    * 
+    * @return the list of bonus letters
+    */
    public List<Tile> getBonus() {
       return bonus;
    }
 
+   /**
+    * return the list of normal letters
+    * 
+    * @return the list of normal letters
+    */
    public List<Tile> getLetters() {
       return letters;
    }
 
+   /**
+    * return the String name of the associated player
+    * 
+    * @return the String name of the associated player
+    */
    public String getPlayerName() {
       return playerName;
    }
 
+   /**
+    * return the current score of the associated player
+    * 
+    * @return the current score of the associated player
+    */
    public int getScore() {
       return score;
    }
 
+   /**
+    * return the unique id of the associated player
+    * 
+    * @return the unique id of the associated player
+    */
    public int getPlayerId() {
       return playerId;
    }
    
+   /**
+    * set the list of bonus letters to a new one given
+    * 
+    * @param bonus list of the new Tiles
+    */
    public void setBonus(List<Tile> bonus) {
       this.bonus = bonus;
    }
 
+   /**
+    * set the score of the associated player
+    * 
+    * @param score the new score of the player
+    */
    public void setScore(int score) {
       this.score = score;
    }
 
+   /**
+    * set the list of normal letters to a new one given
+    * 
+    * @param letters list of the new Tiles
+    */
    public void setLetters(List<Tile> letters) {
       this.letters = letters;
    }

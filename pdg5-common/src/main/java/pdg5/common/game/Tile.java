@@ -14,8 +14,8 @@ public class Tile {
     /**
      * Constructor
      *
-     * @param letter
-     * @param value
+     * @param letter character of the tile
+     * @param value of the tile
      */
     public Tile(char letter, int value) {
         this.letter = letter;

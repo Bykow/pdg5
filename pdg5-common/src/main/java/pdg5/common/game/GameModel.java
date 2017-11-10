@@ -4,19 +4,29 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Class representing the model of the game. It contains an inner class Board
- * who is the letters (bonus and normal letters) manipulated by a player.
+ * Class representing the model of the game. 
+ * It allow to manipulate data of the game properly
  */
 public class GameModel implements Serializable {
 
+   /**
+    * enum to differenciate players
+    */
    public enum PlayerBoard {
       PLAYER1, PLAYER2
    }
 
-   private int gameId;
-   private Board[] boards;
-   private Composition composition;
+   private int gameId; //Unique id of the game
+   private Board[] boards; //Two parts of the game one for each player
+   private Composition composition; //Word in progress for this client
 
+   /**
+    * Constructor
+    * @param boards array of two Board representing the two sides of the game
+    * @param gameId unique id for the game
+    * @throws IllegalArgumentException if the array has wrong length, 
+    *                                  should be 2
+    */
    public GameModel(Board[] boards, int gameId) throws IllegalArgumentException{
       if(boards.length != PlayerBoard.values().length){
          throw new IllegalArgumentException("There must be exactly two boards in the array");
@@ -36,10 +46,21 @@ public class GameModel implements Serializable {
       board[PlayerBoard.PLAYER1.ordinal()]
    }*/
    
+   /**
+    * Return the Board of the given player
+    * @param player that we want the board
+    * @return the Board of the given player
+    */
    public Board getBoard(PlayerBoard player) {
       return boards[player.ordinal()];
    }
 
+   /**
+    * Return the Board of the given id player
+    * @param playerId that we want the board
+    * @return the Board of the given id player
+    * @throws IllegalArgumentException if the given id isn't one of the players
+    */
    public Board getBoardById(int playerId) {
       for (Board board : boards) {
          if (board.getPlayerId() == playerId) {

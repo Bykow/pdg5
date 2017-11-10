@@ -1,6 +1,7 @@
 package pdg5.server.util;
 
 import pdg5.common.protocol.*;
+import pdg5.server.manage.ManageUser;
 import pdg5.server.process.ProcessSignIn;
 import pdg5.server.process.ProcessSignUp;
 

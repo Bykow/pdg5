@@ -49,6 +49,7 @@ public class Client extends Application {
         // Start send
         new Thread(sender).start();
 
+
     }
 
     /**

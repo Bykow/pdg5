@@ -19,9 +19,10 @@ public class ClientHandler implements Runnable {
     private ServerRequestManager requestManager;
     private MessageQueue queueIn;
     private MessageQueue queueOut;
+    private static int id;
 
     public ClientHandler(Socket socket) {
-        System.out.println("SRV : new client");
+        System.out.println("SRV : new client #" + id++);
         this.socket = socket;
         this.queueIn = new MessageQueue();
         this.queueOut = new MessageQueue();

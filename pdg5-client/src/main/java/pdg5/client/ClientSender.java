@@ -9,15 +9,16 @@ import java.net.Socket;
 
 public class ClientSender implements Runnable {
 
-    private Socket socket;
-    private MessageQueue queue;
-    private ObjectOutputStream out;
+    private static MessageQueue queue;
+    private static ObjectOutputStream out;
 
     public ClientSender(Socket socket) throws IOException {
         this.socket = socket;
         this.out = new ObjectOutputStream(socket.getOutputStream());
         this.queue = new MessageQueue();
     }
+
+    public ClientSender(){}
 
     public void add(Message msg) {
         queue.add(msg);
@@ -35,7 +36,7 @@ public class ClientSender implements Runnable {
         }
     }
 
-    public boolean isConnected() {
-        return socket.isConnected();
+    public void addToQueue(Message m) {
+        queue.add(m);
     }
 }

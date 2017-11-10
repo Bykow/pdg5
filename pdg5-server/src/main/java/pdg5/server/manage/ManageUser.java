@@ -96,7 +96,7 @@ public class ManageUser {
      * @return true if correct, false otherwise
      */
     public boolean isCorrectPassword(String username, String password) {
-        User u = getUserByUsername(username);
+		User u = getUserByUsername(username);
         if (u == null) return false;
         return isExpectedPassword(password, u.getPass());
     }

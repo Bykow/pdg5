@@ -28,9 +28,7 @@ public class MainController {
     private AnchorPane layout;
 
     @FXML
-    public void initialize() {
-
-    }
+    public void initialize() {}
 
     public void loadGame() {
         try {

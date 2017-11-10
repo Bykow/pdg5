@@ -32,6 +32,8 @@ public class SignUpController {
     @FXML
     private TextField username;
     @FXML
+    private TextField email;
+    @FXML
     private PasswordField password;
     @FXML
     private PasswordField passwordConf;
@@ -64,7 +66,7 @@ public class SignUpController {
 
         ClientSender cs = new ClientSender();
 
-        if (password.equals(passwordConf)) {
+        if (password.getText().equals(passwordConf.getText())) {
             SignUp signUp = new SignUp("gofuckyourself@lol.com", username.getText(), password.getText());
             cs.addToQueue(signUp);
         }

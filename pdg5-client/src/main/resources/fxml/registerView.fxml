@@ -21,7 +21,17 @@
             <Font size="18.0" />
          </font>
       </TextField>
+      <TextField fx:id="email" layoutX="113.0" layoutY="258.0" prefHeight="37.0" prefWidth="410.0" promptText="E-mail">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
       <PasswordField fx:id="password" cache="true" layoutX="113.0" layoutY="302.0" prefHeight="37.0" prefWidth="410.0" promptText="Password">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </PasswordField>
+      <PasswordField fx:id="passwordConf" cache="true" layoutX="113.0" layoutY="346.0" prefHeight="37.0" prefWidth="410.0" promptText="Repeat password">
          <font>
             <Font size="18.0" />
          </font>
@@ -36,15 +46,5 @@
             <Font size="18.0" />
          </font>
       </Hyperlink>
-      <TextField fx:id="email" layoutX="113.0" layoutY="258.0" prefHeight="37.0" prefWidth="410.0" promptText="E-mail">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </TextField>
-      <PasswordField fx:id="passwordConf" cache="true" layoutX="113.0" layoutY="346.0" prefHeight="37.0" prefWidth="410.0" promptText="Repeat password">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </PasswordField>
    </children>
 </AnchorPane>

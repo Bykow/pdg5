@@ -9,6 +9,7 @@ import java.net.Socket;
 
 public class ClientSender implements Runnable {
 
+    private static Socket socket;
     private static MessageQueue queue;
     private static ObjectOutputStream out;
 

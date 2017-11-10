@@ -35,7 +35,6 @@ public class GTile extends Pane {
             loader.setRoot(this);
             loader.setController(this);
             loader.load();
-            loader.getBuilderFactory().getBuilder(Pane.class).build();
 
         } catch (IOException e) {
             e.printStackTrace();

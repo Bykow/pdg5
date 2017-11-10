@@ -13,41 +13,25 @@
    <children>
       <HBox layoutY="393.0" prefHeight="80.0" prefWidth="524.0" styleClass="table">
          <children>
-            <AnchorPane fx:id="ugbox0" prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <Pane layoutX="10.0" layoutY="7.0" prefHeight="50.0" prefWidth="55.0" />
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="ugbox1" prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <Pane layoutX="10.0" layoutY="7.0" prefHeight="50.0" prefWidth="55.0" />
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="ugbox2" prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <Pane layoutX="10.0" layoutY="7.0" prefHeight="50.0" prefWidth="55.0" />
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="ugbox3" prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <Pane layoutX="10.0" layoutY="7.0" prefHeight="50.0" prefWidth="55.0" />
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="ugbox4" prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <Pane layoutX="10.0" layoutY="7.0" prefHeight="50.0" prefWidth="55.0" />
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="ugbox5" prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <Pane layoutX="10.0" layoutY="7.0" prefHeight="50.0" prefWidth="55.0" />
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="ugbox6" prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <Pane layoutX="10.0" layoutY="7.0" prefHeight="50.0" prefWidth="55.0" />
-               </children>
-            </AnchorPane>
+            <Pane fx:id="ugbox0" prefHeight="200.0" prefWidth="200.0" />
+            <Pane fx:id="ugbox1" prefHeight="200.0" prefWidth="200.0" />
+            <Pane fx:id="ugbox2" prefHeight="200.0" prefWidth="200.0" />
+            <Pane fx:id="ugbox3" prefHeight="200.0" prefWidth="200.0" />
+            <Pane fx:id="ugbox4" prefHeight="200.0" prefWidth="200.0" />
+            <Pane fx:id="ugbox5" prefHeight="200.0" prefWidth="200.0" />
+            <Pane fx:id="ugbox6" prefHeight="200.0" prefWidth="200.0" />
+
+            <fx:define>
+               <ArrayList fx:id="userList" >
+                  <fx:reference source="ugbox0"/>
+                  <fx:reference source="ugbox1"/>
+                  <fx:reference source="ugbox2"/>
+                  <fx:reference source="ugbox3"/>
+                  <fx:reference source="ugbox4"/>
+                  <fx:reference source="ugbox5"/>
+                  <fx:reference source="ugbox6"/>
+               </ArrayList>
+            </fx:define>
          </children>
       </HBox>
       <HBox prefHeight="80.0" prefWidth="524.0" styleClass="table">

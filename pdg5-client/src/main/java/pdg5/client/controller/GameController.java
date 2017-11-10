@@ -31,6 +31,8 @@ public class GameController {
 
     @FXML
     private List<Pane> deckList;
+    @FXML
+    private List<Pane> userList;
 
     @FXML
     public void initialize() {
@@ -44,6 +46,16 @@ public class GameController {
             ap.setOnDragDropped(this::handleOnDragDropped);
             ap.setOnDragDone(this::handleOnDragDone);
         }
+
+        for(Pane ap : userList) {
+            ap.setOnDragDetected(this::handleOnDragDetected);
+            ap.setOnDragEntered(this::handleOnDragEntered);
+            ap.setOnDragOver(this::handleOnDragOver);
+            ap.setOnDragDropped(this::handleOnDragDropped);
+            ap.setOnDragDone(this::handleOnDragDone);
+        }
+
+
     }
 
     private void handleOnDragDetected(MouseEvent event) {

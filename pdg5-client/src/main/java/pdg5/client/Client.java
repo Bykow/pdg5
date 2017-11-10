@@ -49,9 +49,6 @@ public class Client extends Application {
         // Start send
         new Thread(sender).start();
 
-        // Process message
-        // TODO Process message
-        System.out.println("Client.start ELSE");
     }
 
     /**

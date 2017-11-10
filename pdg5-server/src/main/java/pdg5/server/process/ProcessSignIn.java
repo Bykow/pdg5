@@ -25,10 +25,9 @@ public class ProcessSignIn implements GenericProcess {
     public Message execute() {
         if(manageUser.isCorrectPassword(signIn.getUsername(), signIn.getPassword())) {
             //return new Load(manageGame(signIn.getUsername()));
-            System.out.println("login correct");
-            return null;
+            //todo waiting for game logic to improve
+            return new ErrorMessage("Login valid for user " + signIn.getUsername());
         } else {
-            System.out.println("login failed");
             return new ErrorMessage("Password invalid in SignIn for user " + signIn.getUsername());
         }
     }

@@ -20,4 +20,5 @@ public interface Protocol {
 
     final int OK = 200;
     final int ERROR = 400;
+    final int COULDNOTADDUSER = 401;
 }

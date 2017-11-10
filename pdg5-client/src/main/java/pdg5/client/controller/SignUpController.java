@@ -4,14 +4,14 @@
  Fichier     : SignInController.java
  Auteur(s)   : Andrea Cotza
  Date        : 06.11.2017
- 
+
  But         : <‡ complÈter>
- 
+
  Remarque(s) : <‡ complÈter>
- 
+
  Compilateur : jdk1.8.0_60
  -----------------------------------------------------------------------------------
-*/
+ */
 
 package pdg5.client.controller;
 
@@ -61,18 +61,24 @@ public class SignUpController {
     @FXML
     private void handleRegister(ActionEvent actionEvent) {
         Stage stage = (Stage)btnRegister.getScene().getWindow();
-
-        System.out.println("hello?");
-
         ClientSender cs = new ClientSender();
 
-        if (password.getText().equals(passwordConf.getText())) {
-            SignUp signUp = new SignUp("gofuckyourself@lol.com", username.getText(), password.getText());
+        if (checkPassword(password.getText(), passwordConf.getText())) {
+            // Sending to server
+            SignUp signUp = new SignUp(email.getText(), username.getText(), password.getText());
             cs.addToQueue(signUp);
-        }
 
-        stage.hide();
-        loadGame(stage);
+            stage.hide();
+            loadGame(stage);
+        } else {
+            System.out.println("Password and password confirmation are not equal, try again.");
+            password.clear();
+            passwordConf.clear();
+        }
+    }
+
+    private boolean checkPassword(String a, String b) {
+        return a.equals(b);
     }
 
     private void loadGame(Stage stage) {

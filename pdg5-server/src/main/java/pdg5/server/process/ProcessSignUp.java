@@ -20,17 +20,16 @@ public class ProcessSignUp implements GenericProcess {
 
     @Override
     public Message execute() {
-        manager.addUser(signUp.getEmail(), signUp.getUsername(), signUp.getPassword());
+        int exitCode = manager.addUser(signUp.getEmail(), signUp.getUsername(), signUp.getPassword());
 
-        //todo change that its just for demo
-        int code = Protocol.OK;
-
-        switch (code) {
+        switch (exitCode) {
             case Protocol.OK :
                 return new Load();
-                //todo this is not suppose to be empty
+                //todo this is not suppose to be empty, waiting for game logic to continue
             case Protocol.ERROR :
-                return new ErrorMessage("Unexpected ErrorMessage in SignUp code: " + Protocol.ERROR);
+                return new ErrorMessage("Unexpected ErrorMessage in SignUp code: " + exitCode);
+            case Protocol.COULDNOTADDUSER :
+                return new ErrorMessage("Server could not add user in DataBase. Code: " + exitCode);
             default :
                 return new ErrorMessage("Unhandled ErrorMessage in SignUp, default reached");
         }

@@ -21,10 +21,6 @@ public class ClientSender implements Runnable {
 
     public ClientSender(){}
 
-    public void add(Message msg) {
-        queue.add(msg);
-    }
-
     @Override
     public void run() {
         System.out.println("ClientSender.run");

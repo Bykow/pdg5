@@ -60,7 +60,7 @@ public class ServerNetworkManagerTest {
         new Thread(clientListener).start();
         new Thread(clientSender).start();
 
-        clientSender.add(new Noop());
+        clientSender.addToQueue(new Noop());
         Message response = clientListener.take();
 
         Assert.assertEquals(

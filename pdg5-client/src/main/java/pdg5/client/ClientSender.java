@@ -9,10 +9,12 @@ import java.net.Socket;
 
 public class ClientSender implements Runnable {
 
+    private static Socket socket;
     private static MessageQueue queue;
     private static ObjectOutputStream out;
 
     public ClientSender(Socket socket) throws IOException {
+        this.socket = socket;
         this.out = new ObjectOutputStream(socket.getOutputStream());
         this.queue = new MessageQueue();
     }

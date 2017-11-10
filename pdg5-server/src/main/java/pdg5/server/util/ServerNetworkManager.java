@@ -28,4 +28,12 @@ public class ServerNetworkManager {
             Logger.getLogger(ServerNetworkManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public void close() {
+        try {
+            serverSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

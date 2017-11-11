@@ -44,6 +44,15 @@ public class GameModel implements Serializable {
       boards[PlayerBoard.PLAYER2.ordinal()] = new Board(game.getOpponentName());
       board[PlayerBoard.PLAYER1.ordinal()]
    }*/
+
+   /**
+    * return the Composition of this client
+    * 
+    * @return the Composition of this client
+    */
+   public Composition getComposition() {
+      return composition;
+   }
    
    /**
     * Return the Board of the given player
@@ -67,5 +76,21 @@ public class GameModel implements Serializable {
          }
       }
       throw new IllegalArgumentException("the playerId is not in the game");
+   }
+   
+   /**
+    * compare a GameModel with an Object and 
+    * return true if they have same fields and Class
+    * 
+    * @param o Compared Object
+    * @return true if the two Object is of same class and have the same fields
+    */
+   public boolean equals(Object o) {
+      return getClass().isInstance(o) &&
+              getClass() == o.getClass() &&
+              composition.equals(((GameModel) o).composition) &&
+              boards[0].equals(((GameModel) o).boards[0]) &&
+              boards[1].equals(((GameModel) o).boards[1]) &&
+              gameId == ((GameModel) o).gameId;
    }
 }

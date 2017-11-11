@@ -1,5 +1,7 @@
 package pdg5.common.game;
 
+import java.util.Arrays;
+
 /**
  * A Tile represents a letter and its value on in the game. The value is
  * directly linked to the langage of the game.
@@ -49,4 +51,19 @@ public class Tile {
     public String toString() {
         return getLetter() + ", " + getValue();
     }
+    
+    /**
+    * compare a Tile with an Object and 
+    * return true if they have same fields and Class
+    * 
+    * @param o Compared Object
+    * @return true if the two Object is of same class and have the same fields
+    */
+   public boolean equals(Object o) {
+      return getClass().isInstance(o) &&
+              getClass() == o.getClass() &&
+              id == ((Tile) o).id &&
+              letter == ((Tile) o).letter &&
+              value == ((Tile) o).value;
+   }
 }

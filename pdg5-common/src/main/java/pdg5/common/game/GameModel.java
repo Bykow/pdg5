@@ -1,7 +1,6 @@
 package pdg5.common.game;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Class representing the model of the game. 

@@ -8,8 +8,8 @@ package pdg5.common.game;
  */
 public class Tile {
     private int id;
-    private char letter;
-    private int value;
+    private final char letter;
+    private final int value;
 
     /**
      * Constructor

@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import pdg5.client.controller.MainController;
+import pdg5.client.util.ClientRequestManager;
 import pdg5.common.Protocol;
 
 import java.io.IOException;
@@ -21,6 +22,7 @@ public class Client extends Application {
     private Socket socket;
     private ClientListener listener;
     private ClientSender sender;
+    private ClientRequestManager requestManager;
 
     public static void main(String[] args) {
         launch(args);
@@ -30,6 +32,7 @@ public class Client extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("WordOn Desktop");
+        this.requestManager = new ClientRequestManager();
 
         initRootLayout();
 
@@ -49,7 +52,14 @@ public class Client extends Application {
         // Start send
         new Thread(sender).start();
 
-
+        // Process message
+        while (true) {
+            sender.add(
+                    requestManager.execute(
+                            listener.take()
+                    )
+            );
+        }
     }
 
     /**

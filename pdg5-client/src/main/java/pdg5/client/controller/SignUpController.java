@@ -66,7 +66,7 @@ public class SignUpController {
         if (checkPassword(password.getText(), passwordConf.getText())) {
             // Sending to server
             SignUp signUp = new SignUp(email.getText(), username.getText(), password.getText());
-            cs.addToQueue(signUp);
+            cs.add(signUp);
 
             stage.hide();
             loadGame(stage);

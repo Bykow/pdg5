@@ -52,7 +52,7 @@ public class SignInController {
         ClientSender cs = new ClientSender();
         SignIn signIn = new SignIn(username.getText(), password.getText());
 
-        cs.addToQueue(signIn);
+        cs.add(signIn);
 
         stage.hide();
         loadGame(stage);

@@ -19,7 +19,8 @@ public class ClientSender implements Runnable {
         this.queue = new MessageQueue();
     }
 
-    public ClientSender(){}
+    public ClientSender() {
+    }
 
     @Override
     public void run() {
@@ -33,7 +34,13 @@ public class ClientSender implements Runnable {
         }
     }
 
-    public void addToQueue(Message m) {
-        queue.add(m);
+    public void add(Message m) {
+        if (m != null) {
+            queue.add(m);
+        }
+    }
+
+    public boolean isConnected() {
+        return socket.isConnected();
     }
 }

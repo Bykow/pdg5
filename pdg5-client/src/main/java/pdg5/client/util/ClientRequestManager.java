@@ -1,45 +1,26 @@
 package pdg5.client.util;
 
-import pdg5.common.protocol.Chat;
-import pdg5.common.protocol.Game;
-import pdg5.common.protocol.Load;
-import pdg5.common.protocol.ValidationWord;
+import pdg5.client.process.ProcessNoop;
+import pdg5.client.process.ProcessSignUp;
+import pdg5.common.protocol.ErrorMessage;
+import pdg5.common.protocol.Message;
+import pdg5.common.protocol.Noop;
+import pdg5.common.protocol.SignUp;
 
 /**
- *
+ * @author Maxime Guillod
  */
 public class ClientRequestManager {
 
-   public void execute(Object o) {
-      if(o instanceof Load){
-         loadAllGames((Load)o);
-      } else if(o instanceof Game) {
-         loadGame((Game)o);
-      } else if(o instanceof ValidationWord) {
-         validateWord((ValidationWord)o);
-      } else if(o instanceof Chat) {
-         getChat((Chat)o);
-      }
-   }
+    public Message execute(Message o) {
+        if (o instanceof SignUp) {
+            return new ProcessSignUp((SignUp) o).execute();
 
-   public void loadAllGames(Load load) {
-      // getting all the games
+        } else if (o instanceof Noop) {
+            return new ProcessNoop((Noop) o).execute();
+        }
 
-   }
+        return new ErrorMessage("Unable to check Message Type");
+    }
 
-   public void loadGame(Game game) {
-      // getting one game information
-
-   }
-
-   public void validateWord(ValidationWord validation) {
-      // validation of a word
-
-      System.out.println("Valid : " + validation.isIsValid());
-   }
-
-   public void getChat(Chat chat) {
-      // chat entry
-
-   }
 }

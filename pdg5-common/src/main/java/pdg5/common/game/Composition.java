@@ -179,4 +179,18 @@ public class Composition implements Serializable{
       
       return sizeOfWord >= 2;
    }
+   
+   /**
+    * compare a Composition with an Object and 
+    * return true if they have same fields and Class
+    * 
+    * @param o Compared Object
+    * @return true if the two Object is of same class and have the same fields
+    */
+   public boolean equals(Object o) {
+      return getClass().isInstance(o) &&
+              getClass() == o.getClass() &&
+              Arrays.equals(word, ((Composition) o).word) &&
+              Arrays.equals(bonus, ((Composition) o).bonus);
+   }
 }

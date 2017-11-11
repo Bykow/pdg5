@@ -106,4 +106,21 @@ public class Board implements Serializable{
    public void setLetters(List<Tile> letters) {
       this.letters = letters;
    }
+   
+   /**
+    * compare a Board with an Object and 
+    * return true if they have same fields and Class
+    * 
+    * @param o Compared Object
+    * @return true if the two Object is of same class and have the same fields
+    */
+   public boolean equals(Object o) {
+      return getClass().isInstance(o) &&
+              getClass() == o.getClass() &&
+              bonus.equals(((Board) o).bonus) &&
+              letters.equals(((Board) o).letters) &&
+              playerId == ((Board) o).playerId &&
+              playerName == ((Board) o).playerName &&
+              score == ((Board) o).score;
+   }
 }

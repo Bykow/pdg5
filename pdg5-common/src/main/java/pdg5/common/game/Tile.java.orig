@@ -1,6 +1,10 @@
 package pdg5.common.game;
 
+<<<<<<< HEAD
 import java.io.Serializable;
+=======
+import java.util.Arrays;
+>>>>>>> db8197edd343e7b54913528276134545f4bab96e
 
 /**
  * A Tile represents a letter and its value on in the game. The value is

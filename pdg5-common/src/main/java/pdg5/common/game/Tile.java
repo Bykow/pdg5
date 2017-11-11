@@ -1,12 +1,14 @@
 package pdg5.common.game;
 
+import java.io.Serializable;
+
 /**
  * A Tile represents a letter and its value on in the game. The value is
  * directly linked to the langage of the game.
  * An id is necessary to recognize two same letters  with same value, 
  * when one is a bonus tile and an other is a normal letter.
  */
-public class Tile {
+public class Tile implements Serializable{
     private int id;
     private final char letter;
     private final int value;

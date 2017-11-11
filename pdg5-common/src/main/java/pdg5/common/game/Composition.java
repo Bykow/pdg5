@@ -1,5 +1,6 @@
 package pdg5.common.game;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 
@@ -7,7 +8,7 @@ import java.util.Arrays;
  * Class representing the Tiles that the user is currently 
  * manipulating to make and to send to the server a word.
  */
-public class Composition {
+public class Composition implements Serializable{
 
    /**
     * type of existing square where the player can put the letters

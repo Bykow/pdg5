@@ -100,4 +100,10 @@ public class CompositionTest {
       
       assert(e.getMessage().contains("This isn't a valid word"));
    }
+   
+   @Test
+   public void aBadBonusArraySizeShouldThrowIllegalArgumentException(){
+      // TODO
+   }
+   
 }

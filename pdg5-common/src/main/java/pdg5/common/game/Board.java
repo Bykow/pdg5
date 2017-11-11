@@ -120,7 +120,7 @@ public class Board implements Serializable{
               bonus.equals(((Board) o).bonus) &&
               letters.equals(((Board) o).letters) &&
               playerId == ((Board) o).playerId &&
-              playerName == ((Board) o).playerName &&
+              playerName.equals(((Board) o).playerName) &&
               score == ((Board) o).score;
    }
 }

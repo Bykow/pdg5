@@ -2,6 +2,7 @@ package pdg5.common.game;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -50,8 +51,9 @@ public class Composition implements Serializable{
       public abstract int getFinalValue(Tile tile);
    }
 
-   // Max size of a word
+   // Min-Max size of a word
    private static final int WORD_MAX_SIZE = 7; 
+   private static final int WORD_MIN_SIZE = 2;
    // seven or less Tiles representing the current word
    private final Tile[] word; 
    // seven current  bonus square where letters can obtain more values
@@ -157,6 +159,12 @@ public class Composition implements Serializable{
       return score;
    }
 
+   //TODO
+   public int getValue(List<Integer> letterValues) {
+      int score = 0;
+      return score;
+   }
+   
    /**
     * return true if the Composition is potentially a word 
     * It means the word begins at first square, his of length two 
@@ -177,7 +185,7 @@ public class Composition implements Serializable{
          }
       }
       
-      return sizeOfWord >= 2;
+      return sizeOfWord >= WORD_MIN_SIZE;
    }
    
    /**

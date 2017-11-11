@@ -89,8 +89,8 @@ public class GameModel implements Serializable {
       return getClass().isInstance(o) &&
               getClass() == o.getClass() &&
               composition.equals(((GameModel) o).composition) &&
-              boards[0].equals(((GameModel) o).boards[0]) &&
-              boards[1].equals(((GameModel) o).boards[1]) &&
+              boards[PlayerBoard.PLAYER1.ordinal()].equals(((GameModel) o).boards[PlayerBoard.PLAYER1.ordinal()]) &&
+              boards[PlayerBoard.PLAYER2.ordinal()].equals(((GameModel) o).boards[PlayerBoard.PLAYER2.ordinal()]) &&
               gameId == ((GameModel) o).gameId;
    }
 }

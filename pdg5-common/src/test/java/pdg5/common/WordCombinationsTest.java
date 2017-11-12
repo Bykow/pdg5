@@ -5,10 +5,17 @@
  */
 package pdg5.common;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,17 +53,49 @@ public class WordCombinationsTest {
    @Test
    public void testGetAllWordsFromLetters() {
       System.out.println("getAllWordsFromLetters");
-      String letters = "aime";
+      String letters = "";
+      List<String> expResult = new ArrayList<String>();
+      File file = new File(".\\src\\test\\resources\\testFileWords.txt");
+      try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+         String line = br.readLine();
+         letters = line;
+         while ((line = br.readLine()) != null) {
+            expResult.add(line);
+      }
+}     catch (IOException ex) {
+         fail("impossible to read the result file");
+      }
       WordCombinations wc = new WordCombinations(tree);
-      List<String> expResult = null;
       List<String> result = wc.getAllWordsFromLetters(letters);
       for (Iterator<String> iterator = result.iterator(); iterator.hasNext();) {
          String next = iterator.next();
-         System.out.println(next);
          
       }
-      // TODO review the generated test code and remove the default call to fail.
-      fail("The test case is a prototype.");
+      boolean pass = true;
+      if (expResult.size() != result.size()) {
+         pass = false;
+      }
+      List<String> wordNotFoundFromResult = new ArrayList<>();
+      for (String word : result) {
+         if(!expResult.contains(word)) {
+            pass = false;
+            wordNotFoundFromResult.add(word);
+         }
+      }
+      
+      List<String> wordNotFoundFromExpected = new ArrayList<>();
+      for (String word : expResult) {
+         if(!result.contains(word)) {
+            pass = false;
+            wordNotFoundFromExpected.add(word);
+         }
+      }
+      if(!pass) {
+         System.out.println("the numbers of word found (" + result.size() + ") isn't correct should be : " + expResult.size() + 
+                 ".\nThe words not found from Expected List : \n" + wordNotFoundFromExpected.toString() +
+                 ".\nThe words not found from result List : \n" + wordNotFoundFromResult.toString());
+         fail();
+      }
    }
    
 }

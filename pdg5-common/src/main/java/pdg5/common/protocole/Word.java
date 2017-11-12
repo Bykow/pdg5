@@ -3,9 +3,7 @@ package pdg5.common.protocole;
 import java.io.Serializable;
 
 /**
- * A word which is enter by a player
- *
- * @author Maxime Guillod
+ * Class representing a Word.
  */
 public class Word implements Serializable {
 
@@ -14,6 +12,13 @@ public class Word implements Serializable {
     private Validation validation;
     private int gameId;
 
+    /**
+     * Constructor
+     * @param word String representing the word
+     * @param play associated play to the word, can be null.
+     * @param validation associated validation to the word, can be null.
+     * @param gameId unique ID where the word context is.
+     */
     public Word(String word, Play play, Validation validation, int gameId) {
         this.word = word;
         this.play = play;
@@ -21,18 +26,34 @@ public class Word implements Serializable {
         this.gameId = gameId;
     }
 
+    /**
+     * Return The unique ID of the game where is the word.
+     * @return The unique ID of the game where is the word.
+     */
     public int getGameId() {
         return gameId;
     }
 
+    /**
+     * Return the associated play to the word.
+     * @return the associated play to the word.
+     */
     public Play getPlay() {
         return play;
     }
 
+    /**
+     * Return the associated Validation.
+     * @return the associated Validation.
+     */
     public Validation getValidation() {
         return validation;
     }
 
+    /**
+     * Return the word.
+     * @return the word.
+     */
     public String getWord() {
         return word;
     }

@@ -7,7 +7,11 @@ import java.io.Serializable;
  */
 public class Validation implements Serializable {
 
+   /**
+    * Constructor
+    */
     public Validation() {
+       
     }
 
 }

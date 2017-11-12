@@ -8,6 +8,9 @@ import pdg5.common.game.Tile;
 
 /**
  * @author Maxime Guillod
+ * 
+ * Class sended through the connection  by the server representing
+ * a full game with two players.
  */
 public class Game extends Message {
 
@@ -50,6 +53,10 @@ public class Game extends Message {
         
     }
 
+    /**
+     * return the unique ID of a game
+     * @return the unique ID of a game
+     */
     public int getID() {
        return ID;
     } 

@@ -27,24 +27,24 @@ import org.junit.BeforeClass;
  * @author Jimmy Verdasca
  */
 public class WordCombinationsTest {
-   
-   private static TST tree = new TST();
-   
+
+   private static TST dictionnary = new TST();
+
    public WordCombinationsTest() {
    }
-   
+
    /**
     * fill the TST used as dictionnary because we need him to test this class
-    * 
+    *
     * @throws Exception if an error occure while filling (bad URI etc)
     */
    @BeforeClass
    public static void init() throws Exception {
-     ClassLoader classLoader = TSTTest.class.getClassLoader();
+      ClassLoader classLoader = TSTTest.class.getClassLoader();
 
-     Stream<String> lines = Files.lines(Paths.get(classLoader.getResource("dico/fr_dico.dic").toURI()));
-     lines.forEach(e -> tree.put(e));
-     lines.close();
+      Stream<String> lines = Files.lines(Paths.get(classLoader.getResource("dico/fr_dico.dic").toURI()));
+      lines.forEach(e -> dictionnary.put(e));
+      lines.close();
    }
 
    /**
@@ -54,48 +54,46 @@ public class WordCombinationsTest {
    public void testGetAllWordsFromLetters() {
       System.out.println("getAllWordsFromLetters");
       String letters = "";
-      List<String> expResult = new ArrayList<String>();
+      List<String> expResult = new ArrayList<>();
       File file = new File(".\\src\\test\\resources\\testFileWords.txt");
       try (BufferedReader br = new BufferedReader(new FileReader(file))) {
          String line = br.readLine();
          letters = line;
          while ((line = br.readLine()) != null) {
             expResult.add(line);
-      }
-}     catch (IOException ex) {
+         }
+      } catch (IOException ex) {
          fail("impossible to read the result file");
       }
-      WordCombinations wc = new WordCombinations(tree);
+
+      WordCombinations wc = new WordCombinations(dictionnary);
       List<String> result = wc.getAllWordsFromLetters(letters);
-      for (Iterator<String> iterator = result.iterator(); iterator.hasNext();) {
-         String next = iterator.next();
-         
-      }
-      boolean pass = true;
-      if (expResult.size() != result.size()) {
-         pass = false;
-      }
-      List<String> wordNotFoundFromResult = new ArrayList<>();
-      for (String word : result) {
-         if(!expResult.contains(word)) {
-            pass = false;
-            wordNotFoundFromResult.add(word);
-         }
-      }
-      
+
+//      if (expResult.size() != result.size()) {
+//         pass = false;
+//      }
+//      List<String> wordNotFoundFromResult = new ArrayList<>();
+//      for (String word : result) {
+//         if (!expResult.contains(word)) {
+//            pass = false;
+//            wordNotFoundFromResult.add(word);
+//         }
+//      }
+
       List<String> wordNotFoundFromExpected = new ArrayList<>();
       for (String word : expResult) {
-         if(!result.contains(word)) {
-            pass = false;
+         if (!result.contains(word) && dictionnary.contains(word)) {
             wordNotFoundFromExpected.add(word);
          }
       }
-      if(!pass) {
-         System.out.println("the numbers of word found (" + result.size() + ") isn't correct should be : " + expResult.size() + 
-                 ".\nThe words not found from Expected List : \n" + wordNotFoundFromExpected.toString() +
-                 ".\nThe words not found from result List : \n" + wordNotFoundFromResult.toString());
-         fail();
-      }
+
+      assertTrue(
+              "the algorithm missed some words"
+              //+ ".\nThe words not found from result List : \n" + wordNotFoundFromResult.toString()
+              + ".\nThe words not found from Expected List : \n" + wordNotFoundFromExpected.toString(),
+              wordNotFoundFromExpected.isEmpty()
+      );
+
    }
-   
+
 }

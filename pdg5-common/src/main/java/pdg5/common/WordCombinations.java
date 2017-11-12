@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ * 
  */
 public class WordCombinations {
 
@@ -19,6 +19,11 @@ public class WordCombinations {
       this.dictionnary = dictionnary;
    }
 
+   /**
+    * get All possible words we can do with 
+    * @param letters
+    * @return 
+    */
    public List<String> getAllWordsFromLetters(String letters) {
       listOfWords = new ArrayList<>();
       sb = new StringBuilder();
@@ -50,6 +55,8 @@ public class WordCombinations {
                entry.setValue(number - 1);
                search(length - 1);
                entry.setValue(number);
+               
+               sb.deleteCharAt(sb.length() - 1);
             }
          });
       }

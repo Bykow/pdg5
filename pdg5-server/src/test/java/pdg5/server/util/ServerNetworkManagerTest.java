@@ -26,13 +26,15 @@ public class ServerNetworkManagerTest {
         new Thread(() -> {
             serverNetworkManager = new ServerNetworkManager();
         }).start();
+
+        // To be sure the server is running and listen on the port.
         Thread.sleep(100);
+
         try {
             socket = new Socket(Protocol.DEFAULT_SERVER, Protocol.DEFAULT_PORT);
             clientSender = new ClientSender(socket);
             clientListener = new ClientListener(socket);
         } catch (IOException e) {
-            e.printStackTrace();
         }
 
     }

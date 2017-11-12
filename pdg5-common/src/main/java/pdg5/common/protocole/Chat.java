@@ -1,6 +1,7 @@
 package pdg5.common.protocole;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author Maxime Guillod

@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pdg5.common.protocol;
 
 /**
- *
- * @author Jimmy Verdasca
+ * Class sendable to the serveur by a client to ask for start a new game.
  */
-public class NewGame {
+public class NewGame extends Message {
    
 }

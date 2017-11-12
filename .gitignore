@@ -49,3 +49,4 @@ Eclipse
 *.toc
 *.gz
 *.pdf
+/pdg5-server/nbproject/

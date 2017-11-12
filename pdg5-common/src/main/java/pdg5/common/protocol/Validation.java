@@ -1,4 +1,4 @@
-package pdg5.common.protocole;
+package pdg5.common.protocol;
 
 /**
  * Class sended through the connection by a client

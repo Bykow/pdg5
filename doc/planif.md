@@ -35,13 +35,14 @@
 > - [x] Interface graphique pour la connexion
 
 ## Itération 7: *7 novembre 2017*
-> - [x] Amélioration et début d'intégration des interfacees
-> - [x] Création de compte
+> - [x] Amélioration et début d'intégration des interfaces
+> - [x] Création de comptes
 > - [x] Communication entre le serveur et le(s) client(s)
 > - [x] Login
+> - [x] Lancement du serveur et de la BDD : Docker
 
 ## Itération 8: *14 novembre 2017*
-> - [x] Création d'un diaporamma pour la présentation
+> - [x] Création d'un diaporama pour la présentation
 > - [x] Merge de nos fonctionnalités
 > - [ ] **\* Présentation intermédiaire**
 

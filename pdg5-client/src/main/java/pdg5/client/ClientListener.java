@@ -13,8 +13,11 @@ import java.net.Socket;
 public class ClientListener implements Runnable {
 
     private Socket socket;
-    private MessageQueue queue;
-    private ObjectInputStream in;
+    private static MessageQueue queue;
+    private static ObjectInputStream in;
+
+    public ClientListener() {
+    }
 
     public ClientListener(Socket socket) throws IOException {
         this.socket = socket;

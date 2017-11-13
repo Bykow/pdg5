@@ -54,15 +54,7 @@ public class Client extends Application {
 
         // Process message
         // TODO @Maxime : Refactor
-        new Thread(() -> {
-            while (true) {
-                sender.add(
-                        requestManager.execute(
-                                listener.take()
-                        )
-                );
-            }
-        }).start();
+
     }
 
     /**

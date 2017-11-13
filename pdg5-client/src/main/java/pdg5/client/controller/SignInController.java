@@ -1,17 +1,17 @@
 /**
- -----------------------------------------------------------------------------------
- Laboratoire : <nn>
- Fichier     : SignInController.java
- Auteur(s)   : Andrea Cotza
- Date        : 06.11.2017
- 
- But         : <‡ complÈter>
- 
- Remarque(s) : <‡ complÈter>
- 
- Compilateur : jdk1.8.0_60
- -----------------------------------------------------------------------------------
-*/
+ * -----------------------------------------------------------------------------------
+ * Laboratoire : <nn>
+ * Fichier     : SignInController.java
+ * Auteur(s)   : Andrea Cotza
+ * Date        : 06.11.2017
+ * <p>
+ * But         : <‡ complÈter>
+ * <p>
+ * Remarque(s) : <‡ complÈter>
+ * <p>
+ * Compilateur : jdk1.8.0_60
+ * -----------------------------------------------------------------------------------
+ */
 
 package pdg5.client.controller;
 
@@ -52,7 +52,7 @@ public class SignInController {
     @FXML
     private void handleLogin(ActionEvent actionEvent) {
         ClientListener listener = new ClientListener();
-        Stage stage = (Stage)btnLogin.getScene().getWindow();
+        Stage stage = (Stage) btnLogin.getScene().getWindow();
 
         ClientSender cs = new ClientSender();
         SignIn signIn = new SignIn(username.getText(), password.getText());
@@ -61,11 +61,19 @@ public class SignInController {
 
 
         Message msg = listener.take();
-        if(msg instanceof ErrorMessage) {
+        if (msg instanceof ErrorMessage) {
             System.err.println(msg);
             password.setText("");
-        } else if(msg instanceof Load) {
-            System.out.println("Connection");
+
+            // TODO Replace Alert by Toast
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Login information");
+            alert.setHeaderText("Login information");
+            alert.setContentText("Incorrect username or password.");
+            alert.showAndWait();
+
+        } else if (msg instanceof Load) {
+            System.out.println("Connection success ");
             stage.hide();
             loadGame(stage);
         }
@@ -74,9 +82,9 @@ public class SignInController {
 
     @FXML
     private void handleSwitch(ActionEvent actionEvent) {
-        Stage stage = (Stage)btnLogin.getScene().getWindow();
+        Stage stage = (Stage) btnLogin.getScene().getWindow();
 
-        if(signUpScene == null) {
+        if (signUpScene == null) {
             Scene currentScene = btnLogin.getScene();
 
             try {

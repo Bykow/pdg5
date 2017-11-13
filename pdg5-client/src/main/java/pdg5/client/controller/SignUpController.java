@@ -23,6 +23,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import pdg5.client.Client;
 import pdg5.client.ClientSender;
+import pdg5.client.util.Toast;
 import pdg5.common.protocol.SignUp;
 
 import java.io.IOException;
@@ -72,6 +73,7 @@ public class SignUpController {
             loadGame(stage);
         } else {
             System.out.println("Password and password confirmation are not equal, try again.");
+            new Toast(stage, "Password and password confirmation are not equal, try again.").show();
             password.clear();
             passwordConf.clear();
         }

@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 import pdg5.client.Client;
 import pdg5.client.ClientListener;
 import pdg5.client.ClientSender;
+import pdg5.client.util.Toast;
 import pdg5.common.protocol.ErrorMessage;
 import pdg5.common.protocol.Load;
 import pdg5.common.protocol.Message;
@@ -65,12 +66,7 @@ public class SignInController {
             System.err.println(msg);
             password.setText("");
 
-            // TODO Replace Alert by Toast
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Login information");
-            alert.setHeaderText("Login information");
-            alert.setContentText("Incorrect username or password.");
-            alert.showAndWait();
+            new Toast(stage, "Incorrect username or password").show();
 
         } else if (msg instanceof Load) {
             System.out.println("Connection success ");

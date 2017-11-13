@@ -5,63 +5,66 @@
 ----------
 
 
-## 1 :
-* Découverte du projet, constitution des groupes.
+## Itération 1: *19 septembre 2017*
+- [ ] Découverte du projet, constitution des groupes.
 
-## 2 :
+## Itération 2: *26 septembre 2017*
 * Plannification
 * Liste des fonctionnalités
 * Recherche d'outils et ressources (dico, librairies, langages, ...)
 
-## 3 :
+## Itération 3: *3 octobre 2017*
 * Liste des fonctionnalités finale (+ règles)
 * Modèle de base de données
 * Diagramme de classes
 * Protocole initial
 
-## 4 :
+## Itération 4: *10 octobre 2017*
 * Préparation de l'UI pour les fonctionnalités de base
 * Serveur TCP (gestion des connexions aux clients)
 * Base de données
 * Début de rédaction des requêtes SQL
 
-## 5 :
+## Itération 5: *24 octobre 2017*
 * Finition et implémentation du protocole
 * Création de compte
 * Login
 
-## 6 :
+## Itération 6: *31 octobre 2017*
 * Lancement d'une partie contre un utilisateur connu
 
-## 7 :
+## Itération 7: *7 novembre 2017*
 * Lancement d'une partie contre un utilisateur aléatoire (en attente de partie)
 * Déroulement d'une partie
 
-## 8 :
-* Présentation intermédiaire (14.11, imposé)
+## Itération 8: *14 novembre 2017*
+* **Présentation intermédiaire**
 * Déroulement d'une partie
 
-## 9 :
+## Itération 9: *21 novembre 2017*
 * Déroulement d'une partie
 
-## 10:
+## Itération 10: *28 novembre 2017*
 * Mode tournoi
 
-## 11:
+## Itération 11: *5 décembre 2017*
 * Mode tournoi
 * Finitions
 
-## 12:
+## Itération 12: *12 décembre 2017*
 * Finitions
 
-## 13:
+## Itération 13: *19 décembre 2017*
 * Rapport
 
-## 14:
+## Itération 14: *9 janvier 2018*
 * Rapport
 
-## 15:
-* Rendu final du projet (16.01, imposé)
+## Itération 15: *16 janvier 2018*
+* **\*Rendu final du projet**
 
-## 16:
-* Défense orale (23.01, imposé)
+## Itération 16: *23 janvier 2018*
+* **\*Défense orale**
+
+
+*\* : élément itératif imposé*

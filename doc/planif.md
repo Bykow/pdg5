@@ -37,8 +37,8 @@
 ## Itération 7: *7 novembre 2017*
 > - [x] Amélioration et début d'intégration des interfacees
 > - [x] Création de compte
-> - [x] Login
 > - [x] Communication entre le serveur et le(s) client(s)
+> - [x] Login
 
 ## Itération 8: *14 novembre 2017*
 > - [x] Création d'un diaporamma pour la présentation
@@ -47,20 +47,30 @@
 
 ## Itération 9: *21 novembre 2017*
 > - [ ] Lancement d'une partie contre un utilisateur connu
-> - [ ] Déroulement basique d'une partie (sans bonus), interaction simple
-> - [ ] Ajout et implémentation du chat dans la partie
+> - [ ] Début du déroulement basique d'une partie, interaction simple
 
 ## Itération 10: *28 novembre 2017*
-> - [ ] Ajout des fonctionnalités (avec gestion côté serveur et client)
+> - [ ] Finalisation du déroulement basique d'une partie
+> - [ ] Ajout et implémentation du chat dans la partie
 
 ## Itération 11: *5 décembre 2017*
-> - [ ] Mode tournoi
-> - [ ] Finitions
+> - [ ] Ajout des fonctionnalités 
+>   - [ ] Bonus
+>   - [ ] Mélanger les tuiles
+>   - [ ] Gestion de la liste d'ami
+>   - [ ] Historique utilisateur
+>   - [ ] Statistiques utilisateur
 
 ## Itération 12: *12 décembre 2017*
-> - [ ] Rapport et finalisation
+> - [ ] Lancer une recherche de partie
+> - [ ] Ajout des fonctionnalités 
+>   - [ ] Jeter les tuiles
+>   - [ ] Aperçu des tuiles de l'adversaire
+>   - [ ] Ajout des notifications windows
+>   - [ ] Parrainage
 
 ## Itération 13: *19 décembre 2017*
+> - [ ] Mode tournoi
 > - [ ] Rapport et finalisation
 
 <hr/>
@@ -71,6 +81,7 @@
 > - [ ] Rapport et finalisation
 
 ## Itération 15: *16 janvier 2018*
+> - [ ] Rapport et finalisation
 > - [ ] **\* Rendu final du projet**
 
 ## Itération 16: *23 janvier 2018*

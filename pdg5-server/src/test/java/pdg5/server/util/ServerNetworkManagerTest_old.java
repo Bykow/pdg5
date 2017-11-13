@@ -13,7 +13,7 @@ import pdg5.common.protocol.Message;
 import java.io.IOException;
 import java.net.Socket;
 
-public class ServerNetworkManagerTest {
+public class ServerNetworkManagerTest_old {
 
     private ServerNetworkManager serverNetworkManager;
 

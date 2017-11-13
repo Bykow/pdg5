@@ -53,13 +53,16 @@ public class Client extends Application {
         new Thread(sender).start();
 
         // Process message
-        while (true) {
-            sender.add(
-                    requestManager.execute(
-                            listener.take()
-                    )
-            );
-        }
+        // TODO @Maxime : Refactor
+        new Thread(() -> {
+            while (true) {
+                sender.add(
+                        requestManager.execute(
+                                listener.take()
+                        )
+                );
+            }
+        }).start();
     }
 
     /**

@@ -27,10 +27,10 @@ import pdg5.common.Protocol;
 
 
 public class Toast {
-    Popup popup;
-    Label label;
-    Stage stage;
-    Timeline timer;
+    private Popup popup;
+    private Label label;
+    private Stage stage;
+    private Timeline timer;
 
     public Toast(final Stage stage, final String message) {
         this(stage, message, Protocol.TOAST_DEFAULT_DURATION);

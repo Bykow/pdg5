@@ -50,3 +50,4 @@ Eclipse
 *.toc
 *.gz
 *.pdf
+/pdg5-common/nbproject/

@@ -7,11 +7,12 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.mindrot.jbcrypt.BCrypt;
 
+import pdg5.common.Protocol;
 import pdg5.server.persistent.User;
 
 public class ManageUser {
 	
-	public User addUser(String email,String username, String pass) {
+	public int addUser(String email,String username, String pass) {
 		Session session = Manager.getSession();
 		Transaction tx = null;
 		String hashedPass = BCrypt.hashpw(pass, BCrypt.gensalt());
@@ -22,18 +23,23 @@ public class ManageUser {
 		user.setUsername(username);
 		user.setPass(hashedPass);
 		Integer usrID;
+		int exitCode;
+
+		//todo if the email/username is already taken ?
 		
 		try {
 	         tx = session.beginTransaction();
 	         usrID = (Integer) session.save(user); 
 	         user.setId(usrID);
 	         tx.commit();
+	         exitCode = Protocol.OK;
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
+	         exitCode = Protocol.COULDNOTADDUSER;
 	         e.printStackTrace(); 
 	      }
 		
-		return user;
+		return exitCode;
 	}
 	
 	/**
@@ -96,7 +102,7 @@ public class ManageUser {
      * @return true if correct, false otherwise
      */
     public boolean isCorrectPassword(String username, String password) {
-        User u = getUserByUsername(username);
+		User u = getUserByUsername(username);
         if (u == null) return false;
         return isExpectedPassword(password, u.getPass());
     }

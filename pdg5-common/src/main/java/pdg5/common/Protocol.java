@@ -9,7 +9,7 @@ public interface Protocol {
      * Socket
      */
     final String DEFAULT_SERVER = "127.0.0.1"; // modify for tests
-    final int DEFAULT_PORT = 47298;
+    final int DEFAULT_PORT = 44555;
 
     final int NUMBER_OF_TUILES_PER_PLAYER = 7;
     final int NUMBER_OF_EXTRA_TUILES = 2;
@@ -19,4 +19,8 @@ public interface Protocol {
     final String LANG_FR = "fr";
 
     final int OK = 200;
+    final int ERROR = 400;
+    final int COULDNOTADDUSER = 401;
+
+    final int TOAST_BOTTOM_DIST = 50;
 }

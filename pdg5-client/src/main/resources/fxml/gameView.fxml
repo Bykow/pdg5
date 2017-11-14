@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import java.util.ArrayList?>
+
+<AnchorPane prefHeight="543.0" prefWidth="524.0" style="-fx-background-color: #3caef5;" stylesheets="@../css/gameView.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox layoutY="393.0" prefHeight="80.0" prefWidth="524.0" styleClass="table">
+         <children>
+            <AnchorPane fx:id="ugbox0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Pane layoutX="10.0" layoutY="7.0" prefHeight="50.0" prefWidth="55.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="ugbox1" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Pane layoutX="10.0" layoutY="7.0" prefHeight="50.0" prefWidth="55.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="ugbox2" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Pane layoutX="10.0" layoutY="7.0" prefHeight="50.0" prefWidth="55.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="ugbox3" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Pane layoutX="10.0" layoutY="7.0" prefHeight="50.0" prefWidth="55.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="ugbox4" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Pane layoutX="10.0" layoutY="7.0" prefHeight="50.0" prefWidth="55.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="ugbox5" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Pane layoutX="10.0" layoutY="7.0" prefHeight="50.0" prefWidth="55.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="ugbox6" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Pane layoutX="10.0" layoutY="7.0" prefHeight="50.0" prefWidth="55.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+      <HBox prefHeight="80.0" prefWidth="524.0" styleClass="table">
+         <children>
+            <AnchorPane fx:id="agbox0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Pane layoutX="10.0" layoutY="21.0" prefHeight="50.0" prefWidth="55.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="agbox1" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Pane layoutX="10.0" layoutY="21.0" prefHeight="50.0" prefWidth="55.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="agbox2" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Pane layoutX="10.0" layoutY="21.0" prefHeight="50.0" prefWidth="55.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="agbox3" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Pane layoutX="10.0" layoutY="21.0" prefHeight="50.0" prefWidth="55.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="agbox4" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Pane layoutX="10.0" layoutY="21.0" prefHeight="50.0" prefWidth="55.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="agbox5" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Pane layoutX="10.0" layoutY="21.0" prefHeight="50.0" prefWidth="55.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="agbox6" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Pane layoutX="10.0" layoutY="21.0" prefHeight="50.0" prefWidth="55.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+      <HBox layoutY="305.0" prefHeight="80.0" prefWidth="150.0" styleClass="table">
+         <children>
+            <AnchorPane fx:id="ugbbox0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Pane layoutX="10.0" layoutY="7.0" prefHeight="50.0" prefWidth="55.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="ugbbox1" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Pane layoutX="10.0" layoutY="7.0" prefHeight="50.0" prefWidth="55.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+      <HBox layoutX="374.0" layoutY="89.0" prefHeight="80.0" prefWidth="150.0" styleClass="table">
+         <children>
+            <AnchorPane fx:id="agbbox0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Pane layoutX="10.0" layoutY="21.0" prefHeight="50.0" prefWidth="55.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="agbbox1" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Pane layoutX="10.0" layoutY="21.0" prefHeight="50.0" prefWidth="55.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+      <HBox id="deck" layoutY="473.0" prefHeight="70.0" prefWidth="524.0">
+         <children>
+            <AnchorPane fx:id="ubox0" prefHeight="200.0" prefWidth="200.0" />
+            <AnchorPane fx:id="ubox1" prefHeight="200.0" prefWidth="200.0" />
+            <AnchorPane fx:id="ubox2" prefHeight="200.0" prefWidth="200.0" />
+            <AnchorPane fx:id="ubox3" prefHeight="200.0" prefWidth="200.0" />
+            <AnchorPane fx:id="ubox4" prefHeight="200.0" prefWidth="200.0" />
+            <AnchorPane fx:id="ubox5" prefHeight="200.0" prefWidth="200.0" />
+            <AnchorPane fx:id="ubox6" prefHeight="200.0" prefWidth="200.0" />
+
+            <fx:define>
+               <ArrayList fx:id="deckList" >
+                  <fx:reference source="ubox0"/>
+                  <fx:reference source="ubox1"/>
+                  <fx:reference source="ubox2"/>
+                  <fx:reference source="ubox3"/>
+                  <fx:reference source="ubox4"/>
+                  <fx:reference source="ubox5"/>
+                  <fx:reference source="ubox6"/>
+               </ArrayList>
+            </fx:define>
+         </children>
+      </HBox>
+      <AnchorPane layoutX="435.0" layoutY="293.0" prefHeight="80.0" prefWidth="80.0" styleClass="avatar">
+         <children>
+            <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="4.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/nopic.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="9.0" layoutY="94.0" prefHeight="80.0" prefWidth="80.0" styleClass="avatar">
+         <children>
+            <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="4.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/nopic.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <Label alignment="CENTER_RIGHT" contentDisplay="TOP" layoutX="398.0" layoutY="272.0" prefHeight="17.0" prefWidth="117.0" text="Username" textFill="#2c3e50">
+         <font>
+            <Font name="Helvetica Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label contentDisplay="TOP" layoutX="9.0" layoutY="176.0" prefHeight="17.0" prefWidth="117.0" text="Username" textFill="#2c3e50">
+         <font>
+            <Font name="Helvetica Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="210.0" layoutY="175.0" prefHeight="36.0" prefWidth="105.0" text="0" textFill="#1e70a5">
+         <font>
+            <Font name="Helvetica Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="210.0" layoutY="236.0" prefHeight="36.0" prefWidth="105.0" text="0" textFill="#84cdf6">
+         <font>
+            <Font name="Helvetica Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="140.0" layoutY="204.0" prefHeight="36.0" prefWidth="245.0" text="0 tuilles restantes" textFill="#f7f6f6">
+         <font>
+            <Font name="Helvetica Bold" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

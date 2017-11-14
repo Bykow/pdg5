@@ -43,6 +43,7 @@ IntelliJ
 Eclipse
 .classpath
 .project
+.settings
 
 # Explude latex temp file
 *.aux
@@ -50,3 +51,8 @@ Eclipse
 *.gz
 *.pdf
 /pdg5-server/nbproject/
+
+
+#OSX bullshit
+*.DS_Store
+

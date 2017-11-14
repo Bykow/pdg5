@@ -1,5 +1,7 @@
 package pdg5.server;
 
+import pdg5.server.util.ServerNetworkManager;
+
 /**
  * @author Maxime Guillod
  */

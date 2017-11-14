@@ -45,9 +45,13 @@ Eclipse
 .project
 .settings
 
+Netbeans
+/pdg5-common/nbproject/
+/pdg5-server/nbproject/
+/pdg5-client/nbproject/
+
 # Explude latex temp file
 *.aux
 *.toc
 *.gz
 *.pdf
-/pdg5-common/nbproject/

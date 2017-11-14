@@ -28,4 +28,5 @@ public class Play extends Message {
        this.gameID = gameID;
        this.playerID = playerID;
     }
+
 }

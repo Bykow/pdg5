@@ -1,34 +1,32 @@
 package pdg5.common.protocol;
 
-import java.awt.Image;
 import java.io.Serializable;
 
 /**
- * Class use to login into our application
- *
- * @author Maxime Guillod
+ * Class sended through the connection by a client representing
+ * a attempt to sign in by a client.
  */
-public class SignIn extends Message {
+public class SignIn implements Serializable {
 
-    private String username;
+    private String login;
     private String password;
 
     /**
      * Constructor
-     * @param username trying to sign in
+     * @param login trying to sign in
      * @param password trying to sign in
      */
-    public SignIn(String username, String password) {
-        this.username = username;
+    public SignIn(String login, String password) {
+        this.login = login;
         this.password = password;
     }
 
     /**
-     * return the username
-     * @return the username
+     * return the login
+     * @return the login
      */
-    public String getUsername() {
-        return username;
+    public String getLogin() {
+        return login;
     }
 
     /**
@@ -39,9 +37,15 @@ public class SignIn extends Message {
         return password;
     }
 
+    /**
+     * Method immediately used when the server receive the object.
+     * The server will try to authenticate an anonymous client
+     * with the given login and password.
+     * If it succes, the client will be logged and increase in privileges.
+     */
     @Override
     public String toString() {
-        return "SignIn{" + "Username=" + username + ", password=" + password + '}';
+        return "SignIn{" + "login=" + login + ", password=" + password + '}';
     }
 
 }

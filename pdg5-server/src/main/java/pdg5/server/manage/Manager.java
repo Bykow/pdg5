@@ -1,5 +1,6 @@
 package pdg5.server.manage;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

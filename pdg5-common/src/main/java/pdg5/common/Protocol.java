@@ -23,4 +23,5 @@ public interface Protocol {
     final int COULDNOTADDUSER = 401;
 
     final int TOAST_BOTTOM_DIST = 50;
+    final int TOAST_DEFAULT_DURATION = 5000;
 }

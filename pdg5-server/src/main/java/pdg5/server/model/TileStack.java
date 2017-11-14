@@ -39,6 +39,14 @@ public class TileStack {
         tileLeft = size;
     }
 
+    private TileStack(TileStack stack) {
+        this.stack = stack.stack;
+        this.size = stack.size;
+        this.tileLeft = stack.tileLeft;
+        this.map = stack.map;
+        this.r = stack.r;
+    }
+
     /**
      * Initialize both HashMap of letter with values and stack of Tuiles for a game.
      *
@@ -86,6 +94,17 @@ public class TileStack {
     public Tile getNextTuile() {
         tileLeft--;
         return stack.pop();
+    }
+
+    public String convertToString() {
+        TileStack stack = new TileStack(this);
+        String output = new String();
+
+        while(stack.tileLeft > 0) {
+            output.concat(String.valueOf(stack.getNextTuile().getLetter()));
+        }
+
+        return output;
     }
 
     public int getSize() {

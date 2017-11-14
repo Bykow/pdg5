@@ -8,11 +8,12 @@ import org.hibernate.cfg.Configuration;
 import pdg5.common.Protocol;
 import pdg5.server.persistent.AbstractData;
 
-public class Manager {
+import java.util.List;
 
-	private SessionFactory factory;
-	private Session session;
-	private Transaction transaction;
+public class Manager {
+	private static SessionFactory factory;
+	private static Session session;
+	private static Transaction transaction;
 
 	public Manager() {
 		factory = null;
@@ -32,6 +33,7 @@ public class Manager {
 		}
 		return factory;
 	}
+
 	/**
 	 * Used to get a global session
 	 * @return
@@ -52,9 +54,8 @@ public class Manager {
 		}
 	}
 
-	public AbstractData commitToDB(AbstractData abstractData) {
+	public AbstractData addToDB(AbstractData abstractData) {
 		Integer id;
-		int code = Protocol.OK;
 
 		try {
 			transaction = session.beginTransaction();
@@ -63,11 +64,25 @@ public class Manager {
 			transaction.commit();
 		} catch (HibernateException e) {
 			if (transaction !=null) transaction.rollback();
-			code = Protocol.ERROR;
 			e.printStackTrace();
 		}
 
 		return abstractData;
+	}
+
+	public List<? extends AbstractData> getListFromDB(String query) {
+		List<AbstractData> list = null;
+
+		try {
+			transaction = session.beginTransaction();
+			list = session.createQuery(query).list();
+
+			transaction.commit();
+		} catch (HibernateException e) {
+			if (transaction!=null) transaction.rollback();
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 	public int updateToDB(AbstractData abstractData) {

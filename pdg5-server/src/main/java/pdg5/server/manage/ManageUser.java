@@ -2,27 +2,22 @@ package pdg5.server.manage;
 
 import java.util.List;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.mindrot.jbcrypt.BCrypt;
 
-import pdg5.common.Protocol;
 import pdg5.server.persistent.User;
 
 public class ManageUser extends Manager {
 	
 	public User addUser(String email,String username, String pass) {
-		String hashedPass = BCrypt.hashpw(pass, BCrypt.gensalt());
-		email = email.toLowerCase();
-		username = username.toLowerCase();
 		User user = new User();
-		user.setEmail(email);
-		user.setUsername(username);
-		user.setPass(hashedPass);
+		user.setEmail(email.toLowerCase());
+		user.setUsername(username.toLowerCase());
+		user.setPass(BCrypt.hashpw(pass, BCrypt.gensalt()));
+
 		//todo if the email/username is already taken ?
 		
-		return (User)commitToDB(user);
+		return (User) addToDB(user);
 	}
 	
 	/**
@@ -60,20 +55,7 @@ public class ManageUser extends Manager {
     }
 	
 	public List<User> listUser() {
-		 Session session = getSession();
-	      Transaction tx = null;
-	      List<User> users = null;
-	      
-	      try {
-	         tx = session.beginTransaction();
-	         users = session.createQuery("FROM User").list(); 
-	         
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }
-	      return users;
+		 return (List<User>) getListFromDB("FROM User");
 	}
 	
 	/**

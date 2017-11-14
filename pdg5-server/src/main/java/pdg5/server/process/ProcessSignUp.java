@@ -20,7 +20,12 @@ public class ProcessSignUp implements GenericProcess {
 
     @Override
     public Message execute() {
-        int exitCode = manager.addUser(signUp.getEmail(), signUp.getUsername(), signUp.getPassword());
+        int exitCode;
+        if (manager.addUser(signUp.getEmail(), signUp.getUsername(), signUp.getPassword()) != null) {
+            exitCode = Protocol.OK;
+        } else {
+            exitCode = Protocol.ERROR;
+        }
 
         switch (exitCode) {
             case Protocol.OK :

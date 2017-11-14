@@ -22,7 +22,7 @@ public class ManageGame extends Manager {
 		game.setLastActivity(new Date());
 		game.setRemainingLetters(remainingLetters);
 
-		return (Game)commitToDB(game);
+		return (Game) addToDB(game);
 	}
 	
 	public Game addGame(String title, User player1, User player2, String remainingLetters) {
@@ -34,24 +34,11 @@ public class ManageGame extends Manager {
 		game.setLastActivity(new Date());
 		game.setRemainingLetters(remainingLetters);
 
-		return (Game)commitToDB(game);
+		return (Game) addToDB(game);
 	}
 	
 	public List<Game> listGame() {
-		 Session session = getSession();
-	      Transaction tx = null;
-	      List<Game> games = null;
-	      
-	      try {
-	         tx = session.beginTransaction();
-	         games = session.createQuery("FROM Game").list(); 
-	         
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }
-	      return games;
+		 return (List<Game>) getListFromDB("FROM Game");
 	}
 	
 	public List<Game> getGamesByUsername(User username) {

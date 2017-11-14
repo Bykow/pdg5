@@ -12,7 +12,7 @@
 //import pdg5.server.manage.ManageMessage;
 //import pdg5.server.manage.ManageTournament;
 //import pdg5.server.manage.ManageUser;
-//import pdg5.server.manage.Manager;
+//import pdg5.server.model.TileStack;
 //import pdg5.server.persistent.Blacklist;
 //import pdg5.server.persistent.Chat;
 //import pdg5.server.persistent.Friend;
@@ -34,6 +34,7 @@
 //		ManageUser mu = new ManageUser();
 //		ManageChat mc = new ManageChat();
 //		ManageMessage mm = new ManageMessage();
+//        TileStack stack = new TileStack("FR");
 //
 //		System.out.println("***** Global tests ****");
 //
@@ -185,8 +186,8 @@
 //		}
 //
 //		// create game
-//		Game g1 = mg.addGame("Wizard battle", usr2, usr4);
-//		Game g2 = mg.addGame("Evil battle", usr1, usr2,t1);
+//		Game g1 = mg.addGame("Wizard battle", usr2, usr4, stack.convertToString());
+//		Game g2 = mg.addGame("Evil battle", usr1, usr2,t1, stack.convertToString());
 //
 //		List<Game> lg = mg.listGame();
 //		System.out.println("***** created games ****");
@@ -283,6 +284,6 @@
 //			System.out.println(user);
 //		}
 //
-//		Manager.closeConversation();
+//		mc.closeConversation();
 //	}
 //}

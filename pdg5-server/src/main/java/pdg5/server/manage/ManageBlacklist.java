@@ -10,28 +10,13 @@ import org.hibernate.Transaction;
 import pdg5.server.persistent.Blacklist;
 import pdg5.server.persistent.User;
 
-public class ManageBlacklist {
-	public Blacklist addBlacklist(User fromUser, User toUser) {
-		Session session = Manager.getSession();
-		Transaction tx = null;
-		Blacklist Blacklist = new Blacklist(fromUser, toUser, new Date());
-		Integer tntID;
-		
-		try {
-	         tx = session.beginTransaction();
-	         tntID = (Integer) session.save(Blacklist); 
-	         Blacklist.setId(tntID);
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }
-		
-		return Blacklist;
+public class ManageBlacklist extends Manager {
+	public int addBlacklist(User fromUser, User toUser) {
+		return commitToDB(new Blacklist(fromUser, toUser, new Date()));
 	}
 	
 	public List<Blacklist> listBlacklist() {
-		 Session session = Manager.getSession();
+		 Session session = getSession();
 	      Transaction tx = null;
 	      List<Blacklist> Blacklists = null;
 	      
@@ -47,31 +32,11 @@ public class ManageBlacklist {
 	      return Blacklists;
 	}
 	
-	public void updateBlacklist(Blacklist Blacklist) {
-		Session session = Manager.getSession();
-	      Transaction tx = null;
-	      
-	      try {
-	         tx = session.beginTransaction();
-			 session.update(Blacklist); 
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }
+	public int updateBlacklist(Blacklist blacklist) {
+		return updateToDB(blacklist);
 	}
 	
-	public void deleteBlacklist(Blacklist Blacklist) {
-		Session session = Manager.getSession();
-	      Transaction tx = null;
-	      
-	      try {
-	         tx = session.beginTransaction();
-	         session.delete(Blacklist); 
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }
+	public int deleteBlacklist(Blacklist blacklist) {
+		return deleteToDB(blacklist);
 	}
 }

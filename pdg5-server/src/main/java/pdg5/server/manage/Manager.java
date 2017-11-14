@@ -10,12 +10,17 @@ import pdg5.server.persistent.AbstractData;
 
 public class Manager {
 
-	private static SessionFactory factory = null;
-	private static Session session = null;
-	Transaction transaction = null;
+	private SessionFactory factory;
+	private Session session;
+	private Transaction transaction;
 
+	public Manager() {
+		factory = null;
+		session = null;
+		transaction = null;
+	}
 
-	private static SessionFactory getFactory() {
+	private SessionFactory getFactory() {
 		if(factory == null) {
 			try {
 				factory = new Configuration().configure().buildSessionFactory();
@@ -31,9 +36,9 @@ public class Manager {
 	 * Used to get a global session
 	 * @return
 	 */
-	public static Session getSession() {
+	public Session getSession() {
 		if(session == null) {
-			session = Manager.getFactory().openSession();
+			session = getFactory().openSession();
 		}
 		return session;
 	}
@@ -41,7 +46,7 @@ public class Manager {
 	/**
 	 * To call when we are done talking to the DB
 	 */
-	public static void closeConversation() {
+	public void closeConversation() {
 		if(session != null) {
 			session.close();
 		}

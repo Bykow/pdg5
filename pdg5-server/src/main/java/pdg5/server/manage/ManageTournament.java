@@ -12,16 +12,11 @@ import pdg5.server.persistent.Tournament;
 public class ManageTournament extends Manager {
 	
 	public int addTournament(String title) {
-		Session session = Manager.getSession();
-		Transaction tx = null;
-		Tournament tournament = new Tournament(title, new Date());
-		Integer tntID;
-		
-		return commitToDB(tournament);
+		return commitToDB(new Tournament(title, new Date()));
 	}
 	
 	public List<Tournament> listTournaments() {
-		 Session session = Manager.getSession();
+		 Session session = getSession();
 	      Transaction tx = null;
 	      List<Tournament> tournaments = null;
 	      
@@ -38,31 +33,11 @@ public class ManageTournament extends Manager {
 	}
 	
 	public void updateTournament(Tournament tournament) {
-		Session session = Manager.getSession();
-	      Transaction tx = null;
-	      
-	      try {
-	         tx = session.beginTransaction();
-			 session.update(tournament); 
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }
+		updateToDB(tournament);
 	}
 	
 	public void deleteTournament(Tournament tournament) {
-		Session session = Manager.getSession();
-	      Transaction tx = null;
-	      
-	      try {
-	         tx = session.beginTransaction();
-	         session.delete(tournament); 
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }
+		deleteToDB(tournament);
 	}
 
 }

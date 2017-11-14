@@ -10,50 +10,21 @@ import pdg5.server.persistent.Chat;
 import pdg5.server.persistent.Game;
 import pdg5.server.persistent.Tournament;
 
-public class ManageChat {
-	public Chat addChatTournament(Tournament tournament) {
-		Session session = Manager.getSession();
-		Transaction tx = null;
-		
+public class ManageChat extends Manager {
+	public int addChatTournament(Tournament tournament) {
 		Chat chat = new Chat();
 		chat.setTournament(tournament);
-		Integer cid;
-		
-		try {
-	         tx = session.beginTransaction();
-	         cid = (Integer) session.save(chat); 
-	         chat.setId(cid);
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }
-		
-		return chat;
+		return commitToDB(tournament);
 	}
 	
-	public Chat addChatGame(Game game) {
-		Session session = Manager.getSession();
-		Transaction tx = null;
+	public int addChatGame(Game game) {
 		Chat chat = new Chat();
 		chat.setGame(game);
-		Integer cid;
-		
-		try {
-	         tx = session.beginTransaction();
-	         cid = (Integer) session.save(chat); 
-	         chat.setId(cid);
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }
-		
-		return chat;
+		return commitToDB(game);
 	}
 	
 	public List<Chat> listChats() {
-		 Session session = Manager.getSession();
+		 Session session = getSession();
 	      Transaction tx = null;
 	      List<Chat> chats = null;
 	      
@@ -69,31 +40,11 @@ public class ManageChat {
 	      return chats;
 	}
 	
-	public void updateChat(Chat chat) {
-		Session session = Manager.getSession();
-	      Transaction tx = null;
-	      
-	      try {
-	         tx = session.beginTransaction();
-			 session.update(chat); 
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }
+	public int updateChat(Chat chat) {
+		return updateToDB(chat);
 	}
 	
-	public void deleteChat(Chat chat) {
-		Session session = Manager.getSession();
-	      Transaction tx = null;
-	      
-	      try {
-	         tx = session.beginTransaction();
-	         session.delete(chat); 
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }
+	public int deleteChat(Chat chat) {
+		return deleteToDB(chat);
 	}
 }

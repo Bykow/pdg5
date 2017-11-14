@@ -10,28 +10,13 @@ import org.hibernate.Transaction;
 import pdg5.server.persistent.Friend;
 import pdg5.server.persistent.User;
 
-public class ManageFriend {
-	public Friend addFriend(User fromUser, User toUser) {
-		Session session = Manager.getSession();
-		Transaction tx = null;
-		Friend friend = new Friend(fromUser, toUser, new Date());
-		Integer tntID;
-		
-		try {
-	         tx = session.beginTransaction();
-	         tntID = (Integer) session.save(friend); 
-	         friend.setId(tntID);
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }
-		
-		return friend;
+public class ManageFriend extends Manager {
+	public int addFriend(User fromUser, User toUser) {
+		return commitToDB(new Friend(fromUser, toUser, new Date()));
 	}
 	
 	public List<Friend> listFriend() {
-		 Session session = Manager.getSession();
+		 Session session = getSession();
 	      Transaction tx = null;
 	      List<Friend> friends = null;
 	      
@@ -47,31 +32,11 @@ public class ManageFriend {
 	      return friends;
 	}
 	
-	public void updateFriend(Friend friend) {
-		Session session = Manager.getSession();
-	      Transaction tx = null;
-	      
-	      try {
-	         tx = session.beginTransaction();
-			 session.update(friend); 
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }
+	public int updateFriend(Friend friend) {
+		return updateToDB(friend);
 	}
 	
-	public void deleteFriend(Friend friend) {
-		Session session = Manager.getSession();
-	      Transaction tx = null;
-	      
-	      try {
-	         tx = session.beginTransaction();
-	         session.delete(friend); 
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }
+	public int deleteFriend(Friend friend) {
+		return deleteFriend(friend);
 	}
 }

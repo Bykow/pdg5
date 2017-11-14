@@ -39,7 +39,7 @@ public class ManageUser extends Manager {
      * @return a corresponding User instance
      */
     public User getUserByEmail(String email) {
-    	Session session = Manager.getSession();
+    	Session session = getSession();
         email = email.toLowerCase();
         session.beginTransaction();
         User u = session.createQuery("from User where email=:email", User.class)
@@ -56,7 +56,7 @@ public class ManageUser extends Manager {
      * @return a corresponding User instance
      */
     public User getUserByUsername(String username) {
-    	Session session = Manager.getSession();
+    	Session session = getSession();
         username = username.toLowerCase();
         session.beginTransaction();
         User u = session.createQuery("from User where username=:username", User.class)
@@ -67,7 +67,7 @@ public class ManageUser extends Manager {
     }
 	
 	public List<User> listUser() {
-		 Session session = Manager.getSession();
+		 Session session = getSession();
 	      Transaction tx = null;
 	      List<User> users = null;
 	      

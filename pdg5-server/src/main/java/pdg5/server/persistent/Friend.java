@@ -18,32 +18,18 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "friend", catalog = "pdg")
-public class Friend implements java.io.Serializable {
+public class Friend extends AbstractData implements java.io.Serializable {
 
-	private Integer id;
 	private User userByToUser;
 	private User userByFromUser;
 	private Date lastMod;
 
-	public Friend() {
-	}
+	public Friend() {}
 
 	public Friend(User userByToUser, User userByFromUser, Date lastMod) {
 		this.userByToUser = userByToUser;
 		this.userByFromUser = userByFromUser;
 		this.lastMod = lastMod;
-	}
-
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "ID", unique = true, nullable = false)
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

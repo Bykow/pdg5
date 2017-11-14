@@ -12,8 +12,8 @@ import pdg5.server.persistent.Message;
 import pdg5.server.persistent.User;
 
 public class ManageMessage extends Manager {
-	public int addMessage(String content, User user, Chat chat) {
-		return commitToDB(new Message(chat,user,content,new Date()));
+	public Message addMessage(String content, User user, Chat chat) {
+		return (Message)commitToDB(new Message(chat,user,content,new Date()));
 	}
 	
 	public List<Message> listMessages() {

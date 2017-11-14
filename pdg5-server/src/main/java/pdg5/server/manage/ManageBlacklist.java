@@ -11,8 +11,8 @@ import pdg5.server.persistent.Blacklist;
 import pdg5.server.persistent.User;
 
 public class ManageBlacklist extends Manager {
-	public int addBlacklist(User fromUser, User toUser) {
-		return commitToDB(new Blacklist(fromUser, toUser, new Date()));
+	public Blacklist addBlacklist(User fromUser, User toUser) {
+		return (Blacklist)commitToDB(new Blacklist(fromUser, toUser, new Date()));
 	}
 	
 	public List<Blacklist> listBlacklist() {

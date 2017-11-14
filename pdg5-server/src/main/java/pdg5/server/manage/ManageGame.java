@@ -12,7 +12,7 @@ import pdg5.server.persistent.Tournament;
 import pdg5.server.persistent.User;
 
 public class ManageGame extends Manager {
-	public int addGame(String title, User player1, User player2, Tournament tournament, String remainingLetters) {
+	public Game addGame(String title, User player1, User player2, Tournament tournament, String remainingLetters) {
 		Game game = new Game();
 		game.setTitle(title);
 		game.setUserByPlayer1(player1);
@@ -22,10 +22,10 @@ public class ManageGame extends Manager {
 		game.setLastActivity(new Date());
 		game.setRemainingLetters(remainingLetters);
 
-		return commitToDB(game);
+		return (Game)commitToDB(game);
 	}
 	
-	public int addGame(String title, User player1, User player2, String remainingLetters) {
+	public Game addGame(String title, User player1, User player2, String remainingLetters) {
 		Game game = new Game();
 		game.setTitle(title);
 		game.setUserByPlayer1(player1);
@@ -34,7 +34,7 @@ public class ManageGame extends Manager {
 		game.setLastActivity(new Date());
 		game.setRemainingLetters(remainingLetters);
 
-		return commitToDB(game);
+		return (Game)commitToDB(game);
 	}
 	
 	public List<Game> listGame() {

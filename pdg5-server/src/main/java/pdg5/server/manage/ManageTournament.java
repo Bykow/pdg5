@@ -11,8 +11,8 @@ import pdg5.server.persistent.Tournament;
 
 public class ManageTournament extends Manager {
 	
-	public int addTournament(String title) {
-		return commitToDB(new Tournament(title, new Date()));
+	public Tournament addTournament(String title) {
+		return (Tournament)commitToDB(new Tournament(title, new Date()));
 	}
 	
 	public List<Tournament> listTournaments() {

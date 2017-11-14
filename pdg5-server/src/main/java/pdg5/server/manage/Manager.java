@@ -52,7 +52,7 @@ public class Manager {
 		}
 	}
 
-	public int commitToDB(AbstractData abstractData) {
+	public AbstractData commitToDB(AbstractData abstractData) {
 		Integer id;
 		int code = Protocol.OK;
 
@@ -67,7 +67,7 @@ public class Manager {
 			e.printStackTrace();
 		}
 
-		return code;
+		return abstractData;
 	}
 
 	public int updateToDB(AbstractData abstractData) {

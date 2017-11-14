@@ -11,8 +11,8 @@ import pdg5.server.persistent.Friend;
 import pdg5.server.persistent.User;
 
 public class ManageFriend extends Manager {
-	public int addFriend(User fromUser, User toUser) {
-		return commitToDB(new Friend(fromUser, toUser, new Date()));
+	public Friend addFriend(User fromUser, User toUser) {
+		return (Friend)commitToDB(new Friend(fromUser, toUser, new Date()));
 	}
 	
 	public List<Friend> listFriend() {

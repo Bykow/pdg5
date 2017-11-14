@@ -13,8 +13,8 @@ import pdg5.server.persistent.Matchlist;
 
 public class ManageMatchlist extends Manager {
 	
-	public int addMatchlist(Tournament tournament, User user) {
-		return commitToDB(new Matchlist(tournament, user));
+	public Matchlist addMatchlist(Tournament tournament, User user) {
+		return (Matchlist)commitToDB(new Matchlist(tournament, user));
 	}
 	
 	public List<Matchlist> listMatchlist() {

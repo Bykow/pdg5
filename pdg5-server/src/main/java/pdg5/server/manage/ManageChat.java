@@ -11,16 +11,16 @@ import pdg5.server.persistent.Game;
 import pdg5.server.persistent.Tournament;
 
 public class ManageChat extends Manager {
-	public int addChatTournament(Tournament tournament) {
+	public Chat addChatTournament(Tournament tournament) {
 		Chat chat = new Chat();
 		chat.setTournament(tournament);
-		return commitToDB(tournament);
+		return (Chat)commitToDB(tournament);
 	}
 	
-	public int addChatGame(Game game) {
+	public Chat addChatGame(Game game) {
 		Chat chat = new Chat();
 		chat.setGame(game);
-		return commitToDB(game);
+		return (Chat)commitToDB(game);
 	}
 	
 	public List<Chat> listChats() {

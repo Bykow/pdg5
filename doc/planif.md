@@ -72,6 +72,9 @@
 
 ## Itération 13: *19 décembre 2017*
 > - [ ] Mode tournoi
+>   - [ ] Implémentation d'une IA
+>   - [ ] Propre logique du jeu
+>   - [ ] Adaptation du modèle du jeu
 > - [ ] Rapport et finalisation
 
 <hr/>

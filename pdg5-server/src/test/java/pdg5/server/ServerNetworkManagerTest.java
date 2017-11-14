@@ -2,7 +2,7 @@ package pdg5.server;
 
 import org.junit.jupiter.api.Test;
 import pdg5.client.ClientNetworkManager;
-import pdg5.common.protocole.SignIn;
+import pdg5.common.protocol.SignIn;
 
 import java.io.IOException;
 

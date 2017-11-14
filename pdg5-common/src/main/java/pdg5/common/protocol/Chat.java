@@ -1,4 +1,4 @@
-package pdg5.common.protocole;
+package pdg5.common.protocol;
 
 import java.io.Serializable;
 import java.util.Date;

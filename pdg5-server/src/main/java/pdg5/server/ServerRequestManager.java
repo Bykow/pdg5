@@ -1,7 +1,7 @@
 package pdg5.server;
 
-import pdg5.common.protocole.SignIn;
-import pdg5.common.protocole.SignUp;
+import pdg5.common.protocol.SignIn;
+import pdg5.common.protocol.SignUp;
 
 /**
  * @author Maxime Guillod

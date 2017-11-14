@@ -1,9 +1,9 @@
 package pdg5.client;
 
-import pdg5.common.protocole.Chat;
-import pdg5.common.protocole.Game;
-import pdg5.common.protocole.Load;
-import pdg5.common.protocole.ValidationWord;
+import pdg5.common.protocol.Chat;
+import pdg5.common.protocol.Game;
+import pdg5.common.protocol.Load;
+import pdg5.common.protocol.ValidationWord;
 
 /**
  *

@@ -13,8 +13,6 @@ import pdg5.server.persistent.User;
 public class ManageUser extends Manager {
 	
 	public int addUser(String email,String username, String pass) {
-		Session session = Manager.getSession();
-		Transaction tx = null;
 		String hashedPass = BCrypt.hashpw(pass, BCrypt.gensalt());
 		email = email.toLowerCase();
 		username = username.toLowerCase();
@@ -22,14 +20,9 @@ public class ManageUser extends Manager {
 		user.setEmail(email);
 		user.setUsername(username);
 		user.setPass(hashedPass);
-		Integer usrID;
-		int exitCode;
-
 		//todo if the email/username is already taken ?
 		
-		exitCode = commitToDB(user);
-		
-		return exitCode;
+		return commitToDB(user);
 	}
 	
 	/**

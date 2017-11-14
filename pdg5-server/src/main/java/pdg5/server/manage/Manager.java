@@ -3,12 +3,17 @@ package pdg5.server.manage;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import pdg5.common.Protocol;
+import pdg5.server.persistent.AbstractData;
 
 public class Manager {
 
 	private static SessionFactory factory = null;
 	private static Session session = null;
+	Transaction transaction = null;
+
 
 	private static SessionFactory getFactory() {
 		if(factory == null) {
@@ -40,5 +45,55 @@ public class Manager {
 		if(session != null) {
 			session.close();
 		}
+	}
+
+	public int commitToDB(AbstractData abstractData) {
+		Integer id;
+		int code = Protocol.OK;
+
+		try {
+			transaction = session.beginTransaction();
+			id = (Integer) session.save(abstractData);
+			abstractData.setId(id);
+			transaction.commit();
+		} catch (HibernateException e) {
+			if (transaction !=null) transaction.rollback();
+			code = Protocol.ERROR;
+			e.printStackTrace();
+		}
+
+		return code;
+	}
+
+	public int updateToDB(AbstractData abstractData) {
+		int code = Protocol.OK;
+
+		try {
+			transaction = session.beginTransaction();
+			session.update(abstractData);
+			transaction.commit();
+		} catch (HibernateException e) {
+			if (transaction!=null) transaction.rollback();
+			code = Protocol.ERROR;
+			e.printStackTrace();
+		}
+
+		return code;
+	}
+
+	public int deleteToDB(AbstractData abstractData) {
+		int code = Protocol.OK;
+
+		try {
+			transaction = session.beginTransaction();
+			session.delete(abstractData);
+			transaction.commit();
+		} catch (HibernateException e) {
+			if (transaction!=null) transaction.rollback();
+			code = Protocol.ERROR;
+			e.printStackTrace();
+		}
+
+		return code;
 	}
 }

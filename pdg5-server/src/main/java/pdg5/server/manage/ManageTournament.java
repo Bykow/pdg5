@@ -9,25 +9,15 @@ import org.hibernate.Transaction;
 
 import pdg5.server.persistent.Tournament;
 
-public class ManageTournament {
+public class ManageTournament extends Manager {
 	
-	public Tournament addTournament(String title) {
+	public int addTournament(String title) {
 		Session session = Manager.getSession();
 		Transaction tx = null;
 		Tournament tournament = new Tournament(title, new Date());
 		Integer tntID;
 		
-		try {
-	         tx = session.beginTransaction();
-	         tntID = (Integer) session.save(tournament); 
-	         tournament.setId(tntID);
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }
-		
-		return tournament;
+		return commitToDB(tournament);
 	}
 	
 	public List<Tournament> listTournaments() {

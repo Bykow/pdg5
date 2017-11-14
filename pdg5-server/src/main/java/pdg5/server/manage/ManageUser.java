@@ -10,7 +10,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import pdg5.common.Protocol;
 import pdg5.server.persistent.User;
 
-public class ManageUser {
+public class ManageUser extends Manager {
 	
 	public int addUser(String email,String username, String pass) {
 		Session session = Manager.getSession();
@@ -27,17 +27,7 @@ public class ManageUser {
 
 		//todo if the email/username is already taken ?
 		
-		try {
-	         tx = session.beginTransaction();
-	         usrID = (Integer) session.save(user); 
-	         user.setId(usrID);
-	         tx.commit();
-	         exitCode = Protocol.OK;
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         exitCode = Protocol.COULDNOTADDUSER;
-	         e.printStackTrace(); 
-	      }
+		exitCode = commitToDB(user);
 		
 		return exitCode;
 	}
@@ -112,31 +102,11 @@ public class ManageUser {
     }
 	
 	public void updateUser(User user) {
-		Session session = Manager.getSession();
-	      Transaction tx = null;
-	      
-	      try {
-	         tx = session.beginTransaction();
-			 session.update(user); 
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }
+		updateToDB(user);
 	}
 	
 	public void deleteUser(User user) {
-		Session session = Manager.getSession();
-	      Transaction tx = null;
-	      
-	      try {
-	         tx = session.beginTransaction();
-	         session.delete(user); 
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }
+		deleteToDB(user);
 	}
 
 }

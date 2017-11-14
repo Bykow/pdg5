@@ -18,9 +18,8 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "message", catalog = "pdg")
-public class Message implements java.io.Serializable {
+public class Message extends AbstractData implements java.io.Serializable {
 
-	private Integer id;
 	private Chat chat;
 	private User user;
 	private String content;
@@ -34,18 +33,6 @@ public class Message implements java.io.Serializable {
 		this.user = user;
 		this.content = content;
 		this.created = created;
-	}
-
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "ID", unique = true, nullable = false)
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

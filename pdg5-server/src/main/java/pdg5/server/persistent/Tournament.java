@@ -19,9 +19,8 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "tournament", catalog = "pdg")
-public class Tournament implements java.io.Serializable {
+public class Tournament extends AbstractData implements java.io.Serializable {
 
-	private Integer id;
 	private String title;
 	private Date created;
 	private Set chats = new HashSet(0);
@@ -42,18 +41,6 @@ public class Tournament implements java.io.Serializable {
 		this.chats = chats;
 		this.matchlists = matchlists;
 		this.games = games;
-	}
-
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "ID", unique = true, nullable = false)
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	@Column(name = "title", nullable = false, length = 45)

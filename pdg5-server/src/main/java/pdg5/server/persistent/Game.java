@@ -29,9 +29,8 @@ import javax.sql.rowset.serial.SerialException;
  */
 @Entity
 @Table(name = "game", catalog = "pdg")
-public class Game implements java.io.Serializable {
+public class Game extends AbstractData implements java.io.Serializable {
 
-	private Integer id;
 	private Tournament tournament;
 	private User userByPlayer2;
 	private User userByPlayer1;
@@ -62,18 +61,6 @@ public class Game implements java.io.Serializable {
 		this.created = created;
 		this.lastActivity = lastActivity;
 		this.chats = chats;
-	}
-
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "ID", unique = true, nullable = false)
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -29,4 +29,15 @@ public class Play extends Message {
        this.playerID = playerID;
     }
 
+   public Composition getComposition() {
+      return composition;
+   }
+
+   public int getGameID() {
+      return gameID;
+   }
+
+   public int getPlayerID() {
+      return playerID;
+   }
 }

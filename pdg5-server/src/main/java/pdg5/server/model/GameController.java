@@ -24,6 +24,7 @@ import pdg5.common.protocol.Game;
 import pdg5.common.protocol.Load;
 import pdg5.common.protocol.Message;
 import pdg5.common.protocol.ValidationWord;
+import pdg5.server.manage.ManageUser;
 
 /**
  * @author Jimmy Verdasca
@@ -77,6 +78,8 @@ public class GameController {
     */
    private static TST dictionnary = new TST();
    
+   private ManageUser manageUser;
+   
    /**
     * Constructor
     */
@@ -99,6 +102,8 @@ public class GameController {
       } catch (IOException ex) {
          Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
       }
+      
+      manageUser = new ManageUser();
    }
    
    /**
@@ -152,6 +157,7 @@ public class GameController {
       bonus.add(ts.getNextTuile());
       bonus.add(ts.getNextTuile());
       
+      // TODO send to second player
       return getGameFromModel(model.getGameId(), idPlayer1);
    }
    
@@ -162,7 +168,7 @@ public class GameController {
     * @return a new Board filled with Tiles
     */
    public Board initBoard(TileStack ts, int idPlayer) {
-      Board board = new Board(userManager.getUserNameById(idPlayer), idPlayer);
+      Board board = new Board(manageUser.getUserNameById(idPlayer), idPlayer);
       List<Tile> letters = new ArrayList<>();
       for (int i = 0; i < 7; i++) {
          letters.add(ts.getNextTuile());
@@ -190,7 +196,7 @@ public class GameController {
       for (Integer idGame : clientGames.get(idClient)) {
          games.add(getGameFromModel(idGame, idClient));
       }
-      return new Load(games, idClient);
+      return new Load(games);
    }
    
    private Game getGameFromModel(int idGame, int idClient) {
@@ -211,5 +217,120 @@ public class GameController {
 
    public Message validateComposition(Composition composition) {
       return new ValidationWord(dictionnary.contains(composition.toString()));
+   }
+
+   /**
+    * a player try to play a word in a given (id) game. The server first check if the move is valid :
+    * 1) Check if the composition is a valide word Structure
+    * 2) Check if the word is in the dictionnary 
+    * 3) Check if the player possess the word letters
+    * 
+    * @param gameID unique id of the game
+    * @param playerID unique id of the player trying the move
+    * @param composition containing the word
+    * @return an ErrorMessage if a check fails or a Game 
+    * with the new State because the word has been played
+    */
+   public Message play(int gameID, int playerID, Composition composition) {
+      // Check if the composition is a valide word Structure
+      if (!composition.isValid()) {
+         return new ErrorMessage("The given Composition isn't a valide word structure");
+      }
+      
+      // Check if the word is in the dictionnary 
+      // We can use trim because we checked the structure of the composition before
+      String word = composition.getStringForm().trim();
+      if (!dictionnary.contains(word)) {
+         return new ErrorMessage("The given word isn't in our dictionnary");
+      }
+      
+      // Check if the player possess the word letters
+      GameModel model = games.get(gameID);
+      Board board = model.getBoardById(playerID);
+      List<Tile> letters = board.getLetters();
+      StringBuilder sb = new StringBuilder();
+      for (Tile letter : letters) {
+         sb.append(letter.getLetter());
+      }
+      
+      for (Tile bonus : board.getBonus()) {
+         sb.append(bonus.getLetter());
+      }
+      
+      if (!isContained(word, sb.toString())) {
+         return new ErrorMessage("You don't have the letters to play this word. Tried : " + word + " have : " + sb.toString());
+      }
+      
+      // Calculate the value of the word
+      int scoreToAdd = composition.getValue(board);
+      
+      // Update model with this word played (score, turn of turnManager, Tiles of player)
+      // score
+      board.setScore(scoreToAdd + board.getScore());
+      // turn in turnManager
+      TurnManager tm = playerTurnManager.get(gameID);
+      tm.turnEnded();
+      // Squares
+      Composition comp = model.getComposition();
+      comp.setBonus(tm.getSquares(playerID));
+      // remove composition letters and bonus letters
+      comp.removeAll();
+      board.setBonus(new ArrayList<Tile>());
+      // get new letters from TileStack and add it to the board
+      TileStack ts = tileStacks.get(gameID);
+      List<Tile> newLetters = board.getLetters();
+      for (int i = 0; i < word.length(); i++) {
+         if(ts.getTileLeft() > 0) {
+            newLetters.add(ts.getNextTuile());
+         }
+      }
+      board.setLetters(newLetters);
+      
+      // TODO check if game ended
+      
+      // Send to player the new state of the game
+      // TODO send to second player
+      return getGameFromModel(gameID, playerID);
+   }
+   
+   /**
+    * Check if the letters of a string (contained), are contained in an other string (container)
+    * 
+    * @param contained smaller string
+    * @param container bigger or equal string
+    * @return true if letters of contained are contained in container
+    */
+   private boolean isContained(String contained, String container) {
+      Map<Character, Integer> occurenceContained = getOccurenceMapFromString(contained);
+      Map<Character, Integer> occurenceContainer = getOccurenceMapFromString(container);
+      for (Character character : occurenceContained.keySet()) {
+         // if the container don't have the character in the map 
+         // or has less occurence of contained then it's false
+         if(!occurenceContainer.containsKey(character) || 
+                 occurenceContained.get(character) > occurenceContainer.get(character)) {
+            return false;
+         }
+      }
+      return true;
+   }
+   
+   /**
+    * return a map where keys are the letters of a String 
+    * and the value the occurence of this letter
+    * 
+    * @param string we want to be mapped
+    * @return a map where keys are the letters of a String 
+    * and the value the occurence of this letter
+    */
+   private Map<Character, Integer> getOccurenceMapFromString(String string) {
+      Map<Character, Integer> map = new HashMap<>();
+      for (char c : string.toCharArray()) {
+         if(map.containsKey(c)) {
+            int nbOccurence = map.get(c);
+            map.put(c, ++nbOccurence);
+         } else {
+            map.put(c, 1);
+         }
+      }
    }
 }

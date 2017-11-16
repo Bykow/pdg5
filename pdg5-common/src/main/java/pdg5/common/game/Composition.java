@@ -99,7 +99,20 @@ public class Composition implements Serializable{
       return false;
    }
 
-   
+   /**
+    * return a String representation of the Composition 
+    *  with space instead of null Tile
+    * 
+    * @return a String representation of the Composition 
+    *  with space instead of null Tile
+    */
+   public String getStringForm() {
+      StringBuilder sb = new StringBuilder();
+      for (Tile tile : word) {
+         sb.append(tile.getLetter());
+      }
+      return sb.toString();
+   }
    
    
 
@@ -129,6 +142,12 @@ public class Composition implements Serializable{
       Tile temp = word[position];
       word[position] = null;
       return temp;
+   }
+   
+   public void removeAll() {
+      for (int i = 0; i < word.length; i++) {
+         remove(i);
+      }
    }
 
    /**
@@ -178,7 +197,7 @@ public class Composition implements Serializable{
     * 
     * @return true if the Composition is potentially a word, false else
     */
-   private boolean isValid() {
+   public boolean isValid() {
       boolean endOfWord = false;
       int sizeOfWord = 0;
       for (Tile tile : word) {

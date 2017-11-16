@@ -5,8 +5,10 @@ import pdg5.server.manage.ManageUser;
 import pdg5.server.model.GameController;
 import pdg5.server.process.ProcessNewGame;
 import pdg5.server.process.ProcessNoop;
+import pdg5.server.process.ProcessPlay;
 import pdg5.server.process.ProcessSignIn;
 import pdg5.server.process.ProcessSignUp;
+import pdg5.server.process.ProcessValidation;
 
 /**
  * @author Maxime Guillod
@@ -36,6 +38,12 @@ public class ServerRequestManager {
             
         } else if (o instanceof NewGame) {
            return new ProcessNewGame((NewGame) o, gameController).execute();
+           
+        } else if (o instanceof Validation) {
+           return new ProcessValidation((Validation) o, gameController).execute();
+           
+        } else if (o instanceof Play) {
+           return new ProcessPlay((Play) o, gameController).execute();
            
         }
 

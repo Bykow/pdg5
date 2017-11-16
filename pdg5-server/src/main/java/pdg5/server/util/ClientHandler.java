@@ -38,6 +38,10 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    public void addToQueue(Message message) {
+        queueOut.add(message);
+    }
+
     @Override
     public void run() {
         // Start receive message

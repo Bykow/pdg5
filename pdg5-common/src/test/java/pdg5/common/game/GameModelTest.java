@@ -12,6 +12,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -63,7 +64,7 @@ public class GameModelTest {
       board2.setBonus(getUniqueLettersList(2));
       
       boards = new Board[]{board1, board2};
-      model = new GameModel(boards, 42);
+      model = new GameModel(boards, 42, new Date(), 0);
    }
    
    @After

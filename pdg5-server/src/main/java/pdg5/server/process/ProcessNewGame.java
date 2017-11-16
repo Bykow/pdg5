@@ -1,7 +1,10 @@
 package pdg5.server.process;
 
-import pdg5.common.protocol.ErrorMessage;
+import pdg5.common.game.Utils;
 import pdg5.common.protocol.Message;
+import pdg5.common.protocol.NewGame;
+import pdg5.server.manage.ManageUser;
+import pdg5.server.model.GameController;
 
 /**
  * When a client ask for a new game, the server use this class to add 
@@ -9,8 +12,21 @@ import pdg5.common.protocol.Message;
  */
 public class ProcessNewGame implements GenericProcess {
 
-   public ProcessNewGame(int idPlayerAskingForGame) {
-      
+   
+   private GameController gameController;
+   private ManageUser manageUser;
+   private NewGame newGame;
+   
+   
+   /**
+    * Constructor
+    * 
+    * @param newGame contains id of players who will play the new game
+    * @param gm GameController that will create and stock the new game
+    */
+   public ProcessNewGame(NewGame newGame, GameController gm) {
+      this.newGame = newGame;
+      this.gameController = gm;
    }
    
    /**
@@ -19,8 +35,11 @@ public class ProcessNewGame implements GenericProcess {
     */
    @Override
    public Message execute() {
-      //TODO
-      return new ErrorMessage("Waiting for opponent being selected.");
+      if(newGame.getIdOpponentWished() == Utils.RANDOM_OPPONENT) {
+         return gameController.askNewGame(newGame.getIdPlayerAsking());
+      } else {
+         return gameController.askOpponentNewGame(newGame.getIdPlayerAsking(), newGame.getIdOpponentWished());
+      }
    }
    
 }

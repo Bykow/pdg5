@@ -33,5 +33,4 @@ public class Load extends Message {
     public List<Game> getGames() {
         return games;
     }
-
 }

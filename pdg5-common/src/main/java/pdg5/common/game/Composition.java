@@ -41,6 +41,11 @@ public class Composition implements Serializable{
             return tile.getValue() + 10;
          }
          
+      }, W {
+         @Override
+         public int getFinalValue(Tile tile) {
+            return tile.getValue();
+         }
       };
       /**
        * return the new value when a Tile pass through a square
@@ -51,9 +56,6 @@ public class Composition implements Serializable{
       public abstract int getFinalValue(Tile tile);
    }
 
-   // Min-Max size of a word
-   private static final int WORD_MAX_SIZE = 7; 
-   private static final int WORD_MIN_SIZE = 2;
    // seven or less Tiles representing the current word
    private final Tile[] word; 
    // seven current  bonus square where letters can obtain more values
@@ -63,8 +65,8 @@ public class Composition implements Serializable{
     * Constructor
     */
    public Composition() {
-      word = new Tile[WORD_MAX_SIZE];
-      bonus = new Square[WORD_MAX_SIZE];
+      word = new Tile[Utils.WORD_MAX_SIZE];
+      bonus = new Square[Utils.WORD_MAX_SIZE];
    }
    
    /**
@@ -75,10 +77,10 @@ public class Composition implements Serializable{
     * isn't the good size (WORD_MAX_SIZE)
     */
    public void setBonus(Square[] bonusList) throws IllegalArgumentException {
-      if(bonusList.length != WORD_MAX_SIZE) {
-         throw new IllegalArgumentException(String.format("the length of array bonus parameter is not %d", WORD_MAX_SIZE));
+      if(bonusList.length != Utils.WORD_MAX_SIZE) {
+         throw new IllegalArgumentException(String.format("the length of array bonus parameter is not %d", Utils.WORD_MAX_SIZE));
       }
-      bonus = Arrays.copyOf(bonusList, WORD_MAX_SIZE);
+      bonus = Arrays.copyOf(bonusList, Utils.WORD_MAX_SIZE);
    }
 
    /**
@@ -88,7 +90,7 @@ public class Composition implements Serializable{
     * @return True if the Tile as been put or False else
     */
    public boolean push(Tile tile) {
-      for (int i = 0; i < WORD_MAX_SIZE; i++) {
+      for (int i = 0; i < Utils.WORD_MAX_SIZE; i++) {
          if (word[i] == null) {
             word[i] = tile;
             return true;
@@ -96,6 +98,10 @@ public class Composition implements Serializable{
       }
       return false;
    }
+
+   
+   
+   
 
    /**
     * add a Tile at a given position, works only if the position is empty
@@ -142,7 +148,7 @@ public class Composition implements Serializable{
       
       int score = 0;
       // pass the letters through the square to know the real current value
-      for (int i = 0; i < WORD_MAX_SIZE; i++) {
+      for (int i = 0; i < Utils.WORD_MAX_SIZE; i++) {
          if(word[i] != null) {
             score += bonus[i].getFinalValue(word[i]);
          }
@@ -185,7 +191,7 @@ public class Composition implements Serializable{
          }
       }
       
-      return sizeOfWord >= WORD_MIN_SIZE;
+      return sizeOfWord >= Utils.WORD_MIN_SIZE;
    }
    
    /**

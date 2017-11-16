@@ -8,7 +8,7 @@ import pdg5.server.model.TileStack;
  * Created on 10.10.17 by Bykow
  */
 public class TileStackTest {
-    private TileStack tileStack = new TileStack(Protocol.LANG_FR);
+    private TileStack tileStack = new TileStack(Protocol.Languages.LANG_FR.toString());
 
     @Test
     public void getNextTuile() throws Exception {

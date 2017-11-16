@@ -6,6 +6,7 @@
 package pdg5.common.game;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.junit.After;
 import org.junit.Before;
@@ -27,7 +28,7 @@ public class CompositionTest {
 
       Board[] boards = new Board[]{new Board("Test1", 13), new Board("Test2", 17)};
 
-      game = new GameModel(boards, 5);
+      game = new GameModel(boards, 5, new Date(), 0);
       comp = new Composition();
    }
 

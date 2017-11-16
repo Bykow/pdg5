@@ -6,6 +6,7 @@ import pdg5.common.protocol.Message;
 import pdg5.common.protocol.SignIn;
 import pdg5.server.manage.ManageGame;
 import pdg5.server.manage.ManageUser;
+import pdg5.server.model.GameController;
 import pdg5.server.persistent.User;
 
 /**
@@ -15,18 +16,17 @@ public class ProcessSignIn implements GenericProcess {
     private SignIn signIn;
     private ManageUser manageUser;
     private ManageGame manageGame;
-
-    public ProcessSignIn(SignIn signIn, ManageUser manageUser) {
+    private GameController gameController;
+    public ProcessSignIn(SignIn signIn, ManageUser manageUser, GameController gameController) {
         this.signIn = signIn;
         this.manageUser = manageUser;
+        this.gameController = gameController;
     }
 
     @Override
     public Message execute() {
         if(manageUser.isCorrectPassword(signIn.getUsername(), signIn.getPassword())) {
-            //return new Load(manageGame(signIn.getUsername()));
-            //todo waiting for game logic to improve
-            return new ErrorMessage("Login valid for user " + signIn.getUsername());
+            return gameController.findGamesOf(manageUser.getUserByUsername(signIn.getLogin()).getId());
         } else {
             return new ErrorMessage("Password invalid in SignIn for user " + signIn.getUsername());
         }

@@ -1,0 +1,113 @@
+0 vide je joue l'ia joue je note
+2 *2
+3 *3
+w w
+
+
+Liste premier Joueur
+1)200w0w 
+2)00w0w3 
+3)w3w000 
+4)0w0w20 
+5)002ww0 
+6)w0030w 
+
+Liste deuxième Joueur
+6)w0030w
+5)002ww0
+4)0w0w20
+3)w3w000
+2)00w0w3
+1)200w0w
+
+Liste IA
+5)002ww0
+4)0w0w20
+3)w3w000
+2)00w0w3
+1)200w0w
+6)w0030w
+
+ANALYSE
+TOURNOI :
+
+partie 1 :
+moi    opposant
+000000 000000 
+
+200w0w 002ww0 
+00w0w3 0w0w20 
+w3w000 w3w000
+0w0w20 00w0w3 
+002ww0 200w0w 
+w0030w w0030w
+
+200w0w 002ww0 
+00w0w3 0w0w20 
+w3w000 w3w000 
+0w0w20 00w0w3 
+002ww0 200w0w 
+w0030w w0030w
+
+200w0w 002ww0 
+00w0w3 0w0w20 
+w3w000 w3w000
+0w0w20 00w0w3
+002ww0
+
+partie 2 :
+000000 000000
+
+200w0w 002ww0
+00w0w3 0w0w20
+w3w000 w3w000
+0w0w20 00w0w3
+
+pareil que partie 1...
+
+partie 3 :
+000000 000000
+
+200w0w 002ww0
+00w0w3 0w0w20
+w3w000 w3w000
+0w0w20 00w0w3
+002ww0 200w0w
+w0030w w0030w
+
+pareil que 3 et 2
+
+liste différents :
+000000 premier 
+200w0w deuxieme pour un et suite aléatoire
+002ww0 deuxieme pour un et suite aléatoire
+0w0w20 suite aléatoire
+00w0w3 suite aléatoire
+w3w000 suite aléatoire
+w0030w suite aléatoire
+
+réussite de prédire en milieu d'une partie
+
+EN NORMAL :
+
+partie contre Franck :
+200w0w w0030w
+00w0w3 002ww0
+w3w000 
+
+partie contre rapha E : 
+
+200w0w w0030w
+00w0w3 002ww0
+
+partie contre Monique : 
+200w0w w0030w
+00w0w3 002ww0
+w3w000 0w0w20
+0w0w20 w3w000
+002ww0 00w0w3
+w0030w 200w0w
+
+200w0w
+
+

@@ -1,6 +1,7 @@
 package pdg5.common.game;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Class representing the model of the game. 
@@ -16,8 +17,15 @@ public class GameModel implements Serializable {
    }
 
    private int gameId; //Unique id of the game
+   
+   /**
+    * unqiue id of the Tournament, 0 if it is not a Tournament
+    */
+   private int idTournament;
    private Board[] boards; //Two parts of the game one for each player
    private Composition composition; //Word in progress for this client
+   private final Date creation;
+   private Date lastMove;
 
    /**
     * Constructor
@@ -26,13 +34,16 @@ public class GameModel implements Serializable {
     * @throws IllegalArgumentException if the array has wrong length, 
     *                                  should be 2
     */
-   public GameModel(Board[] boards, int gameId) throws IllegalArgumentException{
+   public GameModel(Board[] boards, int gameId, Date creation, int idTournament) throws IllegalArgumentException{
       if(boards.length != PlayerBoard.values().length){
          throw new IllegalArgumentException("There must be exactly two boards in the array");
       }
       this.boards = boards;
       this.gameId = gameId;
       composition = new Composition();
+      this.creation = creation;
+      this.idTournament = idTournament;
+      lastMove = new Date();
    }
 
    /*
@@ -77,6 +88,45 @@ public class GameModel implements Serializable {
       }
       throw new IllegalArgumentException("the playerId is not in the game");
    }
+
+   /**
+    * return the unique id of this game
+    * 
+    * @return the unique id of this game
+    */
+   public int getGameId() {
+      return gameId;
+   }
+
+   /**
+    * return the date we created this game
+    * 
+    * @return the date we created this game
+    */
+   public Date getCreation() {
+      return creation;
+   }
+
+   /**
+    * return the date when the last player played a word
+    * 
+    * @return the date when the last player played a word
+    */
+   public Date getLastMove() {
+      return lastMove;
+   }
+
+   /**
+    * return the unique id of the associated tournament. 
+    * It's 0 if it is not associated.
+    * 
+    * @return the unique id of the associated tournament
+    */
+   public int getIdTournament() {
+      return idTournament;
+   }
+   
+   
    
    /**
     * compare a GameModel with an Object and 

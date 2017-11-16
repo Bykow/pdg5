@@ -29,14 +29,29 @@ public class Play extends Message {
        this.playerID = playerID;
     }
 
+    /**
+     * return the Composition containing the word we try to play
+     * 
+     * @return the Composition containing the word we try to play
+     */
    public Composition getComposition() {
       return composition;
    }
 
+   /**
+    * return the unique id of the game we try the move
+    * 
+    * @return the unique id of the game we try the move
+    */
    public int getGameID() {
       return gameID;
    }
 
+   /**
+    * return the unique id of the player trying to play
+    * 
+    * @return the unique id of the player trying to play
+    */
    public int getPlayerID() {
       return playerID;
    }

@@ -19,7 +19,7 @@ public class GameModel implements Serializable {
    private int gameId; //Unique id of the game
    
    /**
-    * unqiue id of the Tournament, 0 if it is not a Tournament
+    * unique id of the Tournament, 0 if it is not a Tournament
     */
    private int idTournament;
    private Board[] boards; //Two parts of the game one for each player
@@ -125,8 +125,6 @@ public class GameModel implements Serializable {
    public int getIdTournament() {
       return idTournament;
    }
-   
-   
    
    /**
     * compare a GameModel with an Object and 

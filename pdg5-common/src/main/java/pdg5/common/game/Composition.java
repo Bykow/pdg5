@@ -144,6 +144,9 @@ public class Composition implements Serializable{
       return temp;
    }
    
+   /**
+    * remove all the Tiles in the Composition
+    */
    public void removeAll() {
       for (int i = 0; i < word.length; i++) {
          remove(i);

@@ -27,8 +27,6 @@ import pdg5.common.protocol.ValidationWord;
 import pdg5.server.manage.ManageUser;
 
 /**
- * @author Jimmy Verdasca
- * 
  * this Class manage all the games created by the server
  */
 public class GameController {
@@ -177,10 +175,24 @@ public class GameController {
       return board;
    }
    
+   /**
+    * Send a request to the wished opponent to play a new Game
+    * 
+    * @param idPlayerAskingForGame unique id of the player requesting a game to opponent
+    * @param idWishedOpponent unique id of the wished opponent
+    * @return the protocol.TODO class to ask the opponent if he accept the game
+    */
    public Message askOpponentNewGame(int idPlayerAskingForGame, int idWishedOpponent) {
       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
    }
    
+   /**
+    * add a GameModel to the list of games of a client
+    * !!!carefull this don't add the game to the Map of games!!!
+    * 
+    * @param gm the GameModel we want to add
+    * @param idPlayer the player participating at this game
+    */
    private void addGameForClient(GameModel gm, int idPlayer) {
       if(clientGames.containsKey(idPlayer)) {
          clientGames.get(idPlayer).add(gm.getGameId());
@@ -191,6 +203,13 @@ public class GameController {
       }
    }
 
+   /**
+    * Find all games where the specific client given by id participate
+    * and return the list through the Load class
+    * 
+    * @param idClient unique id we wants the list of games
+    * @return the Load created and filled with all games of the client
+    */
    public Message findGamesOf(int idClient) {
       List<Game> games = new ArrayList<>();
       for (Integer idGame : clientGames.get(idClient)) {
@@ -199,6 +218,15 @@ public class GameController {
       return new Load(games);
    }
    
+   /**
+    * Create a protocol.Game from a GameModel and return it
+    * the GameModel used is found with the id of a game 
+    * the Game created is the point of view of the client given by idClient
+    * 
+    * @param idGame unique id of the game we use to build the protocol.Game
+    * @param idClient unique id that will be the point of view of the Game created
+    * @return the protocol.Game created
+    */
    private Game getGameFromModel(int idGame, int idClient) {
       GameModel gm = games.get(idGame);
       Board board1 = gm.getBoard(GameModel.PlayerBoard.PLAYER1);
@@ -215,8 +243,18 @@ public class GameController {
       return game;
    }
 
+   /**
+    * Check if the Composition word is in the dictionnary
+    * 
+    * @param composition containing a word
+    * @return true if the word is in the dictionnary, else false
+    */
    public Message validateComposition(Composition composition) {
-      return new ValidationWord(dictionnary.contains(composition.toString()));
+      if(composition.isValid()) {
+         return new ValidationWord(dictionnary.contains(composition.toString()));
+      } else {
+         return new ValidationWord(false);
+      }
    }
 
    /**

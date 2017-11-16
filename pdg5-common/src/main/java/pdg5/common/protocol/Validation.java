@@ -9,7 +9,14 @@ import pdg5.common.game.Composition;
  */
 public class Validation extends Message {
 
+   /**
+    * the composition that the client want to validate
+    */
    private final Composition composition;
+   
+   /**
+    * unique id of the client who wants to validate a Composition
+    */
    private final int idClient;
    
    /**

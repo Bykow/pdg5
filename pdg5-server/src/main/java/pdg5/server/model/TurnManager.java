@@ -11,7 +11,6 @@ import pdg5.common.game.Utils;
 
 /**
  * This class manage the turn for a game
- * @author Jimmy Verdasca
  */
 public class TurnManager {
    
@@ -114,10 +113,21 @@ public class TurnManager {
       return possiblesArraySquare[position];
    }
    
+   /**
+    * return if true if player2 is an AI, else false
+    * 
+    * @return if true if player2 is an AI, else false
+    */
    private boolean isAnAIGame() {
       return idPlayer2 == Utils.ID_AI;
    }
    
+   /**
+    * check if an unique id player is one of both participant of the game
+    * 
+    * @param idPlayer unique id we want to check
+    * @throws IllegalArgumentException if the given id isn't a participant
+    */
    private void checkIdPlayerInGame(int idPlayer) throws IllegalArgumentException{
       if(idPlayer != idPlayer1 && idPlayer != idPlayer2) {
          throw new IllegalArgumentException("the given id is not one of the players");

@@ -9,7 +9,9 @@ import java.io.Serializable;
  */
 public class ValidationWord extends Message {
 
-   //Answer to a Validation.java request
+   /**
+    * Answer to a Validation.java request
+    */
     private boolean isValid;
 
     /**

@@ -9,20 +9,25 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Listen the network on the DEFAULT_PORT, and start a {@link ClientHandler} when a new connection is detected.
+ *
  * @author Maxime Guillod
  */
 public class ServerNetworkManager {
 
     private ServerSocket serverSocket;
     private Socket socket;
+    private ServerActiveUser activeUser;
 
     public ServerNetworkManager() {
         System.out.println("START ServerNetworkManager");
+        activeUser = new ServerActiveUser();
+
         try {
             serverSocket = new ServerSocket(Protocol.DEFAULT_PORT);
-            while(true) {
+            while (true) {
                 socket = serverSocket.accept();
-                new Thread(new ClientHandler(socket)).start();
+                new Thread(new ClientHandler(socket, activeUser)).start();
             }
         } catch (IOException ex) {
             Logger.getLogger(ServerNetworkManager.class.getName()).log(Level.SEVERE, null, ex);

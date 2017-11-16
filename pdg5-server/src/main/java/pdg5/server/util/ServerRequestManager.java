@@ -10,10 +10,13 @@ import pdg5.server.process.ProcessSignUp;
  * @author Maxime Guillod
  */
 public class ServerRequestManager {
-    private ManageUser manageUser;
 
-    public ServerRequestManager() {
+    private ManageUser manageUser;
+    private ServerActiveUser activeUser;
+
+    public ServerRequestManager(ServerActiveUser activeUser) {
         this.manageUser = new ManageUser();
+        this.activeUser = activeUser;
     }
 
     /**
@@ -22,10 +25,10 @@ public class ServerRequestManager {
      */
     public Message execute(Message o) {
         if (o instanceof SignUp) {
-            return new ProcessSignUp((SignUp) o, manageUser).execute();
+            return new ProcessSignUp((SignUp) o, manageUser, activeUser).execute();
 
         } else if (o instanceof SignIn) {
-            return new ProcessSignIn((SignIn) o, manageUser).execute();
+            return new ProcessSignIn((SignIn) o, manageUser, activeUser).execute();
 
         } else if (o instanceof Noop) {
             return new ProcessNoop((Noop) o).execute();

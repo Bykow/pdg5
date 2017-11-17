@@ -305,8 +305,18 @@ public class GameController {
       // Update model with this word played (score, turn of turnManager, Tiles of player)
       // score
       board.setScore(scoreToAdd + board.getScore());
-      // turn in turnManager
+      // Send Square.W to opponent
       TurnManager tm = playerTurnManager.get(gameID);
+      Board boardOpponent = model.getOpponentBoard(playerID);
+      List<Tile> newBonusTile = new ArrayList<>();
+      Composition.Square[] squares = tm.getSquares(playerID);
+      for (int i = 0; i < squares.length; i++) {
+         if (squares[i] == Composition.Square.W) {
+            newBonusTile.add(composition.remove(i));
+         }
+      }
+      boardOpponent.setBonus(newBonusTile);
+      // turn in turnManager
       tm.turnEnded();
       // Squares
       Composition comp = model.getComposition();
@@ -370,5 +380,6 @@ public class GameController {
             map.put(c, 1);
          }
       }
+      return map;
    }
 }

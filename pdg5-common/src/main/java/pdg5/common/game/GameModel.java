@@ -73,6 +73,22 @@ public class GameModel implements Serializable {
    public Board getBoard(PlayerBoard player) {
       return boards[player.ordinal()];
    }
+   
+   /**
+    * return the board of the opponent given id player
+    * @param playerId id of player
+    * @return the board of the opponent given id player
+    * @throws IllegalArgumentException if the id given isn't one of the players
+    */
+   public Board getOpponentBoard(int playerId) throws IllegalArgumentException {
+      if (playerId == boards[PlayerBoard.PLAYER1.ordinal()].getPlayerId()) {
+         return boards[PlayerBoard.PLAYER2.ordinal()];
+      } else if (playerId == boards[PlayerBoard.PLAYER2.ordinal()].getPlayerId()) {
+         return boards[PlayerBoard.PLAYER1.ordinal()];
+      } else {
+         throw new IllegalArgumentException("the playerId is not in the game");
+      }
+   }
 
    /**
     * Return the Board of the given id player
@@ -80,7 +96,7 @@ public class GameModel implements Serializable {
     * @return the Board of the given id player
     * @throws IllegalArgumentException if the given id isn't one of the players
     */
-   public Board getBoardById(int playerId) {
+   public Board getBoardById(int playerId) throws IllegalArgumentException {
       for (Board board : boards) {
          if (board.getPlayerId() == playerId) {
             return board;

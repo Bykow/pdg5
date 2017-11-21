@@ -34,7 +34,7 @@ public class ProcessSignIn implements GenericProcess {
             //todo waiting for game logic to improve
             // TODO add client to activeUser
 
-            return gameController.findGamesOf(manageUser.getUserByUsername(signIn.getLogin()).getId());
+            return gameController.findGamesOf(manageUser.getUserByUsername(signIn.getUsername()).getId());
         } else {
             return new ErrorMessage("Password invalid in SignIn for user " + signIn.getUsername());
         }

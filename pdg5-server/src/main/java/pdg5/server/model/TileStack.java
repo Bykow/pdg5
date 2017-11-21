@@ -55,7 +55,7 @@ public class TileStack {
      */
     private void initStack(String lang) throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
-        Stream<String> lines = Files.lines(Paths.get(classLoader.getResource(lang + "/" + lang + "_stackInit").toURI()));
+        Stream<String> lines = Files.lines(Paths.get(classLoader.getResource("dico/" + lang + "_stackInit").toURI()));
 
                 // Fills the map with letter and values. '0' stands for a joker
         lines   .peek(s -> map.put(s.charAt(0), Integer.parseInt(s.substring(5,7))))

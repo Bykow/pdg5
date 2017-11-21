@@ -5,7 +5,7 @@ import org.junit.Test;
 import pdg5.common.MessageQueue;
 
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.Assert.fail;
 
 
 public class MessageQueueTest {

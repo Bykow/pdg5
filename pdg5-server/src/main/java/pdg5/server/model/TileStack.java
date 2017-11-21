@@ -1,9 +1,13 @@
-      package pdg5.server.model;
+package pdg5.server.model;
 
 import pdg5.common.Protocol;
 import pdg5.common.game.Tile;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collections;
@@ -53,12 +57,14 @@ public class TileStack {
      * @param lang langage of the game
      * @throws IOException
      */
-    private void initStack(String lang) throws Exception {
+    private void initStack(String lang) {
         ClassLoader classLoader = getClass().getClassLoader();
-        Stream<String> lines = Files.lines(Paths.get("src/main/resources/dico/" + lang + "_stackInit"));
+        Stream<String> lines = null;
 
+        InputStream inputStream = TileStack.class.getResourceAsStream("/dico/" + lang + "_stackInit.txt");
+        new BufferedReader(new InputStreamReader(inputStream)).lines()
                 // Fills the map with letter and values. '0' stands for a joker
-        lines   .peek(s -> map.put(s.charAt(0), Integer.parseInt(s.substring(5,7))))
+                .peek(s -> map.put(s.charAt(0), Integer.parseInt(s.substring(5,7))))
                 // For each line of the config file, adds the number of letters to stack
                 .forEach(s -> {
                     for (int i = Integer.parseInt(s.substring(2,4)); i > 0; i--) {

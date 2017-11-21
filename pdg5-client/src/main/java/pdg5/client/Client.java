@@ -11,6 +11,9 @@ import pdg5.common.Protocol;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import pdg5.common.protocol.SignIn;
 
 public class Client extends Application {
 

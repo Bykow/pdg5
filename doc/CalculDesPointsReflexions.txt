@@ -1,0 +1,21 @@
+Calcul du meilleur score
+   Cas particulier des lettres multiples qui sont à la fois dans bonus et dans les lettres de bases
+
+   Si un tel cas se produit, on prend en priorité la lettre dans les bonus
+
+   Exception : joker dans les bonus
+   si un joker est dans les bonus et que la lettre utilisée est aussi dans les lettres de base, l'utilisation du joker en bonus peut ne pas être optimal
+   il faut tester les deux possibilités
+
+
+   Déroulement
+
+   Si la lettre est dans les lettre bonus
+      On la prend
+   Si le joker est dans les bonus et/ou que la lettre est dans les lettres normales
+      Si les deux sont trouvées, comparer le résultat et garder le meilleur
+      Si un seul est trouvé, le prendre
+   Si le joker est dans les lettres normales
+      On le prend
+   Sinon
+      Mot impossible à composer

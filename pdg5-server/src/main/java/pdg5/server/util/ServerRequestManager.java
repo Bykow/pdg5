@@ -2,9 +2,13 @@ package pdg5.server.util;
 
 import pdg5.common.protocol.*;
 import pdg5.server.manage.ManageUser;
+import pdg5.server.model.GameController;
+import pdg5.server.process.ProcessNewGame;
 import pdg5.server.process.ProcessNoop;
+import pdg5.server.process.ProcessPlay;
 import pdg5.server.process.ProcessSignIn;
 import pdg5.server.process.ProcessSignUp;
+import pdg5.server.process.ProcessValidation;
 
 /**
  * @author Maxime Guillod
@@ -13,10 +17,12 @@ public class ServerRequestManager {
 
     private ManageUser manageUser;
     private ServerActiveUser activeUser;
+    private GameController gameController;
 
     public ServerRequestManager(ServerActiveUser activeUser) {
         this.manageUser = new ManageUser();
         this.activeUser = activeUser;
+        this.gameController = new GameController();
     }
 
     /**
@@ -28,10 +34,20 @@ public class ServerRequestManager {
             return new ProcessSignUp((SignUp) o, manageUser, activeUser).execute();
 
         } else if (o instanceof SignIn) {
-            return new ProcessSignIn((SignIn) o, manageUser, activeUser).execute();
+            return new ProcessSignIn((SignIn) o, manageUser, activeUser, gameController).execute();
 
         } else if (o instanceof Noop) {
             return new ProcessNoop((Noop) o).execute();
+            
+        } else if (o instanceof NewGame) {
+           return new ProcessNewGame((NewGame) o, gameController).execute();
+           
+        } else if (o instanceof Validation) {
+           return new ProcessValidation((Validation) o, gameController).execute();
+           
+        } else if (o instanceof Play) {
+           return new ProcessPlay((Play) o, gameController).execute();
+           
         }
 
         return new ErrorMessage("Unhandled ErrorMessage is ServerRequestManager, default reached");

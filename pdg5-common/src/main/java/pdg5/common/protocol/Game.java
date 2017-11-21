@@ -8,6 +8,9 @@ import pdg5.common.game.Tile;
 
 /**
  * @author Maxime Guillod
+ * 
+ * Class sended through the connection  by the server representing
+ * a full game with two players.
  */
 public class Game extends Message {
 
@@ -24,14 +27,14 @@ public class Game extends Message {
     private String opponentName;
     private int nbLeftTile;
     private List<Tile> addedTile;
-    private Composition.Square square;
+    private Composition.Square[] square;
     private List<Tile> bonusLetters;
     private boolean bonusIsMine;
     
     public Game(int ID, String title, Date created, Date lastActivity, 
                 int tournament, int score, String namePlayer, int opponentScore, 
                 String opponentName, int nbLeftTile, List<Tile> addedTile,
-                Composition.Square square, List<Tile> bonusLetters,
+                Composition.Square[] square, List<Tile> bonusLetters,
                 boolean bonusIsMine) {
         this.ID = ID;
         this.title = title;
@@ -50,6 +53,10 @@ public class Game extends Message {
         
     }
 
+    /**
+     * return the unique ID of a game
+     * @return the unique ID of a game
+     */
     public int getID() {
        return ID;
     } 
@@ -94,7 +101,7 @@ public class Game extends Message {
       return addedTile;
    }
 
-   public Composition.Square getSquare() {
+   public Composition.Square[] getSquare() {
       return square;
    }
 

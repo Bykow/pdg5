@@ -18,9 +18,8 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name = "user", catalog = "pdg", uniqueConstraints = { @UniqueConstraint(columnNames = "email"),
 		@UniqueConstraint(columnNames = "username") })
-public class User implements java.io.Serializable {
+public class User extends AbstractData implements java.io.Serializable {
 
-	private Integer id;
 	private String email;
 	private String username;
 	private String pass;
@@ -55,18 +54,6 @@ public class User implements java.io.Serializable {
 		this.blacklistsForFromUser = blacklistsForFromUser;
 		this.gamesForPlayer2 = gamesForPlayer2;
 		this.gamesForPlayer1 = gamesForPlayer1;
-	}
-
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "ID", unique = true, nullable = false)
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	@Column(name = "email", unique = true, nullable = false, length = 60)

@@ -11,10 +11,8 @@ import pdg5.server.persistent.Game;
 import pdg5.server.persistent.Tournament;
 import pdg5.server.persistent.User;
 
-public class ManageGame {
+public class ManageGame extends Manager {
 	public Game addGame(String title, User player1, User player2, Tournament tournament, String remainingLetters) {
-		Session session = Manager.getSession();
-		Transaction tx = null;
 		Game game = new Game();
 		game.setTitle(title);
 		game.setUserByPlayer1(player1);
@@ -23,24 +21,11 @@ public class ManageGame {
 		game.setCreated(new Date());
 		game.setLastActivity(new Date());
 		game.setRemainingLetters(remainingLetters);
-		Integer gID;
-		
-		try {
-	         tx = session.beginTransaction();
-	         gID = (Integer) session.save(game); 
-	         game.setId(gID);
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }
-		
-		return game;
+
+		return (Game) addToDB(game);
 	}
 	
 	public Game addGame(String title, User player1, User player2, String remainingLetters) {
-		Session session = Manager.getSession();
-		Transaction tx = null;
 		Game game = new Game();
 		game.setTitle(title);
 		game.setUserByPlayer1(player1);
@@ -48,40 +33,16 @@ public class ManageGame {
 		game.setCreated(new Date());
 		game.setLastActivity(new Date());
 		game.setRemainingLetters(remainingLetters);
-		Integer gID;
-		
-		try {
-	         tx = session.beginTransaction();
-	         gID = (Integer) session.save(game); 
-	         game.setId(gID);
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }
-		
-		return game;
+
+		return (Game) addToDB(game);
 	}
 	
 	public List<Game> listGame() {
-		 Session session = Manager.getSession();
-	      Transaction tx = null;
-	      List<Game> games = null;
-	      
-	      try {
-	         tx = session.beginTransaction();
-	         games = session.createQuery("FROM Game").list(); 
-	         
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }
-	      return games;
+		 return (List<Game>) getListFromDB("FROM Game");
 	}
 	
 	public List<Game> getGamesByUsername(User username) {
-		Session session = Manager.getSession();
+		Session session = getSession();
 	      Transaction tx = null;
 	      List<Game> games = null;
 	      
@@ -100,31 +61,11 @@ public class ManageGame {
 	      return games;
 	}
 	
-	public void updateGame(Game game) {
-		Session session = Manager.getSession();
-	      Transaction tx = null;
-	      
-	      try {
-	         tx = session.beginTransaction();
-			 session.update(game); 
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }
+	public int updateGame(Game game) {
+		return updateToDB(game);
 	}
 	
-	public void deleteGame(Game game) {
-		Session session = Manager.getSession();
-	      Transaction tx = null;
-	      
-	      try {
-	         tx = session.beginTransaction();
-	         session.delete(game); 
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }
+	public int deleteGame(Game game) {
+		return deleteToDB(game);
 	}
 }

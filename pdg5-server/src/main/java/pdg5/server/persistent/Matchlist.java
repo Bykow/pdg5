@@ -15,7 +15,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "matchlist", catalog = "pdg")
-public class Matchlist implements java.io.Serializable {
+public class Matchlist extends AbstractData implements java.io.Serializable {
 
 	private Integer id;
 	private Tournament tournament;
@@ -27,18 +27,6 @@ public class Matchlist implements java.io.Serializable {
 	public Matchlist(Tournament tournament, User user) {
 		this.tournament = tournament;
 		this.user = user;
-	}
-
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "ID", unique = true, nullable = false)
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

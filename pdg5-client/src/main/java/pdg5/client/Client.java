@@ -10,8 +10,10 @@ import pdg5.client.util.ClientRequestManager;
 import pdg5.common.Protocol;
 
 import java.io.IOException;
-<<<<<<< HEAD
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import pdg5.common.protocol.SignIn;
 
 public class Client extends Application {
 
@@ -90,31 +92,5 @@ public class Client extends Application {
     public void stop() throws Exception {
         super.stop();
         System.exit(0);
-=======
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import pdg5.common.protocol.SignIn;
-
-public class Client {
-    public static void main(String... args){
-       
-       ClientNetworkManager netManager = new ClientNetworkManager();
-       
-       try {
-          System.out.println("Sending information");
-          netManager.send(new SignIn("Bonjour", "Au revoir"));
-          
-          System.out.println("Receiving");
-          netManager.receive();
-          
-          System.out.println("Waiting");
-          Thread.sleep(100000);
-          
-       } catch (IOException | InterruptedException | ClassNotFoundException ex) {
-          Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-       }
-       
-       
->>>>>>> 44b8cebd4789b7c0f244cf49f0e27179adcdfae8
     }
 }

@@ -15,19 +15,28 @@
 
 package pdg5.client.util;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.Duration;
 import pdg5.common.Protocol;
 
+
 public class Toast {
-    Popup popup;
-    Label label;
-    Stage stage;
+    private Popup popup;
+    private Label label;
+    private Stage stage;
+    private Timeline timer;
 
     public Toast(final Stage stage, final String message) {
+        this(stage, message, Protocol.TOAST_DEFAULT_DURATION);
+    }
+
+    public Toast(final Stage stage, final String message, int duration) {
         this.stage = stage;
         popup = new Popup();
 
@@ -40,6 +49,8 @@ public class Toast {
         label.getStylesheets().add("/css/toast.css");
         label.getStyleClass().add("toast");
         popup.getContent().add(label);
+
+        timer = new Timeline(new KeyFrame(Duration.millis(duration), ae -> popup.hide()));
     }
 
     private void handleEscape(MouseEvent event) {
@@ -53,6 +64,7 @@ public class Toast {
 
     public void show() {
         popup.setOnShown(this::handleShown);
+        timer.play();
         popup.show(stage);
     }
 }

@@ -6,6 +6,8 @@ import java.util.List;
 
 /**
  * @author Maxime Guillod
+ * Class sent through the connection by the server representing
+ * the list of available games a player have.
  */
 public class Load extends Message {
 
@@ -26,6 +28,10 @@ public class Load extends Message {
         this.games = new ArrayList<Game>();
     }
 
+    /**
+     * return the list of available games of a player
+     * @return the list of available games of a player
+     */
     public List<Game> getGames() {
         return games;
     }

@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Class representing a Word.
  */
-public class Word extends Message {
+public class Word implements Serializable {
 
     private String word;
     private Play play;

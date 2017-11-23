@@ -18,9 +18,8 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "blacklist", catalog = "pdg")
-public class Blacklist implements java.io.Serializable {
+public class Blacklist extends AbstractData implements java.io.Serializable {
 
-	private Integer id;
 	private User userByToUser;
 	private User userByFromUser;
 	private Date lastMod;
@@ -32,18 +31,6 @@ public class Blacklist implements java.io.Serializable {
 		this.userByToUser = userByToUser;
 		this.userByFromUser = userByFromUser;
 		this.lastMod = lastMod;
-	}
-
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "ID", unique = true, nullable = false)
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -19,20 +19,27 @@ public class ClientHandler implements Runnable {
     private ServerRequestManager requestManager;
     private MessageQueue queueIn;
     private MessageQueue queueOut;
+    private ServerActiveUser activeUser;
     private static int id;
 
-    public ClientHandler(Socket socket) {
+    public ClientHandler(Socket socket, ServerActiveUser activeUser) {
+        if(socket == null) return;
         System.out.println("SRV : new client #" + id++);
         this.socket = socket;
         this.queueIn = new MessageQueue();
         this.queueOut = new MessageQueue();
-        this.requestManager = new ServerRequestManager();
+        this.activeUser = activeUser;
+        this.requestManager = new ServerRequestManager(this.activeUser);
         try {
             this.out = new ObjectOutputStream(socket.getOutputStream());
             this.in = new ObjectInputStream(socket.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void addToQueue(Message message) {
+        queueOut.add(message);
     }
 
     @Override
@@ -50,18 +57,6 @@ public class ClientHandler implements Runnable {
                             queueIn.take()
                     )
             );
-        }
-    }
-
-    public ServerRequestManager getRequestManager() {
-        return requestManager;
-    }
-
-    public void send(Object o) {
-        try {
-            out.writeObject(o);
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 

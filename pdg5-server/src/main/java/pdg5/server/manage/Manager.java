@@ -3,14 +3,25 @@ package pdg5.server.manage;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import pdg5.common.Protocol;
+import pdg5.server.persistent.AbstractData;
+
+import java.util.List;
 
 public class Manager {
+	private static SessionFactory factory;
+	private static Session session;
+	private static Transaction transaction;
 
-	private static SessionFactory factory = null;
-	private static Session session = null;
+	public Manager() {
+		factory = null;
+		session = null;
+		transaction = null;
+	}
 
-	private static SessionFactory getFactory() {
+	private SessionFactory getFactory() {
 		if(factory == null) {
 			try {
 				factory = new Configuration().configure().buildSessionFactory();
@@ -22,13 +33,14 @@ public class Manager {
 		}
 		return factory;
 	}
+
 	/**
 	 * Used to get a global session
 	 * @return
 	 */
-	public static Session getSession() {
+	public Session getSession() {
 		if(session == null) {
-			session = Manager.getFactory().openSession();
+			session = getFactory().openSession();
 		}
 		return session;
 	}
@@ -36,9 +48,72 @@ public class Manager {
 	/**
 	 * To call when we are done talking to the DB
 	 */
-	public static void closeConversation() {
+	public void closeConversation() {
 		if(session != null) {
 			session.close();
 		}
+	}
+
+	public AbstractData addToDB(AbstractData abstractData) {
+		Integer id;
+
+		try {
+			transaction = session.beginTransaction();
+			id = (Integer) session.save(abstractData);
+			abstractData.setId(id);
+			transaction.commit();
+		} catch (HibernateException e) {
+			if (transaction !=null) transaction.rollback();
+			e.printStackTrace();
+		}
+
+		return abstractData;
+	}
+
+	public List<? extends AbstractData> getListFromDB(String query) {
+		List<AbstractData> list = null;
+
+		try {
+			transaction = session.beginTransaction();
+			list = session.createQuery(query).list();
+
+			transaction.commit();
+		} catch (HibernateException e) {
+			if (transaction!=null) transaction.rollback();
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	public int updateToDB(AbstractData abstractData) {
+		int code = Protocol.OK;
+
+		try {
+			transaction = session.beginTransaction();
+			session.update(abstractData);
+			transaction.commit();
+		} catch (HibernateException e) {
+			if (transaction!=null) transaction.rollback();
+			code = Protocol.ERROR;
+			e.printStackTrace();
+		}
+
+		return code;
+	}
+
+	public int deleteToDB(AbstractData abstractData) {
+		int code = Protocol.OK;
+
+		try {
+			transaction = session.beginTransaction();
+			session.delete(abstractData);
+			transaction.commit();
+		} catch (HibernateException e) {
+			if (transaction!=null) transaction.rollback();
+			code = Protocol.ERROR;
+			e.printStackTrace();
+		}
+
+		return code;
 	}
 }

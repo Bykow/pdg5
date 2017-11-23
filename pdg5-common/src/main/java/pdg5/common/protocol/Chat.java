@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author Maxime Guillod
+ * Class sended through the connection by a client or the server representing,
+ * if the message comes from a client, a message.
+ * If the message comes from the server, an historic.
  */
 public class Chat extends Message {
 

@@ -13,16 +13,23 @@ import java.net.Socket;
 public class ClientListener implements Runnable {
 
     private Socket socket;
-    private static MessageQueue queue;
+    private static MessageQueue queue = null;
     private static ObjectInputStream in;
 
     public ClientListener() {
+       init(); 
+    }
+    
+    private void init() {
+       if(queue == null) {
+          queue = new MessageQueue();
+       }
     }
 
     public ClientListener(Socket socket) throws IOException {
         this.socket = socket;
         this.in = new ObjectInputStream(socket.getInputStream());
-        this.queue = new MessageQueue();
+        init();
     }
 
     @Override

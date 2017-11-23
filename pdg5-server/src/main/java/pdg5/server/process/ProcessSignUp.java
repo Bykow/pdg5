@@ -3,6 +3,7 @@ package pdg5.server.process;
 import pdg5.common.Protocol;
 import pdg5.common.protocol.*;
 import pdg5.server.manage.ManageUser;
+import pdg5.server.util.ServerActiveUser;
 
 import java.util.List;
 
@@ -12,15 +13,22 @@ import java.util.List;
 public class ProcessSignUp implements GenericProcess {
     private SignUp signUp;
     private ManageUser manager;
+    private ServerActiveUser activeUser;
 
-    public ProcessSignUp(SignUp signUp, ManageUser manageUser) {
+    public ProcessSignUp(SignUp signUp, ManageUser manageUser, ServerActiveUser activeUser) {
         this.signUp = signUp;
         this.manager = manageUser;
+        this.activeUser = activeUser;
     }
 
     @Override
     public Message execute() {
-        int exitCode = manager.addUser(signUp.getEmail(), signUp.getUsername(), signUp.getPassword());
+        int exitCode;
+        if (manager.addUser(signUp.getEmail(), signUp.getUsername(), signUp.getPassword()) != null) {
+            exitCode = Protocol.OK;
+        } else {
+            exitCode = Protocol.ERROR;
+        }
 
         switch (exitCode) {
             case Protocol.OK :

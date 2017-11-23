@@ -2,98 +2,32 @@ package pdg5.server.manage;
 
 import java.util.List;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
 import pdg5.server.persistent.Chat;
 import pdg5.server.persistent.Game;
 import pdg5.server.persistent.Tournament;
 
-public class ManageChat {
+public class ManageChat extends Manager {
 	public Chat addChatTournament(Tournament tournament) {
-		Session session = Manager.getSession();
-		Transaction tx = null;
-		
 		Chat chat = new Chat();
 		chat.setTournament(tournament);
-		Integer cid;
-		
-		try {
-	         tx = session.beginTransaction();
-	         cid = (Integer) session.save(chat); 
-	         chat.setId(cid);
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }
-		
-		return chat;
+		return (Chat) addToDB(tournament);
 	}
 	
 	public Chat addChatGame(Game game) {
-		Session session = Manager.getSession();
-		Transaction tx = null;
 		Chat chat = new Chat();
 		chat.setGame(game);
-		Integer cid;
-		
-		try {
-	         tx = session.beginTransaction();
-	         cid = (Integer) session.save(chat); 
-	         chat.setId(cid);
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }
-		
-		return chat;
+		return (Chat) addToDB(game);
 	}
 	
 	public List<Chat> listChats() {
-		 Session session = Manager.getSession();
-	      Transaction tx = null;
-	      List<Chat> chats = null;
-	      
-	      try {
-	         tx = session.beginTransaction();
-	         chats = session.createQuery("FROM Chat").list(); 
-	         
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }
-	      return chats;
+		 return (List<Chat>) getListFromDB("FROM Chat");
 	}
 	
-	public void updateChat(Chat chat) {
-		Session session = Manager.getSession();
-	      Transaction tx = null;
-	      
-	      try {
-	         tx = session.beginTransaction();
-			 session.update(chat); 
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }
+	public int updateChat(Chat chat) {
+		return updateToDB(chat);
 	}
 	
-	public void deleteChat(Chat chat) {
-		Session session = Manager.getSession();
-	      Transaction tx = null;
-	      
-	      try {
-	         tx = session.beginTransaction();
-	         session.delete(chat); 
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }
+	public int deleteChat(Chat chat) {
+		return deleteToDB(chat);
 	}
 }

@@ -8,7 +8,7 @@ public interface Protocol {
     /**
      * Socket
      */
-    final String DEFAULT_SERVER = "127.0.0.1"; // modify for tests
+    final String DEFAULT_SERVER = "localhost"; // modify for tests
     final int DEFAULT_PORT = 44555;
 
     final int NUMBER_OF_TUILES_PER_PLAYER = 7;
@@ -16,11 +16,31 @@ public interface Protocol {
     final int NUMBER_OF_PLAYERS = 2;
     final int NUMBER_OF_TUILES_PER_GAME = 116;
 
-    final String LANG_FR = "fr";
-
     final int OK = 200;
     final int ERROR = 400;
     final int COULDNOTADDUSER = 401;
 
+    public enum Languages {LANG_FR ("fr");
+      private final String lang;
+
+      /**
+       * constructor
+       * @param lang string for a langage
+       */
+      private Languages(final String lang) {
+          this.lang = lang;
+      }
+
+      /**
+       * return the string associated to the langage
+       * @return the string associated to the langage
+       */
+      @Override
+      public String toString() {
+          return lang;
+      }
+    };
+    
     final int TOAST_BOTTOM_DIST = 50;
+    final int TOAST_DEFAULT_DURATION = 5000;
 }

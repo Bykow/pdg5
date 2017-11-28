@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="598.0" prefWidth="363.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane id="bottom-bar" layoutY="543.0" prefHeight="55.0" prefWidth="363.0">
+         <children>
+            <TextField layoutX="9.0" layoutY="9.0" prefHeight="37.0" prefWidth="287.0" />
+            <Button layoutX="304.0" layoutY="6.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="51.0" styleClass="send-btn" />
+         </children>
+      </AnchorPane>
+      <VBox prefHeight="543.0" prefWidth="363.0">
+         <children>
+            <AnchorPane prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER" styleClass="time" text="Label">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <Label styleClass="info" text="Label" />
+            <Label styleClass="user" text="Label" />
+            <Label styleClass="adversary" text="Label" />
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../css/chat.css" />
+      <URL value="@../css/global.css" />
+   </stylesheets>
+</AnchorPane>

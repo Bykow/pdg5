@@ -13,8 +13,6 @@ public class ProcessLoad implements GenericProcess {
 
     @Override
     public Message execute() {
-        // TODO Lancer l'interface avec les parties
-
         return null;
     }
 }

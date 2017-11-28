@@ -207,12 +207,11 @@ public class GameController {
      */
     public Message findGamesOf(int idClient) {
         // TODO clientGame null pointer exception when signIn
-//        List<Game> games = new ArrayList<>();
-//        for (Integer idGame : clientGames.get(idClient)) {
-//            games.add(getGameFromModel(idGame, idClient));
-//        }
-//        return new Load(games);
-        return new Load(null);
+        List<Game> games = new ArrayList<>();
+        for (Integer idGame : clientGames.get(idClient)) {
+            games.add(getGameFromModel(idGame, idClient));
+        }
+        return new Load(games);
     }
 
     /**

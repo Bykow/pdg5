@@ -11,9 +11,6 @@ import pdg5.common.Protocol;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import pdg5.common.protocol.SignIn;
 
 public class Client extends Application {
 
@@ -35,28 +32,19 @@ public class Client extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("WordOn Desktop");
-        this.requestManager = new ClientRequestManager();
 
         initRootLayout();
 
         // Try connect
         try {
             this.socket = new Socket(Protocol.DEFAULT_SERVER, Protocol.DEFAULT_PORT);
+            // Init for use into controller
             this.sender = new ClientSender(socket);
             this.listener = new ClientListener(socket);
 
         } catch (IOException e) {
             System.err.println("Connection error");
         }
-
-        // Start listen
-        new Thread(listener).start();
-
-        // Start send
-        new Thread(sender).start();
-
-        // Process message
-        // TODO @Maxime : Refactor
 
     }
 

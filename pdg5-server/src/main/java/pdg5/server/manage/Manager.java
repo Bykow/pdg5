@@ -8,6 +8,7 @@ import org.hibernate.cfg.Configuration;
 import pdg5.common.Protocol;
 import pdg5.server.persistent.AbstractData;
 
+import java.io.File;
 import java.util.List;
 
 public class Manager {
@@ -24,7 +25,7 @@ public class Manager {
 	private SessionFactory getFactory() {
 		if(factory == null) {
 			try {
-				factory = new Configuration().configure().buildSessionFactory();
+				factory = new Configuration().configure(new File("/hibernate.cfg.xml")).buildSessionFactory();
 		      } catch (Throwable ex) {
 		         System.err.println("Failed to create sessionFactory object. " + ex);
 		         ex.printStackTrace();

@@ -62,6 +62,8 @@
                 <includes>
                     <include>**/*.txt</include>
                     <include>**/*.dic</include>
+                    <include>**/*.xml</include>
+                    <include>*.xml</include>
                 </includes>
             </resource>
         </resources>

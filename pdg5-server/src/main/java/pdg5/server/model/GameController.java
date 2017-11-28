@@ -206,11 +206,13 @@ public class GameController {
      * @return the Load created and filled with all games of the client
      */
     public Message findGamesOf(int idClient) {
-        List<Game> games = new ArrayList<>();
-        for (Integer idGame : clientGames.get(idClient)) {
-            games.add(getGameFromModel(idGame, idClient));
-        }
-        return new Load(games);
+        // TODO clientGame null pointer exception when signIn
+//        List<Game> games = new ArrayList<>();
+//        for (Integer idGame : clientGames.get(idClient)) {
+//            games.add(getGameFromModel(idGame, idClient));
+//        }
+//        return new Load(games);
+        return new Load(null);
     }
 
     /**

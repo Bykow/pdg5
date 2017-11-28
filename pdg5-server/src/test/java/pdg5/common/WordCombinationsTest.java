@@ -5,19 +5,14 @@
  */
 package pdg5.common;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
@@ -42,56 +37,36 @@ public class WordCombinationsTest {
    public static void init() throws Exception {
       ClassLoader classLoader = TSTTest.class.getClassLoader();
 
-      Stream<String> lines = Files.lines(Paths.get(classLoader.getResource("dico/fr_dico.dic").toURI()));
-      lines.forEach(e -> dictionnary.put(e));
-      lines.close();
+      try (Stream<String> lines = Files.lines(Paths.get(classLoader.getResource("dico/fr_dico.dic").toURI()))) {
+         lines.forEach(e -> dictionnary.put(e));
+      }
    }
 
    /**
     * Test of getAllWordsFromLetters method, of class WordCombinations.
+    *
+    * @throws java.net.URISyntaxException
+    * @throws java.io.IOException
     */
    @Test
-   public void testGetAllWordsFromLetters() {
+   public void testGetAllWordsFromLetters() throws URISyntaxException, IOException {
       System.out.println("getAllWordsFromLetters");
-      String letters = "";
-      List<String> expResult = new ArrayList<>();
-      File file = new File(".\\src\\test\\resources\\testFileWords.txt");
-      try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-         String line = br.readLine();
-         letters = line;
-         while ((line = br.readLine()) != null) {
-            expResult.add(line);
-         }
-      } catch (IOException ex) {
-         fail("impossible to read the result file");
-      }
+      ClassLoader classLoader = TSTTest.class.getClassLoader();
+      Path p = Paths.get(classLoader.getResource("dico/testFileWords.txt").toURI());
+      Stream<String> lines = Files.lines(p);
+      Stream<String> lines2 = Files.lines(p);
 
       WordCombinations wc = new WordCombinations(dictionnary);
-      List<String> result = wc.getAllWordsFromLetters(letters);
-
-//      if (expResult.size() != result.size()) {
-//         pass = false;
-//      }
-//      List<String> wordNotFoundFromResult = new ArrayList<>();
-//      for (String word : result) {
-//         if (!expResult.contains(word)) {
-//            pass = false;
-//            wordNotFoundFromResult.add(word);
-//         }
-//      }
-
-      List<String> wordNotFoundFromExpected = new ArrayList<>();
-      for (String word : expResult) {
-         if (!result.contains(word) && dictionnary.contains(word)) {
-            wordNotFoundFromExpected.add(word);
-         }
-      }
+      List<String> result = wc.getAllWordsFromLetters(lines.findFirst().get());
+      
+      List<String> wordNotFoundFromExpected = lines2.skip(1).filter((word) -> {
+         return !result.contains(word) && dictionnary.contains(word);
+      }).collect(Collectors.toList());
 
       assertTrue(
-              "the algorithm missed some words"
-              //+ ".\nThe words not found from result List : \n" + wordNotFoundFromResult.toString()
-              + ".\nThe words not found from Expected List : \n" + wordNotFoundFromExpected.toString(),
-              wordNotFoundFromExpected.isEmpty()
+         "the algorithm missed some words"
+         + ".\nThe words not found from Expected List : \n" + wordNotFoundFromExpected.toString(),
+         wordNotFoundFromExpected.isEmpty()
       );
 
    }

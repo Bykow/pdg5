@@ -12,6 +12,6 @@
          </children>
       </AnchorPane>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="276.0" prefWidth="362.0" style="-fx-background-color: #34495e;" />
-      <AnchorPane prefHeight="598.0" prefWidth="363.0" style="-fx-background-color: #3caef5;" />
+      <AnchorPane fx:id="chatContainer" prefHeight="598.0" prefWidth="363.0" style="-fx-background-color: #3caef5;" />
    </items>
 </SplitPane>

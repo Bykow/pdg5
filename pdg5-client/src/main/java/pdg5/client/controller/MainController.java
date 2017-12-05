@@ -24,6 +24,8 @@ public class MainController {
 
     @FXML
     private AnchorPane gameContainer;
+    @FXML
+    private AnchorPane chatContainer;
 
     private AnchorPane layout;
 
@@ -38,6 +40,19 @@ public class MainController {
             loader.setController(controller);
             layout = loader.load();
             gameContainer.getChildren().setAll(layout);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadChat() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            ChatController controller = new ChatController();
+            loader.setLocation(MainController.class.getResource("/fxml/chatView.fxml"));
+            loader.setController(controller);
+            layout = loader.load();
+            chatContainer.getChildren().setAll(layout);
         } catch (IOException e) {
             e.printStackTrace();
         }

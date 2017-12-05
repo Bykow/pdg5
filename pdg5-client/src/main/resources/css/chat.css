@@ -2,6 +2,36 @@
     -fx-background-color: #ffbd00;
 }
 
+#msgContainer {
+    -fx-background-color: #3caef5;
+    -fx-border-width: 0;
+}
+
+#msgContainer .scroll-bar:vertical .track {
+    -fx-background-color: #3caef5;
+}
+
+#msgContainer .scroll-bar:vertical .thumb {
+    -fx-background-color: rgba(0, 0, 0, 0.6);
+}
+
+#msgContainer .scroll-bar:vertical .increment-button,
+#msgContainer .scroll-bar:vertical .decrement-button {
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+}
+
+#msgContainer .scroll-bar .increment-arrow,
+#msgContainer .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0;
+}
+
+VBox {
+    -fx-spacing: 5;
+    -fx-padding: 5 10 5 10;
+}
+
 .send-btn {
     -fx-background-image: url("../img/send.png");
     -fx-background-size: 60%;
@@ -9,40 +39,52 @@
     -fx-background-position: center;
 }
 
-.time {
+.time, .info {
+    -fx-alignment: baseline-center;
+}
+
+.user {
+    -fx-alignment: baseline-right;
+}
+
+.adversary {
+    -fx-alignment: baseline-left;
+}
+
+.time Label {
     -fx-font-family: "Helvetica";
     -fx-text-fill: #a7defc;
     -fx-font-weight: bold;
     -fx-font-size: 10;
-    -fx-padding: 20px 0 3px 0;
+    -fx-padding: 15px 0 0 0;
 }
 
-.info {
+.info Label {
     -fx-font-family: "Helvetica";
     -fx-text-fill: #ffffff;
     -fx-border-color: #ffffff;
-    -fx-border-radius: 8;
+    -fx-border-radius: 10;
     -fx-padding: 3px 15px 3px 15px;
 }
 
-.adversary {
+.adversary Label {
     -fx-font-family: "Helvetica";
     -fx-text-fill: #34495e;
     -fx-font-weight: bold;
     -fx-background-color: #c1e7fc;
-    -fx-background-radius: 9;
-    -fx-border-radius: 8;
+    -fx-background-radius: 11;
+    -fx-border-radius: 10;
     -fx-border-color: #ffffff;
     -fx-padding: 3px 10px 3px 10px;
 }
 
-.user {
+.user Label {
     -fx-font-family: "Helvetica";
     -fx-text-fill: #c1e7fc;
     -fx-font-weight: bold;
     -fx-background-color: #34495E;
-    -fx-background-radius: 9;
-    -fx-border-radius: 8;
+    -fx-background-radius: 11;
+    -fx-border-radius: 10;
     -fx-border-color: #ffffff;
     -fx-padding: 3px 10px 3px 10px;
 }

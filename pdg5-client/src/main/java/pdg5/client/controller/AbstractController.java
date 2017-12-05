@@ -28,6 +28,7 @@ public abstract class AbstractController {
             stage.setScene(scene);
             stage.show();
             mainController.loadGame();
+            mainController.loadChat();
 
         } catch (IOException e) {
             e.printStackTrace();

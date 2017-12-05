@@ -17,18 +17,18 @@ public class ClientListener implements Runnable {
     private static ObjectInputStream in;
 
     public ClientListener() {
-       init(); 
+        init();
     }
-    
+
     private void init() {
-       if(queue == null) {
-          queue = new MessageQueue();
-       }
+        if (queue == null) {
+            queue = new MessageQueue();
+        }
     }
 
     public ClientListener(Socket socket) throws IOException {
         this.socket = socket;
-        this.in = new ObjectInputStream(socket.getInputStream());
+        in = new ObjectInputStream(socket.getInputStream());
         init();
     }
 
@@ -37,7 +37,7 @@ public class ClientListener implements Runnable {
         System.out.println("ClientListener.run");
         try {
             while (true) {
-                queue.add((Message)in.readObject());
+                queue.add((Message) in.readObject());
             }
         } catch (IOException | ClassNotFoundException e) {
         }

@@ -13,22 +13,22 @@ public class ClientSender implements Runnable {
     private static MessageQueue queue = null;
     private static ObjectOutputStream out;
 
-    public ClientSender(Socket socket) throws IOException {
-        this.socket = socket;
-        this.out = new ObjectOutputStream(socket.getOutputStream());
+    public ClientSender(Socket socketIn) throws IOException {
+        socket = socketIn;
+        out = new ObjectOutputStream(socket.getOutputStream());
         init();
     }
 
     public ClientSender() {
-       init();
+        init();
     }
 
     private void init() {
-       if(queue == null) {
-          queue = new MessageQueue();
-       }
+        if (queue == null) {
+            queue = new MessageQueue();
+        }
     }
-    
+
     @Override
     public void run() {
         System.out.println("ClientSender.run");

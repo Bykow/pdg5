@@ -39,8 +39,10 @@ public class Client extends Application {
         try {
             this.socket = new Socket(Protocol.DEFAULT_SERVER, Protocol.DEFAULT_PORT);
             // Init for use into controller
-            this.sender = new ClientSender(socket);
-            this.listener = new ClientListener(socket);
+            sender = new ClientSender(socket);
+            listener = new ClientListener(socket);
+            new Thread(sender).start();
+            new Thread(listener).start();
 
         } catch (IOException e) {
             System.err.println("Connection error");

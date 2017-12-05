@@ -12,6 +12,7 @@ public class ClientSender implements Runnable {
     private static Socket socket;
     private static MessageQueue queue = null;
     private static ObjectOutputStream out;
+    private static boolean launch = false;
 
     public ClientSender(Socket socketIn) throws IOException {
         socket = socketIn;
@@ -31,8 +32,14 @@ public class ClientSender implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("ClientSender.run");
+        if (launch) {
+            System.err.println("[ERROR] ClientSender already launch");
+            return;
+        }
+
         while (true) {
+            launch = true;
+            System.out.println("ClientSender.run");
             try {
                 out.writeObject(queue.take());
             } catch (IOException e) {

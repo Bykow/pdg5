@@ -22,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import pdg5.client.Client;
+import pdg5.client.ClientListener;
 import pdg5.client.ClientSender;
 import pdg5.client.util.Toast;
 import pdg5.common.protocol.SignUp;
@@ -62,12 +63,12 @@ public class SignUpController extends AbstractController {
     @FXML
     private void handleRegister(ActionEvent actionEvent) {
         Stage stage = (Stage)btnRegister.getScene().getWindow();
-        ClientSender cs = new ClientSender();
+        ClientSender clientSender = new ClientSender();
 
         if (checkPassword(password.getText(), passwordConf.getText())) {
             // Sending to server
             SignUp signUp = new SignUp(email.getText(), username.getText(), password.getText());
-            cs.add(signUp);
+            clientSender.add(signUp);
 
             stage.hide();
             loadGame(stage);

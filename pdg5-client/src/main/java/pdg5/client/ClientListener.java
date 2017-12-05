@@ -15,6 +15,7 @@ public class ClientListener implements Runnable {
     private Socket socket;
     private static MessageQueue queue = null;
     private static ObjectInputStream in;
+    private static boolean launch = false;
 
     public ClientListener() {
         init();
@@ -34,8 +35,14 @@ public class ClientListener implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("ClientListener.run");
+        if (launch) {
+            System.err.println("[ERROR] ClientListener already launch.");
+            return;
+        }
+
         try {
+            launch = true;
+            System.out.println("ClientListener.run");
             while (true) {
                 queue.add((Message) in.readObject());
             }

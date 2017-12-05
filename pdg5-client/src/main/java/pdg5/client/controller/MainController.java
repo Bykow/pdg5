@@ -53,12 +53,6 @@ public class MainController {
             e.printStackTrace();
         }
 
-        // Start listen
-        new Thread(listener).start();
-
-        // Start send
-        new Thread(sender).start();
-
         // Process message
         sender.add(
                 requestManager.execute(

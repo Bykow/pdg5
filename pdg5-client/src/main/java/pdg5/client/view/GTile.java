@@ -19,10 +19,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import pdg5.client.Client;
 import pdg5.common.game.Tile;
 
-public class GTile extends Pane {
+public class GTile extends StackPane {
     private static FXMLLoader loader = initLoader();
 
     private Tile model;
@@ -42,6 +43,17 @@ public class GTile extends Pane {
         super();
 
         this.model = model;
+
+        // Load root layout from fxml file.
+        loader.setRoot(this);
+        loader.setController(this);
+
+    }
+
+    public GTile(char letter, int point) {
+        super();
+
+        this.model = new Tile(letter, point);
 
         // Load root layout from fxml file.
         loader.setRoot(this);

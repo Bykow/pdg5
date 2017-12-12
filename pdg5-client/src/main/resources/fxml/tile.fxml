@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
-<fx:root type="Pane" id="main" minHeight="50.0" maxHeight="50.0" prefHeight="50.0" minWidth="55.0" maxWidth="55.0" prefWidth="55.0" stylesheets="@../css/tile.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root
+        type="StackPane"
+        id="main"
+        minHeight="50.0"
+        maxHeight="50.0"
+        prefHeight="50.0"
+        minWidth="55.0"
+        maxWidth="55.0"
+        prefWidth="55.0"
+        stylesheets="@../css/tile.css"
+        xmlns="http://javafx.com/javafx/8.0.141"
+        xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="letter" layoutX="8.0" layoutY="12.0" prefHeight="30.0" prefWidth="31.0" text="A" textFill="#2c3e50">
          <font>

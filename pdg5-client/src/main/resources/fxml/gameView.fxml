@@ -92,7 +92,7 @@
 
             <fx:define>
                <ArrayList fx:id="deckList" >
-                  <fx:reference source="ubox0"/>
+                   <fx:reference source="ubox0"/>
                   <fx:reference source="ubox1"/>
                   <fx:reference source="ubox2"/>
                   <fx:reference source="ubox3"/>

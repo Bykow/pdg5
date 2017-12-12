@@ -6,8 +6,11 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import pdg5.client.controller.MainController;
+import pdg5.client.util.ClientRequestManager;
+import pdg5.common.Protocol;
 
 import java.io.IOException;
+import java.net.Socket;
 
 public class Client extends Application {
 
@@ -16,6 +19,10 @@ public class Client extends Application {
     //private SplitPane rootLayout;
     private AnchorPane rootLayout;
     private AnchorPane gameLayout;
+    private Socket socket;
+    private ClientListener listener;
+    private ClientSender sender;
+    private ClientRequestManager requestManager;
 
     public static void main(String[] args) {
         launch(args);
@@ -27,6 +34,20 @@ public class Client extends Application {
         this.primaryStage.setTitle("WordOn Desktop");
 
         initRootLayout();
+
+        // Try connect
+        try {
+            this.socket = new Socket(Protocol.DEFAULT_SERVER, Protocol.DEFAULT_PORT);
+            // Init for use into controller
+            sender = new ClientSender(socket);
+            listener = new ClientListener(socket);
+            new Thread(sender).start();
+            new Thread(listener).start();
+
+        } catch (IOException e) {
+            System.err.println("Connection error");
+        }
+
     }
 
     /**
@@ -55,5 +76,11 @@ public class Client extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+        System.exit(0);
     }
 }

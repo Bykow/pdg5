@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 6 nov. 2017 22:46:44 by Hibernate Tools 5.2.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="pdg" dynamic-insert="false" dynamic-update="false" mutable="true" name="pdg5.server.persistent.Game" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="game">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="pdg5.server.persistent.Tournament" embed-xml="true" fetch="select" insert="true" name="tournament" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="tournament"/>
+        </many-to-one>
+        <many-to-one class="pdg5.server.persistent.User" embed-xml="true" fetch="select" insert="true" name="userByPlayer2" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="player2" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="pdg5.server.persistent.User" embed-xml="true" fetch="select" insert="true" name="userByPlayer1" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="player1" not-null="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="title" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="title" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="remainingLetters" optimistic-lock="true" type="string" unique="false">
+            <column length="100" name="remaining_letters" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="created" optimistic-lock="true" type="timestamp" unique="false">
+            <column length="19" name="created" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="lastActivity" optimistic-lock="true" type="timestamp" unique="false">
+            <column length="19" name="last_activity" not-null="true"/>
+        </property>
+        <property name="gameState" column="game_state" type="blob" />
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="chats" optimistic-lock="true" sort="unsorted" table="chat">
+            <key on-delete="noaction">
+                <column name="game"/>
+            </key>
+            <one-to-many class="pdg5.server.persistent.Chat" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

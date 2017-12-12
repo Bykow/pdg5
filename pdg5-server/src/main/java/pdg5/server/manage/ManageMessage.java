@@ -1,0 +1,26 @@
+package pdg5.server.manage;
+
+import java.util.Date;
+import java.util.List;
+
+import pdg5.server.persistent.Chat;
+import pdg5.server.persistent.Message;
+import pdg5.server.persistent.User;
+
+public class ManageMessage extends Manager {
+	public Message addMessage(String content, User user, Chat chat) {
+		return (Message) addToDB(new Message(chat,user,content,new Date()));
+	}
+	
+	public List<Message> listMessages() {
+		 return (List<Message>) getListFromDB("FROM Message");
+	}
+	
+	public int updateMessage(Message message) {
+		return updateToDB(message);
+	}
+	
+	public int deleteMessage(Message message) {
+		return deleteToDB(message);
+	}
+}

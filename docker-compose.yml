@@ -1,0 +1,35 @@
+version: '2'
+services:
+  mysql:
+    container_name: pdg_mysql
+    restart: always
+    build: docker/images/mysql
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    volumes:
+      - pdg-data:/var/lib/mysql
+    expose:
+      - "3306"
+    ports: 
+      - "3306:3306"
+
+  phpmyadmin:
+    container_name: pdg_phpmyadmin
+    build: docker/images/phpmyadmin
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    ports:
+      - "6060:80"
+    links:
+      - mysql:db
+
+  server:
+    container_name: pdg_server
+    build: pdg5-server
+    expose:
+      - "44555"
+    ports:
+     - "44555:44555"
+
+volumes:
+  pdg-data:

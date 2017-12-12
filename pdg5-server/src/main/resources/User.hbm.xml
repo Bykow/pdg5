@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 6 nov. 2017 22:46:44 by Hibernate Tools 5.2.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="pdg" dynamic-insert="false" dynamic-update="false" mutable="true" name="pdg5.server.persistent.User" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="user">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID"/>
+            <generator class="identity"/>
+        </id>
+        <property generated="never" lazy="false" name="email" optimistic-lock="true" type="string" unique="false">
+            <column length="60" name="email" not-null="true" unique="true"/>
+        </property>
+        <property generated="never" lazy="false" name="username" optimistic-lock="true" type="string" unique="false">
+            <column length="60" name="username" not-null="true" unique="true"/>
+        </property>
+        <property generated="never" lazy="false" name="pass" optimistic-lock="true" type="string" unique="false">
+            <column length="256" name="pass"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="friendsForToUser" optimistic-lock="true" sort="unsorted" table="friend">
+            <key on-delete="noaction">
+                <column name="toUser" not-null="true"/>
+            </key>
+            <one-to-many class="pdg5.server.persistent.Friend" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="friendsForFromUser" optimistic-lock="true" sort="unsorted" table="friend">
+            <key on-delete="noaction">
+                <column name="fromUser" not-null="true"/>
+            </key>
+            <one-to-many class="pdg5.server.persistent.Friend" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="messages" optimistic-lock="true" sort="unsorted" table="message">
+            <key on-delete="noaction">
+                <column name="user" not-null="true"/>
+            </key>
+            <one-to-many class="pdg5.server.persistent.Message" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="matchlists" optimistic-lock="true" sort="unsorted" table="matchlist">
+            <key on-delete="noaction">
+                <column name="userID" not-null="true"/>
+            </key>
+            <one-to-many class="pdg5.server.persistent.Matchlist" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="blacklistsForToUser" optimistic-lock="true" sort="unsorted" table="blacklist">
+            <key on-delete="noaction">
+                <column name="toUser" not-null="true"/>
+            </key>
+            <one-to-many class="pdg5.server.persistent.Blacklist" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="blacklistsForFromUser" optimistic-lock="true" sort="unsorted" table="blacklist">
+            <key on-delete="noaction">
+                <column name="fromUser" not-null="true"/>
+            </key>
+            <one-to-many class="pdg5.server.persistent.Blacklist" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="gamesForPlayer2" optimistic-lock="true" sort="unsorted" table="game">
+            <key on-delete="noaction">
+                <column name="player2" not-null="true"/>
+            </key>
+            <one-to-many class="pdg5.server.persistent.Game" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="gamesForPlayer1" optimistic-lock="true" sort="unsorted" table="game">
+            <key on-delete="noaction">
+                <column name="player1" not-null="true"/>
+            </key>
+            <one-to-many class="pdg5.server.persistent.Game" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

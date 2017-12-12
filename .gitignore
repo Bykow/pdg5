@@ -40,10 +40,23 @@ IntelliJ
 *.iml
 .idea
 
+Eclipse
+.classpath
+.project
+.settings
+
+Netbeans
+/pdg5-common/nbproject/
+/pdg5-server/nbproject/
+/pdg5-client/nbproject/
+
 # Explude latex temp file
 *.aux
 *.toc
 *.gz
 *.pdf
 
-\.DS_Store
+
+#OSX bullshit
+*.DS_Store
+

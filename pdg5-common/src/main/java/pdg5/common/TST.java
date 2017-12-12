@@ -1,37 +1,27 @@
 package pdg5.common;
 
 /**
- * Class representing a Ternary Search Tree, used to stock a diconnary
+ * Class representing a Ternary Search Tree, used to stock a dictionary
  */
 public class TST {
-    /**
-     * Private inner class Node, represents a Node (a char) in the data structure
-     */
-    private class Node {
-        public Node left;       // subtree smaller keys
-        public Node right;      // subtree greater keys
-        public Node center;     // subtree with next key
-        public char c;
-        public boolean isWord;  // is the current char an end of word
-        public int nodeHeight;  // height of subtree
-
-        Node(char c) {
-            this.c = c;
-            this.isWord = false;
-            this.nodeHeight = 0;
-        }
-    }
-
     /**
      * Root of the tree
      */
     private Node root;
 
     /**
+     * Default constructor
+     */
+    public TST() {
+        this.root = null;
+    }
+
+    /**
      * Put a Node in the tree with a rebalancing
-     * @param x the node to put
+     *
+     * @param x   the node to put
      * @param key the key (string)
-     * @param d index of the char in the word (for recursive purposes)
+     * @param d   index of the char in the word (for recursive purposes)
      * @return Node for recursive calls
      */
     private Node put(Node x, String key, int d) {
@@ -56,15 +46,16 @@ public class TST {
 
     /**
      * Gets the Node of a key
-     * @param x Node to get
+     *
+     * @param x   Node to get
      * @param key the key (string)
-     * @param d index of the char in the word (for recursive purposes)
+     * @param d   index of the char in the word (for recursive purposes)
      * @return Node for recursive calls
      */
-    private Node get(Node x, String key, int d) {
+    private boolean get(Node x, String key, int d) {
 
         if (x == null) {
-            return null;
+            return false;
         }
 
         char c = key.charAt(d);
@@ -73,15 +64,20 @@ public class TST {
             return get(x.left, key, d);
         } else if (c > x.c) {
             return get(x.right, key, d);
-        } else if (d != key.length() - 1) {
-            return get(x.center, key, d + 1);
         } else {
-            return x;
+            if (x.isWord && d == key.length() - 1) {
+                return true;
+            } else if (d == key.length() - 1) {
+                return false;
+            } else {
+                return get(x.center, key, d + 1);
+            }
         }
     }
 
     /**
      * Helper updates the height of a subtree with the height of the childs
+     *
      * @param x Node to update
      */
     private void updateNodeHeight(Node x) {
@@ -90,6 +86,7 @@ public class TST {
 
     /**
      * Rotation on the right of the subtree
+     *
      * @param x Node to rotate around
      * @return Node for recursive calls
      */
@@ -105,6 +102,7 @@ public class TST {
 
     /**
      * Rotation on the left of the subtree
+     *
      * @param x Node to rotate around
      * @return Node for recursive calls
      */
@@ -120,6 +118,7 @@ public class TST {
 
     /**
      * Return the balance of a tree
+     *
      * @param x Node to rotate around
      * @return int the delta between balances
      */
@@ -133,6 +132,7 @@ public class TST {
 
     /**
      * Restores the balance of the tree
+     *
      * @param x Node to rotate around
      * @return Node for recursive calls
      */
@@ -158,6 +158,7 @@ public class TST {
 
     /**
      * height of the current node
+     *
      * @param x Node to get height from
      * @return int height
      */
@@ -170,14 +171,8 @@ public class TST {
     }
 
     /**
-     * Default constructor
-     */
-    public TST() {
-        this.root = null;
-    }
-
-    /**
      * Puts a word in the tree
+     *
      * @param key word
      */
     public void put(String key) {
@@ -186,23 +181,32 @@ public class TST {
 
     /**
      * Asks if a word is in the tree
+     *
      * @param key string word
      * @return true is the word is in the tree
      */
     public boolean contains(String key) {
-        Node x = get(root, key, 0);
-
-        if (x == null) {
-            return true;
-        }
-        return false;
+        return get(root, key, 0);
     }
 
     /**
-     * Return the height of current Node
-     * @return height
+     * Private inner class Node, represents a Node (a char) in the data structure
      */
-    public int height() {
-        return height(root);
+    private class Node {
+        public Node left;       // subtree smaller keys
+        public Node right;      // subtree greater keys
+        public Node center;     // subtree with next key
+        public char c;
+        public boolean isWord;  // is the current char an end of word
+        public int nodeHeight;  // height of subtree
+
+        Node(char c) {
+            this.c = c;
+            this.isWord = false;
+            this.nodeHeight = 0;
+            this.left = null;
+            this.right = null;
+            this.center = null;
+        }
     }
 }

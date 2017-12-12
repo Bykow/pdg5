@@ -25,16 +25,21 @@
 # Domaine
 Ce tableau à pour but de répartir quel pièce de logiciel ce trouve sur quelle application. Soit client, soit serveur, soit en commun
 
-| pdg5.client.Client | Commun | pdg5.server.Server |
-| - | - | - |
-| Graphic interface | Exchange Protocol | DB |
-| Game | | MultiThreading for each client |
-| | | Game Logic |
-| | | Dico |
+| Client            | Commun            | Server |
+|    -              |    -              |    -   |
+| Graphic interface | Exchange Protocol |   DB   |
+| Game              |                   | MultiThreading for each client |
+|                   |                   | Game Logic |
+|    -              |    -              |  Dico  |
 
 ## Implémentation
+### Mode Tutoriel
+* unique possibilité lors du premier login
+*
+
 ### Mode Partie
 * timer 72h max entre chaque cout
+* contre joueur matchmaking
 
 ### Mode Tournoi
 * timer 24h max entre chaque cout
@@ -54,12 +59,14 @@ Ce tableau à pour but de répartir quel pièce de logiciel ce trouve sur quelle
 * pubs
 
 # Règles du jeu
-* Former des mots 7 lettres
-* chaque joueur possède 7 tuiles random
+* Former des mots de 2 à 7 lettres
+* chaque joueur possède 7 tuiles random + 2 optionnelle envoyées par l'ennemi. 
+* Au premier tour le joueur qui commence possède les 2 optionnelle
 * pre-séléctionne des tuiles
 * les tuiles valent des points
 * la partie possède 114 tuiles 
-* la victoire revient au joueur avec le plus de points une fois que les tuiles sont épuisées
+* la victoire revient au joueur avec le plus de points une fois que les tuiles sont épuisées et qu'un joueur ne peut plus former de mots
+* tour par tour
 
 # Problématiques
 * Base de donnée
@@ -71,4 +78,10 @@ Ce tableau à pour but de répartir quel pièce de logiciel ce trouve sur quelle
 * Emplacements des tuiles avec multiplicateurs  
 Envoie d'une string lors d'un nouveau coup  
 Exemple : 0030000 pour la 3ème, x3
-* Echange de tuile
+* Envoi de 0 à 2 tuiles à l'ennemi
+* Choisie la lettre lorsqu'on pre-selectionne un Joker
+
+#calcul des points par coup
+* (somme(Lettre i * Multiplicteur i) + 10 si 7 lettres ) * 2 si lettres ennemies utilisées
+* pas de multiplicateur sur la 7ème case
+* toujours 2 W (position d'envoi à l'ennemi)

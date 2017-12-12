@@ -22,7 +22,7 @@ import javafx.scene.input.*;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import pdg5.client.view.GTile;
-import pdg5.common.game.Tuile;
+import pdg5.common.game.Tile;
 
 import java.util.List;
 
@@ -64,23 +64,6 @@ public class GameController {
             ap.setOnDragDropped(this::handleOnDragDropped);
             ap.setOnDragDone(this::handleOnDragDone);
         }
-
-        for(StackPane ap : userList) {
-            ap.setOnDragDetected(this::handleOnDragDetected);
-            ap.setOnDragEntered(this::handleOnDragEntered);
-            ap.setOnDragOver(this::handleOnDragOver);
-            ap.setOnDragDropped(this::handleOnDragDropped);
-            ap.setOnDragDone(this::handleOnDragDone);
-        }
-
-        for(StackPane ap : userBonusList) {
-            ap.setOnDragDetected(this::handleOnDragDetected);
-            ap.setOnDragEntered(this::handleOnDragEntered);
-            ap.setOnDragOver(this::handleOnDragOver);
-            ap.setOnDragDropped(this::handleOnDragDropped);
-            ap.setOnDragDone(this::handleOnDragDone);
-        }
-
     }
 
     private void handleOnDragDetected(MouseEvent event) {
@@ -128,7 +111,7 @@ public class GameController {
 
         boolean success = false;
         if (db.hasContent(tileFormat)) {
-            source.getChildren().setAll(new GTile((Tuile)db.getContent(tileFormat)));
+            source.getChildren().setAll(new GTile((Tile)db.getContent(tileFormat)));
             success = true;
         }
 

@@ -50,6 +50,8 @@ Netbeans
 /pdg5-server/nbproject/
 /pdg5-client/nbproject/
 
+nb-*.xml
+
 # Explude latex temp file
 *.aux
 *.toc

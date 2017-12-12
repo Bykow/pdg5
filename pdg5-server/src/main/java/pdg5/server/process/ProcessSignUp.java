@@ -23,7 +23,6 @@ public class ProcessSignUp implements GenericProcess {
 
     @Override
     public Message execute() {
-       /*
         int exitCode;
         if (manager.addUser(signUp.getEmail(), signUp.getUsername(), signUp.getPassword()) != null) {
             exitCode = Protocol.OK;
@@ -42,7 +41,6 @@ public class ProcessSignUp implements GenericProcess {
             default :
                 return new ErrorMessage("Unhandled ErrorMessage in SignUp, default reached");
         }
-        */
-       return new ErrorMessage("Not implemented");
+       //return new ErrorMessage("Not implemented");
     }
 }

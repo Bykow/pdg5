@@ -41,6 +41,6 @@ public class ProcessSignIn implements GenericProcess {
         }
         */
        
-       return null;
+       return new ErrorMessage("Not implemented");
     }
 }

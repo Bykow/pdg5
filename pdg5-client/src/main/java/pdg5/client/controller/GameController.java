@@ -21,11 +21,9 @@ import javafx.scene.control.Label;
 import javafx.scene.input.*;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import pdg5.client.view.GTile;
 import pdg5.common.game.Tile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GameController {
@@ -56,16 +54,26 @@ public class GameController {
 
     @FXML
     public void initialize() {
-        System.out.println(deckList);
-        GTile g = new GTile('A', 2);
-        deckList.get(0).getChildren().add(g);
-
         deckList.get(0).getChildren().add(new GTile(new Tile('A', 2)));
-        deckList.get(1).getChildren().addAll(new GTile(new Tile('F', 1)));
-        System.out.println(deckList);
-
+        deckList.get(1).getChildren().add(new GTile(new Tile('F', 1)));
 
         for(StackPane ap : deckList) {
+            ap.setOnDragDetected(this::handleOnDragDetected);
+            ap.setOnDragEntered(this::handleOnDragEntered);
+            ap.setOnDragOver(this::handleOnDragOver);
+            ap.setOnDragDropped(this::handleOnDragDropped);
+            ap.setOnDragDone(this::handleOnDragDone);
+        }
+
+        for(StackPane ap : userList) {
+            ap.setOnDragDetected(this::handleOnDragDetected);
+            ap.setOnDragEntered(this::handleOnDragEntered);
+            ap.setOnDragOver(this::handleOnDragOver);
+            ap.setOnDragDropped(this::handleOnDragDropped);
+            ap.setOnDragDone(this::handleOnDragDone);
+        }
+
+        for(StackPane ap : userBonusList) {
             ap.setOnDragDetected(this::handleOnDragDetected);
             ap.setOnDragEntered(this::handleOnDragEntered);
             ap.setOnDragOver(this::handleOnDragOver);

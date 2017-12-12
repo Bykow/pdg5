@@ -21,8 +21,6 @@ public class ClientRequestManager {
         } else if (o instanceof Noop) {
             return new ProcessNoop((Noop) o).execute();
 
-        } else if (o instanceof  Load) {
-            return new ProcessLoad((Load) o).execute();
         }
 
         return new ErrorMessage("Unable to check Message Type");

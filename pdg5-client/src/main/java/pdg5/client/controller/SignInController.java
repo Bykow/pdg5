@@ -55,10 +55,10 @@ public class SignInController extends AbstractController {
         ClientListener listener = new ClientListener();
         Stage stage = (Stage) btnLogin.getScene().getWindow();
 
-        ClientSender cs = new ClientSender();
+        ClientSender clientSender = new ClientSender();
         SignIn signIn = new SignIn(username.getText(), password.getText());
 
-        cs.add(signIn);
+        clientSender.add(signIn);
 
 
         Message msg = listener.take();

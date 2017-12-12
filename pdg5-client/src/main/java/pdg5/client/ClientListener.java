@@ -15,29 +15,36 @@ public class ClientListener implements Runnable {
     private Socket socket;
     private static MessageQueue queue = null;
     private static ObjectInputStream in;
+    private static boolean launch = false;
 
     public ClientListener() {
-       init(); 
+        init();
     }
-    
+
     private void init() {
-       if(queue == null) {
-          queue = new MessageQueue();
-       }
+        if (queue == null) {
+            queue = new MessageQueue();
+        }
     }
 
     public ClientListener(Socket socket) throws IOException {
         this.socket = socket;
-        this.in = new ObjectInputStream(socket.getInputStream());
+        in = new ObjectInputStream(socket.getInputStream());
         init();
     }
 
     @Override
     public void run() {
-        System.out.println("ClientListener.run");
+        if (launch) {
+            System.err.println("[ERROR] ClientListener already launch.");
+            return;
+        }
+
         try {
+            launch = true;
+            System.out.println("ClientListener.run");
             while (true) {
-                queue.add((Message)in.readObject());
+                queue.add((Message) in.readObject());
             }
         } catch (IOException | ClassNotFoundException e) {
         }

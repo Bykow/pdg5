@@ -24,6 +24,7 @@ import javafx.scene.paint.Color;
 import pdg5.client.view.GTile;
 import pdg5.common.game.Tile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameController {
@@ -31,7 +32,7 @@ public class GameController {
     private static final DataFormat tileFormat = new DataFormat("tile.model");
 
     @FXML
-    private List<StackPane> deckList;
+    private ArrayList<StackPane> deckList;
     @FXML
     private List<StackPane> userList;
     @FXML

@@ -43,13 +43,13 @@
 
             <fx:define>
                <ArrayList fx:id="adversaryList" >
-                  <fx:reference source="ugbox0"/>
-                  <fx:reference source="ugbox1"/>
-                  <fx:reference source="ugbox2"/>
-                  <fx:reference source="ugbox3"/>
-                  <fx:reference source="ugbox4"/>
-                  <fx:reference source="ugbox5"/>
-                  <fx:reference source="ugbox6"/>
+                  <fx:reference source="agbox0"/>
+                  <fx:reference source="agbox1"/>
+                  <fx:reference source="agbox2"/>
+                  <fx:reference source="agbox3"/>
+                  <fx:reference source="agbox4"/>
+                  <fx:reference source="agbox5"/>
+                  <fx:reference source="agbox6"/>
                </ArrayList>
             </fx:define>
          </children>

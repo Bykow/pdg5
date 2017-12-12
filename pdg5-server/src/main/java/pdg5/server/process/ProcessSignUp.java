@@ -43,6 +43,6 @@ public class ProcessSignUp implements GenericProcess {
                 return new ErrorMessage("Unhandled ErrorMessage in SignUp, default reached");
         }
         */
-       return null;
+       return new ErrorMessage("Not implemented");
     }
 }

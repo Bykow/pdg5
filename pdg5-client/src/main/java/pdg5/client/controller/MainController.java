@@ -17,10 +17,17 @@ package pdg5.client.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
+import pdg5.client.ClientListener;
+import pdg5.client.ClientSender;
+import pdg5.client.util.ClientRequestManager;
 
 import java.io.IOException;
 
 public class MainController {
+
+    private ClientListener listener;
+    private ClientSender sender;
+    private ClientRequestManager requestManager;
 
     @FXML
     private AnchorPane gameContainer;
@@ -31,6 +38,10 @@ public class MainController {
     public void initialize() {}
 
     public void loadGame() {
+        listener = new ClientListener();
+        sender = new ClientSender();
+        this.requestManager = new ClientRequestManager();
+
         try {
             FXMLLoader loader = new FXMLLoader();
             GameController controller = new GameController();
@@ -41,5 +52,13 @@ public class MainController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        // Process message
+        sender.add(
+                requestManager.execute(
+                        listener.take()
+                )
+        );
+
     }
 }

@@ -39,8 +39,8 @@ public class ProcessSignIn implements GenericProcess {
         } else {
             return new ErrorMessage("Password invalid in SignIn for user " + signIn.getUsername());
         }
-        
-       */
-       return null;
+        */
+       
+       return new ErrorMessage("Not implemented");
     }
 }

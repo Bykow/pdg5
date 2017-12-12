@@ -17,8 +17,9 @@ package pdg5.client.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.control.Label;
 import javafx.scene.input.*;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import pdg5.client.view.GTile;
 import pdg5.common.game.Tuile;
@@ -30,16 +31,33 @@ public class GameController {
     private static final DataFormat tileFormat = new DataFormat("tile.model");
 
     @FXML
-    private List<Pane> deckList;
+    private List<StackPane> deckList;
     @FXML
-    private List<Pane> userList;
+    private List<StackPane> userList;
+    @FXML
+    private List<StackPane> userBonusList;
+    @FXML
+    private List<StackPane> adversaryList;
+    @FXML
+    private List<StackPane> adversaryBonusList;
+
+    @FXML
+    private Label remainingTiles;
+    @FXML
+    private Label adversaryScore;
+    @FXML
+    private Label userScore;
+    @FXML
+    private Label adversaryName;
+    @FXML
+    private Label userName;
 
     @FXML
     public void initialize() {
         deckList.get(0).getChildren().addAll(new GTile(new Tuile('A', 2)));
         deckList.get(1).getChildren().addAll(new GTile(new Tuile('F', 1)));
 
-        for(Pane ap : deckList) {
+        for(StackPane ap : deckList) {
             ap.setOnDragDetected(this::handleOnDragDetected);
             ap.setOnDragEntered(this::handleOnDragEntered);
             ap.setOnDragOver(this::handleOnDragOver);
@@ -47,7 +65,7 @@ public class GameController {
             ap.setOnDragDone(this::handleOnDragDone);
         }
 
-        for(Pane ap : userList) {
+        for(StackPane ap : userList) {
             ap.setOnDragDetected(this::handleOnDragDetected);
             ap.setOnDragEntered(this::handleOnDragEntered);
             ap.setOnDragOver(this::handleOnDragOver);
@@ -55,11 +73,18 @@ public class GameController {
             ap.setOnDragDone(this::handleOnDragDone);
         }
 
+        for(StackPane ap : userBonusList) {
+            ap.setOnDragDetected(this::handleOnDragDetected);
+            ap.setOnDragEntered(this::handleOnDragEntered);
+            ap.setOnDragOver(this::handleOnDragOver);
+            ap.setOnDragDropped(this::handleOnDragDropped);
+            ap.setOnDragDone(this::handleOnDragDone);
+        }
 
     }
 
     private void handleOnDragDetected(MouseEvent event) {
-        Pane source = (Pane) event.getSource();
+        StackPane source = (StackPane) event.getSource();
 
         if(source.getChildren().size() == 0) {
             event.consume();
@@ -82,7 +107,7 @@ public class GameController {
     }
 
     private void handleOnDragEntered(DragEvent event) {
-        Pane source = (Pane) event.getSource();
+        StackPane source = (StackPane) event.getSource();
         if(source.getChildren().size() == 0) {
             //source.setStyle("-fx-border-color: black;");
         }
@@ -91,14 +116,14 @@ public class GameController {
     }
 
     private void handleOnDragOver(DragEvent event) {
-        Pane source = (Pane) event.getSource();
+        StackPane source = (StackPane) event.getSource();
         if(source.getChildren().size() == 0)
             event.acceptTransferModes(TransferMode.MOVE);
         event.consume();
     }
 
     private void handleOnDragDropped(DragEvent event) {
-        Pane source = (Pane) event.getSource();
+        StackPane source = (StackPane) event.getSource();
         Dragboard db = event.getDragboard();
 
         boolean success = false;
@@ -113,7 +138,7 @@ public class GameController {
 
     private void handleOnDragDone(DragEvent event) {
         if (event.getTransferMode() == TransferMode.MOVE) {
-            Pane source = (Pane) event.getSource();
+            StackPane source = (StackPane) event.getSource();
             source.getChildren().remove(0);
         }
         event.consume();

@@ -5,11 +5,19 @@
     -fx-padding: 10;
 }
 
-.table Pane {
+.table {
+    -fx-alignment: center ;
+    -fx-padding: 10 ;
+}
+
+.table StackPane {
     -fx-background-color: #3498db;
     -fx-border-color: #2c3e50;
     -fx-border-radius: 4px;
     -fx-background-radius: 4px;
+    -fx-background-insets: 5px 8.5px;
+    -fx-border-insets: 5px 8.5px;
+    -fx-padding: -1px;
 }
 
 .avatar {

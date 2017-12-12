@@ -15,12 +15,12 @@ import pdg5.common.protocol.Noop;
 public class ClientRequestManager {
 
     public Message execute(Message o) {
+       System.out.println("Message received : " + o);
         if (o instanceof ErrorMessage) {
             return new ProcessErrorMessage((ErrorMessage) o).execute();
 
         } else if (o instanceof Noop) {
             return new ProcessNoop((Noop) o).execute();
-
         }
 
         return new ErrorMessage("Unable to check Message Type");

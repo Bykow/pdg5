@@ -33,7 +33,7 @@ public class ProcessSignUp implements GenericProcess {
         switch (exitCode) {
             case Protocol.OK :
                 return new Load();
-                //todo this is not suppose to be empty, waiting for game logic to continue
+                // TODO this is not suppose to be empty, waiting for game logic to continue
             case Protocol.ERROR :
                 return new ErrorMessage("Unexpected ErrorMessage in SignUp code: " + exitCode);
             case Protocol.COULDNOTADDUSER :

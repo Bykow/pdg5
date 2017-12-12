@@ -25,7 +25,7 @@ public class Load extends Message {
     }
 
     public Load() {
-        this.games = new ArrayList<Game>();
+        this.games = new ArrayList<>();
     }
 
     /**

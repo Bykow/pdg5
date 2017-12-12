@@ -25,7 +25,7 @@ public class Manager {
 	private SessionFactory getFactory() {
 		if(factory == null) {
 			try {
-				factory = new Configuration().configure(new File("/hibernate.cfg.xml")).buildSessionFactory();
+				factory = new Configuration().configure().buildSessionFactory();
 		      } catch (Throwable ex) {
 		         System.err.println("Failed to create sessionFactory object. " + ex);
 		         ex.printStackTrace();

@@ -44,17 +44,24 @@
 ## Itération 8: *14 novembre 2017*
 > - [x] Création d'un diaporama pour la présentation
 > - [x] Merge de nos fonctionnalités
-> - [ ] **\* Présentation intermédiaire**
+> - [x] **\* Présentation intermédiaire**
 
 ## Itération 9: *21 novembre 2017*
-> - [ ] Lancement d'une partie contre un utilisateur connu
-> - [ ] Début du déroulement basique d'une partie, interaction simple
+> - [x] Répartition du travail
+> - [x] Comunication client-serveur complète 
 
 ## Itération 10: *28 novembre 2017*
-> - [ ] Finalisation du déroulement basique d'une partie
-> - [ ] Ajout et implémentation du chat dans la partie
+> - [x] Avancement de nos parties
 
 ## Itération 11: *5 décembre 2017*
+> - [x] Création de l'inertafce client pour le chat
+
+## Itération 12: *12 décembre 2017*
+> - [x] Ajout et implémentation du chat dans la partie
+> - [ ] Déroulement basique d'une partie
+
+## Itération 13: *19 décembre 2017*
+> - [ ] Lancer une recherche de partie
 > - [ ] Ajout des fonctionnalités 
 >   - [ ] Bonus
 >   - [ ] Mélanger les tuiles
@@ -62,26 +69,20 @@
 >   - [ ] Historique utilisateur
 >   - [ ] Statistiques utilisateur
 
-## Itération 12: *12 décembre 2017*
-> - [ ] Lancer une recherche de partie
-> - [ ] Ajout des fonctionnalités 
->   - [ ] Jeter les tuiles
->   - [ ] Aperçu des tuiles de l'adversaire
->   - [ ] Ajout des notifications windows
->   - [ ] Parrainage
-
-## Itération 13: *19 décembre 2017*
-> - [ ] Mode tournoi
->   - [ ] Implémentation d'une IA
->   - [ ] Propre logique du jeu
->   - [ ] Adaptation du modèle du jeu
-> - [ ] Rapport et finalisation
-
 <hr/>
 <center><b>Vacances</b></center>
 <hr/>
 
 ## Itération 14: *9 janvier 2018*
+> - [ ] Ajout des fonctionnalités 
+>   - [ ] Jeter les tuiles
+>   - [ ] Aperçu des tuiles de l'adversaire
+>   - [ ] Ajout des notifications windows
+>   - [ ] Parrainage
+> - [ ] Mode tournoi
+>   - [ ] Implémentation d'une IA
+>   - [ ] Propre logique du jeu
+>   - [ ] Adaptation du modèle du jeu
 > - [ ] Rapport et finalisation
 
 ## Itération 15: *16 janvier 2018*

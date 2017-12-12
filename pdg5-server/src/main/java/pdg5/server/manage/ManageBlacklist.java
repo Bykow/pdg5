@@ -1,10 +1,10 @@
 package pdg5.server.manage;
 
-import java.util.Date;
-import java.util.List;
-
 import pdg5.server.persistent.Blacklist;
 import pdg5.server.persistent.User;
+
+import java.util.Date;
+import java.util.List;
 
 public class ManageBlacklist extends Manager {
 	public Blacklist addBlacklist(User fromUser, User toUser) {

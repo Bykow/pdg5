@@ -1,12 +1,12 @@
 package pdg5.server;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
+import pdg5.server.persistent.Tournament;
 
 import java.util.Date;
 
-import org.junit.Test;
-
-import pdg5.server.persistent.Tournament;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class PersistentTournamentTest {
 

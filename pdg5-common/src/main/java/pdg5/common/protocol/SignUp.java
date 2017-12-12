@@ -1,8 +1,5 @@
 package pdg5.common.protocol;
 
-import java.awt.*;
-import java.io.Serializable;
-
 /**
  * Class use to register
  *

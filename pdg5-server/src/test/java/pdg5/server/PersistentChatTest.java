@@ -1,16 +1,16 @@
 package pdg5.server;
 
-import static org.junit.Assert.*;
-
-import java.util.HashSet;
-import java.util.Set;
-
 import org.junit.Test;
-
 import pdg5.server.persistent.Chat;
 import pdg5.server.persistent.Game;
 import pdg5.server.persistent.Message;
 import pdg5.server.persistent.Tournament;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class PersistentChatTest {
 

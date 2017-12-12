@@ -3,12 +3,7 @@ package pdg5.server.util;
 import pdg5.common.protocol.*;
 import pdg5.server.manage.ManageUser;
 import pdg5.server.model.GameController;
-import pdg5.server.process.ProcessNewGame;
-import pdg5.server.process.ProcessNoop;
-import pdg5.server.process.ProcessPlay;
-import pdg5.server.process.ProcessSignIn;
-import pdg5.server.process.ProcessSignUp;
-import pdg5.server.process.ProcessValidation;
+import pdg5.server.process.*;
 
 /**
  * @author Maxime Guillod

@@ -1,14 +1,14 @@
 package pdg5.server;
 
-import static org.junit.Assert.*;
-
-import java.util.Date;
-
 import org.junit.Test;
-
 import pdg5.server.persistent.Chat;
 import pdg5.server.persistent.Message;
 import pdg5.server.persistent.User;
+
+import java.util.Date;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class PersistentMessageTest {
 

@@ -1,9 +1,9 @@
 package pdg5.server.manage;
 
+import pdg5.server.persistent.Tournament;
+
 import java.util.Date;
 import java.util.List;
-
-import pdg5.server.persistent.Tournament;
 
 public class ManageTournament extends Manager {
 	

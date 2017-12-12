@@ -1,7 +1,5 @@
 package pdg5.common.protocol;
 
-import java.io.Serializable;
-
 /**
  * Class use to login into our application
  *

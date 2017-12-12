@@ -1,10 +1,10 @@
 package pdg5.server.manage;
 
-import java.util.Date;
-import java.util.List;
-
 import pdg5.server.persistent.Friend;
 import pdg5.server.persistent.User;
+
+import java.util.Date;
+import java.util.List;
 
 public class ManageFriend extends Manager {
 	public Friend addFriend(User fromUser, User toUser) {

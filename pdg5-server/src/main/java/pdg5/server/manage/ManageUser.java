@@ -1,11 +1,10 @@
 package pdg5.server.manage;
 
-import java.util.List;
-
 import org.hibernate.Session;
 import org.mindrot.jbcrypt.BCrypt;
-
 import pdg5.server.persistent.User;
+
+import java.util.List;
 
 public class ManageUser extends Manager {
 

@@ -18,12 +18,9 @@ package pdg5.client.view;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import pdg5.client.Client;
 import pdg5.common.game.Tile;
-
-import java.io.IOException;
 
 public class GTile extends Pane {
     private static FXMLLoader loader = initLoader();

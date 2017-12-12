@@ -1,11 +1,12 @@
 package pdg5.server.process;
 
 import pdg5.common.Protocol;
-import pdg5.common.protocol.*;
+import pdg5.common.protocol.ErrorMessage;
+import pdg5.common.protocol.Load;
+import pdg5.common.protocol.Message;
+import pdg5.common.protocol.SignUp;
 import pdg5.server.manage.ManageUser;
 import pdg5.server.util.ServerActiveUser;
-
-import java.util.List;
 
 /**
  * Created on 31.10.17 by Bykow

@@ -8,113 +8,112 @@ import org.hibernate.cfg.Configuration;
 import pdg5.common.Protocol;
 import pdg5.server.persistent.AbstractData;
 
-import java.io.File;
 import java.util.List;
 
 public class Manager {
-	private static SessionFactory factory;
-	private static Session session;
-	private static Transaction transaction;
+    private static SessionFactory factory;
+    private static Session session;
+    private static Transaction transaction;
 
-	public Manager() {
-		factory = null;
-		session = null;
-		transaction = null;
-	}
+    public Manager() {
+        factory = null;
+        session = null;
+        transaction = null;
+    }
 
-	private SessionFactory getFactory() {
-		if(factory == null) {
-			try {
-				factory = new Configuration().configure().buildSessionFactory();
-		      } catch (Throwable ex) {
-		         System.err.println("Failed to create sessionFactory object. " + ex);
-		         ex.printStackTrace();
-		         throw new ExceptionInInitializerError(ex);
-		      }
-		}
-		return factory;
-	}
+    private SessionFactory getFactory() {
+        if(factory == null) {
+            try {
+                factory = new Configuration().configure().buildSessionFactory();
+            } catch (Throwable ex) {
+                System.err.println("Failed to create sessionFactory object. " + ex);
+                ex.printStackTrace();
+                throw new ExceptionInInitializerError(ex);
+            }
+        }
+        return factory;
+    }
 
-	/**
-	 * Used to get a global session
-	 * @return
-	 */
-	public Session getSession() {
-		if(session == null) {
-			session = getFactory().openSession();
-		}
-		return session;
-	}
+    /**
+     * Used to get a global session
+     * @return
+     */
+    public Session getSession() {
+        if(session == null) {
+            session = getFactory().openSession();
+        }
+        return session;
+    }
 
-	/**
-	 * To call when we are done talking to the DB
-	 */
-	public void closeConversation() {
-		if(session != null) {
-			session.close();
-		}
-	}
+    /**
+     * To call when we are done talking to the DB
+     */
+    public void closeConversation() {
+        if(session != null) {
+            session.close();
+        }
+    }
 
-	public AbstractData addToDB(AbstractData abstractData) {
-		Integer id;
+    public AbstractData addToDB(AbstractData abstractData) {
+        Integer id;
 
-		try {
-			transaction = session.beginTransaction();
-			id = (Integer) session.save(abstractData);
-			abstractData.setId(id);
-			transaction.commit();
-		} catch (HibernateException e) {
-			if (transaction !=null) transaction.rollback();
-			e.printStackTrace();
-		}
+        try {
+            transaction = getSession().beginTransaction();
+            id = (Integer) getSession().save(abstractData);
+            abstractData.setId(id);
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction !=null) transaction.rollback();
+            e.printStackTrace();
+        }
 
-		return abstractData;
-	}
+        return abstractData;
+    }
 
-	public List<? extends AbstractData> getListFromDB(String query) {
-		List<AbstractData> list = null;
+    public List<? extends AbstractData> getListFromDB(String query) {
+        List<AbstractData> list = null;
 
-		try {
-			transaction = session.beginTransaction();
-			list = session.createQuery(query).list();
+        try {
+            transaction = getSession().beginTransaction();
+            list = getSession().createQuery(query).list();
 
-			transaction.commit();
-		} catch (HibernateException e) {
-			if (transaction!=null) transaction.rollback();
-			e.printStackTrace();
-		}
-		return list;
-	}
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction!=null) transaction.rollback();
+            e.printStackTrace();
+        }
+        return list;
+    }
 
-	public int updateToDB(AbstractData abstractData) {
-		int code = Protocol.OK;
+    public int updateToDB(AbstractData abstractData) {
+        int code = Protocol.OK;
 
-		try {
-			transaction = session.beginTransaction();
-			session.update(abstractData);
-			transaction.commit();
-		} catch (HibernateException e) {
-			if (transaction!=null) transaction.rollback();
-			code = Protocol.ERROR;
-			e.printStackTrace();
-		}
+        try {
+            transaction = getSession().beginTransaction();
+            getSession().update(abstractData);
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction!=null) transaction.rollback();
+            code = Protocol.ERROR;
+            e.printStackTrace();
+        }
 
-		return code;
-	}
+        return code;
+    }
 
-	public int deleteToDB(AbstractData abstractData) {
-		int code = Protocol.OK;
+    public int deleteToDB(AbstractData abstractData) {
+        int code = Protocol.OK;
 
-		try {
-			transaction = session.beginTransaction();
-			session.delete(abstractData);
-			transaction.commit();
-		} catch (HibernateException e) {
-			if (transaction!=null) transaction.rollback();
-			code = Protocol.ERROR;
-			e.printStackTrace();
-		}
+        try {
+            transaction = getSession().beginTransaction();
+            getSession().delete(abstractData);
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction!=null) transaction.rollback();
+            code = Protocol.ERROR;
+            e.printStackTrace();
+        }
 
-		return code;
-	}
+        return code;
+    }
 }

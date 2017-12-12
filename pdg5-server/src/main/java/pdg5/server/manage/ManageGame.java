@@ -1,15 +1,14 @@
 package pdg5.server.manage;
 
-import java.util.Date;
-import java.util.List;
-
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import pdg5.server.persistent.Game;
 import pdg5.server.persistent.Tournament;
 import pdg5.server.persistent.User;
+
+import java.util.Date;
+import java.util.List;
 
 public class ManageGame extends Manager {
 	public Game addGame(String title, User player1, User player2, Tournament tournament, String remainingLetters) {

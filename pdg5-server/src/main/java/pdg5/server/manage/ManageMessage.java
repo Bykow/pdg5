@@ -1,11 +1,11 @@
 package pdg5.server.manage;
 
-import java.util.Date;
-import java.util.List;
-
 import pdg5.server.persistent.Chat;
 import pdg5.server.persistent.Message;
 import pdg5.server.persistent.User;
+
+import java.util.Date;
+import java.util.List;
 
 public class ManageMessage extends Manager {
 	public Message addMessage(String content, User user, Chat chat) {

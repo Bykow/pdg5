@@ -1,10 +1,10 @@
 package pdg5.server.manage;
 
-import java.util.List;
-
 import pdg5.server.persistent.Chat;
 import pdg5.server.persistent.Game;
 import pdg5.server.persistent.Tournament;
+
+import java.util.List;
 
 public class ManageChat extends Manager {
 	public Chat addChatTournament(Tournament tournament) {

@@ -1,7 +1,5 @@
 package pdg5.common.protocol;
 
-import java.io.Serializable;
-
 /**
  * Class sended through the connection by the server representing
  * the answer to a Validation request wich explain to a client 

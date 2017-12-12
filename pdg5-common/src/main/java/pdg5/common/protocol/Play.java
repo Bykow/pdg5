@@ -1,6 +1,5 @@
 package pdg5.common.protocol;
 
-import java.io.Serializable;
 import pdg5.common.game.Composition;
 
 /**

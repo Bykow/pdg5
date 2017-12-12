@@ -1,13 +1,10 @@
 package pdg5.server.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
 import pdg5.common.game.Composition;
 import pdg5.common.game.Composition.Square;
 import pdg5.common.game.Utils;
+
+import java.util.Random;
 
 /**
  * This class manage the turn for a game

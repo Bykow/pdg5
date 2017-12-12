@@ -1,13 +1,13 @@
 package pdg5.server.util;
 
 import pdg5.common.Protocol;
+import pdg5.server.model.GameController;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import pdg5.server.model.GameController;
 
 /**
  * Listen the network on the DEFAULT_PORT, and start a {@link ClientHandler} when a new connection is detected.

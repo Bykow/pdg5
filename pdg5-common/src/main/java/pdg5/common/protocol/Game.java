@@ -1,10 +1,10 @@
 package pdg5.common.protocol;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
 import pdg5.common.game.Composition;
 import pdg5.common.game.Tile;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author Maxime Guillod

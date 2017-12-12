@@ -1,10 +1,10 @@
 package pdg5.server.manage;
 
-import java.util.List;
-
 import pdg5.server.persistent.Matchlist;
 import pdg5.server.persistent.Tournament;
 import pdg5.server.persistent.User;
+
+import java.util.List;
 
 public class ManageMatchlist extends Manager {
 	

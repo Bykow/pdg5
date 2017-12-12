@@ -1,33 +1,18 @@
 package pdg5.server.model;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.stream.Stream;
 import pdg5.common.Protocol;
 import pdg5.common.TST;
 import pdg5.common.game.Board;
 import pdg5.common.game.Composition;
 import pdg5.common.game.GameModel;
 import pdg5.common.game.Tile;
-import pdg5.common.protocol.ErrorMessage;
-import pdg5.common.protocol.Game;
-import pdg5.common.protocol.Load;
-import pdg5.common.protocol.Message;
-import pdg5.common.protocol.ValidationWord;
+import pdg5.common.protocol.*;
 import pdg5.server.manage.ManageUser;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.*;
 
 /**
  * this Class manage all the games created by the server

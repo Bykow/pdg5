@@ -5,7 +5,6 @@
  */
 package pdg5.server.process;
 
-import pdg5.common.game.Composition;
 import pdg5.common.protocol.Message;
 import pdg5.common.protocol.Validation;
 import pdg5.server.model.GameController;

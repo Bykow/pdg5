@@ -21,14 +21,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import pdg5.client.Client;
-import pdg5.common.game.Tuile;
+import pdg5.common.game.Tile;
 
 import java.io.IOException;
 
 public class GTile extends Pane {
     private static FXMLLoader loader = initLoader();
 
-    private Tuile model;
+    private Tile model;
 
     @FXML
     private Label letter;
@@ -41,19 +41,15 @@ public class GTile extends Pane {
         return loader;
     }
 
-    public GTile(Tuile model) {
+    public GTile(Tile model) {
         super();
 
         this.model = model;
 
-        try {
-            // Load root layout from fxml file.
-            loader.setRoot(this);
-            loader.setController(this);
+        // Load root layout from fxml file.
+        loader.setRoot(this);
+        loader.setController(this);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @FXML
@@ -62,7 +58,7 @@ public class GTile extends Pane {
         point.setText(String.valueOf(model.getValue()));
     }
 
-    public Tuile getModel() {
+    public Tile getModel() {
         return model;
     }
 }

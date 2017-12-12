@@ -54,8 +54,8 @@ public class GameController {
 
     @FXML
     public void initialize() {
-        deckList.get(0).getChildren().addAll(new GTile(new Tuile('A', 2)));
-        deckList.get(1).getChildren().addAll(new GTile(new Tuile('F', 1)));
+        deckList.get(0).getChildren().addAll(new GTile(new Tile('A', 2)));
+        deckList.get(1).getChildren().addAll(new GTile(new Tile('F', 1)));
 
         for(StackPane ap : deckList) {
             ap.setOnDragDetected(this::handleOnDragDetected);

@@ -17,9 +17,9 @@ public class ChatController {
     public void initialize() {
         Label time = new Label("19 sept. 2017 à 10:46:02");
         ChatMessage msg0 = new ChatMessage(ChatMessage.Type.TIME, "19 sept. 2017 à 10:46:02");
-        ChatMessage msg1 = new ChatMessage(ChatMessage.Type.INFO, "Shitty game has started !");
+        ChatMessage msg1 = new ChatMessage(ChatMessage.Type.INFO, "Game has started !");
         ChatMessage msg2 = new ChatMessage(ChatMessage.Type.USER, "Hello <3");
-        ChatMessage msg3 = new ChatMessage(ChatMessage.Type.ADVERSARY, "Hi bitch");
+        ChatMessage msg3 = new ChatMessage(ChatMessage.Type.ADVERSARY, "Hi");
 
 
         addMessage(msg0);

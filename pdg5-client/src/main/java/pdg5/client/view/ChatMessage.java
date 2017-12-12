@@ -4,15 +4,25 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
 public class ChatMessage extends StackPane {
-    public ChatMessage(String type, String msg) {
+    public ChatMessage(Type type, String msg) {
         super(new Label(msg));
-        this.getStyleClass().add(type);
+        this.getStyleClass().add(type.getValue());
     }
 
-    public interface Type {
-        String TIME = "time";
-        String USER = "user";
-        String INFO = "info";
-        String ADVERSARY = "adversary";
+    public enum Type {
+        TIME("time"),
+        USER("user"),
+        INFO("info"),
+        ADVERSARY("adversary");
+
+        private String value;
+
+        Type(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
     }
 }

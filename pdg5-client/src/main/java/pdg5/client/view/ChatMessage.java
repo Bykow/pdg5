@@ -5,7 +5,10 @@ import javafx.scene.layout.StackPane;
 
 public class ChatMessage extends StackPane {
     public ChatMessage(Type type, String msg) {
-        super(new Label(msg));
+        Label content = new Label(msg);
+        content.setWrapText(true);
+        this.getChildren().add(content);
+
         this.getStyleClass().add(type.getValue());
     }
 

@@ -16,8 +16,8 @@
       </ScrollPane>
       <AnchorPane id="bottom-bar" layoutY="543.0" prefHeight="55.0" prefWidth="300.0">
          <children>
-            <TextField layoutX="9.0" layoutY="9.0" prefHeight="37.0" prefWidth="224.0" />
-            <Button layoutX="240.0" layoutY="6.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="51.0" styleClass="send-btn" />
+            <TextField fx:id="msgInput" onAction="#sendMsg" layoutX="9.0" layoutY="9.0" prefHeight="37.0" prefWidth="224.0" />
+            <Button fx:id="btnSend" onAction="#sendMsg" layoutX="240.0" layoutY="6.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="51.0" styleClass="send-btn" />
          </children>
       </AnchorPane>
    </children>

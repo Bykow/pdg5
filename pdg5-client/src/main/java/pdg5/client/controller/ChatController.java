@@ -1,8 +1,10 @@
 package pdg5.client.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import pdg5.client.view.ChatMessage;
 import pdg5.common.Protocol;
@@ -12,6 +14,8 @@ public class ChatController {
     private VBox msgContainer;
     @FXML
     private ScrollPane scrollPane;
+    @FXML
+    TextField msgInput;
 
     @FXML
     public void initialize() {
@@ -21,16 +25,15 @@ public class ChatController {
         ChatMessage msg2 = new ChatMessage(ChatMessage.Type.USER, "Hello <3");
         ChatMessage msg3 = new ChatMessage(ChatMessage.Type.ADVERSARY, "Hi");
 
-
         addMessage(msg0);
         addMessage(msg1);
         addMessage(msg2);
         addMessage(msg3);
+    }
 
-
-        for(int i=0; i<20; i++) {
-            addMessage(new ChatMessage(ChatMessage.Type.ADVERSARY, "Hi bitch"));
-        }
+    @FXML
+    private void sendMsg(ActionEvent actionEvent) {
+        addMessage(new ChatMessage(ChatMessage.Type.USER, msgInput.getText()));
     }
 
     private void addMessage(ChatMessage msg) {

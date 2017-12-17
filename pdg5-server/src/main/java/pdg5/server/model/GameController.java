@@ -132,6 +132,7 @@ public class GameController {
       List<Tile> bonus = new ArrayList<>();
       bonus.add(ts.getNextTuile());
       bonus.add(ts.getNextTuile());
+      boards[0].setBonus(bonus);
 
       // TODO send to second player
       return getGameFromModel(model.getGameId(), idPlayer1);

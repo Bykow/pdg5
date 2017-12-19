@@ -8,6 +8,7 @@ import pdg5.common.game.GameModel;
 import pdg5.common.game.Tile;
 import pdg5.common.protocol.*;
 import pdg5.server.manage.ManageUser;
+import pdg5.server.util.ServerActiveUser;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -57,19 +58,21 @@ public class GameController {
    /**
     * message sent if we added someone to the matchmaking list
     */
-   private static final String lookingForOpponent = "Nous recherchons actuellement un adversaire";
+   private static final String MESSAGE_LOOKING_OPPONENT = "Nous recherchons actuellement un adversaire";
 
    /**
     * dictionary containing the playable words
     */
-   private static TST dictionary = new TST();
+   private final TST dictionary = new TST();
 
-   private ManageUser manageUser;
+   private final ManageUser manageUser;
+   private final ServerActiveUser activeUser;
 
    /**
     * Constructor
+     * @param activeUser The activeUsers
     */
-   public GameController() {
+    public GameController(ServerActiveUser activeUser) {
       games = new HashMap<>();
       clientGames = new HashMap<>();
       tileStacks = new HashMap<>();
@@ -80,19 +83,20 @@ public class GameController {
       InputStream inputStream = TST.class.getResourceAsStream("/dico/fr_dico.dic");
       new BufferedReader(new InputStreamReader(inputStream)).lines()
               .forEach(dictionary::put);
-
-   }
+        this.activeUser = activeUser;
+    }
 
    /**
     * If a player ask for a Game with a random opponent, this method check the
     * matchmaking list to give him an opponent or put him in the waiting list.
     *
     * @param idPlayerAsking unique id of the player who asked for a game
+     * @return Message response
     */
    public Message askNewGame(int idPlayerAsking) {
       if (matchMaking.isEmpty()) {
          matchMaking.add(idPlayerAsking);
-         return new ErrorMessage(lookingForOpponent);
+         return new ErrorMessage(MESSAGE_LOOKING_OPPONENT);
       } else {
          return addNewGame(idPlayerAsking, matchMaking.remove(0));
       }
@@ -134,13 +138,16 @@ public class GameController {
       bonus.add(ts.getNextTuile());
       boards[0].setBonus(bonus);
 
-      // TODO send to second player
+      // sending to second player
+      activeUser.getClientHandler(idPlayer2).addToQueue(getGameFromModel(model.getGameId(), idPlayer2));
       return getGameFromModel(model.getGameId(), idPlayer1);
    }
 
    /**
     * return a new Board filled with Tiles of a given TileStack
     *
+    * @param ts
+    * @param idPlayer
     * @Param ts TileStack used to fill the new Board
     * @return a new Board filled with Tiles
     */
@@ -191,7 +198,6 @@ public class GameController {
     * @return the Load created and filled with all games of the client
     */
    public Message findGamesOf(int idClient) {
-      // TODO clientGame null pointer exception when signIn
       List<Game> listGames = new ArrayList<>();
       List<Integer> gameIds = clientGames.get(idClient);
       if (gameIds != null) {
@@ -271,16 +277,17 @@ public class GameController {
       Board board = model.getBoardById(playerID);
       List<Tile> letters = board.getLetters();
       StringBuilder sb = new StringBuilder();
-      for (Tile letter : letters) {
-         sb.append(letter.getLetter());
-      }
+      letters.forEach((letter) -> {
+          sb.append(letter.getLetter());
+       });
 
-      for (Tile bonus : board.getBonus()) {
-         sb.append(bonus.getLetter());
-      }
+      board.getBonus().forEach((bonus) -> {
+          sb.append(bonus.getLetter());
+       });
 
       if (!isContained(word, sb.toString())) {
-         return new ErrorMessage("You don't have the letters to play this word. Tried : " + word + " have : " + sb.toString());
+          return new ErrorMessage(
+                  String.format("You don't have the letters to play this word.\n\t Tried : %s\n\t have : %s", word, sb.toString()));
       }
 
       // Calculate the value of the word
@@ -307,7 +314,7 @@ public class GameController {
       comp.setBonus(tm.getSquares(playerID));
       // remove composition letters and bonus letters
       comp.removeAll();
-      board.setBonus(new ArrayList<Tile>());
+      board.setBonus(new ArrayList<>());
       // get new letters from TileStack and add it to the board
       TileStack ts = tileStacks.get(gameID);
       List<Tile> newLetters = board.getLetters();
@@ -319,8 +326,9 @@ public class GameController {
       board.setLetters(newLetters);
 
       // TODO check if game ended
-      // Send to player the new state of the game
-      // TODO send to second player
+      
+      int opponentId = model.getOpponentBoard(playerID).getPlayerId();
+      activeUser.getClientHandler(opponentId).addToQueue(getGameFromModel(gameID, opponentId));
       return getGameFromModel(gameID, playerID);
    }
 

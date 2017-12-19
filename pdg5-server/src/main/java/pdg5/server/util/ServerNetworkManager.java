@@ -1,7 +1,6 @@
 package pdg5.server.util;
 
 import pdg5.common.Protocol;
-import pdg5.server.model.GameController;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -19,13 +18,11 @@ public class ServerNetworkManager {
     private ServerSocket serverSocket;
     private Socket socket;
     private ServerActiveUser activeUser;
-    private GameController gameController;
 
     public ServerNetworkManager() {
         System.out.println("START ServerNetworkManager");
         activeUser = new ServerActiveUser();
 
-        gameController = new GameController();
         try {
             serverSocket = new ServerSocket(Protocol.DEFAULT_PORT);
             while (true) {

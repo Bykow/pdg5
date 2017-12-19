@@ -195,10 +195,10 @@ public class Composition implements Serializable{
    
    /**
     * return true if the Composition is potentially a word 
-    * It means the word begins at first square, his of length two 
+    * It means the word begins at first square, is of length two 
     * or more and has no hole.
     * 
-    * @return true if the Composition is potentially a word, false else
+    * @return true if the Composition is potentially a word, false otherwise
     */
    public boolean isValid() {
       boolean endOfWord = false;
@@ -228,5 +228,13 @@ public class Composition implements Serializable{
               getClass() == o.getClass() &&
               Arrays.equals(word, ((Composition) o).word) &&
               Arrays.equals(bonus, ((Composition) o).bonus);
+   }
+
+   @Override
+   public int hashCode() {
+      int hash = 7;
+      hash = 79 * hash + Arrays.deepHashCode(this.word);
+      hash = 79 * hash + Arrays.deepHashCode(this.bonus);
+      return hash;
    }
 }

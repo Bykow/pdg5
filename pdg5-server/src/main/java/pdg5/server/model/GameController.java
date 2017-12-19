@@ -170,6 +170,9 @@ public class GameController {
     * @return the protocol.TODO class to ask the opponent if he accept the game
     */
    public Message askOpponentNewGame(int idPlayerAskingForGame, int idWishedOpponent) {
+       
+       
+       
       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
    }
 
@@ -226,10 +229,10 @@ public class GameController {
       TurnManager tm = playerTurnManager.get(gm.getGameId());
 
       Game game = new Game(gm.getGameId(), "title", gm.getCreation(),
-              gm.getLastMove(), gm.getIdTournament(), board1.getScore(),
-              board1.getPlayerName(), board2.getScore(), board2.getPlayerName(),
-              ts.getTileLeft(), board1.getLetters(), tm.getSquares(idClient),
-              boardOfClient.getBonus(), tm.isCurrentPlayer(idClient));
+        gm.getLastMove(), gm.getIdTournament(), board1.getScore(),
+        board1.getPlayerName(), board2.getScore(), board2.getPlayerName(),
+        ts.getTileLeft(), board1.getLetters(), tm.getSquares(idClient),
+        boardOfClient.getBonus(), tm.isCurrentPlayer(idClient));
       return game;
    }
 
@@ -307,15 +310,17 @@ public class GameController {
          }
       }
       boardOpponent.setBonus(newBonusTile);
-      // turn in turnManager
-      tm.turnEnded();
-      // Squares
-      Composition comp = model.getComposition();
+      tm.turnEnded(); // turn in turnManager
+      Composition comp = model.getComposition(); // Squares
       comp.setBonus(tm.getSquares(playerID));
-      // remove composition letters and bonus letters
-      comp.removeAll();
+      comp.removeAll(); // remove composition letters and bonus letters
+      
       board.setBonus(new ArrayList<>());
-      // get new letters from TileStack and add it to the board
+      
+      
+      /*
+       * get new letters from TileStack and add it to the board
+       */
       TileStack ts = tileStacks.get(gameID);
       List<Tile> newLetters = board.getLetters();
       for (int i = 0; i < word.length(); i++) {
@@ -343,15 +348,16 @@ public class GameController {
    private boolean isContained(String contained, String container) {
       Map<Character, Integer> occurenceContained = getOccurenceMapFromString(contained);
       Map<Character, Integer> occurenceContainer = getOccurenceMapFromString(container);
-      for (Character character : occurenceContained.keySet()) {
-         // if the container don't have the character in the map
-         // or has less occurence of contained then it's false
-         if (!occurenceContainer.containsKey(character)
-                 || occurenceContained.get(character) > occurenceContainer.get(character)) {
-            return false;
-         }
-      }
-      return true;
+      
+      // if the container don't have the character in the map
+      // or has less occurence of contained then it's false
+      return occurenceContained
+         .keySet()
+         .stream()
+         .noneMatch((character) -> (
+            !occurenceContainer.containsKey(character)
+            || occurenceContained.get(character) > occurenceContainer.get(character)
+         ));
    }
 
    /**

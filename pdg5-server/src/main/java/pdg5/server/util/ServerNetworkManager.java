@@ -24,8 +24,8 @@ public class ServerNetworkManager {
     public ServerNetworkManager() {
         System.out.println("START ServerNetworkManager");
         activeUser = new ServerActiveUser();
-
         gameController = new GameController();
+
         try {
             serverSocket = new ServerSocket(Protocol.DEFAULT_PORT);
             while (true) {

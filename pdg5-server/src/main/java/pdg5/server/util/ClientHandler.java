@@ -22,14 +22,18 @@ public class ClientHandler implements Runnable {
     private ServerActiveUser activeUser;
     private static int id;
 
+    /**
+     * @param socket
+     * @param activeUser
+     */
     public ClientHandler(Socket socket, ServerActiveUser activeUser) {
-        if(socket == null) return;
+        if (socket == null) return;
         System.out.println("SRV : new client #" + id++);
         this.socket = socket;
         this.queueIn = new MessageQueue();
         this.queueOut = new MessageQueue();
         this.activeUser = activeUser;
-        this.requestManager = new ServerRequestManager(this.activeUser);
+        this.requestManager = new ServerRequestManager(this.activeUser, this);
         try {
             this.out = new ObjectOutputStream(socket.getOutputStream());
             this.in = new ObjectInputStream(socket.getInputStream());
@@ -38,6 +42,11 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    /**
+     * Add message to be send to the client
+     *
+     * @param message
+     */
     public void addToQueue(Message message) {
         queueOut.add(message);
     }

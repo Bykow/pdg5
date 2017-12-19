@@ -13,11 +13,13 @@ public class ServerRequestManager {
     private ManageUser manageUser;
     private ServerActiveUser activeUser;
     private GameController gameController;
+    private ClientHandler clientHandler;
 
-    public ServerRequestManager(ServerActiveUser activeUser) {
+    public ServerRequestManager(ServerActiveUser activeUser, ClientHandler clientHandler) {
         this.manageUser = new ManageUser();
         this.activeUser = activeUser;
         this.gameController = new GameController();
+        this.clientHandler = clientHandler;
     }
 
     /**
@@ -29,7 +31,7 @@ public class ServerRequestManager {
             return new ProcessSignUp((SignUp) o, manageUser, activeUser).execute();
 
         } else if (o instanceof SignIn) {
-            return new ProcessSignIn((SignIn) o, manageUser, activeUser, gameController).execute();
+            return new ProcessSignIn((SignIn) o, manageUser, activeUser, gameController, clientHandler).execute();
 
         } else if (o instanceof Noop) {
             return new ProcessNoop((Noop) o).execute();

@@ -14,8 +14,8 @@ import pdg5.server.model.GameController;
  */
 public class ProcessValidation implements GenericProcess {
 
-   private GameController gameController;
-   private Validation validation;
+   private final GameController gameController;
+   private final Validation validation;
    
    /**
     * Constructor

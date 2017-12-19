@@ -26,7 +26,7 @@ public class ServerActiveUser {
         map.remove(user);
     }
 
-    public ClientHandler getClientHangler(Integer user) {
+    public ClientHandler getClientHandler(Integer user) {
         return map.get(user);
     }
 

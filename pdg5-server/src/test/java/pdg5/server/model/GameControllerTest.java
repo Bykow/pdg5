@@ -5,17 +5,15 @@
  */
 package pdg5.server.model;
 
-import java.util.Date;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import pdg5.common.Protocol;
 import pdg5.common.game.Board;
 import pdg5.common.game.Composition;
-import pdg5.common.game.GameModel;
 import pdg5.common.protocol.ErrorMessage;
 import pdg5.common.protocol.Game;
 import pdg5.common.protocol.Message;
+import pdg5.server.util.ServerActiveUser;
 
 /**
  *
@@ -30,7 +28,7 @@ public class GameControllerTest {
    
    @Before
    public void setUp() {
-      gameController = new GameController();
+      gameController = new GameController(new ServerActiveUser());
    }
 
    /**

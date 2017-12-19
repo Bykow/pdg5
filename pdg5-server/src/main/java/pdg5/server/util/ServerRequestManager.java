@@ -17,7 +17,7 @@ public class ServerRequestManager {
     public ServerRequestManager(ServerActiveUser activeUser) {
         this.manageUser = new ManageUser();
         this.activeUser = activeUser;
-        this.gameController = new GameController();
+        this.gameController = new GameController(activeUser);
     }
 
     /**
@@ -41,7 +41,7 @@ public class ServerRequestManager {
            return new ProcessValidation((Validation) o, gameController).execute();
            
         } else if (o instanceof Play) {
-           return new ProcessPlay((Play) o, gameController).execute();
+           return new ProcessPlay((Play) o, gameController, activeUser).execute();
            
         }
 

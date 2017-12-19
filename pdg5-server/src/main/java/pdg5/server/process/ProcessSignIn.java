@@ -31,11 +31,10 @@ public class ProcessSignIn implements GenericProcess {
     public Message execute() {
         if (manager.isCorrectPassword(signIn.getUsername(), signIn.getPassword())) {
             // TODO waiting for game logic to improve
-            // TODO add client to activeUser
             int userId = manager.getUserByUsername(signIn.getUsername()).getId();
             activeUser.add(userId, clientHandler);
 
-            return gameController.findGamesOf(manager.getUserByUsername(signIn.getUsername()).getId());
+            return gameController.findGamesOf(userId);
         } else {
             return new ErrorMessage("Password invalid in SignIn for user " + signIn.getUsername());
         }

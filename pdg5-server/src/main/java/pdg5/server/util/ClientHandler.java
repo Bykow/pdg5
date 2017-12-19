@@ -75,7 +75,8 @@ public class ClientHandler implements Runnable {
                 try {
                     out.writeObject(queueOut.take());
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    // TODO Must close on exit
+                    System.err.println("COUCOU");
                 }
             }
         }).start();
@@ -89,6 +90,7 @@ public class ClientHandler implements Runnable {
                 }
             } catch (IOException | ClassNotFoundException e) {
                 System.err.println("Connection close");
+                activeUser.remove(this);
             }
         }).start();
     }

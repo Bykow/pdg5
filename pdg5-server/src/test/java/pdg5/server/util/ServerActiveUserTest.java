@@ -1,43 +1,45 @@
-//package pdg5.server;
-//
-//import org.junit.Assert;
-//import org.junit.Before;
-//import org.junit.Test;
-//import pdg5.server.util.ClientHandler;
-//import pdg5.server.util.ServerActiveUser;
-//
-//import static junit.framework.TestCase.assertTrue;
-//
-///**
-// * @author Maxime Guillod
-// */
-//public class ServerActiveUserTest {
-//
-//    private ServerActiveUser activeUser;
-//    private ClientHandler clientHandler;
-//
-//    @Before
-//    public void setUp() {
-//        activeUser = new ServerActiveUser();
-//        clientHandler = new ClientHandler(null, null);
-//    }
-//
-//    @Test
-//    public void global() {
-//        activeUser.add(1, clientHandler);
-//        activeUser.add(2, null);
-//        assertTrue(activeUser.contains(1));
-//        assertTrue(!activeUser.contains(42));
-//        activeUser.remove(2);
-//        assertTrue(!activeUser.contains(2));
-//        Assert.assertEquals(
-//                clientHandler,
-//                activeUser.getClientHangler(1)
-//        );
-//        Assert.assertNotEquals(
-//                clientHandler,
-//                activeUser.getClientHangler(2)
-//        );
-//    }
-//
-//}
+package pdg5.server.util;
+
+import org.junit.Assert;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+class ServerActiveUserTest {
+
+    private ServerActiveUser serverActiveUser;
+
+    @BeforeEach
+    void setUp() {
+        serverActiveUser = new ServerActiveUser();
+    }
+
+    @Test
+    void contain() {
+        // Initialisation
+        int id1 = 42;
+        ClientHandler c1 = new ClientHandler(null, null);
+
+        int id2 = 41;
+        ClientHandler c2 = new ClientHandler(null, null);
+
+        // Add
+        serverActiveUser.add(id1, c1);
+        serverActiveUser.add(id2, c2);
+
+
+        Assert.assertTrue(serverActiveUser.contains(id1));
+        Assert.assertTrue(serverActiveUser.contains(c1));
+        Assert.assertTrue(serverActiveUser.contains(id2));
+        Assert.assertTrue(serverActiveUser.contains(c2));
+
+        // Remove from id
+        serverActiveUser.remove(id2);
+        Assert.assertFalse(serverActiveUser.contains(id2));
+        Assert.assertFalse(serverActiveUser.contains(c2));
+
+        // Remove from ClientHandler
+        serverActiveUser.remove(c1);
+        Assert.assertFalse(serverActiveUser.contains(id1));
+        Assert.assertFalse(serverActiveUser.contains(c1));
+    }
+}

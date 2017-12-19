@@ -70,7 +70,6 @@ public class GameController {
     * Constructor
     */
    public GameController() {
-      System.out.println("START GameController");
       games = new HashMap<>();
       clientGames = new HashMap<>();
       tileStacks = new HashMap<>();

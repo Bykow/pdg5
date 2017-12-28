@@ -54,7 +54,8 @@ public class ClientHandler implements Runnable {
         while (true) {
             queueOut.add(
                     requestManager.execute(
-                            queueIn.take()
+                            queueIn.take(),
+                            this
                     )
             );
         }

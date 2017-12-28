@@ -5,6 +5,7 @@ import pdg5.common.protocol.Message;
 import pdg5.common.protocol.SignIn;
 import pdg5.server.manage.ManageUser;
 import pdg5.server.model.GameController;
+import pdg5.server.util.ClientHandler;
 import pdg5.server.util.ServerActiveUser;
 
 /**
@@ -12,27 +13,35 @@ import pdg5.server.util.ServerActiveUser;
  */
 public class ProcessSignIn implements GenericProcess {
 
-   private SignIn signIn;
-   private ManageUser manager;
-   private ServerActiveUser activeUser;
-   private GameController gameController;
+    private final SignIn signIn;
+    private final ManageUser manager;
+    private final ServerActiveUser activeUser;
+    private final GameController gameController;
+    private final ClientHandler clientHandler;
 
-   public ProcessSignIn(SignIn signIn, ManageUser manager, ServerActiveUser activeUser, GameController gameController) {
-      this.signIn = signIn;
-      this.manager = manager;
-      this.activeUser = activeUser;
-      this.gameController = gameController;
-   }
+    public ProcessSignIn(SignIn signIn, ManageUser manager,
+            ServerActiveUser activeUser, GameController gameController,
+            ClientHandler clientHandler) {
+        this.signIn = signIn;
+        this.manager = manager;
+        this.activeUser = activeUser;
+        this.gameController = gameController;
+        this.clientHandler = clientHandler;
+    }
 
-   @Override
-   public Message execute() {
-      if (manager.isCorrectPassword(signIn.getUsername(), signIn.getPassword())) {
-         // TODO waiting for game logic to improve
-         // TODO add client to activeUser
+    @Override
+    public Message execute() {
+        if (manager.isCorrectPassword(signIn.getUsername(), signIn.getPassword())) {
+            // TODO waiting for game logic to improve
+            // TODO add client to activeUser
 
-         return gameController.findGamesOf(manager.getUserByUsername(signIn.getUsername()).getId());
-      } else {
-         return new ErrorMessage("Password invalid in SignIn for user " + signIn.getUsername());
-      }
-   }
+            int idUser = manager.getUserByUsername(signIn.getUsername()).getId();
+
+            activeUser.add(idUser, clientHandler);
+
+            return gameController.findGamesOf(idUser);
+        } else {
+            return new ErrorMessage("Password invalid in SignIn for user " + signIn.getUsername());
+        }
+    }
 }

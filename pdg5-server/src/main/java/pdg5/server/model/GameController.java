@@ -93,7 +93,7 @@ public class GameController {
     * @param idPlayerAsking unique id of the player who asked for a game
      * @return Message response
     */
-   public Message askNewGame(int idPlayerAsking) {
+   public Message newGame(int idPlayerAsking) {
       if (matchMaking.isEmpty()) {
          matchMaking.add(idPlayerAsking);
          return new ErrorMessage(MESSAGE_LOOKING_OPPONENT);
@@ -109,7 +109,7 @@ public class GameController {
     * @param idPlayer2 unique id of second player
     * @return the game to the clients who will play
     */
-   private Message addNewGame(int idPlayer1, int idPlayer2) {
+   public Message addNewGame(int idPlayer1, int idPlayer2) {
       currentAvailableId++;
 
       // add new TileStack to the Map
@@ -159,21 +159,6 @@ public class GameController {
       }
       board.setLetters(letters);
       return board;
-   }
-
-   /**
-    * Send a request to the wished opponent to play a new Game
-    *
-    * @param idPlayerAskingForGame unique id of the player requesting a game to
-    * opponent
-    * @param idWishedOpponent unique id of the wished opponent
-    * @return the protocol.TODO class to ask the opponent if he accept the game
-    */
-   public Message askOpponentNewGame(int idPlayerAskingForGame, int idWishedOpponent) {
-       
-       
-       
-      throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
    }
 
    /**

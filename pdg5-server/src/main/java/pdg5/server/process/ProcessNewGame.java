@@ -15,16 +15,16 @@ import pdg5.server.util.ServerActiveUser;
  */
 public class ProcessNewGame implements GenericProcess {
 
-   private GameController gameController;
-   private ManageUser manageUser;
-   private NewGame newGame;
-   private ServerActiveUser activeUser;
+   private final GameController gameController;
+   private final NewGame newGame;
+   private final ServerActiveUser activeUser;
 
    /**
     * Constructor
     *
     * @param newGame contains id of players who will play the new game
     * @param gm GameController that will create and stock the new game
+     * @param activeUser
     */
    public ProcessNewGame(NewGame newGame, GameController gm, ServerActiveUser activeUser) {
       this.newGame = newGame;

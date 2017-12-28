@@ -75,21 +75,6 @@ public class GameControllerTest {
    }
 
    /**
-    * Test of newGameAskingOpponent method, of class GameController.
-    */
-   @Test
-   public void testAskOpponentNewGame() {
-      System.out.println("askOpponentNewGame");
-      int idPlayerAskingForGame = 0;
-      int idWishedOpponent = 0;
-      Message expResult = null;
-      Message result = gameController.newGameAskingOpponent(idPlayerAskingForGame, idWishedOpponent);
-      assertEquals(expResult, result);
-      // TODO review the generated test code and remove the default call to fail.
-      fail("The test case is a prototype.");
-   }
-
-   /**
     * Test of findGamesOf method, of class GameController.
     */
    @Test

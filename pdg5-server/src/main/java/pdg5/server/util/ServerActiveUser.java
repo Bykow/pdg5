@@ -8,7 +8,7 @@ import java.util.Map;
  */
 public class ServerActiveUser {
 
-    private Map<Integer, ClientHandler> map;
+    private final Map<Integer, ClientHandler> map;
 
     public ServerActiveUser() {
         map = new LinkedHashMap<>();

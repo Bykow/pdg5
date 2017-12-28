@@ -10,9 +10,9 @@ import pdg5.server.process.*;
  */
 public class ServerRequestManager {
 
-    private ManageUser manageUser;
-    private ServerActiveUser activeUser;
-    private GameController gameController;
+    private final ManageUser manageUser;
+    private final ServerActiveUser activeUser;
+    private final GameController gameController;
 
     public ServerRequestManager(ServerActiveUser activeUser) {
         this.manageUser = new ManageUser();
@@ -22,26 +22,27 @@ public class ServerRequestManager {
 
     /**
      * @param o
+     * @param ch
      * @return Message to be send
      */
-    public Message execute(Message o) {
+    public Message execute(Message o, ClientHandler ch) {
         if (o instanceof SignUp) {
-            return new ProcessSignUp((SignUp) o, manageUser, activeUser).execute();
+            return new ProcessSignUp((SignUp) o, manageUser, activeUser, ch).execute();
 
         } else if (o instanceof SignIn) {
-            return new ProcessSignIn((SignIn) o, manageUser, activeUser, gameController).execute();
+            return new ProcessSignIn((SignIn) o, manageUser, activeUser, gameController, ch).execute();
 
         } else if (o instanceof Noop) {
             return new ProcessNoop((Noop) o).execute();
             
         } else if (o instanceof NewGame) {
-           return new ProcessNewGame((NewGame) o, gameController).execute();
+           return new ProcessNewGame((NewGame) o, gameController, activeUser).execute();
            
         } else if (o instanceof Validation) {
            return new ProcessValidation((Validation) o, gameController).execute();
            
         } else if (o instanceof Play) {
-           return new ProcessPlay((Play) o, gameController, activeUser).execute();
+           return new ProcessPlay((Play) o, gameController, activeUser).execute(); 
            
         }
 

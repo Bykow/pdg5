@@ -8,7 +8,9 @@ import pdg5.common.game.Utils;
 public class NewGame extends Message {
 
    private int idPlayerAsking;
-   private int idOpponentWished = Utils.RANDOM_OPPONENT;
+   private int idOpponentWished;
+   private TYPE type;
+   public enum TYPE {RANDOM, REQUEST, ACCEPT, REFUSE};
    
    /**
     * Constructor for random opponent
@@ -16,7 +18,7 @@ public class NewGame extends Message {
     * @param idPlayerAsking our own unique id to ask a new game
     */
    public NewGame(int idPlayerAsking) {
-      this.idPlayerAsking = idPlayerAsking;
+      this(idPlayerAsking, Utils.RANDOM_OPPONENT, TYPE.RANDOM);
    }
    
    /**
@@ -25,11 +27,12 @@ public class NewGame extends Message {
     * @param idPlayerAsking
     * @param idOpponentWished 
     */
-   public NewGame(int idPlayerAsking, int idOpponentWished) {
-      this(idPlayerAsking);
+   public NewGame(int idPlayerAsking, int idOpponentWished, TYPE type) {
+      this.idPlayerAsking = idPlayerAsking;
       this.idOpponentWished = idOpponentWished;
+      this.type = type;
    }
-   
+
    /**
     * return the unqiue of the player asking for a new game
     * 
@@ -47,5 +50,12 @@ public class NewGame extends Message {
    public int getIdOpponentWished() {
       return idOpponentWished;
    }
-   
+
+   public TYPE getType() {
+      return type;
+   }
+
+   public void setType(TYPE type) {
+      this.type = type;
+   }
 }

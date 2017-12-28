@@ -32,7 +32,7 @@ public class GameControllerTest {
    }
 
    /**
-    * Test of askNewGame method, of class GameController.
+    * Test of newGame method, of class GameController.
     */
    @Test
    public void testAskNewGame() {
@@ -41,10 +41,10 @@ public class GameControllerTest {
       int idPlayerAsking = 32;
       int idPlayerAsking2 = 16;
       
-      Message result = gameController.askNewGame(idPlayerAsking);
+      Message result = gameController.newGame(idPlayerAsking);
       assertEquals(new ErrorMessage("Nous recherchons actuellement un adversaire"), result);
       
-      Message result2 = gameController.askNewGame(idPlayerAsking2);
+      Message result2 = gameController.newGame(idPlayerAsking2);
       assertTrue(result2 instanceof Game);
       
       assertEquals(((Game)result2).getScore(), 0); // score of player begin at 0
@@ -75,7 +75,7 @@ public class GameControllerTest {
    }
 
    /**
-    * Test of askOpponentNewGame method, of class GameController.
+    * Test of newGameAskingOpponent method, of class GameController.
     */
    @Test
    public void testAskOpponentNewGame() {
@@ -83,7 +83,7 @@ public class GameControllerTest {
       int idPlayerAskingForGame = 0;
       int idWishedOpponent = 0;
       Message expResult = null;
-      Message result = gameController.askOpponentNewGame(idPlayerAskingForGame, idWishedOpponent);
+      Message result = gameController.newGameAskingOpponent(idPlayerAskingForGame, idWishedOpponent);
       assertEquals(expResult, result);
       // TODO review the generated test code and remove the default call to fail.
       fail("The test case is a prototype.");

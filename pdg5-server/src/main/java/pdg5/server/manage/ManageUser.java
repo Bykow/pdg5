@@ -87,8 +87,8 @@ public class ManageUser extends Manager {
    public User getUserNameById(int idPlayer) {
       Session session = new Manager().getSession();
       session.beginTransaction();
-      User u = session.createQuery("from User where ID=:ID", User.class)
-              .setParameter("ID", idPlayer).uniqueResult();
+      User u = session.createQuery("from User where id=:id", User.class)
+              .setParameter("id", idPlayer).uniqueResult();
       session.getTransaction().commit();
 
       return u;

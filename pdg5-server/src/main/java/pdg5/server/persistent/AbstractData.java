@@ -19,7 +19,7 @@ public class AbstractData {
         this.id = id;
     }
 
-    @Column(name = "ID", unique = true, nullable = false)
+    @Column(name = "id", unique = true, nullable = false)
     public Integer getId() {
         return this.id;
     }

@@ -66,6 +66,7 @@ public class ClientHandler implements Runnable {
             while (true) {
                 try {
                     out.writeObject(queueOut.take());
+                    
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

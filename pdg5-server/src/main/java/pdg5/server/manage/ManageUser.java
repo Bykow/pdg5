@@ -84,14 +84,14 @@ public class ManageUser extends Manager {
       deleteToDB(user);
    }
 
-   public String getUserNameById(int idPlayer) {
+   public User getUserNameById(int idPlayer) {
       Session session = new Manager().getSession();
       session.beginTransaction();
-      User u = session.createQuery("from User where id=:idPlayer", User.class)
-              .setParameter("id", idPlayer).uniqueResult();
+      User u = session.createQuery("from User where ID=:ID", User.class)
+              .setParameter("ID", idPlayer).uniqueResult();
       session.getTransaction().commit();
 
-      return u.getUsername();
+      return u;
    }
 
 }

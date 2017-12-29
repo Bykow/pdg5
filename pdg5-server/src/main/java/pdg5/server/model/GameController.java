@@ -152,7 +152,7 @@ public class GameController {
     * @return a new Board filled with Tiles
     */
    public Board initBoard(TileStack ts, int idPlayer) {
-      Board board = new Board(manageUser.getUserNameById(idPlayer), idPlayer);
+      Board board = new Board(manageUser.getUserNameById(idPlayer).getUsername(), idPlayer);
       List<Tile> letters = new ArrayList<>();
       for (int i = 0; i < 7; i++) {
          letters.add(ts.getNextTuile());

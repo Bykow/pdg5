@@ -43,6 +43,7 @@ public class ClientSender implements Runnable {
             try {
                 out.writeObject(queue.take());
             } catch (IOException e) {
+               
                 e.printStackTrace();
             }
         }

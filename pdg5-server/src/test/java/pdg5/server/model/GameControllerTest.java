@@ -5,6 +5,7 @@
  */
 package pdg5.server.model;
 
+import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -13,6 +14,7 @@ import pdg5.common.game.Composition;
 import pdg5.common.protocol.ErrorMessage;
 import pdg5.common.protocol.Game;
 import pdg5.common.protocol.Message;
+import pdg5.server.manage.ManageUser;
 import pdg5.server.util.ServerActiveUser;
 
 /**
@@ -21,6 +23,7 @@ import pdg5.server.util.ServerActiveUser;
  */
 public class GameControllerTest {
    
+    private Random random;
    private GameController gameController;
    
    public GameControllerTest() {
@@ -28,6 +31,7 @@ public class GameControllerTest {
    
    @Before
    public void setUp() {
+      random = new Random(System.currentTimeMillis());
       gameController = new GameController(new ServerActiveUser());
    }
 
@@ -35,11 +39,17 @@ public class GameControllerTest {
     * Test of newGame method, of class GameController.
     */
    @Test
+   @Ignore
    public void testAskNewGame() {
       System.out.println("askNewGame");
       
-      int idPlayerAsking = 32;
-      int idPlayerAsking2 = 16;
+      ManageUser manager = new ManageUser();
+      
+      String name1 = "test" + random.nextLong(); 
+      String name2 = "test" + random.nextLong(); 
+      
+      int idPlayerAsking = manager.addUser(name1, name1, "blabla").getId();
+      int idPlayerAsking2 = manager.addUser(name2, name2, "blabla").getId();
       
       Message result = gameController.newGame(idPlayerAsking);
       assertEquals(new ErrorMessage("Nous recherchons actuellement un adversaire"), result);

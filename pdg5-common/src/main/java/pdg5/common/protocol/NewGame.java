@@ -3,14 +3,24 @@ package pdg5.common.protocol;
 import pdg5.common.game.Utils;
 
 /**
- * Class sendable to the serveur by a client to ask for start a new game.
+ * Class sendable to start new games. 
+ * Can be send multiple times to ask or answer new games challenges.
  */
 public class NewGame extends Message {
 
    private int idPlayerAsking;
    private int idOpponentWished;
    private TYPE type;
-   public enum TYPE {RANDOM, REQUEST, ACCEPT, REFUSE};
+   
+   // This enum specify the signification of this NewGame instance
+   public enum TYPE {
+      RANDOM,   // The player want to add himself to the matchmaking 
+      REQUEST,  // Can be used by the client or the server, 
+                // if it's the client means he want to play with a specific player, 
+                // if it's the server we annonce to the player someone wants to play with him.
+      ACCEPT,   // The specified player accept the challenge
+      REFUSE    // The specified player refuse the challenge
+   };
    
    /**
     * Constructor for random opponent
@@ -24,8 +34,9 @@ public class NewGame extends Message {
    /**
     * Constructor for specific opponent
     * 
-    * @param idPlayerAsking
-    * @param idOpponentWished 
+    * @param idPlayerAsking our own unique id to ask a new game
+    * @param idOpponentWished the id of the opponent, 0 reserved for a random
+    * @param type objective of this instance
     */
    public NewGame(int idPlayerAsking, int idOpponentWished, TYPE type) {
       this.idPlayerAsking = idPlayerAsking;
@@ -51,10 +62,20 @@ public class NewGame extends Message {
       return idOpponentWished;
    }
 
+   /**
+    * return the objective of this instance
+    * 
+    * @return the objective of this instance
+    */
    public TYPE getType() {
       return type;
    }
 
+   /**
+    * set the objective of this instance usefull to quickly send back an answer
+    * 
+    * @param type new objective of the instance
+    */
    public void setType(TYPE type) {
       this.type = type;
    }

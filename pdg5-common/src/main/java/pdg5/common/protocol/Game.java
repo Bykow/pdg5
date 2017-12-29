@@ -112,10 +112,5 @@ public class Game extends Message {
    public boolean isBonusIsMine() {
       return bonusIsMine;
    }
-   
-   
-    
-    
-    
     
 }

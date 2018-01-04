@@ -28,10 +28,7 @@ import javafx.stage.Stage;
 import pdg5.client.ClientListener;
 import pdg5.client.ClientSender;
 import pdg5.client.util.Toast;
-import pdg5.common.protocol.ErrorMessage;
-import pdg5.common.protocol.Load;
-import pdg5.common.protocol.Message;
-import pdg5.common.protocol.SignIn;
+import pdg5.common.protocol.*;
 
 import java.io.IOException;
 
@@ -70,7 +67,7 @@ public class SignInController extends AbstractController {
 
             new Toast(stage, "Incorrect username or password").show();
 
-        } else if (msg instanceof Load) {
+        } else if (msg instanceof SignInOK) {
             System.out.println("Connection success ");
             stage.hide();
             loadGame(stage);

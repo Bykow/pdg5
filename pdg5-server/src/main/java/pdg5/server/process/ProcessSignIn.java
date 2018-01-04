@@ -1,9 +1,6 @@
 package pdg5.server.process;
 
-import pdg5.common.protocol.ErrorMessage;
-import pdg5.common.protocol.Load;
-import pdg5.common.protocol.Message;
-import pdg5.common.protocol.SignIn;
+import pdg5.common.protocol.*;
 import pdg5.server.manage.ManageUser;
 import pdg5.server.model.GameController;
 import pdg5.server.util.ClientHandler;
@@ -40,6 +37,9 @@ public class ProcessSignIn implements GenericProcess {
 
             activeUser.add(idUser, clientHandler);
 
+            // Will be receive by the SignInController
+            clientHandler.addToQueue(new SignInOK());
+            // Will be receive by the ClientRequestController
             return new Load();
             //return gameController.findGamesOf(idUser);
         } else {

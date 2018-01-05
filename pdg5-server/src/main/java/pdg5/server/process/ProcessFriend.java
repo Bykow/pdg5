@@ -42,7 +42,7 @@ public class ProcessFriend implements GenericProcess {
    public Message execute() {
       switch(friend.getType()) {
          case ADD_FRIEND:
-            manageFriend.addFriend(manageUser.getUserNameById(friend.getIdPlayer()), manageUser.getUserNameById(friend.getIdTargettedPlayer()));
+            manageFriend.addFriend(manageUser.getUserById(friend.getIdPlayer()), manageUser.getUserById(friend.getIdTargettedPlayer()));
             break;
          case REMOVE_FRIEND:
             manageFriend.listFriend()
@@ -53,7 +53,7 @@ public class ProcessFriend implements GenericProcess {
                     .map((f) -> manageFriend.deleteFriend(f));
             break;
          case ADD_BLACKLIST:
-            manageBlacklist.addBlacklist(manageUser.getUserNameById(friend.getIdPlayer()), manageUser.getUserNameById(friend.getIdTargettedPlayer()));
+            manageBlacklist.addBlacklist(manageUser.getUserById(friend.getIdPlayer()), manageUser.getUserById(friend.getIdTargettedPlayer()));
             break;
          case REMOVE_BLACKLIST:
             manageBlacklist.listBlacklist()

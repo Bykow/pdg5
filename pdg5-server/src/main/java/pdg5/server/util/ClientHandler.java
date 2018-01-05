@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import pdg5.server.model.GameController;
 
 /**
  * @author Maxime Guillod
@@ -23,14 +24,14 @@ public class ClientHandler implements Runnable {
     private static int id;
     private int playerId;
 
-    public ClientHandler(Socket socket, ServerActiveUser activeUser) {
+    public ClientHandler(Socket socket, ServerActiveUser activeUser, GameController gameController) {
         if(socket == null) return;
         System.out.println("SRV : new client #" + id++);
         this.socket = socket;
         this.queueIn = new MessageQueue();
         this.queueOut = new MessageQueue();
         this.activeUser = activeUser;
-        this.requestManager = new ServerRequestManager(this.activeUser);
+        this.requestManager = new ServerRequestManager(activeUser, gameController);
         try {
             this.out = new ObjectOutputStream(socket.getOutputStream());
             this.in = new ObjectInputStream(socket.getInputStream());

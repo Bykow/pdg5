@@ -39,7 +39,7 @@ public class MainController {
    public void loadGame() {
       listener = new ClientListener();
       sender = new ClientSender();
-      this.requestManager = new ClientRequestManager();
+      this.requestManager = new ClientRequestManager(this);
 
       try {
          FXMLLoader loader = new FXMLLoader();

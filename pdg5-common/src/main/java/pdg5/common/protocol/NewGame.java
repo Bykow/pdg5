@@ -8,7 +8,6 @@ import pdg5.common.game.Utils;
  */
 public class NewGame extends Message {
 
-   private int idPlayerAsking;
    private int idOpponentWished;
    private TYPE type;
    
@@ -19,38 +18,27 @@ public class NewGame extends Message {
                 // if it's the client means he want to play with a specific player, 
                 // if it's the server we annonce to the player someone wants to play with him.
       ACCEPT,   // The specified player accept the challenge
-      REFUSE    // The specified player refuse the challenge
+      REFUSE,   // The specified player refuse the challenge
+      PENDING,  // The matchmaking is working
+      CANCEL    // Cancel the request
    };
    
    /**
     * Constructor for random opponent
-    * 
-    * @param idPlayerAsking our own unique id to ask a new game
     */
-   public NewGame(int idPlayerAsking) {
-      this(idPlayerAsking, Utils.RANDOM_OPPONENT, TYPE.RANDOM);
+   public NewGame() {
+      this(Utils.RANDOM_OPPONENT, TYPE.RANDOM);
    }
    
    /**
     * Constructor for specific opponent
     * 
-    * @param idPlayerAsking our own unique id to ask a new game
     * @param idOpponentWished the id of the opponent, 0 reserved for a random
     * @param type objective of this instance
     */
-   public NewGame(int idPlayerAsking, int idOpponentWished, TYPE type) {
-      this.idPlayerAsking = idPlayerAsking;
+   public NewGame(int idOpponentWished, TYPE type) {
       this.idOpponentWished = idOpponentWished;
       this.type = type;
-   }
-
-   /**
-    * return the unqiue of the player asking for a new game
-    * 
-    * @return the unqiue of the player asking for a new game
-    */
-   public int getIdPlayerAsking() {
-      return idPlayerAsking;
    }
 
    /**

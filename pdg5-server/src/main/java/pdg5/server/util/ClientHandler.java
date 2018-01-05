@@ -21,6 +21,7 @@ public class ClientHandler implements Runnable {
     private MessageQueue queueOut;
     private ServerActiveUser activeUser;
     private static int id;
+    private int playerId;
 
     public ClientHandler(Socket socket, ServerActiveUser activeUser) {
         if(socket == null) return;
@@ -86,4 +87,14 @@ public class ClientHandler implements Runnable {
         }).start();
     }
 
+   public void setPlayerId(int playerId) {
+      this.playerId = playerId;
+   }
+
+   public int getPlayerId() {
+      //TODO check if null throw
+      return playerId;
+   }
+
+    
 }

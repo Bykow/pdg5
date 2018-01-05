@@ -36,6 +36,7 @@ public class ProcessSignIn implements GenericProcess {
             int idUser = manager.getUserByUsername(signIn.getUsername()).getId();
 
             activeUser.add(idUser, clientHandler);
+            clientHandler.setPlayerId(idUser);
 
             // Will be receive by the SignInController
             clientHandler.addToQueue(new SignInOK());

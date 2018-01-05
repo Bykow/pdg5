@@ -38,6 +38,7 @@ public class ProcessSignIn implements GenericProcess {
             int idUser = manager.getUserByUsername(signIn.getUsername()).getId();
 
             activeUser.add(idUser, clientHandler);
+            clientHandler.setPlayerId(idUser);
 
             return gameController.findGamesOf(idUser);
         } else {

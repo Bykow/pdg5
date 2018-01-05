@@ -36,7 +36,7 @@ public class ServerRequestManager {
             return new ProcessNoop((Noop) o).execute();
             
         } else if (o instanceof NewGame) {
-           return new ProcessNewGame((NewGame) o, gameController, activeUser).execute();
+           return new ProcessNewGame((NewGame) o, gameController, activeUser, ch).execute();
            
         } else if (o instanceof Validation) {
            return new ProcessValidation((Validation) o, gameController).execute();

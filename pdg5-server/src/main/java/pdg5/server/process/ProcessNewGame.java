@@ -7,6 +7,7 @@ import pdg5.common.protocol.NewGame.TYPE;
 import pdg5.common.protocol.Noop;
 import pdg5.server.manage.ManageUser;
 import pdg5.server.model.GameController;
+import pdg5.server.util.ClientHandler;
 import pdg5.server.util.ServerActiveUser;
 
 /**
@@ -18,6 +19,7 @@ public class ProcessNewGame implements GenericProcess {
    private final GameController gameController;
    private final NewGame newGame;
    private final ServerActiveUser activeUser;
+   private final ClientHandler clientHandler;
 
    /**
     * Constructor
@@ -26,10 +28,11 @@ public class ProcessNewGame implements GenericProcess {
     * @param gm GameController that will create and stock the new game
      * @param activeUser
     */
-   public ProcessNewGame(NewGame newGame, GameController gm, ServerActiveUser activeUser) {
+   public ProcessNewGame(NewGame newGame, GameController gm, ServerActiveUser activeUser, ClientHandler clientHandler) {
       this.newGame = newGame;
       this.gameController = gm;
       this.activeUser = activeUser;
+      this.clientHandler = clientHandler;
    }
 
    /**
@@ -41,12 +44,12 @@ public class ProcessNewGame implements GenericProcess {
    public Message execute() {
       switch (newGame.getType()) {
          case RANDOM:
-            return gameController.newGame(newGame.getIdPlayerAsking());
+            return gameController.newGame(clientHandler.getPlayerId());
          case REQUEST:
             activeUser.getClientHandler(newGame.getIdOpponentWished()).addToQueue(newGame);
             break;
          case ACCEPT:
-            return gameController.addNewGame(newGame.getIdPlayerAsking(), newGame.getIdOpponentWished());
+            return gameController.addNewGame(clientHandler.getPlayerId(), newGame.getIdOpponentWished());
          case REFUSE:
             break;
          default:

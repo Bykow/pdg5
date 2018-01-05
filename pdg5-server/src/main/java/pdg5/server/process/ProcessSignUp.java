@@ -41,6 +41,7 @@ public class ProcessSignUp implements GenericProcess {
             case Protocol.OK:
                 if (user != null) {
                     activeUser.add(user.getId(), clientHandler);
+                    clientHandler.setPlayerId(user.getId());
                 }
                 return new Load();
             // TODO this is not suppose to be empty, waiting for game logic to continue

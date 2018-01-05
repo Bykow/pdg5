@@ -14,10 +14,10 @@ public class ServerRequestManager {
     private final ServerActiveUser activeUser;
     private final GameController gameController;
 
-    public ServerRequestManager(ServerActiveUser activeUser) {
+    public ServerRequestManager(ServerActiveUser activeUser, GameController gameController) {
         this.manageUser = new ManageUser();
         this.activeUser = activeUser;
-        this.gameController = new GameController(activeUser);
+        this.gameController = gameController;
     }
 
     /**

@@ -18,6 +18,6 @@ public class ProcessLoad implements GenericProcess {
     @Override
     public Message execute() {
        System.out.println("after load, sending new game random");
-       return new NewGame(1);
+       return new NewGame();
      }
 }

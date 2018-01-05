@@ -2,6 +2,7 @@ package pdg5.client.process;
 
 import pdg5.common.protocol.ErrorMessage;
 import pdg5.common.protocol.Message;
+import pdg5.common.protocol.Noop;
 
 public class ProcessErrorMessage implements GenericProcess {
 
@@ -15,6 +16,7 @@ public class ProcessErrorMessage implements GenericProcess {
     public Message execute() {
         // TODO toast
         System.out.println("ErrorMessage : " + message.getError());
-        return null;
+        return new Noop(Noop.Sender.CLIENT);
     }
+    
 }

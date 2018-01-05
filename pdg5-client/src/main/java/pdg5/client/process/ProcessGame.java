@@ -1,6 +1,5 @@
 package pdg5.client.process;
 
-import pdg5.common.game.Tile;
 import pdg5.common.protocol.Game;
 import pdg5.common.protocol.Message;
 import pdg5.common.protocol.Noop;

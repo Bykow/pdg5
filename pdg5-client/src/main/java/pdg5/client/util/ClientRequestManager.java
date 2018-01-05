@@ -10,7 +10,7 @@ import pdg5.client.controller.MainController;
  */
 public class ClientRequestManager {
 
-    private MainController mainController;
+    private final MainController mainController;
 
     public ClientRequestManager(MainController mainController) {
         this.mainController = mainController;
@@ -25,7 +25,7 @@ public class ClientRequestManager {
             return new ProcessGame((Game) o).execute();
 
         } else if (o instanceof Load) {
-            return new ProcessLoad((Load) o).execute();
+            return new ProcessLoad((Load) o, mainController).execute();
 
         } else if (o instanceof NewGame) {
             return new ProcessNewGame((NewGame) o).execute();

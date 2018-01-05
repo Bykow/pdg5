@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.*;
+import pdg5.server.manage.ManageGame;
 
 /**
  * this Class manage all the games created by the server
@@ -138,6 +139,11 @@ public class GameController {
       bonus.add(ts.getNextTuile());
       boards[0].setBonus(bonus);
 
+      // Add the game to the DB
+      ManageUser userManager = new ManageUser();
+      ManageGame gameManager = new ManageGame();
+      gameManager.addGame("title", userManager.getUserById(idPlayer1), userManager.getUserById(idPlayer2), ts.convertToString());
+      
       // sending to second player
       activeUser.getClientHandler(idPlayer2).addToQueue(getGameFromModel(model.getGameId(), idPlayer2));
       return getGameFromModel(model.getGameId(), idPlayer1);
@@ -152,7 +158,7 @@ public class GameController {
     * @return a new Board filled with Tiles
     */
    public Board initBoard(TileStack ts, int idPlayer) {
-      Board board = new Board(manageUser.getUserNameById(idPlayer).getUsername(), idPlayer);
+      Board board = new Board(manageUser.getUserById(idPlayer).getUsername(), idPlayer);
       List<Tile> letters = new ArrayList<>();
       for (int i = 0; i < 7; i++) {
          letters.add(ts.getNextTuile());

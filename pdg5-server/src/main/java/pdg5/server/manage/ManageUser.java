@@ -84,7 +84,7 @@ public class ManageUser extends Manager {
       deleteToDB(user);
    }
 
-   public User getUserNameById(int idPlayer) {
+   public User getUserById(int idPlayer) {
       Session session = new Manager().getSession();
       session.beginTransaction();
       User u = session.createQuery("from User where id=:id", User.class)

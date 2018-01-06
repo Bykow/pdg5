@@ -10,10 +10,10 @@ import static javax.persistence.GenerationType.IDENTITY;
  * Created on 14.11.17 by Bykow
  */
 public class AbstractData {
-    public Integer id;
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
+    public Integer id;
 
     public void setId(Integer id) {
         this.id = id;

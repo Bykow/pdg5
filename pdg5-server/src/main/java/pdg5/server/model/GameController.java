@@ -229,8 +229,8 @@ public class GameController {
       Game game = new Game(gm.getGameId(), "title", gm.getCreation(),
         gm.getLastMove(), gm.getIdTournament(), board1.getScore(),
         board1.getPlayerName(), board2.getScore(), board2.getPlayerName(),
-        ts.getTileLeft(), board1.getLetters(), tm.getSquares(idClient),
-        boardOfClient.getBonus(), tm.isCurrentPlayer(idClient));
+        ts.getTileLeft(), boardOfClient.getLetters(), tm.getSquares(idClient),
+        boardOfClient.getBonus(), gm.getOpponentBoard(idClient).getBonus(), tm.isCurrentPlayer(idClient));
       return game;
    }
 

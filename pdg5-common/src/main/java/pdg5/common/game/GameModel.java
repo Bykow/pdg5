@@ -113,6 +113,23 @@ public class GameModel implements Serializable {
       }
       throw new IllegalArgumentException("the playerId is not in the game");
    }
+   
+   public Board getOpponentBoardById(int playerId){
+      Board opponentBoard = null;
+      Boolean isPlayer = false;
+      for (Board board : boards) {
+         if (board.getPlayerId() != playerId) {
+            opponentBoard = board;
+         } else {
+            isPlayer = true;
+         }
+      }
+      if(isPlayer){
+         return opponentBoard;
+      } else{
+         throw new IllegalArgumentException("the playerId is not in the game");
+      }
+   }
 
    /**
     * return the unique id of this game

@@ -76,7 +76,7 @@ public class MainController {
     public void loadLoby() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            LobyController controller = new LobyController();
+            LobyController controller = new LobyController(sender);
             loader.setLocation(MainController.class.getResource("/fxml/lobyView.fxml"));
             loader.setController(controller);
             layout = loader.load();

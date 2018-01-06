@@ -13,16 +13,20 @@ public class LobyController {
     private Label titleWaiting;
     private Label titleFinished;
 
+    private ClientSender sender;
+    
     @FXML
     private VBox gameList;
 
-    public LobyController() {
+    public LobyController(ClientSender sender) {
         titleToPlay = new Label("A ton tour");
         titleToPlay.getStyleClass().add("titleToPlay");
         titleWaiting = new Label("En attente");
         titleWaiting.getStyleClass().add("titleWaiting");
         titleFinished = new Label("Terminé");
         titleFinished.getStyleClass().add("titleFinished");
+        
+        this.sender = sender;
     }
 
     @FXML
@@ -39,7 +43,6 @@ public class LobyController {
     @FXML
     private void startNewGame(ActionEvent actionEvent) {
         System.out.println("new game");
-        ClientSender clientSender = new ClientSender();
-        clientSender.add(new NewGame());
+        sender.add(new NewGame());
     }
 }

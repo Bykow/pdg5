@@ -3,7 +3,7 @@ package pdg5.common.protocol;
 import pdg5.common.game.Composition;
 
 /**
- * Class sended through the connection by a client representing
+ * Class sent through the connection by a client representing
  * a Composition(word) trying to be played by a client.
  */
 public class Play extends Message {

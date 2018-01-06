@@ -347,11 +347,22 @@ public class GameController {
       }
       board.setLetters(newLetters);
 
+      int opponentId = model.getOpponentBoard(playerID).getPlayerId();
+      
+      // Send game result if the game finished
       if(gameEnded(model, ts)) {
-         // TODO create protocol for win and lose and send here to both players the result
+         if(board.getScore() > boardOpponent.getScore()) {
+            activeUser.getClientHandler(opponentId).addToQueue(new End(End.RESULT.LOSE));
+            return new End(End.RESULT.WIN);
+         } else if (board.getScore() < boardOpponent.getScore()) {
+            activeUser.getClientHandler(opponentId).addToQueue(new End(End.RESULT.WIN));
+            return new End(End.RESULT.LOSE);
+         } else {
+            activeUser.getClientHandler(opponentId).addToQueue(new End(End.RESULT.EQUALITY));
+            return new End(End.RESULT.EQUALITY);
+         }
       }
       
-      int opponentId = model.getOpponentBoard(playerID).getPlayerId();
       activeUser.getClientHandler(opponentId).addToQueue(getGameFromModel(gameID, opponentId));
       return getGameFromModel(gameID, playerID);
    }

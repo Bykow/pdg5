@@ -3,7 +3,7 @@ package pdg5.common.protocol;
 /**
  * @author Jimmy Verdasca
  * 
- * Class sended through the connection  by the client 
+ * Class sent through the connection  by the client 
  * to let him manipulate his friend list or black list.
  */
 public class Friend extends Message {

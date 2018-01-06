@@ -1,7 +1,7 @@
 package pdg5.common.protocol;
 
 /**
- * Class sended through the connection by the server representing
+ * Class sent through the connection by the server representing
  * the answer to a Validation request wich explain to a client 
  * if a word is valid or not.
  */

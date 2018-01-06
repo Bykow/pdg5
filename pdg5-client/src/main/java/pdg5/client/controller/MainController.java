@@ -2,11 +2,11 @@
  * -----------------------------------------------------------------------------------
  * Laboratoire : <nn>
  * Fichier : MainController.java Auteur(s) : Andrea Cotza Date : 03.10.2017
- *
+ * <p>
  * But : <à compléter>
- *
+ * <p>
  * Remarque(s) : <à compléter>
- *
+ * <p>
  * Compilateur : jdk1.8.0_60
  * -----------------------------------------------------------------------------------
  */
@@ -18,55 +18,69 @@ import javafx.scene.layout.AnchorPane;
 import pdg5.client.ClientListener;
 import pdg5.client.ClientSender;
 import pdg5.client.util.ClientRequestManager;
+import pdg5.common.protocol.Message;
 
 import java.io.IOException;
 
 public class MainController {
 
-   private ClientListener listener;
-   private ClientSender sender;
-   private ClientRequestManager requestManager;
+    private ClientListener listener;
+    private ClientSender sender;
+    private ClientRequestManager requestManager;
 
-   private GameController gameController;
+    private GameController gameController;
 
-   @FXML
-   private AnchorPane gameContainer;
+    @FXML
+    private AnchorPane gameContainer;
 
-   private AnchorPane layout;
+    private AnchorPane layout;
 
-   @FXML
-   public void initialize() {
-   }
+    @FXML
+    public void initialize() {
+    }
 
-   public void loadGame() {
-      listener = new ClientListener();
-      sender = new ClientSender();
-      this.requestManager = new ClientRequestManager(this);
+    public void loadGame() {
+        // Already start
+        listener = new ClientListener();
+        // Already start
+        sender = new ClientSender();
 
-      try {
-         FXMLLoader loader = new FXMLLoader();
-         gameController = new GameController();
-         loader.setLocation(MainController.class.getResource("/fxml/gameView.fxml"));
-         loader.setController(gameController);
-         layout = loader.load();
-         gameContainer.getChildren().setAll(layout);
-      } catch (IOException e) {
-         e.printStackTrace();
-      }
+        this.requestManager = new ClientRequestManager(this);
 
-      // Process message
-      // TODO @Maxime 
-      new Thread(() -> {
-         sender.add(
-                 requestManager.execute(
-                         listener.take()
-                 )
-         );
-      }).start();
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            gameController = new GameController();
+            loader.setLocation(MainController.class.getResource("/fxml/gameView.fxml"));
+            loader.setController(gameController);
+            layout = loader.load();
+            gameContainer.getChildren().setAll(layout);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-   }
+        // Process message
+        new Thread(() -> {
+            while (true) {
+                sender.add(
+                        requestManager.execute(
+                                listener.take()
+                        )
+                );
+            }
+        }).start();
 
-   public GameController getGameController() {
-      return gameController;
-   }
+    }
+
+    /**
+     * Allow you to send message to the server
+     *
+     * @param m
+     */
+    public void sendMessage(Message m) {
+        sender.add(m);
+    }
+
+    public GameController getGameController() {
+        return gameController;
+    }
 }

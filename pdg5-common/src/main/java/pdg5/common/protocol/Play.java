@@ -18,7 +18,6 @@ public class Play extends Message {
      * 
      * @param composition Word played by a player.
      * @param gameID Unique ID game where the word is played
-     * @param playerID Unique ID client wich play the word.
      */
     public Play(Composition composition, int gameID) {
        this.composition = composition;

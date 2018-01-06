@@ -1,12 +1,12 @@
 package pdg5.server.process;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pdg5.common.Protocol;
-import pdg5.common.protocol.ErrorMessage;
-import pdg5.common.protocol.Load;
-import pdg5.common.protocol.Message;
-import pdg5.common.protocol.SignUp;
+import pdg5.common.protocol.*;
 import pdg5.server.manage.ManageUser;
 import pdg5.server.persistent.User;
+import pdg5.server.util.ClientAlreadyConnected;
 import pdg5.server.util.ClientHandler;
 import pdg5.server.util.ServerActiveUser;
 
@@ -37,12 +37,19 @@ public class ProcessSignUp implements GenericProcess {
             exitCode = Protocol.ERROR;
         }
 
+        System.out.println(exitCode);
+
         switch (exitCode) {
             case Protocol.OK:
                 if (user != null) {
-                    activeUser.add(user.getId(), clientHandler);
+                    try {
+                        activeUser.add(user.getId(), clientHandler);
+                    } catch (ClientAlreadyConnected ex) {
+                        return new ErrorMessage(ex.getMessage());
+                    }
                     clientHandler.setPlayerId(user.getId());
                 }
+                clientHandler.addToQueue(new SignInOK());
                 return new Load();
             // TODO this is not suppose to be empty, waiting for game logic to continue
             case Protocol.ERROR:
@@ -52,6 +59,5 @@ public class ProcessSignUp implements GenericProcess {
             default:
                 return new ErrorMessage("Unhandled ErrorMessage in SignUp, default reached");
         }
-        //return new ErrorMessage("Not implemented");
     }
 }

@@ -59,7 +59,6 @@ public class SignInController extends AbstractController {
 
         clientSender.add(signIn);
 
-
         Message msg = listener.take();
         if (msg instanceof ErrorMessage) {
             System.err.println(msg);
@@ -72,7 +71,6 @@ public class SignInController extends AbstractController {
             stage.hide();
             loadGame(stage);
         }
-
     }
 
     @FXML

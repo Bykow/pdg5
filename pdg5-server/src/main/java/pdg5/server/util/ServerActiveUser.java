@@ -14,7 +14,10 @@ public class ServerActiveUser {
         map = new LinkedHashMap<>();
     }
 
-    public void add(Integer user, ClientHandler clientHandler) {
+    public void add(Integer user, ClientHandler clientHandler) throws ClientAlreadyConnected {
+        if(map.containsKey(user)){
+            throw new ClientAlreadyConnected("The client is already logged in");
+        }
         map.put(user, clientHandler);
     }
 

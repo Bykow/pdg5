@@ -110,6 +110,8 @@ public class GameController {
       if (matchMaking.isEmpty()) {
          matchMaking.add(idPlayerAsking);
          return new ErrorMessage(MESSAGE_LOOKING_OPPONENT);
+      } else if (matchMaking.contains(idPlayerAsking)) {
+         return new ErrorMessage(MESSAGE_LOOKING_OPPONENT);
       } else {
          return addNewGame(idPlayerAsking, matchMaking.remove(0));
       }

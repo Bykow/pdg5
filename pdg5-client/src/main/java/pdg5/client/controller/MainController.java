@@ -32,6 +32,8 @@ public class MainController {
 
     @FXML
     private AnchorPane gameContainer;
+    @FXML
+    private AnchorPane lobyContainer;
 
     private AnchorPane layout;
 
@@ -69,6 +71,19 @@ public class MainController {
             }
         }).start();
 
+    }
+
+    public void loadLoby() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            LobyController controller = new LobyController();
+            loader.setLocation(MainController.class.getResource("/fxml/lobyView.fxml"));
+            loader.setController(controller);
+            layout = loader.load();
+            lobyContainer.getChildren().setAll(layout);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

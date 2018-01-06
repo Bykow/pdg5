@@ -8,6 +8,7 @@ package pdg5.server.process;
 import pdg5.common.protocol.Message;
 import pdg5.common.protocol.Play;
 import pdg5.server.model.GameController;
+import pdg5.server.util.ClientHandler;
 import pdg5.server.util.ServerActiveUser;
 
 /**
@@ -19,6 +20,7 @@ public class ProcessPlay implements GenericProcess {
    private final Play play;
    private final GameController gameController;
    private final ServerActiveUser activeUser;
+   private final ClientHandler clientHandler;
    
    /**
     * Constructor
@@ -27,10 +29,11 @@ public class ProcessPlay implements GenericProcess {
     * @param gameController GameController that will try to play the move
      * @param activeUser
     */
-   public ProcessPlay(Play play, GameController gameController, ServerActiveUser activeUser) {
+   public ProcessPlay(Play play, GameController gameController, ServerActiveUser activeUser, ClientHandler clientHandler) {
       this.play = play;
       this.gameController = gameController;
       this.activeUser = activeUser;
+      this.clientHandler = clientHandler;
    }
 
    /**
@@ -44,6 +47,6 @@ public class ProcessPlay implements GenericProcess {
     */
    @Override
    public Message execute() {
-       return gameController.play(play.getGameID(), play.getPlayerID(), play.getComposition());
+       return gameController.play(play.getGameID(), clientHandler.getPlayerId(), play.getComposition());
    }
 }

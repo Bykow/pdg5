@@ -12,8 +12,6 @@ public class Play extends Message {
     private Composition composition;
     //ID of the game trying to play the word
     private int gameID;
-    //ID of the player trying to play the word
-    private int playerID;
    
     /**
      * Constructor
@@ -22,10 +20,9 @@ public class Play extends Message {
      * @param gameID Unique ID game where the word is played
      * @param playerID Unique ID client wich play the word.
      */
-    public Play(Composition composition, int gameID, int playerID) {
+    public Play(Composition composition, int gameID) {
        this.composition = composition;
        this.gameID = gameID;
-       this.playerID = playerID;
     }
 
     /**
@@ -44,14 +41,5 @@ public class Play extends Message {
     */
    public int getGameID() {
       return gameID;
-   }
-
-   /**
-    * return the unique id of the player trying to play
-    * 
-    * @return the unique id of the player trying to play
-    */
-   public int getPlayerID() {
-      return playerID;
    }
 }

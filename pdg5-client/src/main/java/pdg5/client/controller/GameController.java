@@ -23,7 +23,9 @@ import javafx.scene.input.*;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import pdg5.client.view.GTile;
+import pdg5.common.Protocol;
 import pdg5.common.game.Tile;
+import pdg5.common.protocol.Game;
 
 import java.util.List;
 
@@ -144,6 +146,31 @@ public class GameController {
         event.consume();
     }
 
+    private void updateDeckList(List<Tile> list) {
+        for (int i = 0; i < Protocol.NUMBER_OF_TUILES_PER_PLAYER; i++) {
+            deckList.get(i).getChildren().add(new GTile(list.get(i)));
+        }
+    }
+
+    private void updateBonusList(List<Tile> list) {
+        for (int i = 0; i < Protocol.NUMBER_OF_EXTRA_TUILES; i++) {
+            userBonusList.get(i).getChildren().add(new GTile(list.get(i)));
+        }
+    }
+
+    private void updatePlayer(Game g) {
+        updateDeckList(g.getAddedTile());
+        updateBonusList(g.getBonusLetters());
+    }
+
+    public void updateGame(Game g) {
+        updatePlayer(g);
+        remainingTiles.setText(String.valueOf(g.getNbLeftTile()));
+        adversaryScore.setText(String.valueOf(g.getOpponentScore()));
+        userScore.setText(String.valueOf(g.getScore()));
+        adversaryName.setText(g.getOpponentName());
+        userName.setText(g.getNamePlayer());
+    }
     @FXML
     private void play(ActionEvent actionEvent) {
         System.out.println("play");

@@ -27,6 +27,8 @@ public class MainController {
    private ClientSender sender;
    private ClientRequestManager requestManager;
 
+   private GameController gameController;
+
    @FXML
    private AnchorPane gameContainer;
    @FXML
@@ -45,9 +47,9 @@ public class MainController {
 
       try {
          FXMLLoader loader = new FXMLLoader();
-         GameController controller = new GameController();
+         gameController = new GameController();
          loader.setLocation(MainController.class.getResource("/fxml/gameView.fxml"));
-         loader.setController(controller);
+         loader.setController(gameController);
          layout = loader.load();
          gameContainer.getChildren().setAll(layout);
       } catch (IOException e) {
@@ -64,6 +66,10 @@ public class MainController {
          );
       }).start();
 
+   }
+
+   public GameController getGameController() {
+      return gameController;
    }
 
    public void loadLoby() {

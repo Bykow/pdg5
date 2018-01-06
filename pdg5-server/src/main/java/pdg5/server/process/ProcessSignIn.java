@@ -1,8 +1,11 @@
 package pdg5.server.process;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pdg5.common.protocol.*;
 import pdg5.server.manage.ManageUser;
 import pdg5.server.model.GameController;
+import pdg5.server.util.ClientAlreadyConnected;
 import pdg5.server.util.ClientHandler;
 import pdg5.server.util.ServerActiveUser;
 
@@ -35,14 +38,20 @@ public class ProcessSignIn implements GenericProcess {
 
             int idUser = manager.getUserByUsername(signIn.getUsername()).getId();
 
-            activeUser.add(idUser, clientHandler);
-            clientHandler.setPlayerId(idUser);
+            try {
+                // TODO check if user is logged in already
+                activeUser.add(idUser, clientHandler);
+                clientHandler.setPlayerId(idUser);
 
-            // Will be receive by the SignInController
-            clientHandler.addToQueue(new SignInOK());
-            // Will be receive by the ClientRequestController
-            return new Load();
-            //return gameController.findGamesOf(idUser);
+                // Will be receive by the SignInController
+                clientHandler.addToQueue(new SignInOK());
+                // Will be receive by the ClientRequestController
+                return new Load();
+                // TODO test this v
+                //return gameController.findGamesOf(idUser);
+            } catch (ClientAlreadyConnected ex) {
+                return new ErrorMessage(ex.getMessage());
+            }
         } else {
             return new ErrorMessage("Password invalid in SignIn for user " + signIn.getUsername());
         }

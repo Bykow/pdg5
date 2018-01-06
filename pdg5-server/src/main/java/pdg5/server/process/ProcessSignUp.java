@@ -1,9 +1,12 @@
 package pdg5.server.process;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pdg5.common.Protocol;
 import pdg5.common.protocol.*;
 import pdg5.server.manage.ManageUser;
 import pdg5.server.persistent.User;
+import pdg5.server.util.ClientAlreadyConnected;
 import pdg5.server.util.ClientHandler;
 import pdg5.server.util.ServerActiveUser;
 
@@ -39,7 +42,11 @@ public class ProcessSignUp implements GenericProcess {
         switch (exitCode) {
             case Protocol.OK:
                 if (user != null) {
-                    activeUser.add(user.getId(), clientHandler);
+                    try {
+                        activeUser.add(user.getId(), clientHandler);
+                    } catch (ClientAlreadyConnected ex) {
+                        return new ErrorMessage(ex.getMessage());
+                    }
                     clientHandler.setPlayerId(user.getId());
                 }
                 clientHandler.addToQueue(new SignInOK());

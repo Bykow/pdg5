@@ -22,10 +22,12 @@ import javafx.scene.control.Label;
 import javafx.scene.input.*;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import pdg5.client.ClientSender;
 import pdg5.client.view.GTile;
 import pdg5.common.Protocol;
 import pdg5.common.game.Tile;
 import pdg5.common.protocol.Game;
+import pdg5.common.protocol.NewGame;
 
 import java.util.List;
 
@@ -57,8 +59,13 @@ public class GameController {
 
     @FXML
     public void initialize() {
+
         deckList.get(0).getChildren().add(new GTile(new Tile('A', 2)));
         deckList.get(1).getChildren().add(new GTile(new Tile('F', 1)));
+
+        ClientSender clientSender = new ClientSender();
+        clientSender.add(new NewGame());
+
 
         for(StackPane ap : deckList) {
             ap.setOnDragDetected(this::handleOnDragDetected);

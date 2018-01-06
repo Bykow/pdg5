@@ -29,12 +29,13 @@ public class Game extends Message {
     private List<Tile> addedTile;
     private Composition.Square[] square;
     private List<Tile> bonusLetters;
+    private List<Tile> opponentBonusLetters;
     private boolean bonusIsMine;
     
     public Game(int ID, String title, Date created, Date lastActivity, 
                 int tournament, int score, String namePlayer, int opponentScore, 
                 String opponentName, int nbLeftTile, List<Tile> addedTile,
-                Composition.Square[] square, List<Tile> bonusLetters,
+                Composition.Square[] square, List<Tile> bonusLetters, List<Tile> opponentBonusLetters,
                 boolean bonusIsMine) {
         this.ID = ID;
         this.title = title;
@@ -49,6 +50,7 @@ public class Game extends Message {
         this.addedTile = addedTile;
         this.square = square;
         this.bonusLetters = bonusLetters;
+        this.opponentBonusLetters = opponentBonusLetters;
         this.bonusIsMine = bonusIsMine;
         
     }
@@ -107,6 +109,10 @@ public class Game extends Message {
 
    public List<Tile> getBonusLetters() {
       return bonusLetters;
+   }
+
+   public List<Tile> getOpponentBonusLetters() {
+      return opponentBonusLetters;
    }
 
    public boolean isBonusIsMine() {

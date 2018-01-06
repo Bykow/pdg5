@@ -4,17 +4,18 @@
  Fichier     : GameController.java
  Auteur(s)   : Andrea Cotza
  Date        : 24.10.2017
- 
+
  But         : <‡ complÈter>
- 
+
  Remarque(s) : <‡ complÈter>
- 
+
  Compilateur : jdk1.8.0_60
  -----------------------------------------------------------------------------------
-*/
+ */
 
 package pdg5.client.controller;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
@@ -58,10 +59,6 @@ public class GameController {
 
     @FXML
     public void initialize() {
-
-        deckList.get(0).getChildren().add(new GTile(new Tile('A', 2)));
-        deckList.get(1).getChildren().add(new GTile(new Tile('F', 1)));
-
         ClientSender clientSender = new ClientSender();
         clientSender.add(new NewGame());
 
@@ -174,11 +171,14 @@ public class GameController {
     }
 
     public void updateGame(Game g) {
-        updatePlayer(g);
-        remainingTiles.setText(String.valueOf(g.getNbLeftTile()));
-        adversaryScore.setText(String.valueOf(g.getOpponentScore()));
-        userScore.setText(String.valueOf(g.getScore()));
-        adversaryName.setText(g.getOpponentName());
-        userName.setText(g.getNamePlayer());
+        Platform.runLater(() -> {
+                    updatePlayer(g);
+                    remainingTiles.setText(String.valueOf(g.getNbLeftTile()));
+                    adversaryScore.setText(String.valueOf(g.getOpponentScore()));
+                    userScore.setText(String.valueOf(g.getScore()));
+                    adversaryName.setText(g.getOpponentName());
+                    userName.setText(g.getNamePlayer());
+                }
+        );
     }
 }

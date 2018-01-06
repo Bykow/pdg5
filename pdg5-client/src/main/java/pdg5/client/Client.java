@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import pdg5.client.controller.MainController;
 import pdg5.client.util.ClientRequestManager;
 import pdg5.common.Protocol;
+import pdg5.common.protocol.NewGame;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -47,7 +48,6 @@ public class Client extends Application {
         } catch (IOException e) {
             System.err.println("Connection error");
         }
-
     }
 
     /**

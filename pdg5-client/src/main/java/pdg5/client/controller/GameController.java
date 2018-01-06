@@ -18,6 +18,7 @@ package pdg5.client.controller;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
 import javafx.scene.input.*;
@@ -30,7 +31,9 @@ import pdg5.common.game.Composition;
 import pdg5.common.game.Tile;
 import pdg5.common.protocol.Game;
 import pdg5.common.protocol.NewGame;
+import pdg5.common.protocol.Play;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameController {
@@ -63,9 +66,6 @@ public class GameController {
 
     @FXML
     public void initialize() {
-        ClientSender clientSender = new ClientSender();
-        clientSender.add(new NewGame());
-
 
         for(StackPane ap : deckList) {
             ap.setOnDragDetected(this::handleOnDragDetected);
@@ -187,10 +187,18 @@ public class GameController {
         );
     }
 
+    private Composition getPlay() {
+        Composition composition = new Composition();
+        for (StackPane st: userList) {
+            composition.push(((GTile) st.getChildren().get(0)).getModel());
+        }
+        return composition;
+    }
+
     @FXML
     private void play(ActionEvent actionEvent) {
         System.out.println("play");
-        userList.get(0)
-        Composition comp = new Composition(userList);
+        ClientSender clientSender = new ClientSender();
+        clientSender.add(new Play(getPlay(), gameID));
     }
 }

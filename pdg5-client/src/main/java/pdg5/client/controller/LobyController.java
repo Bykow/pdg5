@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import pdg5.client.ClientSender;
+import pdg5.common.protocol.NewGame;
 
 public class LobyController {
 
@@ -37,5 +39,7 @@ public class LobyController {
     @FXML
     private void startNewGame(ActionEvent actionEvent) {
         System.out.println("new game");
+        ClientSender clientSender = new ClientSender();
+        clientSender.add(new NewGame());
     }
 }

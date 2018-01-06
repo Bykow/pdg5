@@ -4,13 +4,13 @@
 <?import javafx.scene.layout.*?>
 <SplitPane dividerPositions="0.5, 0.7387312186978298" prefHeight="600.0" prefWidth="1049.0" stylesheets="@../css/mainView.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <items>
-      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="598.0" prefWidth="599.0" style="-fx-background-color: #3caef5;">
+      <AnchorPane minHeight="0.0" minWidth="524.0" prefHeight="598.0" prefWidth="599.0" style="-fx-background-color: #3caef5;">
          <children>
             <AnchorPane layoutY="543.0" prefHeight="55.0" prefWidth="595.0" style="-fx-background-color: #ffbd00;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
             <AnchorPane fx:id="gameContainer" prefHeight="543.0" prefWidth="524.0" />
          </children>
       </AnchorPane>
-      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="276.0" prefWidth="362.0" style="-fx-background-color: #34495e;" />
+      <AnchorPane fx:id="lobyContainer" minHeight="0.0" minWidth="290.0" prefHeight="276.0" prefWidth="362.0" style="-fx-background-color: #34495e;" />
       <AnchorPane prefHeight="598.0" prefWidth="363.0" style="-fx-background-color: #3caef5;" />
    </items>
 </SplitPane>

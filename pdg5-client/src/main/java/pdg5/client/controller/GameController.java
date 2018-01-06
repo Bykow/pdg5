@@ -15,6 +15,7 @@
 
 package pdg5.client.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
@@ -141,6 +142,11 @@ public class GameController {
             source.getChildren().remove(0);
         }
         event.consume();
+    }
+
+    @FXML
+    private void play(ActionEvent actionEvent) {
+        System.out.println("play");
     }
 
 }

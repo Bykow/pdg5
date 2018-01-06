@@ -1,0 +1,28 @@
+.main {
+    -fx-background-color: #f7f6f6;
+}
+
+.imgWrapper {
+    -fx-border-color: #fff;
+    -fx-border-width: 2px;
+    -fx-padding: 0 -2px -2px 0;
+}
+
+.username,
+.msg,
+.score {
+    -fx-font-family: "Helvetica";
+    -fx-font-weight: 800;
+
+}
+
+.username {
+    -fx-text-fill: #2c3e50;
+    -fx-font-size: 14px;
+}
+
+.msg,
+.score {
+    -fx-text-fill: #929292;
+    -fx-font-size: 12px;
+}

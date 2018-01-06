@@ -14,18 +14,12 @@ public class Validation extends Message {
    private final Composition composition;
    
    /**
-    * unique id of the client who wants to validate a Composition
-    */
-   private final int idClient;
-   
-   /**
     * Constructor
     * 
     * @param composition the composition that the client want to validate
     */
-    public Validation(Composition composition, int idClient) {
+    public Validation(Composition composition) {
        this.composition = composition;
-       this.idClient = idClient;
     }
 
     /**
@@ -36,14 +30,4 @@ public class Validation extends Message {
    public Composition getComposition() {
       return composition;
    }
-   
-   /**
-     * return the unique id of the player who is loading games
-     * @return the unique id of the player who is loading games
-     */
-   public int getIdClient() {
-      return idClient;
-   }
-
-    
 }

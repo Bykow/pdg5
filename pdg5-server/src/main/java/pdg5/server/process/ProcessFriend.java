@@ -7,6 +7,7 @@ import pdg5.common.protocol.Noop;
 import pdg5.server.manage.ManageBlacklist;
 import pdg5.server.manage.ManageFriend;
 import pdg5.server.manage.ManageUser;
+import pdg5.server.util.ClientHandler;
 
 /**
  * @author Jimmy Verdasca
@@ -19,6 +20,7 @@ public class ProcessFriend implements GenericProcess {
    private ManageFriend manageFriend;
    private ManageUser manageUser;
    private Friend friend;
+   private final ClientHandler clientHandler;
 
    /**
     * Constructor
@@ -26,11 +28,12 @@ public class ProcessFriend implements GenericProcess {
     * @param friend the Friend protocole we handle
     * @param manageUser the user manager used to manipulate users
     */
-   public ProcessFriend(Friend friend, ManageUser manageUser) {
+   public ProcessFriend(Friend friend, ManageUser manageUser, ClientHandler clientHandler) {
       this.manageBlacklist = new ManageBlacklist();
       this.manageFriend = new ManageFriend();
       this.manageUser = manageUser;
       this.friend = friend;
+      this.clientHandler = clientHandler;
    }
 
    /**
@@ -42,23 +45,23 @@ public class ProcessFriend implements GenericProcess {
    public Message execute() {
       switch(friend.getType()) {
          case ADD_FRIEND:
-            manageFriend.addFriend(manageUser.getUserById(friend.getIdPlayer()), manageUser.getUserById(friend.getIdTargettedPlayer()));
+            manageFriend.addFriend(manageUser.getUserById(clientHandler.getPlayerId()), manageUser.getUserById(friend.getIdTargettedPlayer()));
             break;
          case REMOVE_FRIEND:
             manageFriend.listFriend()
                     .stream()
-                    .filter((f) -> f.getUserByFromUser().getId() == friend.getIdPlayer()
+                    .filter((f) -> f.getUserByFromUser().getId() == clientHandler.getPlayerId()
                             && f.getUserByToUser().getId() == friend.getIdTargettedPlayer())
                     .findAny()
                     .map((f) -> manageFriend.deleteFriend(f));
             break;
          case ADD_BLACKLIST:
-            manageBlacklist.addBlacklist(manageUser.getUserById(friend.getIdPlayer()), manageUser.getUserById(friend.getIdTargettedPlayer()));
+            manageBlacklist.addBlacklist(manageUser.getUserById(clientHandler.getPlayerId()), manageUser.getUserById(friend.getIdTargettedPlayer()));
             break;
          case REMOVE_BLACKLIST:
             manageBlacklist.listBlacklist()
                     .stream()
-                    .filter((f) -> f.getUserByFromUser().getId() == friend.getIdPlayer()
+                    .filter((f) -> f.getUserByFromUser().getId() == clientHandler.getPlayerId()
                             && f.getUserByToUser().getId() == friend.getIdTargettedPlayer())
                     .findAny()
                     .map((f) -> manageBlacklist.deleteBlacklist(f));

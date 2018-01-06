@@ -154,13 +154,17 @@ public class GameController {
 
     private void updateDeckList(List<Tile> list) {
         for (int i = 0; i < Protocol.NUMBER_OF_TUILES_PER_PLAYER; i++) {
-            deckList.get(i).getChildren().add(new GTile(list.get(i)));
+            if (list.get(i) != null) {
+                deckList.get(i).getChildren().add(new GTile(list.get(i)));
+            }
         }
     }
 
     private void updateBonusList(List<Tile> list) {
         for (int i = 0; i < Protocol.NUMBER_OF_EXTRA_TUILES; i++) {
-            userBonusList.get(i).getChildren().add(new GTile(list.get(i)));
+            if (list.get(i) != null) {
+                userBonusList.get(i).getChildren().add(new GTile(list.get(i)));
+            }
         }
     }
 

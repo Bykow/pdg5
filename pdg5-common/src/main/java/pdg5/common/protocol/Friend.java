@@ -17,7 +17,6 @@ public class Friend extends Message {
    }
    
    private TYPE type;
-   private int idPlayer;
    private int idTargettedPlayer;
 
    /**
@@ -27,19 +26,9 @@ public class Friend extends Message {
     * @param idPlayer unique ID of the player who sended this Message
     * @param idTargettedPlayer unique ID of the player concerned by the objective
     */
-   public Friend(TYPE type, int idPlayer, int idTargettedPlayer) {
+   public Friend(TYPE type, int idTargettedPlayer) {
       this.type = type;
-      this.idPlayer = idPlayer;
       this.idTargettedPlayer = idTargettedPlayer;
-   }
-
-   /**
-    * return the unique ID of the player who sended this Message
-    * 
-    * @return the unique ID of the player who sended this Message
-    */
-   public int getIdPlayer() {
-      return idPlayer;
    }
 
    /**

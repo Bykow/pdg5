@@ -20,7 +20,7 @@ public class TileStack {
     private int size;
     private int tileLeft;
     private HashMap<Character, Integer> map = new HashMap<>();
-    private Random r;
+    private final Random r;
 
     /**
      * Ctor
@@ -40,10 +40,10 @@ public class TileStack {
     }
 
     private TileStack(TileStack stack) {
-        this.stack = stack.stack;
+        this.stack = (Stack<Tile>) stack.stack.clone();
         this.size = stack.size;
         this.tileLeft = stack.tileLeft;
-        this.map = stack.map;
+        this.map = new HashMap<>(stack.map);
         this.r = stack.r;
     }
 
@@ -99,11 +99,11 @@ public class TileStack {
     }
 
     public String convertToString() {
-        TileStack stack = new TileStack(this);
+        TileStack localStack = new TileStack(this);
         String output = new String();
 
-        while(stack.tileLeft > 0) {
-            output = output.concat(String.valueOf(stack.getNextTuile().getLetter()));
+        while(localStack.tileLeft > 0) {
+            output = output.concat(String.valueOf(localStack.getNextTuile().getLetter()));
         }
 
         return output;

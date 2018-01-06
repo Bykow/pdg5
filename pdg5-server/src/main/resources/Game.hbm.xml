@@ -19,7 +19,7 @@
             <column length="45" name="title" not-null="true"/>
         </property>
         <property generated="never" lazy="false" name="remainingLetters" optimistic-lock="true" type="string" unique="false">
-            <column length="100" name="remaining_letters" not-null="true"/>
+            <column length="120" name="remaining_letters" not-null="true"/>
         </property>
         <property generated="never" lazy="false" name="created" optimistic-lock="true" type="timestamp" unique="false">
             <column length="19" name="created" not-null="true"/>

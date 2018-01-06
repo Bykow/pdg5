@@ -15,7 +15,6 @@
 
 package pdg5.client.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
@@ -155,13 +154,17 @@ public class GameController {
 
     private void updateDeckList(List<Tile> list) {
         for (int i = 0; i < Protocol.NUMBER_OF_TUILES_PER_PLAYER; i++) {
-            deckList.get(i).getChildren().add(new GTile(list.get(i)));
+            if (list.get(i) != null) {
+                deckList.get(i).getChildren().add(new GTile(list.get(i)));
+            }
         }
     }
 
     private void updateBonusList(List<Tile> list) {
         for (int i = 0; i < Protocol.NUMBER_OF_EXTRA_TUILES; i++) {
-            userBonusList.get(i).getChildren().add(new GTile(list.get(i)));
+            if (list.get(i) != null) {
+                userBonusList.get(i).getChildren().add(new GTile(list.get(i)));
+            }
         }
     }
 
@@ -178,9 +181,4 @@ public class GameController {
         adversaryName.setText(g.getOpponentName());
         userName.setText(g.getNamePlayer());
     }
-    @FXML
-    private void play(ActionEvent actionEvent) {
-        System.out.println("play");
-    }
-
 }

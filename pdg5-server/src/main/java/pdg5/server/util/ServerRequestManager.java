@@ -26,6 +26,8 @@ public class ServerRequestManager {
      * @return Message to be send
      */
     public Message execute(Message o, ClientHandler ch) {
+        System.out.println("Message received : " + o);
+        
         if (o instanceof SignUp) {
             return new ProcessSignUp((SignUp) o, manageUser, activeUser, ch).execute();
 

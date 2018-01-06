@@ -2,11 +2,11 @@
  * -----------------------------------------------------------------------------------
  * Laboratoire : <nn>
  * Fichier : MainController.java Auteur(s) : Andrea Cotza Date : 03.10.2017
- *
+ * <p>
  * But : <à compléter>
- *
+ * <p>
  * Remarque(s) : <à compléter>
- *
+ * <p>
  * Compilateur : jdk1.8.0_60
  * -----------------------------------------------------------------------------------
  */
@@ -30,10 +30,8 @@ public class MainController {
 
     private GameController gameController;
 
-   @FXML
-   private AnchorPane gameContainer;
-   @FXML
-   private AnchorPane lobyContainer;
+    @FXML
+    private AnchorPane gameContainer;
 
     private AnchorPane layout;
 
@@ -85,17 +83,4 @@ public class MainController {
     public GameController getGameController() {
         return gameController;
     }
-
-   public void loadLoby() {
-      try {
-         FXMLLoader loader = new FXMLLoader();
-         LobyController controller = new LobyController();
-         loader.setLocation(MainController.class.getResource("/fxml/lobyView.fxml"));
-         loader.setController(controller);
-         layout = loader.load();
-         lobyContainer.getChildren().setAll(layout);
-      } catch (IOException e) {
-         e.printStackTrace();
-      }
-   }
 }

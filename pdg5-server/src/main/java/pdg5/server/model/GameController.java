@@ -143,7 +143,7 @@ public class GameController {
       ManageUser userManager = new ManageUser();
       ManageGame gameManager = new ManageGame();
       gameManager.addGame("title", userManager.getUserById(idPlayer1), userManager.getUserById(idPlayer2), ts.convertToString());
-
+      
       // sending to second player
       activeUser.getClientHandler(idPlayer2).addToQueue(getGameFromModel(model.getGameId(), idPlayer2));
       return getGameFromModel(model.getGameId(), idPlayer1);

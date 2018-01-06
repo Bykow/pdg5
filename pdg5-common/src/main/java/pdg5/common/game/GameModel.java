@@ -17,8 +17,16 @@ public class GameModel implements Serializable {
    public enum PlayerBoard {
       PLAYER1, PLAYER2
    }
+   
+   /**
+    * enum to identifiate the State of the game
+    */
+   public enum State {
+      IN_PROGRESS, FINISHED, OUTDATED
+   }
 
    private int gameId; //Unique id of the game
+   private State state;
 
    /**
     * unique id of the Tournament, 0 if it is not a Tournament
@@ -28,6 +36,8 @@ public class GameModel implements Serializable {
    private Composition composition; //Word in progress for this client
    private final Date creation;
    private Date lastMove;
+   private boolean hasPassedLastMovePlayer1;
+   private boolean hasPassedLastMovePlayer2;
 
    /**
     * Constructor
@@ -48,6 +58,9 @@ public class GameModel implements Serializable {
       this.idTournament = idTournament;
       composition = new Composition();
       lastMove = new Date();
+      hasPassedLastMovePlayer1 = false;
+      hasPassedLastMovePlayer2 = false;
+      state = State.IN_PROGRESS;
    }
 
    /*
@@ -140,6 +153,10 @@ public class GameModel implements Serializable {
       return gameId;
    }
 
+   public State getState() {
+      return state;
+   }
+
    /**
     * return the date we created this game
     *
@@ -168,6 +185,18 @@ public class GameModel implements Serializable {
       return idTournament;
    }
 
+   public boolean isHasPassedLastMovePlayer1() {
+      return hasPassedLastMovePlayer1;
+   }
+
+   public boolean isHasPassedLastMovePlayer2() {
+      return hasPassedLastMovePlayer2;
+   }
+
+   public void setState(State state) {
+      this.state = state;
+   }
+   
    /**
     * compare a GameModel with an Object and return true if they have same fields and
     * Class

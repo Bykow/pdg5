@@ -12,6 +12,9 @@ import pdg5.server.util.ServerActiveUser;
 
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pdg5.server.manage.ManageGame;
@@ -21,6 +24,18 @@ import pdg5.server.manage.ManageGame;
  */
 public class GameController {
 
+   private final ScheduledExecutorService checkGamesOutdatedScheduler;
+   
+   /**
+    * 72 hours in millisecond
+    */
+   private static final int OUTDATE_TIME = 72 * 60 * 60 * 1000;
+   
+   /**
+    * number of letters left in a TileStack befor the game changes to check-end-mode
+    */
+   private static int TILE_LEFT_END_MODE = 10;
+   
    /**
     * random used for Square position random
     */
@@ -79,7 +94,9 @@ public class GameController {
       InputStream inputStream = TST.class.getResourceAsStream("/dico/fr_dico.dic");
       new BufferedReader(new InputStreamReader(inputStream)).lines()
               .forEach(dictionary::put);
-        this.activeUser = activeUser;
+      this.activeUser = activeUser;
+      checkGamesOutdatedScheduler = Executors.newScheduledThreadPool(1);
+      checkGamesOutdatedScheduler.scheduleAtFixedRate(areGamesOutdated(), 1, 1, TimeUnit.MINUTES);
     }
 
    /**
@@ -328,11 +345,39 @@ public class GameController {
       }
       board.setLetters(newLetters);
 
-      // TODO check if game ended
+      if(gameEnded(model, ts)) {
+         // TODO create protocol for win and lose and send here to both players the result
+      }
       
       int opponentId = model.getOpponentBoard(playerID).getPlayerId();
       activeUser.getClientHandler(opponentId).addToQueue(getGameFromModel(gameID, opponentId));
       return getGameFromModel(gameID, playerID);
+   }
+   
+   /**
+    * return true if the game has ended
+    * 
+    * @param model the GameModel of the game we are checking
+    * @param ts the TilesStack of the game we are checking
+    * @return true if the game has ended
+    */
+   private boolean gameEnded(GameModel model, TileStack ts) {
+      int tilesLeft = ts.getTileLeft();
+      
+      // not end-mode yet
+      if(tilesLeft > TILE_LEFT_END_MODE) {
+         return false;
+      // two players passed -> end of game
+      } else if(model.isHasPassedLastMovePlayer1() && model.isHasPassedLastMovePlayer2()) {
+         return true;
+      // the tileStacke is empty and a player used all his Tiles -> end of game
+      } else if (tilesLeft == 0 && 
+              (model.getBoard(GameModel.PlayerBoard.PLAYER1).getLetters().isEmpty()
+              || model.getBoard(GameModel.PlayerBoard.PLAYER2).getLetters().isEmpty())) {
+         return true;
+      } else {
+         return false;
+      }
    }
 
    /**
@@ -377,5 +422,31 @@ public class GameController {
          }
       }
       return map;
+   }
+
+   private Runnable areGamesOutdated() {
+      return new Runnable() {
+         @Override
+         public void run() {
+            for (Map.Entry<Integer, GameModel> entry : games.entrySet()) {
+               Integer gameID = entry.getKey();
+               GameModel gameModel = entry.getValue();
+
+               // we check only games in state IN_PROGRESS
+               if (gameModel.getState() == GameModel.State.IN_PROGRESS) {
+                  // Check if the game is outdated
+                  if (new Date().getTime() - gameModel.getLastMove().getTime() > OUTDATE_TIME) {
+                     gameModel.setState(GameModel.State.OUTDATED);
+                     
+                     // Send to players the update
+                     int idPlayer1 = gameModel.getBoard(GameModel.PlayerBoard.PLAYER1).getPlayerId();
+                     int idPlayer2 = gameModel.getBoard(GameModel.PlayerBoard.PLAYER2).getPlayerId();
+                     activeUser.getClientHandler(idPlayer1).addToQueue(getGameFromModel(gameID, idPlayer1));
+                     activeUser.getClientHandler(idPlayer2).addToQueue(getGameFromModel(gameID, idPlayer2));
+                  }
+               }
+            }
+         }
+      };
    }
 }

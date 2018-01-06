@@ -26,6 +26,7 @@ import javafx.scene.paint.Color;
 import pdg5.client.ClientSender;
 import pdg5.client.view.GTile;
 import pdg5.common.Protocol;
+import pdg5.common.game.Composition;
 import pdg5.common.game.Tile;
 import pdg5.common.protocol.Game;
 import pdg5.common.protocol.NewGame;
@@ -57,6 +58,8 @@ public class GameController {
     private Label adversaryName;
     @FXML
     private Label userName;
+
+    private int gameID;
 
     @FXML
     public void initialize() {
@@ -172,6 +175,7 @@ public class GameController {
     }
 
     public void updateGame(Game g) {
+        gameID = g.getID();
         Platform.runLater(() -> {
                     updatePlayer(g);
                     remainingTiles.setText(String.valueOf(g.getNbLeftTile()));
@@ -186,5 +190,7 @@ public class GameController {
     @FXML
     private void play(ActionEvent actionEvent) {
         System.out.println("play");
+        userList.get(0)
+        Composition comp = new Composition(userList);
     }
 }

@@ -47,7 +47,7 @@ public class ServerRequestManager {
            return new ProcessPlay((Play) o, gameController, activeUser, ch).execute(); 
            
         } else if (o instanceof Friend) {
-           return new ProcessFriend((Friend) o, manageUser).execute(); 
+           return new ProcessFriend((Friend) o, manageUser, ch).execute(); 
            
         }
 

@@ -103,7 +103,7 @@ public class TileStack {
         String output = new String();
 
         while(stack.tileLeft > 0) {
-            output.concat(String.valueOf(stack.getNextTuile().getLetter()));
+            output = output.concat(String.valueOf(stack.getNextTuile().getLetter()));
         }
 
         return output;

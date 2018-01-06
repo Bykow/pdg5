@@ -10,10 +10,10 @@ import pdg5.common.protocol.*;
 import pdg5.server.manage.ManageUser;
 import pdg5.server.util.ServerActiveUser;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pdg5.server.manage.ManageGame;
 
 /**
@@ -50,11 +50,6 @@ public class GameController {
     * current player waiting for an other random player
     */
    private final List<Integer> matchMaking;
-
-   /**
-    * first free id of Game possible
-    */
-   private static int currentAvailableId = -1;
 
    /**
     * message sent if we added someone to the matchmaking list
@@ -111,19 +106,26 @@ public class GameController {
     * @return the game to the clients who will play
     */
    public Message addNewGame(int idPlayer1, int idPlayer2) {
-      currentAvailableId++;
 
       // add new TileStack to the Map
       TileStack ts = new TileStack(Protocol.Languages.LANG_FR.toString());
-      tileStacks.put(currentAvailableId, ts);
+      
+      // Add the game to the DB
+      ManageUser userManager = new ManageUser();
+      ManageGame gameManager = new ManageGame();
+      pdg5.server.persistent.Game game = gameManager.addGame("title", userManager.getUserById(idPlayer1), userManager.getUserById(idPlayer2), ts.convertToString());
+      
+      int idGame = game.getId();
+      
+      tileStacks.put(idGame, ts);
 
       // add new GameModel to the Map
       Board[] boards = new Board[]{initBoard(ts, idPlayer1),
          initBoard(ts, idPlayer2)};
       GameModel model = new GameModel(
-              boards, currentAvailableId, new Date(), 0
+              boards, idGame, new Date(), 0
       );
-      games.put(currentAvailableId, model);
+      games.put(idGame, model);
 
       // add new idGames to the list of games of players
       addGameForClient(model, idPlayer1);
@@ -131,7 +133,7 @@ public class GameController {
 
       // add a new turnManager for this game
       TurnManager tm = new TurnManager(idPlayer1, idPlayer2, System.currentTimeMillis());
-      playerTurnManager.put(currentAvailableId, tm);
+      playerTurnManager.put(idGame, tm);
 
       // take the bonus letters from the TileStack
       List<Tile> bonus = new ArrayList<>();
@@ -139,10 +141,15 @@ public class GameController {
       bonus.add(ts.getNextTuile());
       boards[0].setBonus(bonus);
 
-      // Add the game to the DB
-      ManageUser userManager = new ManageUser();
-      ManageGame gameManager = new ManageGame();
-      gameManager.addGame("title", userManager.getUserById(idPlayer1), userManager.getUserById(idPlayer2), ts.convertToString());
+      try {
+         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+         ObjectOutputStream output = new ObjectOutputStream(byteArrayOutputStream);
+         output.writeObject(game);
+         String gameState = Base64.getEncoder().encodeToString(byteArrayOutputStream.toByteArray());
+         game.setGameState(gameState);
+      } catch (IOException ex) {
+         Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+      }
       
       // sending to second player
       activeUser.getClientHandler(idPlayer2).addToQueue(getGameFromModel(model.getGameId(), idPlayer2));

@@ -93,15 +93,38 @@ public class GameModel implements Serializable {
       scoreLastWordPlayed = 0;
    }
 
-   /*
-   public GameModel(pdg5.common.protocole.GameModel game) {
+   /**
+    * Constructor
+    * 
+    * @param game Game used to build the GameModel
+    */
+   public GameModel(pdg5.common.protocol.Game game) {
       gameId = game.getID();
       boards = new Board[PlayerBoard.values().length];
       int p1 = PlayerBoard.PLAYER1.ordinal();
-      boards[p1] = new Board(game.getNamePlayer());
-      boards[PlayerBoard.PLAYER2.ordinal()] = new Board(game.getOpponentName());
-      board[PlayerBoard.PLAYER1.ordinal()]
-   }*/
+      int p2 = PlayerBoard.PLAYER2.ordinal();
+      boards[p1] = new Board(game.getNamePlayer(), 0); // TODO playerId ???
+      boards[p2] = new Board(game.getOpponentName(), 0); // TODO playerId ???
+      boards[p1].setLetters(game.getAddedTile());
+      boards[p1].setScore(game.getScore());
+      boards[p2].setScore(game.getOpponentScore());
+      
+      if(game.isYourTurn()) {
+         boards[p1].setBonus(game.getBonusLetters());
+      } else {
+         boards[p1].setBonus(game.getBonusLetters());
+      }
+      
+      creation = game.getCreated();
+      idTournament = game.getTournament();
+      hasPassedLastMovePlayer1 = false;  //TODO ???
+      hasPassedLastMovePlayer2 = false;  //TODO ???
+      lastMove = game.getLastActivity();
+      lastWordPlayed = game.getLastWordPlayed();
+      scoreLastWordPlayed = game.getScoreLastWordPlayed();
+      state = State.IN_PROGRESS; //TODO ???
+      
+   }
 
    /**
     * Return the Board of the given player

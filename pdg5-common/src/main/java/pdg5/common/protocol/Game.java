@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * @author Maxime Guillod
- * 
+ *
  * Class sended through the connection  by the server representing
  * a full game with two players.
  */
@@ -29,13 +29,13 @@ public class Game extends Message {
     private List<Tile> addedTile;
     private List<Tile> bonusLetters;
     private List<Tile> opponentBonusLetters;
-   
+
     private String lastWordPlayed;
     private int scoreLastWordPlayed;
     private boolean yourTurn;
-    
-    public Game(int ID, String title, Date created, Date lastActivity, 
-                int tournament, int score, String namePlayer, int opponentScore, 
+
+    public Game(int ID, String title, Date created, Date lastActivity,
+                int tournament, int score, String namePlayer, int opponentScore,
                 String opponentName, int nbLeftTile, List<Tile> addedTile, List<Tile> bonusLetters,
                 String lastWordPlayed, int scoreLastWordPlayed, boolean yourTurn) {
         this.ID = ID;
@@ -54,7 +54,7 @@ public class Game extends Message {
         this.lastWordPlayed = lastWordPlayed;
         this.scoreLastWordPlayed = scoreLastWordPlayed;
         this.yourTurn = yourTurn;
-        
+
     }
 
     /**
@@ -62,66 +62,78 @@ public class Game extends Message {
      * @return the unique ID of a game
      */
     public int getID() {
-       return ID;
-    } 
+        return ID;
+    }
 
     public String getTitle() {
-       return title;
+        return title;
     }
 
     public Date getCreated() {
-       return created;
+        return created;
     }
 
     public Date getLastActivity() {
-       return lastActivity;
+        return lastActivity;
     }
 
     public int getTournament() {
-       return tournament;
-    } 
-
-    public int getScore() {
-       return score;
+        return tournament;
     }
 
-   public String getNamePlayer() {
-      return namePlayer;
-   }
+    public int getScore() {
+        return score;
+    }
 
-   public int getOpponentScore() {
-      return opponentScore;
-   }
+    public String getNamePlayer() {
+        return namePlayer;
+    }
 
-   public String getOpponentName() {
-      return opponentName;
-   }
+    public int getOpponentScore() {
+        return opponentScore;
+    }
 
-   public int getNbLeftTile() {
-      return nbLeftTile;
-   }
+    public String getOpponentName() {
+        return opponentName;
+    }
 
-   public List<Tile> getAddedTile() {
-      return addedTile;
-   }
-   
-   public List<Tile> getBonusLetters() {
-      return bonusLetters;
-   }
+    public int getNbLeftTile() {
+        return nbLeftTile;
+    }
 
-   public List<Tile> getOpponentBonusLetters() {
-      return opponentBonusLetters;
-   }
-   
-   public boolean isYourTurn() {
-      return yourTurn;
-   }
+    public List<Tile> getAddedTile() {
+        return addedTile;
+    }
 
-   public String getLastWordPlayed() {
-      return lastWordPlayed;
-   }
+    public List<Tile> getBonusLetters() {
+        return bonusLetters;
+    }
 
-   public int getScoreLastWordPlayed() {
-      return scoreLastWordPlayed;
-   }  
+    public List<Tile> getOpponentBonusLetters() {
+        return opponentBonusLetters;
+    }
+
+    public boolean isYourTurn() {
+        return yourTurn;
+    }
+
+    public String getLastWordPlayed() {
+        return lastWordPlayed;
+    }
+
+    public int getScoreLastWordPlayed() {
+        return scoreLastWordPlayed;
+    }
+
+    public String toString() {
+        String output = "";
+        output += "Player Name:     " + namePlayer + "\n";
+        output += "Player Score:     " + score + "\n";
+        output += "Opponent Name:   " + opponentName + "\n";
+        output += "Opponent Score:   " + opponentScore + "\n";
+        output += "isYourTurn:      " + yourTurn + "\n";
+        output += "Last Word Played " + lastWordPlayed + "\n";
+
+        return output;
+    }
 }

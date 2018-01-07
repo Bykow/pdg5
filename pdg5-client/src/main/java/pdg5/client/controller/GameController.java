@@ -169,9 +169,19 @@ public class GameController {
         }
     }
 
+    private void cleanComposition() {
+        for (int i = 0; i < Protocol.NUMBER_OF_TUILES_PER_PLAYER; i++) {
+            if(userList.get(i).getChildren().size() == 0) {
+                continue;
+            }
+            userList.get(i).getChildren().remove(0);
+        }
+    }
+
     private void updatePlayer(Game g) {
         updateDeckList(g.getAddedTile());
         updateBonusList(g.getBonusLetters());
+        cleanComposition();
     }
 
     public void updateGame(Game g) {

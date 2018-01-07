@@ -22,6 +22,7 @@ public class ClientRequestManager {
 
     public Message execute(Message o) {
         System.out.println("Message received : " + o);
+        System.out.println(o.toString());
         if (o instanceof ErrorMessage) {
             return new ProcessErrorMessage((ErrorMessage) o).execute();
         } else if (o instanceof Noop) {

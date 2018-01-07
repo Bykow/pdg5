@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class WordCombinations {
 
-   private final char JOKER = '0';
+   private final char JOKER = '?';
    private final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 
    private final TST dictionnary;

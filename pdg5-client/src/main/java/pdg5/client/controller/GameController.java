@@ -155,7 +155,7 @@ public class GameController {
 
     private void updateDeckList(List<Tile> list) {
         for (int i = 0; i < Protocol.NUMBER_OF_TUILES_PER_PLAYER; i++) {
-            if (list.get(i) != null) {
+            if (!list.isEmpty() && list.get(i) != null) {
                 deckList.get(i).getChildren().add(new GTile(list.get(i)));
             }
         }
@@ -163,7 +163,7 @@ public class GameController {
 
     private void updateBonusList(List<Tile> list) {
         for (int i = 0; i < Protocol.NUMBER_OF_EXTRA_TUILES; i++) {
-            if (list.get(i) != null) {
+            if (!list.isEmpty() && list.get(i) != null) {
                 userBonusList.get(i).getChildren().add(new GTile(list.get(i)));
             }
         }
@@ -190,6 +190,9 @@ public class GameController {
     private Composition getPlay() {
         Composition composition = new Composition();
         for (StackPane st: userList) {
+            if(st.getChildren().size() == 0) {
+                continue;
+            }
             composition.push(((GTile) st.getChildren().get(0)).getModel());
         }
         return composition;
@@ -197,7 +200,6 @@ public class GameController {
 
     @FXML
     private void play(ActionEvent actionEvent) {
-        System.out.println("play");
         ClientSender clientSender = new ClientSender();
         clientSender.add(new Play(getPlay(), gameID));
     }

@@ -8,13 +8,18 @@ package pdg5.common.game;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
- * Class representing one side of the game (one per player)
- * It contains the letters of one player (bonus and normal letters), and a score
+ * Class representing one side of the game (one per player) It contains the letters
+ * of one player (bonus and normal letters), and a score
  */
+public class Board implements Serializable {
 
-public class Board implements Serializable{
+   /**
+    * Word in progress for this client
+    */
+   private final Composition composition;
 
    private List<Tile> bonus; // bonus letters
    private List<Tile> letters; // normal letters
@@ -24,21 +29,23 @@ public class Board implements Serializable{
 
    /**
     * Constructor
-    * 
+    *
     * @param playerName name of the associated player
     * @param playerId unique id of the associated player
     */
    public Board(String playerName, int playerId) {
       this.playerName = playerName;
       this.playerId = playerId;
-      
+
       bonus = new ArrayList<>();
       letters = new ArrayList<>();
+      composition = new Composition();
+
    }
 
    /**
     * return the list of bonus letters
-    * 
+    *
     * @return the list of bonus letters
     */
    public List<Tile> getBonus() {
@@ -47,7 +54,7 @@ public class Board implements Serializable{
 
    /**
     * return the list of normal letters
-    * 
+    *
     * @return the list of normal letters
     */
    public List<Tile> getLetters() {
@@ -56,7 +63,7 @@ public class Board implements Serializable{
 
    /**
     * return the String name of the associated player
-    * 
+    *
     * @return the String name of the associated player
     */
    public String getPlayerName() {
@@ -65,7 +72,7 @@ public class Board implements Serializable{
 
    /**
     * return the current score of the associated player
-    * 
+    *
     * @return the current score of the associated player
     */
    public int getScore() {
@@ -74,16 +81,25 @@ public class Board implements Serializable{
 
    /**
     * return the unique id of the associated player
-    * 
+    *
     * @return the unique id of the associated player
     */
    public int getPlayerId() {
       return playerId;
    }
-   
+
+   /**
+    * return the Composition of this client
+    *
+    * @return the Composition of this client
+    */
+   public Composition getComposition() {
+      return composition;
+   }
+
    /**
     * set the list of bonus letters to a new one given
-    * 
+    *
     * @param bonus list of the new Tiles
     */
    public void setBonus(List<Tile> bonus) {
@@ -92,7 +108,7 @@ public class Board implements Serializable{
 
    /**
     * set the score of the associated player
-    * 
+    *
     * @param score the new score of the player
     */
    public void setScore(int score) {
@@ -101,27 +117,40 @@ public class Board implements Serializable{
 
    /**
     * set the list of normal letters to a new one given
-    * 
+    *
     * @param letters list of the new Tiles
     */
    public void setLetters(List<Tile> letters) {
       this.letters = letters;
    }
-   
+
    /**
-    * compare a Board with an Object and 
-    * return true if they have same fields and Class
-    * 
+    * compare a Board with an Object and return true if they have same fields and
+    * Class
+    *
     * @param o Compared Object
     * @return true if the two Object is of same class and have the same fields
     */
    public boolean equals(Object o) {
-      return getClass().isInstance(o) &&
-              getClass() == o.getClass() &&
-              bonus.equals(((Board) o).bonus) &&
-              letters.equals(((Board) o).letters) &&
-              playerId == ((Board) o).playerId &&
-              playerName.equals(((Board) o).playerName) &&
-              score == ((Board) o).score;
+      return getClass().isInstance(o)
+         && getClass() == o.getClass()
+         && bonus.equals(((Board) o).bonus)
+         && letters.equals(((Board) o).letters)
+         && playerId == ((Board) o).playerId
+         && playerName.equals(((Board) o).playerName)
+         && score == ((Board) o).score
+         && composition.equals(((Board) o).composition);
+   }
+
+   @Override
+   public int hashCode() {
+      int hash = 5;
+      hash = 67 * hash + Objects.hashCode(this.composition);
+      hash = 67 * hash + Objects.hashCode(this.bonus);
+      hash = 67 * hash + Objects.hashCode(this.letters);
+      hash = 67 * hash + this.playerId;
+      hash = 67 * hash + Objects.hashCode(this.playerName);
+      hash = 67 * hash + this.score;
+      return hash;
    }
 }

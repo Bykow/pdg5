@@ -149,21 +149,25 @@ public class GameController {
       
       tileStacks.put(idGame, ts);
 
+      
+      // add a new turnManager for this game
+      TurnManager tm = new TurnManager(idPlayer1, idPlayer2, System.currentTimeMillis());
+      playerTurnManager.put(idGame, tm);
+      
       // add new GameModel to the Map
       Board[] boards = new Board[]{initBoard(ts, idPlayer1),
          initBoard(ts, idPlayer2)};
       GameModel model = new GameModel(
               boards, idGame, new Date(), 0
       );
+      model.getBoardById(idPlayer1).getComposition().setSquare(tm.getSquares(idPlayer1));
+      model.getBoardById(idPlayer2).getComposition().setSquare(tm.getSquares(idPlayer2));
       games.put(idGame, model);
 
       // add new idGames to the list of games of players
       addGameForClient(model, idPlayer1);
       addGameForClient(model, idPlayer2);
 
-      // add a new turnManager for this game
-      TurnManager tm = new TurnManager(idPlayer1, idPlayer2, System.currentTimeMillis());
-      playerTurnManager.put(idGame, tm);
 
       // take the bonus letters from the TileStack
       List<Tile> bonus = new ArrayList<>();
@@ -341,8 +345,8 @@ public class GameController {
       }
       boardOpponent.setBonus(newBonusTile);
       tm.turnEnded(); // turn in turnManager
-      Composition comp = model.getComposition(); // Squares
-      comp.setBonus(tm.getSquares(playerID));
+      Composition comp = board.getComposition(); // Squares
+      comp.setSquare(tm.getSquares(playerID));
       comp.removeAll(); // remove composition letters and bonus letters
       
       board.setBonus(new ArrayList<>());
@@ -415,7 +419,7 @@ public class GameController {
     * @return true if letters of contained are contained in container
     */
    private boolean isContained(String contained, String container) {
-      Map<Character, Integer> occurenceContained = getOccurenceMapFromString(contained);
+      Map<Character, Integer> occurenceContained = getOccurenceMapFromString(contained.toUpperCase());
       Map<Character, Integer> occurenceContainer = getOccurenceMapFromString(container);
       
       // if the container don't have the character in the map

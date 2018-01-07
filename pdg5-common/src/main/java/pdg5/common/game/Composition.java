@@ -58,15 +58,16 @@ public class Composition implements Serializable{
 
    // seven or less Tiles representing the current word
    private final Tile[] word; 
+   
    // seven current  bonus square where letters can obtain more values
-   private Square[] bonus; 
+   private Square[] square; 
 
    /**
     * Constructor
     */
    public Composition() {
       word = new Tile[Utils.WORD_MAX_SIZE];
-      bonus = new Square[Utils.WORD_MAX_SIZE];
+      square = new Square[Utils.WORD_MAX_SIZE];
    }
    
    /**
@@ -76,11 +77,11 @@ public class Composition implements Serializable{
     * @throws IllegalArgumentException if the length of the given array 
     * isn't the good size (WORD_MAX_SIZE)
     */
-   public void setBonus(Square[] bonusList) throws IllegalArgumentException {
+   public void setSquare(Square[] bonusList) throws IllegalArgumentException {
       if(bonusList.length != Utils.WORD_MAX_SIZE) {
          throw new IllegalArgumentException(String.format("the length of array bonus parameter is not %d", Utils.WORD_MAX_SIZE));
       }
-      bonus = Arrays.copyOf(bonusList, Utils.WORD_MAX_SIZE);
+      square = Arrays.copyOf(bonusList, Utils.WORD_MAX_SIZE);
    }
 
    /**
@@ -109,9 +110,13 @@ public class Composition implements Serializable{
    public String getStringForm() {
       StringBuilder sb = new StringBuilder();
       for (Tile tile : word) {
-         sb.append(tile.getLetter());
+         if(tile == null){
+            sb.append(" ");
+         } else {
+            sb.append(tile.getLetter());
+         }
       }
-      return sb.toString();
+      return sb.toString().toLowerCase();
    }
    
    
@@ -172,7 +177,7 @@ public class Composition implements Serializable{
       // pass the letters through the square to know the real current value
       for (int i = 0; i < Utils.WORD_MAX_SIZE; i++) {
          if(word[i] != null) {
-            score += bonus[i].getFinalValue(word[i]);
+            score += square[i].getFinalValue(word[i]);
          }
       }
       
@@ -231,7 +236,7 @@ public class Composition implements Serializable{
       return getClass().isInstance(o) &&
               getClass() == o.getClass() &&
               Arrays.equals(word, ((Composition) o).word) &&
-              Arrays.equals(bonus, ((Composition) o).bonus);
+              Arrays.equals(square, ((Composition) o).square);
    }
 
    /**
@@ -243,7 +248,7 @@ public class Composition implements Serializable{
    public int hashCode() {
       int hash = 7;
       hash = 79 * hash + Arrays.deepHashCode(this.word);
-      hash = 79 * hash + Arrays.deepHashCode(this.bonus);
+      hash = 79 * hash + Arrays.deepHashCode(this.square);
       return hash;
    }
 }

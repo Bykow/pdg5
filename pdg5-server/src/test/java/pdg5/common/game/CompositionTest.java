@@ -34,7 +34,7 @@ public class CompositionTest {
 
    @Before
    public void setUp() {
-      comp.setBonus(new Square[]{
+      comp.setSquare(new Square[]{
          Square.NORMAL,
          Square.DOUBLE,
          Square.NORMAL,

@@ -49,11 +49,6 @@ public class GameModel implements Serializable {
    private Board[] boards; 
    
    /**
-    * Word in progress for this client
-    */
-   private Composition composition; 
-   
-   /**
     * Date when the game as been created
     */
    private final Date creation;
@@ -90,7 +85,6 @@ public class GameModel implements Serializable {
       this.gameId = gameId;
       this.creation = creationDate;
       this.idTournament = idTournament;
-      composition = new Composition();
       lastMove = new Date();
       hasPassedLastMovePlayer1 = false;
       hasPassedLastMovePlayer2 = false;
@@ -108,14 +102,6 @@ public class GameModel implements Serializable {
       boards[PlayerBoard.PLAYER2.ordinal()] = new Board(game.getOpponentName());
       board[PlayerBoard.PLAYER1.ordinal()]
    }*/
-   /**
-    * return the Composition of this client
-    *
-    * @return the Composition of this client
-    */
-   public Composition getComposition() {
-      return composition;
-   }
 
    /**
     * Return the Board of the given player
@@ -282,7 +268,6 @@ public class GameModel implements Serializable {
    public boolean equals(Object o) {
       return getClass().isInstance(o)
          && getClass() == o.getClass()
-         && composition.equals(((GameModel) o).composition)
          && boards[PlayerBoard.PLAYER1.ordinal()].equals(((GameModel) o).boards[PlayerBoard.PLAYER1.ordinal()])
          && boards[PlayerBoard.PLAYER2.ordinal()].equals(((GameModel) o).boards[PlayerBoard.PLAYER2.ordinal()])
          && gameId == ((GameModel) o).gameId;
@@ -298,7 +283,6 @@ public class GameModel implements Serializable {
       int hash = 7;
       hash = 71 * hash + this.gameId;
       hash = 71 * hash + Arrays.deepHashCode(this.boards);
-      hash = 71 * hash + Objects.hashCode(this.composition);
       return hash;
    }
 }

@@ -24,10 +24,13 @@ import pdg5.server.manage.ManageGame;
  */
 public class GameController {
 
+   /**
+    * Schedular that each minutes check if the games are outdated
+    */
    private final ScheduledExecutorService checkGamesOutdatedScheduler;
    
    /**
-    * 72 hours in millisecond
+    * Max time to play (72 hours in millisecond)
     */
    private static final int OUTDATE_TIME = 72 * 60 * 60 * 1000;
    
@@ -76,12 +79,20 @@ public class GameController {
     */
    private final TST dictionary = new TST();
 
+   /**
+    * Link item to the user's part of database
+    */
    private final ManageUser manageUser;
+   
+   /**
+    * item containing informations about all the users online
+    */
    private final ServerActiveUser activeUser;
 
    /**
     * Constructor
-     * @param activeUser The activeUsers
+    * 
+     * @param activeUser The activeUsers contains informations about all the users online
     */
     public GameController(ServerActiveUser activeUser) {
       games = new HashMap<>();
@@ -178,9 +189,8 @@ public class GameController {
    /**
     * return a new Board filled with Tiles of a given TileStack
     *
-    * @param ts
-    * @param idPlayer
-    * @Param ts TileStack used to fill the new Board
+    * @param ts TileStack used to fill the new Board
+    * @param idPlayer unique id of the player
     * @return a new Board filled with Tiles
     */
    public Board initBoard(TileStack ts, int idPlayer) {
@@ -437,6 +447,13 @@ public class GameController {
       return map;
    }
 
+   /**
+    * method called by the scheduler to check in all games if there is some outdated.
+    * If some are outdated, the method change the state of the game 
+    * and send to players a Game to inform them of the update.
+    * 
+    * @return the Runnable used by the scheduler to run the method.
+    */
    private Runnable areGamesOutdated() {
       return new Runnable() {
          @Override

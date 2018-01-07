@@ -39,6 +39,11 @@ public class TileStack {
         tileLeft = size;
     }
 
+    /**
+     * Constructor of copy
+     * 
+     * @param stack the TileStack we want to copy
+     */
     private TileStack(TileStack stack) {
         this.stack = (Stack<Tile>) stack.stack.clone();
         this.size = stack.size;
@@ -93,11 +98,21 @@ public class TileStack {
         return (char)(r.nextInt(high + 1 - low) + low);
     }
 
+    /**
+     * get the top Tuile of the stack and update the size
+     * 
+     * @return the top Tile of the Stack
+     */
     public Tile getNextTuile() {
         tileLeft--;
         return stack.pop();
     }
 
+    /**
+     * return the a String reprsenting all the letters left in the TileStack.
+     * 
+     * @return the a String reprsenting all the letters left in the TileStack
+     */
     public String convertToString() {
         TileStack localStack = new TileStack(this);
         String output = new String();
@@ -109,6 +124,10 @@ public class TileStack {
         return output;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public int getSize() {
         return size;
     }

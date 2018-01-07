@@ -3,7 +3,7 @@ package pdg5.common.protocol;
 import pdg5.common.game.Composition;
 
 /**
- * Class sended through the connection by a client
+ * Class sent through the connection by a client
  * to ask for a validation of a word by the server.
  */
 public class Validation extends Message {

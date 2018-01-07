@@ -12,6 +12,9 @@ import pdg5.server.util.ServerActiveUser;
 
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pdg5.server.manage.ManageGame;
@@ -21,6 +24,21 @@ import pdg5.server.manage.ManageGame;
  */
 public class GameController {
 
+   /**
+    * Schedular that each minutes check if the games are outdated
+    */
+   private final ScheduledExecutorService checkGamesOutdatedScheduler;
+   
+   /**
+    * Max time to play (72 hours in millisecond)
+    */
+   private static final int OUTDATE_TIME = 72 * 60 * 60 * 1000;
+   
+   /**
+    * number of letters left in a TileStack befor the game changes to check-end-mode
+    */
+   private static int TILE_LEFT_END_MODE = 10;
+   
    /**
     * random used for Square position random
     */
@@ -61,12 +79,20 @@ public class GameController {
     */
    private final TST dictionary = new TST();
 
+   /**
+    * Link item to the user's part of database
+    */
    private final ManageUser manageUser;
+   
+   /**
+    * item containing informations about all the users online
+    */
    private final ServerActiveUser activeUser;
 
    /**
     * Constructor
-     * @param activeUser The activeUsers
+    * 
+     * @param activeUser The activeUsers contains informations about all the users online
     */
     public GameController(ServerActiveUser activeUser) {
       games = new HashMap<>();
@@ -79,7 +105,9 @@ public class GameController {
       InputStream inputStream = TST.class.getResourceAsStream("/dico/fr_dico.dic");
       new BufferedReader(new InputStreamReader(inputStream)).lines()
               .forEach(dictionary::put);
-        this.activeUser = activeUser;
+      this.activeUser = activeUser;
+      checkGamesOutdatedScheduler = Executors.newScheduledThreadPool(1);
+      checkGamesOutdatedScheduler.scheduleAtFixedRate(areGamesOutdated(), 1, 1, TimeUnit.MINUTES);
     }
 
    /**
@@ -161,9 +189,8 @@ public class GameController {
    /**
     * return a new Board filled with Tiles of a given TileStack
     *
-    * @param ts
-    * @param idPlayer
-    * @Param ts TileStack used to fill the new Board
+    * @param ts TileStack used to fill the new Board
+    * @param idPlayer unique id of the player
     * @return a new Board filled with Tiles
     */
    public Board initBoard(TileStack ts, int idPlayer) {
@@ -330,11 +357,50 @@ public class GameController {
       }
       board.setLetters(newLetters);
 
-      // TODO check if game ended
-      
       int opponentId = model.getOpponentBoard(playerID).getPlayerId();
+      
+      // Send game result if the game finished
+      if(gameEnded(model, ts)) {
+         if(board.getScore() > boardOpponent.getScore()) {
+            activeUser.getClientHandler(opponentId).addToQueue(new End(End.RESULT.LOSE));
+            return new End(End.RESULT.WIN);
+         } else if (board.getScore() < boardOpponent.getScore()) {
+            activeUser.getClientHandler(opponentId).addToQueue(new End(End.RESULT.WIN));
+            return new End(End.RESULT.LOSE);
+         } else {
+            activeUser.getClientHandler(opponentId).addToQueue(new End(End.RESULT.EQUALITY));
+            return new End(End.RESULT.EQUALITY);
+         }
+      }
+      
       activeUser.getClientHandler(opponentId).addToQueue(getGameFromModel(gameID, opponentId));
       return getGameFromModel(gameID, playerID);
+   }
+   
+   /**
+    * return true if the game has ended
+    * 
+    * @param model the GameModel of the game we are checking
+    * @param ts the TilesStack of the game we are checking
+    * @return true if the game has ended
+    */
+   private boolean gameEnded(GameModel model, TileStack ts) {
+      int tilesLeft = ts.getTileLeft();
+      
+      // not end-mode yet
+      if(tilesLeft > TILE_LEFT_END_MODE) {
+         return false;
+      // two players passed -> end of game
+      } else if(model.isHasPassedLastMovePlayer1() && model.isHasPassedLastMovePlayer2()) {
+         return true;
+      // the tileStacke is empty and a player used all his Tiles -> end of game
+      } else if (tilesLeft == 0 && 
+              (model.getBoard(GameModel.PlayerBoard.PLAYER1).getLetters().isEmpty()
+              || model.getBoard(GameModel.PlayerBoard.PLAYER2).getLetters().isEmpty())) {
+         return true;
+      } else {
+         return false;
+      }
    }
 
    /**
@@ -379,5 +445,38 @@ public class GameController {
          }
       }
       return map;
+   }
+
+   /**
+    * method called by the scheduler to check in all games if there is some outdated.
+    * If some are outdated, the method change the state of the game 
+    * and send to players a Game to inform them of the update.
+    * 
+    * @return the Runnable used by the scheduler to run the method.
+    */
+   private Runnable areGamesOutdated() {
+      return new Runnable() {
+         @Override
+         public void run() {
+            for (Map.Entry<Integer, GameModel> entry : games.entrySet()) {
+               Integer gameID = entry.getKey();
+               GameModel gameModel = entry.getValue();
+
+               // we check only games in state IN_PROGRESS
+               if (gameModel.getState() == GameModel.State.IN_PROGRESS) {
+                  // Check if the game is outdated
+                  if (new Date().getTime() - gameModel.getLastMove().getTime() > OUTDATE_TIME) {
+                     gameModel.setState(GameModel.State.OUTDATED);
+                     
+                     // Send to players the update
+                     int idPlayer1 = gameModel.getBoard(GameModel.PlayerBoard.PLAYER1).getPlayerId();
+                     int idPlayer2 = gameModel.getBoard(GameModel.PlayerBoard.PLAYER2).getPlayerId();
+                     activeUser.getClientHandler(idPlayer1).addToQueue(getGameFromModel(gameID, idPlayer1));
+                     activeUser.getClientHandler(idPlayer2).addToQueue(getGameFromModel(gameID, idPlayer2));
+                  }
+               }
+            }
+         }
+      };
    }
 }

@@ -1,7 +1,9 @@
 package pdg5.common.game;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -68,6 +70,13 @@ public class Composition implements Serializable{
    public Composition() {
       word = new Tile[Utils.WORD_MAX_SIZE];
       square = new Square[Utils.WORD_MAX_SIZE];
+   }
+   
+   
+   
+   public Composition(Composition composition){
+      word = composition.word.clone();
+      square = composition.square.clone();
    }
    
    /**
@@ -160,14 +169,12 @@ public class Composition implements Serializable{
 
    /**
     * return the current value's word of the Composition
-    * We need a Board to know if a letter comes from a bonus letter.
     * 
-    * @param board where come from the letters
     * @return the current value's word of the Composition
     * @throws IllegalStateException if currently the Composition 
     * don't contain a potential word
     */
-   public int getValue(Board board) throws IllegalStateException {
+   public int getValue() throws IllegalStateException {
       // check if the composition is potentially a word
       if(!isValid()) {
          throw new IllegalStateException("This isn't a valid word");
@@ -181,14 +188,6 @@ public class Composition implements Serializable{
          }
       }
       
-      // double the word's value if we used all the bonus letters
-      if(board.getBonus().isEmpty()) {
-         score *= 2;
-      } else {
-         for (Tile bonusTile : board.getBonus()) {
-            score -= bonusTile.getValue();
-         }
-      }
       return score;
    }
 
@@ -200,6 +199,12 @@ public class Composition implements Serializable{
    public int getValue(List<Integer> letterValues) {
       int score = 0;
       return score;
+   }
+
+   public List<Tile> getWord() {
+      List<Tile> returnList = new ArrayList<>(Arrays.asList(word));
+      returnList.removeAll(Collections.singleton(null));
+      return returnList;
    }
    
    /**

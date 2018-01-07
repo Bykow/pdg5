@@ -10,7 +10,10 @@ import java.io.Serializable;
  * when one is a bonus tile and an other is a normal letter.
  */
 public class Tile implements Serializable{
-    private int id;
+   
+   private static long uniqueId = 0;
+   
+    private final long id;
     private final char letter;
     private final int value;
 
@@ -23,6 +26,7 @@ public class Tile implements Serializable{
     public Tile(char letter, int value) {
         this.letter = letter;
         this.value = value;
+        id = uniqueId++;
     }
 
     /**
@@ -66,5 +70,14 @@ public class Tile implements Serializable{
               id == ((Tile) o).id &&
               letter == ((Tile) o).letter &&
               value == ((Tile) o).value;
+   }
+
+   @Override
+   public int hashCode() {
+      int hash = 3;
+      hash = 67 * hash + (int) (this.id ^ (this.id >>> 32));
+      hash = 67 * hash + this.letter;
+      hash = 67 * hash + this.value;
+      return hash;
    }
 }

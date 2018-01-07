@@ -21,8 +21,8 @@ public class Board implements Serializable {
     */
    private final Composition composition;
 
-   private List<Tile> bonus; // bonus letters
-   private List<Tile> letters; // normal letters
+   private ArrayList<Tile> bonus; // bonus letters
+   private ArrayList<Tile> letters; // normal letters
    private final int playerId; // id of the player associated
    private final String playerName; // name of the player associated
    private int score; // score of the player associated
@@ -41,6 +41,16 @@ public class Board implements Serializable {
       letters = new ArrayList<>();
       composition = new Composition();
 
+   }
+   
+   public Board(Board board){
+      playerName = board.playerName;
+      playerId = board.playerId;
+      
+      score = board.score;
+      composition = new Composition(board.composition);
+      bonus = (ArrayList<Tile>) board.bonus.clone();
+      letters = (ArrayList<Tile>) board.letters.clone();
    }
 
    /**
@@ -103,7 +113,7 @@ public class Board implements Serializable {
     * @param bonus list of the new Tiles
     */
    public void setBonus(List<Tile> bonus) {
-      this.bonus = bonus;
+      this.bonus = new ArrayList<>(bonus);
    }
 
    /**
@@ -121,7 +131,33 @@ public class Board implements Serializable {
     * @param letters list of the new Tiles
     */
    public void setLetters(List<Tile> letters) {
-      this.letters = letters;
+      this.letters = new ArrayList<>(letters);
+   }
+   
+   public boolean replayWord(List<Tile> word){
+      for (Tile tile : word) {
+         if(!bonus.isEmpty() && bonus.remove(tile) || letters.remove(tile)){
+            composition.push(tile);
+         } else {
+            return false;
+         }
+      }
+      
+      return true;
+   }
+   
+   public int getValue(){
+      int value = composition.getValue();
+      
+      // double the word's value if we used all the bonus letters
+      if(getBonus().isEmpty()) {
+         value *= 2;
+      } else {
+         for (Tile bonusTile : getBonus()) {
+            value -= bonusTile.getValue();
+         }
+      }
+      return value;
    }
 
    /**

@@ -262,7 +262,7 @@ public class GameController {
       Game game = new Game(gm.getGameId(), "title", gm.getCreation(),
         gm.getLastMove(), gm.getIdTournament(), board1.getScore(),
         board1.getPlayerName(), board2.getScore(), board2.getPlayerName(),
-        ts.getTileLeft(), boardOfClient.getLetters(), tm.getSquares(idClient),
+        ts.getTileLeft(), boardOfClient.getLetters(),
         boardOfClient.getBonus(), gm.getLastWordPlayed(), 
         gm.getScoreLastWordPlayed(), tm.isCurrentPlayer(idClient));
       return game;
@@ -310,23 +310,14 @@ public class GameController {
       // Check if the player possess the word letters
       GameModel model = games.get(gameID);
       Board board = model.getBoardById(playerID);
-      List<Tile> letters = board.getLetters();
-      StringBuilder sb = new StringBuilder();
-      letters.forEach((letter) -> {
-          sb.append(letter.getLetter());
-       });
-
-      board.getBonus().forEach((bonus) -> {
-          sb.append(bonus.getLetter());
-       });
-
-      if (!isContained(word, sb.toString())) {
-          return new ErrorMessage(
-                  String.format("You don't have the letters to play this word.\n\t Tried : %s\n\t have : %s", word, sb.toString()));
-      }
 
       // Calculate the value of the word
-      int scoreToAdd = composition.getValue(board);
+      Board testBoard = new Board(board);
+      if(!testBoard.replayWord(composition.getWord())){
+          return new ErrorMessage("You don't have the letters to play this word");
+      }
+      int scoreToAdd = testBoard.getValue();
+      board.replayWord(composition.getWord());
 
       // Update model with this word played (score, turn of turnManager, Tiles of player)
       // score

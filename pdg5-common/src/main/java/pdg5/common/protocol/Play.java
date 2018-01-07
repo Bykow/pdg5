@@ -8,9 +8,14 @@ import pdg5.common.game.Composition;
  */
 public class Play extends Message {
 
-    //Word trying to be played
+    /**
+     * Word trying to be played
+     */
     private Composition composition;
-    //ID of the game trying to play the word
+    
+    /**
+     * ID of the game trying to play the word
+     */
     private int gameID;
    
     /**

@@ -25,18 +25,52 @@ public class GameModel implements Serializable {
       IN_PROGRESS, FINISHED, OUTDATED
    }
 
-   private int gameId; //Unique id of the game
+   private int scoreLastWordPlayed;
+   private String lastWordPlayed;
+   
+   /**
+    * Unique id of the game
+    */
+   private int gameId; 
+   
+   /**
+    * current state of the game
+    */
    private State state;
 
    /**
     * unique id of the Tournament, 0 if it is not a Tournament
     */
    private int idTournament;
-   private Board[] boards; //Two parts of the game one for each player
-   private Composition composition; //Word in progress for this client
+   
+   /**
+    * Two parts of the game one for each player
+    */
+   private Board[] boards; 
+   
+   /**
+    * Word in progress for this client
+    */
+   private Composition composition; 
+   
+   /**
+    * Date when the game as been created
+    */
    private final Date creation;
+   
+   /**
+    * Date of the last word played by a player
+    */
    private Date lastMove;
+   
+   /**
+    * true if the player 1 last move was a "pass"
+    */
    private boolean hasPassedLastMovePlayer1;
+   
+   /**
+    * true if the player 2 last move was a "pass"
+    */
    private boolean hasPassedLastMovePlayer2;
 
    /**
@@ -61,6 +95,8 @@ public class GameModel implements Serializable {
       hasPassedLastMovePlayer1 = false;
       hasPassedLastMovePlayer2 = false;
       state = State.IN_PROGRESS;
+      lastWordPlayed = "";
+      scoreLastWordPlayed = 0;
    }
 
    /*
@@ -185,14 +221,52 @@ public class GameModel implements Serializable {
       return idTournament;
    }
 
+   /**
+    * return the last word that a player has play
+    * 
+    * @return the last word that a player has play
+    */
+   public String getLastWordPlayed() {
+      return lastWordPlayed;
+   }
+
+   /**
+    * return the score of the last played word by a player
+    * 
+    * @return the score of the last played word by a player
+    */
+   public int getScoreLastWordPlayed() {
+      return scoreLastWordPlayed;
+   }
+
+   public void setLastWordPlayed(String lastWordPlayed) {
+      this.lastWordPlayed = lastWordPlayed;
+   }
+
+   public void setScoreLastWordPlayed(int scoreLastWordPlayed) {
+      this.scoreLastWordPlayed = scoreLastWordPlayed;
+   }
+
+   /**
+    * return true if player 1 last move was a "pass"
+    * @return true if player 1 last move was a "pass"
+    */
    public boolean isHasPassedLastMovePlayer1() {
       return hasPassedLastMovePlayer1;
    }
 
+   /**
+    * return true if player 2 last move was a "pass"
+    * @return true if player 2 last move was a "pass"
+    */
    public boolean isHasPassedLastMovePlayer2() {
       return hasPassedLastMovePlayer2;
    }
 
+   /**
+    * set the current state of the game
+    * @param state the new state of the game
+    */
    public void setState(State state) {
       this.state = state;
    }
@@ -217,7 +291,7 @@ public class GameModel implements Serializable {
    /**
     * Hashcode mandatory for use of Equals
     *
-    * @return
+    * @return the hash as int
     */
    @Override
    public int hashCode() {

@@ -23,6 +23,9 @@ public class Load extends Message {
         this.games = games;
     }
 
+    /**
+     * Constructor empty
+     */
     public Load() {
         this.games = new ArrayList<>();
     }

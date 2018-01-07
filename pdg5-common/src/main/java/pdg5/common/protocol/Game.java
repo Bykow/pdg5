@@ -30,13 +30,16 @@ public class Game extends Message {
     private Composition.Square[] square;
     private List<Tile> bonusLetters;
     private List<Tile> opponentBonusLetters;
-    private boolean bonusIsMine;
+   
+    private String lastWordPlayed;
+    private int scoreLastWordPlayed;
+    private boolean yourTurn;
     
     public Game(int ID, String title, Date created, Date lastActivity, 
                 int tournament, int score, String namePlayer, int opponentScore, 
                 String opponentName, int nbLeftTile, List<Tile> addedTile,
-                Composition.Square[] square, List<Tile> bonusLetters, List<Tile> opponentBonusLetters,
-                boolean bonusIsMine) {
+                Composition.Square[] square, List<Tile> bonusLetters,
+                String lastWordPlayed, int scoreLastWordPlayed, boolean yourTurn) {
         this.ID = ID;
         this.title = title;
         this.created = created;
@@ -51,7 +54,9 @@ public class Game extends Message {
         this.square = square;
         this.bonusLetters = bonusLetters;
         this.opponentBonusLetters = opponentBonusLetters;
-        this.bonusIsMine = bonusIsMine;
+        this.lastWordPlayed = lastWordPlayed;
+        this.scoreLastWordPlayed = scoreLastWordPlayed;
+        this.yourTurn = yourTurn;
         
     }
 
@@ -114,9 +119,19 @@ public class Game extends Message {
    public List<Tile> getOpponentBonusLetters() {
       return opponentBonusLetters;
    }
-
-   public boolean isBonusIsMine() {
-      return bonusIsMine;
+   
+   public boolean isYourTurn() {
+      return yourTurn;
    }
+
+   public String getLastWordPlayed() {
+      return lastWordPlayed;
+   }
+
+   public int getScoreLastWordPlayed() {
+      return scoreLastWordPlayed;
+   }
+   
+   
     
 }

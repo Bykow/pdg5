@@ -16,14 +16,20 @@ public class Friend extends Message {
       REMOVE_BLACKLIST  // Remove a player to the BlackList
    }
    
+   /**
+    * signification of this Friend instance (see enum Friend.TYPE)
+    */
    private TYPE type;
+   
+   /**
+    * unique id of the player concerned by the action
+    */
    private int idTargettedPlayer;
 
    /**
     * Constructor 
     * 
     * @param type objective of the message
-    * @param idPlayer unique ID of the player who sended this Message
     * @param idTargettedPlayer unique ID of the player concerned by the objective
     */
    public Friend(TYPE type, int idTargettedPlayer) {

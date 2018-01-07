@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ * class who allow to search with a low complexity
+ * all the combinations of word contained in our dictionnary
  */
 public class WordCombinations {
 
@@ -23,10 +24,10 @@ public class WordCombinations {
    }
 
    /**
-    * get All possible words we can do with
+    * get all possible words we can do with some letters
     *
-    * @param letters
-    * @return
+    * @param letters in a String
+    * @return a List of String representing all the possible words
     */
    public List<String> getAllWordsFromLetters(String letters) {
       listOfWords = new ArrayList<>();
@@ -44,6 +45,13 @@ public class WordCombinations {
       return listOfWords;
    }
 
+   /**
+    * Search with the occurence map letterMap, 
+    * all the possible word of length lower than the given length.
+    * if a word is found, we put him in the List listOfWord.
+    * 
+    * @param length Max number of letters we use.
+    */
    private void search(final int length) {
       if (length > 0) {
          letterMap.entrySet().forEach((entry) -> {

@@ -9,8 +9,19 @@ import java.util.Date;
  */
 public class Chat extends Message {
 
+   /**
+    * time when this instance was created
+    */
     private long timeStamp;
+    
+    /**
+     * String representing the message
+     */
     private String message;
+    
+    /**
+     * unique id of the game
+     */
     private int gameId;
 
     /**

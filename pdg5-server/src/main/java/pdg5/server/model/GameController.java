@@ -259,7 +259,8 @@ public class GameController {
         gm.getLastMove(), gm.getIdTournament(), board1.getScore(),
         board1.getPlayerName(), board2.getScore(), board2.getPlayerName(),
         ts.getTileLeft(), boardOfClient.getLetters(), tm.getSquares(idClient),
-        boardOfClient.getBonus(), gm.getOpponentBoard(idClient).getBonus(), tm.isCurrentPlayer(idClient));
+        boardOfClient.getBonus(), gm.getLastWordPlayed(), 
+        gm.getScoreLastWordPlayed(), tm.isCurrentPlayer(idClient));
       return game;
    }
 
@@ -326,6 +327,8 @@ public class GameController {
       // Update model with this word played (score, turn of turnManager, Tiles of player)
       // score
       board.setScore(scoreToAdd + board.getScore());
+      model.setScoreLastWordPlayed(scoreToAdd);
+      model.setLastWordPlayed(word);
       // Send Square.W to opponent
       TurnManager tm = playerTurnManager.get(gameID);
       Board boardOpponent = model.getOpponentBoard(playerID);
@@ -362,14 +365,14 @@ public class GameController {
       // Send game result if the game finished
       if(gameEnded(model, ts)) {
          if(board.getScore() > boardOpponent.getScore()) {
-            activeUser.getClientHandler(opponentId).addToQueue(new End(End.RESULT.LOSE));
-            return new End(End.RESULT.WIN);
+            activeUser.getClientHandler(opponentId).addToQueue(new End(End.RESULT.LOSE, gameID));
+            return new End(End.RESULT.WIN, gameID);
          } else if (board.getScore() < boardOpponent.getScore()) {
-            activeUser.getClientHandler(opponentId).addToQueue(new End(End.RESULT.WIN));
-            return new End(End.RESULT.LOSE);
+            activeUser.getClientHandler(opponentId).addToQueue(new End(End.RESULT.WIN, gameID));
+            return new End(End.RESULT.LOSE, gameID);
          } else {
-            activeUser.getClientHandler(opponentId).addToQueue(new End(End.RESULT.EQUALITY));
-            return new End(End.RESULT.EQUALITY);
+            activeUser.getClientHandler(opponentId).addToQueue(new End(End.RESULT.EQUALITY, gameID));
+            return new End(End.RESULT.EQUALITY, gameID);
          }
       }
       

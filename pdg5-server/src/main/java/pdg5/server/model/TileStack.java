@@ -124,10 +124,6 @@ public class TileStack {
         return output;
     }
 
-    /**
-     * 
-     * @return 
-     */
     public int getSize() {
         return size;
     }

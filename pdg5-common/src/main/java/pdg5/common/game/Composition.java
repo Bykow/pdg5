@@ -101,10 +101,10 @@ public class Composition implements Serializable{
 
    /**
     * return a String representation of the Composition 
-    *  with space instead of null Tile
+    * with space instead of null Tile
     * 
     * @return a String representation of the Composition 
-    *  with space instead of null Tile
+    * with space instead of null Tile
     */
    public String getStringForm() {
       StringBuilder sb = new StringBuilder();
@@ -187,7 +187,11 @@ public class Composition implements Serializable{
       return score;
    }
 
-   //TODO
+   /**
+    * TODO not implemented yet
+    * @param letterValues
+    * @return 
+    */
    public int getValue(List<Integer> letterValues) {
       int score = 0;
       return score;
@@ -230,6 +234,11 @@ public class Composition implements Serializable{
               Arrays.equals(bonus, ((Composition) o).bonus);
    }
 
+   /**
+    * Hashcode mandatory for use of Equals
+    * 
+    * @return the hash as int
+    */
    @Override
    public int hashCode() {
       int hash = 7;

@@ -35,7 +35,8 @@ public class Word implements Serializable {
     }
 
     /**
-     * Return the associated play to the word.
+     * return the associated play to the word.
+     * 
      * @return the associated play to the word.
      */
     public Play getPlay() {
@@ -43,7 +44,8 @@ public class Word implements Serializable {
     }
 
     /**
-     * Return the associated Validation.
+     * return the associated Validation.
+     * 
      * @return the associated Validation.
      */
     public Validation getValidation() {
@@ -51,7 +53,8 @@ public class Word implements Serializable {
     }
 
     /**
-     * Return the word.
+     * return the word.
+     * 
      * @return the word.
      */
     public String getWord() {

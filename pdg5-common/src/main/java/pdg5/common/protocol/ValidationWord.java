@@ -22,6 +22,7 @@ public class ValidationWord extends Message {
 
     /**
      * Return a boolean representing the answer : is the word valid?
+     * 
      * @return a boolean representing the answer : is the word valid?
      */
     public boolean isIsValid() {

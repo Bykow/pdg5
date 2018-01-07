@@ -60,7 +60,7 @@ public class WordCombinationsTest {
 
       WordCombinations wc = new WordCombinations(dictionnary);
       List<String> result = wc.getAllWordsFromLetters(lines.findFirst().get());
-      
+
       List<String> wordNotFoundFromExpected = lines2.skip(1).filter((word) -> {
          return !result.contains(word) && dictionnary.contains(word);
       }).collect(Collectors.toList());

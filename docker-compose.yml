@@ -6,8 +6,8 @@ services:
     build: docker/images/mysql
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=true
-    volumes:
-      - pdg-data:/var/lib/mysql
+    #volumes:
+    #  - pdg-data:/var/lib/mysql
     expose:
       - "3306"
     ports: 

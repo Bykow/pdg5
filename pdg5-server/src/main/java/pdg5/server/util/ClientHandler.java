@@ -84,7 +84,7 @@ public class ClientHandler implements Runnable {
                 }
             } catch (IOException | ClassNotFoundException e) {
                 System.err.println("Connection close");
-                activeUser.remove(id);
+                activeUser.remove(playerId);
             }
         }).start();
     }

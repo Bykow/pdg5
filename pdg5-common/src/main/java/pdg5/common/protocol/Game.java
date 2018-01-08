@@ -65,6 +65,14 @@ public class Game extends Message {
         return tournament;
     }
 
+   public Board getBoard() {
+      return board;
+   }
+
+   public Board getOpponentBoard() {
+      return opponentBoard;
+   }
+
     public int getScore() {
         return board.getScore();
     }

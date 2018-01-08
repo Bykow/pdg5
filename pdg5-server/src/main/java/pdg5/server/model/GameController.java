@@ -295,7 +295,64 @@ public class GameController {
     * @return an ErrorMessage if he can't pass, or a Game with the updates
     */
    public Message pass(int gameID, int playerID) {
-      return new Noop(Noop.Sender.SERVER);
+      //check if the game exist
+      GameModel model = games.get(gameID);
+      if(model == null || model.getState() != State.IN_PROGRESS) {
+         return new ErrorMessage("This game doesn't exist anymore or has never existed or is finish");
+      }
+      
+      //check if it's player's turn
+      TurnManager tm = playerTurnManager.get(gameID);
+      if(!tm.isCurrentPlayer(playerID)) {
+         return new ErrorMessage("It's not your turn !");
+      }
+      
+      // throw Tiles or pass depending on the game context
+      TileStack ts = tileStacks.get(gameID);
+      if(isEndMode(model, ts)) {
+         pass(model, tm, playerID);
+      } else {
+         throwAction(model, playerID, ts);
+      }
+      
+      // send game result if the game is finish
+      if(gameEnded(model, ts)) {
+         sendScoreResults(model);
+         return new Noop(Noop.Sender.SERVER);
+      } else { // send next turn
+         tm.turnEnded();
+
+         int opponentId = model.getOpponentBoardById(playerID).getPlayerId();
+         activeUser.getClientHandler(opponentId).addToQueue(getGameFromModel(gameID, opponentId));
+         return getGameFromModel(gameID, playerID);
+      }
+   }
+   
+   private void pass(GameModel model, TurnManager turnManager, int playerID) {
+      //TODO
+   }
+   
+   private void throwAction(GameModel model, int playerID, TileStack ts) {
+      Board board = model.getBoardById(playerID);
+      Board opponentBoard = model.getOpponentBoard(playerID);
+      List<Tile> letters = board.getLetters();
+      List<Tile> bonus = board.getBonus();
+      List<Tile> bonusOpponent = new ArrayList<>();
+      
+      //two random of player letter are sent as bonus to the opponent
+      for (int i = 0; i < 2; i++) {
+         bonusOpponent.add(letters.remove(rand.nextInt(letters.size())));
+         letters.add(ts.getNextTuile());
+      }
+      opponentBoard.setBonus(bonusOpponent);
+      
+      // the player lose the total value of bonus letters in his score
+      int lostScore = 0;
+      for (Tile bonusTile : bonus) {
+         lostScore -= bonusTile.getValue();
+      }
+      board.setScore(board.getScore() - lostScore);
+      board.setBonus(new ArrayList<>());
    }
 
    /**
@@ -385,20 +442,42 @@ public class GameController {
       
       // Send game result if the game finished
       if(gameEnded(model, ts)) {
-         if(board.getScore() > boardOpponent.getScore()) {
-            activeUser.getClientHandler(opponentId).addToQueue(new End(End.RESULT.LOSE, gameID));
-            return new End(End.RESULT.WIN, gameID);
-         } else if (board.getScore() < boardOpponent.getScore()) {
-            activeUser.getClientHandler(opponentId).addToQueue(new End(End.RESULT.WIN, gameID));
-            return new End(End.RESULT.LOSE, gameID);
-         } else {
-            activeUser.getClientHandler(opponentId).addToQueue(new End(End.RESULT.EQUALITY, gameID));
-            return new End(End.RESULT.EQUALITY, gameID);
-         }
+         sendScoreResults(model);
+         return new Noop(Noop.Sender.SERVER);
       }
       
       activeUser.getClientHandler(opponentId).addToQueue(getGameFromModel(gameID, opponentId));
       return getGameFromModel(gameID, playerID);
+   }
+   
+   private void sendScoreResults(GameModel model) {
+      int gameID = model.getGameId();
+      Board board = model.getBoard(GameModel.PlayerBoard.PLAYER1);
+      Board boardOpponent = model.getBoard(GameModel.PlayerBoard.PLAYER2);
+      int player1Id = board.getPlayerId();
+      int player2Id = boardOpponent.getPlayerId();
+      
+      if(board.getScore() > boardOpponent.getScore()) {
+            activeUser.getClientHandler(player2Id).addToQueue(new End(End.RESULT.LOSE, gameID));
+            activeUser.getClientHandler(player1Id).addToQueue(new End(End.RESULT.WIN, gameID));
+         } else if (board.getScore() < boardOpponent.getScore()) {
+            activeUser.getClientHandler(player2Id).addToQueue(new End(End.RESULT.WIN, gameID));
+            activeUser.getClientHandler(player1Id).addToQueue(new End(End.RESULT.LOSE, gameID));
+         } else {
+            activeUser.getClientHandler(player2Id).addToQueue(new End(End.RESULT.EQUALITY, gameID));
+            activeUser.getClientHandler(player1Id).addToQueue(new End(End.RESULT.EQUALITY, gameID));
+         }
+   }
+   
+   private boolean isEndMode(GameModel model, TileStack ts) {
+      int tilesLeft = ts.getTileLeft();
+      
+      // not end-mode yet
+      if(tilesLeft > TILE_LEFT_END_MODE) {
+         return false;
+      }
+      
+      return true;
    }
    
    /**
@@ -412,7 +491,7 @@ public class GameController {
       int tilesLeft = ts.getTileLeft();
       
       // not end-mode yet
-      if(tilesLeft > TILE_LEFT_END_MODE) {
+      if(!isEndMode(model, ts)) {
          return false;
       // two players passed -> end of game
       } else if(model.isHasPassedLastMovePlayer1() && model.isHasPassedLastMovePlayer2()) {

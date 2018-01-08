@@ -320,8 +320,7 @@ public class GameController {
 
       // Check if the word is in the dictionary
       // We can use trim because we checked the structure of the composition before
-      String word = composition.getStringForm().trim();
-      if (!dictionary.contains(word)) {
+      if (!dictionary.contains(composition.getStringForm().trim())) {
          return new ErrorMessage("The given word isn't in our dictionary");
       }
       
@@ -329,13 +328,14 @@ public class GameController {
 
       // Check if the player possess the word letters
       Board testBoard = new Board(board);
-      if(!testBoard.replayWord(composition.getWord())){
+      List<Tile> word = composition.getWord();
+      if(!testBoard.replayWord(word)){
           return new ErrorMessage("You don't have the letters to play this word");
       }
       
       // Calculate the value of the word
       int scoreToAdd = testBoard.getValue();
-      board.replayWord(composition.getWord());
+      board.replayWord(word);
 
       // Update model with this word played (score, turn of turnManager, Tiles of player)
       // score
@@ -362,7 +362,7 @@ public class GameController {
       //get new letters from TileStack and add it to the board
       TileStack ts = tileStacks.get(gameID);
       List<Tile> newLetters = board.getLetters();
-      for (int i = 0; i < word.length(); i++) {
+      for (int i = 0; i < word.size(); i++) {
          if (ts.getTileLeft() > 0) {
             newLetters.add(ts.getNextTuile());
          }

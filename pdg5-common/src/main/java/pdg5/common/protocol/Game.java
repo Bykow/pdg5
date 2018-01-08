@@ -23,14 +23,14 @@ public class Game extends Message {
     private Board board;
     private Board opponentBoard;
     private int nbLeftTile;
-    private String lastWordPlayed;
+    private List<Tile> lastWordPlayed;
     private int scoreLastWordPlayed;
     private boolean yourTurn;
     private State state;
     
     public Game(int ID, Date created, Date lastActivity,
                 int tournament, Board board, Board opponentBoard, int nbLeftTile, 
-                String lastWordPlayed, int scoreLastWordPlayed, boolean yourTurn, State state) {
+                List<Tile> lastWordPlayed, int scoreLastWordPlayed, boolean yourTurn, State state) {
         this.ID = ID;
         this.created = created;
         this.lastActivity = lastActivity;
@@ -109,7 +109,7 @@ public class Game extends Message {
         return yourTurn;
     }
 
-    public String getLastWordPlayed() {
+    public List<Tile> getLastWordPlayed() {
         return lastWordPlayed;
     }
 
@@ -128,7 +128,7 @@ public class Game extends Message {
         output += "Opponent Name:   " + getOpponentName() + "\n";
         output += "Opponent Score:   " + getOpponentScore() + "\n";
         output += "isYourTurn:      " + yourTurn + "\n";
-        output += "Last Word Played " + lastWordPlayed + "\n";
+        output += "Last Word Played " + lastWordPlayed.toString() + "\n";
 
         return output;
     }

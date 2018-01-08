@@ -1,8 +1,10 @@
 package pdg5.common.game;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -26,7 +28,7 @@ public class GameModel implements Serializable {
    }
 
    private int scoreLastWordPlayed;
-   private String lastWordPlayed;
+   private List<Tile> lastWordPlayed;
    
    /**
     * Unique id of the game
@@ -89,7 +91,7 @@ public class GameModel implements Serializable {
       hasPassedLastMovePlayer1 = false;
       hasPassedLastMovePlayer2 = false;
       state = State.IN_PROGRESS;
-      lastWordPlayed = "";
+      lastWordPlayed = new ArrayList<>();
       scoreLastWordPlayed = 0;
    }
 
@@ -235,7 +237,7 @@ public class GameModel implements Serializable {
     * 
     * @return the last word that a player has play
     */
-   public String getLastWordPlayed() {
+   public List<Tile> getLastWordPlayed() {
       return lastWordPlayed;
    }
 
@@ -248,7 +250,7 @@ public class GameModel implements Serializable {
       return scoreLastWordPlayed;
    }
 
-   public void setLastWordPlayed(String lastWordPlayed) {
+   public void setLastWordPlayed(List<Tile> lastWordPlayed) {
       this.lastWordPlayed = lastWordPlayed;
    }
 

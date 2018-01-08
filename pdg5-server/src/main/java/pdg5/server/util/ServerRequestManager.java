@@ -49,6 +49,9 @@ public class ServerRequestManager {
         } else if (o instanceof Friend) {
            return new ProcessFriend((Friend) o, manageUser, ch).execute(); 
            
+        } else if (o instanceof Pass) {
+           return new ProcessPass((Pass) o, gameController, ch).execute(); 
+           
         }
 
         return new ErrorMessage("Unhandled ErrorMessage is ServerRequestManager, default reached");

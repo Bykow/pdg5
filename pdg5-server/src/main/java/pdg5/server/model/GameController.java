@@ -285,6 +285,18 @@ public class GameController {
          return new ValidationWord(false);
       }
    }
+   
+   /**
+    * A player try to pass his turn, 
+    * depending on the context (endGameMode) we will pass or throw tiles
+    * 
+    * @param gameID unique id of the game
+    * @param playerID unique id of the player trying to pass
+    * @return an ErrorMessage if he can't pass, or a Game with the updates
+    */
+   public Message pass(int gameID, int playerID) {
+      return new Noop(Noop.Sender.SERVER);
+   }
 
    /**
     * a player try to play a word in a given (id) game. The server first check if the

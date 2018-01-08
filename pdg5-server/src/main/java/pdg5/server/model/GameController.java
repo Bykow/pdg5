@@ -253,18 +253,23 @@ public class GameController {
     */
    private Game getGameFromModel(int idGame, int idClient) {
       GameModel gm = games.get(idGame);
-      Board board1 = gm.getBoard(GameModel.PlayerBoard.PLAYER1);
-      Board board2 = gm.getBoard(GameModel.PlayerBoard.PLAYER2);
       Board boardOfClient = gm.getBoardById(idClient);
+      Board opponentBoard = gm.getOpponentBoard(idClient);
       TileStack ts = tileStacks.get(gm.getGameId());
       TurnManager tm = playerTurnManager.get(gm.getGameId());
+      boolean hisTurn = tm.isCurrentPlayer(idClient);
+      List<Tile> bonus;
+      if(hisTurn) {
+         bonus = boardOfClient.getBonus();
+      } else {
+         bonus = opponentBoard.getBonus();
+      }
 
       Game game = new Game(gm.getGameId(), "title", gm.getCreation(),
-        gm.getLastMove(), gm.getIdTournament(), board1.getScore(),
-        board1.getPlayerName(), board2.getScore(), board2.getPlayerName(),
+        gm.getLastMove(), gm.getIdTournament(), boardOfClient.getScore(),
+        boardOfClient.getPlayerName(), opponentBoard.getScore(), opponentBoard.getPlayerName(),
         ts.getTileLeft(), boardOfClient.getLetters(),
-        boardOfClient.getBonus(), gm.getLastWordPlayed(), 
-        gm.getScoreLastWordPlayed(), tm.isCurrentPlayer(idClient));
+        bonus, gm.getLastWordPlayed(), gm.getScoreLastWordPlayed(), hisTurn);
       return game;
    }
 

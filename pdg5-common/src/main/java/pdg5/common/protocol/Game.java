@@ -5,6 +5,7 @@ import pdg5.common.game.Tile;
 
 import java.util.Date;
 import java.util.List;
+import pdg5.common.game.GameModel.State;
 
 /**
  * @author Maxime Guillod
@@ -33,11 +34,12 @@ public class Game extends Message {
     private String lastWordPlayed;
     private int scoreLastWordPlayed;
     private boolean yourTurn;
+    private State state;
 
     public Game(int ID, String title, Date created, Date lastActivity,
                 int tournament, int score, String namePlayer, int opponentScore,
                 String opponentName, int nbLeftTile, List<Tile> addedTile, List<Tile> bonusLetters,
-                String lastWordPlayed, int scoreLastWordPlayed, boolean yourTurn) {
+                String lastWordPlayed, int scoreLastWordPlayed, boolean yourTurn, State state) {
         this.ID = ID;
         this.title = title;
         this.created = created;
@@ -54,6 +56,7 @@ public class Game extends Message {
         this.lastWordPlayed = lastWordPlayed;
         this.scoreLastWordPlayed = scoreLastWordPlayed;
         this.yourTurn = yourTurn;
+        this.state = state;
 
     }
 
@@ -124,6 +127,10 @@ public class Game extends Message {
     public int getScoreLastWordPlayed() {
         return scoreLastWordPlayed;
     }
+
+   public State getState() {
+      return state;
+   }
 
     public String toString() {
         String output = "";

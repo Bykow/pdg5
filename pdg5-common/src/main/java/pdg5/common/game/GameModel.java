@@ -103,8 +103,8 @@ public class GameModel implements Serializable {
       boards = new Board[PlayerBoard.values().length];
       int p1 = PlayerBoard.PLAYER1.ordinal();
       int p2 = PlayerBoard.PLAYER2.ordinal();
-      boards[p1] = new Board(game.getNamePlayer(), 0); // TODO playerId ???
-      boards[p2] = new Board(game.getOpponentName(), 0); // TODO playerId ???
+      boards[p1] = new Board(game.getNamePlayer(), 1); 
+      boards[p2] = new Board(game.getOpponentName(), 2);
       boards[p1].setLetters(game.getAddedTile());
       boards[p1].setScore(game.getScore());
       boards[p2].setScore(game.getOpponentScore());
@@ -117,12 +117,12 @@ public class GameModel implements Serializable {
       
       creation = game.getCreated();
       idTournament = game.getTournament();
-      hasPassedLastMovePlayer1 = false;  //TODO ???
-      hasPassedLastMovePlayer2 = false;  //TODO ???
+      hasPassedLastMovePlayer1 = false;  
+      hasPassedLastMovePlayer2 = false;  
       lastMove = game.getLastActivity();
       lastWordPlayed = game.getLastWordPlayed();
       scoreLastWordPlayed = game.getScoreLastWordPlayed();
-      state = State.IN_PROGRESS; //TODO ???
+      state = game.getState();
       
    }
 

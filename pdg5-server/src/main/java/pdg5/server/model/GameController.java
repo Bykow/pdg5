@@ -269,7 +269,7 @@ public class GameController {
         gm.getLastMove(), gm.getIdTournament(), boardOfClient.getScore(),
         boardOfClient.getPlayerName(), opponentBoard.getScore(), opponentBoard.getPlayerName(),
         ts.getTileLeft(), boardOfClient.getLetters(),
-        bonus, gm.getLastWordPlayed(), gm.getScoreLastWordPlayed(), hisTurn);
+        bonus, gm.getLastWordPlayed(), gm.getScoreLastWordPlayed(), hisTurn, gm.getState());
       return game;
    }
 

@@ -17,6 +17,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import pdg5.common.game.GameModel.State;
 import pdg5.server.manage.ManageGame;
 
 /**
@@ -289,8 +290,9 @@ public class GameController {
 
    /**
     * a player try to play a word in a given (id) game. The server first check if the
-    * move is valid : 1) check if it's player's turn 2) Check if the composition is a valide word Structure 3) Check
-    * if the word is in the dictionary 4) Check if the player possess the word
+    * move is valid : 1) check if the game exist 2) check if it's player's turn 
+    * 3) Check if the composition is a valide word Structure 4) Check
+    * if the word is in the dictionary 5) Check if the player possess the word
     * letters
     *
     * @param gameID unique id of the game
@@ -300,6 +302,13 @@ public class GameController {
     * the word has been played
     */
    public Message play(int gameID, int playerID, Composition composition) {
+      
+      //check if the game exist
+      GameModel model = games.get(gameID);
+      if(model == null || model.getState() != State.IN_PROGRESS) {
+         return new ErrorMessage("cette partie n'existe plus ou n'a jamais existé ou est terminée");
+      }
+      
       //check if it's player's turn
       TurnManager tm = playerTurnManager.get(gameID);
       if(!tm.isCurrentPlayer(playerID)) {
@@ -317,16 +326,16 @@ public class GameController {
       if (!dictionary.contains(word)) {
          return new ErrorMessage("The given word isn't in our dictionary");
       }
-
-      // Check if the player possess the word letters
-      GameModel model = games.get(gameID);
+      
       Board board = model.getBoardById(playerID);
 
-      // Calculate the value of the word
+      // Check if the player possess the word letters
       Board testBoard = new Board(board);
       if(!testBoard.replayWord(composition.getWord())){
           return new ErrorMessage("You don't have the letters to play this word");
       }
+      
+      // Calculate the value of the word
       int scoreToAdd = testBoard.getValue();
       board.replayWord(composition.getWord());
 

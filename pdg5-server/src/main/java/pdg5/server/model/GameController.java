@@ -306,7 +306,7 @@ public class GameController {
       //check if the game exist
       GameModel model = games.get(gameID);
       if(model == null || model.getState() != State.IN_PROGRESS) {
-         return new ErrorMessage("cette partie n'existe plus ou n'a jamais existé ou est terminée");
+         return new ErrorMessage("This game doesn't exist anymore or has never existed or is finish");
       }
       
       //check if it's player's turn
@@ -361,10 +361,7 @@ public class GameController {
       
       board.setBonus(new ArrayList<>());
       
-      
-      /*
-       * get new letters from TileStack and add it to the board
-       */
+      //get new letters from TileStack and add it to the board
       TileStack ts = tileStacks.get(gameID);
       List<Tile> newLetters = board.getLetters();
       for (int i = 0; i < word.length(); i++) {

@@ -289,8 +289,8 @@ public class GameController {
 
    /**
     * a player try to play a word in a given (id) game. The server first check if the
-    * move is valid : 1) Check if the composition is a valide word Structure 2) Check
-    * if the word is in the dictionary 3) Check if the player possess the word
+    * move is valid : 1) check if it's player's turn 2) Check if the composition is a valide word Structure 3) Check
+    * if the word is in the dictionary 4) Check if the player possess the word
     * letters
     *
     * @param gameID unique id of the game
@@ -300,6 +300,12 @@ public class GameController {
     * the word has been played
     */
    public Message play(int gameID, int playerID, Composition composition) {
+      //check if it's player's turn
+      TurnManager tm = playerTurnManager.get(gameID);
+      if(!tm.isCurrentPlayer(playerID)) {
+         return new ErrorMessage("It's not your turn !");
+      }
+      
       // Check if the composition is a valide word Structure
       if (!composition.isValid()) {
          return new ErrorMessage("The given Composition isn't a valide word structure");
@@ -330,7 +336,6 @@ public class GameController {
       model.setScoreLastWordPlayed(scoreToAdd);
       model.setLastWordPlayed(word);
       // Send Square.W to opponent
-      TurnManager tm = playerTurnManager.get(gameID);
       Board boardOpponent = model.getOpponentBoard(playerID);
       List<Tile> newBonusTile = new ArrayList<>();
       Composition.Square[] squares = tm.getSquares(playerID);

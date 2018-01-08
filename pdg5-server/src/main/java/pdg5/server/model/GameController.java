@@ -38,7 +38,7 @@ public class GameController {
    /**
     * number of letters left in a TileStack befor the game changes to check-end-mode
     */
-   private static int TILE_LEFT_END_MODE = 10;
+   private static final int TILE_LEFT_END_MODE = 10;
    
    /**
     * random used for Square position random
@@ -469,28 +469,24 @@ public class GameController {
     * @return the Runnable used by the scheduler to run the method.
     */
    private Runnable areGamesOutdated() {
-      return new Runnable() {
-         @Override
-         public void run() {
-            for (Map.Entry<Integer, GameModel> entry : games.entrySet()) {
-               Integer gameID = entry.getKey();
-               GameModel gameModel = entry.getValue();
-
-               // we check only games in state IN_PROGRESS
-               if (gameModel.getState() == GameModel.State.IN_PROGRESS) {
-                  // Check if the game is outdated
+      return () -> {
+          games.entrySet().forEach((entry) -> {
+              Integer gameID = entry.getKey();
+              // Check if the game is outdated
+              GameModel gameModel = entry.getValue();
+              // we check only games in state IN_PROGRESS
+              if (gameModel.getState() == GameModel.State.IN_PROGRESS) {
                   if (new Date().getTime() - gameModel.getLastMove().getTime() > OUTDATE_TIME) {
-                     gameModel.setState(GameModel.State.OUTDATED);
-                     
-                     // Send to players the update
-                     int idPlayer1 = gameModel.getBoard(GameModel.PlayerBoard.PLAYER1).getPlayerId();
-                     int idPlayer2 = gameModel.getBoard(GameModel.PlayerBoard.PLAYER2).getPlayerId();
-                     activeUser.getClientHandler(idPlayer1).addToQueue(getGameFromModel(gameID, idPlayer1));
-                     activeUser.getClientHandler(idPlayer2).addToQueue(getGameFromModel(gameID, idPlayer2));
+                      gameModel.setState(GameModel.State.OUTDATED);
+                      
+                      // Send to players the update
+                      int idPlayer1 = gameModel.getBoard(GameModel.PlayerBoard.PLAYER1).getPlayerId();
+                      int idPlayer2 = gameModel.getBoard(GameModel.PlayerBoard.PLAYER2).getPlayerId();
+                      activeUser.getClientHandler(idPlayer1).addToQueue(getGameFromModel(gameID, idPlayer1));
+                      activeUser.getClientHandler(idPlayer2).addToQueue(getGameFromModel(gameID, idPlayer2));
                   }
-               }
-            }
-         }
+              }
+          });
       };
    }
 }

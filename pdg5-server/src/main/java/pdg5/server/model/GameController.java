@@ -353,7 +353,7 @@ public class GameController {
       
       // the player lose the total value of bonus letters in his score
       int lostScore = 0;
-      lostScore = bonus.stream().map((bonusTile) -> bonusTile.getValue()).reduce(lostScore, (sum, tile) -> sum - tile);
+      lostScore = bonus.stream().map((bonusTile) -> bonusTile.getValue()).reduce(lostScore, (sum, tile) -> sum + tile);
       board.setScore(board.getScore() - lostScore);
       board.setBonus(new ArrayList<>());
    }

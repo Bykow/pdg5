@@ -1,0 +1,778 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>pdg5.server.manage.ManageBlacklist</OriginalElement>
+  <nodes>
+    <node x="3520.571731286111" y="3443.0">pdg5.server.manage.ManageFriend</node>
+    <node x="5382.796619774117" y="4731.0">pdg5.server.util.ServerRequestManager</node>
+    <node x="5544.561177248678" y="3181.0">pdg5.server.model.GameController</node>
+    <node x="4555.571731286111" y="4287.5">pdg5.server.process.ProcessNewGame</node>
+    <node x="2993.8717312861113" y="3443.0">pdg5.server.manage.ManageBlacklist</node>
+    <node x="5317.571731286111" y="4302.0">pdg5.server.process.ProcessValidation</node>
+    <node x="2683.8717312861113" y="906.5">pdg5.server.manage.Manager</node>
+    <node x="1321.0436062861113" y="3414.0">pdg5.server.manage.ManageGame</node>
+    <node x="2106.1217312861113" y="532.0">pdg5.server.persistent.User</node>
+    <node x="6464.904809393562" y="1051.5">java.lang.Runnable</node>
+    <node x="4306.571731286111" y="4316.5">pdg5.server.process.ProcessNoop</node>
+    <node x="4187.022451589328" y="2290.0">pdg5.server.manage.ManageUser</node>
+    <node x="6447.404809393562" y="67.5">java.lang.FunctionalInterface</node>
+    <node x="2007.5436062861113" y="2260.0">pdg5.server.persistent.Matchlist</node>
+    <node x="1624.6529812861113" y="0.0">javax.persistence.Table</node>
+    <node x="5491.144510582012" y="2187.5">pdg5.server.model.TurnManager</node>
+    <node x="815.7830522486786" y="3311.5">pdg5.server.persistent.Chat</node>
+    <node x="142.51009456318343" y="4128.0">pdg5.server.persistent.Message</node>
+    <node x="2442.384231286111" y="54.0">javax.persistence.Entity</node>
+    <node x="352.78305224867836" y="1957.0">pdg5.server.persistent.Game</node>
+    <node x="3829.571731286111" y="4287.5">pdg5.server.process.ProcessSignUp</node>
+    <node x="5848.144510582012" y="2231.0">pdg5.server.model.TileStack</node>
+    <node x="1611.4602729527778" y="2362.5">pdg5.server.manage.ManageTournament</node>
+    <node x="6490.217309393562" y="4273.0">pdg5.server.util.ServerNetworkManager</node>
+    <node x="1407.2966197741166" y="4288.5">pdg5.server.manage.ManageChat</node>
+    <node x="1281.7830522486786" y="784.0">pdg5.server.persistent.Tournament</node>
+    <node x="4584.022451589328" y="2237.0">pdg5.server.persistent.Friend</node>
+    <node x="4546.206892726895" y="3486.5">pdg5.server.process.GenericProcess</node>
+    <node x="6269.029809393562" y="3413.0">pdg5.server.util.ServerActiveUser</node>
+    <node x="6363.404809393562" y="2231.0">pdg5.server.util.ClientHandler</node>
+    <node x="2607.8717312861113" y="3443.0">pdg5.server.manage.ManageMatchlist</node>
+    <node x="3175.1485593935613" y="2231.0">pdg5.server.persistent.Blacklist</node>
+    <node x="1246.5654812861117" y="67.5">java.io.Serializable</node>
+    <node x="1985.6529812861113" y="25.5">pdg5.server.persistent.AbstractData</node>
+    <node x="941.1887766368618" y="4746.5">pdg5.server.manage.ManageMessage</node>
+    <node x="6641.302709525836" y="4790.0">pdg5.server.Server</node>
+    <node x="4978.571731286111" y="4302.0">pdg5.server.process.ProcessPlay</node>
+    <node x="5738.571731286111" y="4273.0">pdg5.server.process.ProcessSignIn</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="pdg5.server.persistent.Chat" target="javax.persistence.Table">
+      <point x="-104.0" y="-208.0" />
+      <point x="867.7830522486786" y="3151.0" />
+      <point x="287.28305224867836" y="3151.0" />
+      <point x="287.28305224867836" y="362.0" />
+      <point x="1688.5904812861113" y="362.0" />
+      <point x="-106.5625" y="86.0" />
+    </edge>
+    <edge source="pdg5.server.persistent.Message" target="java.io.Serializable">
+      <point x="-139.11111111111086" y="-251.5" />
+      <point x="159.89898345207257" y="4108.0" />
+      <point x="0.0" y="4108.0" />
+      <point x="0.0" y="312.0" />
+      <point x="1254.3432590638895" y="312.0" />
+      <point x="-62.22222222222217" y="18.5" />
+    </edge>
+    <edge source="pdg5.server.persistent.Matchlist" target="pdg5.server.persistent.Tournament">
+      <point x="-136.5" y="-179.0" />
+      <point x="2027.0436062861113" y="1697.0" />
+      <point x="1576.2830522486786" y="1697.0" />
+      <point x="124.0" y="300.5" />
+    </edge>
+    <edge source="pdg5.server.process.ProcessSignIn" target="pdg5.server.model.GameController">
+      <point x="0.0" y="-106.5" />
+      <point x="6016.071731286111" y="3958.0" />
+      <point x="5817.561177248678" y="3958.0" />
+      <point x="21.0" y="338.5" />
+    </edge>
+    <edge source="pdg5.server.persistent.Friend" target="javax.persistence.Table">
+      <point x="0.0" y="-202.0" />
+      <point x="4728.522451589328" y="1937.0" />
+      <point x="4713.37959444647" y="1937.0" />
+      <point x="4713.37959444647" y="222.0" />
+      <point x="1944.3404812861118" y="222.0" />
+      <point x="149.18750000000023" y="86.0" />
+    </edge>
+    <edge source="pdg5.server.persistent.Matchlist" target="javax.persistence.Entity">
+      <point x="136.5" y="-179.0" />
+      <point x="2300.0436062861113" y="1827.0" />
+      <point x="2599.6217312861113" y="1827.0" />
+      <point x="2599.6217312861113" y="512.0" />
+      <point x="2562.696731286111" y="512.0" />
+      <point x="32.8125" y="32.0" />
+    </edge>
+    <edge source="pdg5.server.util.ServerRequestManager" target="pdg5.server.manage.ManageUser">
+      <point x="-144.57142857142844" y="-92.0" />
+      <point x="5422.225191202689" y="4701.0" />
+      <point x="3819.071731286111" y="4701.0" />
+      <point x="3819.071731286111" y="3111.0" />
+      <point x="4249.855784922661" y="3111.0" />
+      <point x="-125.66666666666697" y="149.0" />
+    </edge>
+    <edge source="pdg5.server.persistent.Blacklist" target="pdg5.server.persistent.AbstractData">
+      <point x="82.57142857142844" y="-208.0" />
+      <point x="3402.2199879649897" y="1927.0" />
+      <point x="3717.264316668692" y="1927.0" />
+      <point x="3717.264316668692" y="252.0" />
+      <point x="2160.3092312861113" y="252.0" />
+      <point x="71.15625" y="60.5" />
+    </edge>
+    <edge source="pdg5.server.persistent.Game" target="pdg5.server.persistent.Tournament">
+      <point x="110.5" y="-482.0" />
+      <point x="684.2830522486784" y="1727.0" />
+      <point x="1390.2830522486786" y="1727.0" />
+      <point x="-62.0" y="300.5" />
+    </edge>
+    <edge source="pdg5.server.persistent.User" target="javax.persistence.Table">
+      <point x="-96.59999999999991" y="-552.5" />
+      <point x="2251.0217312861114" y="322.0" />
+      <point x="1859.0904812861113" y="322.0" />
+      <point x="63.9375" y="86.0" />
+    </edge>
+    <edge source="pdg5.server.model.GameController" target="pdg5.server.model.TurnManager">
+      <point x="-31.5" y="-338.5" />
+      <point x="5765.061177248678" y="3091.0" />
+      <point x="5659.644510582012" y="3091.0" />
+      <point x="0.0" y="251.5" />
+    </edge>
+    <edge source="pdg5.server.manage.ManageChat" target="pdg5.server.persistent.Tournament">
+      <point x="29.166666666666515" y="-91.0" />
+      <point x="1611.4632864407831" y="4088.0" />
+      <point x="1783.5436062861113" y="4088.0" />
+      <point x="1783.5436062861113" y="3031.0" />
+      <point x="1506.666666666667" y="3031.0" />
+      <point x="1506.666666666667" y="1737.0" />
+      <point x="1452.2830522486786" y="1737.0" />
+      <point x="0.0" y="300.5" />
+    </edge>
+    <edge source="pdg5.server.persistent.Tournament" target="java.io.Serializable">
+      <point x="-136.39999999999998" y="-300.5" />
+      <point x="0.0" y="18.5" />
+    </edge>
+    <edge source="pdg5.server.persistent.Game" target="javax.persistence.Entity">
+      <point x="22.09999999999991" y="-482.0" />
+      <point x="595.8830522486783" y="1667.0" />
+      <point x="515.738776636862" y="1667.0" />
+      <point x="515.738776636862" y="502.0" />
+      <point x="2497.071731286111" y="502.0" />
+      <point x="-32.8125" y="32.0" />
+    </edge>
+    <edge source="pdg5.server.process.ProcessNewGame" target="pdg5.server.model.GameController">
+      <point x="50.375" y="-92.0" />
+      <point x="4807.446731286111" y="4018.0" />
+      <point x="5565.561177248678" y="4018.0" />
+      <point x="-231.0" y="338.5" />
+    </edge>
+    <edge source="pdg5.server.persistent.Blacklist" target="javax.persistence.Entity">
+      <point x="123.85714285714312" y="-208.0" />
+      <point x="3443.5057022507044" y="1937.0" />
+      <point x="3728.264316668692" y="1937.0" />
+      <point x="3728.264316668692" y="242.0" />
+      <point x="2584.571731286111" y="242.0" />
+      <point x="54.6875" y="32.0" />
+    </edge>
+    <edge source="pdg5.server.util.ServerRequestManager" target="pdg5.server.process.ProcessNoop">
+      <point x="-92.0" y="-92.0" />
+      <point x="5474.796619774117" y="4681.0" />
+      <point x="4421.071731286111" y="4681.0" />
+      <point x="0.0" y="63.0" />
+    </edge>
+    <edge source="pdg5.server.manage.ManageUser" target="pdg5.server.persistent.User">
+      <point x="-150.80000000000018" y="-149.0" />
+      <point x="4224.722451589328" y="1757.0" />
+      <point x="2489.680554815523" y="1757.0" />
+      <point x="142.0588235294117" y="552.5" />
+    </edge>
+    <edge source="pdg5.server.persistent.Chat" target="pdg5.server.persistent.AbstractData">
+      <point x="-69.33333333333326" y="-208.0" />
+      <point x="902.4497189153453" y="3141.0" />
+      <point x="298.28305224867836" y="3141.0" />
+      <point x="298.28305224867836" y="412.0" />
+      <point x="2017.9967312861113" y="412.0" />
+      <point x="-71.15625" y="60.5" />
+    </edge>
+    <edge source="pdg5.server.process.ProcessSignUp" target="pdg5.server.manage.ManageUser">
+      <point x="-182.80000000000018" y="-92.0" />
+      <point x="3875.271731286111" y="4098.0" />
+      <point x="3965.1735593935614" y="4098.0" />
+      <point x="3965.1735593935614" y="3121.0" />
+      <point x="4291.7446738115505" y="3121.0" />
+      <point x="-83.77777777777737" y="149.0" />
+    </edge>
+    <edge source="pdg5.server.manage.ManageUser" target="pdg5.server.manage.Manager">
+      <point x="75.39999999999964" y="-149.0" />
+      <point x="4450.9224515893275" y="1727.0" />
+      <point x="3081.401143050817" y="1727.0" />
+      <point x="179.52941176470586" y="178.0" />
+    </edge>
+    <edge source="pdg5.server.manage.ManageBlacklist" target="pdg5.server.persistent.Blacklist">
+      <point x="121.19999999999982" y="-76.5" />
+      <point x="3266.571731286111" y="3161.0" />
+      <point x="3391.8985593935613" y="3161.0" />
+      <point x="72.25" y="208.0" />
+    </edge>
+    <edge source="pdg5.server.process.ProcessSignUp" target="pdg5.server.process.GenericProcess">
+      <point x="0.0" y="-92.0" />
+      <point x="4058.071731286111" y="4058.0" />
+      <point x="4563.956892726895" y="4058.0" />
+      <point x="-88.75" y="33.0" />
+    </edge>
+    <edge source="pdg5.server.util.ServerRequestManager" target="pdg5.server.process.ProcessValidation">
+      <point x="-13.142857142856883" y="-92.0" />
+      <point x="5553.65376263126" y="4651.0" />
+      <point x="5518.071731286111" y="4651.0" />
+      <point x="0.0" y="77.5" />
+    </edge>
+    <edge source="pdg5.server.persistent.User" target="pdg5.server.persistent.AbstractData">
+      <point x="0.0" y="-552.5" />
+      <point x="2347.6217312861113" y="312.0" />
+      <point x="2108.5592312861113" y="312.0" />
+      <point x="19.40625" y="60.5" />
+    </edge>
+    <edge source="pdg5.server.persistent.Tournament" target="pdg5.server.persistent.AbstractData">
+      <point x="0.0" y="-300.5" />
+      <point x="1452.2830522486786" y="452.0" />
+      <point x="2069.7467312861113" y="452.0" />
+      <point x="-19.40625" y="60.5" />
+    </edge>
+    <edge source="pdg5.server.persistent.Tournament" target="javax.persistence.Entity">
+      <point x="136.4000000000001" y="-300.5" />
+      <point x="1588.6830522486787" y="512.0" />
+      <point x="2518.946731286111" y="512.0" />
+      <point x="-10.9375" y="32.0" />
+    </edge>
+    <edge source="pdg5.server.persistent.Friend" target="pdg5.server.persistent.AbstractData">
+      <point x="82.57142857142844" y="-202.0" />
+      <point x="4811.093880160756" y="1917.0" />
+      <point x="4735.37959444647" y="1917.0" />
+      <point x="4735.37959444647" y="202.0" />
+      <point x="2186.1842312861113" y="202.0" />
+      <point x="97.03125" y="60.5" />
+    </edge>
+    <edge source="pdg5.server.persistent.Game" target="java.io.Serializable">
+      <point x="-198.9000000000001" y="-482.0" />
+      <point x="374.88305224867827" y="1667.0" />
+      <point x="460.738776636862" y="1667.0" />
+      <point x="460.738776636862" y="332.0" />
+      <point x="1285.4543701750006" y="332.0" />
+      <point x="-31.111111111111086" y="18.5" />
+    </edge>
+    <edge source="pdg5.server.persistent.Blacklist" target="java.io.Serializable">
+      <point x="-41.285714285714675" y="-208.0" />
+      <point x="3278.3628451078466" y="1897.0" />
+      <point x="3388.2324455718253" y="1897.0" />
+      <point x="3388.2324455718253" y="282.0" />
+      <point x="1363.2321479527782" y="282.0" />
+      <point x="46.666666666666515" y="18.5" />
+    </edge>
+    <edge source="pdg5.server.manage.ManageChat" target="pdg5.server.manage.Manager">
+      <point x="87.5" y="-91.0" />
+      <point x="1669.7966197741166" y="4098.0" />
+      <point x="1997.0436062861113" y="4098.0" />
+      <point x="1997.0436062861113" y="1897.0" />
+      <point x="2850.5776136390523" y="1897.0" />
+      <point x="-51.29411764705901" y="178.0" />
+    </edge>
+    <edge source="pdg5.server.persistent.Message" target="pdg5.server.persistent.AbstractData">
+      <point x="-34.77777777777783" y="-251.5" />
+      <point x="264.2323167854056" y="4078.0" />
+      <point x="163.2044016368618" y="4078.0" />
+      <point x="163.2044016368618" y="402.0" />
+      <point x="2005.0592312861113" y="402.0" />
+      <point x="-84.09375" y="60.5" />
+    </edge>
+    <edge source="pdg5.server.persistent.Game" target="pdg5.server.persistent.User">
+      <point x="198.89999999999998" y="-482.0" />
+      <point x="772.6830522486785" y="1767.0" />
+      <point x="2177.151143050817" y="1767.0" />
+      <point x="-170.47058823529414" y="552.5" />
+    </edge>
+    <edge source="pdg5.server.persistent.Message" target="javax.persistence.Entity">
+      <point x="0.0" y="-251.5" />
+      <point x="299.01009456318343" y="4068.0" />
+      <point x="254.28305224867836" y="4068.0" />
+      <point x="254.28305224867836" y="482.0" />
+      <point x="2453.321731286111" y="482.0" />
+      <point x="-76.5625" y="32.0" />
+    </edge>
+    <edge source="pdg5.server.persistent.Matchlist" target="pdg5.server.persistent.AbstractData">
+      <point x="19.5" y="-179.0" />
+      <point x="2183.0436062861113" y="1657.0" />
+      <point x="1944.3611772486786" y="1657.0" />
+      <point x="1944.3611772486786" y="472.0" />
+      <point x="2095.6217312861113" y="472.0" />
+      <point x="6.46875" y="60.5" />
+    </edge>
+    <edge source="pdg5.server.manage.ManageBlacklist" target="pdg5.server.persistent.User">
+      <point x="-121.19999999999982" y="-76.5" />
+      <point x="3024.1717312861115" y="2981.0" />
+      <point x="2499.6217312861113" y="2981.0" />
+      <point x="2499.6217312861113" y="1807.0" />
+      <point x="2376.0334959919937" y="1807.0" />
+      <point x="28.411764705882433" y="552.5" />
+    </edge>
+    <edge source="pdg5.server.Server" target="pdg5.server.util.ServerNetworkManager">
+      <point x="53.5" y="-33.0" />
+      <point x="6801.802709525836" y="4691.0" />
+      <point x="6717.467309393562" y="4691.0" />
+      <point x="75.75" y="106.5" />
+    </edge>
+    <edge source="java.lang.Runnable" target="java.lang.FunctionalInterface">
+      <point x="0.0" y="-33.0" />
+      <point x="0.0" y="18.5" />
+    </edge>
+    <edge source="pdg5.server.model.GameController" target="pdg5.server.manage.ManageUser">
+      <point x="-157.5" y="-338.5" />
+      <point x="5639.061177248678" y="3111.0" />
+      <point x="4543.0780071448835" y="3111.0" />
+      <point x="167.55555555555566" y="149.0" />
+    </edge>
+    <edge source="pdg5.server.persistent.Message" target="javax.persistence.Table">
+      <point x="-104.33333333333348" y="-251.5" />
+      <point x="194.67676122984994" y="4098.0" />
+      <point x="11.0" y="4098.0" />
+      <point x="11.0" y="352.0" />
+      <point x="1645.9654812861113" y="352.0" />
+      <point x="-149.1875" y="86.0" />
+    </edge>
+    <edge source="pdg5.server.persistent.Tournament" target="javax.persistence.Table">
+      <point x="-68.19999999999993" y="-300.5" />
+      <point x="1384.0830522486785" y="382.0" />
+      <point x="1773.8404812861113" y="382.0" />
+      <point x="-21.3125" y="86.0" />
+    </edge>
+    <edge source="pdg5.server.persistent.Chat" target="java.io.Serializable">
+      <point x="-138.66666666666674" y="-208.0" />
+      <point x="833.1163855820118" y="3161.0" />
+      <point x="276.28305224867836" y="3161.0" />
+      <point x="276.28305224867836" y="322.0" />
+      <point x="1269.8988146194451" y="322.0" />
+      <point x="-46.666666666666515" y="18.5" />
+    </edge>
+    <edge source="pdg5.server.persistent.Message" target="pdg5.server.persistent.User">
+      <point x="69.55555555555566" y="-251.5" />
+      <point x="368.5656501187391" y="4088.0" />
+      <point x="805.2830522486786" y="4088.0" />
+      <point x="805.2830522486786" y="1777.0" />
+      <point x="2205.5629077566996" y="1777.0" />
+      <point x="-142.0588235294117" y="552.5" />
+    </edge>
+    <edge source="pdg5.server.persistent.Friend" target="java.io.Serializable">
+      <point x="-41.28571428571422" y="-202.0" />
+      <point x="4687.236737303614" y="1687.0" />
+      <point x="4307.115443121695" y="1687.0" />
+      <point x="4307.115443121695" y="232.0" />
+      <point x="1378.7877035083338" y="232.0" />
+      <point x="62.22222222222217" y="18.5" />
+    </edge>
+    <edge source="pdg5.server.persistent.Matchlist" target="javax.persistence.Table">
+      <point x="-19.5" y="-179.0" />
+      <point x="2144.0436062861113" y="1667.0" />
+      <point x="1799.2830522486786" y="1667.0" />
+      <point x="1799.2830522486786" y="382.0" />
+      <point x="1816.4654812861113" y="382.0" />
+      <point x="21.3125" y="86.0" />
+    </edge>
+    <edge source="pdg5.server.manage.ManageMatchlist" target="pdg5.server.persistent.Matchlist">
+      <point x="-30.5" y="-76.5" />
+      <point x="2760.3717312861113" y="3001.0" />
+      <point x="2241.5436062861113" y="3001.0" />
+      <point x="78.0" y="179.0" />
+    </edge>
+    <edge source="pdg5.server.process.ProcessSignIn" target="pdg5.server.process.GenericProcess">
+      <point x="-237.85714285714312" y="-106.5" />
+      <point x="5778.2145884289675" y="3988.0" />
+      <point x="4741.456892726895" y="3988.0" />
+      <point x="88.75" y="33.0" />
+    </edge>
+    <edge source="pdg5.server.manage.ManageMatchlist" target="pdg5.server.persistent.User">
+      <point x="30.5" y="-76.5" />
+      <point x="2821.3717312861113" y="2991.0" />
+      <point x="2488.6217312861113" y="2991.0" />
+      <point x="2488.6217312861113" y="1817.0" />
+      <point x="2347.6217312861113" y="1817.0" />
+      <point x="0.0" y="552.5" />
+    </edge>
+    <edge source="pdg5.server.manage.ManageTournament" target="pdg5.server.manage.Manager">
+      <point x="127.5" y="-76.5" />
+      <point x="1908.9602729527778" y="1877.0" />
+      <point x="2799.2834959919937" y="1877.0" />
+      <point x="-102.58823529411757" y="178.0" />
+    </edge>
+    <edge source="pdg5.server.manage.ManageMessage" target="pdg5.server.manage.Manager">
+      <point x="149.16666666666674" y="-76.5" />
+      <point x="1269.3554433035285" y="4711.0" />
+      <point x="1254.3611772486786" y="4711.0" />
+      <point x="1254.3611772486786" y="3161.0" />
+      <point x="1578.9602729527778" y="3161.0" />
+      <point x="1578.9602729527778" y="1847.0" />
+      <point x="2722.3423195214054" y="1847.0" />
+      <point x="-179.52941176470586" y="178.0" />
+    </edge>
+    <edge source="pdg5.server.process.ProcessNoop" target="pdg5.server.process.GenericProcess">
+      <point x="0.0" y="-63.0" />
+      <point x="4421.071731286111" y="4068.0" />
+      <point x="4599.456892726895" y="4068.0" />
+      <point x="-53.25" y="33.0" />
+    </edge>
+    <edge source="pdg5.server.persistent.Matchlist" target="java.io.Serializable">
+      <point x="-58.5" y="-179.0" />
+      <point x="2105.0436062861113" y="1677.0" />
+      <point x="1788.2830522486786" y="1677.0" />
+      <point x="1788.2830522486786" y="342.0" />
+      <point x="1332.1210368416673" y="342.0" />
+      <point x="15.555555555555657" y="18.5" />
+    </edge>
+    <edge source="pdg5.server.persistent.Matchlist" target="pdg5.server.persistent.User">
+      <point x="97.5" y="-179.0" />
+      <point x="2261.0436062861113" y="1817.0" />
+      <point x="2319.209966580229" y="1817.0" />
+      <point x="-28.411764705882433" y="552.5" />
+    </edge>
+    <edge source="pdg5.server.persistent.Chat" target="pdg5.server.persistent.Game">
+      <point x="138.66666666666663" y="-208.0" />
+      <point x="1110.4497189153453" y="3081.0" />
+      <point x="485.38305224867827" y="3081.0" />
+      <point x="-88.39999999999998" y="482.0" />
+    </edge>
+    <edge source="pdg5.server.manage.ManageFriend" target="pdg5.server.persistent.Friend">
+      <point x="55.40000000000009" y="-76.5" />
+      <point x="3714.471731286111" y="3151.0" />
+      <point x="4656.272451589328" y="3151.0" />
+      <point x="-72.25" y="202.0" />
+    </edge>
+    <edge source="pdg5.server.process.ProcessPlay" target="pdg5.server.model.GameController">
+      <point x="106.33333333333303" y="-77.5" />
+      <point x="5244.405064619445" y="4048.0" />
+      <point x="5691.561177248678" y="4048.0" />
+      <point x="-105.0" y="338.5" />
+    </edge>
+    <edge source="pdg5.server.util.ServerNetworkManager" target="pdg5.server.model.GameController">
+      <point x="-60.600000000000364" y="-106.5" />
+      <point x="6581.117309393561" y="3908.0" />
+      <point x="6027.561177248678" y="3908.0" />
+      <point x="231.0" y="338.5" />
+    </edge>
+    <edge source="pdg5.server.process.ProcessSignIn" target="pdg5.server.util.ServerActiveUser">
+      <point x="237.85714285714312" y="-106.5" />
+      <point x="6253.928874143254" y="4108.0" />
+      <point x="6424.342309393562" y="4108.0" />
+      <point x="-22.1875" y="106.5" />
+    </edge>
+    <edge source="pdg5.server.persistent.Chat" target="pdg5.server.persistent.Tournament">
+      <point x="69.33333333333326" y="-208.0" />
+      <point x="1041.1163855820118" y="3101.0" />
+      <point x="342.28305224867836" y="3101.0" />
+      <point x="342.28305224867836" y="1707.0" />
+      <point x="1328.2830522486786" y="1707.0" />
+      <point x="-124.0" y="300.5" />
+    </edge>
+    <edge source="pdg5.server.manage.ManageMessage" target="pdg5.server.persistent.Chat">
+      <point x="-29.833333333333258" y="-76.5" />
+      <point x="1090.3554433035285" y="4691.0" />
+      <point x="971.7830522486786" y="4691.0" />
+      <point x="0.0" y="208.0" />
+    </edge>
+    <edge source="pdg5.server.util.ClientHandler" target="java.lang.Runnable">
+      <point x="0.0" y="-208.0" />
+      <point x="0.0" y="33.0" />
+    </edge>
+    <edge source="pdg5.server.process.ProcessValidation" target="pdg5.server.process.GenericProcess">
+      <point x="-133.66666666666697" y="-77.5" />
+      <point x="5384.405064619445" y="3998.0" />
+      <point x="4705.956892726895" y="3998.0" />
+      <point x="53.25" y="33.0" />
+    </edge>
+    <edge source="pdg5.server.util.ServerRequestManager" target="pdg5.server.process.ProcessSignIn">
+      <point x="13.142857142856883" y="-92.0" />
+      <point x="5579.939476916974" y="4651.0" />
+      <point x="6016.071731286111" y="4651.0" />
+      <point x="0.0" y="106.5" />
+    </edge>
+    <edge source="pdg5.server.manage.ManageChat" target="pdg5.server.persistent.Chat">
+      <point x="-145.83333333333348" y="-91.0" />
+      <point x="1436.4632864407831" y="4108.0" />
+      <point x="1034.1830522486785" y="4108.0" />
+      <point x="62.39999999999998" y="208.0" />
+    </edge>
+    <edge source="pdg5.server.manage.ManageMatchlist" target="pdg5.server.persistent.Tournament">
+      <point x="-152.5" y="-76.5" />
+      <point x="2638.3717312861113" y="3021.0" />
+      <point x="1600.9602729527778" y="3021.0" />
+      <point x="1600.9602729527778" y="1727.0" />
+      <point x="1483.2830522486786" y="1727.0" />
+      <point x="31.0" y="300.5" />
+    </edge>
+    <edge source="pdg5.server.util.ServerRequestManager" target="pdg5.server.util.ServerActiveUser">
+      <point x="92.0" y="-92.0" />
+      <point x="5658.796619774117" y="4681.0" />
+      <point x="6468.717309393562" y="4681.0" />
+      <point x="22.1875" y="106.5" />
+    </edge>
+    <edge source="pdg5.server.util.ClientHandler" target="pdg5.server.util.ServerRequestManager">
+      <point x="153.0" y="208.0" />
+      <point x="6694.904809393562" y="3141.0" />
+      <point x="6814.717309393562" y="3141.0" />
+      <point x="6814.717309393562" y="4711.0" />
+      <point x="5737.65376263126" y="4711.0" />
+      <point x="170.85714285714312" y="-92.0" />
+    </edge>
+    <edge source="pdg5.server.manage.ManageTournament" target="pdg5.server.persistent.Tournament">
+      <point x="-42.5" y="-76.5" />
+      <point x="1738.9602729527778" y="1707.0" />
+      <point x="1545.2830522486786" y="1707.0" />
+      <point x="93.0" y="300.5" />
+    </edge>
+    <edge source="pdg5.server.manage.ManageGame" target="pdg5.server.manage.Manager">
+      <point x="113.0" y="-105.5" />
+      <point x="1660.0436062861113" y="3161.0" />
+      <point x="1589.9602729527778" y="3161.0" />
+      <point x="1589.9602729527778" y="1857.0" />
+      <point x="2747.9893783449347" y="1857.0" />
+      <point x="-153.88235294117658" y="178.0" />
+    </edge>
+    <edge source="pdg5.server.persistent.Friend" target="pdg5.server.persistent.User">
+      <point x="-123.85714285714266" y="-202.0" />
+      <point x="4604.665308732185" y="1707.0" />
+      <point x="2546.5040842272874" y="1707.0" />
+      <point x="198.88235294117612" y="552.5" />
+    </edge>
+    <edge source="pdg5.server.manage.ManageGame" target="pdg5.server.persistent.User">
+      <point x="37.66666666666674" y="-105.5" />
+      <point x="1584.710272952778" y="3151.0" />
+      <point x="1567.9602729527778" y="3151.0" />
+      <point x="1567.9602729527778" y="1797.0" />
+      <point x="2262.3864371684645" y="1797.0" />
+      <point x="-85.23529411764684" y="552.5" />
+    </edge>
+    <edge source="pdg5.server.util.ServerRequestManager" target="pdg5.server.model.GameController">
+      <point x="39.42857142857156" y="-92.0" />
+      <point x="5606.225191202689" y="4661.0" />
+      <point x="6374.415481286111" y="4661.0" />
+      <point x="6374.415481286111" y="3938.0" />
+      <point x="5901.561177248678" y="3938.0" />
+      <point x="105.0" y="338.5" />
+    </edge>
+    <edge source="pdg5.server.persistent.User" target="java.io.Serializable">
+      <point x="-193.19999999999982" y="-552.5" />
+      <point x="2154.4217312861115" y="332.0" />
+      <point x="1347.6765923972227" y="332.0" />
+      <point x="31.111111111111086" y="18.5" />
+    </edge>
+    <edge source="pdg5.server.persistent.Friend" target="javax.persistence.Entity">
+      <point x="123.85714285714266" y="-202.0" />
+      <point x="4852.379594446471" y="1907.0" />
+      <point x="4746.37959444647" y="1907.0" />
+      <point x="4746.37959444647" y="192.0" />
+      <point x="2606.446731286111" y="192.0" />
+      <point x="76.5625" y="32.0" />
+    </edge>
+    <edge source="pdg5.server.manage.ManageMessage" target="pdg5.server.persistent.Message">
+      <point x="-149.16666666666652" y="-76.5" />
+      <point x="971.0221099701953" y="4711.0" />
+      <point x="220.76009456318343" y="4711.0" />
+      <point x="-78.25" y="251.5" />
+    </edge>
+    <edge source="pdg5.server.persistent.User" target="javax.persistence.Entity">
+      <point x="193.19999999999982" y="-552.5" />
+      <point x="10.9375" y="32.0" />
+    </edge>
+    <edge source="pdg5.server.process.ProcessNewGame" target="pdg5.server.manage.ManageUser">
+      <point x="-151.125" y="-92.0" />
+      <point x="4605.946731286111" y="4048.0" />
+      <point x="4321.686177248678" y="4048.0" />
+      <point x="4321.686177248678" y="3141.0" />
+      <point x="4375.522451589328" y="3141.0" />
+      <point x="0.0" y="149.0" />
+    </edge>
+    <edge source="pdg5.server.process.ProcessSignUp" target="pdg5.server.util.ServerActiveUser">
+      <point x="182.80000000000018" y="-92.0" />
+      <point x="4240.871731286112" y="4088.0" />
+      <point x="6335.592309393562" y="4088.0" />
+      <point x="-110.9375" y="106.5" />
+    </edge>
+    <edge source="pdg5.server.manage.ManageGame" target="pdg5.server.persistent.Game">
+      <point x="-113.0" y="-105.5" />
+      <point x="1434.0436062861113" y="3051.0" />
+      <point x="750.5830522486783" y="3051.0" />
+      <point x="176.79999999999995" y="482.0" />
+    </edge>
+    <edge source="pdg5.server.manage.ManageFriend" target="pdg5.server.manage.Manager">
+      <point x="-55.40000000000009" y="-76.5" />
+      <point x="3603.671731286111" y="2951.0" />
+      <point x="3164.6485593935613" y="2951.0" />
+      <point x="3164.6485593935613" y="1927.0" />
+      <point x="3004.459966580229" y="1927.0" />
+      <point x="102.58823529411757" y="178.0" />
+    </edge>
+    <edge source="pdg5.server.persistent.Blacklist" target="pdg5.server.persistent.User">
+      <point x="-123.85714285714312" y="-208.0" />
+      <point x="3195.791416536418" y="1787.0" />
+      <point x="2432.857025403758" y="1787.0" />
+      <point x="85.23529411764684" y="552.5" />
+    </edge>
+    <edge source="pdg5.server.persistent.Game" target="javax.persistence.Table">
+      <point x="-110.5" y="-482.0" />
+      <point x="463.28305224867836" y="1687.0" />
+      <point x="482.738776636862" y="1687.0" />
+      <point x="482.738776636862" y="372.0" />
+      <point x="1731.2154812861113" y="372.0" />
+      <point x="-63.9375" y="86.0" />
+    </edge>
+    <edge source="pdg5.server.persistent.Chat" target="javax.persistence.Entity">
+      <point x="0.0" y="-208.0" />
+      <point x="971.7830522486786" y="3121.0" />
+      <point x="320.28305224867836" y="3121.0" />
+      <point x="320.28305224867836" y="492.0" />
+      <point x="2475.196731286111" y="492.0" />
+      <point x="-54.6875" y="32.0" />
+    </edge>
+    <edge source="pdg5.server.manage.ManageGame" target="pdg5.server.persistent.Tournament">
+      <point x="-37.66666666666674" y="-105.5" />
+      <point x="1509.3769396194446" y="3041.0" />
+      <point x="1310.382147952778" y="3041.0" />
+      <point x="1310.382147952778" y="1737.0" />
+      <point x="1421.2830522486786" y="1737.0" />
+      <point x="-31.0" y="300.5" />
+    </edge>
+    <edge source="pdg5.server.manage.ManageFriend" target="pdg5.server.persistent.User">
+      <point x="-110.80000000000018" y="-76.5" />
+      <point x="3548.271731286111" y="2961.0" />
+      <point x="2858.296619774117" y="2961.0" />
+      <point x="2858.296619774117" y="1797.0" />
+      <point x="2404.445260697876" y="1797.0" />
+      <point x="56.823529411764866" y="552.5" />
+    </edge>
+    <edge source="pdg5.server.manage.ManageBlacklist" target="pdg5.server.manage.Manager">
+      <point x="0.0" y="-76.5" />
+      <point x="3145.3717312861113" y="3161.0" />
+      <point x="3153.6485593935613" y="3161.0" />
+      <point x="3153.6485593935613" y="1937.0" />
+      <point x="2978.8129077566996" y="1937.0" />
+      <point x="76.94117647058829" y="178.0" />
+    </edge>
+    <edge source="pdg5.server.util.ServerRequestManager" target="pdg5.server.process.ProcessSignUp">
+      <point x="-118.28571428571468" y="-92.0" />
+      <point x="5448.510905488402" y="4691.0" />
+      <point x="4058.071731286111" y="4691.0" />
+      <point x="0.0" y="92.0" />
+    </edge>
+    <edge source="pdg5.server.process.ProcessValidation" target="pdg5.server.model.GameController">
+      <point x="0.0" y="-77.5" />
+      <point x="5518.071731286111" y="4058.0" />
+      <point x="5733.561177248678" y="4058.0" />
+      <point x="-63.0" y="338.5" />
+    </edge>
+    <edge source="pdg5.server.process.ProcessNewGame" target="pdg5.server.process.GenericProcess">
+      <point x="-50.375" y="-92.0" />
+      <point x="4706.696731286111" y="4068.0" />
+      <point x="4634.956892726895" y="4068.0" />
+      <point x="-17.75" y="33.0" />
+    </edge>
+    <edge source="pdg5.server.persistent.Blacklist" target="javax.persistence.Table">
+      <point x="0.0" y="-208.0" />
+      <point x="3319.6485593935613" y="1907.0" />
+      <point x="3695.264316668692" y="1907.0" />
+      <point x="3695.264316668692" y="272.0" />
+      <point x="1901.7154812861118" y="272.0" />
+      <point x="106.56250000000023" y="86.0" />
+    </edge>
+    <edge source="pdg5.server.manage.Manager" target="pdg5.server.persistent.AbstractData">
+      <point x="0.0" y="-178.0" />
+      <point x="2901.8717312861113" y="292.0" />
+      <point x="2134.4342312861113" y="292.0" />
+      <point x="45.28125" y="60.5" />
+    </edge>
+    <edge source="pdg5.server.persistent.Game" target="pdg5.server.persistent.AbstractData">
+      <point x="-22.09999999999991" y="-482.0" />
+      <point x="551.6830522486785" y="1677.0" />
+      <point x="504.738776636862" y="1677.0" />
+      <point x="504.738776636862" y="442.0" />
+      <point x="2056.8092312861113" y="442.0" />
+      <point x="-32.34375" y="60.5" />
+    </edge>
+    <edge source="pdg5.server.persistent.Message" target="pdg5.server.persistent.Chat">
+      <point x="139.1111111111111" y="-251.5" />
+      <point x="438.1212056742943" y="4108.0" />
+      <point x="909.3830522486787" y="4108.0" />
+      <point x="-62.39999999999998" y="208.0" />
+    </edge>
+    <edge source="pdg5.server.manage.ManageChat" target="pdg5.server.persistent.Game">
+      <point x="-29.166666666666515" y="-91.0" />
+      <point x="1553.12995310745" y="4088.0" />
+      <point x="1310.5436062861113" y="4088.0" />
+      <point x="1310.5436062861113" y="3071.0" />
+      <point x="573.7830522486784" y="3071.0" />
+      <point x="0.0" y="482.0" />
+    </edge>
+    <edge source="pdg5.server.manage.ManageMessage" target="pdg5.server.persistent.User">
+      <point x="29.833333333333258" y="-76.5" />
+      <point x="1150.022109970195" y="4711.0" />
+      <point x="1138.2830522486786" y="4711.0" />
+      <point x="1138.2830522486786" y="1787.0" />
+      <point x="2233.974672462582" y="1787.0" />
+      <point x="-113.64705882352928" y="552.5" />
+    </edge>
+    <edge source="pdg5.server.util.ServerNetworkManager" target="pdg5.server.util.ClientHandler">
+      <point x="121.19999999999982" y="-106.5" />
+      <point x="6762.9173093935615" y="3878.0" />
+      <point x="6698.723559393561" y="3878.0" />
+      <point x="6698.723559393561" y="3161.0" />
+      <point x="6592.904809393562" y="3161.0" />
+      <point x="51.0" y="208.0" />
+    </edge>
+    <edge source="pdg5.server.util.ServerNetworkManager" target="pdg5.server.util.ServerActiveUser">
+      <point x="0.0" y="-106.5" />
+      <point x="6641.717309393562" y="3898.0" />
+      <point x="6557.467309393562" y="3898.0" />
+      <point x="110.9375" y="106.5" />
+    </edge>
+    <edge source="pdg5.server.manage.ManageMatchlist" target="pdg5.server.manage.Manager">
+      <point x="91.5" y="-76.5" />
+      <point x="2882.3717312861113" y="3161.0" />
+      <point x="2847.296619774117" y="3161.0" />
+      <point x="2847.296619774117" y="1917.0" />
+      <point x="2901.8717312861113" y="1917.0" />
+      <point x="0.0" y="178.0" />
+    </edge>
+    <edge source="pdg5.server.util.ServerRequestManager" target="pdg5.server.process.ProcessPlay">
+      <point x="-39.42857142857156" y="-92.0" />
+      <point x="5527.3680483455455" y="4661.0" />
+      <point x="5138.071731286111" y="4661.0" />
+      <point x="0.0" y="77.5" />
+    </edge>
+    <edge source="pdg5.server.process.ProcessPlay" target="pdg5.server.process.GenericProcess">
+      <point x="-106.33333333333303" y="-77.5" />
+      <point x="5031.7383979527785" y="4008.0" />
+      <point x="4670.456892726895" y="4008.0" />
+      <point x="17.75" y="33.0" />
+    </edge>
+    <edge source="pdg5.server.util.ClientHandler" target="pdg5.server.util.ServerActiveUser">
+      <point x="-51.0" y="208.0" />
+      <point x="44.375" y="-106.5" />
+    </edge>
+    <edge source="pdg5.server.util.ServerActiveUser" target="pdg5.server.util.ClientHandler">
+      <point x="-133.125" y="-106.5" />
+      <point x="6313.404809393562" y="3161.0" />
+      <point x="6388.904809393562" y="3161.0" />
+      <point x="-153.0" y="208.0" />
+    </edge>
+    <edge source="pdg5.server.process.ProcessSignIn" target="pdg5.server.manage.ManageUser">
+      <point x="-79.28571428571468" y="-106.5" />
+      <point x="5936.786017000397" y="3968.0" />
+      <point x="5261.7419370526" y="3968.0" />
+      <point x="5261.7419370526" y="3131.0" />
+      <point x="4459.300229367105" y="3131.0" />
+      <point x="83.77777777777737" y="149.0" />
+    </edge>
+    <edge source="pdg5.server.util.ServerRequestManager" target="pdg5.server.process.ProcessNewGame">
+      <point x="-65.71428571428532" y="-92.0" />
+      <point x="5501.082334059832" y="4671.0" />
+      <point x="4757.071731286111" y="4671.0" />
+      <point x="0.0" y="92.0" />
+    </edge>
+    <edge source="pdg5.server.model.GameController" target="pdg5.server.model.TileStack">
+      <point x="94.5" y="-338.5" />
+      <point x="5891.061177248678" y="3161.0" />
+      <point x="5902.144510582012" y="3161.0" />
+      <point x="-108.0" y="208.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.10000000000000005" x="3072.9999999999964" y="1257.9999999999982" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

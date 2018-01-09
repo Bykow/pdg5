@@ -29,6 +29,7 @@ import pdg5.common.Protocol;
 import pdg5.common.game.Composition;
 import pdg5.common.game.Tile;
 import pdg5.common.protocol.Game;
+import pdg5.common.protocol.Pass;
 import pdg5.common.protocol.Play;
 
 import java.util.ArrayList;
@@ -188,7 +189,7 @@ public class GameController {
         gameID = g.getID();
         Platform.runLater(() -> {
                     updatePlayer(g);
-                    remainingTiles.setText(String.valueOf(g.getNbLeftTile()));
+                    remainingTiles.setText(String.valueOf(g.getNbLeftTile()) + " tuilles restante(s)");
                     adversaryScore.setText(String.valueOf(g.getOpponentScore()));
                     userScore.setText(String.valueOf(g.getScore()));
                     adversaryName.setText(g.getOpponentName());
@@ -206,6 +207,7 @@ public class GameController {
             composition.push(((GTile) st.getChildren().get(0)).getModel());
         }
         cleanList(adversaryBonusList, Protocol.NUMBER_OF_EXTRA_TUILES);
+        cleanList(userList, Protocol.NUMBER_OF_EXTRA_TUILES);
         return composition;
     }
 
@@ -226,10 +228,19 @@ public class GameController {
     }
 
     @FXML
+    private void swap(ActionEvent actionEvent) {
+        shuffleHand();
+    }
+
+    @FXML
     private void play(ActionEvent actionEvent) {
         ClientSender clientSender = new ClientSender();
         clientSender.add(new Play(getPlay(userList), gameID));
     }
 
-
+    @FXML
+    private void discard(ActionEvent actionEvent) {
+        ClientSender clientSender = new ClientSender();
+        clientSender.add(new Pass(gameID));
+    }
 }

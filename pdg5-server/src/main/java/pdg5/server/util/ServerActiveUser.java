@@ -2,6 +2,7 @@ package pdg5.server.util;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import pdg5.common.protocol.Message;
 
 /**
  * @author Maxime Guillod
@@ -31,6 +32,13 @@ public class ServerActiveUser {
 
     public ClientHandler getClientHandler(Integer user) {
         return map.get(user);
+    }
+    
+    public void giveToClientHandler(Integer user, Message m){
+        ClientHandler client = getClientHandler(user);
+        if(client != null){
+            client.addToQueue(m);
+        }
     }
 
 }

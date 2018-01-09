@@ -15,6 +15,15 @@ Button:hover {
     -fx-cursor: hand;
 }
 
+Button.secondary {
+    -fx-background-color: #e67e22;
+}
+
+Button.secondary:hover {
+    -fx-background-color: #d26e22;
+    -fx-cursor: hand;
+}
+
 #bottom-bar {
     -fx-background-color: #ffbd00;
 }

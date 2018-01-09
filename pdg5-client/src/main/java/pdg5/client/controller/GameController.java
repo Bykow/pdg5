@@ -18,7 +18,6 @@ package pdg5.client.controller;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
 import javafx.scene.input.*;
@@ -30,10 +29,8 @@ import pdg5.common.Protocol;
 import pdg5.common.game.Composition;
 import pdg5.common.game.Tile;
 import pdg5.common.protocol.Game;
-import pdg5.common.protocol.NewGame;
 import pdg5.common.protocol.Play;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GameController {
@@ -153,34 +150,11 @@ public class GameController {
         event.consume();
     }
 
-    private void updateDeckList(List<Tile> list) {
-        for (int i = 0; i < Protocol.NUMBER_OF_TUILES_PER_PLAYER; i++) {
-            if (!list.isEmpty() && list.get(i) != null) {
-                deckList.get(i).getChildren().add(new GTile(list.get(i)));
-            }
-        }
-    }
-
-    private void updateBonusList(List<Tile> list) {
-        for (int i = 0; i < Protocol.NUMBER_OF_EXTRA_TUILES; i++) {
-            if (!list.isEmpty() && list.get(i) != null) {
-                userBonusList.get(i).getChildren().add(new GTile(list.get(i)));
-            }
-        }
-    }
-
-    private void updateOpponentList(List<Tile> list) {
-        for (int i = 0; i < Protocol.NUMBER_OF_EXTRA_TUILES; i++) {
-            if (!list.isEmpty() && list.get(i) != null) {
-                adversaryList.get(i).getChildren().add(new GTile(list.get(i)));
-            }
-        }
-    }
-
-    private void updateOpponentBonusList(List<Tile> list) {
-        for (int i = 0; i < Protocol.NUMBER_OF_EXTRA_TUILES; i++) {
-            if (!list.isEmpty() && list.get(i) != null) {
-                adversaryBonusList.get(i).getChildren().add(new GTile(list.get(i)));
+    private void updateList(List<Tile> listFrom, int size, List<StackPane> listDest) {
+        for (int i = 0; i < size; i++) {
+            listDest.get(i).getChildren().clear();
+            if (!listFrom.isEmpty() && i < listFrom.size()) {
+                listDest.get(i).getChildren().add(new GTile(listFrom.get(i)));
             }
         }
     }
@@ -203,12 +177,26 @@ public class GameController {
         }
     }
 
+    private void cleanOpponentBonus() {
+        for (int i = 0; i < Protocol.NUMBER_OF_EXTRA_TUILES; i++) {
+            if(adversaryBonusList.get(i).getChildren().size() == 0) {
+                continue;
+            }
+            adversaryBonusList.get(i).getChildren().remove(0);
+        }
+    }
+
     private void updatePlayer(Game g) {
-        updateDeckList(g.getAddedTile());
-        updateBonusList(g.getBonusLetters());
-        updateOpponentList(g.getLastWordPlayed());
-        updateOpponentBonusList(g.getOpponentBonusLetters());
-        cleanComposition();
+        updateList(g.getAddedTile(), Protocol.NUMBER_OF_TUILES_PER_PLAYER, deckList);
+        updateList(g.getBonusLetters(), Protocol.NUMBER_OF_EXTRA_TUILES, userBonusList);
+        updateList(g.getLastWordPlayed(), Protocol.NUMBER_OF_TUILES_PER_PLAYER, adversaryList);
+        updateList(g.getOpponentBonusLetters(), Protocol.NUMBER_OF_EXTRA_TUILES, adversaryBonusList);
+        if (g.isYourTurn()) {
+            cleanComposition();
+            cleanOpponentBonus();
+        } else {
+            cleanBonus();
+        }
     }
 
     public void updateGame(Game g) {
@@ -232,7 +220,7 @@ public class GameController {
             }
             composition.push(((GTile) st.getChildren().get(0)).getModel());
         }
-        cleanBonus();
+        cleanOpponentBonus();
         return composition;
     }
 

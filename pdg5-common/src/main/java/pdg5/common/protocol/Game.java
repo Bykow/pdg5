@@ -124,11 +124,13 @@ public class Game extends Message {
     public String toString() {
         String output = "";
         output += "Player Name:     " + getNamePlayer() + "\n";
-        output += "Player Score:     " + getScore() + "\n";
+        output += "Player Score:    " + getScore() + "\n";
         output += "Opponent Name:   " + getOpponentName() + "\n";
-        output += "Opponent Score:   " + getOpponentScore() + "\n";
+        output += "Opponent Score:  " + getOpponentScore() + "\n";
         output += "isYourTurn:      " + yourTurn + "\n";
         output += "Last Word Played " + lastWordPlayed.toString() + "\n";
+        output += "Bonus            " + getBonusLetters().toString() + "\n";
+        output += "Opponent Bonus   " + getOpponentBonusLetters().toString() + "\n";
 
         return output;
     }

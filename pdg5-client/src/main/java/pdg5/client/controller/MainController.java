@@ -15,9 +15,11 @@ package pdg5.client.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import pdg5.client.ClientListener;
 import pdg5.client.ClientSender;
 import pdg5.client.util.ClientRequestManager;
+import pdg5.client.util.Toast;
 import pdg5.common.protocol.Message;
 
 import java.io.IOException;
@@ -93,6 +95,11 @@ public class MainController {
      */
     public void sendMessage(Message m) {
         sender.add(m);
+    }
+
+    public void displayToast(String m) {
+        Stage stage = (Stage) gameContainer.getScene().getWindow();
+        new Toast(stage, m).show();
     }
 
     public GameController getGameController() {

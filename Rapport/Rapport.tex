@@ -174,7 +174,7 @@
 	\subsection{Conception}
 	
 	\subsection{Implémentation}
-		\subsubsection{Dictionnaire}
+		\subsubsection{Dictionnaire / Stack}
 		Nous avons effectué du reverse engineering\footnote{\textbf{Reverse engineering} :  \href{https://fr.wikipedia.org/wiki/R\%C3\%A9tro-ing\%C3\%A9nierie}{Définition Wikipédia}} afin de comprendre le fonctionnement internet du jeu.\\
 		Après avoir enregistré plusieurs fois les lettres sorties par l'application mobile, nous avons pu constater et mettre en avant que le dictionnaire (les lettres tirées) sont définie par rapport à stack prédéfinit qui est simplement mélangé au début de la partie. En effet, lors d'une partie, on trouvera toujours le même nombre de fois le \textit{E} qui sort par exemple.
 		
@@ -246,6 +246,9 @@
 		Maven est un outil de gestion et d'automatisation de projet Java. Il permet notamment d'automatiser les dépendances de notre projet en téléchargent automatiquement les librairies utilisées par les autres membres du groupe. Il permet également de tester le projet en lançant tout les tests de notre projet avant de le compiler afin de garantir du bon fonctionnement de ce dernier. 
 		
 		\subsection{Docker}
+		Docker est une technologie qui tent à se répendre de plus en plus. Ce dernier permet de lancer des machines virtuelles dans des containers tout en automatisant le déploiement de ces derniers. 
+		
+		Pour ce projet nous avons réaliser un petit script qui permet de compiler notre projet avec Maven tout en verifiant qu'il passe tout nos test JUnit, puis il va lancer (et télécharger au besoin) un serveur MySQL pour notre base de données, mais également un serveur PhpMyAdmin pour l'administration de la base de données, et pour finir une machine virtuel linux qui va inplémenter et lancer le serveur Java de notre application. 
 	
 	\section{Conclusion}
 	
@@ -253,6 +256,12 @@
 	\section{Annexes}
 
 	\includepdf[scale=0.95, pagecommand={}]{journalTravail/vide.pdf}
+	%\includepdf[scale=0.95, pagecommand={}]{journalTravail/Lawrence.pdf}
+	%\includepdf[scale=0.95, pagecommand={}]{journalTravail/Miguel.pdf}
+	%\includepdf[scale=0.95, pagecommand={}]{journalTravail/Cotza.pdf}
+	%\includepdf[scale=0.95, pagecommand={}]{journalTravail/Jimmy.pdf}
+	%\includepdf[scale=0.95, pagecommand={}]{journalTravail/Tony.pdf}
+	%\includepdf[scale=0.95, pagecommand={}]{journalTravail/Maxime.pdf}
 	
 	
 	

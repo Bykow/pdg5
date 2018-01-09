@@ -46,9 +46,7 @@ public class MainController {
     }
 
     public void loadGame() {
-        // Already start
         listener = new ClientListener();
-        // Already start
         sender = new ClientSender();
 
         this.requestManager = new ClientRequestManager(this);
@@ -80,7 +78,7 @@ public class MainController {
     public void loadLoby() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            lobyController = new LobyController(sender);
+            lobyController = new LobyController(sender, gameController);
             loader.setLocation(MainController.class.getResource("/fxml/lobyView.fxml"));
             loader.setController(lobyController);
             layout = loader.load();

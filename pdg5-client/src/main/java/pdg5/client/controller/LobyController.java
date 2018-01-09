@@ -28,18 +28,15 @@ public class LobyController {
     private ArrayList<Game> gameModelList;
 
     private GGameListEntry selected;
+    private GameController gameController;
 
     private ClientSender sender;
     
     @FXML
     private VBox gameList;
 
-    public LobyController(ClientSender sender) {
+    public LobyController(ClientSender sender, GameController gameController) {
         gameModelList = new ArrayList<>();
-
-        gameModelList.add(new Game(0, new Date(), new Date(), 0, null, null, 12, null, 56, true, GameModel.State.IN_PROGRESS));
-        gameModelList.add(new Game(0, new Date(), new Date(), 0, null, null, 12, null, 56, true, GameModel.State.IN_PROGRESS));
-        gameModelList.add(new Game(0, new Date(), new Date(), 0, null, null, 12, null, 56, true, GameModel.State.FINISHED));
 
         titleToPlay = new Label("A ton tour");
         titleToPlay.getStyleClass().add("titleToPlay");
@@ -49,6 +46,7 @@ public class LobyController {
         titleFinished.getStyleClass().add("titleFinished");
         
         this.sender = sender;
+        this.gameController = gameController;
     }
 
     @FXML
@@ -56,7 +54,7 @@ public class LobyController {
         refresh();
     }
 
-    private void refresh() {
+    public void refresh() {
         gameList.getChildren().clear();
 
         gameList.getChildren().add(titleToPlay);
@@ -109,6 +107,7 @@ public class LobyController {
         unselectLast();
         selected = element;
         element.setSelected(true);
+        gameController.updateGame(element.getModel());
     }
 
     private void handleDelete(ActionEvent event) {
@@ -125,5 +124,15 @@ public class LobyController {
 
     private void addGame(Game game) {
         gameModelList.add(game);
+    }
+
+    public boolean hasGame(Game game) {
+        return gameModelList.stream().anyMatch((o) -> o.getID() == game.getID());
+    }
+
+    public void updateGame(Game game) {
+        gameModelList.remove(game);
+        addGame(game);
+        refresh();
     }
 }

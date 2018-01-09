@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>pdg5.client.ClientSender</OriginalElement>
+  <nodes>
+    <node x="549.1579499886076" y="26988.0">pdg5.client.controller.SignInController</node>
+    <node x="451.6579499886076" y="26167.0">pdg5.client.util.Toast</node>
+    <node x="386.1875" y="17244.0">pdg5.client.process.ProcessErrorMessage</node>
+    <node x="1249.5562028176482" y="168.0">java.lang.Runnable</node>
+    <node x="1229.5562028176482" y="0.0">java.lang.FunctionalInterface</node>
+    <node x="10.1875" y="21492.0">pdg5.client.ClientSender</node>
+    <node x="878.6875" y="21435.5">javafx.application.Application</node>
+    <node x="1828.2031184020639" y="15823.0">javafx.scene.Parent</node>
+    <node x="1502.6517344497588" y="24984.0">pdg5.client.view.GTile</node>
+    <node x="977.4183666552743" y="26284.0">pdg5.client.controller.AbstractController</node>
+    <node x="2455.2251105984633" y="24650.5">javafx.scene.layout.Pane</node>
+    <node x="176.50173444975871" y="26529.0">pdg5.client.controller.SignUpController</node>
+    <node x="567.6875" y="21623.5">pdg5.client.util.ClientRequestManager</node>
+    <node x="1474.4017344497588" y="25307.0">pdg5.client.controller.GameController</node>
+    <node x="1352.9017344497588" y="21492.0">pdg5.client.ClientListener</node>
+    <node x="1769.1187028176482" y="413.0">javafx.scene.Node</node>
+    <node x="2073.276734449759" y="168.0">javafx.event.EventTarget</node>
+    <node x="448.6517344497588" y="8049.0">pdg5.client.process.GenericProcess</node>
+    <node x="916.1875" y="24562.0">pdg5.client.Client</node>
+    <node x="1632.9017344497588" y="18853.0">javafx.scene.layout.Region</node>
+    <node x="2742.901734449759" y="21623.5">javafx.beans.DefaultProperty</node>
+    <node x="833.418366655274" y="25874.0">pdg5.client.controller.MainController</node>
+    <node x="147.1875" y="17244.0">pdg5.client.process.ProcessLoad</node>
+    <node x="2619.276734449759" y="168.0">com.sun.javafx.beans.IDProperty</node>
+    <node x="739.1875" y="17244.0">pdg5.client.process.ProcessNoop</node>
+    <node x="1555.2767344497588" y="87.0">javafx.css.Styleable</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="pdg5.client.Client" target="pdg5.client.ClientSender">
+      <point x="-148.71428571428578" y="-181.0" />
+      <point x="940.9732142857142" y="24532.0" />
+      <point x="215.75" y="24532.0" />
+      <point x="79.0625" y="165.5" />
+    </edge>
+    <edge source="javafx.scene.Node" target="javafx.css.Styleable">
+      <point x="-63.0" y="-7670.0" />
+      <point x="2084.118702817648" y="363.0" />
+      <point x="1866.5267344497588" y="363.0" />
+      <point x="62.25" y="113.0" />
+    </edge>
+    <edge source="pdg5.client.Client" target="javafx.application.Application">
+      <point x="0.0" y="-181.0" />
+      <point x="0.0" y="222.0" />
+    </edge>
+    <edge source="javafx.scene.layout.Pane" target="javafx.scene.Node">
+      <point x="134.25" y="-92.5" />
+      <point x="2768.4751105984633" y="24542.0" />
+      <point x="2931.401734449759" y="24542.0" />
+      <point x="2931.401734449759" y="15803.0" />
+      <point x="2490.755066454012" y="15803.0" />
+      <point x="343.63636363636374" y="7670.0" />
+    </edge>
+    <edge source="javafx.scene.Node" target="com.sun.javafx.beans.IDProperty">
+      <point x="315.0" y="-7670.0" />
+      <point x="2462.118702817648" y="393.0" />
+      <point x="2705.776734449759" y="393.0" />
+      <point x="0.0" y="32.0" />
+    </edge>
+    <edge source="pdg5.client.controller.SignInController" target="pdg5.client.ClientListener">
+      <point x="133.33333333333348" y="-136.0" />
+      <point x="832.4912833219411" y="26968.0" />
+      <point x="1872.9017344497588" y="26968.0" />
+      <point x="1872.9017344497588" y="24532.0" />
+      <point x="1572.9017344497588" y="24532.0" />
+      <point x="100.00000000000006" y="165.5" />
+    </edge>
+    <edge source="javafx.application.Application" target="javafx.application.Application">
+      <point x="-140.66666666666666" y="222.0" />
+      <point x="949.0208333333334" y="21899.5" />
+      <point x="858.6875" y="21899.5" />
+      <point x="858.6875" y="21657.5" />
+      <point x="-211.0" y="-0.0" />
+    </edge>
+    <edge source="pdg5.client.controller.AbstractController" target="pdg5.client.Client">
+      <point x="80.0" y="-34.0" />
+      <point x="1177.4183666552744" y="26142.0" />
+      <point x="1850.9017344497588" y="26142.0" />
+      <point x="1850.9017344497588" y="24944.0" />
+      <point x="1205.3541666666665" y="24944.0" />
+      <point x="115.66666666666652" y="181.0" />
+    </edge>
+    <edge source="pdg5.client.controller.MainController" target="pdg5.client.ClientListener">
+      <point x="78.2222222222224" y="-121.5" />
+      <point x="1087.6405888774964" y="25834.0" />
+      <point x="1358.1875" y="25834.0" />
+      <point x="1358.1875" y="24542.0" />
+      <point x="1492.9017344497588" y="24542.0" />
+      <point x="20.0" y="165.5" />
+    </edge>
+    <edge source="javafx.scene.layout.Pane" target="javafx.scene.layout.Region">
+      <point x="-44.75" y="-92.5" />
+      <point x="2589.4751105984633" y="24542.0" />
+      <point x="2541.235067783092" y="24542.0" />
+      <point x="363.33333333333326" y="2804.5" />
+    </edge>
+    <edge source="javafx.scene.Parent" target="javafx.scene.Node">
+      <point x="-172.28571428571445" y="-1485.0" />
+      <point x="1957.4174041163494" y="15803.0" />
+      <point x="2009.6641573631027" y="15803.0" />
+      <point x="-137.4545454545455" y="7670.0" />
+    </edge>
+    <edge source="pdg5.client.controller.GameController" target="pdg5.client.view.GTile">
+      <point x="-91.5" y="-248.5" />
+      <point x="-63.25" y="136.5" />
+    </edge>
+    <edge source="pdg5.client.controller.SignInController" target="pdg5.client.controller.SignUpController">
+      <point x="-33.333333333333485" y="-136.0" />
+      <point x="665.8246166552741" y="26938.0" />
+      <point x="433.7517344497587" y="26938.0" />
+      <point x="85.75" y="194.5" />
+    </edge>
+    <edge source="pdg5.client.controller.SignInController" target="pdg5.client.controller.AbstractController">
+      <point x="33.333333333333485" y="-136.0" />
+      <point x="732.4912833219411" y="26938.0" />
+      <point x="1151.9183666552744" y="26938.0" />
+      <point x="1151.9183666552744" y="26509.0" />
+      <point x="1127.4183666552744" y="26509.0" />
+      <point x="30.0" y="34.0" />
+    </edge>
+    <edge source="pdg5.client.controller.SignUpController" target="pdg5.client.ClientSender">
+      <point x="-68.59999999999991" y="-194.5" />
+      <point x="279.4017344497588" y="26499.0" />
+      <point x="141.5" y="26499.0" />
+      <point x="141.5" y="24512.0" />
+      <point x="120.875" y="24512.0" />
+      <point x="-15.8125" y="165.5" />
+    </edge>
+    <edge source="pdg5.client.controller.SignUpController" target="pdg5.client.controller.AbstractController">
+      <point x="68.59999999999991" y="-194.5" />
+      <point x="416.6017344497586" y="26499.0" />
+      <point x="1007.4183666552743" y="26499.0" />
+      <point x="-90.0" y="34.0" />
+    </edge>
+    <edge source="java.lang.Runnable" target="java.lang.FunctionalInterface">
+      <point x="0.0" y="-32.0" />
+      <point x="0.0" y="18.5" />
+    </edge>
+    <edge source="pdg5.client.ClientSender" target="java.lang.Runnable">
+      <point x="0.0" y="-165.5" />
+      <point x="136.6875" y="393.0" />
+      <point x="1268.1812028176482" y="393.0" />
+      <point x="-55.875" y="32.0" />
+    </edge>
+    <edge source="javafx.scene.layout.Region" target="javafx.css.Styleable">
+      <point x="-408.75" y="-2804.5" />
+      <point x="1769.1517344497588" y="18833.0" />
+      <point x="1728.6187028176482" y="18833.0" />
+      <point x="1728.6187028176482" y="393.0" />
+      <point x="1742.0267344497588" y="393.0" />
+      <point x="-62.25" y="113.0" />
+    </edge>
+    <edge source="pdg5.client.process.ProcessErrorMessage" target="pdg5.client.process.GenericProcess">
+      <point x="0.0" y="-64.0" />
+      <point x="552.6875" y="15803.0" />
+      <point x="555.1517344497588" y="15803.0" />
+      <point x="0.0" y="34.0" />
+    </edge>
+    <edge source="pdg5.client.controller.MainController" target="pdg5.client.util.ClientRequestManager">
+      <point x="-39.11111111111086" y="-121.5" />
+      <point x="970.3072555441631" y="25824.0" />
+      <point x="695.7350677830921" y="25824.0" />
+      <point x="695.7350677830921" y="24542.0" />
+      <point x="703.1875" y="24542.0" />
+      <point x="0.0" y="34.0" />
+    </edge>
+    <edge source="pdg5.client.Client" target="pdg5.client.util.ClientRequestManager">
+      <point x="-49.57142857142844" y="-181.0" />
+      <point x="1040.1160714285716" y="24512.0" />
+      <point x="793.5208333333335" y="24512.0" />
+      <point x="90.33333333333348" y="34.0" />
+    </edge>
+    <edge source="javafx.scene.Node" target="javafx.event.EventTarget">
+      <point x="189.0" y="-7670.0" />
+      <point x="0.0" y="32.0" />
+    </edge>
+    <edge source="pdg5.client.controller.SignInController" target="pdg5.client.util.Toast">
+      <point x="0.0" y="-136.0" />
+      <point x="699.1579499886076" y="26489.0" />
+      <point x="686.4079499886076" y="26489.0" />
+      <point x="78.25" y="151.0" />
+    </edge>
+    <edge source="pdg5.client.process.ProcessNoop" target="pdg5.client.process.GenericProcess">
+      <point x="0.0" y="-64.0" />
+      <point x="853.6875" y="15803.0" />
+      <point x="626.1517344497588" y="15803.0" />
+      <point x="71.0" y="34.0" />
+    </edge>
+    <edge source="pdg5.client.ClientListener" target="java.lang.Runnable">
+      <point x="0.0" y="-165.5" />
+      <point x="1472.9017344497588" y="393.0" />
+      <point x="1305.4312028176482" y="393.0" />
+      <point x="-18.625" y="32.0" />
+    </edge>
+    <edge source="pdg5.client.controller.AbstractController" target="pdg5.client.controller.MainController">
+      <point x="-80.0" y="-34.0" />
+      <point x="1017.4183666552743" y="26142.0" />
+      <point x="921.418366655274" y="26142.0" />
+      <point x="-88.0" y="121.5" />
+    </edge>
+    <edge source="javafx.scene.Node" target="javafx.scene.Parent">
+      <point x="206.18181818181824" y="7670.0" />
+      <point x="2353.3005209994662" y="15803.0" />
+      <point x="2388.1316898306354" y="15803.0" />
+      <point x="258.42857142857156" y="-1485.0" />
+    </edge>
+    <edge source="javafx.scene.layout.Pane" target="javafx.scene.layout.Pane">
+      <point x="-119.33333333333326" y="92.5" />
+      <point x="2514.8917772651303" y="24855.5" />
+      <point x="2435.2251105984633" y="24855.5" />
+      <point x="2435.2251105984633" y="24743.0" />
+      <point x="-179.0" y="-0.0" />
+    </edge>
+    <edge source="pdg5.client.util.ClientRequestManager" target="pdg5.client.process.ProcessNoop">
+      <point x="67.75" y="-34.0" />
+      <point x="770.9375" y="18833.0" />
+      <point x="853.6875" y="18833.0" />
+      <point x="0.0" y="64.0" />
+    </edge>
+    <edge source="pdg5.client.controller.MainController" target="pdg5.client.ClientSender">
+      <point x="-117.33333333333326" y="-121.5" />
+      <point x="892.0850333219407" y="25844.0" />
+      <point x="322.60998613958907" y="25844.0" />
+      <point x="322.60998613958907" y="24542.0" />
+      <point x="184.125" y="24542.0" />
+      <point x="47.4375" y="165.5" />
+    </edge>
+    <edge source="javafx.scene.Node" target="javafx.scene.Node">
+      <point x="-343.63636363636374" y="7670.0" />
+      <point x="1803.4823391812845" y="15773.0" />
+      <point x="1749.1187028176482" y="15773.0" />
+      <point x="1749.1187028176482" y="11918.0" />
+      <point x="-378.0" y="3835.0" />
+    </edge>
+    <edge source="pdg5.client.view.GTile" target="javafx.scene.layout.Pane">
+      <point x="0.0" y="-136.5" />
+      <point x="1629.1517344497588" y="24954.0" />
+      <point x="2634.2251105984633" y="24954.0" />
+      <point x="0.0" y="92.5" />
+    </edge>
+    <edge source="pdg5.client.Client" target="pdg5.client.ClientListener">
+      <point x="99.14285714285734" y="-181.0" />
+      <point x="1188.8303571428573" y="24512.0" />
+      <point x="1372.9017344497588" y="24512.0" />
+      <point x="-100.0" y="165.5" />
+    </edge>
+    <edge source="pdg5.client.controller.SignUpController" target="pdg5.client.util.Toast">
+      <point x="0.0" y="-194.5" />
+      <point x="348.0017344497587" y="26489.0" />
+      <point x="529.9079499886076" y="26489.0" />
+      <point x="-78.25" y="151.0" />
+    </edge>
+    <edge source="pdg5.client.controller.SignInController" target="pdg5.client.ClientSender">
+      <point x="-100.0" y="-136.0" />
+      <point x="599.1579499886076" y="26958.0" />
+      <point x="102.59999999999991" y="26958.0" />
+      <point x="102.59999999999991" y="24532.0" />
+      <point x="57.625" y="24532.0" />
+      <point x="-79.0625" y="165.5" />
+    </edge>
+    <edge source="javafx.css.Styleable" target="javafx.css.Styleable">
+      <point x="-186.75" y="113.0" />
+      <point x="1617.5267344497588" y="333.0" />
+      <point x="1535.2767344497588" y="333.0" />
+      <point x="1535.2767344497588" y="200.0" />
+      <point x="-249.0" y="-0.0" />
+    </edge>
+    <edge source="pdg5.client.util.ClientRequestManager" target="pdg5.client.process.ProcessErrorMessage">
+      <point x="-67.75" y="-34.0" />
+      <point x="635.4375" y="18833.0" />
+      <point x="552.6875" y="18833.0" />
+      <point x="0.0" y="64.0" />
+    </edge>
+    <edge source="pdg5.client.controller.MainController" target="pdg5.client.controller.GameController">
+      <point x="156.44444444444457" y="-121.5" />
+      <point x="1165.8628110997186" y="25854.0" />
+      <point x="1748.9017344497588" y="25854.0" />
+      <point x="91.5" y="248.5" />
+    </edge>
+    <edge source="javafx.scene.Parent" target="javafx.scene.Parent">
+      <point x="-201.0" y="1485.0" />
+      <point x="1928.7031184020639" y="18813.0" />
+      <point x="1808.2031184020639" y="18813.0" />
+      <point x="1808.2031184020639" y="17308.0" />
+      <point x="-301.5" y="-0.0" />
+    </edge>
+    <edge source="javafx.scene.layout.Region" target="javafx.scene.layout.Region">
+      <point x="-363.33333333333326" y="2804.5" />
+      <point x="1814.5684011164255" y="24482.0" />
+      <point x="1612.9017344497588" y="24482.0" />
+      <point x="1612.9017344497588" y="21657.5" />
+      <point x="-545.0" y="-0.0" />
+    </edge>
+    <edge source="javafx.scene.layout.Region" target="javafx.scene.Parent">
+      <point x="-136.25" y="-2804.5" />
+      <point x="2041.6517344497588" y="18833.0" />
+      <point x="2129.703118402064" y="18833.0" />
+      <point x="0.0" y="1485.0" />
+    </edge>
+    <edge source="pdg5.client.view.GTile" target="pdg5.client.Client">
+      <point x="-84.33333333333326" y="-136.5" />
+      <point x="1544.8184011164255" y="24964.0" />
+      <point x="1089.6875" y="24964.0" />
+      <point x="0.0" y="181.0" />
+    </edge>
+    <edge source="javafx.scene.layout.Pane" target="javafx.beans.DefaultProperty">
+      <point x="44.75" y="-92.5" />
+      <point x="2678.9751105984633" y="24532.0" />
+      <point x="2831.901734449759" y="24532.0" />
+      <point x="0.0" y="34.0" />
+    </edge>
+    <edge source="pdg5.client.Client" target="pdg5.client.controller.MainController">
+      <point x="-115.66666666666652" y="181.0" />
+      <point x="974.0208333333335" y="24964.0" />
+      <point x="1009.4183666552743" y="24964.0" />
+      <point x="2.2737367544323206E-13" y="-121.5" />
+    </edge>
+    <edge source="javafx.scene.Node" target="java.lang.Runnable">
+      <point x="-189.0" y="-7670.0" />
+      <point x="1958.1187028176482" y="373.0" />
+      <point x="1379.9312028176482" y="373.0" />
+      <point x="55.875" y="32.0" />
+    </edge>
+    <edge source="javafx.scene.layout.Region" target="javafx.scene.Node">
+      <point x="408.75" y="-2804.5" />
+      <point x="2586.651734449759" y="18833.0" />
+      <point x="2441.703118402064" y="18833.0" />
+      <point x="2441.703118402064" y="15803.0" />
+      <point x="2422.027793726739" y="15803.0" />
+      <point x="274.909090909091" y="7670.0" />
+    </edge>
+    <edge source="pdg5.client.process.ProcessLoad" target="pdg5.client.process.GenericProcess">
+      <point x="0.0" y="-64.0" />
+      <point x="256.6875" y="15803.0" />
+      <point x="484.1517344497588" y="15803.0" />
+      <point x="-71.0" y="34.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.9055793991416309" x="1365.9028436018957" y="456.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Methods</Category>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

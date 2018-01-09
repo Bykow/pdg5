@@ -59,6 +59,7 @@ nb-*.xml
 *.pdf
 *.lof
 *.out
+*.lot
 
 
 #OSX bullshit

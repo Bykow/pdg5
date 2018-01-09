@@ -243,6 +243,11 @@ public class GameController {
       // delete the game from the list of the player
       clientGames.get(playerID).removeIf(p -> p == gameID);
       
+      if(model.getState() == GameModel.State.IN_PROGRESS) {
+         model.setState(State.FINISHED);
+         finish(gameID, idPlayer2, playerID, false);
+      }
+      
       // if the second player has deleted the game too we delete the game from the map of games too
       if(clientGames.get(idPlayer2).indexOf(gameID) == -1) {
          games.remove(gameID);
@@ -250,6 +255,26 @@ public class GameController {
       
       // send games to player again with the game deleted
       return findGamesOf(playerID);
+   }
+   
+   private void finish(int gameID, int idWinner, int idLooser, boolean isEquality) {
+      if(isEquality) {
+         activeUser.getClientHandler(idLooser).addToQueue(new End(End.RESULT.EQUALITY, gameID));
+         activeUser.getClientHandler(idWinner).addToQueue(new End(End.RESULT.EQUALITY, gameID));
+      } else {
+         activeUser.getClientHandler(idLooser).addToQueue(new End(End.RESULT.LOSE, gameID));
+         activeUser.getClientHandler(idWinner).addToQueue(new End(End.RESULT.WIN, gameID));
+      }
+      
+      // update the DB game
+      pdg5.server.persistent.Game game = 
+              manageGame.getGamesByUsername(manageUser.getUserById(idWinner))
+                      .stream()
+                      .filter((f) -> f.id == gameID)
+                      .findAny()
+                      .get();
+      game.setGameState(games.get(gameID));
+      manageGame.updateGame(game);
    }
 
    /**
@@ -505,15 +530,12 @@ public class GameController {
       model.setState(State.FINISHED);
       
       if(board.getScore() > boardOpponent.getScore()) {
-            activeUser.getClientHandler(player2Id).addToQueue(new End(End.RESULT.LOSE, gameID));
-            activeUser.getClientHandler(player1Id).addToQueue(new End(End.RESULT.WIN, gameID));
-         } else if (board.getScore() < boardOpponent.getScore()) {
-            activeUser.getClientHandler(player2Id).addToQueue(new End(End.RESULT.WIN, gameID));
-            activeUser.getClientHandler(player1Id).addToQueue(new End(End.RESULT.LOSE, gameID));
-         } else {
-            activeUser.getClientHandler(player2Id).addToQueue(new End(End.RESULT.EQUALITY, gameID));
-            activeUser.getClientHandler(player1Id).addToQueue(new End(End.RESULT.EQUALITY, gameID));
-         }
+         finish(gameID, player1Id, player2Id, false);
+      } else if (board.getScore() < boardOpponent.getScore()) {
+         finish(gameID, player2Id, player1Id, false);
+      } else {
+         finish(gameID, player2Id, player1Id, true);
+      }
    }
    
    private boolean isEndMode(GameModel model, TileStack ts) {
@@ -619,22 +641,10 @@ public class GameController {
                       activeUser.getClientHandler(idPlayer1).addToQueue(getGameFromModel(gameID, idPlayer1));
                       activeUser.getClientHandler(idPlayer2).addToQueue(getGameFromModel(gameID, idPlayer2));
                       
-                      // update the DB game
-                      pdg5.server.persistent.Game game = 
-                              manageGame.getGamesByUsername(manageUser.getUserById(idPlayer1))
-                                      .stream()
-                                      .filter((f) -> f.id == gameID)
-                                      .findAny()
-                                      .get();
-                      game.setGameState(gameModel);
-                      manageGame.updateGame(game);
-                      
                       if (playerTurnManager.get(gameID).isCurrentPlayer(idPlayer1)) {
-                        activeUser.getClientHandler(idPlayer1).addToQueue(new End(End.RESULT.LOSE, gameID));
-                        activeUser.getClientHandler(idPlayer2).addToQueue(new End(End.RESULT.WIN, gameID));
+                        finish(gameID, idPlayer2, idPlayer1, false);
                       } else {
-                        activeUser.getClientHandler(idPlayer1).addToQueue(new End(End.RESULT.WIN, gameID));
-                        activeUser.getClientHandler(idPlayer2).addToQueue(new End(End.RESULT.LOSE, gameID));
+                        finish(gameID, idPlayer1, idPlayer2, false);
                       }
                   }
               }

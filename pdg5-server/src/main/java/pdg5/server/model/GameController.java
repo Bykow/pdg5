@@ -258,7 +258,7 @@ public class GameController {
     */
    private Game getGameFromModel(int idGame, int idClient) {
       GameModel gm = games.get(idGame);
-      Board boardOfClient = gm.getBoardById(idClient);
+      Board boardOfClient = new Board(gm.getBoardById(idClient));
       Board opponentBoard = gm.getOpponentBoard(idClient);
       
       
@@ -458,7 +458,9 @@ public class GameController {
       }
       
       activeUser.getClientHandler(opponentId).addToQueue(getGameFromModel(gameID, opponentId));
-      return getGameFromModel(gameID, playerID);
+      Game gameToSend = getGameFromModel(gameID, playerID);
+      System.out.println(gameToSend);
+      return gameToSend;
    }
    
    private void sendScoreResults(GameModel model) {
@@ -482,13 +484,9 @@ public class GameController {
    
    private boolean isEndMode(GameModel model, TileStack ts) {
       int tilesLeft = ts.getTileLeft();
+       // not end-mode yet
       
-      // not end-mode yet
-      if(tilesLeft > TILE_LEFT_END_MODE) {
-         return false;
-      }
-      
-      return true;
+      return tilesLeft <= TILE_LEFT_END_MODE;
    }
    
    /**
@@ -508,12 +506,10 @@ public class GameController {
       } else if(model.isHasPassedLastMovePlayer1() && model.isHasPassedLastMovePlayer2()) {
          return true;
       // the tileStacke is empty and a player used all his Tiles -> end of game
-      } else if (tilesLeft == 0 && 
+      } else{
+          return tilesLeft == 0 && 
               (model.getBoard(GameModel.PlayerBoard.PLAYER1).getLetters().isEmpty()
-              || model.getBoard(GameModel.PlayerBoard.PLAYER2).getLetters().isEmpty())) {
-         return true;
-      } else {
-         return false;
+              || model.getBoard(GameModel.PlayerBoard.PLAYER2).getLetters().isEmpty());
       }
    }
 

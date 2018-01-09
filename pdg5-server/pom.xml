@@ -76,6 +76,7 @@
                <include>**/*.dic</include>
                <include>**/*.xml</include>
                <include>*.xml</include>
+               <include>*.jks</include>
             </includes>
          </resource>
       </resources>

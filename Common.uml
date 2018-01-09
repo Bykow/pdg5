@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>pdg5.common.game.Utils</OriginalElement>
+  <nodes>
+    <node x="167.62156862745098" y="886.0">pdg5.common.game.Composition</node>
+    <node x="274.0" y="87.0">pdg5.common.game.Tile</node>
+    <node x="1117.886274509804" y="0.0">pdg5.common.Protocol</node>
+    <node x="1490.886274509804" y="0.0">pdg5.common.MessageQueue</node>
+    <node x="371.1362745098039" y="392.0">pdg5.common.game.Board</node>
+    <node x="0.0" y="541.5">pdg5.common.game.Utils</node>
+    <node x="692.8862745098039" y="413.0">pdg5.common.WordCombinations</node>
+    <node x="735.8862745098039" y="0.0">pdg5.common.TST</node>
+    <node x="329.8862745098039" y="1336.0">pdg5.common.game.GameModel</node>
+    <node x="424.69999999999993" y="0.0">java.io.Serializable</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="pdg5.common.game.GameModel" target="java.io.Serializable">
+      <point x="132.5" y="-235.5" />
+      <point x="621.3862745098039" y="1316.0" />
+      <point x="638.6362745098039" y="1316.0" />
+      <point x="638.6362745098039" y="57.0" />
+      <point x="547.2" y="57.0" />
+      <point x="52.50000000000006" y="18.5" />
+    </edge>
+    <edge source="pdg5.common.game.Tile" target="java.io.Serializable">
+      <point x="0.0" y="-127.5" />
+      <point x="394.5" y="67.0" />
+      <point x="477.19999999999993" y="67.0" />
+      <point x="-17.5" y="18.5" />
+    </edge>
+    <edge source="pdg5.common.WordCombinations" target="pdg5.common.TST">
+      <point x="-95.0" y="-141.0" />
+      <point x="787.8862745098039" y="388.0" />
+      <point x="809.3862745098039" y="388.0" />
+      <point x="-73.5" y="181.5" />
+    </edge>
+    <edge source="pdg5.common.game.GameModel" target="pdg5.common.game.Board">
+      <point x="79.5" y="-235.5" />
+      <point x="568.3862745098039" y="1316.0" />
+      <point x="560.5333333333333" y="1316.0" />
+      <point x="560.5333333333333" y="866.0" />
+      <point x="585.3029411764705" y="866.0" />
+      <point x="85.66666666666663" y="222.0" />
+    </edge>
+    <edge source="pdg5.common.game.Composition" target="pdg5.common.game.Utils">
+      <point x="-110.0" y="-195.0" />
+      <point x="189.62156862745098" y="866.0" />
+      <point x="126.5" y="866.0" />
+      <point x="0.0" y="72.5" />
+    </edge>
+    <edge source="pdg5.common.game.Composition" target="java.io.Serializable">
+      <point x="-66.0" y="-195.0" />
+      <point x="233.62156862745098" y="866.0" />
+      <point x="263.5" y="866.0" />
+      <point x="263.5" y="57.0" />
+      <point x="442.19999999999993" y="57.0" />
+      <point x="-52.5" y="18.5" />
+    </edge>
+    <edge source="pdg5.common.game.Composition" target="pdg5.common.game.Board">
+      <point x="110.0" y="-195.0" />
+      <point x="409.621568627451" y="866.0" />
+      <point x="413.9696078431372" y="866.0" />
+      <point x="-85.66666666666669" y="222.0" />
+    </edge>
+    <edge source="pdg5.common.game.GameModel" target="pdg5.common.game.Composition">
+      <point x="-79.5" y="-235.5" />
+      <point x="409.3862745098039" y="1306.0" />
+      <point x="299.621568627451" y="1306.0" />
+      <point x="0.0" y="195.0" />
+    </edge>
+    <edge source="pdg5.common.game.Board" target="pdg5.common.game.Tile">
+      <point x="-85.66666666666669" y="-222.0" />
+      <point x="413.9696078431372" y="367.0" />
+      <point x="442.7" y="367.0" />
+      <point x="48.19999999999999" y="127.5" />
+    </edge>
+    <edge source="pdg5.common.game.Composition" target="pdg5.common.game.Tile">
+      <point x="66.0" y="-195.0" />
+      <point x="365.621568627451" y="866.0" />
+      <point x="358.8862745098039" y="866.0" />
+      <point x="358.8862745098039" y="367.0" />
+      <point x="394.5" y="367.0" />
+      <point x="0.0" y="127.5" />
+    </edge>
+    <edge source="pdg5.common.game.Board" target="java.io.Serializable">
+      <point x="85.66666666666663" y="-222.0" />
+      <point x="585.3029411764705" y="367.0" />
+      <point x="594.9549019607844" y="367.0" />
+      <point x="594.9549019607844" y="67.0" />
+      <point x="512.2" y="67.0" />
+      <point x="17.500000000000057" y="18.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.6000000000000001" x="601.1666666666665" y="751.3333333333333" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Methods</Category>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

@@ -133,8 +133,12 @@ public class LobyController {
     }
 
     public void updateGame(Game game) {
-        gameModelList.remove(game);
+        gameModelList.removeIf((o) -> o.getID() == game.getID());
         addGame(game);
+        if (gameController.getGameID() == game.getID()) {
+            gameController.updateGame(game);
+        }
         Platform.runLater(this::refresh);
+
     }
 }

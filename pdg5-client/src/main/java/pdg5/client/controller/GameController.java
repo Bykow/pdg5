@@ -229,4 +229,9 @@ public class GameController {
         ClientSender clientSender = new ClientSender();
         clientSender.add(new Play(getPlay(), gameID));
     }
+
+    public int getGameID() {
+        return gameID;
+    }
+
 }

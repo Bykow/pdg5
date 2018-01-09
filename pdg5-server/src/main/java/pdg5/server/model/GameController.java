@@ -268,11 +268,18 @@ public class GameController {
       TileStack ts = tileStacks.get(gm.getGameId());
       TurnManager tm = playerTurnManager.get(gm.getGameId());
       boolean hisTurn = tm.isCurrentPlayer(idClient);
+      
+      List<Tile> lastWordPlayed;
+      if(hisTurn) {
+         lastWordPlayed = gm.getLastWordPlayed();
+      } else {
+         lastWordPlayed = new ArrayList<>();
+      }
 
       Game game = new Game(gm.getGameId(), gm.getCreation(),
         gm.getLastMove(), gm.getIdTournament(), boardOfClient, 
         cleanedOpponentBoard, ts.getTileLeft(),
-        gm.getLastWordPlayed(), gm.getScoreLastWordPlayed(), hisTurn, gm.getState());
+        lastWordPlayed, gm.getScoreLastWordPlayed(), hisTurn, gm.getState());
       return game;
    }
 

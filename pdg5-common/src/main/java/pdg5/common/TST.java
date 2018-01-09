@@ -1,9 +1,11 @@
 package pdg5.common;
 
+import java.io.Serializable;
+
 /**
  * Class representing a Ternary Search Tree, used to stock a dictionary
  */
-public class TST {
+public class TST implements Serializable {
     /**
      * Root of the tree
      */

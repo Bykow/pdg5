@@ -89,6 +89,11 @@ public class GameController {
     * item containing informations about all the users online
     */
    private final ServerActiveUser activeUser;
+   
+   /**
+    * Link item to the game's part of database
+    */
+   private final ManageGame manageGame;
 
    /**
     * Constructor
@@ -102,6 +107,7 @@ public class GameController {
       playerTurnManager = new HashMap<>();
       matchMaking = new ArrayList<>();
       manageUser = new ManageUser();
+      manageGame = new ManageGame();
 
       InputStream inputStream = TST.class.getResourceAsStream("/dico/fr_dico.dic");
       new BufferedReader(new InputStreamReader(inputStream)).lines()
@@ -142,10 +148,7 @@ public class GameController {
       TileStack ts = new TileStack(Protocol.Languages.LANG_FR.toString());
       
       // Add the game to the DB
-      ManageUser userManager = new ManageUser();
-      ManageGame gameManager = new ManageGame();
-      pdg5.server.persistent.Game game = gameManager.addGame("title", userManager.getUserById(idPlayer1), userManager.getUserById(idPlayer2), ts.convertToString());
-      
+      pdg5.server.persistent.Game game = manageGame.addGame("title", manageUser.getUserById(idPlayer1), manageUser.getUserById(idPlayer2), ts.convertToString());
       int idGame = game.getId();
       
       tileStacks.put(idGame, ts);
@@ -180,20 +183,16 @@ public class GameController {
          model.getOpponentBoard(idPlayer1).setBonus(bonus);
       }
 
-      try {
-         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-         ObjectOutputStream output = new ObjectOutputStream(byteArrayOutputStream);
-         output.writeObject(game);
-         String gameState = Base64.getEncoder().encodeToString(byteArrayOutputStream.toByteArray());
-         game.setGameState(gameState);
-      } catch (IOException ex) {
-         Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
-      }
+      // update the game to database
+      game.setGameState(model);
+      manageGame.updateGame(game);
       
       // sending to second player
       activeUser.getClientHandler(idPlayer2).addToQueue(getGameFromModel(model.getGameId(), idPlayer2));
       return getGameFromModel(model.getGameId(), idPlayer1);
    }
+   
+   
 
    /**
     * return a new Board filled with Tiles of a given TileStack
@@ -457,6 +456,16 @@ public class GameController {
          return new Noop(Noop.Sender.SERVER);
       }
       
+      // update the DB game
+      pdg5.server.persistent.Game game = 
+              manageGame.getGamesByUsername(manageUser.getUserById(playerID))
+                      .stream()
+                      .filter((f) -> f.id == gameID)
+                      .findAny()
+                      .get();
+      game.setGameState(model);
+      manageGame.updateGame(game);
+      
       activeUser.getClientHandler(opponentId).addToQueue(getGameFromModel(gameID, opponentId));
       Game gameToSend = getGameFromModel(gameID, playerID);
       System.out.println(gameToSend);
@@ -584,6 +593,16 @@ public class GameController {
                       int idPlayer2 = gameModel.getBoard(GameModel.PlayerBoard.PLAYER2).getPlayerId();
                       activeUser.getClientHandler(idPlayer1).addToQueue(getGameFromModel(gameID, idPlayer1));
                       activeUser.getClientHandler(idPlayer2).addToQueue(getGameFromModel(gameID, idPlayer2));
+                      
+                      // update the DB game
+                      pdg5.server.persistent.Game game = 
+                              manageGame.getGamesByUsername(manageUser.getUserById(idPlayer1))
+                                      .stream()
+                                      .filter((f) -> f.id == gameID)
+                                      .findAny()
+                                      .get();
+                      game.setGameState(gameModel);
+                      manageGame.updateGame(game);
                   }
               }
           });

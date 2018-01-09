@@ -34,13 +34,10 @@ public class ProcessSignIn implements GenericProcess {
     @Override
     public Message execute() {
         if (manager.isCorrectPassword(signIn.getUsername(), signIn.getPassword())) {
-            // TODO waiting for game logic to improve
-            // TODO add client to activeUser
 
             int idUser = manager.getUserByUsername(signIn.getUsername()).getId();
 
             try {
-                // TODO check if user is logged in already
                 activeUser.add(idUser, clientHandler);
                 clientHandler.setPlayerId(idUser);
 

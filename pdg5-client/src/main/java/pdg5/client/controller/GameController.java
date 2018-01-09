@@ -207,7 +207,7 @@ public class GameController {
             composition.push(((GTile) st.getChildren().get(0)).getModel());
         }
         cleanList(adversaryBonusList, Protocol.NUMBER_OF_EXTRA_TUILES);
-        cleanList(userList, Protocol.NUMBER_OF_EXTRA_TUILES);
+        cleanList(userList, Protocol.NUMBER_OF_TUILES_PER_PLAYER);
         return composition;
     }
 

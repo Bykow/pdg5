@@ -149,6 +149,8 @@
 		Celui-ci contient tout le code côté serveur avec toute la logique que cella implique. \\
 		C'est lui qui va gérer toute les communications avec tout les clients possibles, mais également de l'intégrité de chaque partie, de générer les bons stacks de lettre en fonction de notre dictionnaire, de verifier les mots envoyés par les clients et en cas de succès, d'envoyer aux 2 joueurs les retours correspondants, etc.
 		
+		Le serveur maintenant une connexion permanante avec un serveur MySQL afin de permet de sauvegarder les données de jeu et ainsi d'assurer l'intégrité des données même en cas de crash de notre serveur. Ce dernier va automatiquement chercher les données sur celui-ci.
+		
 		\subsubsection{Common}
 		Ce dernier sous-projet contient toutes les classes communes au client ainsi qu'au serveur \textit{Server}. Toutes les classes pouvant passer par le réseau pour communiquer entre le serveur et un client doit donc s'y trouver. \\
 		Cette façon de séparer les parties communes nous permet d'éviter le dublicat de code et de s'assurer que les deux autres sous-projets incluent le sous-proket \textit{common} afin de garantir que nos classes comunes le restent.
@@ -230,12 +232,23 @@
 		Suite à la mise en avant du dictionnaire, soit du stack définit de lettre qui peuvent sortir au cours d'une partie, nous avons analysé leur ordre de sortie en essayant de mettre un avant un paterne, ou toutes autres logique. \\
 		Nous avons constaté que l'ordre d'arrivée des lettres est purement aléatoire malgré les apparences. En effet, au fur et à mesure que l'on avance dans une partie, on va acumuler des lettres peut utilisées de la langue française, telle que le \textit{J}, \textit{K}, \textit{V}, \textit{W}, \textit{X}, etc, ce qui rend un apparence seulement, la partie plus dur lorsque nous arrivons au terme.
 		
+		\subsubsection{Verification des mots}
+		La vérification des mots se fait côté serveur afin de garantir que le client ne modifie pas ce dernier et puisse valider n'importe quel mot.\\
+		Cette vérification se fait via un TST\footnote{\textbf{TST} : Ternary Search Tree}. Cette structure de données permet de minimiser les ressources système utilisées du côté du serveur lors de la vérification et validation d'un mot. Il est en effet indispensable de bien optimiser cette partie en raison du fait que c'est une opération lourde qui est amenée à être souvent exécutée.  
+		
+		
 		\subsubsection{Communication}
 	
-	\subsection{Tests}
-	\subsubsection{Bug connu}
-	
-	\subsubsection{Fonctionnalité pouvant être ajoutée}
+		\subsection{Bug connu}
+		
+		\subsection{Fonctionnalité pouvant être ajoutée}
+			\subsubsection{Verification mot en temps réel}
+			Pour éviter de trop surcharger le serveur, et afin de permettre une meilleure expérience utilisateur, on avait prévu d'envoyer du côté client notre TST (dictionnaire des mots possible) afin que ce dernier puisse vérifier et savoir en temps réel si son mot est valide ou pas, et tout ceci sans une seule communication avec le serveur afin de le préserver. \\
+			Et pour éviter qu'un client ne modifie ce TST et puisse envoyer n'importe quel mot, on maintient la vérification côté serveur afin de s'assurer de la légitimité du mot. 
+			
+			\subsubsection{Chat}
+			Le chat peut aussi être ajouté à notre client afin de permettre de communiquer lors de chaque partie avec son adversaire.\\
+			Notre base de données est déjà prévue pour prendre en compte les messages de chat pouvant venir d'un client. 
 	
 	\section{Technologie utilisée}
 	Nous avons décidé de coder et développer notre application sans framework. En effet, aucun des frameworks connus ne nous aurait réellement aidés par rapport à nos beosin. De plus, prendre du temps pour comprendre et savoir utiliser correctement un ou plusieurs nouveaux frameworks aurait pû nous prendre beaucoup de temps. \\

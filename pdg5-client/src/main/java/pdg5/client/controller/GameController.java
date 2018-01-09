@@ -31,6 +31,7 @@ import pdg5.common.game.Tile;
 import pdg5.common.protocol.Game;
 import pdg5.common.protocol.Play;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -196,9 +197,9 @@ public class GameController {
         );
     }
 
-    private Composition getPlay() {
+    private Composition getPlay(List<StackPane> list) {
         Composition composition = new Composition();
-        for (StackPane st: userList) {
+        for (StackPane st: list) {
             if(st.getChildren().size() == 0) {
                 continue;
             }
@@ -213,14 +214,21 @@ public class GameController {
     }
 
     private void shuffleHand() {
-
-        Collections.shuffle(deckList);
+        ArrayList<Tile> temp = new ArrayList<>();
+        for (StackPane st: deckList) {
+            if(st.getChildren().size() == 0) {
+                continue;
+            }
+            temp.add(((GTile) st.getChildren().get(0)).getModel());
+        }
+        Collections.shuffle(temp);
+        updateList(temp, Protocol.NUMBER_OF_TUILES_PER_PLAYER, deckList);
     }
 
     @FXML
     private void play(ActionEvent actionEvent) {
         ClientSender clientSender = new ClientSender();
-        clientSender.add(new Play(getPlay(), gameID));
+        clientSender.add(new Play(getPlay(userList), gameID));
     }
 
 

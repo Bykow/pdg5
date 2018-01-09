@@ -29,7 +29,7 @@ public class ServerRequestManager {
         System.out.println("Message received : " + o);
         
         if (o instanceof SignUp) {
-            return new ProcessSignUp((SignUp) o, manageUser, activeUser, ch).execute();
+            return new ProcessSignUp((SignUp) o, gameController, manageUser, activeUser, ch).execute();
 
         } else if (o instanceof SignIn) {
             return new ProcessSignIn((SignIn) o, manageUser, activeUser, gameController, ch).execute();

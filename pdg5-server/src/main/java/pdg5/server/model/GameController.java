@@ -149,7 +149,6 @@ public class GameController {
       int idGame = game.getId();
       
       tileStacks.put(idGame, ts);
-
       
       // add a new turnManager for this game
       TurnManager tm = new TurnManager(idPlayer1, idPlayer2, System.currentTimeMillis());
@@ -557,6 +556,10 @@ public class GameController {
       return map;
    }
 
+   public TST getDictionnary() {
+      return dictionary;
+   }
+   
    /**
     * method called by the scheduler to check in all games if there is some outdated.
     * If some are outdated, the method change the state of the game 

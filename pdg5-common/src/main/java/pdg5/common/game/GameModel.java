@@ -24,7 +24,7 @@ public class GameModel implements Serializable {
     * enum to identifiate the State of the game
     */
    public enum State {
-      IN_PROGRESS, FINISHED, OUTDATED
+      IN_PROGRESS, END_MODE, FINISHED, OUTDATED
    }
 
    private int scoreLastWordPlayed;
@@ -59,16 +59,6 @@ public class GameModel implements Serializable {
     * Date of the last word played by a player
     */
    private Date lastMove;
-   
-   /**
-    * true if the player 1 last move was a "pass"
-    */
-   private boolean hasPassedLastMovePlayer1;
-   
-   /**
-    * true if the player 2 last move was a "pass"
-    */
-   private boolean hasPassedLastMovePlayer2;
 
    /**
     * Constructor
@@ -88,8 +78,6 @@ public class GameModel implements Serializable {
       this.creation = creationDate;
       this.idTournament = idTournament;
       lastMove = new Date();
-      hasPassedLastMovePlayer1 = false;
-      hasPassedLastMovePlayer2 = false;
       state = State.IN_PROGRESS;
       lastWordPlayed = new ArrayList<>();
       scoreLastWordPlayed = 0;
@@ -119,8 +107,6 @@ public class GameModel implements Serializable {
       
       creation = game.getCreated();
       idTournament = game.getTournament();
-      hasPassedLastMovePlayer1 = false;  
-      hasPassedLastMovePlayer2 = false;  
       lastMove = game.getLastActivity();
       lastWordPlayed = game.getLastWordPlayed();
       scoreLastWordPlayed = game.getScoreLastWordPlayed();
@@ -256,22 +242,6 @@ public class GameModel implements Serializable {
 
    public void setScoreLastWordPlayed(int scoreLastWordPlayed) {
       this.scoreLastWordPlayed = scoreLastWordPlayed;
-   }
-
-   /**
-    * return true if player 1 last move was a "pass"
-    * @return true if player 1 last move was a "pass"
-    */
-   public boolean isHasPassedLastMovePlayer1() {
-      return hasPassedLastMovePlayer1;
-   }
-
-   /**
-    * return true if player 2 last move was a "pass"
-    * @return true if player 2 last move was a "pass"
-    */
-   public boolean isHasPassedLastMovePlayer2() {
-      return hasPassedLastMovePlayer2;
    }
 
    /**

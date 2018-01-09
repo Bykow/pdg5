@@ -16,6 +16,12 @@ import java.util.Objects;
  */
 public class Board implements Serializable {
 
+   public enum LAST_ACTION {
+      PLAY, THROW, PASS
+   }
+   
+   private LAST_ACTION lastAction;
+   
    /**
     * Word in progress for this client
     */
@@ -40,12 +46,14 @@ public class Board implements Serializable {
       bonus = new ArrayList<>();
       letters = new ArrayList<>();
       composition = new Composition();
+      lastAction = null;
 
    }
    
    public Board(Board board){
       playerName = board.playerName;
       playerId = board.playerId;
+      lastAction = board.lastAction;
       
       score = board.score;
       composition = new Composition(board.composition);
@@ -60,6 +68,14 @@ public class Board implements Serializable {
     */
    public List<Tile> getBonus() {
       return bonus;
+   }
+   
+   /**
+    * return the player last action
+    * @return the player last action
+    */
+   public LAST_ACTION getLastAction() {   
+      return lastAction;
    }
 
    /**
@@ -116,6 +132,14 @@ public class Board implements Serializable {
       this.bonus = new ArrayList<>(bonus);
    }
 
+   /**
+    * set the player last action
+    * @param lastAction the new player last action
+    */
+   public void setLastAction(LAST_ACTION lastAction) {
+      this.lastAction = lastAction;
+   }
+   
    /**
     * set the score of the associated player
     *
@@ -175,7 +199,8 @@ public class Board implements Serializable {
          && playerId == ((Board) o).playerId
          && playerName.equals(((Board) o).playerName)
          && score == ((Board) o).score
-         && composition.equals(((Board) o).composition);
+         && composition.equals(((Board) o).composition)
+         && lastAction == ((Board) o).lastAction;
    }
 
    @Override
@@ -187,6 +212,7 @@ public class Board implements Serializable {
       hash = 67 * hash + this.playerId;
       hash = 67 * hash + Objects.hashCode(this.playerName);
       hash = 67 * hash + this.score;
+      hash = 67 * hash + Objects.hashCode(this.lastAction);
       return hash;
    }
 }

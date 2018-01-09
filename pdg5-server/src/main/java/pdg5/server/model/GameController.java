@@ -39,7 +39,8 @@ public class GameController {
    /**
     * number of letters left in a TileStack befor the game changes to check-end-mode
     */
-   private static final int TILE_LEFT_END_MODE = 10;
+   private static final int TILE_LEFT_END_MODE_HARD = 2;
+   private static final int TILE_LEFT_END_MODE_LAZY = 10;
    
    /**
     * random used for Square position random
@@ -376,7 +377,7 @@ public class GameController {
       // throw Tiles or pass depending on the game context
       TileStack ts = tileStacks.get(gameID);
       if(isEndMode(model, ts)) {
-         pass(model, tm, playerID);
+         pass(model, playerID, ts);
       } else {
          throwAction(model, playerID, ts);
       }
@@ -394,15 +395,22 @@ public class GameController {
       }
    }
    
-   private void pass(GameModel model, TurnManager turnManager, int playerID) {
-      //TODO
+   private void pass(GameModel model, int playerID, TileStack ts) {
+      Board board = model.getBoardById(playerID);
+      
+      // the player lose the total value of bonus letters in his score
+      List<Tile> bonus = board.getBonus();
+      int lostScore = 0;
+      lostScore = bonus.stream().map((bonusTile) -> bonusTile.getValue()).reduce(lostScore, (sum, tile) -> sum + tile);
+      board.setScore(board.getScore() - lostScore);
+      board.setBonus(new ArrayList<>());
+      board.setLastAction(Board.LAST_ACTION.PASS);
    }
    
    private void throwAction(GameModel model, int playerID, TileStack ts) {
       Board board = model.getBoardById(playerID);
       Board opponentBoard = model.getOpponentBoard(playerID);
       List<Tile> letters = board.getLetters();
-      List<Tile> bonus = board.getBonus();
       List<Tile> bonusOpponent = new ArrayList<>();
       
       //two random of player letter are sent as bonus to the opponent
@@ -413,10 +421,12 @@ public class GameController {
       opponentBoard.setBonus(bonusOpponent);
       
       // the player lose the total value of bonus letters in his score
+      List<Tile> bonus = board.getBonus();
       int lostScore = 0;
       lostScore = bonus.stream().map((bonusTile) -> bonusTile.getValue()).reduce(lostScore, (sum, tile) -> sum + tile);
       board.setScore(board.getScore() - lostScore);
       board.setBonus(new ArrayList<>());
+      board.setLastAction(Board.LAST_ACTION.THROW);
    }
 
    /**
@@ -503,6 +513,7 @@ public class GameController {
       board.setLetters(newLetters);
 
       int opponentId = model.getOpponentBoard(playerID).getPlayerId();
+      board.setLastAction(Board.LAST_ACTION.PLAY);
       
       // Send game result if the game finished
       if(gameEnded(model, ts)) {
@@ -546,8 +557,14 @@ public class GameController {
    private boolean isEndMode(GameModel model, TileStack ts) {
       int tilesLeft = ts.getTileLeft();
        // not end-mode yet
+       if(tilesLeft <= TILE_LEFT_END_MODE_HARD
+              || tilesLeft <= TILE_LEFT_END_MODE_LAZY
+              && model.getBoard(GameModel.PlayerBoard.PLAYER1).getLastAction() == Board.LAST_ACTION.THROW 
+              && model.getBoard(GameModel.PlayerBoard.PLAYER2).getLastAction() == Board.LAST_ACTION.THROW) {
+          model.setState(State.END_MODE);
+       }
       
-      return tilesLeft <= TILE_LEFT_END_MODE;
+      return model.getState() == GameModel.State.END_MODE;
    }
    
    /**
@@ -564,7 +581,8 @@ public class GameController {
       if(!isEndMode(model, ts)) {
          return false;
       // two players passed -> end of game
-      } else if(model.isHasPassedLastMovePlayer1() && model.isHasPassedLastMovePlayer2()) {
+      } else if(model.getBoard(GameModel.PlayerBoard.PLAYER1).getLastAction() == Board.LAST_ACTION.PASS && 
+              model.getBoard(GameModel.PlayerBoard.PLAYER2).getLastAction() == Board.LAST_ACTION.PASS) {
          return true;
       // the tileStacke is empty and a player used all his Tiles -> end of game
       } else{

@@ -159,30 +159,12 @@ public class GameController {
         }
     }
 
-    private void cleanComposition() {
-        for (int i = 0; i < Protocol.NUMBER_OF_TUILES_PER_PLAYER; i++) {
-            if(userList.get(i).getChildren().size() == 0) {
+    private void cleanList(List<StackPane> list, int size) {
+        for (int i = 0; i < size; i++) {
+            if(list.get(i).getChildren().size() == 0) {
                 continue;
             }
-            userList.get(i).getChildren().remove(0);
-        }
-    }
-
-    private void cleanBonus() {
-        for (int i = 0; i < Protocol.NUMBER_OF_EXTRA_TUILES; i++) {
-            if(userBonusList.get(i).getChildren().size() == 0) {
-                continue;
-            }
-            userBonusList.get(i).getChildren().remove(0);
-        }
-    }
-
-    private void cleanOpponentBonus() {
-        for (int i = 0; i < Protocol.NUMBER_OF_EXTRA_TUILES; i++) {
-            if(adversaryBonusList.get(i).getChildren().size() == 0) {
-                continue;
-            }
-            adversaryBonusList.get(i).getChildren().remove(0);
+            list.get(i).getChildren().remove(0);
         }
     }
 
@@ -192,10 +174,11 @@ public class GameController {
         updateList(g.getLastWordPlayed(), Protocol.NUMBER_OF_TUILES_PER_PLAYER, adversaryList);
         updateList(g.getOpponentBonusLetters(), Protocol.NUMBER_OF_EXTRA_TUILES, adversaryBonusList);
         if (g.isYourTurn()) {
-            cleanComposition();
-            cleanOpponentBonus();
+            cleanList(userList, Protocol.NUMBER_OF_TUILES_PER_PLAYER);
+            cleanList(adversaryBonusList, Protocol.NUMBER_OF_EXTRA_TUILES);
         } else {
-            cleanBonus();
+            cleanList(userBonusList, Protocol.NUMBER_OF_EXTRA_TUILES);
+            cleanList(adversaryList, Protocol.NUMBER_OF_TUILES_PER_PLAYER);
         }
     }
 
@@ -220,7 +203,7 @@ public class GameController {
             }
             composition.push(((GTile) st.getChildren().get(0)).getModel());
         }
-        cleanOpponentBonus();
+        cleanList(adversaryBonusList, Protocol.NUMBER_OF_EXTRA_TUILES);
         return composition;
     }
 

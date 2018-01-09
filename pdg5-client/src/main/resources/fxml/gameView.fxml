@@ -68,7 +68,7 @@
             </fx:define>
          </children>
       </HBox>
-      <HBox layoutX="374.0" layoutY="89.0" prefHeight="80.0" prefWidth="162.0" styleClass="table">
+      <HBox layoutX="362.0" layoutY="89.0" prefHeight="80.0" prefWidth="162.0" styleClass="table">
          <children>
             <StackPane fx:id="agbbox0" prefHeight="200.0" prefWidth="200.0" />
             <StackPane fx:id="agbbox1" prefHeight="200.0" prefWidth="200.0" />

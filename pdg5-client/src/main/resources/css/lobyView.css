@@ -57,3 +57,8 @@
 .titleFinished {
     -fx-background-color: #84cdf6;
 }
+
+#bottom-bar {
+    -fx-border-color: #d26e22;
+    -fx-border-width: 0 1px 0 1px;
+}

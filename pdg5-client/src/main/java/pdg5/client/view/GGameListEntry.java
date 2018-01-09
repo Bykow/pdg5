@@ -25,6 +25,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import pdg5.client.Client;
 import pdg5.common.game.GameModel;
+import pdg5.common.game.Tile;
 import pdg5.common.protocol.Game;
 
 import java.io.IOException;
@@ -90,7 +91,7 @@ public class GGameListEntry extends AnchorPane {
         // TODO Implement messages for finished games
         if (model.getState() != GameModel.State.FINISHED)
             //TODO Get last word played score value
-            msg.setText("a joué " + model.getLastWordPlayed());
+            msg.setText("a joué " + Tile.tilesToString(model.getLastWordPlayed()));
     }
 
     public void setSelected(boolean value) {

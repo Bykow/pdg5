@@ -2,6 +2,7 @@ package pdg5.server.process;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import pdg5.common.WordCombinations;
 import pdg5.common.protocol.*;
 import pdg5.server.manage.ManageUser;
 import pdg5.server.model.GameController;
@@ -45,6 +46,7 @@ public class ProcessSignIn implements GenericProcess {
 
                 // Will be receive by the SignInController
                 clientHandler.addToQueue(new SignInOK());
+                clientHandler.addToQueue(new Dictionnary(new WordCombinations(gameController.getDictionnary())));
                 // Will be receive by the ClientRequestController
                 return new Load();
                 // TODO test this v

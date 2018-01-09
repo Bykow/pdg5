@@ -3,8 +3,10 @@ package pdg5.server.process;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pdg5.common.Protocol;
+import pdg5.common.WordCombinations;
 import pdg5.common.protocol.*;
 import pdg5.server.manage.ManageUser;
+import pdg5.server.model.GameController;
 import pdg5.server.persistent.User;
 import pdg5.server.util.ClientAlreadyConnected;
 import pdg5.server.util.ClientHandler;
@@ -16,11 +18,12 @@ import pdg5.server.util.ServerActiveUser;
 public class ProcessSignUp implements GenericProcess {
 
     private final SignUp signUp;
+    private GameController gameController;
     private final ManageUser manager;
     private final ServerActiveUser activeUser;
     private final ClientHandler clientHandler;
 
-    public ProcessSignUp(SignUp signUp, ManageUser manageUser, ServerActiveUser activeUser, ClientHandler clientHandler) {
+    public ProcessSignUp(SignUp signUp, GameController gameController, ManageUser manageUser, ServerActiveUser activeUser, ClientHandler clientHandler) {
         this.signUp = signUp;
         this.manager = manageUser;
         this.activeUser = activeUser;
@@ -61,6 +64,7 @@ public class ProcessSignUp implements GenericProcess {
                     clientHandler.setPlayerId(user.getId());
                 }
                 clientHandler.addToQueue(new SignInOK());
+                clientHandler.addToQueue(new Dictionnary(new WordCombinations(gameController.getDictionnary())));
                 return new Load();
             // TODO this is not suppose to be empty, waiting for game logic to continue
             case Protocol.ERROR:

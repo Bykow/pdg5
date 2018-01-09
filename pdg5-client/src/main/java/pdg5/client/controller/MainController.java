@@ -12,6 +12,7 @@
  */
 package pdg5.client.controller;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -31,6 +32,7 @@ public class MainController {
     private ClientRequestManager requestManager;
 
     private GameController gameController;
+    private LobyController lobyController;
 
     @FXML
     private AnchorPane gameContainer;
@@ -78,9 +80,9 @@ public class MainController {
     public void loadLoby() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            LobyController controller = new LobyController(sender);
+            lobyController = new LobyController(sender);
             loader.setLocation(MainController.class.getResource("/fxml/lobyView.fxml"));
-            loader.setController(controller);
+            loader.setController(lobyController);
             layout = loader.load();
             lobyContainer.getChildren().setAll(layout);
         } catch (IOException e) {
@@ -99,10 +101,14 @@ public class MainController {
 
     public void displayToast(String m) {
         Stage stage = (Stage) gameContainer.getScene().getWindow();
-        new Toast(stage, m).show();
+        Platform.runLater(() -> new Toast(stage, m).show());
     }
 
     public GameController getGameController() {
         return gameController;
+    }
+
+    public LobyController getLobyController() {
+        return lobyController;
     }
 }

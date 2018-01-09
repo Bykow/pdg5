@@ -10,6 +10,7 @@ import pdg5.client.ClientSender;
 import pdg5.client.view.GGameListEntry;
 import pdg5.common.game.GameModel;
 import pdg5.common.protocol.Game;
+import pdg5.common.protocol.Load;
 import pdg5.common.protocol.NewGame;
 
 import java.util.ArrayList;
@@ -114,5 +115,15 @@ public class LobyController {
         Node btn = (Node)event.getSource();
         GGameListEntry element = (GGameListEntry)btn.getParent();
         System.out.println("delete request for " + element.getModel().getID());
+    }
+
+    public void addLoad(Load load) {
+        for (Game g: load.getGames()) {
+            addGame(g);
+        }
+    }
+
+    private void addGame(Game game) {
+        gameModelList.add(game);
     }
 }

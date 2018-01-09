@@ -91,7 +91,11 @@ public class GGameListEntry extends AnchorPane {
         // TODO Implement messages for finished games
         if (model.getState() != GameModel.State.FINISHED)
             //TODO Get last word played score value
-            msg.setText("a joué " + Tile.tilesToString(model.getLastWordPlayed()));
+            if (model.isYourTurn()) {
+                msg.setText("a joué " + Tile.tilesToString(model.getLastWordPlayed()));
+            } else {
+                msg.setText("vous avez joué " + Tile.tilesToString(model.getLastWordPlayed()));
+            }
     }
 
     public void setSelected(boolean value) {

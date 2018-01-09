@@ -31,6 +31,7 @@ import pdg5.common.game.Tile;
 import pdg5.common.protocol.Game;
 import pdg5.common.protocol.Play;
 
+import java.util.Collections;
 import java.util.List;
 
 public class GameController {
@@ -207,13 +208,20 @@ public class GameController {
         return composition;
     }
 
+    public int getGameID() {
+        return gameID;
+    }
+
+    private void shuffleHand() {
+
+        Collections.shuffle(deckList);
+    }
+
     @FXML
     private void play(ActionEvent actionEvent) {
         ClientSender clientSender = new ClientSender();
         clientSender.add(new Play(getPlay(), gameID));
     }
 
-    public int getGameID() {
-        return gameID;
-    }
+
 }

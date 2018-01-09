@@ -21,7 +21,7 @@ public class ClientRequestManager {
     }
 
     public Message execute(Message o) {
-        System.out.println("Message received : " + o);
+        System.out.println("Message received : ");
         System.out.println(o.toString());
         if (o instanceof ErrorMessage) {
             return new ProcessErrorMessage((ErrorMessage) o).execute();
@@ -35,5 +35,4 @@ public class ClientRequestManager {
 
         return new ErrorMessage("Unable to check Message Type");
     }
-
 }

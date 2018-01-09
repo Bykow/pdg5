@@ -169,6 +169,22 @@ public class GameController {
         }
     }
 
+    private void updateOpponentList(List<Tile> list) {
+        for (int i = 0; i < Protocol.NUMBER_OF_EXTRA_TUILES; i++) {
+            if (!list.isEmpty() && list.get(i) != null) {
+                adversaryList.get(i).getChildren().add(new GTile(list.get(i)));
+            }
+        }
+    }
+
+    private void updateOpponentBonusList(List<Tile> list) {
+        for (int i = 0; i < Protocol.NUMBER_OF_EXTRA_TUILES; i++) {
+            if (!list.isEmpty() && list.get(i) != null) {
+                adversaryBonusList.get(i).getChildren().add(new GTile(list.get(i)));
+            }
+        }
+    }
+
     private void cleanComposition() {
         for (int i = 0; i < Protocol.NUMBER_OF_TUILES_PER_PLAYER; i++) {
             if(userList.get(i).getChildren().size() == 0) {
@@ -178,9 +194,20 @@ public class GameController {
         }
     }
 
+    private void cleanBonus() {
+        for (int i = 0; i < Protocol.NUMBER_OF_EXTRA_TUILES; i++) {
+            if(userBonusList.get(i).getChildren().size() == 0) {
+                continue;
+            }
+            userBonusList.get(i).getChildren().remove(0);
+        }
+    }
+
     private void updatePlayer(Game g) {
         updateDeckList(g.getAddedTile());
         updateBonusList(g.getBonusLetters());
+        updateOpponentList(g.getLastWordPlayed());
+        updateOpponentBonusList(g.getOpponentBonusLetters());
         cleanComposition();
     }
 
@@ -205,6 +232,7 @@ public class GameController {
             }
             composition.push(((GTile) st.getChildren().get(0)).getModel());
         }
+        cleanBonus();
         return composition;
     }
 

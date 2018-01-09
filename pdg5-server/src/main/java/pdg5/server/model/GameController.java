@@ -269,11 +269,7 @@ public class GameController {
       boolean hisTurn = tm.isCurrentPlayer(idClient);
       
       List<Tile> lastWordPlayed;
-      if(hisTurn) {
-         lastWordPlayed = gm.getLastWordPlayed();
-      } else {
-         lastWordPlayed = new ArrayList<>();
-      }
+      lastWordPlayed = gm.getLastWordPlayed();
 
       Game game = new Game(gm.getGameId(), gm.getCreation(),
         gm.getLastMove(), gm.getIdTournament(), boardOfClient, 

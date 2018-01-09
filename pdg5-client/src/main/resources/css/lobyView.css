@@ -62,3 +62,30 @@
     -fx-border-color: #d26e22;
     -fx-border-width: 0 1px 0 1px;
 }
+
+#welcome {
+    -fx-font-weight: 800;
+    -fx-font-size: 12px;
+    -fx-font-family: "Helvetica";
+}
+
+#welcome #username {
+    -fx-text-fill: #fff;
+}
+
+#welcome #welcomemsg {
+    -fx-text-fill: #84cdf6;
+}
+
+#logout {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-image: url(../img/logout.png);
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 15px 15px;
+    -fx-background-position: center;
+}
+
+#logout:hover {
+    -fx-background-image: url(../img/logout-hover.png);
+}

@@ -36,6 +36,9 @@ public class LobyController {
     @FXML
     private VBox gameList;
 
+    @FXML
+    private Label username;
+
     public LobyController(ClientSender sender, GameController gameController) {
         gameModelList = new ArrayList<>();
 
@@ -52,6 +55,8 @@ public class LobyController {
 
     @FXML
     public void initialize() {
+        //TODO Get username
+        username.setText("nameMePlease");
         refresh();
     }
 
@@ -92,6 +97,12 @@ public class LobyController {
     private void unselectLast() {
         if(selected != null)
             selected.setSelected(false);
+    }
+
+    @FXML
+    private void logout(ActionEvent actionEvent) {
+        //TODO Logout
+        System.out.println("logout");
     }
 
     @FXML

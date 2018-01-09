@@ -27,6 +27,7 @@
 \usepackage{enumitem}
 \usepackage{xspace}
 \usepackage{appendix}
+\usepackage{pdfpages}
 % Liens
 \usepackage[hyphens]{url}
 \usepackage{hyperref}
@@ -69,7 +70,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-	\clearpage\maketitle
+	\clearpage
+	\maketitle
 	\thispagestyle{empty}
 	
 	\maketitle
@@ -110,24 +112,27 @@
 	Il y a également toute la gestion de la problématique d'un projet en équipe, en groupe de 6 personnes. En effet, ceci demande une très bonne coordination entre chaque membre afin de bien séparer le travail et de faire en sorte d'avoir un projet unique et harmonieux à terme. Ceci nous demandera d'utiliser plusieurs outils spécifiques.
 	
 	\section{Description du jeu sur Smartphone}
-	\subsection{Fonctionnalités offertes}
-	\subsubsection{Inscription}
-	\subsubsection{Mode normal}
-	\subsubsection{Mode tournoi}
-	\subsubsection{Bonus}
-	
-	\subsection{Règles du jeu}
-	\subsubsection{Mode tournoi}
+		\subsection{Fonctionnalités offertes}
+			\subsubsection{Inscription}
+			
+			\subsubsection{Mode normal}
+			\subsubsection{Mode tournoi}
+			\subsubsection{Bonus}
+		
+		\subsection{Règles du jeu}
+			\subsubsection{Mode tournoi}
 	
 	\section{Jeu sur PC}
 	\subsection{Introduction}
-	% Notre version sur PC, de part de la résolution ainsi que de la taille de nos écrans, peut bénéficier d'une interface bien plus complète (concentrée sur la même fenêtre) que la version mobile. Par exemple, le lobby, la partie séléctionnée ainsi que le chat de la partie courante s'affiche sur la même fenêtre. 
+	Nous avons du optimiser principalement l'interface afin de correspondre aux spécifications d'un ordinateur.\\
+	Pour la partie logique, nous avons essayé de coller au mieux à l'application afin de pouvoir offrir une expérince utilisateurs similaire que sur la version mobile. 
 	
-	\subsection{Interface}
+	\subsection{Interface graphique}
 	L'interface utilisateur à été revue et optimisée pour l'affichage sur ordinateur en raison de la taille d'écran ainsi que sa résolution plus importante. \\
 	Cependant, nous avons voulu garder la patte graphique du jeu original sur mobile en reprenant les codes couleurs et les éléments visuels spécifique au jeu.
 	
 		\subsubsection{Connexion et inscription}
+		Les fenêtres de connexion (\textit{SignIn}) ainsi que celle de l'enregistrement (\textit{SignUp}) sont épurée afin de n'afficher que les informations utiles.
 		
 		\begin{figure}[h]
 			\centering
@@ -153,11 +158,52 @@
 	\subsection{Conception}
 	
 	\subsection{Implémentation}
-	\subsubsection{Dictionnaire}
-	
-	\subsubsection{Algorithme tirage aléatoire}
-	
-	\subsubsection{Communication}
+		\subsubsection{Dictionnaire}
+		Nous avons effectué du reverse engineering\footnote{\textbf{Reverse engineering} :  \href{https://fr.wikipedia.org/wiki/R\%C3\%A9tro-ing\%C3\%A9nierie}{Définition Wikipédia}} afin de comprendre le fonctionnement internet du jeu.\\
+		Après avoir enregistré plusieurs fois les lettres sorties par l'application mobile, nous avons pu constater et mettre en avant que le dictionnaire (les lettres tirées) sont définie par rapport à stack prédéfinit qui est simplement mélangé au début de la partie. En effet, lors d'une partie, on trouvera toujours le même nombre de fois le \textit{E} qui sort par exemple.
+		
+		Nous sommes arrivé au dictionnaire suivante : 
+		
+		\begin{table}[h]
+			\centering
+			\begin{tabular}{cc}
+				\textbf{Lettre} & \textbf{Nombre} \\
+				A     & 12 \\
+				B     & 2 \\
+				C     & 3 \\
+				D     & 3 \\
+				E     & 17 \\
+				F     & 2 \\
+				G     & 2 \\
+				H     & 2 \\
+				I     & 10 \\
+				J     & 1 \\
+				K     & 1 \\
+				L     & 5 \\
+				M     & 3 \\
+				N     & 6 \\
+				O     & 7 \\
+				P     & 3 \\
+				Q     & 1 \\
+				R     & 7 \\
+				S     & 8 \\
+				T     & 6 \\
+				U     & 8 \\
+				V     & 1 \\
+				W     & 1 \\
+				X     & 1 \\
+				Y     & 1 \\
+				Z     & 1 \\
+				\textit{JOKER} & 2 
+			\end{tabular}
+			\caption{Nombre d'occurence de chaque lettre dans notre dictionnaire}
+		\end{table}
+		
+		\subsubsection{Algorithme tirage aléatoire}
+		Suite à la mise en avant du dictionnaire, soit du stack définit de lettre qui peuvent sortir au cours d'une partie, nous avons analysé leur ordre de sortie en essayant de mettre un avant un paterne, ou toutes autres logique. \\
+		Nous avons constaté que l'ordre d'arrivée des lettres est purement aléatoire malgré les apparences. En effet, au fur et à mesure que l'on avance dans une partie, on va acumuler des lettres peut utilisées de la langue française, telle que le \textit{J}, \textit{K}, \textit{V}, \textit{W}, \textit{X}, etc, ce qui rend un apparence seulement, la partie plus dur lorsque nous arrivons au terme.
+		
+		\subsubsection{Communication}
 	
 	\subsection{Tests}
 	\subsubsection{Bug connu}
@@ -165,26 +211,33 @@
 	\subsubsection{Fonctionnalité pouvant être ajoutée}
 	
 	\section{Technologie utilisée}
-	\subsection{JUnit}
-	JUnit est un framework Java permettant de faire des tests unitaires. Ce dernier comporte de nombreuses méthodes afin d'automatiser les tests, et est utilisé par \hyperref[maven]{Maven}.\\
-	Il permet par exemple de comparer des valeurs attendues de méthode avec ce que l'on reçoit vraiment. On peut tester l'intégralité des communications avec un tel système. De plus, il permet de s'assurer que même lors du développement d'un tel projet, les méthodes et fonctions codées précédemment n'ont pas un comportement différent en fonction du contexte d'appel. 
+	Nous avons décidé de coder et développer notre application sans framework. En effet, aucun des frameworks connus ne nous aurait réellement aidés par rapport à nos beosin. De plus, prendre du temps pour comprendre et savoir utiliser correctement un ou plusieurs nouveaux frameworks aurait pû nous prendre beaucoup de temps. \\
+	C'est pour ces raisons que nous choisis de coder principalement notre projet en pure Java, y compris pour toute la partie communication. 
 	
-	\subsection{JavaFX}
-	JavaFX est une bibliothèque d'interface graphique. Nous l'avons utilisée, avec l'aide de SceneBuilder\footnote{\textbf{SceneBuilder} : \href{http://gluonhq.com/products/scene-builder/}{gluonhq.com/products/scene-builder/}} qui permet de créer des interfaces graphiques de manière intuitive et visuelle. \\
-	Cette librairie permet également de gérer tout ce qui est des interactions avec notre environnement graphique à l'aide de \textit{listener} qu'on peut lier à nos briques, nos éléments graphiques. 
-	
-	\subsection{GitHub}
-	GitHub\footnote{\textbf{GitGub} : \href{http:/github.com}{github.com}} utilise la technologie git qui permet de gérer les fichiers d'un projet sur différentes branches, tout en faisant du versionning en ligne. Il offre également la possibilité de gérer les issues avec un système communautaire (du groupe) pour la résolution, mais également une gestion de planning et d'attribution de tâches. \\
-	Ceci nous a permis de bien pouvoir séparer le travail et les parties, pour ensuite, une fois validé par les tests, les intégrer dans notre projet, soit sur la branche master. 
-	
-	\subsection{Apache Maven} \label{maven}
-	Maven est un outil de gestion et d'automatisation de projet Java. Il permet notamment d'automatiser les dépendances de notre projet en téléchargent automatiquement les librairies utilisées par les autres membres du groupe. Il permet également de tester le projet en lançant tout les tests de notre projet avant de le compiler afin de garantir du bon fonctionnement de ce dernier. 
-	
-	\subsection{Docker}
+		\subsection{JUnit}
+		JUnit est un framework Java permettant de faire des tests unitaires. Ce dernier comporte de nombreuses méthodes afin d'automatiser les tests, et est utilisé par \hyperref[maven]{Maven}.\\
+		Il permet par exemple de comparer des valeurs attendues de méthode avec ce que l'on reçoit vraiment. On peut tester l'intégralité des communications avec un tel système. De plus, il permet de s'assurer que même lors du développement d'un tel projet, les méthodes et fonctions codées précédemment n'ont pas un comportement différent en fonction du contexte d'appel. 
+		
+		\subsection{JavaFX}
+		JavaFX est une bibliothèque d'interface graphique. Nous l'avons utilisée, avec l'aide de SceneBuilder\footnote{\textbf{SceneBuilder} : \href{http://gluonhq.com/products/scene-builder/}{gluonhq.com/products/scene-builder/}} qui permet de créer des interfaces graphiques de manière intuitive et visuelle. \\
+		Cette librairie permet également de gérer tout ce qui est des interactions avec notre environnement graphique à l'aide de \textit{listener} qu'on peut lier à nos briques, nos éléments graphiques. 
+		
+		\subsection{GitHub}
+		GitHub\footnote{\textbf{GitGub} : \href{http:/github.com}{github.com}} utilise la technologie git qui permet de gérer les fichiers d'un projet sur différentes branches, tout en faisant du versionning en ligne. Il offre également la possibilité de gérer les issues avec un système communautaire (du groupe) pour la résolution, mais également une gestion de planning et d'attribution de tâches. \\
+		Ceci nous a permis de bien pouvoir séparer le travail et les parties, pour ensuite, une fois validé par les tests, les intégrer dans notre projet, soit sur la branche master. 
+		
+		\subsection{Apache Maven} \label{maven}
+		Maven est un outil de gestion et d'automatisation de projet Java. Il permet notamment d'automatiser les dépendances de notre projet en téléchargent automatiquement les librairies utilisées par les autres membres du groupe. Il permet également de tester le projet en lançant tout les tests de notre projet avant de le compiler afin de garantir du bon fonctionnement de ce dernier. 
+		
+		\subsection{Docker}
 	
 	\section{Conclusion}
 	
+	\newpage
 	\section{Annexes}
+
+	\includepdf[scale=0.95, pagecommand={}]{journalTravail/vide.pdf}
+	
 	
 	
 \end{document}

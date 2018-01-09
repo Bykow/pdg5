@@ -149,7 +149,9 @@
       </Label>
       <AnchorPane id="bottom-bar" layoutY="543.0" prefHeight="55.0" prefWidth="524.0">
          <children>
-            <Button onAction="#play" layoutX="10.0" layoutY="9.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="70.0" text="Jouer" />
+            <Button onAction="#swap" layoutX="95.0" layoutY="9.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="120.0" text="Mélanger" />
+            <Button onAction="#play" layoutX="225.0" layoutY="9.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="90.0" text="Jouer" />
+            <Button onAction="#discard" layoutX="325.0" layoutY="9.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="100.0" text="Jeter" />
          </children>
       </AnchorPane>
    </children>

@@ -226,8 +226,18 @@ public class GameController {
     }
 
     @FXML
+    private void swap(ActionEvent actionEvent) {
+        shuffleHand();
+    }
+
+    @FXML
     private void play(ActionEvent actionEvent) {
         ClientSender clientSender = new ClientSender();
         clientSender.add(new Play(getPlay(userList), gameID));
     }
+
+    @FXML
+    private void discard(ActionEvent actionEvent) {
+    }
+
 }

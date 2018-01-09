@@ -190,7 +190,7 @@ public class GameController {
       }
       
       // sending to second player
-      activeUser.getClientHandler(idPlayer2).addToQueue(getGameFromModel(model.getGameId(), idPlayer2));
+      activeUser.giveToClientHandler(idPlayer2, getGameFromModel(model.getGameId(), idPlayer2));
       return getGameFromModel(model.getGameId(), idPlayer1);
    }
 
@@ -329,7 +329,7 @@ public class GameController {
          tm.turnEnded();
 
          int opponentId = model.getOpponentBoardById(playerID).getPlayerId();
-         activeUser.getClientHandler(opponentId).addToQueue(getGameFromModel(gameID, opponentId));
+         activeUser.giveToClientHandler(opponentId, getGameFromModel(gameID, opponentId));
          return getGameFromModel(gameID, playerID);
       }
    }
@@ -450,7 +450,7 @@ public class GameController {
          return new Noop(Noop.Sender.SERVER);
       }
       
-      activeUser.getClientHandler(opponentId).addToQueue(getGameFromModel(gameID, opponentId));
+      activeUser.giveToClientHandler(opponentId, getGameFromModel(gameID, opponentId));
       return getGameFromModel(gameID, playerID);
    }
    
@@ -462,14 +462,14 @@ public class GameController {
       int player2Id = boardOpponent.getPlayerId();
       
       if(board.getScore() > boardOpponent.getScore()) {
-            activeUser.getClientHandler(player2Id).addToQueue(new End(End.RESULT.LOSE, gameID));
-            activeUser.getClientHandler(player1Id).addToQueue(new End(End.RESULT.WIN, gameID));
+            activeUser.giveToClientHandler(player2Id, new End(End.RESULT.LOSE, gameID));
+            activeUser.giveToClientHandler(player1Id, new End(End.RESULT.WIN, gameID));
          } else if (board.getScore() < boardOpponent.getScore()) {
-            activeUser.getClientHandler(player2Id).addToQueue(new End(End.RESULT.WIN, gameID));
-            activeUser.getClientHandler(player1Id).addToQueue(new End(End.RESULT.LOSE, gameID));
+            activeUser.giveToClientHandler(player2Id, new End(End.RESULT.WIN, gameID));
+            activeUser.giveToClientHandler(player1Id, new End(End.RESULT.LOSE, gameID));
          } else {
-            activeUser.getClientHandler(player2Id).addToQueue(new End(End.RESULT.EQUALITY, gameID));
-            activeUser.getClientHandler(player1Id).addToQueue(new End(End.RESULT.EQUALITY, gameID));
+            activeUser.giveToClientHandler(player2Id, new End(End.RESULT.EQUALITY, gameID));
+            activeUser.giveToClientHandler(player1Id, new End(End.RESULT.EQUALITY, gameID));
          }
    }
    
@@ -573,8 +573,8 @@ public class GameController {
                       // Send to players the update
                       int idPlayer1 = gameModel.getBoard(GameModel.PlayerBoard.PLAYER1).getPlayerId();
                       int idPlayer2 = gameModel.getBoard(GameModel.PlayerBoard.PLAYER2).getPlayerId();
-                      activeUser.getClientHandler(idPlayer1).addToQueue(getGameFromModel(gameID, idPlayer1));
-                      activeUser.getClientHandler(idPlayer2).addToQueue(getGameFromModel(gameID, idPlayer2));
+                      activeUser.giveToClientHandler(idPlayer1, getGameFromModel(gameID, idPlayer1));
+                      activeUser.giveToClientHandler(idPlayer2, getGameFromModel(gameID, idPlayer2));
                   }
               }
           });

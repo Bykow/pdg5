@@ -556,6 +556,10 @@ public class GameController {
       return map;
    }
 
+   public TST getDictionnary() {
+      return dictionary;
+   }
+   
    /**
     * method called by the scheduler to check in all games if there is some outdated.
     * If some are outdated, the method change the state of the game 

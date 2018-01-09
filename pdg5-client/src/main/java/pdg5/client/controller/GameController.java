@@ -18,7 +18,6 @@ package pdg5.client.controller;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
 import javafx.scene.input.*;
@@ -30,10 +29,8 @@ import pdg5.common.Protocol;
 import pdg5.common.game.Composition;
 import pdg5.common.game.Tile;
 import pdg5.common.protocol.Game;
-import pdg5.common.protocol.NewGame;
 import pdg5.common.protocol.Play;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GameController {

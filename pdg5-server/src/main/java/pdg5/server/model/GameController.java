@@ -478,6 +478,7 @@ public class GameController {
       Board boardOpponent = model.getBoard(GameModel.PlayerBoard.PLAYER2);
       int player1Id = board.getPlayerId();
       int player2Id = boardOpponent.getPlayerId();
+      model.setState(State.FINISHED);
       
       if(board.getScore() > boardOpponent.getScore()) {
             activeUser.getClientHandler(player2Id).addToQueue(new End(End.RESULT.LOSE, gameID));
@@ -603,6 +604,14 @@ public class GameController {
                                       .get();
                       game.setGameState(gameModel);
                       manageGame.updateGame(game);
+                      
+                      if (playerTurnManager.get(gameID).isCurrentPlayer(idPlayer1)) {
+                        activeUser.getClientHandler(idPlayer1).addToQueue(new End(End.RESULT.LOSE, gameID));
+                        activeUser.getClientHandler(idPlayer2).addToQueue(new End(End.RESULT.WIN, gameID));
+                      } else {
+                        activeUser.getClientHandler(idPlayer1).addToQueue(new End(End.RESULT.WIN, gameID));
+                        activeUser.getClientHandler(idPlayer2).addToQueue(new End(End.RESULT.LOSE, gameID));
+                      }
                   }
               }
           });

@@ -8,14 +8,14 @@
 
 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="598.0" prefWidth="290.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ScrollPane id="listContainer" hbarPolicy="NEVER" layoutY="49.0" prefHeight="494.0" prefWidth="290.0">
+      <ScrollPane id="listContainer" fitToWidth="true" hbarPolicy="NEVER" layoutY="49.0" prefHeight="494.0" prefWidth="290.0">
          <content>
             <VBox fx:id="gameList" prefWidth="288.0" />
          </content>
       </ScrollPane>
       <AnchorPane id="bottom-bar" layoutY="543.0" prefHeight="55.0" prefWidth="290.0">
          <children>
-            <Button onAction="#startNewGame" layoutX="10.0" layoutY="9.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="270.0" text="Commencer une nouvelle partie" />
+            <Button layoutX="10.0" layoutY="9.0" mnemonicParsing="false" onAction="#startNewGame" prefHeight="37.0" prefWidth="270.0" text="Commencer une nouvelle partie" />
          </children>
       </AnchorPane>
    </children>

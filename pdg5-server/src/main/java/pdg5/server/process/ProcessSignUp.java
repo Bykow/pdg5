@@ -30,6 +30,17 @@ public class ProcessSignUp implements GenericProcess {
     @Override
     public Message execute() {
         int exitCode;
+        User userName = manager.getUserByUsername(signUp.getUsername());
+        User userMail = manager.getUserByEmail(signUp.getEmail());
+        
+        if(userName != null){
+            return new ErrorMessage("The username is already used");
+        }
+        
+        if(userMail != null){
+            return new ErrorMessage("The user email is already used");
+        }
+        
         User user = manager.addUser(signUp.getEmail(), signUp.getUsername(), signUp.getPassword());
         if (user != null) {
             exitCode = Protocol.OK;

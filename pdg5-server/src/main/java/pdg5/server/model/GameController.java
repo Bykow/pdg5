@@ -557,7 +557,7 @@ public class GameController {
       return map;
    }
 
-   public TST getDictionary() {
+   public TST getDictionnary() {
       return dictionary;
    }
    

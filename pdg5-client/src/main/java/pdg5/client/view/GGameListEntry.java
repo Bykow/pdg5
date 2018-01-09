@@ -25,6 +25,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import pdg5.client.Client;
 import pdg5.common.game.GameModel;
+import pdg5.common.game.Tile;
 import pdg5.common.protocol.Game;
 
 import java.io.IOException;
@@ -73,7 +74,7 @@ public class GGameListEntry extends AnchorPane {
     @FXML
     public void initialize() {
         this.setOnMouseClicked(mouseClickHandler);
-        if(model.getState() == GameModel.State.FINISHED)
+        if (model.getState() == GameModel.State.FINISHED)
             btnDelete.setDisable(false);
         else {
             String time;
@@ -86,16 +87,19 @@ public class GGameListEntry extends AnchorPane {
             score.setText(time);
         }
 
-        // TODO Remove test when real games are sent
-        username.setText(/*model.getNamePlayer()*/ "test");
+        username.setText(model.getOpponentName());
         // TODO Implement messages for finished games
-        if(model.getState() != GameModel.State.FINISHED)
+        if (model.getState() != GameModel.State.FINISHED)
             //TODO Get last word played score value
-            msg.setText("a joué " + model.getLastWordPlayed());
+            if (model.isYourTurn()) {
+                msg.setText("a joué " + Tile.tilesToString(model.getLastWordPlayed()));
+            } else {
+                msg.setText("vous avez joué " + Tile.tilesToString(model.getLastWordPlayed()));
+            }
     }
 
     public void setSelected(boolean value) {
-        if(value)
+        if (value)
             this.getStyleClass().add("selected");
         else
             this.getStyleClass().clear();
@@ -108,4 +112,5 @@ public class GGameListEntry extends AnchorPane {
     public void delete(ActionEvent actionEvent) {
         deleteHandler.handle(actionEvent);
     }
+
 }

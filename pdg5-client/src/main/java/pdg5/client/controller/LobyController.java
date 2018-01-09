@@ -1,5 +1,6 @@
 package pdg5.client.controller;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -10,16 +11,17 @@ import pdg5.client.ClientSender;
 import pdg5.client.view.GGameListEntry;
 import pdg5.common.game.GameModel;
 import pdg5.common.protocol.Game;
+import pdg5.common.protocol.Load;
 import pdg5.common.protocol.NewGame;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class LobyController {
-
     private Label titleToPlay;
     private Label titleWaiting;
     private Label titleFinished;
@@ -27,18 +29,15 @@ public class LobyController {
     private ArrayList<Game> gameModelList;
 
     private GGameListEntry selected;
+    private GameController gameController;
 
     private ClientSender sender;
     
     @FXML
     private VBox gameList;
 
-    public LobyController(ClientSender sender) {
+    public LobyController(ClientSender sender, GameController gameController) {
         gameModelList = new ArrayList<>();
-
-        gameModelList.add(new Game(0, new Date(), new Date(), 0, null, null, 12, null, 56, true, GameModel.State.IN_PROGRESS));
-        gameModelList.add(new Game(0, new Date(), new Date(), 0, null, null, 12, null, 56, true, GameModel.State.IN_PROGRESS));
-        gameModelList.add(new Game(0, new Date(), new Date(), 0, null, null, 12, null, 56, true, GameModel.State.FINISHED));
 
         titleToPlay = new Label("A ton tour");
         titleToPlay.getStyleClass().add("titleToPlay");
@@ -48,6 +47,7 @@ public class LobyController {
         titleFinished.getStyleClass().add("titleFinished");
         
         this.sender = sender;
+        this.gameController = gameController;
     }
 
     @FXML
@@ -55,32 +55,29 @@ public class LobyController {
         refresh();
     }
 
-    private void refresh() {
+    private List<GGameListEntry> genGraphicalEntry(Predicate<Game> condition) {
+        return gameModelList.stream()
+                .filter(condition)
+                .sorted(Comparator.comparing(Game::getLastActivity))
+                .map(m -> new GGameListEntry(m, this::handleMouseClick, this::handleDelete))
+                .collect(Collectors.toList());
+    }
+
+    public void refresh() {
         gameList.getChildren().clear();
 
         gameList.getChildren().add(titleToPlay);
-        gameList.getChildren().addAll(gameModelList.stream()
-                .filter(g -> g.isYourTurn() && g.getState() == GameModel.State.IN_PROGRESS)
-                .sorted(Comparator.comparing(Game::getLastActivity))
-                .map(m -> new GGameListEntry(m, this::handleMouseClick, this::handleDelete))
-                .collect(Collectors.toList()));
+        gameList.getChildren().addAll(genGraphicalEntry(g -> g.isYourTurn() && g.getState() == GameModel.State.IN_PROGRESS));
 
         gameList.getChildren().add(titleWaiting);
-        gameList.getChildren().addAll(gameModelList.stream()
-                .filter(g -> !g.isYourTurn() && g.getState() == GameModel.State.IN_PROGRESS)
-                .sorted(Comparator.comparing(Game::getLastActivity))
-                .map(m -> new GGameListEntry(m, this::handleMouseClick, this::handleDelete))
-                .collect(Collectors.toList()));
+        gameList.getChildren().addAll(genGraphicalEntry(g -> !g.isYourTurn() && g.getState() == GameModel.State.IN_PROGRESS));
 
         gameList.getChildren().add(titleFinished);
-        gameList.getChildren().addAll(gameModelList.stream()
-                .filter(g -> g.getState() == GameModel.State.FINISHED)
-                .sorted(Comparator.comparing(Game::getLastActivity))
-                .map(m -> new GGameListEntry(m, this::handleMouseClick, this::handleDelete))
-                .collect(Collectors.toList()));
+        gameList.getChildren().addAll(genGraphicalEntry(g -> g.getState() == GameModel.State.FINISHED));
 
         if(selected != null) {
             Optional<Node> selBefRefresh = gameList.getChildren().stream()
+                    .filter(g -> g instanceof GGameListEntry)
                     .filter(g -> ((GGameListEntry) g).getModel().getID() == selected.getModel().getID())
                     .findFirst();
             if (selBefRefresh.isPresent()) {
@@ -108,11 +105,36 @@ public class LobyController {
         unselectLast();
         selected = element;
         element.setSelected(true);
+        gameController.updateGame(element.getModel());
     }
 
     private void handleDelete(ActionEvent event) {
         Node btn = (Node)event.getSource();
         GGameListEntry element = (GGameListEntry)btn.getParent();
         System.out.println("delete request for " + element.getModel().getID());
+    }
+
+    public void addLoad(Load load) {
+        for (Game g: load.getGames()) {
+            addGame(g);
+        }
+    }
+
+    private void addGame(Game game) {
+        gameModelList.add(game);
+    }
+
+    public boolean hasGame(Game game) {
+        return gameModelList.stream().anyMatch((o) -> o.getID() == game.getID());
+    }
+
+    public void updateGame(Game game) {
+        gameModelList.removeIf((o) -> o.getID() == game.getID());
+        addGame(game);
+        if (gameController.getGameID() == game.getID()) {
+            gameController.updateGame(game);
+        }
+        Platform.runLater(this::refresh);
+
     }
 }

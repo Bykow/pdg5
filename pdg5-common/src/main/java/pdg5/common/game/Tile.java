@@ -1,6 +1,7 @@
 package pdg5.common.game;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created on 03.10.17 by Bykow
@@ -79,5 +80,14 @@ public class Tile implements Serializable{
       hash = 67 * hash + this.letter;
       hash = 67 * hash + this.value;
       return hash;
+   }
+
+   public static String tilesToString(List<Tile> list) {
+       String temp = "";
+       for (Tile t : list) {
+           temp += t.letter;
+       }
+
+       return temp;
    }
 }

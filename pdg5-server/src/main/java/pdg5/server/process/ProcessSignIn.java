@@ -43,11 +43,8 @@ public class ProcessSignIn implements GenericProcess {
 
                 // Will be receive by the SignInController
                 clientHandler.addToQueue(new SignInOK());
-                clientHandler.addToQueue(new Dictionnary(gameController.getDictionnary()));
-                // Will be receive by the ClientRequestController
-                return new Load();
-                // TODO test this v
-                //return gameController.findGamesOf(idUser);
+                //clientHandler.addToQueue(new Dictionnary(gameController.getDictionnary()));
+                return gameController.findGamesOf(idUser);
             } catch (ClientAlreadyConnected ex) {
                 return new ErrorMessage(ex.getMessage());
             }

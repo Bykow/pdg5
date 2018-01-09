@@ -12,12 +12,15 @@
  */
 package pdg5.client.controller;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import pdg5.client.ClientListener;
 import pdg5.client.ClientSender;
 import pdg5.client.util.ClientRequestManager;
+import pdg5.client.util.Toast;
 import pdg5.common.protocol.Message;
 
 import java.io.IOException;
@@ -29,6 +32,7 @@ public class MainController {
     private ClientRequestManager requestManager;
 
     private GameController gameController;
+    private LobyController lobyController;
 
     @FXML
     private AnchorPane gameContainer;
@@ -42,9 +46,7 @@ public class MainController {
     }
 
     public void loadGame() {
-        // Already start
         listener = new ClientListener();
-        // Already start
         sender = new ClientSender();
 
         this.requestManager = new ClientRequestManager(this);
@@ -76,9 +78,9 @@ public class MainController {
     public void loadLoby() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            LobyController controller = new LobyController(sender);
+            lobyController = new LobyController(sender, gameController);
             loader.setLocation(MainController.class.getResource("/fxml/lobyView.fxml"));
-            loader.setController(controller);
+            loader.setController(lobyController);
             layout = loader.load();
             lobyContainer.getChildren().setAll(layout);
         } catch (IOException e) {
@@ -95,7 +97,16 @@ public class MainController {
         sender.add(m);
     }
 
+    public void displayToast(String m) {
+        Stage stage = (Stage) gameContainer.getScene().getWindow();
+        Platform.runLater(() -> new Toast(stage, m).show());
+    }
+
     public GameController getGameController() {
         return gameController;
+    }
+
+    public LobyController getLobyController() {
+        return lobyController;
     }
 }

@@ -188,7 +188,7 @@ public class GameController {
         gameID = g.getID();
         Platform.runLater(() -> {
                     updatePlayer(g);
-                    remainingTiles.setText(String.valueOf(g.getNbLeftTile()));
+                    remainingTiles.setText(String.valueOf(g.getNbLeftTile()) + " tuilles restante(s)");
                     adversaryScore.setText(String.valueOf(g.getOpponentScore()));
                     userScore.setText(String.valueOf(g.getScore()));
                     adversaryName.setText(g.getOpponentName());
@@ -226,10 +226,18 @@ public class GameController {
     }
 
     @FXML
+    private void swap(ActionEvent actionEvent) {
+        shuffleHand();
+    }
+
+    @FXML
     private void play(ActionEvent actionEvent) {
         ClientSender clientSender = new ClientSender();
         clientSender.add(new Play(getPlay(userList), gameID));
     }
 
+    @FXML
+    private void discard(ActionEvent actionEvent) {
+    }
 
 }

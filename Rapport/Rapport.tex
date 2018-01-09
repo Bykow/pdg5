@@ -127,6 +127,22 @@
 	Nous avons du optimiser principalement l'interface afin de correspondre aux spécifications d'un ordinateur.\\
 	Pour la partie logique, nous avons essayé de coller au mieux à l'application afin de pouvoir offrir une expérince utilisateurs similaire que sur la version mobile. 
 	
+	\subsection{Structure du projet}
+	Nous avons 	séparer notre projet en trois sous-projets afin de faciliter la programmation.  \\
+	On utilise Maven pour lier et gérer les dépendances entres ces sous-projets.
+	
+		\subsubsection{Client}
+		Ce sous-projet contient toute la partie pour le client, en d'autres therme pour l'utilisateur. Il contient également toutes les ressources graphique utilisées pour l'affichages, telles que les tuiles, le logo, et tout les boutons.
+		
+		\subsubsection{Server}
+		Celui-ci contient tout le code côté serveur avec toute la logique que cella implique. \\
+		C'est lui qui va gérer toute les communications avec tout les clients possibles, mais également de l'intégrité de chaque partie, de générer les bons stacks de lettre en fonction de notre dictionnaire, de verifier les mots envoyés par les clients et en cas de succès, d'envoyer aux 2 joueurs les retours correspondants, etc.
+		
+		\subsubsection{Common}
+		Ce dernier sous-projet contient toutes les classes communes au client ainsi qu'au serveur \textit{Server}. Toutes les classes pouvant passer par le réseau pour communiquer entre le serveur et un client doit donc s'y trouver. \\
+		Cette façon de séparer les parties communes nous permet d'éviter le dublicat de code et de s'assurer que les deux autres sous-projets incluent le sous-proket \textit{common} afin de garantir que nos classes comunes le restent.
+	
+	
 	\subsection{Interface graphique}
 	L'interface utilisateur à été revue et optimisée pour l'affichage sur ordinateur en raison de la taille d'écran ainsi que sa résolution plus importante. \\
 	Cependant, nous avons voulu garder la patte graphique du jeu original sur mobile en reprenant les codes couleurs et les éléments visuels spécifique au jeu.

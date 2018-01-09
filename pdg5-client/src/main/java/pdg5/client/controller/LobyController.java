@@ -8,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import pdg5.client.ClientSender;
-import pdg5.client.util.Toast;
 import pdg5.client.view.GGameListEntry;
 import pdg5.common.game.GameModel;
 import pdg5.common.protocol.Game;
@@ -17,12 +16,12 @@ import pdg5.common.protocol.NewGame;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class LobyController {
-
     private Label titleToPlay;
     private Label titleWaiting;
     private Label titleFinished;
@@ -56,32 +55,29 @@ public class LobyController {
         refresh();
     }
 
+    private List<GGameListEntry> genGraphicalEntry(Predicate<Game> condition) {
+        return gameModelList.stream()
+                .filter(condition)
+                .sorted(Comparator.comparing(Game::getLastActivity))
+                .map(m -> new GGameListEntry(m, this::handleMouseClick, this::handleDelete))
+                .collect(Collectors.toList());
+    }
+
     public void refresh() {
         gameList.getChildren().clear();
 
         gameList.getChildren().add(titleToPlay);
-        gameList.getChildren().addAll(gameModelList.stream()
-                .filter(g -> g.isYourTurn() && g.getState() == GameModel.State.IN_PROGRESS)
-                .sorted(Comparator.comparing(Game::getLastActivity))
-                .map(m -> new GGameListEntry(m, this::handleMouseClick, this::handleDelete))
-                .collect(Collectors.toList()));
+        gameList.getChildren().addAll(genGraphicalEntry(g -> g.isYourTurn() && g.getState() == GameModel.State.IN_PROGRESS));
 
         gameList.getChildren().add(titleWaiting);
-        gameList.getChildren().addAll(gameModelList.stream()
-                .filter(g -> !g.isYourTurn() && g.getState() == GameModel.State.IN_PROGRESS)
-                .sorted(Comparator.comparing(Game::getLastActivity))
-                .map(m -> new GGameListEntry(m, this::handleMouseClick, this::handleDelete))
-                .collect(Collectors.toList()));
+        gameList.getChildren().addAll(genGraphicalEntry(g -> !g.isYourTurn() && g.getState() == GameModel.State.IN_PROGRESS));
 
         gameList.getChildren().add(titleFinished);
-        gameList.getChildren().addAll(gameModelList.stream()
-                .filter(g -> g.getState() == GameModel.State.FINISHED)
-                .sorted(Comparator.comparing(Game::getLastActivity))
-                .map(m -> new GGameListEntry(m, this::handleMouseClick, this::handleDelete))
-                .collect(Collectors.toList()));
+        gameList.getChildren().addAll(genGraphicalEntry(g -> g.getState() == GameModel.State.FINISHED));
 
         if(selected != null) {
             Optional<Node> selBefRefresh = gameList.getChildren().stream()
+                    .filter(g -> g instanceof GGameListEntry)
                     .filter(g -> ((GGameListEntry) g).getModel().getID() == selected.getModel().getID())
                     .findFirst();
             if (selBefRefresh.isPresent()) {

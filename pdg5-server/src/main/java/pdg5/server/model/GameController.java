@@ -153,7 +153,6 @@ public class GameController {
       int idGame = game.getId();
       
       tileStacks.put(idGame, ts);
-
       
       // add a new turnManager for this game
       TurnManager tm = new TurnManager(idPlayer1, idPlayer2, System.currentTimeMillis());
@@ -318,11 +317,7 @@ public class GameController {
       boolean hisTurn = tm.isCurrentPlayer(idClient);
       
       List<Tile> lastWordPlayed;
-      if(hisTurn) {
-         lastWordPlayed = gm.getLastWordPlayed();
-      } else {
-         lastWordPlayed = new ArrayList<>();
-      }
+      lastWordPlayed = gm.getLastWordPlayed();
 
       Game game = new Game(gm.getGameId(), gm.getCreation(),
         gm.getLastMove(), gm.getIdTournament(), boardOfClient, 
@@ -407,9 +402,7 @@ public class GameController {
       
       // the player lose the total value of bonus letters in his score
       int lostScore = 0;
-      for (Tile bonusTile : bonus) {
-         lostScore -= bonusTile.getValue();
-      }
+      lostScore = bonus.stream().map((bonusTile) -> bonusTile.getValue()).reduce(lostScore, (sum, tile) -> sum - tile);
       board.setScore(board.getScore() - lostScore);
       board.setBonus(new ArrayList<>());
    }
@@ -516,9 +509,7 @@ public class GameController {
       manageGame.updateGame(game);
       
       activeUser.getClientHandler(opponentId).addToQueue(getGameFromModel(gameID, opponentId));
-      Game gameToSend = getGameFromModel(gameID, playerID);
-      System.out.println(gameToSend);
-      return gameToSend;
+      return getGameFromModel(gameID, playerID);
    }
    
    private void sendScoreResults(GameModel model) {

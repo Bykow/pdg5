@@ -64,9 +64,8 @@ public class ProcessSignUp implements GenericProcess {
                     clientHandler.setPlayerId(user.getId());
                 }
                 clientHandler.addToQueue(new SignInOK());
-                clientHandler.addToQueue(new Dictionnary(gameController.getDictionnary()));
+                //clientHandler.addToQueue(new Dictionnary(gameController.getDictionnary()));
                 return new Load();
-            // TODO this is not suppose to be empty, waiting for game logic to continue
             case Protocol.ERROR:
                 return new ErrorMessage("Unexpected ErrorMessage in SignUp code: " + exitCode);
             case Protocol.COULDNOTADDUSER:

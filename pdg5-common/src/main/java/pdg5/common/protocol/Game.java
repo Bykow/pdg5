@@ -1,12 +1,11 @@
 package pdg5.common.protocol;
 
-import pdg5.common.game.Composition;
+import pdg5.common.game.Board;
+import pdg5.common.game.GameModel.State;
 import pdg5.common.game.Tile;
 
 import java.util.Date;
 import java.util.List;
-import pdg5.common.game.Board;
-import pdg5.common.game.GameModel.State;
 
 /**
  * @author Maxime Guillod
@@ -27,9 +26,9 @@ public class Game extends Message {
     private int scoreLastWordPlayed;
     private boolean yourTurn;
     private State state;
-    
+
     public Game(int ID, Date created, Date lastActivity,
-                int tournament, Board board, Board opponentBoard, int nbLeftTile, 
+                int tournament, Board board, Board opponentBoard, int nbLeftTile,
                 List<Tile> lastWordPlayed, int scoreLastWordPlayed, boolean yourTurn, State state) {
         this.ID = ID;
         this.created = created;
@@ -65,13 +64,13 @@ public class Game extends Message {
         return tournament;
     }
 
-   public Board getBoard() {
-      return board;
-   }
+    public Board getBoard() {
+        return board;
+    }
 
-   public Board getOpponentBoard() {
-      return opponentBoard;
-   }
+    public Board getOpponentBoard() {
+        return opponentBoard;
+    }
 
     public int getScore() {
         return board.getScore();
@@ -98,11 +97,11 @@ public class Game extends Message {
     }
 
     public List<Tile> getBonusLetters() {
-      return board.getBonus();
+        return board.getBonus();
     }
-    
+
     public List<Tile> getOpponentBonusLetters() {
-      return opponentBoard.getBonus();
+        return opponentBoard.getBonus();
     }
 
     public boolean isYourTurn() {
@@ -117,18 +116,20 @@ public class Game extends Message {
         return scoreLastWordPlayed;
     }
 
-   public State getState() {
-      return state;
-   }
+    public State getState() {
+        return state;
+    }
 
     public String toString() {
         String output = "";
         output += "Player Name:     " + getNamePlayer() + "\n";
-        output += "Player Score:     " + getScore() + "\n";
+        output += "Player Score:    " + getScore() + "\n";
         output += "Opponent Name:   " + getOpponentName() + "\n";
-        output += "Opponent Score:   " + getOpponentScore() + "\n";
+        output += "Opponent Score:  " + getOpponentScore() + "\n";
         output += "isYourTurn:      " + yourTurn + "\n";
         output += "Last Word Played " + lastWordPlayed.toString() + "\n";
+        output += "Bonus            " + getBonusLetters().toString() + "\n";
+        output += "Opponent Bonus   " + getOpponentBonusLetters().toString() + "\n";
 
         return output;
     }

@@ -17,7 +17,7 @@ public class ProcessGame implements GenericProcess {
 
     @Override
     public Message execute() {
-        mainController.getGameController().updateGame(game);
+        mainController.getLobyController().updateGame(game);
         return null;
     }
 }

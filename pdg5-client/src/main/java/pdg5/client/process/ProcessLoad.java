@@ -17,7 +17,7 @@ public class ProcessLoad implements GenericProcess {
     @Override
     public Message execute() {
         if (!load.getGames().isEmpty()) {
-            mainController.getGameController().updateGame(load.getGames().get(0));
+            mainController.getLobyController().addLoad(load);
         }
         return null;
     }

@@ -1,5 +1,6 @@
 package pdg5.client.controller;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -7,9 +8,11 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import pdg5.client.ClientSender;
+import pdg5.client.util.Toast;
 import pdg5.client.view.GGameListEntry;
 import pdg5.common.game.GameModel;
 import pdg5.common.protocol.Game;
+import pdg5.common.protocol.Load;
 import pdg5.common.protocol.NewGame;
 
 import java.util.ArrayList;
@@ -27,18 +30,15 @@ public class LobyController {
     private ArrayList<Game> gameModelList;
 
     private GGameListEntry selected;
+    private GameController gameController;
 
     private ClientSender sender;
     
     @FXML
     private VBox gameList;
 
-    public LobyController(ClientSender sender) {
+    public LobyController(ClientSender sender, GameController gameController) {
         gameModelList = new ArrayList<>();
-
-        gameModelList.add(new Game(0, new Date(), new Date(), 0, null, null, 12, null, 56, true, GameModel.State.IN_PROGRESS));
-        gameModelList.add(new Game(0, new Date(), new Date(), 0, null, null, 12, null, 56, true, GameModel.State.IN_PROGRESS));
-        gameModelList.add(new Game(0, new Date(), new Date(), 0, null, null, 12, null, 56, true, GameModel.State.FINISHED));
 
         titleToPlay = new Label("A ton tour");
         titleToPlay.getStyleClass().add("titleToPlay");
@@ -48,6 +48,7 @@ public class LobyController {
         titleFinished.getStyleClass().add("titleFinished");
         
         this.sender = sender;
+        this.gameController = gameController;
     }
 
     @FXML
@@ -55,7 +56,7 @@ public class LobyController {
         refresh();
     }
 
-    private void refresh() {
+    public void refresh() {
         gameList.getChildren().clear();
 
         gameList.getChildren().add(titleToPlay);
@@ -108,11 +109,36 @@ public class LobyController {
         unselectLast();
         selected = element;
         element.setSelected(true);
+        gameController.updateGame(element.getModel());
     }
 
     private void handleDelete(ActionEvent event) {
         Node btn = (Node)event.getSource();
         GGameListEntry element = (GGameListEntry)btn.getParent();
         System.out.println("delete request for " + element.getModel().getID());
+    }
+
+    public void addLoad(Load load) {
+        for (Game g: load.getGames()) {
+            addGame(g);
+        }
+    }
+
+    private void addGame(Game game) {
+        gameModelList.add(game);
+    }
+
+    public boolean hasGame(Game game) {
+        return gameModelList.stream().anyMatch((o) -> o.getID() == game.getID());
+    }
+
+    public void updateGame(Game game) {
+        gameModelList.removeIf((o) -> o.getID() == game.getID());
+        addGame(game);
+        if (gameController.getGameID() == game.getID()) {
+            gameController.updateGame(game);
+        }
+        Platform.runLater(this::refresh);
+
     }
 }

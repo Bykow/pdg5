@@ -94,7 +94,6 @@ public class ClientHandler implements Runnable {
    }
 
    public int getPlayerId() {
-      //TODO check if null throw
       return playerId;
    }
 

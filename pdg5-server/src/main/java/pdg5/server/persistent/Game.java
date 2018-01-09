@@ -87,7 +87,7 @@ public class Game extends AbstractData implements java.io.Serializable {
 		this.title = title;
 	}
 	
-	@Column(name = "remaining_letters", nullable = false, length = 100)
+	@Column(name = "remaining_letters", nullable = false, length = 120)
 	public String getRemainingLetters() {
 		return this.remainingLetters;
 	}

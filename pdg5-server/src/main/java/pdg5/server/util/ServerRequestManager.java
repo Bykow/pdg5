@@ -52,6 +52,9 @@ public class ServerRequestManager {
         } else if (o instanceof Pass) {
            return new ProcessPass((Pass) o, gameController, ch).execute(); 
            
+        } else if (o instanceof DeleteGame) {
+           return new ProcessDeleteGame((DeleteGame) o, gameController, ch).execute(); 
+           
         }
 
         return new ErrorMessage("Unhandled ErrorMessage is ServerRequestManager, default reached");

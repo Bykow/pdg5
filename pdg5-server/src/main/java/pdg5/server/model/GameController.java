@@ -15,6 +15,7 @@ import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pdg5.common.game.GameModel.State;
@@ -226,6 +227,29 @@ public class GameController {
          newList.add(gm.getGameId());
          clientGames.put(idPlayer, newList);
       }
+   }
+   
+   /**
+    * remove from the list of game of a player a given game
+    * 
+    * @param gameID the unique id the client want to remove
+    * @param playerID the unique id of the client
+    * @return the list of game of the client updated
+    */
+   public Message deleteGame(int gameID, int playerID) {
+      GameModel model = games.get(gameID);
+      int idPlayer2 = model.getOpponentBoard(playerID).getPlayerId();
+      
+      // delete the game from the list of the player
+      clientGames.get(playerID).removeIf(p -> p == gameID);
+      
+      // if the second player has deleted the game too we delete the game from the map of games too
+      if(clientGames.get(idPlayer2).indexOf(gameID) == -1) {
+         games.remove(gameID);
+      }
+      
+      // send games to player again with the game deleted
+      return findGamesOf(playerID);
    }
 
    /**

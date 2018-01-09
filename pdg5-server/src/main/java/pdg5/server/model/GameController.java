@@ -457,9 +457,7 @@ public class GameController {
       }
       
       activeUser.getClientHandler(opponentId).addToQueue(getGameFromModel(gameID, opponentId));
-      Game gameToSend = getGameFromModel(gameID, playerID);
-      System.out.println(gameToSend);
-      return gameToSend;
+      return getGameFromModel(gameID, playerID);
    }
    
    private void sendScoreResults(GameModel model) {

@@ -4,8 +4,7 @@ import java.util.Date;
 
 /**
  * Class sended through the connection by a client or the server representing,
- * if the message comes from a client, a message.
- * If the message comes from the server, an historic.
+ * a chat message
  */
 public class Chat extends Message {
 
@@ -25,30 +24,54 @@ public class Chat extends Message {
     private int gameId;
 
     /**
-     * Constructor
+     * Constructor for client creating new messages
+     * 
      * @param message the message or historic we want to send
      * @param gameId the unique ID of the message
      */
     public Chat(String message, int gameId) {
+        this(message, gameId, new Date().getTime());
+    }
+    
+    /**
+     * Constructor for server sending stocked messages
+     * 
+     * @param message the message or historic we want to send
+     * @param gameId the unique ID of the message
+     * @param timeStamp date of the message creation
+     */
+    public Chat(String message, int gameId, long timeStamp) {
         this.message = message;
         this.gameId = gameId;
-        this.timeStamp = new Date().getTime();
+        this.timeStamp = timeStamp;
     }
 
     /**
-     * return a unique ID for the message.
-     * @return a unique ID for the message.
+     * return a unique ID for the message
+     * 
+     * @return a unique ID for the message
      */
     public int getGameId() {
         return gameId;
     }
 
     /**
-     * return a String representing the message.
-     * @return a String representing the message.
+     * return a String representing the message
+     * 
+     * @return a String representing the message
      */
     public String getMessage() {
         return message;
     }
 
+    /**
+     * return the date when the message as been sent
+     * 
+     * @return the date when the message as been sent 
+     */
+    public long getTimeStamp() {
+       return timeStamp;
+    }
+
+    
 }

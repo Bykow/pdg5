@@ -18,6 +18,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pdg5.common.game.GameModel.State;
+import pdg5.server.manage.ManageChat;
 import pdg5.server.manage.ManageGame;
 
 /**
@@ -64,6 +65,11 @@ public class GameController {
     * stock the turn manager for a given unique id of game
     */
    private final Map<Integer, TurnManager> playerTurnManager;
+   
+   /**
+    * stock the list of chat message for a given unique id of game
+    */
+   private final Map<Integer, List<ChatServerSide> > chats;
 
    /**
     * current player waiting for an other random player
@@ -105,6 +111,7 @@ public class GameController {
       clientGames = new HashMap<>();
       tileStacks = new HashMap<>();
       playerTurnManager = new HashMap<>();
+      chats = new HashMap<>();
       matchMaking = new ArrayList<>();
       manageUser = new ManageUser();
       manageGame = new ManageGame();
@@ -115,6 +122,60 @@ public class GameController {
       this.activeUser = activeUser;
       checkGamesOutdatedScheduler = Executors.newScheduledThreadPool(1);
       checkGamesOutdatedScheduler.scheduleAtFixedRate(areGamesOutdated(), 1, 1, TimeUnit.MINUTES);
+    }
+    
+    /**
+     * add to the map of chat messages a new message
+     * 
+     * @param chatServer the message we want to add
+     */
+    public void addChat(ChatServerSide chatServer) {
+       int idGame = chatServer.getIdGame();
+       // we create a list if it's the first message of the game
+       List<ChatServerSide> list;
+       if (!chats.containsKey(idGame)) {
+          chats.put(idGame, new ArrayList<>());
+       }
+       list = chats.get(idGame);
+       list.add(chatServer);
+       
+       // TODO update the DB
+       //pdg5.server.persistent.Chat chatDB = new ManageChat().;
+       
+       // tell to other player
+       int idSecondPlayer = games.get(idGame).getOpponentBoardById(chatServer.getIdSender()).getPlayerId();
+       activeUser.giveToClientHandler(idSecondPlayer, chatServerToChat(chatServer));
+    }
+    
+    /**
+     * create a new Chat from a ChatServerSide
+     * 
+     * @param chatServer the ChatServerSide used to create the Chat
+     * @return a new Chat from a ChatServerSide
+     */
+    private Chat chatServerToChat(ChatServerSide chatServer) {
+       return new Chat(chatServer.getMessage(), chatServer.getIdGame(), chatServer.getTimeStamp());
+    }
+    
+    /**
+     * return a map where keys are the unique id of games 
+     * and values the historic of the chat of the associated game
+     * 
+     * @param playerID the unique player id we wish the historics
+     * @return a map where keys are the unique id of games 
+     * and values the historic of the chat of the associated game
+     */
+    public Map<Integer, List<Chat> > getAllChatsOfPlayer(int playerID) {
+       Map<Integer, List<Chat> > map = new HashMap<>();
+       for (Integer idGame : clientGames.get(playerID)) {
+          List<Chat> chatList = new ArrayList<>();
+          for (ChatServerSide chatServerSide : chats.get(idGame)) {
+             chatList.add(chatServerToChat(chatServerSide));
+          }
+          map.put(idGame, chatList);
+       }
+       
+       return map;
     }
 
    /**
@@ -234,7 +295,7 @@ public class GameController {
     * @param idClient unique id we wants the list of games
     * @return the Load created and filled with all games of the client
     */
-   public Message findGamesOf(int idClient) {
+   public List<Game> findGamesOf(int idClient) {
       List<Game> listGames = new ArrayList<>();
       List<Integer> gameIds = clientGames.get(idClient);
       if (gameIds != null) {
@@ -242,7 +303,7 @@ public class GameController {
             listGames.add(getGameFromModel(idGame, idClient));
          });
       }
-      return new Load(listGames);
+      return listGames;
    }
 
    /**

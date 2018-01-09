@@ -14,6 +14,7 @@ import pdg5.common.game.Board;
 import pdg5.common.game.Composition;
 import pdg5.common.protocol.ErrorMessage;
 import pdg5.common.protocol.Game;
+import pdg5.common.protocol.Load;
 import pdg5.common.protocol.Message;
 import pdg5.server.manage.ManageUser;
 import pdg5.server.util.ServerActiveUser;
@@ -95,7 +96,7 @@ public class GameControllerTest {
       System.out.println("findGamesOf");
       int idClient = 0;
       Message expResult = null;
-      Message result = gameController.findGamesOf(idClient);
+      Message result = new Load(gameController.findGamesOf(idClient), gameController.getAllChatsOfPlayer(idClient));
       assertEquals(expResult, result);
       // TODO review the generated test code and remove the default call to fail.
       fail("The test case is a prototype.");

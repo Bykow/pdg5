@@ -174,7 +174,11 @@ public class GameController {
       List<Tile> bonus = new ArrayList<>();
       bonus.add(ts.getNextTuile());
       bonus.add(ts.getNextTuile());
-      boards[0].setBonus(bonus);
+      if(tm.isCurrentPlayer(idPlayer1)) {
+         model.getBoardById(idPlayer1).setBonus(bonus);
+      } else {
+         model.getOpponentBoard(idPlayer1).setBonus(bonus);
+      }
 
       try {
          ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();

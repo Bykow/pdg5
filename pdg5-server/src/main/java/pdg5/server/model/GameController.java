@@ -263,7 +263,7 @@ public class GameController {
       
       
       Board cleanedOpponentBoard = new Board(opponentBoard);
-      cleanedOpponentBoard.setLetters(new ArrayList<Tile>());
+      cleanedOpponentBoard.getLetters().clear();
       
       TileStack ts = tileStacks.get(gm.getGameId());
       TurnManager tm = playerTurnManager.get(gm.getGameId());
@@ -419,7 +419,7 @@ public class GameController {
       Board boardOpponent = model.getOpponentBoard(playerID);
       List<Tile> newBonusTile = new ArrayList<>();
       Composition.Square[] squares = tm.getSquares(playerID);
-      for (int i = 0; i < squares.length; i++) {
+      for (int i = 0; i < word.size(); i++) {
          if (squares[i] == Composition.Square.W) {
             newBonusTile.add(composition.remove(i));
          }
@@ -430,7 +430,7 @@ public class GameController {
       comp.setSquare(tm.getSquares(playerID));
       comp.removeAll(); // remove composition letters and bonus letters
       
-      board.setBonus(new ArrayList<>());
+      board.getBonus().clear();
       
       //get new letters from TileStack and add it to the board
       TileStack ts = tileStacks.get(gameID);

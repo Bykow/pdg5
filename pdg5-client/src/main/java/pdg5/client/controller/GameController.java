@@ -31,6 +31,8 @@ import pdg5.common.game.Tile;
 import pdg5.common.protocol.Game;
 import pdg5.common.protocol.Play;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GameController {
@@ -159,30 +161,12 @@ public class GameController {
         }
     }
 
-    private void cleanComposition() {
-        for (int i = 0; i < Protocol.NUMBER_OF_TUILES_PER_PLAYER; i++) {
-            if(userList.get(i).getChildren().size() == 0) {
+    private void cleanList(List<StackPane> list, int size) {
+        for (int i = 0; i < size; i++) {
+            if(list.get(i).getChildren().size() == 0) {
                 continue;
             }
-            userList.get(i).getChildren().remove(0);
-        }
-    }
-
-    private void cleanBonus() {
-        for (int i = 0; i < Protocol.NUMBER_OF_EXTRA_TUILES; i++) {
-            if(userBonusList.get(i).getChildren().size() == 0) {
-                continue;
-            }
-            userBonusList.get(i).getChildren().remove(0);
-        }
-    }
-
-    private void cleanOpponentBonus() {
-        for (int i = 0; i < Protocol.NUMBER_OF_EXTRA_TUILES; i++) {
-            if(adversaryBonusList.get(i).getChildren().size() == 0) {
-                continue;
-            }
-            adversaryBonusList.get(i).getChildren().remove(0);
+            list.get(i).getChildren().remove(0);
         }
     }
 
@@ -192,10 +176,11 @@ public class GameController {
         updateList(g.getLastWordPlayed(), Protocol.NUMBER_OF_TUILES_PER_PLAYER, adversaryList);
         updateList(g.getOpponentBonusLetters(), Protocol.NUMBER_OF_EXTRA_TUILES, adversaryBonusList);
         if (g.isYourTurn()) {
-            cleanComposition();
-            cleanOpponentBonus();
+            cleanList(userList, Protocol.NUMBER_OF_TUILES_PER_PLAYER);
+            cleanList(adversaryBonusList, Protocol.NUMBER_OF_EXTRA_TUILES);
         } else {
-            cleanBonus();
+            cleanList(userBonusList, Protocol.NUMBER_OF_EXTRA_TUILES);
+            cleanList(adversaryList, Protocol.NUMBER_OF_TUILES_PER_PLAYER);
         }
     }
 
@@ -212,26 +197,39 @@ public class GameController {
         );
     }
 
-    private Composition getPlay() {
+    private Composition getPlay(List<StackPane> list) {
         Composition composition = new Composition();
-        for (StackPane st: userList) {
+        for (StackPane st: list) {
             if(st.getChildren().size() == 0) {
                 continue;
             }
             composition.push(((GTile) st.getChildren().get(0)).getModel());
         }
-        cleanOpponentBonus();
+        cleanList(adversaryBonusList, Protocol.NUMBER_OF_EXTRA_TUILES);
         return composition;
-    }
-
-    @FXML
-    private void play(ActionEvent actionEvent) {
-        ClientSender clientSender = new ClientSender();
-        clientSender.add(new Play(getPlay(), gameID));
     }
 
     public int getGameID() {
         return gameID;
     }
+
+    private void shuffleHand() {
+        ArrayList<Tile> temp = new ArrayList<>();
+        for (StackPane st: deckList) {
+            if(st.getChildren().size() == 0) {
+                continue;
+            }
+            temp.add(((GTile) st.getChildren().get(0)).getModel());
+        }
+        Collections.shuffle(temp);
+        updateList(temp, Protocol.NUMBER_OF_TUILES_PER_PLAYER, deckList);
+    }
+
+    @FXML
+    private void play(ActionEvent actionEvent) {
+        ClientSender clientSender = new ClientSender();
+        clientSender.add(new Play(getPlay(userList), gameID));
+    }
+
 
 }

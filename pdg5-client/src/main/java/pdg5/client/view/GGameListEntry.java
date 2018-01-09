@@ -79,10 +79,10 @@ public class GGameListEntry extends AnchorPane {
         else {
             String time;
             Date elapsed = new Date(new Date().getTime() - model.getLastActivity().getTime());
-            if (elapsed.getTime() > 60 * 60)
-                time = ((int) elapsed.getTime() / (60 * 60)) + " h";
+            if (elapsed.getTime() > 60 * 60 * 1000)
+                time = ((int) elapsed.getTime() / (60 * 60 * 1000)) + " h";
             else
-                time = ((int) (elapsed.getTime() / 60)) + " min";
+                time = ((int) elapsed.getTime() / (60 * 1000)) + " min";
 
             score.setText(time);
         }

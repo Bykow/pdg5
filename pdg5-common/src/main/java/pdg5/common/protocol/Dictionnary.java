@@ -5,6 +5,7 @@
  */
 package pdg5.common.protocol;
 
+import pdg5.common.TST;
 import pdg5.common.WordCombinations;
 
 /**
@@ -19,23 +20,23 @@ public class Dictionnary extends Message {
    /**
     * object that allow to check by his own the validity of a word
     */
-   private WordCombinations wordCombinations;
+   private TST dictionnary;
    
    /**
     * Constructor
     * 
-    * @param wordCombinations object that allow to check by his own the validity of a word
+    * @param dictionnary object that allow to check by his own the validity of a word
     */
-   public Dictionnary(WordCombinations wordCombinations) {
-      this.wordCombinations = wordCombinations;
+   public Dictionnary(TST dictionnary) {
+      this.dictionnary = dictionnary;
    }
 
    /**
     * return the object that allow to check by his own the validity of a word
     * @return the object that allow to check by his own the validity of a word
     */
-   public WordCombinations getWordCombinations() {
-      return wordCombinations;
+   public TST getWordCombinations() {
+      return dictionnary;
    }
    
    

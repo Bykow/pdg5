@@ -46,7 +46,7 @@ public class ProcessSignIn implements GenericProcess {
 
                 // Will be receive by the SignInController
                 clientHandler.addToQueue(new SignInOK());
-                clientHandler.addToQueue(new Dictionnary(new WordCombinations(gameController.getDictionnary())));
+                clientHandler.addToQueue(new Dictionnary(gameController.getDictionnary()));
                 // Will be receive by the ClientRequestController
                 return new Load();
                 // TODO test this v

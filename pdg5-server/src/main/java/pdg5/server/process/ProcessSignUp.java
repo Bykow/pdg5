@@ -64,7 +64,7 @@ public class ProcessSignUp implements GenericProcess {
                     clientHandler.setPlayerId(user.getId());
                 }
                 clientHandler.addToQueue(new SignInOK());
-                clientHandler.addToQueue(new Dictionnary(new WordCombinations(gameController.getDictionnary())));
+                clientHandler.addToQueue(new Dictionnary(gameController.getDictionnary()));
                 return new Load();
             // TODO this is not suppose to be empty, waiting for game logic to continue
             case Protocol.ERROR:

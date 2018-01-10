@@ -61,9 +61,10 @@ public class ChatController {
         scrollPane.setVvalue(1.0);
     }
 
-    public void addChat(List<Chat> chat) {
+    public void displayChat(List<Chat> chat) {
+        cleanChat();
         for (Chat c : chat) {
-            addMessage(convertChatToChatMessage(c));
+            addChat(c);
         }
     }
 
@@ -79,5 +80,9 @@ public class ChatController {
     private Chat convertChatMessageToChat (ChatMessage cm) {
         //TODO implement me
         return null;
+    }
+
+    private void cleanChat() {
+        msgContainer.getChildren().clear();
     }
 }

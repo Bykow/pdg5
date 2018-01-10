@@ -43,7 +43,7 @@ public class LobyController extends AbstractController {
     public LobyController(ClientSender sender, GameController gameController, ChatController chatController) {
         gameModelList = new ArrayList<>();
 
-        titleToPlay = new Label("A ton tour");
+        titleToPlay = new Label("A@jim ton tour");
         titleToPlay.getStyleClass().add("titleToPlay");
         titleWaiting = new Label("En attente");
         titleWaiting.getStyleClass().add("titleWaiting");
@@ -118,7 +118,7 @@ public class LobyController extends AbstractController {
         selected = element;
         element.setSelected(true);
         gameController.updateGame(element.getModel());
-        updateChat(historic.get(element.getModel().getID()));
+        chatController.displayChat(historic.get(element.getModel().getID()));
     }
 
     private void handleDelete(ActionEvent event) {
@@ -149,16 +149,12 @@ public class LobyController extends AbstractController {
             gameController.updateGame(game);
         }
         Platform.runLater(this::refresh);
-
-    }
-
-    private void updateChat(List<Chat> list) {
-        //todo check the right game is displayed
-        historic.get(selected.getModel().getID()).add().addChat(list);
     }
 
     public void updateChat(Chat chat) {
-        //todo check the right game is displayed
-        chatController.addChat(chat);
+        historic.get(chat.getGameId()).add(chat);
+        if (chat.getGameId() == selected.getModel().getID()) {
+            chatController.addChat(chat);
+        }
     }
 }

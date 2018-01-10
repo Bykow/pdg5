@@ -53,4 +53,8 @@ public class Load extends Message {
        return historic.get(idGame);
     }
 
+
+    public Map<Integer, List<Chat>> getHistoric() {
+        return historic;
+    }
 }

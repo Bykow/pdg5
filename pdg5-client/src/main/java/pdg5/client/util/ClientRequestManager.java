@@ -2,10 +2,7 @@ package pdg5.client.util;
 
 
 import pdg5.client.controller.MainController;
-import pdg5.client.process.ProcessErrorMessage;
-import pdg5.client.process.ProcessGame;
-import pdg5.client.process.ProcessLoad;
-import pdg5.client.process.ProcessNoop;
+import pdg5.client.process.*;
 import pdg5.common.protocol.*;
 
 /**
@@ -31,6 +28,8 @@ public class ClientRequestManager {
             return new ProcessLoad((Load) o, mainController).execute();
         } else if (o instanceof Game) {
             return new ProcessGame((Game) o, mainController).execute();
+        } else if (o instanceof Chat) {
+            return new ProcessChat((Chat) o, mainController).execute();
         }
 
         return new ErrorMessage("Unable to check Message Type");

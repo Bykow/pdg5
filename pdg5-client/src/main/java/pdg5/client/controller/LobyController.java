@@ -11,14 +11,12 @@ import pdg5.client.ClientSender;
 import pdg5.client.util.UserInformations;
 import pdg5.client.view.GGameListEntry;
 import pdg5.common.game.GameModel;
+import pdg5.common.protocol.Chat;
 import pdg5.common.protocol.Game;
 import pdg5.common.protocol.Load;
 import pdg5.common.protocol.NewGame;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -28,19 +26,21 @@ public class LobyController extends AbstractController {
     private Label titleFinished;
 
     private ArrayList<Game> gameModelList;
+    private Map<Integer, List<Chat> > historic;
 
     private GGameListEntry selected;
     private GameController gameController;
+    private ChatController chatController;
 
     private ClientSender sender;
-    
+
     @FXML
     private VBox gameList;
 
     @FXML
     private Label username;
 
-    public LobyController(ClientSender sender, GameController gameController) {
+    public LobyController(ClientSender sender, GameController gameController, ChatController chatController) {
         gameModelList = new ArrayList<>();
 
         titleToPlay = new Label("A ton tour");
@@ -52,6 +52,7 @@ public class LobyController extends AbstractController {
         
         this.sender = sender;
         this.gameController = gameController;
+        this.chatController = chatController;
     }
 
     @FXML
@@ -117,6 +118,7 @@ public class LobyController extends AbstractController {
         selected = element;
         element.setSelected(true);
         gameController.updateGame(element.getModel());
+        updateChat(historic.get(element.getModel().getID()));
     }
 
     private void handleDelete(ActionEvent event) {
@@ -126,6 +128,7 @@ public class LobyController extends AbstractController {
     }
 
     public void addLoad(Load load) {
+        historic = load.getHistoric();
         for (Game g: load.getGames()) {
             addGame(g);
         }
@@ -147,5 +150,15 @@ public class LobyController extends AbstractController {
         }
         Platform.runLater(this::refresh);
 
+    }
+
+    private void updateChat(List<Chat> list) {
+        //todo check the right game is displayed
+        historic.get(selected.getModel().getID()).add().addChat(list);
+    }
+
+    public void updateChat(Chat chat) {
+        //todo check the right game is displayed
+        chatController.addChat(chat);
     }
 }

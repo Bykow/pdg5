@@ -33,6 +33,7 @@ public class MainController extends AbstractController {
 
     private GameController gameController;
     private LobyController lobyController;
+    private ChatController chatController;
 
     @FXML
     private AnchorPane gameContainer;
@@ -80,7 +81,7 @@ public class MainController extends AbstractController {
     public void loadLoby() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            lobyController = new LobyController(sender, gameController);
+            lobyController = new LobyController(sender, gameController, chatController);
             loader.setLocation(MainController.class.getResource("/fxml/lobyView.fxml"));
             loader.setController(lobyController);
             layout = loader.load();
@@ -104,6 +105,19 @@ public class MainController extends AbstractController {
         Platform.runLater(() -> new Toast(stage, m).show());
     }
 
+    public void loadChat() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            chatController = new ChatController(sender);
+            loader.setLocation(MainController.class.getResource("/fxml/chatView.fxml"));
+            loader.setController(chatController);
+            layout = loader.load();
+            chatContainer.getChildren().setAll(layout);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public GameController getGameController() {
         return gameController;
     }
@@ -112,16 +126,7 @@ public class MainController extends AbstractController {
         return lobyController;
     }
 
-    public void loadChat() {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            ChatController controller = new ChatController();
-            loader.setLocation(MainController.class.getResource("/fxml/chatView.fxml"));
-            loader.setController(controller);
-            layout = loader.load();
-            chatContainer.getChildren().setAll(layout);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public ChatController getChatController() {
+        return chatController;
     }
 }

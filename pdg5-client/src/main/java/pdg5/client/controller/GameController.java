@@ -70,7 +70,24 @@ public class GameController extends AbstractController {
         setDragForList(userList, false, false);
         setDragForList(userBonusList, false, true);
 
-        userList.get(userList.size()-1).getStyleClass().add("final");
+        initLists(userList, adversaryList, deckList, userBonusList, adversaryBonusList);
+
+        // Last box +10
+        setModifier(userList.get(userList.size()-1), "final", "+10");
+
+    }
+
+    private void initLists(List<StackPane>... lists) {
+        for(List<StackPane> list : lists) {
+            for (StackPane ap : list) {
+                ap.getChildren().add(new Label());
+            }
+        }
+    }
+
+    private void setModifier(StackPane box, String style, String text) {
+        box.getStyleClass().add(style);
+        ((Label)box.getChildren().get(0)).setText(text);
     }
 
     private void setDragForList(List<StackPane> list, boolean isDeck, boolean isBonus) {
@@ -91,17 +108,17 @@ public class GameController extends AbstractController {
     private void handleOnDragDetected(MouseEvent event) {
         StackPane source = (StackPane) event.getSource();
 
-        if(source.getChildren().size() == 0) {
+        if(source.getChildren().size() < 2) {
             event.consume();
             return;
         }
 
-        GTile tile = (GTile)source.getChildren().get(0);
+        GTile tile = (GTile)source.getChildren().get(1);
         Dragboard db = source.startDragAndDrop(TransferMode.MOVE);
 
         SnapshotParameters parameters = new SnapshotParameters();
         parameters.setFill(Color.TRANSPARENT);
-        db.setDragView(source.getChildren().get(0).snapshot(parameters, null));
+        db.setDragView(source.getChildren().get(1).snapshot(parameters, null));
 
         // Put a string on a dragboard
         ClipboardContent content = new ClipboardContent();
@@ -120,7 +137,7 @@ public class GameController extends AbstractController {
     private void handleOnDragOver(DragEvent event) {
         StackPane source = (StackPane) event.getSource();
 
-        if(source.getChildren().size() == 0) {
+        if(source.getChildren().size() < 2) {
             event.acceptTransferModes(TransferMode.MOVE);
         }
         event.consume();
@@ -129,7 +146,7 @@ public class GameController extends AbstractController {
     private void handleOnDragOverDeck(DragEvent event) {
         StackPane source = (StackPane) event.getSource();
 
-        if(source.getChildren().size() == 0) {
+        if(source.getChildren().size() < 2) {
             Dragboard db = event.getDragboard();
             if(db.hasContent(tileFormat) && !((Tile)db.getContent(tileFormat)).isBonus())
                 event.acceptTransferModes(TransferMode.MOVE);
@@ -140,7 +157,7 @@ public class GameController extends AbstractController {
     private void handleOnDragOverBonus(DragEvent event) {
         StackPane source = (StackPane) event.getSource();
 
-        if(source.getChildren().size() == 0) {
+        if(source.getChildren().size() < 2) {
             Dragboard db = event.getDragboard();
             if(db.hasContent(tileFormat) && ((Tile)db.getContent(tileFormat)).isBonus())
                 event.acceptTransferModes(TransferMode.MOVE);
@@ -154,7 +171,7 @@ public class GameController extends AbstractController {
 
         boolean success = false;
         if (db.hasContent(tileFormat)) {
-            source.getChildren().setAll(new GTile((Tile)db.getContent(tileFormat)));
+            source.getChildren().add(1, new GTile((Tile)db.getContent(tileFormat)));
             success = true;
         }
 
@@ -165,26 +182,27 @@ public class GameController extends AbstractController {
     private void handleOnDragDone(DragEvent event) {
         if (event.getTransferMode() == TransferMode.MOVE) {
             StackPane source = (StackPane) event.getSource();
-            source.getChildren().remove(0);
+            source.getChildren().remove(1);
         }
         event.consume();
     }
 
     private void updateList(List<Tile> listFrom, int size, List<StackPane> listDest) {
         for (int i = 0; i < size; i++) {
-            listDest.get(i).getChildren().clear();
+            if(listDest.get(i).getChildren().size() > 1)
+                listDest.get(i).getChildren().remove(1);
             if (!listFrom.isEmpty() && i < listFrom.size()) {
-                listDest.get(i).getChildren().add(new GTile(listFrom.get(i)));
+                listDest.get(i).getChildren().add(1, new GTile(listFrom.get(i)));
             }
         }
     }
 
     private void cleanList(List<StackPane> list, int size) {
         for (int i = 0; i < size; i++) {
-            if(list.get(i).getChildren().size() == 0) {
+            if(list.get(i).getChildren().size() < 2) {
                 continue;
             }
-            list.get(i).getChildren().remove(0);
+            list.get(i).getChildren().remove(1);
         }
     }
 
@@ -218,10 +236,10 @@ public class GameController extends AbstractController {
     private Composition getPlay(List<StackPane> list) {
         Composition composition = new Composition();
         for (StackPane st: list) {
-            if(st.getChildren().size() == 0) {
+            if(st.getChildren().size() < 2) {
                 continue;
             }
-            composition.push(((GTile) st.getChildren().get(0)).getModel());
+            composition.push(((GTile) st.getChildren().get(1)).getModel());
         }
         cleanList(adversaryBonusList, Protocol.NUMBER_OF_EXTRA_TUILES);
         cleanList(userList, Protocol.NUMBER_OF_TUILES_PER_PLAYER);
@@ -235,10 +253,10 @@ public class GameController extends AbstractController {
     private void shuffleHand() {
         ArrayList<Tile> temp = new ArrayList<>();
         for (StackPane st: deckList) {
-            if(st.getChildren().size() == 0) {
+            if(st.getChildren().size() < 2) {
                 continue;
             }
-            temp.add(((GTile) st.getChildren().get(0)).getModel());
+            temp.add(((GTile) st.getChildren().get(1)).getModel());
         }
         Collections.shuffle(temp);
         updateList(temp, Protocol.NUMBER_OF_TUILES_PER_PLAYER, deckList);

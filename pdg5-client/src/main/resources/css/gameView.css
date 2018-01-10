@@ -20,6 +20,13 @@
     -fx-padding: -1px;
 }
 
+.table StackPane Label {
+    -fx-font-family: "Helvetica";
+    -fx-font-size: 24px;
+    -fx-font-weight: 800;
+    -fx-text-fill: #fff;
+}
+
 .table StackPane.final {
     -fx-background-color: #c02b70;
 }

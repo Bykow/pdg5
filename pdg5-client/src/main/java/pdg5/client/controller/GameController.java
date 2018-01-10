@@ -66,24 +66,13 @@ public class GameController extends AbstractController {
 
     @FXML
     public void initialize() {
+        setDragForList(deckList);
+        setDragForList(userList);
+        setDragForList(userBonusList);
+    }
 
-        for(StackPane ap : deckList) {
-            ap.setOnDragDetected(this::handleOnDragDetected);
-            ap.setOnDragEntered(this::handleOnDragEntered);
-            ap.setOnDragOver(this::handleOnDragOver);
-            ap.setOnDragDropped(this::handleOnDragDropped);
-            ap.setOnDragDone(this::handleOnDragDone);
-        }
-
-        for(StackPane ap : userList) {
-            ap.setOnDragDetected(this::handleOnDragDetected);
-            ap.setOnDragEntered(this::handleOnDragEntered);
-            ap.setOnDragOver(this::handleOnDragOver);
-            ap.setOnDragDropped(this::handleOnDragDropped);
-            ap.setOnDragDone(this::handleOnDragDone);
-        }
-
-        for(StackPane ap : userBonusList) {
+    private void setDragForList(List<StackPane> list) {
+        for(StackPane ap : list) {
             ap.setOnDragDetected(this::handleOnDragDetected);
             ap.setOnDragEntered(this::handleOnDragEntered);
             ap.setOnDragOver(this::handleOnDragOver);

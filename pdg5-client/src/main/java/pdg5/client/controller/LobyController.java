@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import pdg5.client.ClientSender;
+import pdg5.client.util.UserInformations;
 import pdg5.client.view.GGameListEntry;
 import pdg5.common.game.GameModel;
 import pdg5.common.protocol.Game;
@@ -55,7 +56,7 @@ public class LobyController extends AbstractController {
 
     @FXML
     public void initialize() {
-        username.setText(super.getUsername());
+        username.setText(UserInformations.getInstance().getUsername());
         refresh();
     }
 

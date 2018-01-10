@@ -8,4 +8,5 @@ public class Utils {
    public static final int WORD_MIN_SIZE = 2;
    public static final int RANDOM_OPPONENT = 0;
    public static final int ID_AI = 0;
+   public static final char SEPARATOR_CHAT = ':';
 }

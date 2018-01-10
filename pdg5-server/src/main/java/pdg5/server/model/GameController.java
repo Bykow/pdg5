@@ -19,6 +19,7 @@ import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import static pdg5.common.game.Utils.SEPARATOR_CHAT;
 
 /**
  * this Class manage all the games created by the server
@@ -420,6 +421,10 @@ public class GameController {
       board.setScore(board.getScore() - lostScore);
       board.setBonus(new ArrayList<>());
       board.setLastAction(Board.LAST_ACTION.PASS);
+      
+      // Save Last Action for Chat
+      addChat(new ChatServerSide(new Date().getTime(), playerID, Chat.SENDER.USER, 
+              board.getPlayerName() + " has pass and lose " + lostScore + " points", model.getGameId()));
    }
    
    private void throwAction(GameModel model, int playerID, TileStack ts) {
@@ -442,6 +447,15 @@ public class GameController {
       board.setScore(board.getScore() - lostScore);
       board.setBonus(new ArrayList<>());
       board.setLastAction(Board.LAST_ACTION.THROW);
+      
+      // Save Last Action for Chat
+      StringBuilder wordAsString = new StringBuilder();
+      for (Tile tile : bonusOpponent) {
+         wordAsString.append(tile.getLetter());
+      }
+      addChat(new ChatServerSide(new Date().getTime(), playerID, Chat.SENDER.USER, 
+              board.getPlayerName() + " has throw " + 
+              wordAsString.toString() + " for " + lostScore + " points", model.getGameId()));
    }
 
    /**
@@ -545,6 +559,15 @@ public class GameController {
                       .get();
       game.setGameState(model);
       manageGame.updateGame(game);
+      
+      // Save Last Action for Chat
+      StringBuilder wordAsString = new StringBuilder();
+      for (Tile tile : word) {
+         wordAsString.append(tile.getLetter());
+      }
+      addChat(new ChatServerSide(new Date().getTime(), playerID, Chat.SENDER.USER, 
+              board.getPlayerName() + " has play " + 
+              wordAsString.toString() + " for " + scoreToAdd + " points", gameID));
       
       activeUser.giveToClientHandler(opponentId, getGameFromModel(gameID, opponentId));
       return getGameFromModel(gameID, playerID);

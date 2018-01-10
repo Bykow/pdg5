@@ -12,6 +12,8 @@ import pdg5.common.protocol.NewGame;
 
 import java.io.IOException;
 import java.net.Socket;
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
 
 public class Client extends Application {
 
@@ -20,10 +22,12 @@ public class Client extends Application {
     //private SplitPane rootLayout;
     private AnchorPane rootLayout;
     private AnchorPane gameLayout;
-    private Socket socket;
+    private SSLSocket socket;
     private ClientListener listener;
     private ClientSender sender;
     private ClientRequestManager requestManager;
+    
+    private static final String TRUSTSTORE_LOCATION = "";
 
     public static void main(String[] args) {
         launch(args);
@@ -36,9 +40,16 @@ public class Client extends Application {
 
         initRootLayout();
 
+        System.setProperty("javax.net.ssl.trustStore","clientKeyStore.jks");
+        System.setProperty("javax.net.ssl.trustStorePassword","pdg5Password");
+        
         // Try connect
         try {
-            this.socket = new Socket(Protocol.DEFAULT_SERVER, Protocol.DEFAULT_PORT);
+            SSLSocketFactory factory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+            this.socket = (SSLSocket) factory.createSocket(Protocol.DEFAULT_SERVER, Protocol.DEFAULT_PORT);
+            
+            socket.setEnabledCipherSuites(socket.getSupportedCipherSuites());
+            
             // Init for use into controller
             sender = new ClientSender(socket);
             listener = new ClientListener(socket);

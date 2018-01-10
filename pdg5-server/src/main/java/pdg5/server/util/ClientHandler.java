@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import javax.net.ssl.SSLSocket;
 import pdg5.server.model.GameController;
 
 /**
@@ -14,7 +15,7 @@ import pdg5.server.model.GameController;
  */
 public class ClientHandler implements Runnable {
 
-    private Socket socket;
+    private SSLSocket socket;
     private ObjectOutputStream out;
     private ObjectInputStream in;
     private ServerRequestManager requestManager;
@@ -24,7 +25,7 @@ public class ClientHandler implements Runnable {
     private static int id;
     private int playerId;
 
-    public ClientHandler(Socket socket, ServerActiveUser activeUser, GameController gameController) {
+    public ClientHandler(SSLSocket socket, ServerActiveUser activeUser, GameController gameController) {
         if(socket == null) return;
         System.out.println("SRV : new client #" + id++);
         this.socket = socket;

@@ -20,6 +20,10 @@
     -fx-padding: -1px;
 }
 
+.table StackPane.final {
+    -fx-background-color: #c02b70;
+}
+
 .avatar {
     -fx-background-color: #fff;
 }

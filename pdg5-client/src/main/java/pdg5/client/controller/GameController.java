@@ -69,6 +69,8 @@ public class GameController extends AbstractController {
         setDragForList(deckList, true);
         setDragForList(userList, false);
         setDragForList(userBonusList, false);
+
+        userList.get(userList.size()-1).getStyleClass().add("final");
     }
 
     private void setDragForList(List<StackPane> list, boolean isDeck) {

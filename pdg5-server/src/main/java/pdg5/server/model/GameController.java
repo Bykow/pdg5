@@ -5,21 +5,20 @@ import pdg5.common.TST;
 import pdg5.common.game.Board;
 import pdg5.common.game.Composition;
 import pdg5.common.game.GameModel;
+import pdg5.common.game.GameModel.State;
 import pdg5.common.game.Tile;
 import pdg5.common.protocol.*;
+import pdg5.server.manage.ManageGame;
 import pdg5.server.manage.ManageUser;
 import pdg5.server.util.ServerActiveUser;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import pdg5.common.game.GameModel.State;
-import pdg5.server.manage.ManageChat;
-import pdg5.server.manage.ManageGame;
 
 /**
  * this Class manage all the games created by the server
@@ -236,8 +235,15 @@ public class GameController {
 
       // take the bonus letters from the TileStack
       List<Tile> bonus = new ArrayList<>();
-      bonus.add(ts.getNextTuile());
-      bonus.add(ts.getNextTuile());
+
+      Tile next = ts.getNextTuile();
+      next.setBonus(true);
+      bonus.add(next);
+
+      next = ts.getNextTuile();
+      next.setBonus(true);
+      bonus.add(next);
+
       if(tm.isCurrentPlayer(idPlayer1)) {
          model.getBoardById(idPlayer1).setBonus(bonus);
       } else {

@@ -5,3 +5,16 @@
     -fx-border-width: 2px;
     -fx-border-radius: 4px;
 }
+
+#main Label {
+    -fx-text-fill: #2c3e50;
+}
+
+#main.bonus {
+    -fx-background-color: #f1cd0f;
+    -fx-border-color: #dc4c18;
+}
+
+#main.bonus Label {
+    -fx-text-fill: #dc4c18;
+}

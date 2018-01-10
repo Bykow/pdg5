@@ -17,6 +17,7 @@ public class Tile implements Serializable{
     private final long id;
     private final char letter;
     private final int value;
+    private boolean bonus = false;
 
     /**
      * Constructor
@@ -46,6 +47,22 @@ public class Tile implements Serializable{
      */
     public int getValue() {
         return value;
+    }
+
+    /**
+     * Returns if the letter is a bonus letter
+     *
+     * @return boolean
+     */
+    public boolean isBonus() {
+        return bonus;
+    }
+
+    /**
+     * Set the letter as a bonus letter or not
+     */
+    public void setBonus(boolean bonus) {
+        this.bonus = bonus;
     }
 
     /**

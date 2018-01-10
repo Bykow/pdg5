@@ -70,7 +70,7 @@ public class GameController {
         for(StackPane ap : deckList) {
             ap.setOnDragDetected(this::handleOnDragDetected);
             ap.setOnDragEntered(this::handleOnDragEntered);
-            ap.setOnDragOver(this::handleOnDragOver);
+            ap.setOnDragOver(this::handleOnDragOverDeck);
             ap.setOnDragDropped(this::handleOnDragDropped);
             ap.setOnDragDone(this::handleOnDragDone);
         }
@@ -117,17 +117,28 @@ public class GameController {
 
     private void handleOnDragEntered(DragEvent event) {
         StackPane source = (StackPane) event.getSource();
-        if(source.getChildren().size() == 0) {
-            //source.setStyle("-fx-border-color: black;");
-        }
 
         event.consume();
     }
 
     private void handleOnDragOver(DragEvent event) {
         StackPane source = (StackPane) event.getSource();
-        if(source.getChildren().size() == 0)
+        Dragboard db = event.getDragboard();
+
+        if(source.getChildren().size() == 0) {
             event.acceptTransferModes(TransferMode.MOVE);
+        }
+        event.consume();
+    }
+
+    private void handleOnDragOverDeck(DragEvent event) {
+        StackPane source = (StackPane) event.getSource();
+
+        if(source.getChildren().size() == 0) {
+            Dragboard db = event.getDragboard();
+            if(db.hasContent(tileFormat) && !((Tile)db.getContent(tileFormat)).isBonus())
+                event.acceptTransferModes(TransferMode.MOVE);
+        }
         event.consume();
     }
 

@@ -58,6 +58,8 @@ public class GTile extends Pane {
 
     @FXML
     public void initialize() {
+        if(model.isBonus())
+            this.getStyleClass().add("bonus");
         letter.setText(String.valueOf(model.getLetter()));
         point.setText(String.valueOf(model.getValue()));
     }

@@ -10,6 +10,7 @@ import pdg5.client.ClientSender;
 import pdg5.client.view.ChatMessage;
 import pdg5.common.Protocol;
 import pdg5.common.protocol.Chat;
+import pdg5.common.protocol.Game;
 import pdg5.common.protocol.Load;
 
 import java.util.List;
@@ -44,9 +45,10 @@ public class ChatController {
 
     @FXML
     private void sendMsg(ActionEvent actionEvent) {
-        ChatMessage cm = new ChatMessage(ChatMessage.Type.USER, msgInput.getText());
+        String msg = msgInput.getText();
+        ChatMessage cm = new ChatMessage(ChatMessage.Type.USER, msg);
         addMessage(cm);
-        sender.add(convertChatMessageToChat(cm));
+        sender.add(convertChatMessageToChat(cm, msg));
     }
 
     private void addMessage(ChatMessage msg) {
@@ -61,24 +63,34 @@ public class ChatController {
         scrollPane.setVvalue(1.0);
     }
 
-    public void displayChat(List<Chat> chat) {
+    public void displayChat(List<Chat> chat, Game game) {
         cleanChat();
         for (Chat c : chat) {
-            addChat(c);
+            addChat(c, game);
         }
     }
 
-    public void addChat(Chat c) {
-        addMessage(convertChatToChatMessage(c));
+    public void addChat(Chat c, Game game) {
+        addMessage(convertChatToChatMessage(c, game));
     }
 
-    private ChatMessage convertChatToChatMessage (Chat c) {
-        //TODO implement me
-        return null;
+    private ChatMessage convertChatToChatMessage (Chat c, Game game) {
+        ChatMessage.Type type;
+
+        if (c.getSender() == Chat.SENDER.USER) {
+            type = ChatMessage.Type.USER;
+        } else {
+            type = ChatMessage.Type.ADVERSARY;
+        }
+
+        return new ChatMessage(type, c.getMessage());
     }
 
-    private Chat convertChatMessageToChat (ChatMessage cm) {
-        //TODO implement me
+    private Chat convertChatMessageToChat (ChatMessage cm, String msg) {
+        Chat c;
+
+        //todo fuck that...
+
         return null;
     }
 

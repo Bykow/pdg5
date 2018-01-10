@@ -118,7 +118,7 @@ public class LobyController extends AbstractController {
         selected = element;
         element.setSelected(true);
         gameController.updateGame(element.getModel());
-        chatController.displayChat(historic.get(element.getModel().getID()));
+        chatController.displayChat(historic.get(selected.getModel().getID()), selected.getModel());
     }
 
     private void handleDelete(ActionEvent event) {
@@ -154,7 +154,7 @@ public class LobyController extends AbstractController {
     public void updateChat(Chat chat) {
         historic.get(chat.getGameId()).add(chat);
         if (chat.getGameId() == selected.getModel().getID()) {
-            chatController.addChat(chat);
+            chatController.addChat(chat, selected.getModel());
         }
     }
 }

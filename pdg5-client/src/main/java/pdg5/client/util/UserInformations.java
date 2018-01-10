@@ -17,8 +17,8 @@ public class UserInformations {
     /** Point d'accès pour l'instance unique du singleton */
     public static UserInformations getInstance()
     {
-        if (INSTANCE == null)
-        {   INSTANCE = new UserInformations();
+        if (INSTANCE == null) {
+            INSTANCE = new UserInformations();
         }
         return INSTANCE;
     }

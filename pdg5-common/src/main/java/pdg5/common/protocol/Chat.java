@@ -8,6 +8,12 @@ import java.util.Date;
  */
 public class Chat extends Message {
 
+   public enum SENDER {
+      USER, OPPONENT, SERVER
+   }
+   
+   private SENDER sender;
+   
    /**
     * time when this instance was created
     */
@@ -30,7 +36,7 @@ public class Chat extends Message {
      * @param gameId the unique ID of the message
      */
     public Chat(String message, int gameId) {
-        this(message, gameId, new Date().getTime());
+        this(message, gameId, new Date().getTime(), SENDER.USER);
     }
     
     /**
@@ -40,10 +46,11 @@ public class Chat extends Message {
      * @param gameId the unique ID of the message
      * @param timeStamp date of the message creation
      */
-    public Chat(String message, int gameId, long timeStamp) {
+    public Chat(String message, int gameId, long timeStamp, SENDER sender) {
         this.message = message;
         this.gameId = gameId;
         this.timeStamp = timeStamp;
+        this.sender = sender;
     }
 
     /**
@@ -73,5 +80,23 @@ public class Chat extends Message {
        return timeStamp;
     }
 
-    
+    /**
+     * return the identity of the sender relativ to the game
+     * 
+     * @return the identity of the sender relativ to the game
+     */
+   public SENDER getSender() {
+      return sender;
+   }
+
+   /**
+    * set the Sender usefull for server when he wants to transfert easily a Chat
+    * 
+    * @param sender the new identity of the sender relativ to the game
+    */
+   public void setSender(SENDER sender) {
+      this.sender = sender;
+   }
+   
+   
 }

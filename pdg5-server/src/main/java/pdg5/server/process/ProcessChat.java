@@ -6,6 +6,7 @@
 package pdg5.server.process;
 
 import pdg5.common.protocol.Chat;
+import pdg5.common.protocol.ErrorMessage;
 import pdg5.common.protocol.Message;
 import pdg5.common.protocol.Noop;
 import pdg5.server.model.ChatServerSide;
@@ -30,7 +31,11 @@ public class ProcessChat implements GenericProcess {
 
    @Override
    public Message execute() {
-      gameController.addChat(new ChatServerSide(chat.getTimeStamp(), clientHandler.getPlayerId(), chat.getMessage(), chat.getGameId()));
+      if(chat.getSender() != Chat.SENDER.USER) {
+         return new ErrorMessage("you are not allowed to send message for others");
+      }
+      
+      gameController.addChat(new ChatServerSide(chat.getTimeStamp(), clientHandler.getPlayerId(), Chat.SENDER.USER, chat.getMessage(), chat.getGameId()));
       return new Noop(Noop.Sender.SERVER);
    }
    

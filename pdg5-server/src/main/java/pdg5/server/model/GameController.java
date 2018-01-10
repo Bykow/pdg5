@@ -144,7 +144,7 @@ public class GameController {
        
        // tell to other player
        int idSecondPlayer = games.get(idGame).getOpponentBoardById(chatServer.getIdSender()).getPlayerId();
-       activeUser.giveToClientHandler(idSecondPlayer, chatServerToChat(chatServer));
+       activeUser.giveToClientHandler(idSecondPlayer, chatServerToChat(idSecondPlayer, chatServer));
     }
     
     /**
@@ -153,8 +153,17 @@ public class GameController {
      * @param chatServer the ChatServerSide used to create the Chat
      * @return a new Chat from a ChatServerSide
      */
-    private Chat chatServerToChat(ChatServerSide chatServer) {
-       return new Chat(chatServer.getMessage(), chatServer.getIdGame(), chatServer.getTimeStamp());
+    private Chat chatServerToChat(int idReceiver, ChatServerSide chatServer) {
+       if(chatServer.getSenderType() != Chat.SENDER.SERVER) {
+          if(idReceiver == chatServer.getIdSender()) {
+             return new Chat(chatServer.getMessage(), chatServer.getIdGame(), chatServer.getTimeStamp(), Chat.SENDER.USER);
+          } else {
+             return new Chat(chatServer.getMessage(), chatServer.getIdGame(), chatServer.getTimeStamp(), Chat.SENDER.OPPONENT);
+          }
+       } else {
+          return new Chat(chatServer.getMessage(), chatServer.getIdGame(), chatServer.getTimeStamp(), Chat.SENDER.SERVER);
+       }
+       
     }
     
     /**
@@ -170,7 +179,7 @@ public class GameController {
        for (Integer idGame : clientGames.get(playerID)) {
           List<Chat> chatList = new ArrayList<>();
           for (ChatServerSide chatServerSide : chats.get(idGame)) {
-             chatList.add(chatServerToChat(chatServerSide));
+             chatList.add(chatServerToChat(playerID, chatServerSide));
           }
           map.put(idGame, chatList);
        }

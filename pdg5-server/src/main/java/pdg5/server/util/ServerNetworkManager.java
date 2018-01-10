@@ -43,43 +43,44 @@ public class ServerNetworkManager {
             while (true) {
                 socket = serverSocket.accept();
 
-                final char[] JKS_PASSWORD = "persona".toCharArray();
-                final char[] KEY_PASSWORD = "password".toCharArray();
-
-                /* Get the JKS contents */
-                final KeyStore keyStore = KeyStore.getInstance("JKS");
-                try (final InputStream is = new FileInputStream("pdg5.jks")) {
-                    keyStore.load(is, JKS_PASSWORD);
-                }
-                final KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory
-                        .getDefaultAlgorithm());
-                kmf.init(keyStore, KEY_PASSWORD);
-                final TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory
-                        .getDefaultAlgorithm());
-                tmf.init(keyStore);
-
-                /*
-                 * Creates a socket factory for HttpsURLConnection using JKS
-                 * contents
-                 */
-                final SSLContext sslContext = SSLContext.getInstance("TLS");
-                sslContext.init(kmf.getKeyManagers(), tmf.getTrustManagers(), new java.security.SecureRandom());
-
-                SSLSocketFactory sslSf = sslContext.getSocketFactory();
-                // The host name doesn't really matter, since we're turning it into a server socket
-                // (No need to match the host name to the certificate on this side).
-                SSLSocket sslSocket = (SSLSocket) sslSf.createSocket(socket, null,
-                        socket.getPort(), false);
-                sslSocket.setUseClientMode(false);
+//                final char[] JKS_PASSWORD = "persona".toCharArray();
+//                final char[] KEY_PASSWORD = "password".toCharArray();
+//
+//                /* Get the JKS contents */
+//                final KeyStore keyStore = KeyStore.getInstance("JKS");
+//                try (final InputStream is = new FileInputStream("pdg5.jks")) {
+//                    keyStore.load(is, JKS_PASSWORD);
+//                }
+//                final KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory
+//                        .getDefaultAlgorithm());
+//                kmf.init(keyStore, KEY_PASSWORD);
+//                final TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory
+//                        .getDefaultAlgorithm());
+//                tmf.init(keyStore);
+//
+//                /*
+//                 * Creates a socket factory for HttpsURLConnection using JKS
+//                 * contents
+//                 */
+//                final SSLContext sslContext = SSLContext.getInstance("TLS");
+//                sslContext.init(kmf.getKeyManagers(), tmf.getTrustManagers(), new java.security.SecureRandom());
+//
+//                SSLSocketFactory sslSf = sslContext.getSocketFactory();
+//                // The host name doesn't really matter, since we're turning it into a server socket
+//                // (No need to match the host name to the certificate on this side).
+//                SSLSocket sslSocket = (SSLSocket) sslSf.createSocket(socket, null,
+//                        socket.getPort(), false);
+//                sslSocket.setUseClientMode(false);
 
                 // Use the sslSocket InputStream/OutputStream as usual.
                 new Thread(new ClientHandler(socket, activeUser, gameController)).start();
             }
         } catch (IOException ex) {
             Logger.getLogger(ServerNetworkManager.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (final GeneralSecurityException ex) {
-            throw new RuntimeException(ex);
         }
+//        catch (final GeneralSecurityException ex) {
+//            throw new RuntimeException(ex);
+//        }
     }
 
     public void close() {

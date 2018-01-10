@@ -25,7 +25,7 @@ import pdg5.common.protocol.Message;
 
 import java.io.IOException;
 
-public class MainController {
+public class MainController extends AbstractController {
 
     private ClientListener listener;
     private ClientSender sender;

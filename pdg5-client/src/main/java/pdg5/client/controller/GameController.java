@@ -36,7 +36,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class GameController {
+public class GameController extends AbstractController {
 
     private static final DataFormat tileFormat = new DataFormat("tile.model");
 

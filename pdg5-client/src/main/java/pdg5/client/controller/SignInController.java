@@ -68,6 +68,7 @@ public class SignInController extends AbstractController {
 
         } else if (msg instanceof SignInOK) {
             System.out.println("Connection success ");
+            super.setUsername(username.getText());
             stage.hide();
             loadGame(stage);
         }

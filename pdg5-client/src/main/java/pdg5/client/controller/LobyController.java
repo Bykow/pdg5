@@ -21,7 +21,7 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class LobyController {
+public class LobyController extends AbstractController {
     private Label titleToPlay;
     private Label titleWaiting;
     private Label titleFinished;
@@ -55,8 +55,7 @@ public class LobyController {
 
     @FXML
     public void initialize() {
-        //TODO Get username
-        username.setText("nameMePlease");
+        username.setText(super.getUsername());
         refresh();
     }
 

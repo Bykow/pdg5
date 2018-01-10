@@ -38,6 +38,8 @@ public class MainController extends AbstractController {
     private AnchorPane gameContainer;
     @FXML
     private AnchorPane lobyContainer;
+    @FXML
+    private AnchorPane chatContainer;
 
     private AnchorPane layout;
 
@@ -108,5 +110,18 @@ public class MainController extends AbstractController {
 
     public LobyController getLobyController() {
         return lobyController;
+    }
+
+    public void loadChat() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            ChatController controller = new ChatController();
+            loader.setLocation(MainController.class.getResource("/fxml/chatView.fxml"));
+            loader.setController(controller);
+            layout = loader.load();
+            chatContainer.getChildren().setAll(layout);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

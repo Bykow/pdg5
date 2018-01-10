@@ -30,6 +30,7 @@ public abstract class AbstractController {
             stage.show();
             mainController.loadGame();
             mainController.loadLoby();
+            mainController.loadChat();
 
         } catch (IOException e) {
             e.printStackTrace();

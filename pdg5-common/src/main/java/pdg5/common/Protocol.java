@@ -17,6 +17,8 @@ public interface Protocol {
     final int NUMBER_OF_PLAYERS = 2;
     final int NUMBER_OF_TUILES_PER_GAME = 116;
 
+    final int DISPLAY_CHAT_MESSAGES = 50;
+
     final int OK = 200;
     final int ERROR = 400;
     final int COULDNOTADDUSER = 401;

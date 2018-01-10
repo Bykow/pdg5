@@ -8,6 +8,7 @@ Button {
     -fx-font-weight: 800;
     -fx-text-fill: #fff;
     -fx-font-size: 16px;
+
 }
 
 Button:hover {
@@ -27,3 +28,4 @@ Button.secondary:hover {
 #bottom-bar {
     -fx-background-color: #ffbd00;
 }
+

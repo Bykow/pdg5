@@ -56,7 +56,7 @@ public class Client extends Application {
             new Thread(sender).start();
             new Thread(listener).start();
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.err.println("Connection error");
         }
     }
@@ -67,12 +67,6 @@ public class Client extends Application {
     public void initRootLayout() {
         try {
             // Load root layout from fxml file.
-            /*FXMLLoader loader = new FXMLLoader();
-            mainController = new MainController();
-            loader.setLocation(Client.class.getResource("/fxml/mainView.fxml"));
-            loader.setController(mainController);
-            rootLayout = loader.load();*/
-
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Client.class.getResource("/fxml/loginView.fxml"));
             rootLayout = loader.load();
@@ -82,7 +76,6 @@ public class Client extends Application {
 
             primaryStage.setScene(scene);
             primaryStage.show();
-            //mainController.loadGame();
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -12,6 +12,7 @@ import java.io.IOException;
  * Created on 14.11.17 by Bykow
  */
 public abstract class AbstractController {
+    private String username;
 
     protected void loadGame(Stage stage) {
         try {
@@ -33,5 +34,13 @@ public abstract class AbstractController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

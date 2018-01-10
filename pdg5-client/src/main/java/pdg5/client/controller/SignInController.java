@@ -28,6 +28,7 @@ import javafx.stage.Stage;
 import pdg5.client.ClientListener;
 import pdg5.client.ClientSender;
 import pdg5.client.util.Toast;
+import pdg5.client.util.UserInformations;
 import pdg5.common.protocol.*;
 
 import java.io.IOException;
@@ -68,6 +69,7 @@ public class SignInController extends AbstractController {
 
         } else if (msg instanceof SignInOK) {
             System.out.println("Connection success ");
+            UserInformations.getInstance().setUsername(username.getText());
             stage.hide();
             loadGame(stage);
         }

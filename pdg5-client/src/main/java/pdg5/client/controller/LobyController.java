@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import pdg5.client.ClientSender;
+import pdg5.client.util.UserInformations;
 import pdg5.client.view.GGameListEntry;
 import pdg5.common.game.GameModel;
 import pdg5.common.protocol.Game;
@@ -21,7 +22,7 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class LobyController {
+public class LobyController extends AbstractController {
     private Label titleToPlay;
     private Label titleWaiting;
     private Label titleFinished;
@@ -55,8 +56,7 @@ public class LobyController {
 
     @FXML
     public void initialize() {
-        //TODO Get username
-        username.setText("nameMePlease");
+        username.setText(UserInformations.getInstance().getUsername());
         refresh();
     }
 

@@ -36,7 +36,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class GameController {
+public class GameController extends AbstractController {
 
     private static final DataFormat tileFormat = new DataFormat("tile.model");
 
@@ -66,27 +66,19 @@ public class GameController {
 
     @FXML
     public void initialize() {
+        setDragForList(deckList, true);
+        setDragForList(userList, false);
+        setDragForList(userBonusList, false);
+    }
 
-        for(StackPane ap : deckList) {
+    private void setDragForList(List<StackPane> list, boolean isDeck) {
+        for(StackPane ap : list) {
             ap.setOnDragDetected(this::handleOnDragDetected);
             ap.setOnDragEntered(this::handleOnDragEntered);
-            ap.setOnDragOver(this::handleOnDragOverDeck);
-            ap.setOnDragDropped(this::handleOnDragDropped);
-            ap.setOnDragDone(this::handleOnDragDone);
-        }
-
-        for(StackPane ap : userList) {
-            ap.setOnDragDetected(this::handleOnDragDetected);
-            ap.setOnDragEntered(this::handleOnDragEntered);
-            ap.setOnDragOver(this::handleOnDragOver);
-            ap.setOnDragDropped(this::handleOnDragDropped);
-            ap.setOnDragDone(this::handleOnDragDone);
-        }
-
-        for(StackPane ap : userBonusList) {
-            ap.setOnDragDetected(this::handleOnDragDetected);
-            ap.setOnDragEntered(this::handleOnDragEntered);
-            ap.setOnDragOver(this::handleOnDragOver);
+            if(isDeck)
+                ap.setOnDragOver(this::handleOnDragOverDeck);
+            else
+                ap.setOnDragOver(this::handleOnDragOver);
             ap.setOnDragDropped(this::handleOnDragDropped);
             ap.setOnDragDone(this::handleOnDragDone);
         }
@@ -123,7 +115,6 @@ public class GameController {
 
     private void handleOnDragOver(DragEvent event) {
         StackPane source = (StackPane) event.getSource();
-        Dragboard db = event.getDragboard();
 
         if(source.getChildren().size() == 0) {
             event.acceptTransferModes(TransferMode.MOVE);

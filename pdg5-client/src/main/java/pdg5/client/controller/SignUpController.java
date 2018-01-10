@@ -26,6 +26,7 @@ import javafx.stage.Stage;
 import pdg5.client.ClientListener;
 import pdg5.client.ClientSender;
 import pdg5.client.util.Toast;
+import pdg5.client.util.UserInformations;
 import pdg5.common.protocol.ErrorMessage;
 import pdg5.common.protocol.Message;
 import pdg5.common.protocol.SignInOK;
@@ -92,6 +93,8 @@ public class SignUpController extends AbstractController {
                 new Toast(stage, msg.toString()).show();
             } else if (msg instanceof SignInOK) {
                 System.out.println("SignUp success ");
+                UserInformations.getInstance().setUsername(username.getText());
+                UserInformations.getInstance().setMail(email.getText());
                 stage.hide();
                 loadGame(stage);
             }

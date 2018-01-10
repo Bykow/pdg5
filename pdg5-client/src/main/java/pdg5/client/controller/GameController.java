@@ -66,19 +66,21 @@ public class GameController extends AbstractController {
 
     @FXML
     public void initialize() {
-        setDragForList(deckList, true);
-        setDragForList(userList, false);
-        setDragForList(userBonusList, false);
+        setDragForList(deckList, true, false);
+        setDragForList(userList, false, false);
+        setDragForList(userBonusList, false, true);
 
         userList.get(userList.size()-1).getStyleClass().add("final");
     }
 
-    private void setDragForList(List<StackPane> list, boolean isDeck) {
+    private void setDragForList(List<StackPane> list, boolean isDeck, boolean isBonus) {
         for(StackPane ap : list) {
             ap.setOnDragDetected(this::handleOnDragDetected);
             ap.setOnDragEntered(this::handleOnDragEntered);
             if(isDeck)
                 ap.setOnDragOver(this::handleOnDragOverDeck);
+            else if(isBonus)
+                ap.setOnDragOver(this::handleOnDragOverBonus);
             else
                 ap.setOnDragOver(this::handleOnDragOver);
             ap.setOnDragDropped(this::handleOnDragDropped);
@@ -130,6 +132,17 @@ public class GameController extends AbstractController {
         if(source.getChildren().size() == 0) {
             Dragboard db = event.getDragboard();
             if(db.hasContent(tileFormat) && !((Tile)db.getContent(tileFormat)).isBonus())
+                event.acceptTransferModes(TransferMode.MOVE);
+        }
+        event.consume();
+    }
+
+    private void handleOnDragOverBonus(DragEvent event) {
+        StackPane source = (StackPane) event.getSource();
+
+        if(source.getChildren().size() == 0) {
+            Dragboard db = event.getDragboard();
+            if(db.hasContent(tileFormat) && ((Tile)db.getContent(tileFormat)).isBonus())
                 event.acceptTransferModes(TransferMode.MOVE);
         }
         event.consume();

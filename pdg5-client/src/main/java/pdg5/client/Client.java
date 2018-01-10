@@ -8,12 +8,10 @@ import javafx.stage.Stage;
 import pdg5.client.controller.MainController;
 import pdg5.client.util.ClientRequestManager;
 import pdg5.common.Protocol;
-import pdg5.common.protocol.NewGame;
 
-import java.io.IOException;
-import java.net.Socket;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
+import java.io.IOException;
 
 public class Client extends Application {
 
@@ -37,6 +35,7 @@ public class Client extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("WordOn Desktop");
+        this.primaryStage.setResizable(false);
 
         initRootLayout();
 

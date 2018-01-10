@@ -43,12 +43,12 @@ public class ServerNetworkManager {
             while (true) {
                 socket = serverSocket.accept();
 
-                final char[] JKS_PASSWORD = "persona".toCharArray();
-                final char[] KEY_PASSWORD = "password".toCharArray();
+                final char[] JKS_PASSWORD = "pdg5Password".toCharArray();
+                final char[] KEY_PASSWORD = "psg5Password".toCharArray();
 
                 /* Get the JKS contents */
                 final KeyStore keyStore = KeyStore.getInstance("JKS");
-                try (final InputStream is = new FileInputStream("pdg5.jks")) {
+                try (final InputStream is = ServerNetworkManager.class.getResourceAsStream("pdg5.jks")) {
                     keyStore.load(is, JKS_PASSWORD);
                 }
                 final KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory
@@ -63,7 +63,7 @@ public class ServerNetworkManager {
                  * contents
                  */
                 final SSLContext sslContext = SSLContext.getInstance("TLS");
-                sslContext.init(kmf.getKeyManagers(), tmf.getTrustManagers(), new java.security.SecureRandom());
+                sslContext.init(kmf.getKeyManagers(), null, new java.security.SecureRandom());
 
                 SSLSocketFactory sslSf = sslContext.getSocketFactory();
                 // The host name doesn't really matter, since we're turning it into a server socket
@@ -72,8 +72,10 @@ public class ServerNetworkManager {
                         socket.getPort(), false);
                 sslSocket.setUseClientMode(false);
 
+                sslSocket.setEnabledCipherSuites(sslSocket.getSupportedCipherSuites());
+                                
                 // Use the sslSocket InputStream/OutputStream as usual.
-                new Thread(new ClientHandler(socket, activeUser, gameController)).start();
+                new Thread(new ClientHandler(sslSocket, activeUser, gameController)).start();
             }
         } catch (IOException ex) {
             Logger.getLogger(ServerNetworkManager.class.getName()).log(Level.SEVERE, null, ex);

@@ -34,30 +34,36 @@ public class ServerRequestManager {
         } else if (o instanceof SignIn) {
             return new ProcessSignIn((SignIn) o, manageUser, activeUser, gameController, ch).execute();
 
-        } else if (o instanceof Noop) {
-            return new ProcessNoop((Noop) o).execute();
-            
-        } else if (o instanceof NewGame) {
-           return new ProcessNewGame((NewGame) o, gameController, activeUser, ch).execute();
-           
-        } else if (o instanceof Validation) {
-           return new ProcessValidation((Validation) o, gameController).execute();
-           
-        } else if (o instanceof Play) {
-           return new ProcessPlay((Play) o, gameController, activeUser, ch).execute(); 
-           
-        } else if (o instanceof Friend) {
-           return new ProcessFriend((Friend) o, manageUser, ch).execute(); 
-           
-        } else if (o instanceof Pass) {
-           return new ProcessPass((Pass) o, gameController, ch).execute(); 
-           
-        } else if (o instanceof Chat) {
-           return new ProcessChat((Chat) o, gameController, ch).execute(); 
-           
-        }
+        } else if (ch.isConnected()) {
+            if (o instanceof Noop) {
+               return new ProcessNoop((Noop) o).execute();
 
-        return new ErrorMessage("Unhandled ErrorMessage is ServerRequestManager, default reached");
+            } else if (o instanceof NewGame) {
+               return new ProcessNewGame((NewGame) o, gameController, activeUser, ch).execute();
+
+            } else if (o instanceof Validation) {
+               return new ProcessValidation((Validation) o, gameController).execute();
+
+            } else if (o instanceof Play) {
+               return new ProcessPlay((Play) o, gameController, activeUser, ch).execute(); 
+
+            } else if (o instanceof Friend) {
+               return new ProcessFriend((Friend) o, manageUser, ch).execute(); 
+
+            } else if (o instanceof Pass) {
+               return new ProcessPass((Pass) o, gameController, ch).execute(); 
+
+            } else if (o instanceof Chat) {
+               return new ProcessChat((Chat) o, gameController, ch).execute(); 
+
+            } else if (o instanceof Logout) {
+               return new ProcessLogout((Logout) o, activeUser, ch).execute(); 
+
+            }
+        }
+        
+
+        return new ErrorMessage("Unhandled ErrorMessage is ServerRequestManager, default reached are you connected?");
     }
 
 }

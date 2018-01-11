@@ -23,7 +23,7 @@ public class ClientHandler implements Runnable {
     private MessageQueue queueOut;
     private ServerActiveUser activeUser;
     private static int id;
-    private int playerId;
+    private Integer playerId;
 
     public ClientHandler(SSLSocket socket, ServerActiveUser activeUser, GameController gameController) {
         if(socket == null) return;
@@ -39,6 +39,7 @@ public class ClientHandler implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        playerId = null;
     }
 
     public void addToQueue(Message message) {
@@ -90,13 +91,19 @@ public class ClientHandler implements Runnable {
         }).start();
     }
 
-   public void setPlayerId(int playerId) {
+   public void setPlayerId(Integer playerId) {
       this.playerId = playerId;
    }
 
-   public int getPlayerId() {
+   public Integer getPlayerId() throws NullPointerException {
+      if (playerId == null) {
+         throw new NullPointerException("the clientHandler has no associated client (playerId in ClientHandler null)");
+      }
       return playerId;
    }
+   
+   public boolean isConnected() {
+      return playerId != null;
+   }
 
-    
 }

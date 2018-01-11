@@ -4,4 +4,5 @@
 
 mvn -Dmaven.test.skip=true install
 
+docker-compose down -v
 docker-compose up --build

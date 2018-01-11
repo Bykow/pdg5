@@ -1,6 +1,5 @@
 package pdg5.server.manage;
 
-import java.io.IOException;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

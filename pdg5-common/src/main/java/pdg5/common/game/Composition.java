@@ -58,6 +58,10 @@ public class Composition implements Serializable{
       public abstract int getFinalValue(Tile tile);
    }
 
+   public Square[] getSquare() {
+      return square;
+   }
+
    // seven or less Tiles representing the current word
    private final Tile[] word; 
    

@@ -60,6 +60,7 @@ public class Tile implements Serializable{
 
     /**
      * Set the letter as a bonus letter or not
+    * @param bonus
      */
     public void setBonus(boolean bonus) {
         this.bonus = bonus;

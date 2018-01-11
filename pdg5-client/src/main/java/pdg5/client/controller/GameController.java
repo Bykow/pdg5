@@ -218,10 +218,15 @@ public class GameController extends AbstractController {
     private void updateOpponentComposition(boolean isYourTurn, List<Tile> listFrom, List<StackPane> listDest, List<Composition.Square> square) {
         for (int i = 0; i < listDest.size(); i++) {
             if (isYourTurn) {
-                if (listDest.get(i).getChildren().size() > 1)
+                if (listDest.get(i).getChildren().size() > 1) {
                     listDest.get(i).getChildren().remove(1);
+                    listDest.get(i).getStyleClass().remove("covered");
+                }
                 if (!listFrom.isEmpty() && i < listFrom.size()) {
                     listDest.get(i).getChildren().add(1, new GTile(listFrom.get(i)));
+                    if(square.get(i) != Composition.Square.NORMAL) {
+                        listDest.get(i).getStyleClass().add("covered");
+                    }
                 }
             } else {
                 cleanList(listDest);

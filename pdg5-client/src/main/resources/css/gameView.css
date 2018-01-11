@@ -60,6 +60,10 @@
     -fx-border-color: #2c3e50 !important;
 }
 
+.adversary StackPane.covered #main.bonus {
+    -fx-border-color: #dc4c18 !important;
+}
+
 .adversary StackPane Label {
     -fx-text-fill: #1e70a5;
 }

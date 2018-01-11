@@ -401,6 +401,9 @@ public class GameController {
         } else {
             throwAction(model, playerID, ts);
         }
+        
+        // empty the last word played as there is none
+        model.getLastWordPlayed().clear();
 
         // send game result if the game is finish
         if (gameEnded(model, ts)) {
@@ -481,24 +484,24 @@ public class GameController {
         //check if the game exist
         GameModel model = games.get(gameID);
         if (model == null || model.getState() != State.IN_PROGRESS) {
-            return new ErrorMessage("This game doesn't exist anymore or has never existed or is finish");
+            return new ErrorMessage("Cette partie n'existe plus ou a été terminée");
         }
 
         //check if it's player's turn
         TurnManager tm = playerTurnManager.get(gameID);
         if (!tm.isCurrentPlayer(playerID)) {
-            return new ErrorMessage("It's not your turn !");
+            return new ErrorMessage("Ce n'est pas votre tour !");
         }
 
         // Check if the composition is a valide word Structure
         if (!composition.isValid()) {
-            return new ErrorMessage("The given Composition isn't a valide word structure");
+            return new ErrorMessage("La composition n'est pas une structure valide");
         }
 
         // Check if the word is in the dictionary
         // We can use trim because we checked the structure of the composition before
         if (!dictionary.contains(composition.getStringForm().trim())) {
-            return new ErrorMessage("The given word isn't in our dictionary");
+            return new ErrorMessage("Ce mot n'est pas dans notre dictionnaire");
         }
 
         Board board = model.getBoardById(playerID);
@@ -507,7 +510,7 @@ public class GameController {
         Board testBoard = new Board(board);
         List<Tile> word = composition.getWord();
         if (!testBoard.replayWord(word)) {
-            return new ErrorMessage("You don't have the letters to play this word");
+            return new ErrorMessage("Vous n'avez pas les lettres pour jouer ce mot");
         }
 
         // Calculate the value of the word
@@ -520,7 +523,7 @@ public class GameController {
         model.setScoreLastWordPlayed(scoreToAdd);
         model.setLastWordPlayed(word);
         
-        
+
         // Send Square.W to opponent
         Board boardOpponent = model.getOpponentBoard(playerID);
         List<Tile> newBonusTile = new ArrayList<>();

@@ -29,7 +29,14 @@ services:
     expose:
       - "44555"
     ports:
-     - "44555:44555"
+      - "44555:44555"
+    depends_on:
+      - wait-for-mysql
+
+  wait-for-mysql:
+    image: digit/wait-for-mysql
+    links:
+      - "mysql"
 
 volumes:
   pdg-data:

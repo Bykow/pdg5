@@ -92,6 +92,11 @@ public class GameController extends AbstractController {
         ((Label)box.getChildren().get(0)).setText(text);
     }
 
+    private void removeModifier(StackPane box) {
+        box.getStyleClass().clear();
+        ((Label)box.getChildren().get(0)).setText("");
+    }
+
     private void setDragForList(List<StackPane> list, boolean isDeck, boolean isBonus) {
         for(StackPane ap : list) {
             ap.setOnDragDetected(this::handleOnDragDetected);

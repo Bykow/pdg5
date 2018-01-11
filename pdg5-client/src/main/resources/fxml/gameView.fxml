@@ -32,7 +32,7 @@
             </fx:define>
          </children>
       </HBox>
-      <HBox prefHeight="80.0" prefWidth="524.0" styleClass="table">
+      <HBox prefHeight="80.0" prefWidth="524.0" styleClass="table, adversary">
          <children>
             <StackPane fx:id="agbox0" prefHeight="200.0" prefWidth="200.0" />
             <StackPane fx:id="agbox1" prefHeight="200.0" prefWidth="200.0" />

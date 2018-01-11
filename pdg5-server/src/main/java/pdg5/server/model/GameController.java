@@ -427,7 +427,7 @@ public class GameController {
       
       // Save Last Action for Chat
       addChat(new ChatServerSide(new Date().getTime(), playerID, Chat.SENDER.USER, 
-              board.getPlayerName() + " has pass and lose " + lostScore + " points", model.getGameId()));
+              board.getPlayerName() + " a passé et perdu " + lostScore + " points", model.getGameId()));
    }
    
    private void throwAction(GameModel model, int playerID, TileStack ts) {
@@ -457,8 +457,8 @@ public class GameController {
          wordAsString.append(tile.getLetter());
       }
       addChat(new ChatServerSide(new Date().getTime(), playerID, Chat.SENDER.USER, 
-              board.getPlayerName() + " has throw " + 
-              wordAsString.toString() + " for " + lostScore + " points", model.getGameId()));
+              board.getPlayerName() + " a jeté " + 
+              wordAsString.toString() + " pour " + lostScore + " points", model.getGameId()));
    }
 
    /**
@@ -565,12 +565,12 @@ public class GameController {
       
       // Save Last Action for Chat
       StringBuilder wordAsString = new StringBuilder();
-      for (Tile tile : word) {
-         wordAsString.append(tile.getLetter());
-      }
+      word.forEach((tile) -> {
+          wordAsString.append(tile.getLetter());
+       });
       addChat(new ChatServerSide(new Date().getTime(), playerID, Chat.SENDER.USER, 
-              board.getPlayerName() + " has play " + 
-              wordAsString.toString() + " for " + scoreToAdd + " points", gameID));
+              board.getPlayerName() + " a joué " + 
+              wordAsString.toString() + " pour " + scoreToAdd + " points", gameID));
       
       activeUser.giveToClientHandler(opponentId, getGameFromModel(gameID, opponentId));
       return getGameFromModel(gameID, playerID);

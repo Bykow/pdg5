@@ -3,10 +3,13 @@ package pdg5.client.controller;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import pdg5.client.Client;
 import pdg5.client.ClientSender;
 import pdg5.client.util.UserInformations;
 import pdg5.client.view.GGameListEntry;
@@ -104,8 +107,7 @@ public class LobyController extends AbstractController {
 
     @FXML
     private void logout(ActionEvent actionEvent) {
-        //TODO Logout
-        System.out.println("logout");
+
     }
 
     @FXML

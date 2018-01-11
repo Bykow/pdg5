@@ -224,7 +224,7 @@ public class GameController extends AbstractController {
             if (square.get(i) != Composition.Square.NORMAL) {
                 setModifier(listDest.get(i), square.get(i).name(), square.get(i).getText());
             } else {
-
+                removeModifier(listDest.get(i));
             }
         }
     }

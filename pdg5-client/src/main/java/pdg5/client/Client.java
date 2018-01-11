@@ -17,7 +17,6 @@ public class Client extends Application {
 
     private MainController mainController;
     private Stage primaryStage;
-    //private SplitPane rootLayout;
     private AnchorPane rootLayout;
     private AnchorPane gameLayout;
     private SSLSocket socket;

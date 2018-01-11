@@ -15,8 +15,10 @@ package pdg5.client.controller;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import pdg5.client.Client;
 import pdg5.client.ClientListener;
 import pdg5.client.ClientSender;
 import pdg5.client.util.ClientRequestManager;
@@ -131,5 +133,22 @@ public class MainController extends AbstractController {
 
     public ChatController getChatController() {
         return chatController;
+    }
+
+    public void logout() {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Client.class.getResource("/fxml/loginView.fxml"));
+        try {
+            layout = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Show the scene containing the root layout.
+        Scene scene = new Scene(layout);
+
+        stage.hide();
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 }

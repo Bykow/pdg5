@@ -45,7 +45,7 @@
     -fx-border-insets: 14px 8.5px 5px 8.5px;
 }
 
-.adversary StackPane.covered {
+.adversary StackPane {
     -fx-background-color: #3498db !important;
     -fx-background-insets: 0 16px 5px 16px;
 }

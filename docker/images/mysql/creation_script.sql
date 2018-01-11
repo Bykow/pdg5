@@ -115,6 +115,7 @@ CREATE TABLE `game` (
   `tournament` int(11) DEFAULT NULL,
   `remaining_letters` VARCHAR(120) NOT NULL,
   `game_state` BLOB,
+  `turn_manager` BLOB,
   PRIMARY KEY (`ID`),
   FOREIGN KEY (`player1`) REFERENCES `user` (`ID`),
   FOREIGN KEY (`player2`) REFERENCES `user` (`ID`),

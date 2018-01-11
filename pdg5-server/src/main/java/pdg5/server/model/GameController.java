@@ -17,6 +17,7 @@ import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 import pdg5.server.manage.ManageGame;
 import pdg5.server.manage.ManageUser;
 import pdg5.server.persistent.User;
@@ -117,18 +118,26 @@ public class GameController {
 
     /**
      * Load the data from database for a user
-     * @param idPlayer 
+     *
+     * @param idPlayer
      */
-    public void dataLoad(int idPlayer){
+    public void dataLoad(int idPlayer) {
+
         ManageGame manageGame = activeUser.getDatabaseManagers(idPlayer).getManageGame();
         ManageUser manageUser = activeUser.getDatabaseManagers(idPlayer).getManageUser();
-        
+
         User user = manageUser.getUserById(idPlayer);
-        List<pdg5.server.persistent.Game> databaseGames = manageGame.getGamesByUser(user);
-        
-        // TODO Mettre les games dans notre map
+
+        clientGames.put(idPlayer, manageGame.getGamesByUser(user)
+                .stream()
+                .peek((g) -> tileStacks.put(g.getId(), new TileStack(Protocol.Languages.LANG_FR.toString(), g.getRemainingLetters())))
+                .peek((g) -> playerTurnManager.put(g.getId(), (TurnManager) g.getTurnManagerAsSerializable()))
+                .map((g) -> (GameModel) g.getGameStateAsSerializable())
+                .peek((g) -> games.put(g.getGameId(), g))
+                .map(GameModel::getGameId).collect(Collectors.toList()));
+
     }
-    
+
     /**
      * add to the map of chat messages a new message
      *
@@ -180,16 +189,16 @@ public class GameController {
      */
     public Map<Integer, List<Chat>> getAllChatsOfPlayer(int playerID) {
         Map<Integer, List<Chat>> map = new HashMap<>();
-        try{
-        List<Integer> userGames = clientGames.get(playerID);
-        userGames.forEach((idGame) -> {
-            List<Chat> chatList = new ArrayList<>();
-            chats.get(idGame).forEach((chatServerSide) -> {
-                chatList.add(chatServerToChat(playerID, chatServerSide));
+        try {
+            List<Integer> userGames = clientGames.get(playerID);
+            userGames.forEach((idGame) -> {
+                List<Chat> chatList = new ArrayList<>();
+                chats.get(idGame).forEach((chatServerSide) -> {
+                    chatList.add(chatServerToChat(playerID, chatServerSide));
+                });
+                map.put(idGame, chatList);
             });
-            map.put(idGame, chatList);
-        });
-        } catch (NullPointerException ex){
+        } catch (NullPointerException ex) {
             System.err.println("No chat found");
         }
 
@@ -271,6 +280,7 @@ public class GameController {
 
         // update the game to database
         game.setGameState(model);
+        game.setTurnManager(tm);
         manageGame.updateGame(game);
 
         // sending to second player
@@ -404,7 +414,7 @@ public class GameController {
         } else {
             throwAction(model, playerID, ts);
         }
-        
+
         // empty the last word played as there is none
         model.getLastWordPlayed().clear();
 
@@ -525,7 +535,6 @@ public class GameController {
         board.setScore(scoreToAdd + board.getScore());
         model.setScoreLastWordPlayed(scoreToAdd);
         model.setLastWordPlayed(word);
-        
 
         // Send Square.W to opponent
         Board boardOpponent = model.getOpponentBoard(playerID);
@@ -567,7 +576,7 @@ public class GameController {
 
         ManageGame manageGame = activeUser.getDatabaseManagers(playerID).getManageGame();
         ManageUser manageUser = activeUser.getDatabaseManagers(playerID).getManageUser();
-        
+
         // update the DB game
         pdg5.server.persistent.Game game
                 = manageGame.getGamesByUser(manageUser.getUserById(playerID))
@@ -576,6 +585,7 @@ public class GameController {
                         .findAny()
                         .get();
         game.setGameState(model);
+        game.setTurnManager(tm);
         manageGame.updateGame(game);
 
         // Save Last Action for Chat
@@ -584,7 +594,7 @@ public class GameController {
             wordAsString.append(tile.getLetter());
         });
         String playerName = board.getPlayerName().substring(0, 1).toUpperCase() + board.getPlayerName().substring(1).toLowerCase();
-        
+
         addChat(new ChatServerSide(new Date().getTime(), playerID, Chat.SENDER.USER,
                 playerName + " a joué "
                 + wordAsString.toString() + " pour " + scoreToAdd + " points", gameID));
@@ -716,7 +726,7 @@ public class GameController {
 
                         ManageGame manageGame = new ManageGame();
                         ManageUser manageUser = new ManageUser();
-                        
+
                         // Send to players the update
                         int idPlayer1 = gameModel.getBoard(GameModel.PlayerBoard.PLAYER1).getPlayerId();
                         int idPlayer2 = gameModel.getBoard(GameModel.PlayerBoard.PLAYER2).getPlayerId();

@@ -1,5 +1,6 @@
 package pdg5.server.model;
 
+import java.io.Serializable;
 import pdg5.common.game.Composition;
 import pdg5.common.game.Composition.Square;
 import pdg5.common.game.Utils;
@@ -9,7 +10,7 @@ import java.util.Random;
 /**
  * This class manage the turn for a game
  */
-public class TurnManager {
+public class TurnManager implements Serializable{
 
     private final static Composition.Square[][] POSSIBLE_ARRAY_SQUARES = {
         {Square.DOUBLE, Square.NORMAL, Square.NORMAL, Square.W, Square.NORMAL, Square.W, Square.BONUS},

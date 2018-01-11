@@ -51,6 +51,28 @@ public class TileStack {
         this.map = new HashMap<>(stack.map);
         this.r = stack.r;
     }
+    
+    public TileStack(String lang, String letters){
+        r = new Random();
+        size = 0;
+        ClassLoader classLoader = getClass().getClassLoader();
+        Stream<String> lines = null;
+
+        InputStream inputStream = TileStack.class.getResourceAsStream("/dico/" + lang + "_stackInit.txt");
+        new BufferedReader(new InputStreamReader(inputStream)).lines()
+                // Fills the map with letter and values. '0' stands for a joker
+                .forEach(s -> map.put(s.charAt(0), Integer.parseInt(s.substring(5,7))));
+
+        letters.chars()
+                .mapToObj(c -> (char) c)
+                .map((Character c) -> new Tile((char) c, map.get(c)))
+                .forEach((t) -> {
+                    size++;
+                    stack.push(new Tile(t));
+                });
+        
+        tileLeft = size;
+    }
 
     /**
      * Initialize both HashMap of letter with values and stack of Tuiles for a game.
@@ -73,16 +95,6 @@ public class TileStack {
                         this.stack.push(new Tile(s.charAt(0), Integer.parseInt(s.substring(5,7))));
                     }
                 });
-
-
-        /*
-        // Adds the missing 12 Tuiles to get the 114 Tuiles of a game. Picks at random the remaining
-        for (int i = Protocol.NUMBER_OF_TUILES_PER_GAME-size; i > 0; i--) {
-            char c = getRandChar();
-            size++;
-            stack.push(new Tile(c, map.get(c)));
-        }
-        */
 
         // Shuffles the stack
         Collections.shuffle(stack, r);

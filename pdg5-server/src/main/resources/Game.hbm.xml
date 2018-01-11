@@ -28,6 +28,7 @@
             <column length="19" name="last_activity" not-null="true"/>
         </property>
         <property name="gameState" column="game_state" type="blob" />
+        <property name="turnManager" column="turn_manager" type="blob" />
         <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="chats" optimistic-lock="true" sort="unsorted" table="chat">
             <key on-delete="noaction">
                 <column name="game"/>

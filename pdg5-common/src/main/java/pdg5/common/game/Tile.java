@@ -11,10 +11,7 @@ import java.util.List;
  * when one is a bonus tile and an other is a normal letter.
  */
 public class Tile implements Serializable{
-   
-   private static long uniqueId = 0;
-   
-    private final long id;
+      
     private final char letter;
     private final int value;
     private boolean bonus = false;
@@ -28,7 +25,6 @@ public class Tile implements Serializable{
     public Tile(char letter, int value) {
         this.letter = letter;
         this.value = value;
-        id = uniqueId++;
     }
 
     /**
@@ -36,7 +32,6 @@ public class Tile implements Serializable{
      * @param t 
      */
     public Tile(Tile t){
-       this.id = t.id;
        this.letter = t.letter;
        this.value = t.value;
     }
@@ -96,17 +91,17 @@ public class Tile implements Serializable{
    public boolean equals(Object o) {
       return getClass().isInstance(o) &&
               getClass() == o.getClass() &&
-              id == ((Tile) o).id &&
+              bonus == ((Tile) o).bonus &&
               letter == ((Tile) o).letter &&
               value == ((Tile) o).value;
    }
 
    @Override
    public int hashCode() {
-      int hash = 3;
-      hash = 67 * hash + (int) (this.id ^ (this.id >>> 32));
-      hash = 67 * hash + this.letter;
-      hash = 67 * hash + this.value;
+      int hash = 7;
+      hash = 53 * hash + this.letter;
+      hash = 53 * hash + this.value;
+      hash = 53 * hash + (this.bonus ? 1 : 0);
       return hash;
    }
 
@@ -115,7 +110,6 @@ public class Tile implements Serializable{
        for (Tile t : list) {
            temp += t.letter;
        }
-
        return temp;
    }
 }

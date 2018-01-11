@@ -24,7 +24,7 @@ public class ClientHandler implements Runnable {
     private MessageQueue queueOut;
     private ServerActiveUser activeUser;
     private static int id;
-    private int playerId;
+    private Integer playerId;
 
     private DatabaseManagers databaseManagers;
     
@@ -47,6 +47,7 @@ public class ClientHandler implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        playerId = null;
     }
 
     public void addToQueue(Message message) {
@@ -98,13 +99,21 @@ public class ClientHandler implements Runnable {
         }).start();
     }
 
-    public void setPlayerId(int playerId) {
-        this.playerId = playerId;
-    }
+   public void setPlayerId(Integer playerId) {
+      this.playerId = playerId;
+   }
 
-    public int getPlayerId() {
-        return playerId;
-    }
+   public Integer getPlayerId() throws NullPointerException {
+      if (playerId == null) {
+         throw new NullPointerException("the clientHandler has no associated client (playerId in ClientHandler null)");
+      }
+      return playerId;
+   }
+   
+   public boolean isConnected() {
+      return playerId != null;
+   }
+
 
     public DatabaseManagers getDatabaseManagers(){
         return databaseManagers;

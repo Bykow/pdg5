@@ -1,9 +1,12 @@
 package pdg5.common.protocol;
 
 /**
- * Created on 11.01.18 by Bykow
+ * class sent through the connection by the client 
+ * to logout
+ * @author Jimmy Verdasca
  */
 public class Logout extends Message {
+   
     public Logout() {
 
     }

@@ -1,24 +1,10 @@
-/**
- -----------------------------------------------------------------------------------
- Laboratoire : <nn>
- Fichier     : GameController.java
- Auteur(s)   : Andrea Cotza
- Date        : 24.10.2017
-
- But         : <‡ complÈter>
-
- Remarque(s) : <‡ complÈter>
-
- Compilateur : jdk1.8.0_60
- -----------------------------------------------------------------------------------
- */
-
 package pdg5.client.controller;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.*;
 import javafx.scene.layout.StackPane;
@@ -63,6 +49,11 @@ public class GameController extends AbstractController {
     private Label adversaryName;
     @FXML
     private Label userName;
+
+    @FXML
+    private Button btnPlay;
+    @FXML
+    private Button btnDiscard;
 
     private int gameID;
 
@@ -274,7 +265,12 @@ public class GameController extends AbstractController {
     public void updateGame(Game g) {
         gameID = g.getID();
         if(!g.isYourTurn()) {
+            btnPlay.setDisable(true);
+            btnDiscard.setDisable(true);
             mainController.getChatController().addChat(constructLogLastPlayed(g));
+        } else {
+            btnPlay.setDisable(false);
+            btnDiscard.setDisable(false);
         }
         Platform.runLater(() -> {
                     updatePlayer(g);

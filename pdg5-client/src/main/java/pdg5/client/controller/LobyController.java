@@ -32,8 +32,6 @@ public class LobyController extends AbstractController {
     private Map<Integer, List<Chat> > historic;
 
     private GGameListEntry selected;
-    private GameController gameController;
-    private ChatController chatController;
     private MainController mainController;
 
     private ClientSender sender;
@@ -44,7 +42,7 @@ public class LobyController extends AbstractController {
     @FXML
     private Label username;
 
-    public LobyController(ClientSender sender, MainController mainController, GameController gameController, ChatController chatController) {
+    public LobyController(ClientSender sender, MainController mainController) {
         gameModelList = new ArrayList<>();
 
         titleToPlay = new Label("A ton tour");
@@ -57,8 +55,6 @@ public class LobyController extends AbstractController {
         historic = new HashMap<>();
         
         this.sender = sender;
-        this.gameController = gameController;
-        this.chatController = chatController;
         this.mainController = mainController;
     }
 
@@ -124,8 +120,8 @@ public class LobyController extends AbstractController {
         selected = element;
         element.setSelected(true);
         UserInformations.getInstance().setIdGameDisplayed(selected.getModel().getID());
-        gameController.updateGame(element.getModel());
-        chatController.displayChat(historic.get(selected.getModel().getID()), selected.getModel());
+        mainController.getGameController().updateGame(element.getModel());
+        mainController.getChatController().displayChat(historic.get(selected.getModel().getID()), selected.getModel());
     }
 
     private void handleDelete(ActionEvent event) {
@@ -153,8 +149,8 @@ public class LobyController extends AbstractController {
     public void updateGame(Game game) {
         gameModelList.removeIf((o) -> o.getID() == game.getID());
         addGame(game);
-        if (gameController.getGameID() == game.getID()) {
-            gameController.updateGame(game);
+        if (mainController.getGameController().getGameID() == game.getID()) {
+            mainController.getGameController().updateGame(game);
         }
 
         if (!historic.containsKey(game.getID())) {
@@ -167,7 +163,7 @@ public class LobyController extends AbstractController {
     public void updateChat(Chat chat) {
         historic.get(chat.getGameId()).add(chat);
         if (chat.getGameId() == UserInformations.getInstance().getIdGameDisplayed()) {
-            chatController.addChat(chat);
+            mainController.getChatController().addChat(chat);
         }
     }
 }

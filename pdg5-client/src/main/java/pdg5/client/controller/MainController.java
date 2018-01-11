@@ -87,7 +87,7 @@ public class MainController extends AbstractController {
     public void loadLoby() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            lobyController = new LobyController(sender, this, gameController, chatController);
+            lobyController = new LobyController(sender, this);
             loader.setLocation(MainController.class.getResource("/fxml/lobyView.fxml"));
             loader.setController(lobyController);
             layout = loader.load();

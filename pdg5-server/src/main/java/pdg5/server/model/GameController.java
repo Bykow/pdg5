@@ -176,16 +176,19 @@ public class GameController {
      * and values the historic of the chat of the associated game
      */
     public Map<Integer, List<Chat> > getAllChatsOfPlayer(int playerID) {
-       Map<Integer, List<Chat> > map = new HashMap<>();
-       for (Integer idGame : clientGames.get(playerID)) {
-          List<Chat> chatList = new ArrayList<>();
-          for (ChatServerSide chatServerSide : chats.get(idGame)) {
-             chatList.add(chatServerToChat(playerID, chatServerSide));
-          }
-          map.put(idGame, chatList);
-       }
-       
-       return map;
+        Map<Integer, List<Chat>> map = new HashMap<>();
+        List<Integer> userGames = clientGames.get(playerID);
+        if (userGames != null) {
+            userGames.forEach((idGame) -> {
+                List<Chat> chatList = new ArrayList<>();
+                chats.get(idGame).forEach((chatServerSide) -> {
+                    chatList.add(chatServerToChat(playerID, chatServerSide));
+                });
+                map.put(idGame, chatList);
+            });
+        }
+
+        return map;
     }
 
    /**

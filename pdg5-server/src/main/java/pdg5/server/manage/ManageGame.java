@@ -41,7 +41,7 @@ public class ManageGame extends Manager {
       return (List<Game>) getListFromDB("FROM Game");
    }
 
-   public List<Game> getGamesByUsername(User username) {
+   public List<Game> getGamesByUser(User user) {
       Session session = getSession();
       Transaction tx = null;
       List<Game> games = null;
@@ -49,8 +49,8 @@ public class ManageGame extends Manager {
       try {
          tx = session.beginTransaction();
          games = session.createQuery("FROM Game WHERE player1 =:p1 OR player2 =:p2")
-                 .setParameter("p1", username.getId())
-                 .setParameter("p2", username.getId())
+                 .setParameter("p1", user.getId())
+                 .setParameter("p2", user.getId())
                  .list();
 
          tx.commit();

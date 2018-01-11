@@ -19,6 +19,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import pdg5.server.manage.ManageGame;
 import pdg5.server.manage.ManageUser;
+import pdg5.server.persistent.User;
 
 /**
  * this Class manage all the games created by the server
@@ -114,6 +115,20 @@ public class GameController {
         checkGamesOutdatedScheduler.scheduleAtFixedRate(areGamesOutdated(), 1, 1, TimeUnit.MINUTES);
     }
 
+    /**
+     * Load the data from database for a user
+     * @param idPlayer 
+     */
+    public void dataLoad(int idPlayer){
+        ManageGame manageGame = activeUser.getDatabaseManagers(idPlayer).getManageGame();
+        ManageUser manageUser = activeUser.getDatabaseManagers(idPlayer).getManageUser();
+        
+        User user = manageUser.getUserById(idPlayer);
+        List<pdg5.server.persistent.Game> databaseGames = manageGame.getGamesByUser(user);
+        
+        // TODO Mettre les games dans notre map
+    }
+    
     /**
      * add to the map of chat messages a new message
      *
@@ -447,12 +462,12 @@ public class GameController {
 
         // Save Last Action for Chat
         StringBuilder wordAsString = new StringBuilder();
-        for (Tile tile : bonusOpponent) {
+        bonusOpponent.forEach((tile) -> {
             wordAsString.append(tile.getLetter());
-        }
+        });
         addChat(new ChatServerSide(new Date().getTime(), playerID, Chat.SENDER.USER,
                 board.getPlayerName() + " a jeté "
-                + wordAsString.toString() + " pour " + lostScore + " points", model.getGameId()));
+                + wordAsString.toString() + " et perdu " + lostScore + " points", model.getGameId()));
     }
 
     /**
@@ -555,7 +570,7 @@ public class GameController {
         
         // update the DB game
         pdg5.server.persistent.Game game
-                = manageGame.getGamesByUsername(manageUser.getUserById(playerID))
+                = manageGame.getGamesByUser(manageUser.getUserById(playerID))
                         .stream()
                         .filter((f) -> f.id == gameID)
                         .findAny()
@@ -707,7 +722,7 @@ public class GameController {
                         int idPlayer2 = gameModel.getBoard(GameModel.PlayerBoard.PLAYER2).getPlayerId();
                         // update the DB game
                         pdg5.server.persistent.Game game
-                                = manageGame.getGamesByUsername(manageUser.getUserById(idPlayer1))
+                                = manageGame.getGamesByUser(manageUser.getUserById(idPlayer1))
                                         .stream()
                                         .filter((f) -> Objects.equals(f.id, gameID))
                                         .findAny()

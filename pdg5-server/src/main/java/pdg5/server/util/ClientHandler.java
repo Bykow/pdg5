@@ -8,6 +8,7 @@ import javax.net.ssl.SSLSocket;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import pdg5.server.manage.ManageChat;
 import pdg5.server.manage.ManageGame;
 import pdg5.server.manage.ManageUser;
 
@@ -122,10 +123,12 @@ public class ClientHandler implements Runnable {
     public class DatabaseManagers {
         private final ManageUser manageUser;
         private final ManageGame manageGame;
+        private final ManageChat manageChat;
 
         public DatabaseManagers() {
             this.manageUser = new ManageUser();
             this.manageGame = new ManageGame();
+            this.manageChat = new ManageChat();
         }
 
         public ManageUser getManageUser() {
@@ -134,6 +137,10 @@ public class ClientHandler implements Runnable {
 
         public ManageGame getManageGame() {
             return manageGame;
+        }
+        
+        public ManageChat getManageChat() {
+            return manageChat;
         }
     }
 

@@ -18,6 +18,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+import pdg5.server.manage.ManageChat;
 import pdg5.server.manage.ManageGame;
 import pdg5.server.manage.ManageUser;
 import pdg5.server.persistent.User;
@@ -125,6 +126,7 @@ public class GameController {
 
         ManageGame manageGame = activeUser.getDatabaseManagers(idPlayer).getManageGame();
         ManageUser manageUser = activeUser.getDatabaseManagers(idPlayer).getManageUser();
+        ManageChat manageChat = activeUser.getDatabaseManagers(idPlayer).getManageChat();
 
         User user = manageUser.getUserById(idPlayer);
 

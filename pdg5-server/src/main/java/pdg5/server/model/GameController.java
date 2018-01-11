@@ -8,8 +8,6 @@ import pdg5.common.game.GameModel;
 import pdg5.common.game.GameModel.State;
 import pdg5.common.game.Tile;
 import pdg5.common.protocol.*;
-import pdg5.server.manage.ManageGame;
-import pdg5.server.manage.ManageUser;
 import pdg5.server.util.ServerActiveUser;
 
 import java.io.BufferedReader;
@@ -19,6 +17,8 @@ import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import pdg5.server.manage.ManageGame;
+import pdg5.server.manage.ManageUser;
 
 /**
  * this Class manage all the games created by the server
@@ -87,19 +87,9 @@ public class GameController {
     private final TST dictionary = new TST();
 
     /**
-     * Link item to the user's part of database
-     */
-    private final ManageUser manageUser;
-
-    /**
      * item containing informations about all the users online
      */
     private final ServerActiveUser activeUser;
-
-    /**
-     * Link item to the game's part of database
-     */
-    private final ManageGame manageGame;
 
     /**
      * Constructor
@@ -114,11 +104,6 @@ public class GameController {
         playerTurnManager = new HashMap<>();
         chats = new HashMap<>();
         matchMaking = new ArrayList<>();
-        manageUser = new ManageUser();
-        manageGame = new ManageGame();
-
-        // loading session for further usage
-        manageUser.getSession();
 
         InputStream inputStream = TST.class.getResourceAsStream("/dico/fr_dico.dic");
         new BufferedReader(new InputStreamReader(inputStream)).lines()
@@ -227,6 +212,8 @@ public class GameController {
         TileStack ts = new TileStack(Protocol.Languages.LANG_FR.toString());
 
         // Add the game to the DB
+        ManageGame manageGame = activeUser.getDatabaseManagers(idPlayer1).getManageGame();
+        ManageUser manageUser = activeUser.getDatabaseManagers(idPlayer1).getManageUser();
         pdg5.server.persistent.Game game = manageGame.addGame("title", manageUser.getUserById(idPlayer1), manageUser.getUserById(idPlayer2), ts.convertToString());
         int idGame = game.getId();
 
@@ -284,6 +271,7 @@ public class GameController {
      * @return a new Board filled with Tiles
      */
     public Board initBoard(TileStack ts, int idPlayer) {
+        ManageUser manageUser = activeUser.getDatabaseManagers(idPlayer).getManageUser();
         Board board = new Board(manageUser.getUserById(idPlayer).getUsername(), idPlayer);
         List<Tile> letters = new ArrayList<>();
         for (int i = 0; i < 7; i++) {
@@ -562,6 +550,9 @@ public class GameController {
             return new Noop(Noop.Sender.SERVER);
         }
 
+        ManageGame manageGame = activeUser.getDatabaseManagers(playerID).getManageGame();
+        ManageUser manageUser = activeUser.getDatabaseManagers(playerID).getManageUser();
+        
         // update the DB game
         pdg5.server.persistent.Game game
                 = manageGame.getGamesByUsername(manageUser.getUserById(playerID))
@@ -577,8 +568,10 @@ public class GameController {
         word.forEach((tile) -> {
             wordAsString.append(tile.getLetter());
         });
+        String playerName = board.getPlayerName().substring(0, 1).toUpperCase() + board.getPlayerName().substring(1).toLowerCase();
+        
         addChat(new ChatServerSide(new Date().getTime(), playerID, Chat.SENDER.USER,
-                board.getPlayerName() + " a joué "
+                playerName + " a joué "
                 + wordAsString.toString() + " pour " + scoreToAdd + " points", gameID));
 
         activeUser.giveToClientHandler(opponentId, getGameFromModel(gameID, opponentId));
@@ -706,6 +699,9 @@ public class GameController {
                     if (new Date().getTime() - gameModel.getLastMove().getTime() > OUTDATE_TIME) {
                         gameModel.setState(GameModel.State.OUTDATED);
 
+                        ManageGame manageGame = new ManageGame();
+                        ManageUser manageUser = new ManageUser();
+                        
                         // Send to players the update
                         int idPlayer1 = gameModel.getBoard(GameModel.PlayerBoard.PLAYER1).getPlayerId();
                         int idPlayer2 = gameModel.getBoard(GameModel.PlayerBoard.PLAYER2).getPlayerId();

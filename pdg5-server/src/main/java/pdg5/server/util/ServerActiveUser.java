@@ -41,5 +41,9 @@ public class ServerActiveUser {
             client.addToQueue(m);
         }
     }
+    
+    public ClientHandler.DatabaseManagers getDatabaseManagers(Integer user){
+        return getClientHandler(user).getDatabaseManagers();
+    }
 
 }

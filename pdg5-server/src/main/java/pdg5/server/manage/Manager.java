@@ -12,13 +12,13 @@ import java.util.List;
 
 public class Manager {
     private static SessionFactory factory;
-    private static Session session;
-    private static Transaction transaction;
+    private Session session;
+    private Transaction transaction;
 
     public Manager() {
         transaction = null;
         session = null;
-        transaction = null;
+        getFactory();
     }
 
     private SessionFactory getFactory() {

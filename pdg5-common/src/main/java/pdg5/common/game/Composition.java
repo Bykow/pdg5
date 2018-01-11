@@ -85,6 +85,10 @@ public class Composition implements Serializable{
       public abstract String getText();
    }
 
+   public Square[] getSquare() {
+      return square;
+   }
+
    // seven or less Tiles representing the current word
    private final Tile[] word; 
    

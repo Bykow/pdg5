@@ -75,7 +75,7 @@ public class GameController extends AbstractController {
         initLists(userList, adversaryList, deckList, userBonusList, adversaryBonusList);
 
         // Last box +10
-        setModifier(userList.get(userList.size()-1), "bonus", "+10");
+        setModifier(userList.get(userList.size()-1), "BONUS", "+10");
     }
 
     @SafeVarargs
@@ -201,15 +201,25 @@ public class GameController extends AbstractController {
         }
     }
 
-    private void updateList(List<Tile> listFrom, int size, List<StackPane> listDest, List<Composition.Square> square) {
+    private void updateOpponentComposition(List<Tile> listFrom, int size, List<StackPane> listDest, List<Composition.Square> square) {
         for (int i = 0; i < size; i++) {
             if(listDest.get(i).getChildren().size() > 1)
                 listDest.get(i).getChildren().remove(1);
             if (!listFrom.isEmpty() && i < listFrom.size()) {
-                if (square.get(i) != Composition.Square.NORMAL) {
-                    setModifier(listDest.get(i), square.get(i).name(), square.get(i).getText());
-                }
                 listDest.get(i).getChildren().add(1, new GTile(listFrom.get(i)));
+            }
+            if (square.get(i) != Composition.Square.NORMAL) {
+                setModifier(listDest.get(i), square.get(i).name(), square.get(i).getText());
+            }
+        }
+    }
+
+    private void updateComposition(int size, List<StackPane> listDest, List<Composition.Square> square) {
+        for (int i = 0; i < size; i++) {
+            if (square.get(i) != Composition.Square.NORMAL) {
+                setModifier(listDest.get(i), square.get(i).name(), square.get(i).getText());
+            } else {
+
             }
         }
     }
@@ -224,9 +234,10 @@ public class GameController extends AbstractController {
     }
 
     private void updatePlayer(Game g) {
-        updateList(g.getAddedTile(), Protocol.NUMBER_OF_TUILES_PER_PLAYER, deckList, g.getSquare());
+        updateComposition(Protocol.NUMBER_OF_TUILES_PER_PLAYER,userList, g.getSquare());
+        updateList(g.getAddedTile(), Protocol.NUMBER_OF_TUILES_PER_PLAYER, deckList);
         updateList(g.getBonusLetters(), Protocol.NUMBER_OF_EXTRA_TUILES, userBonusList);
-        updateList(g.getLastWordPlayed(), Protocol.NUMBER_OF_TUILES_PER_PLAYER, adversaryList, g.getOpponentSquare());
+        updateOpponentComposition(g.getLastWordPlayed(), Protocol.NUMBER_OF_TUILES_PER_PLAYER, adversaryList, g.getOpponentSquare());
         updateList(g.getOpponentBonusLetters(), Protocol.NUMBER_OF_EXTRA_TUILES, adversaryBonusList);
         if (g.isYourTurn()) {
             cleanList(userList, Protocol.NUMBER_OF_TUILES_PER_PLAYER);
@@ -257,10 +268,10 @@ public class GameController extends AbstractController {
     private Composition getPlay(List<StackPane> list) {
         Composition composition = new Composition();
         for (StackPane st: list) {
-            if(st.getChildren().size() < 2) {
-                continue;
+            if(st.getChildren().size() >= 2) {
+                st.getStyleClass().remove("covered");
+                composition.push(((GTile) st.getChildren().get(1)).getModel());
             }
-            composition.push(((GTile) st.getChildren().get(1)).getModel());
         }
         cleanList(adversaryBonusList, Protocol.NUMBER_OF_EXTRA_TUILES);
         cleanList(userList, Protocol.NUMBER_OF_TUILES_PER_PLAYER);

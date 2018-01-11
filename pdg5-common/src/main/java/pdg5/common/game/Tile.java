@@ -32,6 +32,16 @@ public class Tile implements Serializable{
     }
 
     /**
+     * Copy constructor (same id, bonus is not conserved)
+     * @param t 
+     */
+    public Tile(Tile t){
+       this.id = t.id;
+       this.letter = t.letter;
+       this.value = t.value;
+    }
+    
+    /**
      * Returns the letter of a Tile
      *
      * @return char letter

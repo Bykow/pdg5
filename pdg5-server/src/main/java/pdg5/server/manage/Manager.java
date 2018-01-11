@@ -16,7 +16,7 @@ public class Manager {
     private static Transaction transaction;
 
     public Manager() {
-        factory = null;
+        transaction = null;
         session = null;
         transaction = null;
     }
@@ -38,7 +38,7 @@ public class Manager {
      * Used to get a global session
      * @return
      */
-    public Session getSession() {
+    public synchronized Session getSession() {
         if(session == null) {
             session = getFactory().openSession();
         }

@@ -438,6 +438,8 @@ public class GameController {
       //two random of player letter are sent as bonus to the opponent
       for (int i = 0; i < 2; i++) {
          bonusOpponent.add(letters.remove(rand.nextInt(letters.size())));
+         Tile t = ts.getNextTuile();
+         t.setBonus(true);
          letters.add(ts.getNextTuile());
       }
       opponentBoard.setBonus(bonusOpponent);
@@ -522,7 +524,9 @@ public class GameController {
       Composition.Square[] squares = tm.getSquares(playerID);
       for (int i = 0; i < word.size(); i++) {
          if (squares[i] == Composition.Square.W) {
-            newBonusTile.add(composition.remove(i));
+            Tile t = composition.remove(i);
+            t.setBonus(true);
+            newBonusTile.add(t);
          }
       }
       boardOpponent.setBonus(newBonusTile);
@@ -705,7 +709,7 @@ public class GameController {
                       pdg5.server.persistent.Game game = 
                               manageGame.getGamesByUsername(manageUser.getUserById(idPlayer1))
                                       .stream()
-                                      .filter((f) -> f.id == gameID)
+                                      .filter((f) -> Objects.equals(f.id, gameID))
                                       .findAny()
                                       .get();
                       game.setGameState(gameModel);

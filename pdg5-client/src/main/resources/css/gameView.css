@@ -40,6 +40,30 @@
     -fx-font-size: 12px;
 }
 
+.adversary StackPane {
+    -fx-background-insets: 14px 8.5px 5px 8.5px;
+    -fx-border-insets: 14px 8.5px 5px 8.5px;
+}
+
+.adversary StackPane.covered {
+    -fx-background-color: #3498db !important;
+    -fx-background-insets: 0 16px 5px 16px;
+}
+
+.adversary StackPane.covered Label {
+    -fx-background-insets: 0 16px 25px 16px;
+    -fx-padding: 0 0 64px 0;
+    -fx-font-size: 12px;
+}
+
+.adversary StackPane.covered #main {
+    -fx-border-color: #2c3e50 !important;
+}
+
+.adversary StackPane Label {
+    -fx-text-fill: #1e70a5;
+}
+
 .table StackPane.bonus {
     -fx-background-color: #c02b70;
 }

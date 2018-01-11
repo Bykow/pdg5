@@ -132,14 +132,19 @@ public class LobyController extends AbstractController {
 
     public void addLoad(Load load) {
         historic.putAll(load.getHistoric());
-        for (Game g: load.getGames()) {
-            addGame(g);
-        }
+        addListGame(load.getGames());
+    }
+
+    private void addListGame(List<Game> list) {
+        gameModelList.addAll(list);
+        gameModelList = gameModelList.stream()
+                .sorted(Comparator.comparing(Game::getLastActivity))
+                .collect(Collectors.toCollection(ArrayList::new));
+        Platform.runLater(this::refresh);
     }
 
     private void addGame(Game game) {
-        gameModelList.add(game);
-        Platform.runLater(this::refresh);
+        addListGame(Collections.singletonList(game));
     }
 
     public boolean hasGame(Game game) {
@@ -161,9 +166,15 @@ public class LobyController extends AbstractController {
     }
 
     public void updateChat(Chat chat) {
-        historic.get(chat.getGameId()).add(chat);
-        if (chat.getGameId() == UserInformations.getInstance().getIdGameDisplayed()) {
-            mainController.getChatController().addChat(chat);
+        if (historic != null) {
+            historic.get(chat.getGameId()).add(chat);
+            if (chat.getGameId() == UserInformations.getInstance().getIdGameDisplayed()) {
+                mainController.getChatController().addChat(chat);
+            }
         }
+    }
+
+    public Game getGameFromId(int id) {
+        return gameModelList.stream().filter((o) -> o.getID() == id).findAny().get();
     }
 }

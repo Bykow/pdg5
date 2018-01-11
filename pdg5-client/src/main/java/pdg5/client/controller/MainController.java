@@ -74,7 +74,7 @@ public class MainController extends AbstractController {
     public void loadGame() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            gameController = new GameController();
+            gameController = new GameController(sender, this);
             loader.setLocation(MainController.class.getResource("/fxml/gameView.fxml"));
             loader.setController(gameController);
             layout = loader.load();

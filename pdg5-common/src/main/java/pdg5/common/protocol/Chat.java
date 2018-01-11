@@ -38,6 +38,10 @@ public class Chat extends Message {
     public Chat(String message, int gameId) {
         this(message, gameId, new Date().getTime(), SENDER.USER);
     }
+
+    public Chat(String message, int gameId, SENDER sender) {
+        this(message, gameId, new Date().getTime(), sender);
+    }
     
     /**
      * Constructor for server sending stocked messages

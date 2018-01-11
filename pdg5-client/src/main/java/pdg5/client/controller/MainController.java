@@ -23,6 +23,7 @@ import pdg5.client.ClientListener;
 import pdg5.client.ClientSender;
 import pdg5.client.util.ClientRequestManager;
 import pdg5.client.util.Toast;
+import pdg5.common.protocol.Logout;
 import pdg5.common.protocol.Message;
 
 import java.io.IOException;
@@ -86,7 +87,7 @@ public class MainController extends AbstractController {
     public void loadLoby() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            lobyController = new LobyController(sender, gameController, chatController);
+            lobyController = new LobyController(sender, this, gameController, chatController);
             loader.setLocation(MainController.class.getResource("/fxml/lobyView.fxml"));
             loader.setController(lobyController);
             layout = loader.load();
@@ -136,6 +137,8 @@ public class MainController extends AbstractController {
     }
 
     public void logout() {
+        sender.add(new Logout());
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Client.class.getResource("/fxml/loginView.fxml"));
         try {
@@ -147,8 +150,11 @@ public class MainController extends AbstractController {
         // Show the scene containing the root layout.
         Scene scene = new Scene(layout);
 
+        Stage stage = (Stage)gameContainer.getScene().getWindow();
+
         stage.hide();
-        primaryStage.setScene(scene);
-        primaryStage.show();
+
+        stage.setScene(scene);
+        stage.show();
     }
 }

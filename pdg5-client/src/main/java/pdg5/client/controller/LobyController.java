@@ -34,6 +34,7 @@ public class LobyController extends AbstractController {
     private GGameListEntry selected;
     private GameController gameController;
     private ChatController chatController;
+    private MainController mainController;
 
     private ClientSender sender;
 
@@ -43,7 +44,7 @@ public class LobyController extends AbstractController {
     @FXML
     private Label username;
 
-    public LobyController(ClientSender sender, GameController gameController, ChatController chatController) {
+    public LobyController(ClientSender sender, MainController mainController, GameController gameController, ChatController chatController) {
         gameModelList = new ArrayList<>();
 
         titleToPlay = new Label("A ton tour");
@@ -58,6 +59,7 @@ public class LobyController extends AbstractController {
         this.sender = sender;
         this.gameController = gameController;
         this.chatController = chatController;
+        this.mainController = mainController;
     }
 
     @FXML
@@ -107,7 +109,7 @@ public class LobyController extends AbstractController {
 
     @FXML
     private void logout(ActionEvent actionEvent) {
-
+        mainController.logout();
     }
 
     @FXML

@@ -131,7 +131,7 @@ public class LobyController extends AbstractController {
     }
 
     public void addLoad(Load load) {
-        historic = load.getHistoric();
+        historic.putAll(load.getHistoric());
         for (Game g: load.getGames()) {
             addGame(g);
         }
@@ -139,6 +139,7 @@ public class LobyController extends AbstractController {
 
     private void addGame(Game game) {
         gameModelList.add(game);
+        Platform.runLater(this::refresh);
     }
 
     public boolean hasGame(Game game) {
@@ -152,14 +153,17 @@ public class LobyController extends AbstractController {
             gameController.updateGame(game);
         }
 
-        //if (historic.get(game.getID()))
+        if (!historic.containsKey(game.getID())) {
+            historic.put(game.getID(), new ArrayList<>());
+        }
+
         Platform.runLater(this::refresh);
     }
 
     public void updateChat(Chat chat) {
         historic.get(chat.getGameId()).add(chat);
-        if (chat.getGameId() == selected.getModel().getID()) {
-            chatController.addChat(chat, selected.getModel());
+        if (chat.getGameId() == UserInformations.getInstance().getIdGameDisplayed()) {
+            chatController.addChat(chat);
         }
     }
 }

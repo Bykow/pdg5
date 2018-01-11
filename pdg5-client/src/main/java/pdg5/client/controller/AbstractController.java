@@ -14,7 +14,7 @@ import java.io.IOException;
 public abstract class AbstractController {
     private String username;
 
-    protected void loadGame(Stage stage) {
+    protected void loadProg(Stage stage) {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
@@ -28,9 +28,12 @@ public abstract class AbstractController {
 
             stage.setScene(scene);
             stage.show();
+
             mainController.loadGame();
-            mainController.loadLoby();
             mainController.loadChat();
+            mainController.loadLoby();
+
+            mainController.startLogic();
 
         } catch (IOException e) {
             e.printStackTrace();

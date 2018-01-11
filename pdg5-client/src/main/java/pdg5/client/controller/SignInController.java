@@ -15,6 +15,7 @@
 
 package pdg5.client.controller;
 
+import com.sun.deploy.util.StringUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -71,7 +72,7 @@ public class SignInController extends AbstractController {
             System.out.println("Connection success ");
             UserInformations.getInstance().setUsername(username.getText());
             stage.hide();
-            loadGame(stage);
+            loadProg(stage);
         }
     }
 

@@ -29,7 +29,9 @@ public class UserInformations {
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        String temp;
+        temp = username.substring(0, 1).toUpperCase() + username.substring(1).toLowerCase();
+        this.username = temp;
     }
 
     public String getMail() {

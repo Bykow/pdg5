@@ -48,23 +48,14 @@ public class MainController extends AbstractController {
     public void initialize() {
     }
 
-    public void loadGame() {
+    public MainController() {
         listener = new ClientListener();
         sender = new ClientSender();
 
         this.requestManager = new ClientRequestManager(this);
+    }
 
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            gameController = new GameController();
-            loader.setLocation(MainController.class.getResource("/fxml/gameView.fxml"));
-            loader.setController(gameController);
-            layout = loader.load();
-            gameContainer.getChildren().setAll(layout);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+    public void startLogic() {
         // Process message
         new Thread(() -> {
             while (true) {
@@ -75,7 +66,19 @@ public class MainController extends AbstractController {
                 );
             }
         }).start();
+    }
 
+    public void loadGame() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            gameController = new GameController();
+            loader.setLocation(MainController.class.getResource("/fxml/gameView.fxml"));
+            loader.setController(gameController);
+            layout = loader.load();
+            gameContainer.getChildren().setAll(layout);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void loadLoby() {

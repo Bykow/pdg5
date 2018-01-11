@@ -73,11 +73,15 @@ public class GameController extends AbstractController {
         initLists(userList, adversaryList, deckList, userBonusList, adversaryBonusList);
 
         // Last box +10
-        setModifier(userList.get(userList.size()-1), "final", "+10");
+        setModifier(userList.get(userList.size()-1), "bonus", "+10");
 
+        setModifier(userList.get(1), "mult2", "2xL");
+        setModifier(userList.get(3), "mult3", "3xL");
+        setModifier(userList.get(4), "adv_bonus", "W");
     }
 
-    private void initLists(List<StackPane>... lists) {
+    @SafeVarargs
+    private final void initLists(List<StackPane>... lists) {
         for(List<StackPane> list : lists) {
             for (StackPane ap : list) {
                 ap.getChildren().add(new Label());
@@ -172,6 +176,7 @@ public class GameController extends AbstractController {
         boolean success = false;
         if (db.hasContent(tileFormat)) {
             source.getChildren().add(1, new GTile((Tile)db.getContent(tileFormat)));
+            source.getStyleClass().add("covered");
             success = true;
         }
 
@@ -183,6 +188,7 @@ public class GameController extends AbstractController {
         if (event.getTransferMode() == TransferMode.MOVE) {
             StackPane source = (StackPane) event.getSource();
             source.getChildren().remove(1);
+            source.getStyleClass().remove("covered");
         }
         event.consume();
     }

@@ -1,8 +1,5 @@
 package pdg5.server.process;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import pdg5.common.WordCombinations;
 import pdg5.common.protocol.*;
 import pdg5.server.manage.ManageUser;
 import pdg5.server.model.GameController;

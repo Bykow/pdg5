@@ -75,6 +75,9 @@ public class GameController extends AbstractController {
         // Last box +10
         setModifier(userList.get(userList.size()-1), "bonus", "+10");
 
+        setModifier(userList.get(1), "mult2", "2xL");
+        setModifier(userList.get(3), "mult3", "3xL");
+        setModifier(userList.get(4), "adv_bonus", "W");
     }
 
     @SafeVarargs

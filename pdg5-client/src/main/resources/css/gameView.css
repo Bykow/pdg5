@@ -30,6 +30,8 @@
 
 .table StackPane.covered {
     -fx-background-insets: 25px 16px 0 16px;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
 }
 
 .table StackPane.covered Label {
@@ -44,6 +46,30 @@
 
 .table StackPane.bonus #main {
     -fx-border-color: #c02b70;
+}
+
+.table StackPane.mult2 {
+    -fx-background-color: #39a495;
+}
+
+.table StackPane.mult2 #main {
+    -fx-border-color: #39a495;
+}
+
+.table StackPane.mult3 {
+    -fx-background-color: #9c29b7;
+}
+
+.table StackPane.mult3 #main {
+    -fx-border-color: #9c29b7;
+}
+
+.table StackPane.adv_bonus {
+    -fx-background-color: #2a72a6;
+}
+
+.table StackPane.adv_bonus #main {
+    -fx-border-color: #2a72a6;
 }
 
 .avatar {

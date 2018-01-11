@@ -15,7 +15,6 @@
 
 package pdg5.client.controller;
 
-import com.sun.deploy.util.StringUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

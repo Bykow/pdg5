@@ -5,11 +5,9 @@
  */
 package pdg5.server.model;
 
-import java.util.Random;
 import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.Ignore;
+import org.junit.Test;
 import pdg5.common.game.Board;
 import pdg5.common.game.Composition;
 import pdg5.common.protocol.ErrorMessage;
@@ -18,6 +16,10 @@ import pdg5.common.protocol.Load;
 import pdg5.common.protocol.Message;
 import pdg5.server.manage.ManageUser;
 import pdg5.server.util.ServerActiveUser;
+
+import java.util.Random;
+
+import static org.junit.Assert.*;
 
 /**
  *

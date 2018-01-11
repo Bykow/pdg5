@@ -1,7 +1,6 @@
 package pdg5.server.process;
 
 import pdg5.common.protocol.Friend;
-import pdg5.common.protocol.Friend.TYPE;
 import pdg5.common.protocol.Message;
 import pdg5.common.protocol.Noop;
 import pdg5.server.manage.ManageBlacklist;

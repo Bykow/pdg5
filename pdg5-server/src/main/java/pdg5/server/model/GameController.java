@@ -19,7 +19,6 @@ import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import static pdg5.common.game.Utils.SEPARATOR_CHAT;
 
 /**
  * this Class manage all the games created by the server

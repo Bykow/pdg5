@@ -39,6 +39,8 @@ import java.util.List;
 public class GameController extends AbstractController {
 
     private static final DataFormat tileFormat = new DataFormat("tile.model");
+    private final String LEFTTILESINGLE = " tuille restante";
+    private final String LEFTTILEPLURAL = " tuilles restantes";
 
     @FXML
     private List<StackPane> deckList;
@@ -74,10 +76,6 @@ public class GameController extends AbstractController {
 
         // Last box +10
         setModifier(userList.get(userList.size()-1), "bonus", "+10");
-
-        setModifier(userList.get(1), "mult2", "2xL");
-        setModifier(userList.get(3), "mult3", "3xL");
-        setModifier(userList.get(4), "adv_bonus", "W");
     }
 
     @SafeVarargs
@@ -203,6 +201,19 @@ public class GameController extends AbstractController {
         }
     }
 
+    private void updateList(List<Tile> listFrom, int size, List<StackPane> listDest, List<Composition.Square> square) {
+        for (int i = 0; i < size; i++) {
+            if(listDest.get(i).getChildren().size() > 1)
+                listDest.get(i).getChildren().remove(1);
+            if (!listFrom.isEmpty() && i < listFrom.size()) {
+                if (square.get(i) != Composition.Square.NORMAL) {
+                    setModifier(listDest.get(i), square.get(i).name(), square.get(i).getText());
+                }
+                listDest.get(i).getChildren().add(1, new GTile(listFrom.get(i)));
+            }
+        }
+    }
+
     private void cleanList(List<StackPane> list, int size) {
         for (int i = 0; i < size; i++) {
             if(list.get(i).getChildren().size() < 2) {
@@ -213,9 +224,9 @@ public class GameController extends AbstractController {
     }
 
     private void updatePlayer(Game g) {
-        updateList(g.getAddedTile(), Protocol.NUMBER_OF_TUILES_PER_PLAYER, deckList);
+        updateList(g.getAddedTile(), Protocol.NUMBER_OF_TUILES_PER_PLAYER, deckList, g.getSquare());
         updateList(g.getBonusLetters(), Protocol.NUMBER_OF_EXTRA_TUILES, userBonusList);
-        updateList(g.getLastWordPlayed(), Protocol.NUMBER_OF_TUILES_PER_PLAYER, adversaryList);
+        updateList(g.getLastWordPlayed(), Protocol.NUMBER_OF_TUILES_PER_PLAYER, adversaryList, g.getOpponentSquare());
         updateList(g.getOpponentBonusLetters(), Protocol.NUMBER_OF_EXTRA_TUILES, adversaryBonusList);
         if (g.isYourTurn()) {
             cleanList(userList, Protocol.NUMBER_OF_TUILES_PER_PLAYER);
@@ -230,7 +241,11 @@ public class GameController extends AbstractController {
         gameID = g.getID();
         Platform.runLater(() -> {
                     updatePlayer(g);
-                    remainingTiles.setText(String.valueOf(g.getNbLeftTile()) + " tuilles restante(s)");
+                    if (g.getNbLeftTile() > 1) {
+                        remainingTiles.setText(String.valueOf(g.getNbLeftTile()) + LEFTTILEPLURAL);
+                    } else {
+                        remainingTiles.setText(String.valueOf(g.getNbLeftTile()) + LEFTTILESINGLE);
+                    }
                     adversaryScore.setText(String.valueOf(g.getOpponentScore()));
                     userScore.setText(String.valueOf(g.getScore()));
                     adversaryName.setText(g.getOpponentName());

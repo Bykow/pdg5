@@ -2,7 +2,6 @@ package pdg5.client.process;
 
 import pdg5.client.controller.MainController;
 import pdg5.common.protocol.Game;
-import pdg5.common.protocol.Load;
 import pdg5.common.protocol.Message;
 
 public class ProcessGame implements GenericProcess {

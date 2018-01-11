@@ -24,29 +24,54 @@ public class Composition implements Serializable{
          public int getFinalValue(Tile tile) {
             return tile.getValue();
          }
-         
+
+         @Override
+         public String getText() {
+            return null;
+         }
+
       }, DOUBLE {
          @Override
          public int getFinalValue(Tile tile) {
             return tile.getValue() * 2;
          }
-         
+
+         @Override
+         public String getText() {
+            return "2xL";
+         }
+
       }, TRIPLE {
          @Override
          public int getFinalValue(Tile tile) {
             return tile.getValue() * 3;
          }
-         
+
+         @Override
+         public String getText() {
+            return "3xL";
+         }
+
       }, BONUS {
          @Override
          public int getFinalValue(Tile tile) {
             return tile.getValue() + 10;
          }
-         
+
+         @Override
+         public String getText() {
+            return "+10";
+         }
+
       }, W {
          @Override
          public int getFinalValue(Tile tile) {
             return tile.getValue();
+         }
+
+         @Override
+         public String getText() {
+            return "W";
          }
       };
       /**
@@ -56,6 +81,8 @@ public class Composition implements Serializable{
        * @return the new value when a Tile pass through a square
        */
       public abstract int getFinalValue(Tile tile);
+
+      public abstract String getText();
    }
 
    // seven or less Tiles representing the current word

@@ -13,7 +13,6 @@ import pdg5.client.view.ChatMessage;
 import pdg5.common.Protocol;
 import pdg5.common.protocol.Chat;
 import pdg5.common.protocol.Game;
-import pdg5.common.protocol.Load;
 
 import java.util.List;
 

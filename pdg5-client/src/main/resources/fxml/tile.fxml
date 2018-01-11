@@ -2,8 +2,6 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
-
 <fx:root id="main" maxHeight="50.0" maxWidth="55.0" minHeight="50.0" minWidth="55.0" prefHeight="50.0" prefWidth="55.0" stylesheets="@../css/tile.css" type="Pane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="letter" id="letter" layoutX="8.0" layoutY="12.0" prefHeight="30.0" prefWidth="31.0" text="A" textOverrun="CLIP">

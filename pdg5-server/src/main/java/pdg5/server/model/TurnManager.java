@@ -5,7 +5,6 @@ import pdg5.common.game.Composition.Square;
 import pdg5.common.game.Utils;
 
 import java.util.Random;
-import java.util.logging.Logger;
 
 /**
  * This class manage the turn for a game

@@ -2,13 +2,12 @@ package pdg5.server.util;
 
 import pdg5.common.MessageQueue;
 import pdg5.common.protocol.Message;
+import pdg5.server.model.GameController;
 
+import javax.net.ssl.SSLSocket;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.Socket;
-import javax.net.ssl.SSLSocket;
-import pdg5.server.model.GameController;
 
 /**
  * @author Maxime Guillod

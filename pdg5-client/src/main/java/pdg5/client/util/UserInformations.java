@@ -6,6 +6,7 @@ package pdg5.client.util;
 public class UserInformations {
     private String username;
     private String mail;
+    private int idGameDisplayed;
 
     /** Constructeur privé */
     private UserInformations()
@@ -40,4 +41,11 @@ public class UserInformations {
     }
 
 
+    public int getIdGameDisplayed() {
+        return idGameDisplayed;
+    }
+
+    public void setIdGameDisplayed(int idGameDisplayed) {
+        this.idGameDisplayed = idGameDisplayed;
+    }
 }

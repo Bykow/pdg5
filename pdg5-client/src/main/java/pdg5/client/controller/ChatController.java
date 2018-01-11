@@ -7,6 +7,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import pdg5.client.ClientSender;
+import pdg5.client.util.UserInformations;
 import pdg5.client.view.ChatMessage;
 import pdg5.common.Protocol;
 import pdg5.common.protocol.Chat;
@@ -46,9 +47,10 @@ public class ChatController {
     @FXML
     private void sendMsg(ActionEvent actionEvent) {
         String msg = msgInput.getText();
-        ChatMessage cm = new ChatMessage(ChatMessage.Type.USER, msg);
-        addMessage(cm);
-        sender.add(convertChatMessageToChat(cm, msg));
+        msgInput.clear();
+        System.out.println("Trying to send: " + msg);
+        addMessage(new ChatMessage(ChatMessage.Type.USER, msg));
+        sender.add(new Chat(msg, UserInformations.getInstance().getIdGameDisplayed()));
     }
 
     private void addMessage(ChatMessage msg) {
@@ -84,14 +86,6 @@ public class ChatController {
         }
 
         return new ChatMessage(type, c.getMessage());
-    }
-
-    private Chat convertChatMessageToChat (ChatMessage cm, String msg) {
-        Chat c;
-
-        //todo fuck that...
-
-        return null;
     }
 
     private void cleanChat() {

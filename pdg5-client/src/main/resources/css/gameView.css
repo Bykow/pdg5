@@ -15,9 +15,10 @@
     -fx-border-color: #2c3e50;
     -fx-border-radius: 4px;
     -fx-background-radius: 4px;
-    -fx-background-insets: 5px 8.5px;
-    -fx-border-insets: 5px 8.5px;
+    -fx-background-insets: 5px 8.5px 14px 8.5px;
+    -fx-border-insets: 5px 8.5px 14px 8.5px;
     -fx-padding: -1px;
+    -fx-min-height: 69px;
 }
 
 .table StackPane Label {
@@ -27,8 +28,22 @@
     -fx-text-fill: #fff;
 }
 
-.table StackPane.final {
+.table StackPane.covered {
+    -fx-background-insets: 25px 16px 0 16px;
+}
+
+.table StackPane.covered Label {
+    -fx-background-insets: 25px 16px 0 16px;
+    -fx-padding: 60px 0 0 0;
+    -fx-font-size: 12px;
+}
+
+.table StackPane.bonus {
     -fx-background-color: #c02b70;
+}
+
+.table StackPane.bonus #main {
+    -fx-border-color: #c02b70;
 }
 
 .avatar {

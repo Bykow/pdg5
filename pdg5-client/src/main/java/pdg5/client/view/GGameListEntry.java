@@ -87,15 +87,24 @@ public class GGameListEntry extends AnchorPane {
             score.setText(time);
         }
 
-        username.setText(model.getOpponentName());
-        // TODO Implement messages for finished games
-        if (model.getState() != GameModel.State.FINISHED)
-            //TODO Get last word played score value
-            if (model.isYourTurn()) {
-                msg.setText("a joué " + Tile.tilesToString(model.getLastWordPlayed()));
-            } else {
-                msg.setText("vous avez joué " + Tile.tilesToString(model.getLastWordPlayed()));
-            }
+        username.setText(model.getOpponentName().substring(0, 1).toUpperCase() + model.getOpponentName().substring(1).toLowerCase());
+        switch (model.getState()) {
+            case IN_PROGRESS:
+                if (model.isYourTurn()) {
+                    msg.setText("a joué " + Tile.tilesToString(model.getLastWordPlayed()));
+                } else {
+                    msg.setText("vous avez joué " + Tile.tilesToString(model.getLastWordPlayed()));
+                }
+                break;
+            case END_MODE:
+                break;
+            case FINISHED:
+                msg.setText("La partie est terminée");
+                break;
+            case OUTDATED:
+                msg.setText("La partie est expirée");
+                break;
+        }
     }
 
     public void setSelected(boolean value) {

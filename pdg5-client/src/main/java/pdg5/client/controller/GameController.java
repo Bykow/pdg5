@@ -25,9 +25,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import pdg5.client.ClientSender;
 import pdg5.client.view.GTile;
-import pdg5.common.Protocol;
 import pdg5.common.game.Composition;
 import pdg5.common.game.Tile;
+import pdg5.common.protocol.Chat;
 import pdg5.common.protocol.Game;
 import pdg5.common.protocol.Pass;
 import pdg5.common.protocol.Play;
@@ -65,6 +65,15 @@ public class GameController extends AbstractController {
     private Label userName;
 
     private int gameID;
+
+    MainController mainController;
+    ClientSender sender;
+
+    public GameController(ClientSender sender, MainController mainController) {
+        this.sender = sender;
+        this.mainController = mainController;
+
+    }
 
     @FXML
     public void initialize() {
@@ -196,8 +205,8 @@ public class GameController extends AbstractController {
         event.consume();
     }
 
-    private void updateList(List<Tile> listFrom, int size, List<StackPane> listDest) {
-        for (int i = 0; i < size; i++) {
+    private void updateList(List<Tile> listFrom, List<StackPane> listDest) {
+        for (int i = 0; i < listDest.size(); i++) {
             if(listDest.get(i).getChildren().size() > 1)
                 listDest.get(i).getChildren().remove(1);
             if (!listFrom.isEmpty() && i < listFrom.size()) {
@@ -206,19 +215,21 @@ public class GameController extends AbstractController {
         }
     }
 
-    private void updateOpponentComposition(List<Tile> listFrom, int size, List<StackPane> listDest, List<Composition.Square> square) {
-        for (int i = 0; i < size; i++) {
-            if(listDest.get(i).getChildren().size() > 1) {
-                listDest.get(i).getChildren().remove(1);
-                listDest.get(i).getStyleClass().remove("covered");
-            }
-            if (!listFrom.isEmpty() && i < listFrom.size()) {
-                listDest.get(i).getChildren().add(1, new GTile(listFrom.get(i)));
-
-                System.out.println(listFrom.get(i));
-
-                if(square.get(i) != Composition.Square.NORMAL)
-                    listDest.get(i).getStyleClass().add("covered");
+    private void updateOpponentComposition(boolean isYourTurn, List<Tile> listFrom, List<StackPane> listDest, List<Composition.Square> square) {
+        for (int i = 0; i < listDest.size(); i++) {
+            if (isYourTurn) {
+                if (listDest.get(i).getChildren().size() > 1) {
+                    listDest.get(i).getChildren().remove(1);
+                    listDest.get(i).getStyleClass().remove("covered");
+                }
+                if (!listFrom.isEmpty() && i < listFrom.size()) {
+                    listDest.get(i).getChildren().add(1, new GTile(listFrom.get(i)));
+                    if(square.get(i) != Composition.Square.NORMAL) {
+                        listDest.get(i).getStyleClass().add("covered");
+                    }
+                }
+            } else {
+                cleanList(listDest);
             }
             if (square.get(i) != Composition.Square.NORMAL) {
                 setModifier(listDest.get(i), square.get(i).name(), square.get(i).getText());
@@ -226,8 +237,8 @@ public class GameController extends AbstractController {
         }
     }
 
-    private void updateComposition(int size, List<StackPane> listDest, List<Composition.Square> square) {
-        for (int i = 0; i < size; i++) {
+    private void updateComposition(List<StackPane> listDest, List<Composition.Square> square) {
+        for (int i = 0; i < listDest.size(); i++) {
             if (square.get(i) != Composition.Square.NORMAL) {
                 setModifier(listDest.get(i), square.get(i).name(), square.get(i).getText());
             } else {
@@ -236,32 +247,35 @@ public class GameController extends AbstractController {
         }
     }
 
-    private void cleanList(List<StackPane> list, int size) {
-        for (int i = 0; i < size; i++) {
+    private void cleanList(List<StackPane> list) {
+        for (int i = 0; i < list.size(); i++) {
             if(list.get(i).getChildren().size() < 2) {
                 continue;
             }
             list.get(i).getChildren().remove(1);
+            list.get(i).getStyleClass().remove("covered");
         }
     }
 
     private void updatePlayer(Game g) {
-        updateComposition(Protocol.NUMBER_OF_TUILES_PER_PLAYER,userList, g.getSquare());
-        updateList(g.getAddedTile(), Protocol.NUMBER_OF_TUILES_PER_PLAYER, deckList);
-        updateList(g.getBonusLetters(), Protocol.NUMBER_OF_EXTRA_TUILES, userBonusList);
-        updateOpponentComposition(g.getLastWordPlayed(), Protocol.NUMBER_OF_TUILES_PER_PLAYER, adversaryList, g.getOpponentSquare());
-        updateList(g.getOpponentBonusLetters(), Protocol.NUMBER_OF_EXTRA_TUILES, adversaryBonusList);
+        updateComposition(userList, g.getSquare());
+        updateList(g.getAddedTile(), deckList);
+        updateList(g.getBonusLetters(), userBonusList);
+        updateOpponentComposition(g.isYourTurn(), g.getLastWordPlayed(), adversaryList, g.getOpponentSquare());
+        updateList(g.getOpponentBonusLetters(), adversaryBonusList);
         if (g.isYourTurn()) {
-            cleanList(userList, Protocol.NUMBER_OF_TUILES_PER_PLAYER);
-            cleanList(adversaryBonusList, Protocol.NUMBER_OF_EXTRA_TUILES);
+            cleanList(userList);
+            cleanList(adversaryBonusList);
         } else {
-            cleanList(userBonusList, Protocol.NUMBER_OF_EXTRA_TUILES);
-            cleanList(adversaryList, Protocol.NUMBER_OF_TUILES_PER_PLAYER);
+            cleanList(userBonusList);
         }
     }
 
     public void updateGame(Game g) {
         gameID = g.getID();
+        if(!g.isYourTurn()) {
+            mainController.getChatController().addChat(constructLogLastPlayed(g));
+        }
         Platform.runLater(() -> {
                     updatePlayer(g);
                     if (g.getNbLeftTile() > 1) {
@@ -271,8 +285,8 @@ public class GameController extends AbstractController {
                     }
                     adversaryScore.setText(String.valueOf(g.getOpponentScore()));
                     userScore.setText(String.valueOf(g.getScore()));
-                    adversaryName.setText(g.getOpponentName());
-                    userName.setText(g.getNamePlayer());
+                    adversaryName.setText(mainController.upperCaseFirstLetter(g.getOpponentName()));
+                    userName.setText(mainController.upperCaseFirstLetter(g.getNamePlayer()));
                 }
         );
     }
@@ -285,8 +299,9 @@ public class GameController extends AbstractController {
                 composition.push(((GTile) st.getChildren().get(1)).getModel());
             }
         }
-        cleanList(adversaryBonusList, Protocol.NUMBER_OF_EXTRA_TUILES);
-        cleanList(userList, Protocol.NUMBER_OF_TUILES_PER_PLAYER);
+        cleanList(adversaryBonusList);
+        cleanList(userList);
+        updateGame(mainController.getLobyController().getGameFromId(gameID));
         return composition;
     }
 
@@ -303,7 +318,7 @@ public class GameController extends AbstractController {
             temp.add(((GTile) st.getChildren().get(1)).getModel());
         }
         Collections.shuffle(temp);
-        updateList(temp, Protocol.NUMBER_OF_TUILES_PER_PLAYER, deckList);
+        updateList(temp, deckList);
     }
 
     @FXML
@@ -313,13 +328,17 @@ public class GameController extends AbstractController {
 
     @FXML
     private void play(ActionEvent actionEvent) {
-        ClientSender clientSender = new ClientSender();
-        clientSender.add(new Play(getPlay(userList), gameID));
+        sender.add(new Play(getPlay(userList), gameID));
     }
 
     @FXML
     private void discard(ActionEvent actionEvent) {
-        ClientSender clientSender = new ClientSender();
-        clientSender.add(new Pass(gameID));
+        sender.add(new Pass(gameID));
+        cleanList(adversaryList);
+    }
+
+    private Chat constructLogLastPlayed(Game g) {
+        String temp = mainController.upperCaseFirstLetter(g.getNamePlayer()) + " a joué " + Tile.tilesToString(g.getLastWordPlayed()) + " pour " + g.getScoreLastWordPlayed() + " points.";
+        return new Chat(temp, gameID, Chat.SENDER.USER);
     }
 }

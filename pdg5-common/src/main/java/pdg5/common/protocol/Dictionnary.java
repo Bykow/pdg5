@@ -6,7 +6,6 @@
 package pdg5.common.protocol;
 
 import pdg5.common.TST;
-import pdg5.common.WordCombinations;
 
 /**
  * Class sent through the connection after a log in or log up

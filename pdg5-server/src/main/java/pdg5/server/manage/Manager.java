@@ -12,13 +12,13 @@ import java.util.List;
 
 public class Manager {
     private static SessionFactory factory;
-    private static Session session;
-    private static Transaction transaction;
+    private Session session;
+    private Transaction transaction;
 
     public Manager() {
-        factory = null;
-        session = null;
         transaction = null;
+        session = null;
+        getFactory();
     }
 
     private SessionFactory getFactory() {
@@ -38,7 +38,7 @@ public class Manager {
      * Used to get a global session
      * @return
      */
-    public Session getSession() {
+    public synchronized Session getSession() {
         if(session == null) {
             session = getFactory().openSession();
         }

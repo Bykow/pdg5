@@ -1,7 +1,6 @@
 package pdg5.client.process;
 
 import pdg5.client.controller.MainController;
-import pdg5.client.util.Toast;
 import pdg5.common.protocol.ErrorMessage;
 import pdg5.common.protocol.Message;
 

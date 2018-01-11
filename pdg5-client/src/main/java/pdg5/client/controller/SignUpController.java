@@ -96,7 +96,7 @@ public class SignUpController extends AbstractController {
                 UserInformations.getInstance().setUsername(username.getText());
                 UserInformations.getInstance().setMail(email.getText());
                 stage.hide();
-                loadGame(stage);
+                loadProg(stage);
             }
         }
     }

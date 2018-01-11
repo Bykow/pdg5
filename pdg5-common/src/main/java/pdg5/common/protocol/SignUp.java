@@ -62,4 +62,8 @@ public class SignUp extends Message {
         return password;
     }
 
+   @Override
+   public String toString() {
+      return "SignUp{" + "email=" + email + ", username=" + username + '}';
+   }
 }

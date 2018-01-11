@@ -3,18 +3,18 @@ package pdg5.client.controller;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import pdg5.client.Client;
 import pdg5.client.ClientSender;
 import pdg5.client.util.UserInformations;
 import pdg5.client.view.GGameListEntry;
 import pdg5.common.game.GameModel;
-import pdg5.common.protocol.Chat;
-import pdg5.common.protocol.Game;
-import pdg5.common.protocol.Load;
-import pdg5.common.protocol.NewGame;
+import pdg5.common.protocol.*;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -29,8 +29,7 @@ public class LobyController extends AbstractController {
     private Map<Integer, List<Chat> > historic;
 
     private GGameListEntry selected;
-    private GameController gameController;
-    private ChatController chatController;
+    private MainController mainController;
 
     private ClientSender sender;
 
@@ -40,19 +39,20 @@ public class LobyController extends AbstractController {
     @FXML
     private Label username;
 
-    public LobyController(ClientSender sender, GameController gameController, ChatController chatController) {
+    public LobyController(ClientSender sender, MainController mainController) {
         gameModelList = new ArrayList<>();
 
-        titleToPlay = new Label("A@jim ton tour");
+        titleToPlay = new Label("A ton tour");
         titleToPlay.getStyleClass().add("titleToPlay");
         titleWaiting = new Label("En attente");
         titleWaiting.getStyleClass().add("titleWaiting");
         titleFinished = new Label("Terminé");
         titleFinished.getStyleClass().add("titleFinished");
+
+        historic = new HashMap<>();
         
         this.sender = sender;
-        this.gameController = gameController;
-        this.chatController = chatController;
+        this.mainController = mainController;
     }
 
     @FXML
@@ -102,8 +102,8 @@ public class LobyController extends AbstractController {
 
     @FXML
     private void logout(ActionEvent actionEvent) {
-        //TODO Logout
-        System.out.println("logout");
+        mainController.logout();
+        sender.add(new Logout());
     }
 
     @FXML
@@ -117,8 +117,9 @@ public class LobyController extends AbstractController {
         unselectLast();
         selected = element;
         element.setSelected(true);
-        gameController.updateGame(element.getModel());
-        chatController.displayChat(historic.get(selected.getModel().getID()), selected.getModel());
+        UserInformations.getInstance().setIdGameDisplayed(selected.getModel().getID());
+        mainController.getGameController().updateGame(element.getModel());
+        mainController.getChatController().displayChat(historic.get(selected.getModel().getID()), selected.getModel());
     }
 
     private void handleDelete(ActionEvent event) {
@@ -128,14 +129,20 @@ public class LobyController extends AbstractController {
     }
 
     public void addLoad(Load load) {
-        historic = load.getHistoric();
-        for (Game g: load.getGames()) {
-            addGame(g);
-        }
+        historic.putAll(load.getHistoric());
+        addListGame(load.getGames());
+    }
+
+    private void addListGame(List<Game> list) {
+        gameModelList.addAll(list);
+        gameModelList = gameModelList.stream()
+                .sorted(Comparator.comparing(Game::getLastActivity))
+                .collect(Collectors.toCollection(ArrayList::new));
+        Platform.runLater(this::refresh);
     }
 
     private void addGame(Game game) {
-        gameModelList.add(game);
+        addListGame(Collections.singletonList(game));
     }
 
     public boolean hasGame(Game game) {
@@ -145,16 +152,27 @@ public class LobyController extends AbstractController {
     public void updateGame(Game game) {
         gameModelList.removeIf((o) -> o.getID() == game.getID());
         addGame(game);
-        if (gameController.getGameID() == game.getID()) {
-            gameController.updateGame(game);
+        if (mainController.getGameController().getGameID() == game.getID()) {
+            mainController.getGameController().updateGame(game);
         }
+
+        if (!historic.containsKey(game.getID())) {
+            historic.put(game.getID(), new ArrayList<>());
+        }
+
         Platform.runLater(this::refresh);
     }
 
     public void updateChat(Chat chat) {
-        historic.get(chat.getGameId()).add(chat);
-        if (chat.getGameId() == selected.getModel().getID()) {
-            chatController.addChat(chat, selected.getModel());
+        if (historic != null) {
+            historic.get(chat.getGameId()).add(chat);
+            if (chat.getGameId() == UserInformations.getInstance().getIdGameDisplayed()) {
+                mainController.getChatController().addChat(chat);
+            }
         }
+    }
+
+    public Game getGameFromId(int id) {
+        return gameModelList.stream().filter((o) -> o.getID() == id).findAny().get();
     }
 }

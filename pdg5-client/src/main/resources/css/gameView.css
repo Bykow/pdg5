@@ -15,13 +15,89 @@
     -fx-border-color: #2c3e50;
     -fx-border-radius: 4px;
     -fx-background-radius: 4px;
-    -fx-background-insets: 5px 8.5px;
-    -fx-border-insets: 5px 8.5px;
+    -fx-background-insets: 5px 8.5px 14px 8.5px;
+    -fx-border-insets: 5px 8.5px 14px 8.5px;
     -fx-padding: -1px;
+    -fx-min-height: 69px;
 }
 
-.table StackPane.final {
+.table StackPane Label {
+    -fx-font-family: "Helvetica";
+    -fx-font-size: 24px;
+    -fx-font-weight: 800;
+    -fx-text-fill: #fff;
+}
+
+.table StackPane.covered {
+    -fx-background-insets: 25px 16px 0 16px;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.table StackPane.covered Label {
+    -fx-background-insets: 25px 16px 0 16px;
+    -fx-padding: 60px 0 0 0;
+    -fx-font-size: 12px;
+}
+
+.adversary StackPane {
+    -fx-background-color: #3498db !important;
+    -fx-background-insets: 14px 8.5px 5px 8.5px;
+    -fx-border-insets: 14px 8.5px 5px 8.5px;
+}
+
+.adversary StackPane.covered {
+    -fx-background-insets: 0 16px 5px 16px;
+}
+
+.adversary StackPane.covered Label {
+    -fx-background-insets: 0 16px 25px 16px;
+    -fx-padding: 0 0 64px 0;
+    -fx-font-size: 12px;
+}
+
+.adversary StackPane.covered #main {
+    -fx-border-color: #2c3e50 !important;
+}
+
+.adversary StackPane.covered #main.bonus {
+    -fx-border-color: #dc4c18 !important;
+}
+
+.adversary StackPane Label {
+    -fx-text-fill: #1e70a5;
+}
+
+.table StackPane.BONUS {
     -fx-background-color: #c02b70;
+}
+
+.table StackPane.BONUS #main {
+    -fx-border-color: #c02b70;
+}
+
+.table StackPane.DOUBLE {
+    -fx-background-color: #39a495;
+}
+
+.table StackPane.DOUBLE #main {
+    -fx-border-color: #39a495;
+}
+
+.table StackPane.TRIPLE {
+    -fx-background-color: #9c29b7;
+}
+
+.table StackPane.TRIPLE #main {
+    -fx-border-color: #9c29b7;
+}
+
+.table StackPane.W {
+    -fx-background-color: #2a72a6;
+}
+
+.table StackPane.W #main {
+    -fx-border-color: #2a72a6;
 }
 
 .avatar {

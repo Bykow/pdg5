@@ -1,8 +1,9 @@
 package pdg5.server.util;
 
+import pdg5.common.protocol.Message;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
-import pdg5.common.protocol.Message;
 
 /**
  * @author Maxime Guillod
@@ -39,6 +40,10 @@ public class ServerActiveUser {
         if(client != null){
             client.addToQueue(m);
         }
+    }
+    
+    public ClientHandler.DatabaseManagers getDatabaseManagers(Integer user){
+        return getClientHandler(user).getDatabaseManagers();
     }
 
 }

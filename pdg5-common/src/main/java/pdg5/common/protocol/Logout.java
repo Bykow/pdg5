@@ -7,4 +7,7 @@ package pdg5.common.protocol;
  */
 public class Logout extends Message {
    
+    public Logout() {
+
+    }
 }

@@ -1,11 +1,13 @@
 package pdg5.common.protocol;
 
+import java.util.Arrays;
 import pdg5.common.game.Board;
 import pdg5.common.game.GameModel.State;
 import pdg5.common.game.Tile;
 
 import java.util.Date;
 import java.util.List;
+import pdg5.common.game.Composition.Square;
 
 /**
  * @author Maxime Guillod
@@ -118,6 +120,14 @@ public class Game extends Message {
 
     public State getState() {
         return state;
+    }
+    
+    public List<Square> getSquare(){
+       return Arrays.asList(board.getComposition().getSquare());
+    }
+    
+    public List<Square> getOpponentSquare(){
+       return Arrays.asList(opponentBoard.getComposition().getSquare());
     }
 
     public String toString() {

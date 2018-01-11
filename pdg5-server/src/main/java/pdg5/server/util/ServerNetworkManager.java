@@ -1,21 +1,19 @@
 package pdg5.server.util;
 
 import pdg5.common.Protocol;
+import pdg5.server.model.GameController;
 
-import java.io.FileInputStream;
+import javax.net.ServerSocketFactory;
+import javax.net.ssl.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.security.GeneralSecurityException;
 import java.security.KeyStore;
-import java.security.KeyStoreException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import pdg5.server.model.GameController;
-
-import javax.net.ServerSocketFactory;
-import javax.net.ssl.*;
+import pdg5.server.manage.Manager;
 
 /**
  * Listen the network on the DEFAULT_PORT, and start a {@link ClientHandler} when a
@@ -34,6 +32,9 @@ public class ServerNetworkManager {
         System.out.println("START ServerNetworkManager");
         activeUser = new ServerActiveUser();
         gameController = new GameController(activeUser);
+        
+        new Manager().getSession();
+        System.out.println("Hibernate Connected");
     }
 
     public void begin() {

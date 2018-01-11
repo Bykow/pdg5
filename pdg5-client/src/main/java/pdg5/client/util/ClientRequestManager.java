@@ -14,7 +14,6 @@ public class ClientRequestManager {
 
     public ClientRequestManager(MainController mainController) {
         this.mainController = mainController;
-
     }
 
     public Message execute(Message o) {

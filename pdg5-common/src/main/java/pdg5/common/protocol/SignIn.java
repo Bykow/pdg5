@@ -52,7 +52,7 @@ public class SignIn extends Message {
      */
     @Override
     public String toString() {
-        return "SignIn{" + "Username=" + username + ", password=" + password + '}';
+        return "SignIn{" + "Username=" + username + '}';
     }
 
 }

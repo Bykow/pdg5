@@ -2,13 +2,14 @@ package pdg5.server.util;
 
 import pdg5.common.MessageQueue;
 import pdg5.common.protocol.Message;
+import pdg5.server.model.GameController;
 
+import javax.net.ssl.SSLSocket;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.Socket;
-import javax.net.ssl.SSLSocket;
-import pdg5.server.model.GameController;
+import pdg5.server.manage.ManageGame;
+import pdg5.server.manage.ManageUser;
 
 /**
  * @author Maxime Guillod
@@ -25,10 +26,17 @@ public class ClientHandler implements Runnable {
     private static int id;
     private Integer playerId;
 
+    private DatabaseManagers databaseManagers;
+    
     public ClientHandler(SSLSocket socket, ServerActiveUser activeUser, GameController gameController) {
-        if(socket == null) return;
+        if (socket == null) {
+            return;
+        }
         System.out.println("SRV : new client #" + id++);
         this.socket = socket;
+
+        databaseManagers = new DatabaseManagers();
+
         this.queueIn = new MessageQueue();
         this.queueOut = new MessageQueue();
         this.activeUser = activeUser;
@@ -70,7 +78,7 @@ public class ClientHandler implements Runnable {
             while (true) {
                 try {
                     out.writeObject(queueOut.take());
-                    
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -105,5 +113,28 @@ public class ClientHandler implements Runnable {
    public boolean isConnected() {
       return playerId != null;
    }
+
+
+    public DatabaseManagers getDatabaseManagers(){
+        return databaseManagers;
+    }
+    
+    public class DatabaseManagers {
+        private final ManageUser manageUser;
+        private final ManageGame manageGame;
+
+        public DatabaseManagers() {
+            this.manageUser = new ManageUser();
+            this.manageGame = new ManageGame();
+        }
+
+        public ManageUser getManageUser() {
+            return manageUser;
+        }
+
+        public ManageGame getManageGame() {
+            return manageGame;
+        }
+    }
 
 }

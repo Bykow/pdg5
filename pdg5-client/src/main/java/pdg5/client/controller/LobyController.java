@@ -14,10 +14,7 @@ import pdg5.client.ClientSender;
 import pdg5.client.util.UserInformations;
 import pdg5.client.view.GGameListEntry;
 import pdg5.common.game.GameModel;
-import pdg5.common.protocol.Chat;
-import pdg5.common.protocol.Game;
-import pdg5.common.protocol.Load;
-import pdg5.common.protocol.NewGame;
+import pdg5.common.protocol.*;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -106,6 +103,7 @@ public class LobyController extends AbstractController {
     @FXML
     private void logout(ActionEvent actionEvent) {
         mainController.logout();
+        sender.add(new Logout());
     }
 
     @FXML

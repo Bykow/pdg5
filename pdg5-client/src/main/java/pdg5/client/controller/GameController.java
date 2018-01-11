@@ -253,6 +253,7 @@ public class GameController extends AbstractController {
                 continue;
             }
             list.get(i).getChildren().remove(1);
+            list.get(i).getStyleClass().remove("covered");
         }
     }
 
@@ -272,7 +273,9 @@ public class GameController extends AbstractController {
 
     public void updateGame(Game g) {
         gameID = g.getID();
-        mainController.getChatController().addChat(new Chat(Tile.tilesToString(g.getLastWordPlayed()), gameID, Chat.SENDER.OPPONENT));
+        if(!g.isYourTurn()) {
+            mainController.getChatController().addChat(constructLogLastPlayed(g));
+        }
         Platform.runLater(() -> {
                     updatePlayer(g);
                     if (g.getNbLeftTile() > 1) {
@@ -282,8 +285,8 @@ public class GameController extends AbstractController {
                     }
                     adversaryScore.setText(String.valueOf(g.getOpponentScore()));
                     userScore.setText(String.valueOf(g.getScore()));
-                    adversaryName.setText(g.getOpponentName());
-                    userName.setText(g.getNamePlayer());
+                    adversaryName.setText(mainController.upperCaseFirstLetter(g.getOpponentName()));
+                    userName.setText(mainController.upperCaseFirstLetter(g.getNamePlayer()));
                 }
         );
     }
@@ -332,5 +335,10 @@ public class GameController extends AbstractController {
     private void discard(ActionEvent actionEvent) {
         sender.add(new Pass(gameID));
         cleanList(adversaryList);
+    }
+
+    private Chat constructLogLastPlayed(Game g) {
+        String temp = mainController.upperCaseFirstLetter(g.getNamePlayer()) + " a joué " + Tile.tilesToString(g.getLastWordPlayed()) + " pour " + g.getScoreLastWordPlayed() + " points.";
+        return new Chat(temp, gameID, Chat.SENDER.USER);
     }
 }

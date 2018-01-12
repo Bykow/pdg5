@@ -7,10 +7,14 @@
       <AnchorPane minHeight="0.0" minWidth="524.0" prefHeight="598.0" prefWidth="524.0" maxWidth="524.0" style="-fx-background-color: #3caef5;">
          <children>
             <AnchorPane layoutY="543.0" prefHeight="55.0" prefWidth="595.0" style="-fx-background-color: #ffbd00;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-            <AnchorPane fx:id="gameContainer" prefHeight="543.0" prefWidth="524.0" />
+            <AnchorPane fx:id="gameContainer" id="game" prefHeight="543.0" prefWidth="524.0" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="lobyContainer" minHeight="0.0" minWidth="290.0" prefHeight="276.0" prefWidth="290.0" maxWidth="290.0" style="-fx-background-color: #34495e;" />
-      <AnchorPane fx:id="chatContainer" prefHeight="598.0" minWidth="300.0" prefWidth="300.0" maxWidth="300.0" style="-fx-background-color: #3caef5;" />
+      <AnchorPane fx:id="lobyContainer" minHeight="0.0" minWidth="290.0" prefHeight="290.0" prefWidth="290.0" maxWidth="290.0" style="-fx-background-color: #34495e;" />
+      <AnchorPane fx:id="chatContainer" id="chat" prefHeight="598.0" minWidth="300.0" prefWidth="300.0" maxWidth="300.0" style="-fx-background-color: #3caef5;">
+         <children>
+            <AnchorPane layoutY="543.0" prefHeight="55.0" prefWidth="300.0" style="-fx-background-color: #ffbd00;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+         </children>
+      </AnchorPane>
    </items>
 </SplitPane>

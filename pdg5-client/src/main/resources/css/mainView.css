@@ -1,3 +1,17 @@
 .split-pane *.split-pane-divider {
     -fx-padding: 0;
 }
+
+#game {
+    -fx-background-image: url(../img/logoBackground.png);
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: 425px 150px;
+}
+
+#chat {
+    -fx-background-image: url(../img/bubbleBackground.png);
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: 150px 100px;
+}

@@ -156,7 +156,9 @@ public class GameController {
         // TODO update the DB
         //pdg5.server.persistent.Chat chatDB = new ManageChat().;
         // tell to other player
+        int idFirstPlayer = games.get(idGame).getBoardById(chatServer.getIdSender()).getPlayerId();
         int idSecondPlayer = games.get(idGame).getOpponentBoardById(chatServer.getIdSender()).getPlayerId();
+        activeUser.giveToClientHandler(idFirstPlayer, chatServerToChat(idFirstPlayer, chatServer));
         activeUser.giveToClientHandler(idSecondPlayer, chatServerToChat(idSecondPlayer, chatServer));
     }
 
@@ -342,7 +344,7 @@ public class GameController {
     }
 
     /**
-     * Create a protocol.Game from a GameModel and return it the GameModel used is
+     * Create a protocol.Game from a Game   Model and return it the GameModel used is
      * found with the id of a game the Game created is the point of view of the
      * client given by idClient
      *
@@ -407,6 +409,9 @@ public class GameController {
             return new ErrorMessage("It's not your turn !");
         }
 
+        // empty the last word played as there is none
+        model.setLastWordPlayed(new ArrayList<Tile>());
+
         // throw Tiles or pass depending on the game context
         TileStack ts = tileStacks.get(gameID);
         if (isEndMode(model, ts)) {
@@ -414,9 +419,6 @@ public class GameController {
         } else {
             throwAction(model, playerID, ts);
         }
-
-        // empty the last word played as there is none
-        model.getLastWordPlayed().clear();
 
         // send game result if the game is finish
         if (gameEnded(model, ts)) {
@@ -440,7 +442,8 @@ public class GameController {
             manageGame.updateGame(game);
 
             int opponentId = model.getOpponentBoardById(playerID).getPlayerId();
-            activeUser.giveToClientHandler(opponentId, getGameFromModel(gameID, opponentId));
+            Message m = getGameFromModel(gameID, opponentId);
+            activeUser.giveToClientHandler(opponentId, m);
             return getGameFromModel(gameID, playerID);
         }
     }
@@ -467,6 +470,7 @@ public class GameController {
         List<Tile> letters = board.getLetters();
         List<Tile> bonusOpponent = new ArrayList<>();
 
+
         //two random of player letter are sent as bonus to the opponent
         for (int i = 0; i < 2; i++) {
             bonusOpponent.add(letters.remove(rand.nextInt(letters.size())));
@@ -489,6 +493,7 @@ public class GameController {
         bonusOpponent.forEach((tile) -> {
             wordAsString.append(tile.getLetter());
         });
+        
         addChat(new ChatServerSide(new Date().getTime(), playerID, Chat.SENDER.USER,
                 board.getPlayerName() + " a jeté "
                 + wordAsString.toString() + " et perdu " + lostScore + " points", model.getGameId()));

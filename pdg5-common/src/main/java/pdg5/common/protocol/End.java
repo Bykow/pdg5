@@ -49,5 +49,7 @@ public class End extends Message {
       return idGame;
    }
    
-   
+   public String toString() {
+      return result.toString();
+   }
 }

@@ -25,6 +25,11 @@ Button.secondary:hover {
     -fx-cursor: hand;
 }
 
+Button:disabled {
+    -fx-background-color: #b1b1b1 !important;
+    -fx-opacity: 1.0;
+}
+
 #bottom-bar {
     -fx-background-color: #ffbd00;
 }

@@ -3,7 +3,6 @@ package pdg5.client.controller;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -32,10 +31,6 @@ public class ChatController {
 
     @FXML
     public void initialize() {
-        Label time = new Label("19 sept. 2017 à 10:46:02");
-        ChatMessage msg0 = new ChatMessage(ChatMessage.Type.INFO, "Select a Game");
-
-        addMessage(msg0);
     }
 
     @FXML

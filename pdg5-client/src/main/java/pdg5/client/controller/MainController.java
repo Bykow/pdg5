@@ -125,6 +125,8 @@ public class MainController extends AbstractController {
     }
 
     public GameController getGameController() {
+        if(gameController == null)
+            loadGame();
         return gameController;
     }
 
@@ -133,6 +135,8 @@ public class MainController extends AbstractController {
     }
 
     public ChatController getChatController() {
+        if(chatController == null)
+            loadChat();
         return chatController;
     }
 

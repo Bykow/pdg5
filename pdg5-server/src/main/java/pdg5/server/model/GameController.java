@@ -289,6 +289,7 @@ public class GameController {
         // update the game to database
         game.setGameState(model);
         game.setTurnManager(tm);
+        game.setRemainingLetters(ts.convertToString());
         manageGame.updateGame(game);
 
         // sending to second player
@@ -405,7 +406,7 @@ public class GameController {
     public Message pass(int gameID, int playerID) {
         //check if the game exist
         GameModel model = games.get(gameID);
-        if (model == null || model.getState() != State.IN_PROGRESS) {
+        if (model == null || model.getState() == State.FINISHED) {
             return new ErrorMessage("Cette partie n'existe plus ou a été terminée");
         }
 
@@ -446,6 +447,7 @@ public class GameController {
                             .get();
             game.setGameState(model);
             game.setTurnManager(tm);
+            game.setRemainingLetters(ts.convertToString());
             manageGame.updateGame(game);
 
             int opponentId = model.getOpponentBoardById(playerID).getPlayerId();
@@ -485,8 +487,9 @@ public class GameController {
             bonusOpponent.add(letters.remove(rand.nextInt(letters.size())));
             Tile t = ts.getNextTuile();
             t.setBonus(true);
-            letters.add(ts.getNextTuile());
+            letters.add(t);
         }
+        // TODO REMOVE FIRST THEN PUT LETTERS
         opponentBoard.setBonus(bonusOpponent);
 
         // the player lose the total value of bonus letters in his score
@@ -613,6 +616,7 @@ public class GameController {
                         .findAny()
                         .get();
         game.setGameState(model);
+        game.setRemainingLetters(ts.convertToString());
         game.setTurnManager(tm);
         manageGame.updateGame(game);
 
@@ -772,6 +776,7 @@ public class GameController {
                                         .findAny()
                                         .get();
                         game.setGameState(gameModel);
+                        game.setRemainingLetters("");
                         manageGame.updateGame(game);
                         activeUser.giveToClientHandler(idPlayer1, getGameFromModel(gameID, idPlayer1));
                         activeUser.giveToClientHandler(idPlayer2, getGameFromModel(gameID, idPlayer2));
@@ -780,4 +785,6 @@ public class GameController {
             });
         };
     }
+    
+    
 }

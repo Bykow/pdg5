@@ -26,9 +26,9 @@ public class GameController extends AbstractController {
     private static final DataFormat tileFormat = new DataFormat("tile.model");
     private final String LEFTTILESINGLE = " tuille restante";
     private final String LEFTTILEPLURAL = " tuilles restantes";
-    private final String ENDWIN = "Bravo ! Tu as gagné la partie !";
-    private final String ENDLOSE = "Tu as perdu la partie... ";
-    private final String ENDEQUALITY = "La partie est une équalité !";
+    private final String ENDWIN         = "Bravo ! Tu as gagné !";
+    private final String ENDLOSE        = "Tu as perdu la partie... ";
+    private final String ENDEQUALITY    = "Equalité !";
 
     @FXML
     private List<StackPane> deckList;

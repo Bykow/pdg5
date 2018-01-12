@@ -487,7 +487,7 @@ public class GameController {
             bonusOpponent.add(letters.remove(rand.nextInt(letters.size())));
             Tile t = ts.getNextTuile();
             t.setBonus(true);
-            letters.add(t);
+            letters.add(new Tile(t));
         }
         // TODO REMOVE FIRST THEN PUT LETTERS
         opponentBoard.setBonus(bonusOpponent);

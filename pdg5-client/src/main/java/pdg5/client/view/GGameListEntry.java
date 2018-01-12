@@ -24,6 +24,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import pdg5.client.Client;
+import pdg5.common.Protocol;
 import pdg5.common.game.GameModel;
 import pdg5.common.game.Tile;
 import pdg5.common.protocol.Game;
@@ -91,7 +92,9 @@ public class GGameListEntry extends AnchorPane {
         switch (model.getState()) {
             case IN_PROGRESS:
                 if (model.isYourTurn()) {
-                    if(model.getLastWordPlayed().isEmpty()) {
+                    if (model.getNbLeftTile() == (Protocol.NUMBER_OF_TUILES_PER_GAME-(Protocol.NUMBER_OF_PLAYERS*Protocol.NUMBER_OF_TUILES_PER_PLAYER + Protocol.NUMBER_OF_EXTRA_TUILES))) {
+                        msg.setText("Nouvelle partie");
+                    } else if (model.getNbLeftTile() != (Protocol.NUMBER_OF_TUILES_PER_GAME-(Protocol.NUMBER_OF_PLAYERS*Protocol.NUMBER_OF_TUILES_PER_PLAYER + Protocol.NUMBER_OF_EXTRA_TUILES)) && model.getLastWordPlayed().isEmpty()) {
                         msg.setText("a passé !");
                     } else {
                         msg.setText("a joué " + Tile.tilesToString(model.getLastWordPlayed()));

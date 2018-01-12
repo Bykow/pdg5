@@ -158,7 +158,7 @@ public class Game extends Message {
         output += "isYourTurn:      " + yourTurn + "\n";
         output += "Last Word Played " + lastWordPlayed.toString() + "\n";
         output += "Bonus            " + getBonusLetters().toString() + "\n";
-        output += "Opponent Bonus   " + getOpponentBonusLetters().toString() + "\n";
+        output += "Opponent Bonus   " + getOpponentBonusLetters().toString();
 
         return output;
     }

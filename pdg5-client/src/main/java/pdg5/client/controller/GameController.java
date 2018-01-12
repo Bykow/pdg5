@@ -331,19 +331,7 @@ public class GameController extends AbstractController {
         cleanList(adversaryList);
     }
 
-    public Chat constructLogLastPlayed(Game g) {
-        if (!g.getLastWordPlayed().isEmpty()) {
-            String temp = mainController.upperCaseFirstLetter(g.getNamePlayer()) + " a joué " + Tile.tilesToString(g.getLastWordPlayed()) + " pour " + g.getScoreLastWordPlayed() + " points.";
-            return new Chat(temp, gameID, Chat.SENDER.USER);
-        }
-        return null;
-    }
-
     public void displayEnd(End end) {
-        cleanList(deckList);
-        cleanList(userList);
-        cleanList(adversaryList);
-        cleanList(adversaryBonusList);
         Platform.runLater(() -> {
                     switch (end.getResult()) {
                         case WIN:

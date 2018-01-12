@@ -31,6 +31,7 @@ public abstract class AbstractController {
 
             mainController.loadLoby();
             mainController.loadGame();
+            mainController.loadChat();
 
             mainController.startLogic();
 

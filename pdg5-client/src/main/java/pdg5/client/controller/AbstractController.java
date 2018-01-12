@@ -30,6 +30,7 @@ public abstract class AbstractController {
             stage.show();
 
             mainController.loadLoby();
+            mainController.loadGame();
 
             mainController.startLogic();
 

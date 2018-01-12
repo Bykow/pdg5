@@ -159,8 +159,6 @@ public class LobyController extends AbstractController {
         if (!historic.containsKey(game.getID())) {
             historic.put(game.getID(), new ArrayList<>());
         }
-
-        Platform.runLater(this::refresh);
     }
 
     public void updateChat(Chat chat) {

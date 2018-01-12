@@ -138,12 +138,17 @@ public class GameController {
 
     }
 
+    public void addChat(ChatServerSide chatServer) {
+        addChat(chatServer, true);
+    }
+
     /**
      * add to the map of chat messages a new message
      *
      * @param chatServer the message we want to add
+     * @param sendToBoth if it must be sent to both
      */
-    public void addChat(ChatServerSide chatServer) {
+    public void addChat(ChatServerSide chatServer, boolean sendToBoth) {
         int idGame = chatServer.getIdGame();
         // we create a list if it's the first message of the game
         List<ChatServerSide> list;
@@ -156,10 +161,12 @@ public class GameController {
         // TODO update the DB
         //pdg5.server.persistent.Chat chatDB = new ManageChat().;
         // tell to other player
-        int idFirstPlayer = games.get(idGame).getBoardById(chatServer.getIdSender()).getPlayerId();
         int idSecondPlayer = games.get(idGame).getOpponentBoardById(chatServer.getIdSender()).getPlayerId();
-        activeUser.giveToClientHandler(idFirstPlayer, chatServerToChat(idFirstPlayer, chatServer));
         activeUser.giveToClientHandler(idSecondPlayer, chatServerToChat(idSecondPlayer, chatServer));
+        if (sendToBoth) {
+            int idFirstPlayer = games.get(idGame).getBoardById(chatServer.getIdSender()).getPlayerId();
+            activeUser.giveToClientHandler(idFirstPlayer, chatServerToChat(idFirstPlayer, chatServer));
+        }
     }
 
     /**
@@ -344,7 +351,7 @@ public class GameController {
     }
 
     /**
-     * Create a protocol.Game from a Game   Model and return it the GameModel used is
+     * Create a protocol.Game from a Game Model and return it the GameModel used is
      * found with the id of a game the Game created is the point of view of the
      * client given by idClient
      *
@@ -470,7 +477,6 @@ public class GameController {
         List<Tile> letters = board.getLetters();
         List<Tile> bonusOpponent = new ArrayList<>();
 
-
         //two random of player letter are sent as bonus to the opponent
         for (int i = 0; i < 2; i++) {
             bonusOpponent.add(letters.remove(rand.nextInt(letters.size())));
@@ -493,7 +499,7 @@ public class GameController {
         bonusOpponent.forEach((tile) -> {
             wordAsString.append(tile.getLetter());
         });
-        
+
         addChat(new ChatServerSide(new Date().getTime(), playerID, Chat.SENDER.USER,
                 board.getPlayerName() + " a jeté "
                 + wordAsString.toString() + " et perdu " + lostScore + " points", model.getGameId()));

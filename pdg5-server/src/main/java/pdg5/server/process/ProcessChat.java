@@ -19,9 +19,9 @@ import pdg5.server.util.ClientHandler;
  * @author Jimmy Verdasca
  */
 public class ProcessChat implements GenericProcess {
-   private Chat chat;
-   private GameController gameController;
-   private ClientHandler clientHandler;
+   private final Chat chat;
+   private final GameController gameController;
+   private final ClientHandler clientHandler;
 
    public ProcessChat(Chat chat, GameController gameController, ClientHandler clientHandler) {
       this.chat = chat;
@@ -35,7 +35,8 @@ public class ProcessChat implements GenericProcess {
          return new ErrorMessage("you are not allowed to send message for others");
       }
       
-      gameController.addChat(new ChatServerSide(chat.getTimeStamp(), clientHandler.getPlayerId(), Chat.SENDER.USER, chat.getMessage(), chat.getGameId()));
+      ChatServerSide serverChat = new ChatServerSide(chat.getTimeStamp(), clientHandler.getPlayerId(), Chat.SENDER.USER, chat.getMessage(), chat.getGameId());
+      gameController.addChat(serverChat, false);
       return new Noop(Noop.Sender.SERVER);
    }
    

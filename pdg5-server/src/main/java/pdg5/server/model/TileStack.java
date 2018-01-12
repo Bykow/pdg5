@@ -63,6 +63,8 @@ public class TileStack {
                 // Fills the map with letter and values. '0' stands for a joker
                 .forEach(s -> map.put(s.charAt(0), Integer.parseInt(s.substring(5,7))));
 
+        System.out.println("Number of letters : " + letters.length());
+        
         letters.chars()
                 .mapToObj(c -> (char) c)
                 .map((Character c) -> new Tile((char) c, map.get(c)))
@@ -72,6 +74,7 @@ public class TileStack {
                 });
         
         tileLeft = size;
+        System.out.println("Size of Stack : " + size);
     }
 
     /**

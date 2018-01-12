@@ -617,10 +617,10 @@ public class GameController {
         word.forEach((tile) -> {
             wordAsString.append(tile.getLetter());
         });
-        String playerName = board.getPlayerName().substring(0, 1).toUpperCase() + board.getPlayerName().substring(1).toLowerCase();
+        
 
         addChat(new ChatServerSide(new Date().getTime(), playerID, Chat.SENDER.USER,
-                playerName + " a joué "
+                board.getPlayerName() + " a joué "
                 + wordAsString.toString() + " pour " + scoreToAdd + " points", gameID));
 
         activeUser.giveToClientHandler(opponentId, getGameFromModel(gameID, opponentId));
@@ -726,6 +726,10 @@ public class GameController {
         return map;
     }
 
+    /**
+     * return the dictionnary of the game
+     * @return a Ternary Search Tree
+     */
     public TST getDictionnary() {
         return dictionary;
     }

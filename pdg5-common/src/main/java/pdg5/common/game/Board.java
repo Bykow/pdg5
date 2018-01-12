@@ -40,7 +40,7 @@ public class Board implements Serializable {
     * @param playerId unique id of the associated player
     */
    public Board(String playerName, int playerId) {
-      this.playerName = playerName;
+      this.playerName = playerName.substring(0, 1).toUpperCase() + playerName.substring(1).toLowerCase();;
       this.playerId = playerId;
 
       bonus = new ArrayList<>();

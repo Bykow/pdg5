@@ -60,6 +60,7 @@ public class ChatController {
         for (Chat c : chat) {
             addChat(c);
         }
+
     }
 
     public void addChat(Chat c) {

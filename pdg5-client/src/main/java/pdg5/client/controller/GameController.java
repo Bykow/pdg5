@@ -267,7 +267,6 @@ public class GameController extends AbstractController {
         if(!g.isYourTurn()) {
             btnPlay.setDisable(true);
             btnDiscard.setDisable(true);
-            mainController.getChatController().addChat(constructLogLastPlayed(g));
         } else {
             btnPlay.setDisable(false);
             btnDiscard.setDisable(false);
@@ -334,8 +333,11 @@ public class GameController extends AbstractController {
     }
 
     public Chat constructLogLastPlayed(Game g) {
-        String temp = mainController.upperCaseFirstLetter(g.getNamePlayer()) + " a joué " + Tile.tilesToString(g.getLastWordPlayed()) + " pour " + g.getScoreLastWordPlayed() + " points.";
-        return new Chat(temp, gameID, Chat.SENDER.USER);
+        if (!g.getLastWordPlayed().isEmpty()) {
+            String temp = mainController.upperCaseFirstLetter(g.getNamePlayer()) + " a joué " + Tile.tilesToString(g.getLastWordPlayed()) + " pour " + g.getScoreLastWordPlayed() + " points.";
+            return new Chat(temp, gameID, Chat.SENDER.USER);
+        }
+        return null;
     }
 
     public void displayEnd(End end) {

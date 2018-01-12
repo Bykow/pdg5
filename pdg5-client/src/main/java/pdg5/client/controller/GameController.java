@@ -63,7 +63,6 @@ public class GameController extends AbstractController {
     public GameController(ClientSender sender, MainController mainController) {
         this.sender = sender;
         this.mainController = mainController;
-
     }
 
     @FXML

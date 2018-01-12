@@ -91,7 +91,11 @@ public class GGameListEntry extends AnchorPane {
         switch (model.getState()) {
             case IN_PROGRESS:
                 if (model.isYourTurn()) {
-                    msg.setText("a joué " + Tile.tilesToString(model.getLastWordPlayed()));
+                    if(model.getLastWordPlayed().isEmpty()) {
+                        msg.setText("a passé !");
+                    } else {
+                        msg.setText("a joué " + Tile.tilesToString(model.getLastWordPlayed()));
+                    }
                 } else {
                     msg.setText("vous avez joué " + Tile.tilesToString(model.getLastWordPlayed()));
                 }

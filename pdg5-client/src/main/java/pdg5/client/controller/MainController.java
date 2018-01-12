@@ -78,7 +78,7 @@ public class MainController extends AbstractController {
             loader.setLocation(MainController.class.getResource("/fxml/gameView.fxml"));
             loader.setController(gameController);
             layout = loader.load();
-            Platform.runLater(()->gameContainer.getChildren().setAll(layout));
+            gameContainer.getChildren().setAll(layout);
         } catch (IOException e) {
             e.printStackTrace();
         }

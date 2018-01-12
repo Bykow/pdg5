@@ -29,19 +29,15 @@ public class Game extends Message {
     private final int scoreLastWordPlayed;
     private final boolean yourTurn;
 
-    public enum RESULT {
-        NONE, WIN, LOSE, EQUALITY
-    }
-
-    public RESULT getResult() {
+    public Result getResult() {
         return result;
     }
 
-    public void setResult(RESULT result) {
+    public void setResult(Result result) {
         this.result = result;
     }
 
-    private RESULT result;
+    private Result result;
 
     private State state;
 

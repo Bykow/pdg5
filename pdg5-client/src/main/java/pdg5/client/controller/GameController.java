@@ -333,22 +333,6 @@ public class GameController extends AbstractController {
         cleanList(adversaryList);
     }
 
-    public void displayEnd(End end) {
-        Platform.runLater(() -> {
-                    switch (end.getResult()) {
-                        case WIN:
-                            remainingTiles.setText(String.valueOf(ENDWIN));
-                        case LOSE:
-                            remainingTiles.setText(String.valueOf(ENDLOSE));
-                            break;
-                        case EQUALITY:
-                            remainingTiles.setText(String.valueOf(ENDEQUALITY));
-                            break;
-                    }
-                }
-        );
-    }
-
     public void displayEndState(Result result) {
         Platform.runLater(() -> {
                     switch (result) {

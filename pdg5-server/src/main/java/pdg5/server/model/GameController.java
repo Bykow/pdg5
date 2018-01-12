@@ -18,6 +18,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+import pdg5.common.game.Result;
 import pdg5.server.manage.ManageGame;
 import pdg5.server.manage.ManageUser;
 import pdg5.server.persistent.User;
@@ -650,14 +651,14 @@ public class GameController {
         System.out.println("Sending end Messages");
         
         if (board.getScore() > boardOpponent.getScore()) {
-            activeUser.giveToClientHandler(player1Id, new End(End.Result.WIN, gameID));
-            activeUser.giveToClientHandler(player2Id, new End(End.Result.LOSE, gameID));
+            activeUser.giveToClientHandler(player1Id, new End(Result.WIN, gameID));
+            activeUser.giveToClientHandler(player2Id, new End(Result.LOSE, gameID));
         } else if (board.getScore() < boardOpponent.getScore()) {
-            activeUser.giveToClientHandler(player1Id, new End(End.Result.LOSE, gameID));
-            activeUser.giveToClientHandler(player2Id, new End(End.Result.WIN, gameID));
+            activeUser.giveToClientHandler(player1Id, new End(Result.LOSE, gameID));
+            activeUser.giveToClientHandler(player2Id, new End(Result.WIN, gameID));
         } else {
-            activeUser.giveToClientHandler(player2Id, new End(End.Result.EQUALITY, gameID));
-            activeUser.giveToClientHandler(player1Id, new End(End.Result.EQUALITY, gameID));
+            activeUser.giveToClientHandler(player2Id, new End(Result.EQUALITY, gameID));
+            activeUser.giveToClientHandler(player1Id, new End(Result.EQUALITY, gameID));
         }
     }
 

@@ -120,7 +120,7 @@ public class LobyController extends AbstractController {
         UserInformations.getInstance().setIdGameDisplayed(selected.getModel().getID());
         mainController.getGameController().updateGame(element.getModel());
         if (element.getModel().getState() == GameModel.State.FINISHED) {
-            mainController.getGameController().displayEnd(element.getModel());
+            mainController.getGameController().displayEndState(element.getModel().getResult());
         }
         mainController.getChatController().displayChat(historic.get(selected.getModel().getID()), selected.getModel());
     }

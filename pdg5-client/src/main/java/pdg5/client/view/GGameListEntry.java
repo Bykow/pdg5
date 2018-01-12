@@ -100,7 +100,11 @@ public class GGameListEntry extends AnchorPane {
                         msg.setText("a joué " + Tile.tilesToString(model.getLastWordPlayed()));
                     }
                 } else {
-                    msg.setText("vous avez joué " + Tile.tilesToString(model.getLastWordPlayed()));
+                    if (model.getNbLeftTile() == (Protocol.NUMBER_OF_TUILES_PER_GAME-(Protocol.NUMBER_OF_PLAYERS*Protocol.NUMBER_OF_TUILES_PER_PLAYER + Protocol.NUMBER_OF_EXTRA_TUILES))) {
+                        msg.setText("Nouvelle partie");
+                    } else {
+                        msg.setText("vous avez joué " + Tile.tilesToString(model.getLastWordPlayed()));
+                    }
                 }
                 break;
             case END_MODE:

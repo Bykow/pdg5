@@ -12,6 +12,7 @@ import javafx.scene.paint.Color;
 import pdg5.client.ClientSender;
 import pdg5.client.view.GTile;
 import pdg5.common.game.Composition;
+import pdg5.common.game.GameModel;
 import pdg5.common.game.Tile;
 import pdg5.common.protocol.*;
 
@@ -334,6 +335,22 @@ public class GameController extends AbstractController {
     public void displayEnd(End end) {
         Platform.runLater(() -> {
                     switch (end.getResult()) {
+                        case WIN:
+                            remainingTiles.setText(String.valueOf(ENDWIN));
+                        case LOSE:
+                            remainingTiles.setText(String.valueOf(ENDLOSE));
+                            break;
+                        case EQUALITY:
+                            remainingTiles.setText(String.valueOf(ENDEQUALITY));
+                            break;
+                    }
+                }
+        );
+    }
+
+    public void displayEndState(Game.RESULT result) {
+        Platform.runLater(() -> {
+                    switch (result) {
                         case WIN:
                             remainingTiles.setText(String.valueOf(ENDWIN));
                         case LOSE:

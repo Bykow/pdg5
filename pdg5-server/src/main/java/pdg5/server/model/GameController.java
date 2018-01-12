@@ -43,6 +43,8 @@ public class GameController {
      */
     private static final int TILE_LEFT_END_MODE_HARD = 2;
     private static final int TILE_LEFT_END_MODE_LAZY = 10;
+    
+    private static final int TILE_THROWN = 2;
 
     /**
      * random used for Square position random
@@ -364,9 +366,10 @@ public class GameController {
         GameModel gm = games.get(idGame);
         Board boardOfClient = new Board(gm.getBoardById(idClient));
         Board opponentBoard = gm.getOpponentBoard(idClient);
-
+        
         Board cleanedOpponentBoard = new Board(opponentBoard);
         cleanedOpponentBoard.getLetters().clear();
+        cleanedOpponentBoard.getBonus().forEach((t) -> t.setBonus(true));
 
         TileStack ts = tileStacks.get(gm.getGameId());
         TurnManager tm = playerTurnManager.get(gm.getGameId());
@@ -481,17 +484,20 @@ public class GameController {
         Board board = model.getBoardById(playerID);
         Board opponentBoard = model.getOpponentBoard(playerID);
         List<Tile> letters = board.getLetters();
-        List<Tile> bonusOpponent = new ArrayList<>();
+        List<Tile> removedTiles = new ArrayList<>();
 
-        //two random of player letter are sent as bonus to the opponent
-        for (int i = 0; i < 2; i++) {
-            bonusOpponent.add(letters.remove(rand.nextInt(letters.size())));
-            Tile t = ts.getNextTuile();
-            t.setBonus(true);
-            letters.add(new Tile(t));
+        //two random letters from player are sent as bonus to the opponent
+        for (int i = 0; i < TILE_THROWN; i++) {
+            removedTiles.add(letters.remove(rand.nextInt(letters.size())));
         }
+        
+        removedTiles.forEach((tile) -> {
+            letters.add(ts.getNextTuile());
+            tile.setBonus(true);
+        });
+        
         // TODO REMOVE FIRST THEN PUT LETTERS
-        opponentBoard.setBonus(bonusOpponent);
+        opponentBoard.setBonus(removedTiles);
 
         // the player lose the total value of bonus letters in his score
         List<Tile> bonus = board.getBonus();
@@ -503,7 +509,7 @@ public class GameController {
 
         // Save Last Action for Chat
         StringBuilder wordAsString = new StringBuilder();
-        bonusOpponent.forEach((tile) -> {
+        removedTiles.forEach((tile) -> {
             wordAsString.append(tile.getLetter());
         });
 

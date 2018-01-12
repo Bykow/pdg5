@@ -125,8 +125,8 @@ public class MainController extends AbstractController {
     }
 
     public GameController getGameController() {
-        if (gameController == null) {
-            loadGame();
+        if (!gameContainer.getChildren().get(0).isVisible()) {
+            gameContainer.getChildren().get(0).setVisible(true);
         }
         return gameController;
     }
@@ -136,8 +136,8 @@ public class MainController extends AbstractController {
     }
 
     public ChatController getChatController() {
-        if (chatController == null) {
-            loadChat();
+        if (!chatContainer.getChildren().get(0).isVisible()) {
+            chatContainer.getChildren().get(0).setVisible(true);
         }
         return chatController;
     }

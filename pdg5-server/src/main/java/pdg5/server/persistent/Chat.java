@@ -13,12 +13,12 @@ public class Chat extends AbstractData implements java.io.Serializable {
 
 	private Game game;
 	private Tournament tournament;
-	private Set messages = new HashSet(0);
+	private Set<Message> messages = new HashSet(0);
 
 	public Chat() {
 	}
 
-	public Chat(Game game, Tournament tournament, Set messages) {
+	public Chat(Game game, Tournament tournament, Set<Message> messages) {
 		this.game = game;
 		this.tournament = tournament;
 		this.messages = messages;
@@ -45,11 +45,11 @@ public class Chat extends AbstractData implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "chat")
-	public Set getMessages() {
+	public Set<Message> getMessages() {
 		return this.messages;
 	}
 
-	public void setMessages(Set messages) {
+	public void setMessages(Set<Message> messages) {
 		this.messages = messages;
 	}
 	

@@ -10,6 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import pdg5.server.manage.ManageChat;
 import pdg5.server.manage.ManageGame;
+import pdg5.server.manage.ManageMessage;
 import pdg5.server.manage.ManageUser;
 
 /**
@@ -124,11 +125,13 @@ public class ClientHandler implements Runnable {
         private final ManageUser manageUser;
         private final ManageGame manageGame;
         private final ManageChat manageChat;
+        private final ManageMessage manageMessage;
 
         public DatabaseManagers() {
             this.manageUser = new ManageUser();
             this.manageGame = new ManageGame();
             this.manageChat = new ManageChat();
+            this.manageMessage = new ManageMessage();
         }
 
         public ManageUser getManageUser() {
@@ -141,6 +144,10 @@ public class ClientHandler implements Runnable {
         
         public ManageChat getManageChat() {
             return manageChat;
+        }
+        
+        public ManageMessage getManageMessage() {
+            return manageMessage;
         }
     }
 

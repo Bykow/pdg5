@@ -28,7 +28,7 @@ public class Game extends AbstractData implements java.io.Serializable {
     private String remainingLetters;
     private Blob gameState;
     private Blob turnManager;
-    private Set chats = new HashSet(0);
+    private Set<Chat> chats = new HashSet(0);
 
     public Game() {
     }
@@ -42,7 +42,7 @@ public class Game extends AbstractData implements java.io.Serializable {
     }
 
     public Game(Tournament tournament, User userByPlayer2, User userByPlayer1, String title, Date created,
-            Date lastActivity, Set chats) {
+            Date lastActivity, Set<Chat> chats) {
         this.tournament = tournament;
         this.userByPlayer2 = userByPlayer2;
         this.userByPlayer1 = userByPlayer1;
@@ -121,11 +121,11 @@ public class Game extends AbstractData implements java.io.Serializable {
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "game")
-    public Set getChats() {
+    public Set<Chat> getChats() {
         return this.chats;
     }
 
-    public void setChats(Set chats) {
+    public void setChats(Set<Chat> chats) {
         this.chats = chats;
     }
 
@@ -138,7 +138,7 @@ public class Game extends AbstractData implements java.io.Serializable {
     public Blob getTurnManager() {
         return this.turnManager;
     }
-
+    
     public Serializable getGameStateAsSerializable() {
         return deserialize(getGameState());
     }

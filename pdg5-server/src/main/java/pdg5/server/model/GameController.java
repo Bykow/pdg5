@@ -20,6 +20,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import pdg5.server.manage.ManageChat;
 import pdg5.server.manage.ManageGame;
+import pdg5.server.manage.ManageMessage;
 import pdg5.server.manage.ManageUser;
 import pdg5.server.persistent.User;
 
@@ -32,6 +33,8 @@ public class GameController {
      * Schedular that each minutes check if the games are outdated
      */
     private final ScheduledExecutorService checkGamesOutdatedScheduler;
+    
+    private final static int KEY_CHATS = 9999;
 
     /**
      * Max time to play (72 hours in millisecond)
@@ -130,10 +133,12 @@ public class GameController {
 
         User user = manageUser.getUserById(idPlayer);
 
-        clientGames.put(idPlayer, manageGame.getGamesByUser(user)
+        List<pdg5.server.persistent.Game> listGameOfPlayer = manageGame.getGamesByUser(user);
+        clientGames.put(idPlayer, listGameOfPlayer
                 .stream()
                 .peek((g) -> tileStacks.put(g.getId(), new TileStack(Protocol.Languages.LANG_FR.toString(), g.getRemainingLetters())))
                 .peek((g) -> playerTurnManager.put(g.getId(), (TurnManager) g.getTurnManagerAsSerializable()))
+                //.peek((g) -> chats.put(g.getId(), manageChat.listChats()))
                 .map((g) -> (GameModel) g.getGameStateAsSerializable())
                 .peek((g) -> games.put(g.getGameId(), g))
                 .map(GameModel::getGameId).collect(Collectors.toList()));
@@ -147,11 +152,27 @@ public class GameController {
      */
     public void addChat(ChatServerSide chatServer) {
         int idGame = chatServer.getIdGame();
+        int idPlayer = chatServer.getIdSender();
+        
+        ManageChat manageChat = activeUser.getDatabaseManagers(idPlayer).getManageChat();
+        ManageGame manageGame = activeUser.getDatabaseManagers(idPlayer).getManageGame();
+        ManageUser manageUser = activeUser.getDatabaseManagers(idPlayer).getManageUser();
+        List<pdg5.server.persistent.Game> listGame = manageGame.getGamesByUser(manageUser.getUserById(idPlayer));
+        pdg5.server.persistent.Game game = listGame.stream().filter((g) -> g.getId() == idGame).findAny().get();
+        
         // we create a list if it's the first message of the game
         List<ChatServerSide> list;
         if (!chats.containsKey(idGame)) {
+           
+            // add chat to DB
+            manageChat.addChatGame(game);
+            
+            // add chat to Map
             chats.put(idGame, new ArrayList<>());
         }
+        ManageMessage manageMessage = activeUser.getDatabaseManagers(idPlayer).getManageMessage();
+        manageMessage.addMessage(chatServer.getMessage(), manageUser.getUserById(idPlayer), game.getChats().stream().findFirst().get());
+        
         list = chats.get(idGame);
         list.add(chatServer);
 

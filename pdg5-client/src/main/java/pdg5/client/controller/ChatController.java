@@ -54,13 +54,14 @@ public class ChatController {
         scrollPane.setVvalue(1.0);
     }
 
-    public void displayChat(List<Chat> chat, Game game) {
+    public void displayChat(List<Chat> list, Game game) {
         cleanChat();
         addMessage(new ChatMessage(ChatMessage.Type.TIME, game.getCreated().toString()));
-        for (Chat c : chat) {
-            addChat(c);
+        if (list != null) {
+            for (Chat c : list) {
+                addChat(c);
+            }
         }
-
     }
 
     public void addChat(Chat c) {

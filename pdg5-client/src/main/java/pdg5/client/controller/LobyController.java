@@ -156,7 +156,7 @@ public class LobyController extends AbstractController {
             mainController.getGameController().updateGame(game);
         }
 
-        if (!historic.containsKey(game.getID()) || historic.get(game.getID()) == null) {
+        if (!historic.containsKey(game.getID())) {
             historic.put(game.getID(), new ArrayList<>());
         }
 

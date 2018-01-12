@@ -17,17 +17,31 @@ import pdg5.common.game.Composition.Square;
  */
 public class Game extends Message {
 
-    private int ID;
-    private Date created;
-    private Date lastActivity;
-    private int tournament;
-    private Board board;
-    private Board opponentBoard;
-    private int nbLeftTile;
-    private List<Tile> lastWordPlayed;
-    private int scoreLastWordPlayed;
-    private boolean yourTurn;
+    private final int ID;
+    private final Date created;
+    private final Date lastActivity;
+    private final int tournament;
+    private final Board board;
+    private final Board opponentBoard;
+    private final int nbLeftTile;
+    private final List<Tile> lastWordPlayed;
+    private final int scoreLastWordPlayed;
+    private final boolean yourTurn;
 
+   public enum RESULT {
+      NONE, WIN, LOSE, EQUALITY
+   }
+
+   public RESULT getResult() {
+      return result;
+   }
+
+   public void setResult(RESULT result) {
+      this.result = result;
+   }
+    
+    private RESULT result;
+    
     private State state;
 
     public Game(int ID, Date created, Date lastActivity,
@@ -44,7 +58,7 @@ public class Game extends Message {
         this.scoreLastWordPlayed = scoreLastWordPlayed;
         this.yourTurn = yourTurn;
         this.state = state;
-
+        this.result = RESULT.NONE;
     }
 
     /**
@@ -144,7 +158,7 @@ public class Game extends Message {
         output += "isYourTurn:      " + yourTurn + "\n";
         output += "Last Word Played " + lastWordPlayed.toString() + "\n";
         output += "Bonus            " + getBonusLetters().toString() + "\n";
-        output += "Opponent Bonus   " + getOpponentBonusLetters().toString() + "\n";
+        output += "Opponent Bonus   " + getOpponentBonusLetters().toString();
 
         return output;
     }

@@ -406,7 +406,7 @@ public class GameController {
     public Message pass(int gameID, int playerID) {
         //check if the game exist
         GameModel model = games.get(gameID);
-        if (model == null || model.getState() == State.FINISHED) {
+        if (model == null) {
             return new ErrorMessage("Cette partie n'existe plus ou a été terminée");
         }
 
@@ -527,7 +527,7 @@ public class GameController {
 
         //check if the game exist
         GameModel model = games.get(gameID);
-        if (model == null || model.getState() == State.FINISHED) {
+        if (model == null) {
             return new ErrorMessage("Cette partie n'existe plus ou a été terminée");
         }
 
@@ -636,6 +636,11 @@ public class GameController {
     }
 
     private void sendScoreResults(GameModel model) {
+        model.setState(State.FINISHED);
+        tileStacks.get(model.getGameId()).clear();
+        
+        // TODO SAVE IN DB
+        
         int gameID = model.getGameId();
         Board board = model.getBoard(GameModel.PlayerBoard.PLAYER1);
         Board boardOpponent = model.getBoard(GameModel.PlayerBoard.PLAYER2);

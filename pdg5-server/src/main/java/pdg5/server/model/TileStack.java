@@ -122,6 +122,14 @@ public class TileStack {
         tileLeft--;
         return stack.pop();
     }
+    
+    /**
+     * Empties the stack
+     */
+    public void clear(){
+        stack.clear();
+        tileLeft = 0;
+    }
 
     /**
      * return the a String reprsenting all the letters left in the TileStack.

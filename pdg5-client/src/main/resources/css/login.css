@@ -7,6 +7,7 @@ Button {
     -fx-border-color: #fff;
     -fx-border-width: 2;
     -fx-border-radius: 2;
+    -fx-background-insets: 0 0 1px 0;
 }
 
 Button:hover {

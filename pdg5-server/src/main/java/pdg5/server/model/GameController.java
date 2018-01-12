@@ -130,6 +130,7 @@ public class GameController {
         ManageGame manageGame = activeUser.getDatabaseManagers(idPlayer).getManageGame();
         ManageUser manageUser = activeUser.getDatabaseManagers(idPlayer).getManageUser();
         ManageChat manageChat = activeUser.getDatabaseManagers(idPlayer).getManageChat();
+        ManageMessage manageMessage = activeUser.getDatabaseManagers(idPlayer).getManageMessage();
 
         User user = manageUser.getUserById(idPlayer);
 
@@ -138,11 +139,20 @@ public class GameController {
                 .stream()
                 .peek((g) -> tileStacks.put(g.getId(), new TileStack(Protocol.Languages.LANG_FR.toString(), g.getRemainingLetters())))
                 .peek((g) -> playerTurnManager.put(g.getId(), (TurnManager) g.getTurnManagerAsSerializable()))
-                //.peek((g) -> chats.put(g.getId(), manageChat.listChats()))
                 .map((g) -> (GameModel) g.getGameStateAsSerializable())
                 .peek((g) -> games.put(g.getGameId(), g))
                 .map(GameModel::getGameId).collect(Collectors.toList()));
 
+        for (pdg5.server.persistent.Game game : listGameOfPlayer) {
+           if(!chats.containsKey(game.getId())) {
+              Set<pdg5.server.persistent.Message> messages = game.getChats().stream().findFirst().get().getMessages();
+              List<ChatServerSide> listChat = new ArrayList<>();
+              for (pdg5.server.persistent.Message message : messages) {
+                 listChat.add(new ChatServerSide(message.getCreated().getTime(), message.getUser().getId(), Chat.SENDER.USER, message.getContent(), game.getId()));
+              }
+              chats.put(game.getId(), listChat);
+           }
+       }
     }
 
     /**

@@ -428,6 +428,7 @@ public class GameController {
 
         // send game result if the game is finish
         if (gameEnded(model, ts)) {
+            System.out.println("Ending Game");
             sendScoreResults(model);
             return new Noop(Noop.Sender.SERVER);
         } else { // send next turn
@@ -455,6 +456,8 @@ public class GameController {
     }
 
     private void pass(GameModel model, int playerID, TileStack ts) {
+        
+        System.out.println("Game State : Passing");
         Board board = model.getBoardById(playerID);
 
         // the player lose the total value of bonus letters in his score
@@ -471,6 +474,7 @@ public class GameController {
     }
 
     private void throwAction(GameModel model, int playerID, TileStack ts) {
+        System.out.println("Game State : Throwing");
         Board board = model.getBoardById(playerID);
         Board opponentBoard = model.getOpponentBoard(playerID);
         List<Tile> letters = board.getLetters();
@@ -634,6 +638,8 @@ public class GameController {
         int player1Id = board.getPlayerId();
         int player2Id = boardOpponent.getPlayerId();
 
+        System.out.println("Sending end Messages");
+        
         if (board.getScore() > boardOpponent.getScore()) {
             activeUser.giveToClientHandler(player2Id, new End(End.RESULT.LOSE, gameID));
             activeUser.giveToClientHandler(player1Id, new End(End.RESULT.WIN, gameID));

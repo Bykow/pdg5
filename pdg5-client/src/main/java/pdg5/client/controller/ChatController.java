@@ -57,11 +57,10 @@ public class ChatController {
     public void displayChat(List<Chat> chat, Game game) {
         cleanChat();
         addMessage(new ChatMessage(ChatMessage.Type.TIME, game.getCreated().toString()));
-        if (chat != null) {
-            for (Chat c : chat) {
-                addChat(c);
-            }
+        for (Chat c : chat) {
+            addChat(c);
         }
+
     }
 
     public void addChat(Chat c) {

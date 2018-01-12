@@ -125,9 +125,9 @@ public class MainController extends AbstractController {
     }
 
     public GameController getGameController() {
-        if(gameController == null)
-            System.out.println("Trying to load a game board");
+        if (gameController == null) {
             loadGame();
+        }
         return gameController;
     }
 
@@ -136,8 +136,9 @@ public class MainController extends AbstractController {
     }
 
     public ChatController getChatController() {
-        if(chatController == null)
+        if (chatController == null) {
             loadChat();
+        }
         return chatController;
     }
 

@@ -338,6 +338,7 @@ public class GameController extends AbstractController {
                     switch (result) {
                         case WIN:
                             remainingTiles.setText(String.valueOf(ENDWIN));
+                            break;
                         case LOSE:
                             remainingTiles.setText(String.valueOf(ENDLOSE));
                             break;

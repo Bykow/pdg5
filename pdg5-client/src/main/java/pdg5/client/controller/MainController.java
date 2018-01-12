@@ -78,7 +78,7 @@ public class MainController extends AbstractController {
             loader.setLocation(MainController.class.getResource("/fxml/gameView.fxml"));
             loader.setController(gameController);
             layout = loader.load();
-            gameContainer.getChildren().setAll(layout);
+            gameContainer.getChildren().add(layout);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -91,7 +91,7 @@ public class MainController extends AbstractController {
             loader.setLocation(MainController.class.getResource("/fxml/lobyView.fxml"));
             loader.setController(lobyController);
             layout = loader.load();
-            lobyContainer.getChildren().setAll(layout);
+            lobyContainer.getChildren().add(layout);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -118,15 +118,15 @@ public class MainController extends AbstractController {
             loader.setLocation(MainController.class.getResource("/fxml/chatView.fxml"));
             loader.setController(chatController);
             layout = loader.load();
-            Platform.runLater(()->chatContainer.getChildren().setAll(layout));
+            Platform.runLater(()->chatContainer.getChildren().add(layout));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public GameController getGameController() {
-        if (!gameContainer.getChildren().get(0).isVisible()) {
-            gameContainer.getChildren().get(0).setVisible(true);
+        if (!gameContainer.getChildren().get(1).isVisible()) {
+            gameContainer.getChildren().get(1).setVisible(true);
         }
         return gameController;
     }
@@ -136,8 +136,8 @@ public class MainController extends AbstractController {
     }
 
     public ChatController getChatController() {
-        if (!chatContainer.getChildren().get(0).isVisible()) {
-            chatContainer.getChildren().get(0).setVisible(true);
+        if (!chatContainer.getChildren().get(1).isVisible()) {
+            chatContainer.getChildren().get(1).setVisible(true);
         }
         return chatController;
     }

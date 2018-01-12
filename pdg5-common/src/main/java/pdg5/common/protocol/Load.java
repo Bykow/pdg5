@@ -1,6 +1,7 @@
 package pdg5.common.protocol;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,8 +15,8 @@ public class Load extends Message {
     /**
      * List of available games a player have (even finished ones)
      */
-    private List<Game> games;
-    private Map<Integer, List<Chat> > historic;
+    private final List<Game> games;
+    private final Map<Integer, List<Chat> > historic;
 
     /**
      * Constructor
@@ -32,6 +33,7 @@ public class Load extends Message {
      */
     public Load() {
         this.games = new ArrayList<>();
+        historic = new HashMap<>();
     }
 
     /**

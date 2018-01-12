@@ -31,7 +31,6 @@ public class ClientRequestManager {
         } else if (o instanceof Chat) {
             return new ProcessChat((Chat) o, mainController).execute();
         } else if (o instanceof End) {
-            System.out.println("HAKDKJFLKSJDFLKSDJFLKSDJFLKSDFJLKSDFJLKSDsdfsffsfsfdfJFF");
             return new ProcessEnd((End) o, mainController).execute();
         }
 

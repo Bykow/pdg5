@@ -28,20 +28,20 @@ public class Game extends Message {
     private final int scoreLastWordPlayed;
     private final boolean yourTurn;
 
-   public enum RESULT {
-      NONE, WIN, LOSE, EQUALITY
-   }
+    public enum RESULT {
+        NONE, WIN, LOSE, EQUALITY
+    }
 
-   public RESULT getResult() {
-      return result;
-   }
+    public RESULT getResult() {
+        return result;
+    }
 
-   public void setResult(RESULT result) {
-      this.result = result;
-   }
-    
+    public void setResult(RESULT result) {
+        this.result = result;
+    }
+
     private RESULT result;
-    
+
     private State state;
 
     public Game(int ID, Date created, Date lastActivity,
@@ -140,13 +140,13 @@ public class Game extends Message {
     public void setState(State state) {
         this.state = state;
     }
-    
+
     public List<Square> getSquare(){
-       return Arrays.asList(board.getComposition().getSquare());
+        return Arrays.asList(board.getComposition().getSquare());
     }
-    
+
     public List<Square> getOpponentSquare(){
-       return Arrays.asList(opponentBoard.getComposition().getSquare());
+        return Arrays.asList(opponentBoard.getComposition().getSquare());
     }
 
     public String toString() {

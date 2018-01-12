@@ -182,6 +182,7 @@ public class LobyController extends AbstractController {
     public void gameIsFinished(End end) {
         mainController.getGameController().displayEnd(end);
         getGameFromId(end.getIdGame()).setState(GameModel.State.FINISHED);
+        getGameFromId(end.getIdGame()).setResult(end.getResult());
         Platform.runLater(this::refresh);
     }
 }

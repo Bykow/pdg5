@@ -78,7 +78,7 @@ public class MainController extends AbstractController {
             loader.setLocation(MainController.class.getResource("/fxml/gameView.fxml"));
             loader.setController(gameController);
             layout = loader.load();
-            gameContainer.getChildren().setAll(layout);
+            Platform.runLater(()->gameContainer.getChildren().setAll(layout));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -118,7 +118,7 @@ public class MainController extends AbstractController {
             loader.setLocation(MainController.class.getResource("/fxml/chatView.fxml"));
             loader.setController(chatController);
             layout = loader.load();
-            chatContainer.getChildren().setAll(layout);
+            Platform.runLater(()->chatContainer.getChildren().setAll(layout));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -156,11 +156,9 @@ public class LobyController extends AbstractController {
             mainController.getGameController().updateGame(game);
         }
 
-//        if (!historic.containsKey(game.getID()) || historic.get(game.getID()) == null) {
-//            historic.put(game.getID(), new ArrayList<>());
-//        } else {
-//            historic.get(game.getID()).add(mainController.getGameController().constructLogLastPlayed(game));
-//        }
+        if (!historic.containsKey(game.getID()) || historic.get(game.getID()) == null) {
+            historic.put(game.getID(), new ArrayList<>());
+        }
 
         Platform.runLater(this::refresh);
     }

@@ -126,6 +126,7 @@ public class MainController extends AbstractController {
 
     public GameController getGameController() {
         if(gameController == null)
+            System.out.println("Trying to load a game board");
             loadGame();
         return gameController;
     }

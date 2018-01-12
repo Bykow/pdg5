@@ -267,7 +267,6 @@ public class GameController extends AbstractController {
         if(!g.isYourTurn()) {
             btnPlay.setDisable(true);
             btnDiscard.setDisable(true);
-            //mainController.getChatController().addChat(constructLogLastPlayed(g));
         } else {
             btnPlay.setDisable(false);
             btnDiscard.setDisable(false);

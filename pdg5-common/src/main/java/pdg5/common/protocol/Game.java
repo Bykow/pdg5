@@ -8,6 +8,7 @@ import pdg5.common.game.Tile;
 import java.util.Date;
 import java.util.List;
 import pdg5.common.game.Composition.Square;
+import pdg5.common.game.Result;
 
 /**
  * @author Maxime Guillod
@@ -28,19 +29,15 @@ public class Game extends Message {
     private final int scoreLastWordPlayed;
     private final boolean yourTurn;
 
-   public enum RESULT {
-      NONE, WIN, LOSE, EQUALITY
-   }
-
-   public RESULT getResult() {
+   public Result getResult() {
       return result;
    }
 
-   public void setResult(RESULT result) {
+   public void setResult(Result result) {
       this.result = result;
    }
     
-    private RESULT result;
+    private Result result;
     
     private State state;
 
@@ -58,7 +55,7 @@ public class Game extends Message {
         this.scoreLastWordPlayed = scoreLastWordPlayed;
         this.yourTurn = yourTurn;
         this.state = state;
-        this.result = RESULT.NONE;
+        this.result = Result.NONE;
     }
 
     /**

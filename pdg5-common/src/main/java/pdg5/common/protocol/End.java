@@ -1,5 +1,7 @@
 package pdg5.common.protocol;
 
+import pdg5.common.game.Result;
+
 /**
  * Class sent through the connection by the server, 
  * to indicate the result of an ended game.
@@ -9,13 +11,6 @@ package pdg5.common.protocol;
 public class End extends Message {
    
    /**
-    * result possibilities
-    */
-   public enum RESULT {
-      WIN, LOSE, EQUALITY
-   }
-   
-   /**
     * unique id of the game we are updating
     */
    private int idGame;
@@ -23,7 +18,7 @@ public class End extends Message {
    /**
     * current result of the game
     */
-   private final RESULT result;
+   private final Result result;
    
    /**
     * Constructor
@@ -31,7 +26,7 @@ public class End extends Message {
     * @param result finish result of the game
     * @param idGame unique id of the game
     */
-   public End(RESULT result, int idGame) {
+   public End(Result result, int idGame) {
       this.result = result;
       this.idGame = idGame;
    }
@@ -41,7 +36,7 @@ public class End extends Message {
     * 
     * @return the result of the game
     */
-   public RESULT getResult() {
+   public Result getResult() {
       return result;
    }
 

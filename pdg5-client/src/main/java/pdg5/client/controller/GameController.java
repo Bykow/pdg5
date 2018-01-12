@@ -19,6 +19,7 @@ import pdg5.common.protocol.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import pdg5.common.game.Result;
 
 public class GameController extends AbstractController {
 
@@ -348,7 +349,7 @@ public class GameController extends AbstractController {
         );
     }
 
-    public void displayEndState(Game.RESULT result) {
+    public void displayEndState(Result result) {
         Platform.runLater(() -> {
                     switch (result) {
                         case WIN:

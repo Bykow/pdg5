@@ -425,6 +425,20 @@ public class GameController {
         } else { // send next turn
             tm.turnEnded();
 
+            ManageGame manageGame = activeUser.getDatabaseManagers(playerID).getManageGame();
+            ManageUser manageUser = activeUser.getDatabaseManagers(playerID).getManageUser();
+
+            // update the DB game
+            pdg5.server.persistent.Game game
+                    = manageGame.getGamesByUser(manageUser.getUserById(playerID))
+                            .stream()
+                            .filter((f) -> f.id == gameID)
+                            .findAny()
+                            .get();
+            game.setGameState(model);
+            game.setTurnManager(tm);
+            manageGame.updateGame(game);
+
             int opponentId = model.getOpponentBoardById(playerID).getPlayerId();
             activeUser.giveToClientHandler(opponentId, getGameFromModel(gameID, opponentId));
             return getGameFromModel(gameID, playerID);

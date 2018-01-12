@@ -13,10 +13,7 @@ import pdg5.client.ClientSender;
 import pdg5.client.view.GTile;
 import pdg5.common.game.Composition;
 import pdg5.common.game.Tile;
-import pdg5.common.protocol.Chat;
-import pdg5.common.protocol.Game;
-import pdg5.common.protocol.Pass;
-import pdg5.common.protocol.Play;
+import pdg5.common.protocol.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,6 +24,9 @@ public class GameController extends AbstractController {
     private static final DataFormat tileFormat = new DataFormat("tile.model");
     private final String LEFTTILESINGLE = " tuille restante";
     private final String LEFTTILEPLURAL = " tuilles restantes";
+    private final String ENDWIN = "Bravo ! Tu as gagné la partie !";
+    private final String ENDLOSE = "Tu as perdu la partie... ";
+    private final String ENDEQUALITY = "La partie est une équalité !";
 
     @FXML
     private List<StackPane> deckList;
@@ -333,8 +333,28 @@ public class GameController extends AbstractController {
         cleanList(adversaryList);
     }
 
-    private Chat constructLogLastPlayed(Game g) {
+    public Chat constructLogLastPlayed(Game g) {
         String temp = mainController.upperCaseFirstLetter(g.getNamePlayer()) + " a joué " + Tile.tilesToString(g.getLastWordPlayed()) + " pour " + g.getScoreLastWordPlayed() + " points.";
         return new Chat(temp, gameID, Chat.SENDER.USER);
+    }
+
+    public void displayEnd(End end) {
+        cleanList(deckList);
+        cleanList(userList);
+        cleanList(adversaryList);
+        cleanList(adversaryBonusList);
+        Platform.runLater(() -> {
+                    switch (end.getResult()) {
+                        case WIN:
+                            remainingTiles.setText(String.valueOf(ENDWIN));
+                        case LOSE:
+                            remainingTiles.setText(String.valueOf(ENDLOSE));
+                            break;
+                        case EQUALITY:
+                            remainingTiles.setText(String.valueOf(ENDEQUALITY));
+                            break;
+                    }
+                }
+        );
     }
 }

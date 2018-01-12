@@ -29,6 +29,8 @@ public class ClientRequestManager {
             return new ProcessGame((Game) o, mainController).execute();
         } else if (o instanceof Chat) {
             return new ProcessChat((Chat) o, mainController).execute();
+        } else if (o instanceof End) {
+            return new ProcessEnd((End) o, mainController).execute();
         }
 
         return new ErrorMessage("Unable to check Message Type");

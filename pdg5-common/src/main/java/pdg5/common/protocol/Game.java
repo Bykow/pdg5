@@ -27,6 +27,7 @@ public class Game extends Message {
     private List<Tile> lastWordPlayed;
     private int scoreLastWordPlayed;
     private boolean yourTurn;
+
     private State state;
 
     public Game(int ID, Date created, Date lastActivity,
@@ -120,6 +121,10 @@ public class Game extends Message {
 
     public State getState() {
         return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
     }
     
     public List<Square> getSquare(){

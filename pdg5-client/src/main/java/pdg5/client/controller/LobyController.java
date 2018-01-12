@@ -156,15 +156,19 @@ public class LobyController extends AbstractController {
             mainController.getGameController().updateGame(game);
         }
 
-        if (!historic.containsKey(game.getID())) {
+        if (!historic.containsKey(game.getID()) || historic.get(game.getID()) == null) {
             historic.put(game.getID(), new ArrayList<>());
+        } else {
+            historic.get(game.getID()).add(mainController.getGameController().constructLogLastPlayed(game));
         }
 
         Platform.runLater(this::refresh);
     }
 
     public void updateChat(Chat chat) {
-        if (historic != null) {
+        if (!historic.containsKey(chat.getGameId()) || historic.get(chat.getGameId()) == null) {
+            historic.put(chat.getGameId(), Collections.singletonList(chat));
+        } else {
             historic.get(chat.getGameId()).add(chat);
             if (chat.getGameId() == UserInformations.getInstance().getIdGameDisplayed()) {
                 mainController.getChatController().addChat(chat);
@@ -174,5 +178,11 @@ public class LobyController extends AbstractController {
 
     public Game getGameFromId(int id) {
         return gameModelList.stream().filter((o) -> o.getID() == id).findAny().get();
+    }
+
+    public void gameIsFinished(End end) {
+        mainController.getGameController().displayEnd(end);
+        getGameFromId(end.getIdGame()).setState(GameModel.State.FINISHED);
+        Platform.runLater(this::refresh);
     }
 }

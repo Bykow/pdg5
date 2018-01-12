@@ -527,7 +527,7 @@ public class GameController {
 
         //check if the game exist
         GameModel model = games.get(gameID);
-        if (model == null || model.getState() != State.IN_PROGRESS) {
+        if (model == null || model.getState() == State.FINISHED) {
             return new ErrorMessage("Cette partie n'existe plus ou a été terminée");
         }
 

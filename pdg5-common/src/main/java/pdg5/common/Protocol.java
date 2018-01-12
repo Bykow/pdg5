@@ -8,8 +8,8 @@ public interface Protocol {
     /**
      * Socket
      */
-//    final String DEFAULT_SERVER = "10.192.92.144";
-    final String DEFAULT_SERVER = "localhost"; // modify for tests
+    final String DEFAULT_SERVER = "10.192.92.144";
+//    final String DEFAULT_SERVER = "localhost"; // modify for tests
     final int DEFAULT_PORT = 44555;
 
     final int NUMBER_OF_TUILES_PER_PLAYER = 7;

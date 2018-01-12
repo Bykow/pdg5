@@ -650,14 +650,14 @@ public class GameController {
         System.out.println("Sending end Messages");
         
         if (board.getScore() > boardOpponent.getScore()) {
-            activeUser.giveToClientHandler(player2Id, new End(End.RESULT.LOSE, gameID));
-            activeUser.giveToClientHandler(player1Id, new End(End.RESULT.WIN, gameID));
+            activeUser.giveToClientHandler(player1Id, new End(End.Result.WIN, gameID));
+            activeUser.giveToClientHandler(player2Id, new End(End.Result.LOSE, gameID));
         } else if (board.getScore() < boardOpponent.getScore()) {
-            activeUser.giveToClientHandler(player2Id, new End(End.RESULT.WIN, gameID));
-            activeUser.giveToClientHandler(player1Id, new End(End.RESULT.LOSE, gameID));
+            activeUser.giveToClientHandler(player1Id, new End(End.Result.LOSE, gameID));
+            activeUser.giveToClientHandler(player2Id, new End(End.Result.WIN, gameID));
         } else {
-            activeUser.giveToClientHandler(player2Id, new End(End.RESULT.EQUALITY, gameID));
-            activeUser.giveToClientHandler(player1Id, new End(End.RESULT.EQUALITY, gameID));
+            activeUser.giveToClientHandler(player2Id, new End(End.Result.EQUALITY, gameID));
+            activeUser.giveToClientHandler(player1Id, new End(End.Result.EQUALITY, gameID));
         }
     }
 

@@ -8,6 +8,7 @@ import pdg5.common.game.Tile;
 import java.util.Date;
 import java.util.List;
 import pdg5.common.game.Composition.Square;
+import pdg5.common.game.Result;
 
 /**
  * @author Maxime Guillod
@@ -58,7 +59,7 @@ public class Game extends Message {
         this.scoreLastWordPlayed = scoreLastWordPlayed;
         this.yourTurn = yourTurn;
         this.state = state;
-        this.result = RESULT.NONE;
+        this.result = Result.NONE;
     }
 
     /**

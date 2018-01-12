@@ -198,18 +198,17 @@ public class GameController {
      */
     public Map<Integer, List<Chat>> getAllChatsOfPlayer(int playerID) {
         Map<Integer, List<Chat>> map = new HashMap<>();
-        try {
-            List<Integer> userGames = clientGames.get(playerID);
-            userGames.forEach((idGame) -> {
-                List<Chat> chatList = new ArrayList<>();
-                chats.get(idGame).forEach((chatServerSide) -> {
+        List<Integer> userGames = clientGames.get(playerID);
+        userGames.forEach((idGame) -> {
+            List<Chat> chatList = new ArrayList<>();
+            List<ChatServerSide> messagesChat = chats.get(idGame);
+            if (messagesChat != null) {
+                messagesChat.forEach((chatServerSide) -> {
                     chatList.add(chatServerToChat(playerID, chatServerSide));
                 });
-                map.put(idGame, chatList);
-            });
-        } catch (NullPointerException ex) {
-            System.err.println("No chat found");
-        }
+            }
+            map.put(idGame, chatList);
+        });
 
         return map;
     }
@@ -407,17 +406,17 @@ public class GameController {
         //check if the game exist
         GameModel model = games.get(gameID);
         if (model == null || model.getState() != State.IN_PROGRESS) {
-            return new ErrorMessage("This game doesn't exist anymore or has never existed or is finish");
+            return new ErrorMessage("Cette partie n'existe plus ou a été terminée");
         }
 
         //check if it's player's turn
         TurnManager tm = playerTurnManager.get(gameID);
         if (!tm.isCurrentPlayer(playerID)) {
-            return new ErrorMessage("It's not your turn !");
+            return new ErrorMessage("Ce n'est pas votre tour !");
         }
 
         // empty the last word played as there is none
-        model.setLastWordPlayed(new ArrayList<Tile>());
+        model.setLastWordPlayed(new ArrayList<>());
 
         // throw Tiles or pass depending on the game context
         TileStack ts = tileStacks.get(gameID);

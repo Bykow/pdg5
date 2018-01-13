@@ -3,8 +3,6 @@ package pdg5.common.protocol;
 /**
  * Class sent by the client to the server to tell him he want to pass or throw
  * depending on the context of the game
- * 
- * @author Jimmy Verdasca
  */
 public class Pass extends Message {
    

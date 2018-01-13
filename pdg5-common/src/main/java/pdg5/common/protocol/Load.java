@@ -6,9 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author Maxime Guillod
  * Class sent through the connection by the server representing
- * the list of available games a player have.
+ * the list of available games a player have
  */
 public class Load extends Message {
 
@@ -16,12 +15,17 @@ public class Load extends Message {
      * List of available games a player have (even finished ones)
      */
     private final List<Game> games;
+    
+    /**
+     * the chat historic of this game
+     */
     private final Map<Integer, List<Chat> > historic;
 
     /**
      * Constructor
+     * 
      * @param games list of available games
-     * @param historic
+     * @param historic the chat historic
      */
     public Load(List<Game> games, Map<Integer, List<Chat> > historic) {
         this.games = games;
@@ -56,6 +60,11 @@ public class Load extends Message {
     }
 
 
+    /**
+     * return the map containing all the historic of games
+     * 
+     * @return the map containing all the historic of games
+     */
     public Map<Integer, List<Chat>> getHistoric() {
         return historic;
     }

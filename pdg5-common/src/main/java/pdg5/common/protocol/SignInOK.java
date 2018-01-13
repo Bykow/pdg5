@@ -1,7 +1,6 @@
 package pdg5.common.protocol;
 
 /**
- * @author Maxime Guillod
  * class sent through the connection 
  * to inform the client the log in went successfully
  */

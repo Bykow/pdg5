@@ -2,8 +2,6 @@ package pdg5.common.protocol;
 
 /**
  * Class use to login into our application
- *
- * @author Maxime Guillod
  */
 public class SignIn extends Message {
 
@@ -30,6 +28,7 @@ public class SignIn extends Message {
 
     /**
      * return the username used to log in
+     * 
      * @return the username used to log in
      */
     public String getUsername() {

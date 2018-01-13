@@ -1,8 +1,7 @@
 package pdg5.common.protocol;
 
 /**
- * Message ignored by the controllers, allow to end a request-answer-request chain
- * @author Jimmy Verdasca
+ * Message ignored by the controllers, allow to end a request-answer-request-etc chain
  */
 public class Noop extends Message {
 

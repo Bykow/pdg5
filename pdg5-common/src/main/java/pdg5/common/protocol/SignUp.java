@@ -2,8 +2,6 @@ package pdg5.common.protocol;
 
 /**
  * Class use to register
- *
- * @author Maxime Guillod
  */
 public class SignUp extends Message {
 
@@ -62,6 +60,11 @@ public class SignUp extends Message {
         return password;
     }
 
+    /**
+     * override the print of this class for easier debug in client
+     * 
+     * @return a string with the email and username used to sign up
+     */
    @Override
    public String toString() {
       return "SignUp{" + "email=" + email + ", username=" + username + '}';

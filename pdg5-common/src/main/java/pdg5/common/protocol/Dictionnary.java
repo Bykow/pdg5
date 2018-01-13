@@ -6,8 +6,6 @@ import pdg5.common.TST;
  * Class sent through the connection after a log in or log up
  * it contains the wordCombination 
  * that allow the client to check by his own the validity of the word
- * 
- * @author Jimmy Verdasca
  */
 public class Dictionnary extends Message {
    

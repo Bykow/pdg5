@@ -62,7 +62,7 @@ public class GameControllerTest {
       assertTrue(result2 instanceof Game);
       
       assertEquals(((Game)result2).getScore(), 0); // score of player begin at 0
-      assertEquals(((Game)result2).getAddedTile().size(), 7); // reveice 7 random Tiles
+      assertEquals(((Game)result2).getLetters().size(), 7); // reveice 7 random Tiles
       assertEquals(((Game)result2).getBonusLetters().size(), 2); // reveice 2 random bonus Tiles
       assertNotNull(((Game)result2).getCreated()); // the Creation Date exist
       assertEquals(((Game)result2).getID(), 0); // the first ID game should be 0

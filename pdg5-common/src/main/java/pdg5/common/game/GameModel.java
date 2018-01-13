@@ -94,7 +94,7 @@ public class GameModel implements Serializable {
       int p2 = PlayerBoard.PLAYER2.ordinal();
       boards[p1] = new Board(game.getNamePlayer(), 1); 
       boards[p2] = new Board(game.getOpponentName(), 2);
-      boards[p1].setLetters(game.getAddedTile());
+      boards[p1].setLetters(game.getLetters());
       boards[p1].setScore(game.getScore());
       boards[p2].setScore(game.getOpponentScore());
       

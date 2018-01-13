@@ -251,7 +251,7 @@ public class GameController extends AbstractController {
 
     private void updatePlayer(Game g) {
         updateComposition(userList, g.getSquare());
-        updateList(g.getAddedTile(), deckList);
+        updateList(g.getLetters(), deckList);
         updateList(g.getBonusLetters(), userBonusList);
         updateOpponentComposition(g.isYourTurn(), g.getLastWordPlayed(), adversaryList, g.getOpponentSquare());
         updateList(g.getOpponentBonusLetters(), adversaryBonusList);

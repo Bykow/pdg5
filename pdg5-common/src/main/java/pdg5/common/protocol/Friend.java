@@ -1,19 +1,23 @@
 package pdg5.common.protocol;
 
 /**
- * @author Jimmy Verdasca
- * 
  * Class sent through the connection  by the client 
  * to let him manipulate his friend list or black list.
  */
 public class Friend extends Message {
    
-   // This enum specify the signification of this Friend instance
+   /**
+    * This enum specify the signification of this Friend instance
+    * ADD_FRIEND,       Add a favorite player
+    * REMOVE_FRIEND,    Remove a favorite player
+    * ADD_BLACKLIST,    Add a player to the BlackList
+    * REMOVE_BLACKLIST  Remove a player to the BlackList
+    */
    public enum TYPE {
-      ADD_FRIEND,       // Add a favorite player
-      REMOVE_FRIEND,    // Remove a favorite player
-      ADD_BLACKLIST,    // Add a player to the BlackList
-      REMOVE_BLACKLIST  // Remove a player to the BlackList
+      ADD_FRIEND,
+      REMOVE_FRIEND,
+      ADD_BLACKLIST, 
+      REMOVE_BLACKLIST  
    }
    
    /**

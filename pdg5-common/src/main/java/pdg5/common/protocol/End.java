@@ -3,10 +3,8 @@ package pdg5.common.protocol;
 import pdg5.common.game.Result;
 
 /**
- * Class sent through the connection by the server, 
- * to indicate the result of an ended game.
- * 
- * @author Jimmy Verdasca
+ * Class sent through the connection by the server
+ * to indicate the result of an ended game
  */
 public class End extends Message {
    

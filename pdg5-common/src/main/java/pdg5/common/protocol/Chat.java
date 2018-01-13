@@ -3,15 +3,21 @@ package pdg5.common.protocol;
 import java.util.Date;
 
 /**
- * Class sended through the connection by a client or the server representing,
+ * Class sent through the connection by a client or the server representing,
  * a chat message
  */
 public class Chat extends Message {
 
+   /**
+    * enum representing the type of the person who created this Chat originally
+    */
    public enum SENDER {
       USER, OPPONENT, SERVER
    }
    
+   /**
+    * the type of the person who created this Chat originally
+    */
    private SENDER sender;
    
    /**
@@ -39,6 +45,13 @@ public class Chat extends Message {
         this(message, gameId, new Date().getTime(), SENDER.USER);
     }
 
+    /**
+     * Constructor for client creating new messages
+     * 
+     * @param message the message or historic we want to send
+     * @param gameId the unique ID of the message
+     * @param sender the type of the person who created this Chat originally
+     */
     public Chat(String message, int gameId, SENDER sender) {
         this(message, gameId, new Date().getTime(), sender);
     }
@@ -49,6 +62,7 @@ public class Chat extends Message {
      * @param message the message or historic we want to send
      * @param gameId the unique ID of the message
      * @param timeStamp date of the message creation
+     * @param sender the type of the person who created this Chat originally
      */
     public Chat(String message, int gameId, long timeStamp, SENDER sender) {
         this.message = message;

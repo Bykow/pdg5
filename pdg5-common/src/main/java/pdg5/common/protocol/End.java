@@ -49,6 +49,13 @@ public class End extends Message {
       return idGame;
    }
    
+   /**
+    * override the print of this class, for easier debug in client
+    * it return a string with only the result
+    * 
+    * @return a string with only the result
+    */
+   @Override
    public String toString() {
       return result.toString();
    }

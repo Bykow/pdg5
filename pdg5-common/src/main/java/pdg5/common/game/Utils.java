@@ -1,7 +1,7 @@
 package pdg5.common.game;
 
 /**
- * Class who stock constants by the model in whole project
+ * Class that stock constants by the model in whole project
  */
 public class Utils {
    public static final int WORD_MAX_SIZE = 7;

@@ -18,7 +18,7 @@ public class GameModel implements Serializable {
    public enum PlayerBoard {
       PLAYER1, PLAYER2
    }
-   
+
    /**
     * enum to identifiate the State of the game
     */
@@ -28,12 +28,12 @@ public class GameModel implements Serializable {
 
    private int scoreLastWordPlayed;
    private List<Tile> lastWordPlayed;
-   
+
    /**
     * Unique id of the game
     */
-   private int gameId; 
-   
+   private int gameId;
+
    /**
     * current state of the game
     */
@@ -43,17 +43,17 @@ public class GameModel implements Serializable {
     * unique id of the Tournament, 0 if it is not a Tournament
     */
    private int idTournament;
-   
+
    /**
     * Two parts of the game one for each player
     */
-   private Board[] boards; 
-   
+   private Board[] boards;
+
    /**
     * Date when the game as been created
     */
    private final Date creation;
-   
+
    /**
     * Date of the last word played by a player
     */
@@ -84,7 +84,7 @@ public class GameModel implements Serializable {
 
    /**
     * Constructor
-    * 
+    *
     * @param game Game used to build the GameModel
     */
    public GameModel(pdg5.common.protocol.Game game) {
@@ -92,25 +92,25 @@ public class GameModel implements Serializable {
       boards = new Board[PlayerBoard.values().length];
       int p1 = PlayerBoard.PLAYER1.ordinal();
       int p2 = PlayerBoard.PLAYER2.ordinal();
-      boards[p1] = new Board(game.getNamePlayer(), 1); 
+      boards[p1] = new Board(game.getNamePlayer(), 1);
       boards[p2] = new Board(game.getOpponentName(), 2);
       boards[p1].setLetters(game.getAddedTile());
       boards[p1].setScore(game.getScore());
       boards[p2].setScore(game.getOpponentScore());
-      
+
       if(game.isYourTurn()) {
          boards[p1].setBonus(game.getBonusLetters());
       } else {
          boards[p1].setBonus(game.getBonusLetters());
       }
-      
+
       creation = game.getCreated();
       idTournament = game.getTournament();
       lastMove = game.getLastActivity();
       lastWordPlayed = game.getLastWordPlayed();
       scoreLastWordPlayed = game.getScoreLastWordPlayed();
       state = game.getState();
-      
+
    }
 
    /**
@@ -158,7 +158,7 @@ public class GameModel implements Serializable {
       }
       throw new IllegalArgumentException("the playerId is not in the game");
    }
-   
+
    public Board getOpponentBoardById(int playerId){
       Board opponentBoard = null;
       Boolean isPlayer = false;
@@ -219,7 +219,7 @@ public class GameModel implements Serializable {
 
    /**
     * return the last word that a player has play
-    * 
+    *
     * @return the last word that a player has play
     */
    public List<Tile> getLastWordPlayed() {
@@ -228,7 +228,7 @@ public class GameModel implements Serializable {
 
    /**
     * return the score of the last played word by a player
-    * 
+    *
     * @return the score of the last played word by a player
     */
    public int getScoreLastWordPlayed() {
@@ -250,7 +250,7 @@ public class GameModel implements Serializable {
    public void setState(State state) {
       this.state = state;
    }
-   
+
    /**
     * compare a GameModel with an Object and return true if they have same fields and
     * Class
@@ -261,10 +261,10 @@ public class GameModel implements Serializable {
    @Override
    public boolean equals(Object o) {
       return getClass().isInstance(o)
-         && getClass() == o.getClass()
-         && boards[PlayerBoard.PLAYER1.ordinal()].equals(((GameModel) o).boards[PlayerBoard.PLAYER1.ordinal()])
-         && boards[PlayerBoard.PLAYER2.ordinal()].equals(((GameModel) o).boards[PlayerBoard.PLAYER2.ordinal()])
-         && gameId == ((GameModel) o).gameId;
+              && getClass() == o.getClass()
+              && boards[PlayerBoard.PLAYER1.ordinal()].equals(((GameModel) o).boards[PlayerBoard.PLAYER1.ordinal()])
+              && boards[PlayerBoard.PLAYER2.ordinal()].equals(((GameModel) o).boards[PlayerBoard.PLAYER2.ordinal()])
+              && gameId == ((GameModel) o).gameId;
    }
 
    /**

@@ -1,14 +1,13 @@
 package pdg5.common;
 
 /**
- * Created on 03.10.17 by Bykow
+ * Constants for client and server
  */
 public interface Protocol {
 
     /**
      * Socket
      */
-//    final String DEFAULT_SERVER = "10.192.92.144";
     final String DEFAULT_SERVER = "localhost"; // modify for tests
     final int DEFAULT_PORT = 44555;
 

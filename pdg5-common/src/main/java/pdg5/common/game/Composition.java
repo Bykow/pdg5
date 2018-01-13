@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-
 /**
  * Class representing the Tiles that the user is currently 
  * manipulating to make and to send to the server a word.
@@ -76,7 +75,7 @@ public class Composition implements Serializable{
       };
       /**
        * return the new value when a Tile pass through a square
-       * 
+       *
        * @param tile put in this square
        * @return the new value when a Tile pass through a square
        */
@@ -90,10 +89,10 @@ public class Composition implements Serializable{
    }
 
    // seven or less Tiles representing the current word
-   private final Tile[] word; 
-   
+   private final Tile[] word;
+
    // seven current  bonus square where letters can obtain more values
-   private Square[] square; 
+   private Square[] square;
 
    /**
     * Constructor
@@ -102,17 +101,17 @@ public class Composition implements Serializable{
       word = new Tile[Utils.WORD_MAX_SIZE];
       square = new Square[Utils.WORD_MAX_SIZE];
    }
-   
-   
-   
+
+
+
    public Composition(Composition composition){
       word = composition.word.clone();
       square = composition.square.clone();
    }
-   
+
    /**
     * set a new Square bonus list for a turn
-    * 
+    *
     * @param bonusList the new Square bonus list for this turn
     * @throws IllegalArgumentException if the length of the given array 
     * isn't the good size (WORD_MAX_SIZE)
@@ -126,7 +125,7 @@ public class Composition implements Serializable{
 
    /**
     * add a Tile at the first free position
-    * 
+    *
     * @param tile we want to add
     * @return True if the Tile as been put or False else
     */
@@ -143,7 +142,7 @@ public class Composition implements Serializable{
    /**
     * return a String representation of the Composition 
     * with space instead of null Tile
-    * 
+    *
     * @return a String representation of the Composition 
     * with space instead of null Tile
     */
@@ -158,13 +157,13 @@ public class Composition implements Serializable{
       }
       return sb.toString().toLowerCase();
    }
-   
-   
+
+
 
    /**
     * add a Tile at a given position, works only if the position is empty
     * Return True if the Tile as been put or False else
-    * 
+    *
     * @param tile we want to add
     * @param position where we want to add the Tile
     * @return True if the Tile as been put or False else
@@ -179,7 +178,7 @@ public class Composition implements Serializable{
 
    /**
     * remove a Tile at the given position and return the removed Tile
-    * 
+    *
     * @param position where we want to remove the Tile
     * @return the removed Tile
     */
@@ -188,7 +187,7 @@ public class Composition implements Serializable{
       word[position] = null;
       return temp;
    }
-   
+
    /**
     * remove all the Tiles in the Composition
     */
@@ -200,7 +199,7 @@ public class Composition implements Serializable{
 
    /**
     * return the current value's word of the Composition
-    * 
+    *
     * @return the current value's word of the Composition
     * @throws IllegalStateException if currently the Composition 
     * don't contain a potential word
@@ -210,7 +209,7 @@ public class Composition implements Serializable{
       if(!isValid()) {
          throw new IllegalStateException("This isn't a valid word");
       }
-      
+
       int score = 0;
       // pass the letters through the square to know the real current value
       for (int i = 0; i < Utils.WORD_MAX_SIZE; i++) {
@@ -218,14 +217,14 @@ public class Composition implements Serializable{
             score += square[i].getFinalValue(word[i]);
          }
       }
-      
+
       return score;
    }
 
    /**
     * TODO not implemented yet
     * @param letterValues
-    * @return 
+    * @return
     */
    public int getValue(List<Integer> letterValues) {
       int score = 0;
@@ -237,12 +236,12 @@ public class Composition implements Serializable{
       returnList.removeAll(Collections.singleton(null));
       return returnList;
    }
-   
+
    /**
     * return true if the Composition is potentially a word 
     * It means the word begins at first square, is of length two 
     * or more and has no hole.
-    * 
+    *
     * @return true if the Composition is potentially a word, false otherwise
     */
    public boolean isValid() {
@@ -257,14 +256,14 @@ public class Composition implements Serializable{
             sizeOfWord++;
          }
       }
-      
+
       return sizeOfWord >= Utils.WORD_MIN_SIZE;
    }
-   
+
    /**
     * compare a Composition with an Object and 
     * return true if they have same fields and Class
-    * 
+    *
     * @param o Compared Object
     * @return true if the two Object is of same class and have the same fields
     */
@@ -277,7 +276,7 @@ public class Composition implements Serializable{
 
    /**
     * Hashcode mandatory for use of Equals
-    * 
+    *
     * @return the hash as int
     */
    @Override

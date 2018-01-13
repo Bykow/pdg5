@@ -15,7 +15,7 @@ public class ProcessEnd implements GenericProcess {
     /**
      * Ctor
      *
-     * @param end message End
+     * @param end            message End
      * @param mainController link to mainController
      */
     public ProcessEnd(End end, MainController mainController) {

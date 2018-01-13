@@ -49,7 +49,7 @@ public class WordCombinations {
     * Search with the occurence map letterMap, 
     * all the possible word of length lower than the given length.
     * if a word is found, we put him in the List listOfWord.
-    * 
+    *
     * @param length Max number of letters we use.
     */
    private void search(final int length) {

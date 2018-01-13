@@ -62,8 +62,6 @@ public class TileStack {
         new BufferedReader(new InputStreamReader(inputStream)).lines()
                 // Fills the map with letter and values. '0' stands for a joker
                 .forEach(s -> map.put(s.charAt(0), Integer.parseInt(s.substring(5,7))));
-
-        System.out.println("Number of letters : " + letters.length());
         
         letters.chars()
                 .mapToObj(c -> (char) c)
@@ -74,7 +72,6 @@ public class TileStack {
                 });
         
         tileLeft = size;
-        System.out.println("Size of Stack : " + size);
     }
 
     /**

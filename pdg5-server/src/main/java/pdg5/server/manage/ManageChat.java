@@ -5,8 +5,18 @@ import pdg5.server.persistent.Game;
 import pdg5.server.persistent.Tournament;
 
 import java.util.List;
+import org.hibernate.Session;
 
 public class ManageChat extends Manager {
+
+    public ManageChat(){
+        super();
+    }
+    
+    public ManageChat(Session session) {
+        super(session);
+    }
+    
 	public Chat addChatTournament(Tournament tournament) {
 		Chat chat = new Chat();
 		chat.setTournament(tournament);

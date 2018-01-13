@@ -12,6 +12,14 @@ import java.util.List;
 
 public class ManageGame extends Manager {
 
+    public ManageGame(){
+        super();
+    }
+    
+    public ManageGame(Session session) {
+        super(session);
+    }
+
    public Game addGame(String title, User player1, User player2, Tournament tournament, String remainingLetters) {
       Game game = new Game();
       game.setTitle(title);

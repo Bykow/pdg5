@@ -8,10 +8,12 @@ import javax.net.ssl.SSLSocket;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import org.hibernate.Session;
 import pdg5.server.manage.ManageChat;
 import pdg5.server.manage.ManageGame;
 import pdg5.server.manage.ManageMessage;
 import pdg5.server.manage.ManageUser;
+import pdg5.server.manage.Manager;
 
 /**
  * @author Maxime Guillod
@@ -128,10 +130,13 @@ public class ClientHandler implements Runnable {
         private final ManageMessage manageMessage;
 
         public DatabaseManagers() {
-            this.manageUser = new ManageUser();
-            this.manageGame = new ManageGame();
-            this.manageChat = new ManageChat();
-            this.manageMessage = new ManageMessage();
+            
+            Session session = new Manager().getSession();
+            
+            this.manageUser = new ManageUser(session);
+            this.manageGame = new ManageGame(session);
+            this.manageChat = new ManageChat(session);
+            this.manageMessage = new ManageMessage(session);
         }
 
         public ManageUser getManageUser() {

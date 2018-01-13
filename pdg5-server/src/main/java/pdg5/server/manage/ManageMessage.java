@@ -6,8 +6,18 @@ import pdg5.server.persistent.User;
 
 import java.util.Date;
 import java.util.List;
+import org.hibernate.Session;
 
 public class ManageMessage extends Manager {
+
+    public ManageMessage() {
+        super();
+    }
+    
+    public ManageMessage(Session session) {
+        super(session);
+    }
+    
 	public Message addMessage(String content, User user, Chat chat) {
 		return (Message) addToDB(new Message(chat,user,content,new Date()));
 	}

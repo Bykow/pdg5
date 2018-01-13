@@ -34,7 +34,7 @@ public class GameController {
      * Schedular that each minutes check if the games are outdated
      */
     private final ScheduledExecutorService checkGamesOutdatedScheduler;
-    
+
     private final static int KEY_CHATS = 9999;
 
     /**
@@ -47,7 +47,7 @@ public class GameController {
      */
     private static final int TILE_LEFT_END_MODE_HARD = 2;
     private static final int TILE_LEFT_END_MODE_LAZY = 10;
-    
+
     private static final int TILE_THROWN = 2;
 
     /**
@@ -132,8 +132,6 @@ public class GameController {
 
         ManageGame manageGame = activeUser.getDatabaseManagers(idPlayer).getManageGame();
         ManageUser manageUser = activeUser.getDatabaseManagers(idPlayer).getManageUser();
-        ManageChat manageChat = activeUser.getDatabaseManagers(idPlayer).getManageChat();
-        ManageMessage manageMessage = activeUser.getDatabaseManagers(idPlayer).getManageMessage();
 
         User user = manageUser.getUserById(idPlayer);
 
@@ -146,16 +144,17 @@ public class GameController {
                 .peek((g) -> games.put(g.getGameId(), g))
                 .map(GameModel::getGameId).collect(Collectors.toList()));
 
-        for (pdg5.server.persistent.Game game : listGameOfPlayer) {
-           if(!chats.containsKey(game.getId())) {
-              Set<pdg5.server.persistent.Message> messages = game.getChats().stream().findFirst().get().getMessages();
-              List<ChatServerSide> listChat = new ArrayList<>();
-              for (pdg5.server.persistent.Message message : messages) {
-                 listChat.add(new ChatServerSide(message.getCreated().getTime(), message.getUser().getId(), Chat.SENDER.USER, message.getContent(), game.getId()));
-              }
-              chats.put(game.getId(), listChat);
-           }
-       }
+        listGameOfPlayer.forEach((game) -> {
+            if (!chats.containsKey(game.getId())) {
+                List<ChatServerSide> listChat = new ArrayList<>();
+                game.getChats().stream().findFirst().ifPresent((c) -> {
+                    c.getMessages().forEach((m) -> {
+                        listChat.add(new ChatServerSide(m.getCreated().getTime(), m.getUser().getId(), Chat.SENDER.USER, m.getContent(), game.getId()));
+                    });
+                });
+                chats.put(game.getId(), listChat);
+            }
+        });
     }
 
     public void addChat(ChatServerSide chatServer) {
@@ -171,31 +170,38 @@ public class GameController {
     public void addChat(ChatServerSide chatServer, boolean sendToBoth) {
         int idGame = chatServer.getIdGame();
         int idPlayer = chatServer.getIdSender();
-        
+
         ManageChat manageChat = activeUser.getDatabaseManagers(idPlayer).getManageChat();
         ManageGame manageGame = activeUser.getDatabaseManagers(idPlayer).getManageGame();
         ManageUser manageUser = activeUser.getDatabaseManagers(idPlayer).getManageUser();
-        List<pdg5.server.persistent.Game> listGame = manageGame.getGamesByUser(manageUser.getUserById(idPlayer));
-        pdg5.server.persistent.Game game = listGame.stream().filter((g) -> g.getId() == idGame).findAny().get();
+        ManageMessage manageMessage = activeUser.getDatabaseManagers(idPlayer).getManageMessage();
+
+        pdg5.server.persistent.Game game = manageGame
+                .getGamesByUser(manageUser.getUserById(idPlayer))
+                .stream()
+                .filter((g) -> g.getId() == idGame)
+                .findAny()
+                .get();
         
+
         // we create a list if it's the first message of the game
         List<ChatServerSide> list;
         if (!chats.containsKey(idGame)) {
-           
+
             // add chat to DB
             manageChat.addChatGame(game);
-            
+
             // add chat to Map
             chats.put(idGame, new ArrayList<>());
         }
-        ManageMessage manageMessage = activeUser.getDatabaseManagers(idPlayer).getManageMessage();
-        manageMessage.addMessage(chatServer.getMessage(), manageUser.getUserById(idPlayer), game.getChats().stream().findFirst().get());
         
+        game.getChats().stream().findFirst().ifPresent((c) -> {
+            manageMessage.addMessage(chatServer.getMessage(), manageUser.getUserById(idPlayer), c);
+        });
+
         list = chats.get(idGame);
         list.add(chatServer);
 
-        // TODO update the DB
-        //pdg5.server.persistent.Chat chatDB = new ManageChat().;
         // tell to other player
         int idSecondPlayer = games.get(idGame).getOpponentBoardById(chatServer.getIdSender()).getPlayerId();
         activeUser.giveToClientHandler(idSecondPlayer, chatServerToChat(idSecondPlayer, chatServer));
@@ -494,7 +500,7 @@ public class GameController {
     }
 
     private void pass(GameModel model, int playerID, TileStack ts) {
-        
+
         System.out.println("Game State : Passing");
         Board board = model.getBoardById(playerID);
 
@@ -522,12 +528,12 @@ public class GameController {
         for (int i = 0; i < TILE_THROWN; i++) {
             removedTiles.add(letters.remove(rand.nextInt(letters.size())));
         }
-        
+
         removedTiles.forEach((tile) -> {
             letters.add(ts.getNextTuile());
             tile.setBonus(true);
         });
-        
+
         // TODO REMOVE FIRST THEN PUT LETTERS
         opponentBoard.setBonus(removedTiles);
 
@@ -664,7 +670,6 @@ public class GameController {
         word.forEach((tile) -> {
             wordAsString.append(tile.getLetter());
         });
-        
 
         addChat(new ChatServerSide(new Date().getTime(), playerID, Chat.SENDER.USER,
                 board.getPlayerName() + " a joué "
@@ -677,9 +682,8 @@ public class GameController {
     private void sendScoreResults(GameModel model) {
         model.setState(State.FINISHED);
         tileStacks.get(model.getGameId()).clear();
-        
+
         // TODO SAVE IN DB
-        
         int gameID = model.getGameId();
         Board board = model.getBoard(GameModel.PlayerBoard.PLAYER1);
         Board boardOpponent = model.getBoard(GameModel.PlayerBoard.PLAYER2);
@@ -687,7 +691,7 @@ public class GameController {
         int player2Id = boardOpponent.getPlayerId();
 
         System.out.println("Sending end Messages");
-        
+
         if (board.getScore() > boardOpponent.getScore()) {
             activeUser.giveToClientHandler(player1Id, new End(Result.WIN, gameID));
             activeUser.giveToClientHandler(player2Id, new End(Result.LOSE, gameID));
@@ -782,6 +786,7 @@ public class GameController {
 
     /**
      * return the dictionnary of the game
+     *
      * @return a Ternary Search Tree
      */
     public TST getDictionnary() {
@@ -829,6 +834,5 @@ public class GameController {
             });
         };
     }
-    
-    
+
 }

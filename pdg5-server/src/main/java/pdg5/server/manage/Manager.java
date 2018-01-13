@@ -14,11 +14,15 @@ public class Manager {
     private static SessionFactory factory;
     private Session session;
     private Transaction transaction;
+    
+    public Manager(Session session){
+        transaction = null;
+        this.session = session;
+        getFactory();
+    }
 
     public Manager() {
-        transaction = null;
-        session = null;
-        getFactory();
+        this(null);
     }
 
     private SessionFactory getFactory() {

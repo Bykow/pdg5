@@ -8,6 +8,14 @@ import java.util.List;
 
 public class ManageUser extends Manager {
 
+    public ManageUser(Session session) {
+        super(session);
+    }
+
+    public ManageUser() {
+        super();
+    }
+
    public User addUser(String email, String username, String pass) {
       User user = new User();
       user.setEmail(email.toLowerCase());
@@ -85,7 +93,7 @@ public class ManageUser extends Manager {
    }
 
    public User getUserById(int idPlayer) {
-      Session session = new Manager().getSession();
+      Session session = getSession();
       session.beginTransaction();
       User u = session.createQuery("from User where id=:id", User.class)
               .setParameter("id", idPlayer).uniqueResult();

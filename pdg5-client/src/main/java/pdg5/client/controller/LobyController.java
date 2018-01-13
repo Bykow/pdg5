@@ -3,13 +3,10 @@ package pdg5.client.controller;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import pdg5.client.Client;
 import pdg5.client.ClientSender;
 import pdg5.client.util.UserInformations;
 import pdg5.client.view.GGameListEntry;
@@ -20,17 +17,26 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+/**
+ * Controller for the loby
+ */
 public class LobyController extends AbstractController {
+    // Labels for the list of game
     private Label titleToPlay;
     private Label titleWaiting;
     private Label titleFinished;
 
+    // List of games
     private ArrayList<Game> gameModelList;
+
+    // Chat history is managed by the loby
     private Map<Integer, List<Chat> > historic;
 
+    // Graphical list
     private GGameListEntry selected;
     private MainController mainController;
 
+    // Sender used to send message to the server
     private ClientSender sender;
 
     @FXML
@@ -39,6 +45,12 @@ public class LobyController extends AbstractController {
     @FXML
     private Label username;
 
+    /**
+     * Ctor
+     *
+     * @param sender
+     * @param mainController
+     */
     public LobyController(ClientSender sender, MainController mainController) {
         gameModelList = new ArrayList<>();
 
@@ -50,26 +62,40 @@ public class LobyController extends AbstractController {
         titleFinished.getStyleClass().add("titleFinished");
 
         historic = new HashMap<>();
-        
+
         this.sender = sender;
         this.mainController = mainController;
     }
 
+    /**
+     * Initialize the loby
+     */
     @FXML
     public void initialize() {
+        // Sets the username from the UserInformations data
         username.setText(UserInformations.getInstance().getUsername());
         refresh();
     }
 
-    private List<GGameListEntry> genGraphicalEntry(Predicate<Game> condition) {
+    /**
+     * Generates the list of game for UI thread given the state of the game
+     * Sorts the list by time
+     *
+     * @param state state of the game
+     * @return List of games to display
+     */
+    private List<GGameListEntry> genGraphicalEntry(Predicate<Game> state) {
         return gameModelList.stream()
-                .filter(condition)
+                .filter(state)
                 .sorted(Comparator.comparing(Game::getLastActivity))
                 .map(m -> new GGameListEntry(m, this::handleMouseClick, this::handleDelete))
                 .collect(Collectors.toList());
     }
 
-    public void refresh() {
+    /**
+     * Refreshes the list of games and keep it sorted
+     */
+    private void refresh() {
         gameList.getChildren().clear();
 
         gameList.getChildren().add(titleToPlay);
@@ -95,23 +121,41 @@ public class LobyController extends AbstractController {
         }
     }
 
+    /**
+     * Unselect the last selected item in the list
+     */
     private void unselectLast() {
         if(selected != null)
             selected.setSelected(false);
     }
 
+    /**
+     * Behaviour on logout button clicked
+     * @param actionEvent
+     */
     @FXML
     private void logout(ActionEvent actionEvent) {
+        // Will bring back the SignIn panel
         mainController.logout();
         sender.add(new Logout());
     }
 
+    /**
+     * Behaviour for new game button clicked
+     * Server will send a new Game when it is available
+     *
+     * @param actionEvent
+     */
     @FXML
     private void startNewGame(ActionEvent actionEvent) {
-        System.out.println("new game");
         sender.add(new NewGame());
     }
 
+    /**
+     * Behaviour when a object is clicked in the list
+     *
+     * @param event
+     */
     private void handleMouseClick(MouseEvent event) {
         GGameListEntry element = (GGameListEntry)event.getSource();
         unselectLast();
@@ -119,23 +163,40 @@ public class LobyController extends AbstractController {
         element.setSelected(true);
         UserInformations.getInstance().setIdGameDisplayed(selected.getModel().getID());
         mainController.getGameController().updateGame(element.getModel());
+        // Makes sure if the game is finished, the game is properly displayed
         if (element.getModel().getState() == GameModel.State.FINISHED) {
             mainController.getGameController().displayEndState(element.getModel().getResult());
         }
+        // Fetches the chat for given game and displays it
         mainController.getChatController().displayChat(historic.get(selected.getModel().getID()), selected.getModel());
     }
 
+    /**
+     * Behaviour when delete button is clicked, only for finished games
+     * Currently not implemented.
+     *
+     * @param event
+     */
     private void handleDelete(ActionEvent event) {
         Node btn = (Node)event.getSource();
         GGameListEntry element = (GGameListEntry)btn.getParent();
-        System.out.println("delete request for " + element.getModel().getID());
     }
 
+    /**
+     * Process a Load, recieved when the client logs in.
+     *
+     * @param load Load containing chat history, games
+     */
     public void addLoad(Load load) {
         historic.putAll(load.getHistoric());
         addListGame(load.getGames());
     }
 
+    /**
+     * Process a list of Games to add to the list, calls a refresh
+     *
+     * @param list list of games to update
+     */
     private void addListGame(List<Game> list) {
         gameModelList.addAll(list);
         gameModelList = gameModelList.stream()
@@ -144,14 +205,20 @@ public class LobyController extends AbstractController {
         Platform.runLater(this::refresh);
     }
 
+    /**
+     * Adds a single game
+     *
+     * @param game game to add
+     */
     private void addGame(Game game) {
         addListGame(Collections.singletonList(game));
     }
 
-    public boolean hasGame(Game game) {
-        return gameModelList.stream().anyMatch((o) -> o.getID() == game.getID());
-    }
-
+    /**
+     * Updates the status of a game and displays it if selected in list
+     *
+     * @param game game to update
+     */
     public void updateGame(Game game) {
         gameModelList.removeIf((o) -> o.getID() == game.getID());
         addGame(game);
@@ -164,6 +231,11 @@ public class LobyController extends AbstractController {
         }
     }
 
+    /**
+     * Updates the chat history, displays it if linked to currently displayed game
+     *
+     * @param chat chat to process
+     */
     public void updateChat(Chat chat) {
         if (!historic.containsKey(chat.getGameId()) || historic.get(chat.getGameId()) == null) {
             historic.put(chat.getGameId(), Collections.singletonList(chat));
@@ -175,10 +247,21 @@ public class LobyController extends AbstractController {
         }
     }
 
+    /**
+     * Returns a Game given its ID
+     *
+     * @param id Game Id to fetch
+     * @return Game
+     */
     public Game getGameFromId(int id) {
         return gameModelList.stream().filter((o) -> o.getID() == id).findAny().get();
     }
 
+    /**
+     * Behaviour if Game is finished
+     *
+     * @param end End message
+     */
     public void gameIsFinished(End end) {
         mainController.getGameController().displayEndState(end.getResult());
         getGameFromId(end.getIdGame()).setState(GameModel.State.FINISHED);

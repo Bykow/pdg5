@@ -1,10 +1,10 @@
 package pdg5.server.model;
 
-import java.io.Serializable;
 import pdg5.common.game.Composition;
 import pdg5.common.game.Composition.Square;
 import pdg5.common.game.Utils;
 
+import java.io.Serializable;
 import java.util.Random;
 
 /**

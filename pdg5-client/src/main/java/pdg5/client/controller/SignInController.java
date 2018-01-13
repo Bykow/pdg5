@@ -36,6 +36,9 @@ import pdg5.common.protocol.SignInOK;
 
 import java.io.IOException;
 
+/**
+ * SignIn Controller
+ */
 public class SignInController extends AbstractController {
 
     @FXML
@@ -48,36 +51,55 @@ public class SignInController extends AbstractController {
     private Hyperlink btnSignup;
 
     private Scene signUpScene;
+    private ClientSender sender;
+    private ClientListener listener;
 
     @FXML
-    public void initialize() {
+    public void initialize() {}
+
+    public SignInController() {
+        this.sender = new ClientSender();
+        this.listener = new ClientListener();
     }
 
+    /**
+     * Behaviour when login button is pressed
+     *
+     * @param actionEvent
+     */
     @FXML
     private void handleLogin(ActionEvent actionEvent) {
-        ClientListener listener = new ClientListener();
         Stage stage = (Stage) btnLogin.getScene().getWindow();
 
-        ClientSender clientSender = new ClientSender();
         SignIn signIn = new SignIn(username.getText(), password.getText());
 
-        clientSender.add(signIn);
+        // Sends the info from the input field
+        sender.add(signIn);
 
+        // Waits for response of server
         Message msg = listener.take();
         if (msg instanceof ErrorMessage) {
-            System.err.println(msg);
+            // Login is not valid
+            // Empty password field
             password.setText("");
 
             new Toast(stage, "Incorrect username or password").show();
 
         } else if (msg instanceof SignInOK) {
-            System.out.println("Connection success ");
+            System.out.println(msg);
+            // Saves the username into singleton
             UserInformations.getInstance().setUsername(username.getText());
             stage.hide();
+            // Loads next stage
             loadProg(stage);
         }
     }
 
+    /**
+     * Behaviour when switching from signin to signup
+     *
+     * @param actionEvent
+     */
     @FXML
     private void handleSwitch(ActionEvent actionEvent) {
         Stage stage = (Stage) btnLogin.getScene().getWindow();
@@ -85,9 +107,10 @@ public class SignInController extends AbstractController {
         if (signUpScene == null) {
             Scene currentScene = btnLogin.getScene();
 
+            // Creates the new scene
             try {
                 FXMLLoader loader = new FXMLLoader();
-                SignUpController controller = new SignUpController(currentScene);
+                SignUpController controller = new SignUpController(currentScene, sender, listener);
                 loader.setLocation(SignInController.class.getResource("/fxml/registerView.fxml"));
                 loader.setController(controller);
                 AnchorPane rootLayout = loader.load();

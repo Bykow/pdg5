@@ -19,7 +19,7 @@
       <AnchorPane id="welcome" prefHeight="37.0" prefWidth="290.0">
          <children>
             <Label id="welcomemsg" layoutX="10.0" layoutY="10.0" text="Bienvenue" />
-            <Label id="username" fx:id="username" layoutX="75.0" layoutY="10.0" prefHeight="15.0" prefWidth="176.0" />
+            <Label id="username" fx:id="username" layoutX="85.0" layoutY="10.0" prefHeight="15.0" prefWidth="176.0" />
             <Button id="logout" onAction="#logout" layoutX="259.0" layoutY="1.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="30.0" />
          </children></AnchorPane>
    </children>

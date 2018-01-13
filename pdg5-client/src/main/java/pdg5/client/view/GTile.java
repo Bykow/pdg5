@@ -24,6 +24,9 @@ import pdg5.common.game.Tile;
 
 import java.io.IOException;
 
+/**
+ * Graphical representation of a Tile
+ */
 public class GTile extends Pane {
     private static FXMLLoader loader = initLoader();
 
@@ -34,12 +37,22 @@ public class GTile extends Pane {
     @FXML
     private Label point;
 
+    /**
+     * FXMLLoader
+     *
+     * @return Loader
+     */
     private static FXMLLoader initLoader() {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Client.class.getResource("/fxml/tile.fxml"));
         return loader;
     }
 
+    /**
+     * Ctor
+     *
+     * @param model tile to generate
+     */
     public GTile(Tile model) {
         super();
 
@@ -56,6 +69,9 @@ public class GTile extends Pane {
         }
     }
 
+    /**
+     * Initialize the GTile
+     */
     @FXML
     public void initialize() {
         if(model.isBonus())
@@ -64,6 +80,11 @@ public class GTile extends Pane {
         point.setText(String.valueOf(model.getValue()));
     }
 
+    /**
+     * Default getter for Tile
+     *
+     * @return Tile
+     */
     public Tile getModel() {
         return model;
     }

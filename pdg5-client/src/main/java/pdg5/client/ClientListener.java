@@ -8,7 +8,7 @@ import java.io.ObjectInputStream;
 import java.net.Socket;
 
 /**
- * @author Maxime Guillod
+ * ClientListener, listens to server for incoming messages
  */
 public class ClientListener implements Runnable {
 
@@ -17,22 +17,38 @@ public class ClientListener implements Runnable {
     private static ObjectInputStream in;
     private static boolean launch = false;
 
+    /**
+     * Ctor
+     */
     public ClientListener() {
         init();
     }
 
+    /**
+     * Create a queue if needed
+     */
     private void init() {
         if (queue == null) {
             queue = new MessageQueue();
         }
     }
 
+    /**
+     * Ctor with TCP Socket
+     *
+     * @param socket connection to server
+     *
+     * @throws IOException if socket is invalid
+     */
     public ClientListener(Socket socket) throws IOException {
         this.socket = socket;
         in = new ObjectInputStream(socket.getInputStream());
         init();
     }
 
+    /**
+     * Run for ClientListener, should always be running, contains while(true)
+     */
     @Override
     public void run() {
         if (launch) {
@@ -50,10 +66,11 @@ public class ClientListener implements Runnable {
         }
     }
 
-    public boolean isConnected() {
-        return socket.isConnected();
-    }
-
+    /**
+     * Takes message from process queue
+     *
+     * @return Message
+     */
     public Message take() {
         return queue.take();
     }

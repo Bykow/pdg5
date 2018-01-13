@@ -3,6 +3,9 @@ package pdg5.client.view;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
+/**
+ * Graphical representation of a Chat Message
+ */
 public class ChatMessage extends HBox {
     public ChatMessage(Type type, String msg) {
         Label content = new Label(msg);
@@ -13,6 +16,9 @@ public class ChatMessage extends HBox {
         this.setFillHeight(false);
     }
 
+    /**
+     * Enum that defines where and how to print the message
+     */
     public enum Type {
         TIME("time"),
         USER("user"),

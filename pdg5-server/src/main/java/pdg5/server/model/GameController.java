@@ -2,12 +2,12 @@ package pdg5.server.model;
 
 import pdg5.common.Protocol;
 import pdg5.common.TST;
-import pdg5.common.game.Board;
-import pdg5.common.game.Composition;
-import pdg5.common.game.GameModel;
+import pdg5.common.game.*;
 import pdg5.common.game.GameModel.State;
-import pdg5.common.game.Tile;
 import pdg5.common.protocol.*;
+import pdg5.server.manage.ManageGame;
+import pdg5.server.manage.ManageUser;
+import pdg5.server.persistent.User;
 import pdg5.server.util.ServerActiveUser;
 
 import java.io.BufferedReader;
@@ -18,10 +18,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-import pdg5.common.game.Result;
-import pdg5.server.manage.ManageGame;
-import pdg5.server.manage.ManageUser;
-import pdg5.server.persistent.User;
 
 /**
  * this Class manage all the games created by the server

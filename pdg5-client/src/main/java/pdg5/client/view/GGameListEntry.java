@@ -32,6 +32,9 @@ import pdg5.common.protocol.Game;
 import java.io.IOException;
 import java.util.Date;
 
+/**
+ * Graphical representation of the list of games in the loby
+ */
 public class GGameListEntry extends AnchorPane {
     private static FXMLLoader loader = initLoader();
 
@@ -48,12 +51,24 @@ public class GGameListEntry extends AnchorPane {
     private EventHandler<? super MouseEvent> mouseClickHandler;
     private EventHandler<? super ActionEvent> deleteHandler;
 
+    /**
+     * Initalizes the loader for UI thread
+     *
+     * @return FXMLLoader
+     */
     private static FXMLLoader initLoader() {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Client.class.getResource("/fxml/gameListEntry.fxml"));
         return loader;
     }
 
+    /**
+     * Ctor
+     *
+     * @param model game
+     * @param mouseClickHandler EventHandler
+     * @param deleteHandler EventHandler
+     */
     public GGameListEntry(Game model, EventHandler<? super MouseEvent> mouseClickHandler, EventHandler<? super ActionEvent> deleteHandler) {
         super();
 
@@ -72,12 +87,16 @@ public class GGameListEntry extends AnchorPane {
         }
     }
 
+    /**
+     * Default initialize for JavaFx
+     */
     @FXML
     public void initialize() {
         this.setOnMouseClicked(mouseClickHandler);
         if (model.getState() == GameModel.State.FINISHED)
             btnDelete.setDisable(false);
         else {
+            // logic to display time since last move correctly
             String time;
             Date elapsed = new Date(new Date().getTime() - model.getLastActivity().getTime());
             if (elapsed.getTime() > 60 * 60 * 1000)
@@ -89,24 +108,24 @@ public class GGameListEntry extends AnchorPane {
         }
 
         username.setText(model.getOpponentName().substring(0, 1).toUpperCase() + model.getOpponentName().substring(1).toLowerCase());
+        // Update the visual status with state of game
         switch (model.getState()) {
             case IN_PROGRESS:
+                int numberOfTilesAtBeginOfGame = Protocol.NUMBER_OF_TUILES_PER_GAME-(Protocol.NUMBER_OF_PLAYERS*Protocol.NUMBER_OF_TUILES_PER_PLAYER + Protocol.NUMBER_OF_EXTRA_TUILES);
+                if (model.getNbLeftTile() == numberOfTilesAtBeginOfGame) {
+                    msg.setText("Nouvelle partie");
+                    break;
+                }
+
+                if (model.getLastWordPlayed().isEmpty()) {
+                    msg.setText("a passé !");
+                    break;
+                }
+
                 if (model.isYourTurn()) {
-                    if (model.getNbLeftTile() == (Protocol.NUMBER_OF_TUILES_PER_GAME-(Protocol.NUMBER_OF_PLAYERS*Protocol.NUMBER_OF_TUILES_PER_PLAYER + Protocol.NUMBER_OF_EXTRA_TUILES))) {
-                        msg.setText("Nouvelle partie");
-                    } else if (model.getNbLeftTile() != (Protocol.NUMBER_OF_TUILES_PER_GAME-(Protocol.NUMBER_OF_PLAYERS*Protocol.NUMBER_OF_TUILES_PER_PLAYER + Protocol.NUMBER_OF_EXTRA_TUILES)) && model.getLastWordPlayed().isEmpty()) {
-                        msg.setText("a passé !");
-                    } else {
-                        msg.setText("a joué " + Tile.tilesToString(model.getLastWordPlayed()));
-                    }
+                    msg.setText("a joué " + Tile.tilesToString(model.getLastWordPlayed()));
                 } else {
-                    if (model.getNbLeftTile() == (Protocol.NUMBER_OF_TUILES_PER_GAME-(Protocol.NUMBER_OF_PLAYERS*Protocol.NUMBER_OF_TUILES_PER_PLAYER + Protocol.NUMBER_OF_EXTRA_TUILES))) {
-                        msg.setText("Nouvelle partie");
-                    } else if (model.getNbLeftTile() != (Protocol.NUMBER_OF_TUILES_PER_GAME-(Protocol.NUMBER_OF_PLAYERS*Protocol.NUMBER_OF_TUILES_PER_PLAYER + Protocol.NUMBER_OF_EXTRA_TUILES)) && model.getLastWordPlayed().isEmpty()) {
-                        msg.setText("a passé !");
-                    } else {
-                        msg.setText("vous avez joué " + Tile.tilesToString(model.getLastWordPlayed()));
-                    }
+                    msg.setText("vous avez joué " + Tile.tilesToString(model.getLastWordPlayed()));
                 }
                 break;
             case END_MODE:
@@ -120,6 +139,11 @@ public class GGameListEntry extends AnchorPane {
         }
     }
 
+    /**
+     * Setter for selected item
+     *
+     * @param value
+     */
     public void setSelected(boolean value) {
         if (value)
             this.getStyleClass().add("selected");
@@ -127,12 +151,21 @@ public class GGameListEntry extends AnchorPane {
             this.getStyleClass().clear();
     }
 
+    /**
+     * Getter for game
+     *
+     * @return game
+     */
     public Game getModel() {
         return model;
     }
 
+    /**
+     * Behaviour for delete button pressed
+     *
+     * @param actionEvent
+     */
     public void delete(ActionEvent actionEvent) {
         deleteHandler.handle(actionEvent);
     }
-
 }

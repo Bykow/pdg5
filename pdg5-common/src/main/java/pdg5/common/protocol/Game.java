@@ -1,14 +1,14 @@
 package pdg5.common.protocol;
 
-import java.util.Arrays;
 import pdg5.common.game.Board;
+import pdg5.common.game.Composition.Square;
 import pdg5.common.game.GameModel.State;
+import pdg5.common.game.Result;
 import pdg5.common.game.Tile;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import pdg5.common.game.Composition.Square;
-import pdg5.common.game.Result;
 
 /**
  * @author Maxime Guillod

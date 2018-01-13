@@ -9,11 +9,14 @@ import pdg5.client.Client;
 import java.io.IOException;
 
 /**
- * Created on 14.11.17 by Bykow
+ * Abstract controller, first load of the GUI interface
  */
 public abstract class AbstractController {
-    private String username;
 
+    /**
+     * Load the program for the GUI.
+     * @param stage
+     */
     protected void loadProg(Stage stage) {
         try {
             // Load root layout from fxml file.
@@ -29,22 +32,16 @@ public abstract class AbstractController {
             stage.setScene(scene);
             stage.show();
 
+            // Load the differents components loby game and chat
             mainController.loadLoby();
             mainController.loadGame();
             mainController.loadChat();
 
+            // Start the sending and listening queue
             mainController.startLogic();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 }

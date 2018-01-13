@@ -1,8 +1,5 @@
 package pdg5.server.process;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import pdg5.common.protocol.ErrorMessage;
 import pdg5.common.protocol.Logout;
 import pdg5.common.protocol.Message;
 import pdg5.common.protocol.Noop;

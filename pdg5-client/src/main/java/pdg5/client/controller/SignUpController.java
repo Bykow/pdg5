@@ -48,54 +48,69 @@ public class SignUpController extends AbstractController {
     private Hyperlink switchLogin;
 
     private Scene signInScene;
+    private ClientSender sender;
+    private ClientListener listener;
 
-    SignUpController(Scene signInScene) {
+    SignUpController(Scene signInScene, ClientSender sender, ClientListener listener) {
         this.signInScene = signInScene;
+        this.sender = sender;
+        this.listener = listener;
     }
 
     @FXML
     public void initialize() {
     }
 
+    /**
+     * Behaviour when switching from signup to signin
+     *
+     * @param actionEvent
+     */
     @FXML
     private void handleSwitch(ActionEvent actionEvent) {
         Stage stage = (Stage)btnRegister.getScene().getWindow();
         stage.setScene(signInScene);
     }
 
+    /**
+     * Behaviour when register button pressed
+     *
+     * @param actionEvent
+     */
     @FXML
     private void handleRegister(ActionEvent actionEvent) {
         Stage stage = (Stage)btnRegister.getScene().getWindow();
-        ClientSender clientSender = new ClientSender();
-        ClientListener listener = new ClientListener();
         boolean isSent = false;
 
-
+        // Basic check if both password and confirmation are equals
         if (checkPassword(password.getText(), passwordConf.getText())) {
             // Sending to server
             SignUp signUp = new SignUp(email.getText(), username.getText(), password.getText());
-            clientSender.add(signUp);
+            sender.add(signUp);
             isSent = true;
         } else {
-            System.out.println("Password and password confirmation are not equal, try again.");
             new Toast(stage, "Password and password confirmation are not equal, try again.").show();
             password.clear();
             passwordConf.clear();
         }
 
+        // Wait for response
         if(isSent) {
             Message msg = listener.take();
 
             if (msg instanceof ErrorMessage) {
                 System.err.println(msg);
                 password.setText("");
+                passwordConf.setText("");
 
                 new Toast(stage, msg.toString()).show();
             } else if (msg instanceof SignInOK) {
                 System.out.println("SignUp success ");
+                // Saves the username and email into Singleton
                 UserInformations.getInstance().setUsername(username.getText());
                 UserInformations.getInstance().setMail(email.getText());
                 stage.hide();
+                // Load next stage
                 loadProg(stage);
             }
         }

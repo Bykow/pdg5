@@ -1,6 +1,7 @@
 package pdg5.server.util;
 
 import pdg5.common.Protocol;
+import pdg5.server.manage.Manager;
 import pdg5.server.model.GameController;
 
 import javax.net.ServerSocketFactory;
@@ -13,7 +14,6 @@ import java.security.GeneralSecurityException;
 import java.security.KeyStore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import pdg5.server.manage.Manager;
 
 /**
  * Listen the network on the DEFAULT_PORT, and start a {@link ClientHandler} when a

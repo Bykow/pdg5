@@ -1,6 +1,7 @@
 package pdg5.client.controller;
 
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
@@ -31,6 +32,8 @@ public class ChatController {
 
     @FXML
     public void initialize() {
+        // Auto scroll on new messages
+        msgContainer.heightProperty().addListener((ChangeListener) (observable, oldvalue, newValue) -> scrollPane.setVvalue((Double) newValue));
     }
 
     @FXML
@@ -49,9 +52,6 @@ public class ChatController {
         if(msgContainer.getChildren().size() > Protocol.DISPLAY_CHAT_MESSAGES) {
             msgContainer.getChildren().remove(0);
         }
-
-        // Auto scroll
-        scrollPane.setVvalue(1.0);
     }
 
     public void displayChat(List<Chat> list, Game game) {

@@ -1,16 +1,29 @@
 package pdg5.client.view;
 
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
-public class ChatMessage extends HBox {
+public class ChatMessage extends AnchorPane {
     public ChatMessage(Type type, String msg) {
-        Label content = new Label(msg);
-        content.setWrapText(true);
-        this.getChildren().add(content);
+        TextFlow tf = new TextFlow(new Text(msg));
+        this.getChildren().add(tf);
+
+        switch(type) {
+            case TIME:
+            case INFO:
+                AnchorPane.setRightAnchor(tf, 0.0);
+                AnchorPane.setLeftAnchor(tf, 0.0);
+                break;
+            case USER:
+                AnchorPane.setRightAnchor(tf, 0.0);
+                break;
+            case ADVERSARY:
+                AnchorPane.setLeftAnchor(tf, 0.0);
+                break;
+        }
 
         this.getStyleClass().add(type.getValue());
-        this.setFillHeight(false);
     }
 
     public enum Type {

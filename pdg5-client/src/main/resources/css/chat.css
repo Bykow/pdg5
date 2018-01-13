@@ -39,52 +39,54 @@ VBox {
     -fx-background-position: center;
 }
 
-.time, .info {
-    -fx-alignment: baseline-center;
-}
-
-.user {
-    -fx-alignment: baseline-right;
-}
-
-.adversary {
-    -fx-alignment: baseline-left;
-}
-
-.time Label {
+TextFlow {
     -fx-font-family: "Helvetica";
-    -fx-text-fill: #a7defc;
     -fx-font-weight: bold;
+    -fx-border-color: #ffffff;
+    -fx-border-radius: 10;
+    -fx-background-radius: 11;
+}
+
+.time TextFlow Text {
+    -fx-fill: #a7defc;
+}
+
+.time TextFlow {
+    -fx-max-width: 270px;
+    -fx-text-alignment: center;
     -fx-font-size: 10;
     -fx-padding: 15px 0 0 0;
+    -fx-border-color: transparent;
 }
 
-.info Label {
-    -fx-font-family: "Helvetica";
-    -fx-text-fill: #ffffff;
-    -fx-border-color: #ffffff;
-    -fx-border-radius: 10;
-    -fx-padding: 3px 15px 3px 15px;
+.info TextFlow Text {
+    -fx-fill: #ffffff;
 }
 
-.adversary Label {
-    -fx-font-family: "Helvetica";
-    -fx-text-fill: #34495e;
-    -fx-font-weight: bold;
+.info TextFlow {
+    -fx-max-width: 270px;
+    -fx-font-weight: normal;
+    -fx-text-alignment: center;
+    -fx-padding: 5px 15px 4px 15px;
+}
+
+.adversary TextFlow Text {
+    -fx-fill: #34495e;
+}
+
+.adversary TextFlow {
+    -fx-max-width: 200px;
     -fx-background-color: #c1e7fc;
-    -fx-background-radius: 11;
-    -fx-border-radius: 10;
-    -fx-border-color: #ffffff;
-    -fx-padding: 3px 10px 3px 10px;
+    -fx-padding: 5px 10px 4px 10px;
 }
 
-.user Label {
-    -fx-font-family: "Helvetica";
-    -fx-text-fill: #c1e7fc;
-    -fx-font-weight: bold;
+.user TextFlow Text {
+    -fx-fill: #c1e7fc;
+}
+
+.user TextFlow {
+    -fx-max-width: 200px;
+    -fx-text-alignment: right;
     -fx-background-color: #34495E;
-    -fx-background-radius: 11;
-    -fx-border-radius: 10;
-    -fx-border-color: #ffffff;
-    -fx-padding: 3px 10px 3px 10px;
+    -fx-padding: 5px 10px 4px 10px;
 }

@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Manager to stock and load games from/to de database
+ * Manager to store and load games from/to the database
  */
 public class ManageGame extends Manager {
 
@@ -32,13 +32,13 @@ public class ManageGame extends Manager {
     }
 
     /**
-     * add a tournament game and all his informations to the database
+     * add a tournament game and all it's informations to the database
      * 
      * @param title of the game
      * @param player1 one of the players
      * @param player2 the other player
      * @param tournament the tournament informations to link with this game
-     * @param remainingLetters the left letters in the stack
+     * @param remainingLetters the letters left in the stack
      * @return the game added to the database
      */
     public Game addGame(String title, User player1, User player2, Tournament tournament, String remainingLetters) {
@@ -55,12 +55,12 @@ public class ManageGame extends Manager {
     }
 
     /**
-     * add a game and all his informations to the database
+     * add a game and all it's informations to the database
      * 
      * @param title of the game
      * @param player1 one of the players
      * @param player2 the other player
-     * @param remainingLetters the left letters in the stack
+     * @param remainingLetters the letters left in the stack
      * @return the game added to the database
      */
     public Game addGame(String title, User player1, User player2, String remainingLetters) {
@@ -115,8 +115,8 @@ public class ManageGame extends Manager {
     /**
      * update informations about a game in the database
      * 
-     * @param game the new informations status of the game
-     * @return Protocol.OK if the transaction succeed or Protocol.Error else
+     * @param game the game with new information
+     * @return Protocol.OK if the transaction succeeded or Protocol.Error otherwise
      */
     public int updateGame(Game game) {
         return updateToDB(game);
@@ -126,7 +126,7 @@ public class ManageGame extends Manager {
      * delete a game informations in the database
      * 
      * @param game the game we wish to delete the informations in the database
-     * @return Protocol.OK if the transaction succeed or Protocol.Error else
+     * @return Protocol.OK if the transaction succeeded or Protocol.Error otherwise
      */
     public int deleteGame(Game game) {
         return deleteToDB(game);

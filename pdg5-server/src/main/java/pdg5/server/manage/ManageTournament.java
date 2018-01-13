@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Manager to stock and load tournaments from/to de database
+ * Manager to stock and load tournaments from/to the database
  */
 public class ManageTournament extends Manager {
 
@@ -33,7 +33,7 @@ public class ManageTournament extends Manager {
      * update informations of a specified tournament
      * 
      * @param tournament the new informations of the tournament
-     * @return Protocol.OK if the transaction succeed or Protocol.Error else
+     * @return Protocol.OK if the transaction succeeded or Protocol.Error otherwise
      */
     public int updateTournament(Tournament tournament) {
         return updateToDB(tournament);
@@ -43,7 +43,7 @@ public class ManageTournament extends Manager {
      * delete a specified tournament contained in the database
      * 
      * @param tournament the tournament we wish to delete
-     * @return Protocol.OK if the transaction succeed or Protocol.Error else
+     * @return Protocol.OK if the transaction succeeded or Protocol.Error otherwise
      */
     public int deleteTournament(Tournament tournament) {
         return deleteToDB(tournament);

@@ -8,7 +8,7 @@ import java.util.List;
 import org.hibernate.Session;
 
 /**
- * Manager to stock and load the Chats from/to de database
+ * Manager to stock and load the Chats from/to the database
  */
 public class ManageChat extends Manager {
 
@@ -31,7 +31,7 @@ public class ManageChat extends Manager {
     /**
      * add a new chat for a specified tournament
      * 
-     * @param tournament the tournament we wish to add a chat
+     * @param tournament the tournament we wish to add a chat to
      * @return the chat created and added to the database
      */
     public Chat addChatTournament(Tournament tournament) {
@@ -43,7 +43,7 @@ public class ManageChat extends Manager {
     /**
      * add a new chat for a specified game
      * 
-     * @param game the game we wish to add a chat
+     * @param game the game we wish to add a chat to
      * @return the chat created and added to the database
      */
     public Chat addChatGame(Game game) {
@@ -63,8 +63,8 @@ public class ManageChat extends Manager {
 
     /**
      * update an existing chat with informations of a new one
-     * @param chat the new chat we use to update the informations
-     * @return Protocol.OK if the transaction succeed or Protocol.Error else
+     * @param chat the chat with updated informations
+     * @return Protocol.OK if the transaction succeeded or Protocol.Error otherwise
      */
     public int updateChat(Chat chat) {
         return updateToDB(chat);
@@ -73,7 +73,7 @@ public class ManageChat extends Manager {
     /**
      * delete a chat in the database
      * @param chat the chat we wish to delete
-     * @return Protocol.OK if the transaction succeed or Protocol.Error else
+     * @return Protocol.OK if the transaction succeeded or Protocol.Error otherwise
      */
     public int deleteChat(Chat chat) {
         return deleteToDB(chat);

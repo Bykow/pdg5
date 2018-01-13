@@ -9,7 +9,7 @@ import java.util.List;
 import org.hibernate.Session;
 
 /**
- * Manager to stock and load messages from/to de database
+ * Manager to stock and load messages from/to the database
  */
 public class ManageMessage extends Manager {
 
@@ -54,7 +54,7 @@ public class ManageMessage extends Manager {
      * change informations of a specific message in the database
      * 
      * @param message the new informations of the message
-     * @return Protocol.OK if the transaction succeed or Protocol.Error else
+     * @return Protocol.OK if the transaction succeeded or Protocol.Error otherwise
      */
     public int updateMessage(Message message) {
         return updateToDB(message);
@@ -64,7 +64,7 @@ public class ManageMessage extends Manager {
      * delete a specified message in the database
      * 
      * @param message the message we wish to delete
-     * @return Protocol.OK if the transaction succeed or Protocol.Error else
+     * @return Protocol.OK if the transaction succeeded or Protocol.Error otherwise
      */
     public int deleteMessage(Message message) {
         return deleteToDB(message);

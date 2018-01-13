@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pdg5.common.protocol;
 
 import pdg5.common.TST;
@@ -32,6 +27,7 @@ public class Dictionnary extends Message {
 
    /**
     * return the object that allow to check by his own the validity of a word
+    * 
     * @return the object that allow to check by his own the validity of a word
     */
    public TST getWordCombinations() {

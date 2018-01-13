@@ -157,7 +157,6 @@ public class GameController {
         });
     }
 
-    
     public void addChat(ChatServerSide chatServer) {
         addChat(chatServer, true);
     }
@@ -183,8 +182,7 @@ public class GameController {
                 .filter((g) -> g.getId() == idGame)
                 .findAny()
                 .get();
-        
-        
+
         // saving message in database
         pdg5.server.persistent.Chat databaseChat = game
                 .getChats()
@@ -196,7 +194,7 @@ public class GameController {
                     manageGame.updateGame(game);
                     return manageChat.listChats().stream().findAny().get();
                 });
-        
+
         manageMessage.addMessage(chatServer.getMessage(), manageUser.getUserById(idPlayer), databaseChat);
         manageChat.updateChat(databaseChat);
 
@@ -683,14 +681,11 @@ public class GameController {
         model.setState(State.FINISHED);
         tileStacks.get(model.getGameId()).clear();
 
-        // TODO SAVE IN DB
         int gameID = model.getGameId();
         Board board = model.getBoard(GameModel.PlayerBoard.PLAYER1);
         Board boardOpponent = model.getBoard(GameModel.PlayerBoard.PLAYER2);
         int player1Id = board.getPlayerId();
         int player2Id = boardOpponent.getPlayerId();
-
-        System.out.println("Sending end Messages");
 
         if (board.getScore() > boardOpponent.getScore()) {
             activeUser.giveToClientHandler(player1Id, new End(Result.WIN, gameID));
@@ -702,6 +697,17 @@ public class GameController {
             activeUser.giveToClientHandler(player2Id, new End(Result.EQUALITY, gameID));
             activeUser.giveToClientHandler(player1Id, new End(Result.EQUALITY, gameID));
         }
+
+        ManageGame manageGame = activeUser.getDatabaseManagers(player1Id).getManageGame();
+        manageGame.listGame()
+                .stream()
+                .filter((g) -> g.getId() == model.getGameId())
+                .findFirst()
+                .ifPresent((g) -> {
+                    g.setGameState(model);
+                    manageGame.updateGame(g);
+                });
+
     }
 
     private boolean isEndMode(GameModel model, TileStack ts) {

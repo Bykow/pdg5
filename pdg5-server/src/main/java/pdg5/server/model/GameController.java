@@ -43,11 +43,19 @@ public class GameController {
     private static final int OUTDATE_TIME = 72 * 60 * 60 * 1000;
 
     /**
-     * number of letters left in a TileStack befor the game changes to check-end-mode
+     * number of letters left in a TileStack 
+     * befor the game changes to check-end-mode
      */
     private static final int TILE_LEFT_END_MODE_HARD = 2;
+    /**
+     * number of letters left in a TileStack 
+     * befor the game changes to check-end-mode if two players throw in a row
+     */
     private static final int TILE_LEFT_END_MODE_LAZY = 10;
 
+    /**
+     * number of Tiles thrown when a player use the action throw
+     */
     private static final int TILE_THROWN = 2;
 
     /**
@@ -157,6 +165,11 @@ public class GameController {
         });
     }
 
+    /**
+     * add a chat message to the map chats
+     * 
+     * @param chatServer chat we wish to add
+     */
     public void addChat(ChatServerSide chatServer) {
         addChat(chatServer, true);
     }
@@ -497,6 +510,13 @@ public class GameController {
         }
     }
 
+    /**
+     * do the action "pass" in a specified GameModel
+     * 
+     * @param model the GameModel where we want to do Pass as next action
+     * @param playerID unique id who try to pass currently
+     * @param ts the TileStack associated with this GameModel
+     */
     private void pass(GameModel model, int playerID, TileStack ts) {
 
         System.out.println("Game State : Passing");
@@ -515,6 +535,13 @@ public class GameController {
             board.getPlayerName() + " a passé et perdu " + lostScore + " points", model.getGameId()));
     }
 
+    /**
+     * do the action "throw" in a specified GameModel
+     * 
+     * @param model the GameModel where we want to do throw as next action
+     * @param playerID unique id who try to throw currently
+     * @param ts the TileStack associated with this GameModel
+     */
     private void throwAction(GameModel model, int playerID, TileStack ts) {
         System.out.println("Game State : Throwing");
         Board board = model.getBoardById(playerID);
@@ -677,6 +704,11 @@ public class GameController {
         return getGameFromModel(gameID, playerID);
     }
 
+    /**
+     * finish a game, calcul and send the result of a specified GameModel and send the result to concerned players 
+     * 
+     * @param model the GameModel of the game that we currently considere as finish
+     */
     private void sendScoreResults(GameModel model) {
         model.setState(State.FINISHED);
         tileStacks.get(model.getGameId()).clear();
@@ -710,6 +742,13 @@ public class GameController {
 
     }
 
+    /**
+     * check if a game should be in END_MODE
+     * 
+     * @param model the GameModel we are checking
+     * @param ts the associated TileStack for this game
+     * @return true if a game should be in END_MODE, false otherwise
+     */
     private boolean isEndMode(GameModel model, TileStack ts) {
         int tilesLeft = ts.getTileLeft();
         // not end-mode yet

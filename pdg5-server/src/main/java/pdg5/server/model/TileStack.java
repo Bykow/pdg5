@@ -13,18 +13,37 @@ import java.util.Stack;
 import java.util.stream.Stream;
 
 /**
- * Created on 03.10.17 by Bykow
+ * represent a stack of letters (Tiles)
  */
 public class TileStack {
 
+   /**
+    * stack of the Tiles
+    */
     private Stack<Tile> stack = new Stack<>();
+    
+    /**
+     * the full size of the stack
+     */
     private int size;
+    
+    /**
+     * the current size of the stack
+     */
     private int tileLeft;
+    
+    /**
+     * map who link a caracter to his value
+     */
     private HashMap<Character, Integer> map = new HashMap<>();
+    
+    /**
+     * random used to shuffle the stack or pick randomly Tiles in
+     */
     private final Random r;
 
     /**
-     * Ctor
+     * Constructor
      *
      * @param lang langage of the game
      */
@@ -53,6 +72,12 @@ public class TileStack {
         this.r = stack.r;
     }
 
+    /**
+     * Constructor
+     * 
+     * @param lang langage of the game
+     * @param letters initial letters of the stack
+     */
     public TileStack(String lang, String letters) {
         r = new Random();
         size = 0;
@@ -146,10 +171,20 @@ public class TileStack {
         return output;
     }
 
+    /**
+     * return the full initial size of the stack
+     * 
+     * @return the full initial size of the stack
+     */
     public int getSize() {
         return size;
     }
 
+    /**
+     * return the current size of the stack
+     * 
+     * @return the current size of the stack
+     */
     public int getTileLeft() {
         return tileLeft;
     }

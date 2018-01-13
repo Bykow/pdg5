@@ -32,7 +32,7 @@ public class ServerNetworkManager {
         System.out.println("START ServerNetworkManager");
         activeUser = new ServerActiveUser();
         gameController = new GameController(activeUser);
-        
+
         new Manager().getSession();
         System.out.println("Hibernate Connected");
     }
@@ -53,10 +53,10 @@ public class ServerNetworkManager {
                     keyStore.load(is, JKS_PASSWORD);
                 }
                 final KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory
-                        .getDefaultAlgorithm());
+                    .getDefaultAlgorithm());
                 kmf.init(keyStore, KEY_PASSWORD);
                 final TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory
-                        .getDefaultAlgorithm());
+                    .getDefaultAlgorithm());
                 tmf.init(keyStore);
 
                 /*
@@ -70,11 +70,11 @@ public class ServerNetworkManager {
                 // The host name doesn't really matter, since we're turning it into a server socket
                 // (No need to match the host name to the certificate on this side).
                 SSLSocket sslSocket = (SSLSocket) sslSf.createSocket(socket, null,
-                        socket.getPort(), false);
+                    socket.getPort(), false);
                 sslSocket.setUseClientMode(false);
 
                 sslSocket.setEnabledCipherSuites(sslSocket.getSupportedCipherSuites());
-                                
+
                 // Use the sslSocket InputStream/OutputStream as usual.
                 new Thread(new ClientHandler(sslSocket, activeUser, gameController)).start();
             }

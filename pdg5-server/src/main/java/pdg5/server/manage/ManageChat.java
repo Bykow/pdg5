@@ -9,35 +9,35 @@ import org.hibernate.Session;
 
 public class ManageChat extends Manager {
 
-    public ManageChat(){
+    public ManageChat() {
         super();
     }
-    
+
     public ManageChat(Session session) {
         super(session);
     }
-    
-	public Chat addChatTournament(Tournament tournament) {
-		Chat chat = new Chat();
-		chat.setTournament(tournament);
-		return (Chat) addToDB(chat);
-	}
-	
-	public Chat addChatGame(Game game) {
-		Chat chat = new Chat();
-		chat.setGame(game);
-		return (Chat) addToDB(chat);
-	}
-	
-	public List<Chat> listChats() {
-		 return (List<Chat>) getListFromDB("FROM Chat");
-	}
-	
-	public int updateChat(Chat chat) {
-		return updateToDB(chat);
-	}
-	
-	public int deleteChat(Chat chat) {
-		return deleteToDB(chat);
-	}
+
+    public Chat addChatTournament(Tournament tournament) {
+        Chat chat = new Chat();
+        chat.setTournament(tournament);
+        return (Chat) addToDB(chat);
+    }
+
+    public Chat addChatGame(Game game) {
+        Chat chat = new Chat();
+        chat.setGame(game);
+        return (Chat) addToDB(chat);
+    }
+
+    public List<Chat> listChats() {
+        return (List<Chat>) getListFromDB("FROM Chat");
+    }
+
+    public int updateChat(Chat chat) {
+        return updateToDB(chat);
+    }
+
+    public int deleteChat(Chat chat) {
+        return deleteToDB(chat);
+    }
 }

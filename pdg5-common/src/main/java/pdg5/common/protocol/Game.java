@@ -11,56 +11,56 @@ import pdg5.common.game.Composition.Square;
 import pdg5.common.game.Result;
 
 /**
- * Class sent through the connection  by the server representing
- * a full game with two players in the point of view of one specific player
+ * Class sent through the connection by the server representing a full game with two
+ * players in the point of view of one specific player
  */
 public class Game extends Message {
 
-   /**
-    * unique id of the game
-    */
+    /**
+     * unique id of the game
+     */
     private final int ID;
-    
+
     /**
      * date of creation of the original GameModel
      */
     private final Date created;
-    
+
     /**
      * date of the last action of a player (throw, play pass)
      */
     private final Date lastActivity;
-    
+
     /**
      * unique id of the tournament associated
      */
     private final int tournament;
-    
+
     /**
      * board of the player who will get this point of view
      */
     private final Board board;
-    
+
     /**
      * board of the opponent player (don't contain Tiles)
      */
     private final Board opponentBoard;
-    
+
     /**
      * number of Tiles left in the Tile Stack
      */
     private final int nbLeftTile;
-    
+
     /**
      * Tiles of the last word played (in order)
      */
     private final List<Tile> lastWordPlayed;
-    
+
     /**
      * the tabulated score with the last word played
      */
     private final int scoreLastWordPlayed;
-    
+
     /**
      * indicate if it's the turn's player
      */
@@ -70,7 +70,7 @@ public class Game extends Message {
      * the current State of the game (IN_PROGRESS, END_MODE, FINISHED, OUTDATED)
      */
     private State state;
-    
+
     /**
      * if the game is finished allow to know if the player Won or Lost
      */
@@ -78,7 +78,7 @@ public class Game extends Message {
 
     /**
      * Constructor
-     * 
+     *
      * @param ID unique id of the game
      * @param created date of creation of the original GameModel
      * @param lastActivity date of the last action of a player (throw, play pass)
@@ -89,11 +89,12 @@ public class Game extends Message {
      * @param lastWordPlayed Tiles of the last word played (in order)
      * @param scoreLastWordPlayed the tabulated score with the last word played
      * @param yourTurn indicate if it's the turn's player
-     * @param state the current State of the game (IN_PROGRESS, END_MODE, FINISHED, OUTDATED)
+     * @param state the current State of the game (IN_PROGRESS, END_MODE, FINISHED,
+     * OUTDATED)
      */
     public Game(int ID, Date created, Date lastActivity,
-                int tournament, Board board, Board opponentBoard, int nbLeftTile,
-                List<Tile> lastWordPlayed, int scoreLastWordPlayed, boolean yourTurn, State state) {
+        int tournament, Board board, Board opponentBoard, int nbLeftTile,
+        List<Tile> lastWordPlayed, int scoreLastWordPlayed, boolean yourTurn, State state) {
         this.ID = ID;
         this.created = created;
         this.lastActivity = lastActivity;
@@ -110,7 +111,7 @@ public class Game extends Message {
 
     /**
      * return the unique ID of a game
-     * 
+     *
      * @return the unique ID of a game
      */
     public int getID() {
@@ -119,7 +120,7 @@ public class Game extends Message {
 
     /**
      * return the date of creation of the original GameModel
-     * 
+     *
      * @return the date of creation of the original GameModel
      */
     public Date getCreated() {
@@ -128,8 +129,8 @@ public class Game extends Message {
 
     /**
      * return the date of the last action of a player (throw, play pass)
-     * 
-     * @return  the date of the last action of a player (throw, play pass)
+     *
+     * @return the date of the last action of a player (throw, play pass)
      */
     public Date getLastActivity() {
         return lastActivity;
@@ -137,7 +138,7 @@ public class Game extends Message {
 
     /**
      * return the unique id of the tournament associated
-     * 
+     *
      * @return the unique id of the tournament associated
      */
     public int getTournament() {
@@ -146,7 +147,7 @@ public class Game extends Message {
 
     /**
      * returnt the board of the player who will get this point of view
-     * 
+     *
      * @return the board of the player who will get this point of view
      */
     public Board getBoard() {
@@ -155,7 +156,7 @@ public class Game extends Message {
 
     /**
      * return the board of the opponent player (don't contain Tiles)
-     * 
+     *
      * @return the board of the opponent player (don't contain Tiles)
      */
     public Board getOpponentBoard() {
@@ -164,7 +165,7 @@ public class Game extends Message {
 
     /**
      * return the score of the player who will get this point of view
-     * 
+     *
      * @return the score of the player who will get this point of view
      */
     public int getScore() {
@@ -173,7 +174,7 @@ public class Game extends Message {
 
     /**
      * return the name of the player who will get this point of view
-     * 
+     *
      * @return the name of the player who will get this point of view
      */
     public String getNamePlayer() {
@@ -182,7 +183,7 @@ public class Game extends Message {
 
     /**
      * return the score of the opponent player
-     * 
+     *
      * @return the score of the opponent player
      */
     public int getOpponentScore() {
@@ -191,7 +192,7 @@ public class Game extends Message {
 
     /**
      * return the name of the opponent player
-     * 
+     *
      * @return the name of the opponent player
      */
     public String getOpponentName() {
@@ -200,17 +201,19 @@ public class Game extends Message {
 
     /**
      * return the number of Tiles left in the Tile Stack
-     * 
-     * @return the number of Tiles left in the Tile Stack 
+     *
+     * @return the number of Tiles left in the Tile Stack
      */
     public int getNbLeftTile() {
         return nbLeftTile;
     }
 
     /**
-     * return the letters of the player who will get this point of view without the bonus letters
-     * 
-     * @return the letters of the player who will get this point of view without the bonus letters
+     * return the letters of the player who will get this point of view without the
+     * bonus letters
+     *
+     * @return the letters of the player who will get this point of view without the
+     * bonus letters
      */
     public List<Tile> getLetters() {
         return board.getLetters();
@@ -218,29 +221,29 @@ public class Game extends Message {
 
     /**
      * return the bonus letters of the player who will get this point of view
-     * 
+     *
      * @return the bonus letters of the player who will get this point of view
      */
     public List<Tile> getBonusLetters() {
-      List<Tile> bonusTiles =  board.getBonus();
-      bonusTiles.forEach((t) -> t.setBonus(true));
-      return bonusTiles;
+        List<Tile> bonusTiles = board.getBonus();
+        bonusTiles.forEach((t) -> t.setBonus(true));
+        return bonusTiles;
     }
 
     /**
      * return the bonus letters of the opponent player
-     * 
+     *
      * @return the bonus letters of the opponent player
      */
     public List<Tile> getOpponentBonusLetters() {
-      List<Tile> bonusTiles =  opponentBoard.getBonus();
-      bonusTiles.forEach((t) -> t.setBonus(true));
-      return bonusTiles;
+        List<Tile> bonusTiles = opponentBoard.getBonus();
+        bonusTiles.forEach((t) -> t.setBonus(true));
+        return bonusTiles;
     }
 
     /**
      * return the Tiles of the last word played (in order)
-     * 
+     *
      * @return the Tiles of the last word played (in order)
      */
     public List<Tile> getLastWordPlayed() {
@@ -249,16 +252,16 @@ public class Game extends Message {
 
     /**
      * return the tabulated score with the last word played
-     * 
+     *
      * @return the tabulated score with the last word played
      */
     public int getScoreLastWordPlayed() {
         return scoreLastWordPlayed;
     }
-    
+
     /**
      * indicate if it's the turn's player
-     * 
+     *
      * @return a boolean that indicate if it's the turn's player
      */
     public boolean isYourTurn() {
@@ -266,9 +269,11 @@ public class Game extends Message {
     }
 
     /**
-     * return the current State of the game (IN_PROGRESS, END_MODE, FINISHED, OUTDATED) 
-     * 
-     * @return the current State of the game (IN_PROGRESS, END_MODE, FINISHED, OUTDATED)
+     * return the current State of the game (IN_PROGRESS, END_MODE, FINISHED,
+     * OUTDATED)
+     *
+     * @return the current State of the game (IN_PROGRESS, END_MODE, FINISHED,
+     * OUTDATED)
      */
     public State getState() {
         return state;
@@ -276,25 +281,25 @@ public class Game extends Message {
 
     /**
      * return the squares of the player who will get this point of view
-     * 
+     *
      * @return the squares of the player who will get this point of view
      */
-    public List<Square> getSquare(){
+    public List<Square> getSquare() {
         return Arrays.asList(board.getComposition().getSquare());
     }
 
     /**
      * return the squares of the opponent player
-     * 
+     *
      * @return the squares of the opponent player
      */
-    public List<Square> getOpponentSquare(){
+    public List<Square> getOpponentSquare() {
         return Arrays.asList(opponentBoard.getComposition().getSquare());
     }
-    
+
     /**
      * return the result of the game for this point of view
-     * 
+     *
      * @return the result of the game for this point of view
      */
     public Result getResult() {
@@ -302,18 +307,19 @@ public class Game extends Message {
     }
 
     /**
-     * allow to change the current State of the game (IN_PROGRESS, END_MODE, FINISHED, OUTDATED)
-     * improve the rapidity of answer of the server
-     * 
-     * @param state the new current State of the game (IN_PROGRESS, END_MODE, FINISHED, OUTDATED)
+     * allow to change the current State of the game (IN_PROGRESS, END_MODE,
+     * FINISHED, OUTDATED) improve the rapidity of answer of the server
+     *
+     * @param state the new current State of the game (IN_PROGRESS, END_MODE,
+     * FINISHED, OUTDATED)
      */
     public void setState(State state) {
         this.state = state;
     }
-    
+
     /**
      * allow to change the result of the game
-     * 
+     *
      * @param result the new result of the game
      */
     public void setResult(Result result) {
@@ -322,7 +328,7 @@ public class Game extends Message {
 
     /**
      * override the print of this class for an easier debug in client
-     * 
+     *
      * @return a String representing the game status
      */
     @Override

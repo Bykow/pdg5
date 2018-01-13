@@ -11,7 +11,6 @@ public class ProcessNoop implements GenericProcess {
         this.noop = noop;
     }
 
-
     @Override
     public Message execute() {
         if (noop.getSender() == Noop.Sender.CLIENT) {

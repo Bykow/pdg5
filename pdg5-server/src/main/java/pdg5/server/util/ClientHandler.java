@@ -31,7 +31,7 @@ public class ClientHandler implements Runnable {
     private Integer playerId;
 
     private DatabaseManagers databaseManagers;
-    
+
     public ClientHandler(SSLSocket socket, ServerActiveUser activeUser, GameController gameController) {
         if (socket == null) {
             return;
@@ -69,10 +69,10 @@ public class ClientHandler implements Runnable {
         // Process message
         while (true) {
             queueOut.add(
-                    requestManager.execute(
-                            queueIn.take(),
-                            this
-                    )
+                requestManager.execute(
+                    queueIn.take(),
+                    this
+                )
             );
         }
     }
@@ -103,36 +103,36 @@ public class ClientHandler implements Runnable {
         }).start();
     }
 
-   public void setPlayerId(Integer playerId) {
-      this.playerId = playerId;
-   }
+    public void setPlayerId(Integer playerId) {
+        this.playerId = playerId;
+    }
 
-   public Integer getPlayerId() throws NullPointerException {
-      if (playerId == null) {
-         throw new NullPointerException("the clientHandler has no associated client (playerId in ClientHandler null)");
-      }
-      return playerId;
-   }
-   
-   public boolean isConnected() {
-      return playerId != null;
-   }
+    public Integer getPlayerId() throws NullPointerException {
+        if (playerId == null) {
+            throw new NullPointerException("the clientHandler has no associated client (playerId in ClientHandler null)");
+        }
+        return playerId;
+    }
 
+    public boolean isConnected() {
+        return playerId != null;
+    }
 
-    public DatabaseManagers getDatabaseManagers(){
+    public DatabaseManagers getDatabaseManagers() {
         return databaseManagers;
     }
-    
+
     public class DatabaseManagers {
+
         private final ManageUser manageUser;
         private final ManageGame manageGame;
         private final ManageChat manageChat;
         private final ManageMessage manageMessage;
 
         public DatabaseManagers() {
-            
+
             Session session = new Manager().getSession();
-            
+
             this.manageUser = new ManageUser(session);
             this.manageGame = new ManageGame(session);
             this.manageChat = new ManageChat(session);
@@ -146,11 +146,11 @@ public class ClientHandler implements Runnable {
         public ManageGame getManageGame() {
             return manageGame;
         }
-        
+
         public ManageChat getManageChat() {
             return manageChat;
         }
-        
+
         public ManageMessage getManageMessage() {
             return manageMessage;
         }

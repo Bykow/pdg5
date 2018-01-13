@@ -10,7 +10,7 @@ import java.util.Random;
 /**
  * This class manage the turn for a game
  */
-public class TurnManager implements Serializable{
+public class TurnManager implements Serializable {
 
     private final static Composition.Square[][] POSSIBLE_ARRAY_SQUARES = {
         {Square.DOUBLE, Square.NORMAL, Square.NORMAL, Square.W, Square.NORMAL, Square.W, Square.BONUS},
@@ -128,7 +128,7 @@ public class TurnManager implements Serializable{
         // prevents Server Crash in case of problem
         try {
             squares = POSSIBLE_ARRAY_SQUARES[position];
-        } catch (IndexOutOfBoundsException ex){
+        } catch (IndexOutOfBoundsException ex) {
             System.err.println(ex.getMessage());
             squares = POSSIBLE_ARRAY_SQUARES[0];
         }

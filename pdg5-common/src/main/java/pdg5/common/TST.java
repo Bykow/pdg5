@@ -6,6 +6,7 @@ import java.io.Serializable;
  * Class representing a Ternary Search Tree, used to stock a dictionary
  */
 public class TST implements Serializable {
+
     /**
      * Root of the tree
      */
@@ -21,9 +22,9 @@ public class TST implements Serializable {
     /**
      * Put a Node in the tree with a rebalancing
      *
-     * @param x   the node to put
+     * @param x the node to put
      * @param key the key (string)
-     * @param d   index of the char in the word (for recursive purposes)
+     * @param d index of the char in the word (for recursive purposes)
      * @return Node for recursive calls
      */
     private Node put(Node x, String key, int d) {
@@ -49,9 +50,9 @@ public class TST implements Serializable {
     /**
      * Gets the Node of a key
      *
-     * @param x   Node to get
+     * @param x Node to get
      * @param key the key (string)
-     * @param d   index of the char in the word (for recursive purposes)
+     * @param d index of the char in the word (for recursive purposes)
      * @return Node for recursive calls
      */
     private boolean get(Node x, String key, int d) {
@@ -157,7 +158,6 @@ public class TST implements Serializable {
     }
 
     // Renvoie la hauteur du noeux x
-
     /**
      * height of the current node
      *
@@ -195,6 +195,7 @@ public class TST implements Serializable {
      * Private inner class Node, represents a Node (a char) in the data structure
      */
     private class Node {
+
         public Node left;       // subtree smaller keys
         public Node right;      // subtree greater keys
         public Node center;     // subtree with next key

@@ -7,21 +7,21 @@ import java.io.Serializable;
  */
 public class Word implements Serializable {
 
-   /**
-    * represent the word
-    */
+    /**
+     * represent the word
+     */
     private String word;
-    
+
     /**
      * associated play to the word, can be null
      */
     private Play play;
-    
+
     /**
      * associated validation to the word, can be null
      */
     private Validation validation;
-    
+
     /**
      * unique ID where the word context is
      */
@@ -29,7 +29,7 @@ public class Word implements Serializable {
 
     /**
      * Constructor
-     * 
+     *
      * @param word String representing the word
      * @param play associated play to the word, can be null
      * @param validation associated validation to the word, can be null
@@ -44,7 +44,7 @@ public class Word implements Serializable {
 
     /**
      * return The unique ID of the game where is the word
-     * 
+     *
      * @return The unique ID of the game where is the word
      */
     public int getGameId() {
@@ -53,7 +53,7 @@ public class Word implements Serializable {
 
     /**
      * return the associated play to the word
-     * 
+     *
      * @return the associated play to the word
      */
     public Play getPlay() {
@@ -62,7 +62,7 @@ public class Word implements Serializable {
 
     /**
      * return the associated Validation
-     * 
+     *
      * @return the associated Validation
      */
     public Validation getValidation() {
@@ -71,7 +71,7 @@ public class Word implements Serializable {
 
     /**
      * return the word
-     * 
+     *
      * @return the word
      */
     public String getWord() {

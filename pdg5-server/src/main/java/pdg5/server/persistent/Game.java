@@ -42,7 +42,7 @@ public class Game extends AbstractData implements java.io.Serializable {
     }
 
     public Game(Tournament tournament, User userByPlayer2, User userByPlayer1, String title, Date created,
-            Date lastActivity, Set<Chat> chats) {
+        Date lastActivity, Set<Chat> chats) {
         this.tournament = tournament;
         this.userByPlayer2 = userByPlayer2;
         this.userByPlayer1 = userByPlayer1;
@@ -138,7 +138,7 @@ public class Game extends AbstractData implements java.io.Serializable {
     public Blob getTurnManager() {
         return this.turnManager;
     }
-    
+
     public Serializable getGameStateAsSerializable() {
         return deserialize(getGameState());
     }
@@ -158,7 +158,7 @@ public class Game extends AbstractData implements java.io.Serializable {
     public void setGameState(Blob gameState) {
         this.gameState = gameState;
     }
-    
+
     public void setTurnManager(Blob turnManager) {
         this.turnManager = turnManager;
     }
@@ -172,14 +172,14 @@ public class Game extends AbstractData implements java.io.Serializable {
         Game b = (Game) obj;
 
         return id == b.getId()
-                && ((tournament == null && b.getTournament() == null) || tournament.equals(b.getTournament()))
-                && ((userByPlayer1 == null && b.getUserByPlayer1() == null) || userByPlayer1.equals(b.getUserByPlayer1()))
-                && ((userByPlayer2 == null && b.getUserByPlayer2() == null) || userByPlayer2.equals(b.getUserByPlayer2()))
-                && ((title == null && b.getTitle() == null) || title.equals(b.getTitle()))
-                && ((remainingLetters == null && b.getRemainingLetters() == null) || remainingLetters.equals(b.getRemainingLetters()))
-                && ((created == null && b.getCreated() == null) || created.equals(b.getCreated()))
-                && ((lastActivity == null && b.getLastActivity() == null) || lastActivity.equals(b.getLastActivity()))
-                && chats.equals(b.getChats());
+            && ((tournament == null && b.getTournament() == null) || tournament.equals(b.getTournament()))
+            && ((userByPlayer1 == null && b.getUserByPlayer1() == null) || userByPlayer1.equals(b.getUserByPlayer1()))
+            && ((userByPlayer2 == null && b.getUserByPlayer2() == null) || userByPlayer2.equals(b.getUserByPlayer2()))
+            && ((title == null && b.getTitle() == null) || title.equals(b.getTitle()))
+            && ((remainingLetters == null && b.getRemainingLetters() == null) || remainingLetters.equals(b.getRemainingLetters()))
+            && ((created == null && b.getCreated() == null) || created.equals(b.getCreated()))
+            && ((lastActivity == null && b.getLastActivity() == null) || lastActivity.equals(b.getLastActivity()))
+            && chats.equals(b.getChats());
     }
 
     @Override

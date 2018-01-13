@@ -5,16 +5,16 @@ package pdg5.common.protocol;
  */
 public class SignUp extends Message {
 
-   /**
-    * email of the sign up
-    */
+    /**
+     * email of the sign up
+     */
     private String email;
-    
+
     /**
      * username of the sign up
      */
     private String username;
-    
+
     /**
      * password of the sign up
      */
@@ -22,7 +22,7 @@ public class SignUp extends Message {
 
     /**
      * Constructor
-     * 
+     *
      * @param email used to sign up
      * @param username used to sign up
      * @param password used to sign up
@@ -35,7 +35,7 @@ public class SignUp extends Message {
 
     /**
      * return the email used to sign up
-     * 
+     *
      * @return the email used to sign up
      */
     public String getEmail() {
@@ -44,7 +44,7 @@ public class SignUp extends Message {
 
     /**
      * return the username used to sign up
-     * 
+     *
      * @return the username used to sign up
      */
     public String getUsername() {
@@ -53,7 +53,7 @@ public class SignUp extends Message {
 
     /**
      * return the password used to sign up
-     * 
+     *
      * @return the password used to sign up
      */
     public String getPassword() {
@@ -62,11 +62,11 @@ public class SignUp extends Message {
 
     /**
      * override the print of this class for easier debug in client
-     * 
+     *
      * @return a string with the email and username used to sign up
      */
-   @Override
-   public String toString() {
-      return "SignUp{" + "email=" + email + ", username=" + username + '}';
-   }
+    @Override
+    public String toString() {
+        return "SignUp{" + "email=" + email + ", username=" + username + '}';
+    }
 }

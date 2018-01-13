@@ -10,5 +10,5 @@ package pdg5.common.game;
  * @author Miguel-Portable
  */
 public enum Result {
-   NONE, WIN, LOSE, EQUALITY
+    NONE, WIN, LOSE, EQUALITY
 }

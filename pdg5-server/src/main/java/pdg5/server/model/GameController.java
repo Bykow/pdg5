@@ -116,7 +116,7 @@ public class GameController {
 
         InputStream inputStream = TST.class.getResourceAsStream("/dico/fr_dico.dic");
         new BufferedReader(new InputStreamReader(inputStream)).lines()
-                .forEach(dictionary::put);
+            .forEach(dictionary::put);
         this.activeUser = activeUser;
 
         checkGamesOutdatedScheduler = Executors.newScheduledThreadPool(1);
@@ -137,12 +137,12 @@ public class GameController {
 
         List<pdg5.server.persistent.Game> listGameOfPlayer = manageGame.getGamesByUser(user);
         clientGames.put(idPlayer, listGameOfPlayer
-                .stream()
-                .peek((g) -> tileStacks.put(g.getId(), new TileStack(Protocol.Languages.LANG_FR.toString(), g.getRemainingLetters())))
-                .peek((g) -> playerTurnManager.put(g.getId(), (TurnManager) g.getTurnManagerAsSerializable()))
-                .map((g) -> (GameModel) g.getGameStateAsSerializable())
-                .peek((g) -> games.put(g.getGameId(), g))
-                .map(GameModel::getGameId).collect(Collectors.toList()));
+            .stream()
+            .peek((g) -> tileStacks.put(g.getId(), new TileStack(Protocol.Languages.LANG_FR.toString(), g.getRemainingLetters())))
+            .peek((g) -> playerTurnManager.put(g.getId(), (TurnManager) g.getTurnManagerAsSerializable()))
+            .map((g) -> (GameModel) g.getGameStateAsSerializable())
+            .peek((g) -> games.put(g.getGameId(), g))
+            .map(GameModel::getGameId).collect(Collectors.toList()));
 
         listGameOfPlayer.forEach((game) -> {
             if (!serverChats.containsKey(game.getId())) {
@@ -177,23 +177,23 @@ public class GameController {
         ManageMessage manageMessage = activeUser.getDatabaseManagers(idPlayer).getManageMessage();
 
         pdg5.server.persistent.Game game = manageGame
-                .getGamesByUser(manageUser.getUserById(idPlayer))
-                .stream()
-                .filter((g) -> g.getId() == idGame)
-                .findAny()
-                .get();
+            .getGamesByUser(manageUser.getUserById(idPlayer))
+            .stream()
+            .filter((g) -> g.getId() == idGame)
+            .findAny()
+            .get();
 
         // saving message in database
         pdg5.server.persistent.Chat databaseChat = game
-                .getChats()
-                .stream()
-                .findFirst()
-                .orElseGet(() -> {
-                    serverChats.put(idGame, new ArrayList<>());
-                    manageChat.addChatGame(game);
-                    manageGame.updateGame(game);
-                    return manageChat.listChats().stream().findAny().get();
-                });
+            .getChats()
+            .stream()
+            .findFirst()
+            .orElseGet(() -> {
+                serverChats.put(idGame, new ArrayList<>());
+                manageChat.addChatGame(game);
+                manageGame.updateGame(game);
+                return manageChat.listChats().stream().findAny().get();
+            });
 
         manageMessage.addMessage(chatServer.getMessage(), manageUser.getUserById(idPlayer), databaseChat);
         manageChat.updateChat(databaseChat);
@@ -300,7 +300,7 @@ public class GameController {
         Board[] boards = new Board[]{initBoard(ts, idPlayer1),
             initBoard(ts, idPlayer2)};
         GameModel model = new GameModel(
-                boards, idGame, new Date(), 0
+            boards, idGame, new Date(), 0
         );
         model.getBoardById(idPlayer1).getComposition().setSquare(tm.getSquares(idPlayer1));
         model.getBoardById(idPlayer2).getComposition().setSquare(tm.getSquares(idPlayer2));
@@ -415,9 +415,9 @@ public class GameController {
         lastWordPlayed = gm.getLastWordPlayed();
 
         Game game = new Game(gm.getGameId(), gm.getCreation(),
-                gm.getLastMove(), gm.getIdTournament(), boardOfClient,
-                cleanedOpponentBoard, ts.getTileLeft(),
-                lastWordPlayed, gm.getScoreLastWordPlayed(), hisTurn, gm.getState());
+            gm.getLastMove(), gm.getIdTournament(), boardOfClient,
+            cleanedOpponentBoard, ts.getTileLeft(),
+            lastWordPlayed, gm.getScoreLastWordPlayed(), hisTurn, gm.getState());
         return game;
     }
 
@@ -480,11 +480,11 @@ public class GameController {
 
             // update the DB game
             pdg5.server.persistent.Game game
-                    = manageGame.getGamesByUser(manageUser.getUserById(playerID))
-                            .stream()
-                            .filter((f) -> f.id == gameID)
-                            .findAny()
-                            .get();
+                = manageGame.getGamesByUser(manageUser.getUserById(playerID))
+                    .stream()
+                    .filter((f) -> f.id == gameID)
+                    .findAny()
+                    .get();
             game.setGameState(model);
             game.setTurnManager(tm);
             game.setRemainingLetters(ts.convertToString());
@@ -512,7 +512,7 @@ public class GameController {
 
         // Save Last Action for Chat
         addChat(new ChatServerSide(new Date().getTime(), playerID, Chat.SENDER.USER,
-                board.getPlayerName() + " a passé et perdu " + lostScore + " points", model.getGameId()));
+            board.getPlayerName() + " a passé et perdu " + lostScore + " points", model.getGameId()));
     }
 
     private void throwAction(GameModel model, int playerID, TileStack ts) {
@@ -550,8 +550,8 @@ public class GameController {
         });
 
         addChat(new ChatServerSide(new Date().getTime(), playerID, Chat.SENDER.USER,
-                board.getPlayerName() + " a jeté "
-                + wordAsString.toString() + " et perdu " + lostScore + " points", model.getGameId()));
+            board.getPlayerName() + " a jeté "
+            + wordAsString.toString() + " et perdu " + lostScore + " points", model.getGameId()));
     }
 
     /**
@@ -653,11 +653,11 @@ public class GameController {
 
         // update the DB game
         pdg5.server.persistent.Game game
-                = manageGame.getGamesByUser(manageUser.getUserById(playerID))
-                        .stream()
-                        .filter((f) -> f.id == gameID)
-                        .findAny()
-                        .get();
+            = manageGame.getGamesByUser(manageUser.getUserById(playerID))
+                .stream()
+                .filter((f) -> f.id == gameID)
+                .findAny()
+                .get();
         game.setGameState(model);
         game.setRemainingLetters(ts.convertToString());
         game.setTurnManager(tm);
@@ -670,8 +670,8 @@ public class GameController {
         });
 
         addChat(new ChatServerSide(new Date().getTime(), playerID, Chat.SENDER.USER,
-                board.getPlayerName() + " a joué "
-                + wordAsString.toString() + " pour " + scoreToAdd + " points", gameID));
+            board.getPlayerName() + " a joué "
+            + wordAsString.toString() + " pour " + scoreToAdd + " points", gameID));
 
         activeUser.giveToClientHandler(opponentId, getGameFromModel(gameID, opponentId));
         return getGameFromModel(gameID, playerID);
@@ -700,13 +700,13 @@ public class GameController {
 
         ManageGame manageGame = activeUser.getDatabaseManagers(player1Id).getManageGame();
         manageGame.listGame()
-                .stream()
-                .filter((g) -> g.getId() == model.getGameId())
-                .findFirst()
-                .ifPresent((g) -> {
-                    g.setGameState(model);
-                    manageGame.updateGame(g);
-                });
+            .stream()
+            .filter((g) -> g.getId() == model.getGameId())
+            .findFirst()
+            .ifPresent((g) -> {
+                g.setGameState(model);
+                manageGame.updateGame(g);
+            });
 
     }
 
@@ -714,9 +714,9 @@ public class GameController {
         int tilesLeft = ts.getTileLeft();
         // not end-mode yet
         if (tilesLeft <= TILE_LEFT_END_MODE_HARD
-                || tilesLeft <= TILE_LEFT_END_MODE_LAZY
-                && model.getBoard(GameModel.PlayerBoard.PLAYER1).getLastAction() == Board.LAST_ACTION.THROW
-                && model.getBoard(GameModel.PlayerBoard.PLAYER2).getLastAction() == Board.LAST_ACTION.THROW) {
+            || tilesLeft <= TILE_LEFT_END_MODE_LAZY
+            && model.getBoard(GameModel.PlayerBoard.PLAYER1).getLastAction() == Board.LAST_ACTION.THROW
+            && model.getBoard(GameModel.PlayerBoard.PLAYER2).getLastAction() == Board.LAST_ACTION.THROW) {
             model.setState(State.END_MODE);
         }
 
@@ -738,13 +738,13 @@ public class GameController {
             return false;
             // two players passed -> end of game
         } else if (model.getBoard(GameModel.PlayerBoard.PLAYER1).getLastAction() == Board.LAST_ACTION.PASS
-                && model.getBoard(GameModel.PlayerBoard.PLAYER2).getLastAction() == Board.LAST_ACTION.PASS) {
+            && model.getBoard(GameModel.PlayerBoard.PLAYER2).getLastAction() == Board.LAST_ACTION.PASS) {
             return true;
             // the tileStacke is empty and a player used all his Tiles -> end of game
         } else {
             return tilesLeft == 0
-                    && (model.getBoard(GameModel.PlayerBoard.PLAYER1).getLetters().isEmpty()
-                    || model.getBoard(GameModel.PlayerBoard.PLAYER2).getLetters().isEmpty());
+                && (model.getBoard(GameModel.PlayerBoard.PLAYER1).getLetters().isEmpty()
+                || model.getBoard(GameModel.PlayerBoard.PLAYER2).getLetters().isEmpty());
         }
     }
 
@@ -763,10 +763,10 @@ public class GameController {
         // if the container don't have the character in the map
         // or has less occurence of contained then it's false
         return occurenceContained
-                .keySet()
-                .stream()
-                .noneMatch((character) -> (!occurenceContainer.containsKey(character)
-                || occurenceContained.get(character) > occurenceContainer.get(character)));
+            .keySet()
+            .stream()
+            .noneMatch((character) -> (!occurenceContainer.containsKey(character)
+            || occurenceContained.get(character) > occurenceContainer.get(character)));
     }
 
     /**
@@ -825,11 +825,11 @@ public class GameController {
                         int idPlayer2 = gameModel.getBoard(GameModel.PlayerBoard.PLAYER2).getPlayerId();
                         // update the DB game
                         pdg5.server.persistent.Game game
-                                = manageGame.getGamesByUser(manageUser.getUserById(idPlayer1))
-                                        .stream()
-                                        .filter((f) -> Objects.equals(f.id, gameID))
-                                        .findAny()
-                                        .get();
+                            = manageGame.getGamesByUser(manageUser.getUserById(idPlayer1))
+                                .stream()
+                                .filter((f) -> Objects.equals(f.id, gameID))
+                                .findAny()
+                                .get();
                         game.setGameState(gameModel);
                         game.setRemainingLetters("");
                         manageGame.updateGame(game);

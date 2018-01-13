@@ -17,7 +17,7 @@ public class ServerActiveUser {
     }
 
     public void add(Integer user, ClientHandler clientHandler) throws ClientAlreadyConnected {
-        if(map.containsKey(user)){
+        if (map.containsKey(user)) {
             throw new ClientAlreadyConnected("The client is already logged in");
         }
         map.put(user, clientHandler);
@@ -34,15 +34,15 @@ public class ServerActiveUser {
     public ClientHandler getClientHandler(Integer user) {
         return map.get(user);
     }
-    
-    public void giveToClientHandler(Integer user, Message m){
+
+    public void giveToClientHandler(Integer user, Message m) {
         ClientHandler client = getClientHandler(user);
-        if(client != null){
+        if (client != null) {
             client.addToQueue(m);
         }
     }
-    
-    public ClientHandler.DatabaseManagers getDatabaseManagers(Integer user){
+
+    public ClientHandler.DatabaseManagers getDatabaseManagers(Integer user) {
         return getClientHandler(user).getDatabaseManagers();
     }
 }

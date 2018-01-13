@@ -27,7 +27,7 @@ public class ServerRequestManager {
      */
     public Message execute(Message o, ClientHandler ch) {
         System.out.println("Message received : " + o);
-        
+
         if (o instanceof SignUp) {
             return new ProcessSignUp((SignUp) o, gameController, manageUser, activeUser, ch).execute();
 
@@ -36,32 +36,31 @@ public class ServerRequestManager {
 
         } else if (ch.isConnected()) {
             if (o instanceof Noop) {
-               return new ProcessNoop((Noop) o).execute();
+                return new ProcessNoop((Noop) o).execute();
 
             } else if (o instanceof NewGame) {
-               return new ProcessNewGame((NewGame) o, gameController, activeUser, ch).execute();
+                return new ProcessNewGame((NewGame) o, gameController, activeUser, ch).execute();
 
             } else if (o instanceof Validation) {
-               return new ProcessValidation((Validation) o, gameController).execute();
+                return new ProcessValidation((Validation) o, gameController).execute();
 
             } else if (o instanceof Play) {
-               return new ProcessPlay((Play) o, gameController, activeUser, ch).execute(); 
+                return new ProcessPlay((Play) o, gameController, activeUser, ch).execute();
 
             } else if (o instanceof Friend) {
-               return new ProcessFriend((Friend) o, manageUser, ch).execute(); 
+                return new ProcessFriend((Friend) o, manageUser, ch).execute();
 
             } else if (o instanceof Pass) {
-               return new ProcessPass((Pass) o, gameController, ch).execute(); 
+                return new ProcessPass((Pass) o, gameController, ch).execute();
 
             } else if (o instanceof Chat) {
-               return new ProcessChat((Chat) o, gameController, ch).execute(); 
+                return new ProcessChat((Chat) o, gameController, ch).execute();
 
             } else if (o instanceof Logout) {
-               return new ProcessLogout((Logout) o, activeUser, ch).execute(); 
+                return new ProcessLogout((Logout) o, activeUser, ch).execute();
 
             }
         }
-        
 
         return new ErrorMessage("Unhandled ErrorMessage is ServerRequestManager, default reached are you connected?");
     }

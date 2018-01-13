@@ -13,24 +13,24 @@ public class ManageMessage extends Manager {
     public ManageMessage() {
         super();
     }
-    
+
     public ManageMessage(Session session) {
         super(session);
     }
-    
-	public Message addMessage(String content, User user, Chat chat) {
-		return (Message) addToDB(new Message(chat,user,content,new Date()));
-	}
-	
-	public List<Message> listMessages() {
-		 return (List<Message>) getListFromDB("FROM Message");
-	}
-	
-	public int updateMessage(Message message) {
-		return updateToDB(message);
-	}
-	
-	public int deleteMessage(Message message) {
-		return deleteToDB(message);
-	}
+
+    public Message addMessage(String content, User user, Chat chat) {
+        return (Message) addToDB(new Message(chat, user, content, new Date()));
+    }
+
+    public List<Message> listMessages() {
+        return (List<Message>) getListFromDB("FROM Message");
+    }
+
+    public int updateMessage(Message message) {
+        return updateToDB(message);
+    }
+
+    public int deleteMessage(Message message) {
+        return deleteToDB(message);
+    }
 }

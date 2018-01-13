@@ -6,23 +6,41 @@ import pdg5.server.persistent.User;
 
 import java.util.List;
 
+/**
+ * Manager to stock and load users from/to de database
+ */
 public class ManageUser extends Manager {
 
-    public ManageUser(Session session) {
-        super(session);
-    }
-
+    /**
+     * Constructor
+     */
     public ManageUser() {
         super();
     }
     
+   /**
+    * Constructor
+    * 
+    * @param session the session used by the manager to do transactions
+    */
+    public ManageUser(Session session) {
+        super(session);
+    }
+    
+    /**
+     * add a user to the database
+     * 
+     * @param email of the user
+     * @param username of the user
+     * @param pass the password of the user
+     * @return the new created user
+     */
     public User addUser(String email, String username, String pass) {
         User user = new User();
         user.setEmail(email.toLowerCase());
         user.setUsername(username.toLowerCase());
         user.setPass(BCrypt.hashpw(pass, BCrypt.gensalt()));
 
-        //todo if the email/username is already taken ?
         return (User) addToDB(user);
     }
 
@@ -60,6 +78,27 @@ public class ManageUser extends Manager {
         return u;
     }
 
+    /**
+     * Get the User whose unique id is given from the DB
+     * 
+     * @param idPlayer unique id of the user
+     * @return the found user
+     */
+    public User getUserById(int idPlayer) {
+        Session session = getSession();
+        session.beginTransaction();
+        User u = session.createQuery("from User where id=:id", User.class)
+            .setParameter("id", idPlayer).uniqueResult();
+        session.getTransaction().commit();
+
+        return u;
+    }
+    
+    /**
+     * return a list of all user contained in the database
+     * 
+     * @return a list of all user contained in the database
+     */
     public List<User> listUser() {
         return (List<User>) getListFromDB("FROM User");
     }
@@ -80,26 +119,35 @@ public class ManageUser extends Manager {
         return isExpectedPassword(password, u.getPass());
     }
 
+    /**
+     * method who check if the password once hashed
+     * is the hashed password
+     * 
+     * @param candidate the password tried hashed
+     * @param hashed the password real password hashed
+     * @return true if they are equals, false otherwise
+     */
     private boolean isExpectedPassword(String candidate, String hashed) {
         return BCrypt.checkpw(candidate, hashed);
     }
 
-    public void updateUser(User user) {
-        updateToDB(user);
+    /**
+     * update informations of a specified user
+     * 
+     * @param user the new informations of the user
+     * @return Protocol.OK if the transaction succeed or Protocol.Error else
+     */
+    public int updateUser(User user) {
+        return updateToDB(user);
     }
 
-    public void deleteUser(User user) {
-        deleteToDB(user);
+    /**
+     * delete from the database a specified user
+     * 
+     * @param user the user we wish to delete from database
+     * @return Protocol.OK if the transaction succeed or Protocol.Error else
+     */
+    public int deleteUser(User user) {
+        return deleteToDB(user);
     }
-
-    public User getUserById(int idPlayer) {
-        Session session = getSession();
-        session.beginTransaction();
-        User u = session.createQuery("from User where id=:id", User.class)
-            .setParameter("id", idPlayer).uniqueResult();
-        session.getTransaction().commit();
-
-        return u;
-    }
-
 }

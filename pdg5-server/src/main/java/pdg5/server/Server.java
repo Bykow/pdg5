@@ -3,7 +3,7 @@ package pdg5.server;
 import pdg5.server.util.ServerNetworkManager;
 
 /**
- * @author Maxime Guillod
+ * Class who build the server and run it
  */
 public class Server {
 

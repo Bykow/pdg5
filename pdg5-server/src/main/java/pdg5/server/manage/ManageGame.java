@@ -10,16 +10,37 @@ import pdg5.server.persistent.User;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Manager to stock and load games from/to de database
+ */
 public class ManageGame extends Manager {
 
+   /**
+    * Constructor
+    */
     public ManageGame() {
         super();
     }
 
+    /**
+     * Constructor
+     * 
+     * @param session the session used by the manager to do transactions
+     */
     public ManageGame(Session session) {
         super(session);
     }
 
+    /**
+     * add a tournament game and all his informations to the database
+     * 
+     * @param title of the game
+     * @param player1 one of the players
+     * @param player2 the other player
+     * @param tournament the tournament informations to link with this game
+     * @param remainingLetters the left letters in the stack
+     * @return the game added to the database
+     */
     public Game addGame(String title, User player1, User player2, Tournament tournament, String remainingLetters) {
         Game game = new Game();
         game.setTitle(title);
@@ -33,6 +54,15 @@ public class ManageGame extends Manager {
         return (Game) addToDB(game);
     }
 
+    /**
+     * add a game and all his informations to the database
+     * 
+     * @param title of the game
+     * @param player1 one of the players
+     * @param player2 the other player
+     * @param remainingLetters the left letters in the stack
+     * @return the game added to the database
+     */
     public Game addGame(String title, User player1, User player2, String remainingLetters) {
         Game game = new Game();
         game.setTitle(title);
@@ -45,10 +75,21 @@ public class ManageGame extends Manager {
         return (Game) addToDB(game);
     }
 
+    /**
+     * return a list of all games contained in the database
+     * 
+     * @return a list of all games contained in the database
+     */
     public List<Game> listGame() {
         return (List<Game>) getListFromDB("FROM Game");
     }
 
+    /**
+     * return a list of all games of a User
+     * 
+     * @param user the User we wish to get the games
+     * @return a list of all games of a User
+     */
     public List<Game> getGamesByUser(User user) {
         Session session = getSession();
         Transaction tx = null;
@@ -71,10 +112,22 @@ public class ManageGame extends Manager {
         return games;
     }
 
+    /**
+     * update informations about a game in the database
+     * 
+     * @param game the new informations status of the game
+     * @return Protocol.OK if the transaction succeed or Protocol.Error else
+     */
     public int updateGame(Game game) {
         return updateToDB(game);
     }
 
+    /**
+     * delete a game informations in the database
+     * 
+     * @param game the game we wish to delete the informations in the database
+     * @return Protocol.OK if the transaction succeed or Protocol.Error else
+     */
     public int deleteGame(Game game) {
         return deleteToDB(game);
     }

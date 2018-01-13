@@ -3,7 +3,6 @@ package pdg5.server.model;
 import pdg5.common.protocol.Chat;
 
 /**
- *
  * @author Jimmy Verdasca
  */
 public class ChatServerSide {

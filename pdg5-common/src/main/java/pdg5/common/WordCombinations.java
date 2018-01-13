@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * class who allow to search with a low complexity all the combinations of word
- * contained in our dictionnary
+ * class who allow to search with a low complexity
+ * all the combinations of word contained in our dictionnary
  */
 public class WordCombinations {
 
@@ -46,8 +46,9 @@ public class WordCombinations {
     }
 
     /**
-     * Search with the occurence map letterMap, all the possible word of length lower
-     * than the given length. if a word is found, we put him in the List listOfWord.
+     * Search with the occurence map letterMap,
+     * all the possible word of length lower than the given length.
+     * if a word is found, we put him in the List listOfWord.
      *
      * @param length Max number of letters we use.
      */

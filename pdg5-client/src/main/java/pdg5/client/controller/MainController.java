@@ -28,12 +28,19 @@ import pdg5.common.protocol.Message;
 
 import java.io.IOException;
 
+/**
+ * Main controller
+ */
 public class MainController extends AbstractController {
 
+    // Listener for Server messages
     private ClientListener listener;
+    // Sender to send messages to server
     private ClientSender sender;
+    // Client logic to process recieved messages
     private ClientRequestManager requestManager;
 
+    // Links to subcontrollers
     private GameController gameController;
     private LobyController lobyController;
     private ChatController chatController;
@@ -47,10 +54,9 @@ public class MainController extends AbstractController {
 
     private AnchorPane layout;
 
-    @FXML
-    public void initialize() {
-    }
-
+    /**
+     * Ctor
+     */
     public MainController() {
         listener = new ClientListener();
         sender = new ClientSender();
@@ -58,6 +64,13 @@ public class MainController extends AbstractController {
         this.requestManager = new ClientRequestManager(this);
     }
 
+    @FXML
+    public void initialize() {
+    }
+
+    /**
+     * Starts the logic of the client
+     */
     public void startLogic() {
         // Process message
         new Thread(() -> {
@@ -71,6 +84,9 @@ public class MainController extends AbstractController {
         }).start();
     }
 
+    /**
+     * Load the Game Controller
+     */
     public void loadGame() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -84,6 +100,9 @@ public class MainController extends AbstractController {
         }
     }
 
+    /**
+     * Load the Loby Controller
+     */
     public void loadLoby() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -98,19 +117,8 @@ public class MainController extends AbstractController {
     }
 
     /**
-     * Allow you to send message to the server
-     *
-     * @param m
+     * Load the Chat controller
      */
-    public void sendMessage(Message m) {
-        sender.add(m);
-    }
-
-    public void displayToast(String m) {
-        Stage stage = (Stage) gameContainer.getScene().getWindow();
-        Platform.runLater(() -> new Toast(stage, m).show());
-    }
-
     public void loadChat() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -118,12 +126,36 @@ public class MainController extends AbstractController {
             loader.setLocation(MainController.class.getResource("/fxml/chatView.fxml"));
             loader.setController(chatController);
             layout = loader.load();
-            Platform.runLater(()->chatContainer.getChildren().add(layout));
+            Platform.runLater(() -> chatContainer.getChildren().add(layout));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Allow you to send message to the server
+     *
+     * @param m message to send
+     */
+    public void sendMessage(Message m) {
+        sender.add(m);
+    }
+
+    /**
+     * Displays a toast message
+     *
+     * @param m message to display
+     */
+    public void displayToast(String m) {
+        Stage stage = (Stage) gameContainer.getScene().getWindow();
+        Platform.runLater(() -> new Toast(stage, m).show());
+    }
+
+    /**
+     * Getter for GameController, makes sure it is not null, creates it if needed
+     *
+     * @return Game Controller
+     */
     public GameController getGameController() {
         if (!gameContainer.getChildren().get(1).isVisible()) {
             gameContainer.getChildren().get(1).setVisible(true);
@@ -131,10 +163,20 @@ public class MainController extends AbstractController {
         return gameController;
     }
 
+    /**
+     * Getter for LobyController
+     *
+     * @return LobyController
+     */
     public LobyController getLobyController() {
         return lobyController;
     }
 
+    /**
+     * Getter for ChatController, makes sure it is not null, creates it if needed
+     *
+     * @return ChatController
+     */
     public ChatController getChatController() {
         if (!chatContainer.getChildren().get(1).isVisible()) {
             chatContainer.getChildren().get(1).setVisible(true);
@@ -142,6 +184,9 @@ public class MainController extends AbstractController {
         return chatController;
     }
 
+    /**
+     * Behaviour for a logout
+     */
     public void logout() {
         sender.add(new Logout());
 
@@ -156,14 +201,20 @@ public class MainController extends AbstractController {
         // Show the scene containing the root layout.
         Scene scene = new Scene(layout);
 
-        Stage stage = (Stage)gameContainer.getScene().getWindow();
+        Stage stage = (Stage) gameContainer.getScene().getWindow();
 
+        // Switches the scene
         stage.hide();
-
         stage.setScene(scene);
         stage.show();
     }
 
+    /**
+     * Makes a String have its first letter uppercase, mainly used to display username correctly
+     *
+     * @param s string to process
+     * @return string with uppercase
+     */
     public String upperCaseFirstLetter(String s) {
         return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
     }

@@ -25,7 +25,7 @@ public class TSTTest {
         lines.close();
 
         long stop = System.nanoTime();
-        System.out.println("Created in : " + ((stop - start) / 1000000 ) + " ms");
+        System.out.println("Created in : " + ((stop - start) / 1000000) + " ms");
     }
 
     @Test

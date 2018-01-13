@@ -1,14 +1,13 @@
 package pdg5.common;
 
 /**
- * Created on 03.10.17 by Bykow
+ * Constants for client and server
  */
 public interface Protocol {
 
     /**
      * Socket
      */
-//    final String DEFAULT_SERVER = "10.192.92.144";
     final String DEFAULT_SERVER = "localhost"; // modify for tests
     final int DEFAULT_PORT = 44555;
 
@@ -22,7 +21,9 @@ public interface Protocol {
     final int OK = 200;
     final int ERROR = 400;
     final int COULDNOTADDUSER = 401;
+    final int TOAST_BOTTOM_DIST = 50;
 
+    final int TOAST_DEFAULT_DURATION = 5000;
     public enum Languages {
         LANG_FR("fr");
         private final String lang;
@@ -45,8 +46,5 @@ public interface Protocol {
         public String toString() {
             return lang;
         }
-    };
-
-    final int TOAST_BOTTOM_DIST = 50;
-    final int TOAST_DEFAULT_DURATION = 5000;
+    }
 }

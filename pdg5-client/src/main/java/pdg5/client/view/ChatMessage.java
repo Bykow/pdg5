@@ -4,6 +4,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
+/**
+ * Graphical representation of a Chat Message
+ */
 public class ChatMessage extends AnchorPane {
     public ChatMessage(Type type, String msg) {
         TextFlow tf = new TextFlow(new Text(msg));
@@ -26,6 +29,9 @@ public class ChatMessage extends AnchorPane {
         this.getStyleClass().add(type.getValue());
     }
 
+    /**
+     * Enum that defines where and how to print the message
+     */
     public enum Type {
         TIME("time"),
         USER("user"),

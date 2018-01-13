@@ -13,42 +13,41 @@ import pdg5.common.game.Composition.Square;
 import java.util.Date;
 
 /**
- *
  * @author Miguel-Portable
  */
 public class CompositionTest {
 
-   Composition comp;
-   GameModel game;
+    Composition comp;
+    GameModel game;
 
-   public CompositionTest() {
+    public CompositionTest() {
 
-      Board[] boards = new Board[]{new Board("Test1", 13), new Board("Test2", 17)};
+        Board[] boards = new Board[]{new Board("Test1", 13), new Board("Test2", 17)};
 
-      game = new GameModel(boards, 5, new Date(), 0);
-      comp = new Composition();
-   }
+        game = new GameModel(boards, 5, new Date(), 0);
+        comp = new Composition();
+    }
 
-   @Before
-   public void setUp() {
-      comp.setSquare(new Square[]{
-         Square.NORMAL,
-         Square.DOUBLE,
-         Square.NORMAL,
-         Square.NORMAL,
-         Square.TRIPLE,
-         Square.NORMAL,
-         Square.BONUS
-      });
-   }
+    @Before
+    public void setUp() {
+        comp.setSquare(new Square[]{
+                Square.NORMAL,
+                Square.DOUBLE,
+                Square.NORMAL,
+                Square.NORMAL,
+                Square.TRIPLE,
+                Square.NORMAL,
+                Square.BONUS
+        });
+    }
 
-   @After
-   public void tearDown() {
-   }
-   
-   @Test
-   public void aBadBonusArraySizeShouldThrowIllegalArgumentException(){
-      // TODO
-   }
-   
+    @After
+    public void tearDown() {
+    }
+
+    @Test
+    public void aBadBonusArraySizeShouldThrowIllegalArgumentException() {
+        // TODO
+    }
+
 }

@@ -1,10 +1,10 @@
 package pdg5.server.model;
 
-import java.io.Serializable;
 import pdg5.common.game.Composition;
 import pdg5.common.game.Composition.Square;
 import pdg5.common.game.Utils;
 
+import java.io.Serializable;
 import java.util.Random;
 
 /**
@@ -13,22 +13,22 @@ import java.util.Random;
 public class TurnManager implements Serializable {
 
     private final static Composition.Square[][] POSSIBLE_ARRAY_SQUARES = {
-        {Square.DOUBLE, Square.NORMAL, Square.NORMAL, Square.W, Square.NORMAL, Square.W, Square.BONUS},
-        {Square.NORMAL, Square.NORMAL, Square.W, Square.NORMAL, Square.W, Square.TRIPLE, Square.BONUS},
-        {Square.W, Square.TRIPLE, Square.W, Square.NORMAL, Square.NORMAL, Square.NORMAL, Square.BONUS},
-        {Square.NORMAL, Square.W, Square.NORMAL, Square.W, Square.DOUBLE, Square.NORMAL, Square.BONUS},
-        {Square.NORMAL, Square.NORMAL, Square.DOUBLE, Square.W, Square.W, Square.NORMAL, Square.BONUS},
-        {Square.W, Square.NORMAL, Square.NORMAL, Square.TRIPLE, Square.NORMAL, Square.W, Square.BONUS}
+            {Square.DOUBLE, Square.NORMAL, Square.NORMAL, Square.W, Square.NORMAL, Square.W, Square.BONUS},
+            {Square.NORMAL, Square.NORMAL, Square.W, Square.NORMAL, Square.W, Square.TRIPLE, Square.BONUS},
+            {Square.W, Square.TRIPLE, Square.W, Square.NORMAL, Square.NORMAL, Square.NORMAL, Square.BONUS},
+            {Square.NORMAL, Square.W, Square.NORMAL, Square.W, Square.DOUBLE, Square.NORMAL, Square.BONUS},
+            {Square.NORMAL, Square.NORMAL, Square.DOUBLE, Square.W, Square.W, Square.NORMAL, Square.BONUS},
+            {Square.W, Square.NORMAL, Square.NORMAL, Square.TRIPLE, Square.NORMAL, Square.W, Square.BONUS}
     };
 
     private final static Composition.Square[] FIRST_SQUARE_OF_TOURNAMENT = {
-        Square.NORMAL,
-        Square.NORMAL,
-        Square.NORMAL,
-        Square.NORMAL,
-        Square.NORMAL,
-        Square.NORMAL,
-        Square.BONUS
+            Square.NORMAL,
+            Square.NORMAL,
+            Square.NORMAL,
+            Square.NORMAL,
+            Square.NORMAL,
+            Square.NORMAL,
+            Square.BONUS
     };
 
     private int idPlayer1;
@@ -41,7 +41,7 @@ public class TurnManager implements Serializable {
      * Constructor against an IA
      *
      * @param idPlayer1 unique id of the client
-     * @param seed random seed for this game
+     * @param seed      random seed for this game
      */
     public TurnManager(int idPlayer1, long seed) {
         this(idPlayer1, Utils.ID_AI, seed);
@@ -52,7 +52,7 @@ public class TurnManager implements Serializable {
      *
      * @param idPlayer1 unique id of a client
      * @param idPlayer2 unique id of other client
-     * @param seed random seed for this game
+     * @param seed      random seed for this game
      */
     public TurnManager(int idPlayer1, int idPlayer2, long seed) {
         rand = new Random(seed);

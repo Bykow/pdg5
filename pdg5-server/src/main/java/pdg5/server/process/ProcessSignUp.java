@@ -15,10 +15,10 @@ import pdg5.server.util.ServerActiveUser;
 public class ProcessSignUp implements GenericProcess {
 
     private final SignUp signUp;
-    private GameController gameController;
     private final ManageUser manager;
     private final ServerActiveUser activeUser;
     private final ClientHandler clientHandler;
+    private GameController gameController;
 
     public ProcessSignUp(SignUp signUp, GameController gameController, ManageUser manageUser, ServerActiveUser activeUser, ClientHandler clientHandler) {
         this.signUp = signUp;

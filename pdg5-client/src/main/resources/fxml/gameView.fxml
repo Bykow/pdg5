@@ -7,156 +7,167 @@
 <?import javafx.scene.text.*?>
 <?import java.net.URL?>
 <?import java.util.*?>
-<AnchorPane prefHeight="543.0" prefWidth="524.0" visible="false" style="-fx-background-color: #3caef5;" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <HBox layoutY="393.0" prefHeight="80.0" prefWidth="524.0" styleClass="table">
-         <children>
-            <StackPane fx:id="ugbox0" prefHeight="200.0" prefWidth="200.0" />
-            <StackPane fx:id="ugbox1" prefHeight="200.0" prefWidth="200.0" />
-            <StackPane fx:id="ugbox2" prefHeight="200.0" prefWidth="200.0" />
-            <StackPane fx:id="ugbox3" prefHeight="200.0" prefWidth="200.0" />
-            <StackPane fx:id="ugbox4" prefHeight="200.0" prefWidth="200.0" />
-            <StackPane fx:id="ugbox5" prefHeight="200.0" prefWidth="200.0" />
-            <StackPane fx:id="ugbox6" prefHeight="200.0" prefWidth="200.0" />
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="543.0" prefWidth="524.0" visible="false"
+            style="-fx-background-color: #3caef5;" xmlns="http://javafx.com/javafx/8.0.131">
+    <children>
+        <HBox layoutY="393.0" prefHeight="80.0" prefWidth="524.0" styleClass="table">
+            <children>
+                <StackPane fx:id="ugbox0" prefHeight="200.0" prefWidth="200.0"/>
+                <StackPane fx:id="ugbox1" prefHeight="200.0" prefWidth="200.0"/>
+                <StackPane fx:id="ugbox2" prefHeight="200.0" prefWidth="200.0"/>
+                <StackPane fx:id="ugbox3" prefHeight="200.0" prefWidth="200.0"/>
+                <StackPane fx:id="ugbox4" prefHeight="200.0" prefWidth="200.0"/>
+                <StackPane fx:id="ugbox5" prefHeight="200.0" prefWidth="200.0"/>
+                <StackPane fx:id="ugbox6" prefHeight="200.0" prefWidth="200.0"/>
 
-            <fx:define>
-               <ArrayList fx:id="userList" >
-                  <fx:reference source="ugbox0"/>
-                  <fx:reference source="ugbox1"/>
-                  <fx:reference source="ugbox2"/>
-                  <fx:reference source="ugbox3"/>
-                  <fx:reference source="ugbox4"/>
-                  <fx:reference source="ugbox5"/>
-                  <fx:reference source="ugbox6"/>
-               </ArrayList>
-            </fx:define>
-         </children>
-      </HBox>
-      <HBox prefHeight="80.0" prefWidth="524.0" styleClass="table, adversary">
-         <children>
-            <StackPane fx:id="agbox0" prefHeight="200.0" prefWidth="200.0" />
-            <StackPane fx:id="agbox1" prefHeight="200.0" prefWidth="200.0" />
-            <StackPane fx:id="agbox2" prefHeight="200.0" prefWidth="200.0" />
-            <StackPane fx:id="agbox3" prefHeight="200.0" prefWidth="200.0" />
-            <StackPane fx:id="agbox4" prefHeight="200.0" prefWidth="200.0" />
-            <StackPane fx:id="agbox5" prefHeight="200.0" prefWidth="200.0" />
-            <StackPane fx:id="agbox6" prefHeight="200.0" prefWidth="200.0" />
+                <fx:define>
+                    <ArrayList fx:id="userList">
+                        <fx:reference source="ugbox0"/>
+                        <fx:reference source="ugbox1"/>
+                        <fx:reference source="ugbox2"/>
+                        <fx:reference source="ugbox3"/>
+                        <fx:reference source="ugbox4"/>
+                        <fx:reference source="ugbox5"/>
+                        <fx:reference source="ugbox6"/>
+                    </ArrayList>
+                </fx:define>
+            </children>
+        </HBox>
+        <HBox prefHeight="80.0" prefWidth="524.0" styleClass="table, adversary">
+            <children>
+                <StackPane fx:id="agbox0" prefHeight="200.0" prefWidth="200.0"/>
+                <StackPane fx:id="agbox1" prefHeight="200.0" prefWidth="200.0"/>
+                <StackPane fx:id="agbox2" prefHeight="200.0" prefWidth="200.0"/>
+                <StackPane fx:id="agbox3" prefHeight="200.0" prefWidth="200.0"/>
+                <StackPane fx:id="agbox4" prefHeight="200.0" prefWidth="200.0"/>
+                <StackPane fx:id="agbox5" prefHeight="200.0" prefWidth="200.0"/>
+                <StackPane fx:id="agbox6" prefHeight="200.0" prefWidth="200.0"/>
 
-            <fx:define>
-               <ArrayList fx:id="adversaryList" >
-                  <fx:reference source="agbox0"/>
-                  <fx:reference source="agbox1"/>
-                  <fx:reference source="agbox2"/>
-                  <fx:reference source="agbox3"/>
-                  <fx:reference source="agbox4"/>
-                  <fx:reference source="agbox5"/>
-                  <fx:reference source="agbox6"/>
-               </ArrayList>
-            </fx:define>
-         </children>
-      </HBox>
-      <HBox layoutY="305.0" prefHeight="80.0" prefWidth="162.0" styleClass="table">
-         <children>
-            <StackPane fx:id="ugbbox0" prefHeight="200.0" prefWidth="200.0" />
-            <StackPane fx:id="ugbbox1" prefHeight="200.0" prefWidth="200.0" />
+                <fx:define>
+                    <ArrayList fx:id="adversaryList">
+                        <fx:reference source="agbox0"/>
+                        <fx:reference source="agbox1"/>
+                        <fx:reference source="agbox2"/>
+                        <fx:reference source="agbox3"/>
+                        <fx:reference source="agbox4"/>
+                        <fx:reference source="agbox5"/>
+                        <fx:reference source="agbox6"/>
+                    </ArrayList>
+                </fx:define>
+            </children>
+        </HBox>
+        <HBox layoutY="305.0" prefHeight="80.0" prefWidth="162.0" styleClass="table">
+            <children>
+                <StackPane fx:id="ugbbox0" prefHeight="200.0" prefWidth="200.0"/>
+                <StackPane fx:id="ugbbox1" prefHeight="200.0" prefWidth="200.0"/>
 
-            <fx:define>
-               <ArrayList fx:id="userBonusList" >
-                  <fx:reference source="ugbbox0"/>
-                  <fx:reference source="ugbbox1"/>
-               </ArrayList>
-            </fx:define>
-         </children>
-      </HBox>
-      <HBox layoutX="362.0" layoutY="89.0" prefHeight="80.0" prefWidth="162.0" styleClass="table">
-         <children>
-            <StackPane fx:id="agbbox0" prefHeight="200.0" prefWidth="200.0" />
-            <StackPane fx:id="agbbox1" prefHeight="200.0" prefWidth="200.0" />
+                <fx:define>
+                    <ArrayList fx:id="userBonusList">
+                        <fx:reference source="ugbbox0"/>
+                        <fx:reference source="ugbbox1"/>
+                    </ArrayList>
+                </fx:define>
+            </children>
+        </HBox>
+        <HBox layoutX="362.0" layoutY="89.0" prefHeight="80.0" prefWidth="162.0" styleClass="table">
+            <children>
+                <StackPane fx:id="agbbox0" prefHeight="200.0" prefWidth="200.0"/>
+                <StackPane fx:id="agbbox1" prefHeight="200.0" prefWidth="200.0"/>
 
-            <fx:define>
-               <ArrayList fx:id="adversaryBonusList" >
-                  <fx:reference source="agbbox0"/>
-                  <fx:reference source="agbbox1"/>
-               </ArrayList>
-            </fx:define>
-         </children>
-      </HBox>
-      <HBox id="deck" layoutY="473.0" prefHeight="70.0" prefWidth="524.0">
-         <children>
-            <StackPane fx:id="ubox0" prefHeight="200.0" prefWidth="200.0" />
-            <StackPane fx:id="ubox1" prefHeight="200.0" prefWidth="200.0" />
-            <StackPane fx:id="ubox2" prefHeight="200.0" prefWidth="200.0" />
-            <StackPane fx:id="ubox3" prefHeight="200.0" prefWidth="200.0" />
-            <StackPane fx:id="ubox4" prefHeight="200.0" prefWidth="200.0" />
-            <StackPane fx:id="ubox5" prefHeight="200.0" prefWidth="200.0" />
-            <StackPane fx:id="ubox6" prefHeight="200.0" prefWidth="200.0" />
+                <fx:define>
+                    <ArrayList fx:id="adversaryBonusList">
+                        <fx:reference source="agbbox0"/>
+                        <fx:reference source="agbbox1"/>
+                    </ArrayList>
+                </fx:define>
+            </children>
+        </HBox>
+        <HBox id="deck" layoutY="473.0" prefHeight="70.0" prefWidth="524.0">
+            <children>
+                <StackPane fx:id="ubox0" prefHeight="200.0" prefWidth="200.0"/>
+                <StackPane fx:id="ubox1" prefHeight="200.0" prefWidth="200.0"/>
+                <StackPane fx:id="ubox2" prefHeight="200.0" prefWidth="200.0"/>
+                <StackPane fx:id="ubox3" prefHeight="200.0" prefWidth="200.0"/>
+                <StackPane fx:id="ubox4" prefHeight="200.0" prefWidth="200.0"/>
+                <StackPane fx:id="ubox5" prefHeight="200.0" prefWidth="200.0"/>
+                <StackPane fx:id="ubox6" prefHeight="200.0" prefWidth="200.0"/>
 
-            <fx:define>
-               <ArrayList fx:id="deckList" >
-                   <fx:reference source="ubox0"/>
-                  <fx:reference source="ubox1"/>
-                  <fx:reference source="ubox2"/>
-                  <fx:reference source="ubox3"/>
-                  <fx:reference source="ubox4"/>
-                  <fx:reference source="ubox5"/>
-                  <fx:reference source="ubox6"/>
-               </ArrayList>
-            </fx:define>
-         </children>
-      </HBox>
-      <AnchorPane layoutX="435.0" layoutY="293.0" prefHeight="80.0" prefWidth="80.0" styleClass="avatar">
-         <children>
-            <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="4.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/nopic.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="9.0" layoutY="94.0" prefHeight="80.0" prefWidth="80.0" styleClass="avatar">
-         <children>
-            <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="4.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/nopic.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
-      <Label fx:id="userName" alignment="CENTER_RIGHT" contentDisplay="TOP" layoutX="398.0" layoutY="272.0" prefHeight="17.0" prefWidth="117.0" text="Username" textFill="#2c3e50">
-         <font>
-            <Font name="Helvetica Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="adversaryName" contentDisplay="TOP" layoutX="9.0" layoutY="176.0" prefHeight="17.0" prefWidth="117.0" text="Username" textFill="#2c3e50">
-         <font>
-            <Font name="Helvetica Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="adversaryScore" alignment="CENTER" layoutX="210.0" layoutY="175.0" prefHeight="36.0" prefWidth="105.0" text="0" textFill="#1e70a5">
-         <font>
-            <Font name="Helvetica Bold" size="30.0" />
-         </font>
-      </Label>
-      <Label fx:id="userScore" alignment="CENTER" layoutX="210.0" layoutY="236.0" prefHeight="36.0" prefWidth="105.0" text="0" textFill="#84cdf6">
-         <font>
-            <Font name="Helvetica Bold" size="30.0" />
-         </font>
-      </Label>
-      <Label fx:id="remainingTiles" alignment="CENTER" layoutX="140.0" layoutY="204.0" prefHeight="36.0" prefWidth="245.0" text="0 tuilles restantes" textFill="#f7f6f6">
-         <font>
-            <Font name="Helvetica Bold" size="18.0" />
-         </font>
-      </Label>
-      <AnchorPane id="bottom-bar" layoutY="543.0" prefHeight="55.0" prefWidth="524.0">
-         <children>
-            <Button onAction="#swap" styleClass="secondary" layoutX="95.0" layoutY="9.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="120.0" text="Mélanger" />
-            <Button fx:id="btnPlay" onAction="#play" layoutX="225.0" layoutY="9.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="90.0" text="Jouer" />
-            <Button fx:id="btnDiscard" onAction="#discard" styleClass="secondary" layoutX="325.0" layoutY="9.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="100.0" text="Jeter" />
-         </children>
-      </AnchorPane>
-   </children>
-   <stylesheets>
-      <URL value="@../css/gameView.css" />
-      <URL value="@../css/global.css" />
-   </stylesheets>
+                <fx:define>
+                    <ArrayList fx:id="deckList">
+                        <fx:reference source="ubox0"/>
+                        <fx:reference source="ubox1"/>
+                        <fx:reference source="ubox2"/>
+                        <fx:reference source="ubox3"/>
+                        <fx:reference source="ubox4"/>
+                        <fx:reference source="ubox5"/>
+                        <fx:reference source="ubox6"/>
+                    </ArrayList>
+                </fx:define>
+            </children>
+        </HBox>
+        <AnchorPane layoutX="435.0" layoutY="293.0" prefHeight="80.0" prefWidth="80.0" styleClass="avatar">
+            <children>
+                <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="4.0" layoutY="4.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@../img/nopic.png"/>
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="9.0" layoutY="94.0" prefHeight="80.0" prefWidth="80.0" styleClass="avatar">
+            <children>
+                <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="4.0" layoutY="4.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@../img/nopic.png"/>
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+        <Label fx:id="userName" alignment="CENTER_RIGHT" contentDisplay="TOP" layoutX="398.0" layoutY="272.0"
+               prefHeight="17.0" prefWidth="117.0" text="Username" textFill="#2c3e50">
+            <font>
+                <Font name="Helvetica Bold" size="14.0"/>
+            </font>
+        </Label>
+        <Label fx:id="adversaryName" contentDisplay="TOP" layoutX="9.0" layoutY="176.0" prefHeight="17.0"
+               prefWidth="117.0" text="Username" textFill="#2c3e50">
+            <font>
+                <Font name="Helvetica Bold" size="14.0"/>
+            </font>
+        </Label>
+        <Label fx:id="adversaryScore" alignment="CENTER" layoutX="210.0" layoutY="175.0" prefHeight="36.0"
+               prefWidth="105.0" text="0" textFill="#1e70a5">
+            <font>
+                <Font name="Helvetica Bold" size="30.0"/>
+            </font>
+        </Label>
+        <Label fx:id="userScore" alignment="CENTER" layoutX="210.0" layoutY="236.0" prefHeight="36.0" prefWidth="105.0"
+               text="0" textFill="#84cdf6">
+            <font>
+                <Font name="Helvetica Bold" size="30.0"/>
+            </font>
+        </Label>
+        <Label fx:id="remainingTiles" alignment="CENTER" layoutX="140.0" layoutY="204.0" prefHeight="36.0"
+               prefWidth="245.0" text="0 tuilles restantes" textFill="#f7f6f6">
+            <font>
+                <Font name="Helvetica Bold" size="18.0"/>
+            </font>
+        </Label>
+        <AnchorPane id="bottom-bar" layoutY="543.0" prefHeight="55.0" prefWidth="524.0">
+            <children>
+                <Button onAction="#swap" styleClass="secondary" layoutX="95.0" layoutY="9.0" mnemonicParsing="false"
+                        prefHeight="37.0" prefWidth="120.0" text="Mélanger"/>
+                <Button fx:id="btnPlay" onAction="#play" layoutX="225.0" layoutY="9.0" mnemonicParsing="false"
+                        prefHeight="37.0" prefWidth="90.0" text="Jouer"/>
+                <Button fx:id="btnDiscard" onAction="#discard" styleClass="secondary" layoutX="325.0" layoutY="9.0"
+                        mnemonicParsing="false" prefHeight="37.0" prefWidth="100.0" text="Jeter"/>
+            </children>
+        </AnchorPane>
+    </children>
+    <stylesheets>
+        <URL value="@../css/gameView.css"/>
+        <URL value="@../css/global.css"/>
+    </stylesheets>
 </AnchorPane>

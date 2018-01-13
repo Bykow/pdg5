@@ -4,10 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created on 03.10.17 by Bykow A Tile represents a letter and its value on in the
- * game. The value is directly linked to the langage of the game. An id is necessary
- * to recognize two same letters with same value, when one is a bonus tile and an
- * other is a normal letter.
+ * A Tile represents a letter and its value on in the game. The value is
+ * directly linked to the langage of the game.
+ * An id is necessary to recognize two same letters  with same value, 
+ * when one is a bonus tile and an other is a normal letter.
  */
 public class Tile implements Serializable {
 

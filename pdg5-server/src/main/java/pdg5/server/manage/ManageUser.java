@@ -15,7 +15,7 @@ public class ManageUser extends Manager {
     public ManageUser() {
         super();
     }
-
+    
     public User addUser(String email, String username, String pass) {
         User user = new User();
         user.setEmail(email.toLowerCase());

@@ -22,7 +22,7 @@ public class Play extends Message {
      * Constructor
      *
      * @param composition Word played by a player.
-     * @param gameID Unique ID game where the word is played
+     * @param gameID      Unique ID game where the word is played
      */
     public Play(Composition composition, int gameID) {
         this.composition = composition;

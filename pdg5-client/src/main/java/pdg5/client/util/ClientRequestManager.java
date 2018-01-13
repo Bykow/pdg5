@@ -6,7 +6,7 @@ import pdg5.client.process.*;
 import pdg5.common.protocol.*;
 
 /**
- * @author Maxime Guillod
+ * Client Request Manager, logic to call when receiving a message from server
  */
 public class ClientRequestManager {
 
@@ -16,10 +16,18 @@ public class ClientRequestManager {
         this.mainController = mainController;
     }
 
+    /**
+     * Calls the right Process considering the incoming message
+     *
+     * @param o incoming message
+     * @return the process of the message
+     */
     public Message execute(Message o) {
         System.out.println("Message received : ");
         System.out.println(o.toString());
         System.out.println();
+
+        // Note that this can't be achieved with a switch
         if (o instanceof ErrorMessage) {
             return new ProcessErrorMessage((ErrorMessage) o, mainController).execute();
         } else if (o instanceof Noop) {

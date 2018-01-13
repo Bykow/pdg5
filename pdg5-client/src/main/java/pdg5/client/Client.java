@@ -15,6 +15,7 @@ import java.io.IOException;
 
 public class Client extends Application {
 
+    private static final String TRUSTSTORE_LOCATION = "";
     private MainController mainController;
     private Stage primaryStage;
     private AnchorPane rootLayout;
@@ -23,37 +24,42 @@ public class Client extends Application {
     private ClientListener listener;
     private ClientSender sender;
     private ClientRequestManager requestManager;
-    
-    private static final String TRUSTSTORE_LOCATION = "";
+    private Boolean isConnected;
 
     public static void main(String[] args) {
         launch(args);
     }
 
+    /**
+     * Lauch of client
+     *
+     * @param primaryStage first stage to load
+     * @throws InterruptedException
+     */
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws InterruptedException {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("WordOn Desktop");
         this.primaryStage.setResizable(false);
 
         initRootLayout();
 
-        System.setProperty("javax.net.ssl.trustStore","clientKeyStore.jks");
-        System.setProperty("javax.net.ssl.trustStorePassword","pdg5Password");
-        
+        System.setProperty("javax.net.ssl.trustStore", "clientKeyStore.jks");
+        System.setProperty("javax.net.ssl.trustStorePassword", "pdg5Password");
+
         // Try connect
         try {
             SSLSocketFactory factory = (SSLSocketFactory) SSLSocketFactory.getDefault();
             this.socket = (SSLSocket) factory.createSocket(Protocol.DEFAULT_SERVER, Protocol.DEFAULT_PORT);
-            
+
             socket.setEnabledCipherSuites(socket.getSupportedCipherSuites());
-            
+
             // Init for use into controller
             sender = new ClientSender(socket);
             listener = new ClientListener(socket);
             new Thread(sender).start();
             new Thread(listener).start();
-
+            isConnected = true;
         } catch (Exception e) {
             System.err.println("Connection error");
         }

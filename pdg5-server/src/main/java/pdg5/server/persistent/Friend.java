@@ -10,49 +10,106 @@ import java.util.Date;
 @Table(name = "friend", catalog = "pdg")
 public class Friend extends AbstractData implements java.io.Serializable {
 
+   /**
+    * user who added in black list a user
+    */
     private User userByToUser;
+    
+    /**
+     * the targetted blacklisted user
+     */
     private User userByFromUser;
+    
+    /**
+     * date of the last modification of this blacklist
+     */
     private Date lastMod;
 
+    /**
+     * Constructor
+     */
     public Friend() {
     }
 
+    /**
+     * Constructor
+     * 
+     * @param userByToUser user who added in black list a user
+     * @param userByFromUser the targetted blacklisted user
+     * @param lastMod date of the last modification of this blacklist
+     */
     public Friend(User userByToUser, User userByFromUser, Date lastMod) {
         this.userByToUser = userByToUser;
         this.userByFromUser = userByFromUser;
         this.lastMod = lastMod;
     }
 
+    /**
+     * return the user who added in black list a user
+     * 
+     * @return the user who added in black list a user
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "toUser", nullable = false)
     public User getUserByToUser() {
         return this.userByToUser;
     }
 
+    /**
+     * modify the user who added in black list a user
+     * 
+     * @param userByToUser the new user who added in black list a user
+     */
     public void setUserByToUser(User userByToUser) {
         this.userByToUser = userByToUser;
     }
 
+    /**
+     * return the targetted blacklisted user
+     * 
+     * @return the targetted blacklisted user
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fromUser", nullable = false)
     public User getUserByFromUser() {
         return this.userByFromUser;
     }
 
+    /**
+     * modify the targetted blacklisted user
+     * 
+     * @param userByFromUser the new targetted blacklisted user
+     */
     public void setUserByFromUser(User userByFromUser) {
         this.userByFromUser = userByFromUser;
     }
 
+    /**
+     * return the date of the last modification of this blacklist
+     * 
+     * @return the date of the last modification of this blacklist
+     */
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "last_mod", nullable = false, length = 19)
     public Date getLastMod() {
         return this.lastMod;
     }
 
+    /**
+     * modify the date of the last modification of this blacklist
+     * 
+     * @param lastMod the new date of the last modification of this blacklist
+     */
     public void setLastMod(Date lastMod) {
         this.lastMod = lastMod;
     }
 
+    /**
+     * check if an Object is the same than this instance of Blacklist
+     * 
+     * @param obj the object we check equality
+     * @return true if they are identical
+     */
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Friend)) {
@@ -67,6 +124,10 @@ public class Friend extends AbstractData implements java.io.Serializable {
             && lastMod.equals(b.getLastMod());
     }
 
+    /**
+     * override the print of this class
+     * @return a string with the id, the date of last modification and both users
+     */
     @Override
     public String toString() {
         return id + ", " + userByFromUser + ", " + userByToUser + ", " + lastMod;

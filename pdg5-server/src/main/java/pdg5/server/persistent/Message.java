@@ -10,14 +10,40 @@ import java.util.Date;
 @Table(name = "message", catalog = "pdg")
 public class Message extends AbstractData implements java.io.Serializable {
 
+   /**
+    * the associated chat
+    */
     private Chat chat;
+    
+    /**
+     * the user who wrote this message
+     */
     private User user;
+    
+    /**
+     * the content of the message
+     */
     private String content;
+    
+    /**
+     * the date when was created the message
+     */
     private Date created;
 
+    /**
+     * Constructor
+     */
     public Message() {
     }
 
+    /**
+     * Constructor
+     * 
+     * @param chat the associated chat
+     * @param user the user who wrote this message
+     * @param content the content of the message
+     * @param created the date when was created the message
+     */
     public Message(Chat chat, User user, String content, Date created) {
         this.chat = chat;
         this.user = user;
@@ -25,45 +51,91 @@ public class Message extends AbstractData implements java.io.Serializable {
         this.created = created;
     }
 
+    /**
+     * return the chat associated chat
+     * 
+     * @return the chat associated chat
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "chat", nullable = false)
     public Chat getChat() {
         return this.chat;
     }
 
+    /**
+     * modify the chat associated chat
+     * 
+     * @param chat thenew  chat associated chat
+     */
     public void setChat(Chat chat) {
         this.chat = chat;
     }
 
+    /**
+     * return the user who wrote this message
+     * 
+     * @return the user who wrote this message
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user", nullable = false)
     public User getUser() {
         return this.user;
     }
 
+    /**
+     * modify the user who wrote this message
+     * 
+     * @param user the new user who wrote this message
+     */
     public void setUser(User user) {
         this.user = user;
     }
 
+    /**
+     * return the content of the message
+     * 
+     * @return the content of the message
+     */
     @Column(name = "content", nullable = false, length = 45)
     public String getContent() {
         return this.content;
     }
 
+    /**
+     * modify the content of the message
+     * 
+     * @param content the new content of the message
+     */
     public void setContent(String content) {
         this.content = content;
     }
 
+    /**
+     * return the date when was created the message
+     * 
+     * @return the date when was created the message
+     */
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created", nullable = false, length = 19)
     public Date getCreated() {
         return this.created;
     }
 
+    /**
+     * modify the date when was created the message
+     * 
+     * @param created the new date when was created the message
+     */
     public void setCreated(Date created) {
         this.created = created;
     }
 
+    /**
+     * check if an object is equivalent to this instance
+     * 
+     * @param obj the object we are checking the equality
+     * @return true if they are identicals
+     */
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Message)) {
@@ -79,6 +151,12 @@ public class Message extends AbstractData implements java.io.Serializable {
             && user.equals(b.getUser());
     }
 
+    /**
+     * override the print of this class. Usefull for debug
+     * 
+     * @return a string with the id, the title, userwho created the message, 
+     *   the date of creation, his content and the associated chat where he appear
+     */
     @Override
     public String toString() {
         return id + ", " + chat + ", " + content + ", " + created + ", " + user;

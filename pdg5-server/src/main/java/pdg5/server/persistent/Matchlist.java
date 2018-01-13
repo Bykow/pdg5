@@ -9,38 +9,84 @@ import javax.persistence.*;
 @Table(name = "matchlist", catalog = "pdg")
 public class Matchlist extends AbstractData implements java.io.Serializable {
 
+   /**
+    * the unique id of this matchlist
+    */
     private Integer id;
+    
+    /**
+     * tournament associated to this matchlist
+     */
     private Tournament tournament;
+    
+    /**
+     * the user who possess this matchlist
+     */
     private User user;
 
+    /**
+     * Constructor
+     */
     public Matchlist() {
     }
 
+    /**
+     * Constructor
+     * 
+     * @param tournament associated to this matchlist
+     * @param user who possess this matchlist
+     */
     public Matchlist(Tournament tournament, User user) {
         this.tournament = tournament;
         this.user = user;
     }
 
+    /**
+     * return the tournament associated to this matchlist
+     * 
+     * @return the tournament associated to this matchlist
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TournamentID", nullable = false)
     public Tournament getTournament() {
         return this.tournament;
     }
 
+    /**
+     * modify the tournament associated to this matchlist
+     * 
+     * @param tournament the new tournament associated to this matchlist
+     */
     public void setTournament(Tournament tournament) {
         this.tournament = tournament;
     }
 
+    /**
+     * return the user who possess this matchlist
+     * 
+     * @return the user who possess this matchlist
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userID", nullable = false)
     public User getUser() {
         return this.user;
     }
 
+    /**
+     * modify the user who possess this matchlist
+     * 
+     * @param user the new user who possess this matchlist
+     */
     public void setUser(User user) {
         this.user = user;
     }
 
+    /**
+     * check if an object is equivalent to this instance
+     * 
+     * @param obj the object we are checking the equality
+     * @return true if they are identicals
+     */
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Matchlist)) {
@@ -54,6 +100,12 @@ public class Matchlist extends AbstractData implements java.io.Serializable {
             && user.equals(b.getUser());
     }
 
+    /**
+     * override the print of this class. Usefull for debug
+     * 
+     * @return a string with the id, the user who possess this matchlist
+     *     and the associated tournament
+     */
     @Override
     public String toString() {
         return id + ", " + tournament + ", " + user;

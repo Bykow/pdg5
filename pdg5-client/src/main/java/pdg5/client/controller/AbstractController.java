@@ -15,6 +15,7 @@ public abstract class AbstractController {
 
     /**
      * Load the program for the GUI.
+     *
      * @param stage
      */
     protected void loadProg(Stage stage) {

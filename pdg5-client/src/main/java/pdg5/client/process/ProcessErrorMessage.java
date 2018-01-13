@@ -15,7 +15,7 @@ public class ProcessErrorMessage implements GenericProcess {
     /**
      * Ctor
      *
-     * @param message error
+     * @param message        error
      * @param mainController link to Main controller
      */
     public ProcessErrorMessage(ErrorMessage message, MainController mainController) {

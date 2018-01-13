@@ -15,10 +15,10 @@ import pdg5.server.util.ServerActiveUser;
 public class ProcessSignUp implements GenericProcess {
 
     private final SignUp signUp;
-    private GameController gameController;
     private final ManageUser manager;
     private final ServerActiveUser activeUser;
     private final ClientHandler clientHandler;
+    private GameController gameController;
 
     public ProcessSignUp(SignUp signUp, GameController gameController, ManageUser manageUser, ServerActiveUser activeUser, ClientHandler clientHandler) {
         this.signUp = signUp;
@@ -32,15 +32,15 @@ public class ProcessSignUp implements GenericProcess {
         int exitCode;
         User userName = manager.getUserByUsername(signUp.getUsername());
         User userMail = manager.getUserByEmail(signUp.getEmail());
-        
-        if(userName != null){
+
+        if (userName != null) {
             return new ErrorMessage("The username is already used");
         }
-        
-        if(userMail != null){
+
+        if (userMail != null) {
             return new ErrorMessage("The user email is already used");
         }
-        
+
         User user = manager.addUser(signUp.getEmail(), signUp.getUsername(), signUp.getPassword());
         if (user != null) {
             exitCode = Protocol.OK;

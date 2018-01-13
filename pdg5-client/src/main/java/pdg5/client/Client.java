@@ -12,10 +12,10 @@ import pdg5.common.Protocol;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 public class Client extends Application {
 
+    private static final String TRUSTSTORE_LOCATION = "";
     private MainController mainController;
     private Stage primaryStage;
     private AnchorPane rootLayout;
@@ -25,8 +25,6 @@ public class Client extends Application {
     private ClientSender sender;
     private ClientRequestManager requestManager;
     private Boolean isConnected;
-
-    private static final String TRUSTSTORE_LOCATION = "";
 
     public static void main(String[] args) {
         launch(args);
@@ -46,8 +44,8 @@ public class Client extends Application {
 
         initRootLayout();
 
-        System.setProperty("javax.net.ssl.trustStore","clientKeyStore.jks");
-        System.setProperty("javax.net.ssl.trustStorePassword","pdg5Password");
+        System.setProperty("javax.net.ssl.trustStore", "clientKeyStore.jks");
+        System.setProperty("javax.net.ssl.trustStorePassword", "pdg5Password");
 
         // Try connect
         try {

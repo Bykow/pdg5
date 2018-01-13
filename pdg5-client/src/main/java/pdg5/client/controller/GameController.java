@@ -31,9 +31,9 @@ public class GameController extends AbstractController {
     // Constants string to display
     private final String LEFTTILESINGLE = " tuille restante";
     private final String LEFTTILEPLURAL = " tuilles restantes";
-    private final String ENDWIN         = "Bravo ! Tu as gagné !";
-    private final String ENDLOSE        = "Tu as perdu la partie... ";
-    private final String ENDEQUALITY    = "Equalité !";
+    private final String ENDWIN = "Bravo ! Tu as gagné !";
+    private final String ENDLOSE = "Tu as perdu la partie... ";
+    private final String ENDEQUALITY = "Equalité !";
 
     // Tiles in the hands of the user
     @FXML
@@ -82,7 +82,7 @@ public class GameController extends AbstractController {
     /**
      * Ctor
      *
-     * @param sender sender used to send message to server
+     * @param sender         sender used to send message to server
      * @param mainController mainController link
      */
     public GameController(ClientSender sender, MainController mainController) {
@@ -105,7 +105,7 @@ public class GameController extends AbstractController {
         initLists(userList, adversaryList, deckList, userBonusList, adversaryBonusList);
 
         // Last box +10
-        setModifier(userList.get(userList.size()-1), "BONUS", "+10");
+        setModifier(userList.get(userList.size() - 1), "BONUS", "+10");
     }
 
     /**
@@ -115,7 +115,7 @@ public class GameController extends AbstractController {
      */
     @SafeVarargs
     private final void initLists(List<StackPane>... lists) {
-        for(List<StackPane> list : lists) {
+        for (List<StackPane> list : lists) {
             for (StackPane ap : list) {
                 ap.getChildren().add(new Label());
             }
@@ -157,13 +157,13 @@ public class GameController extends AbstractController {
     /**
      * Sets a modifier for a tile slot, means the slot is worth 3x point or something else
      *
-     * @param box The StackPane to modify
+     * @param box   The StackPane to modify
      * @param style The bonus to add to the StackPane
-     * @param text The text that is displayed
+     * @param text  The text that is displayed
      */
     private void setModifier(StackPane box, String style, String text) {
         box.getStyleClass().add(style);
-        ((Label)box.getChildren().get(0)).setText(text);
+        ((Label) box.getChildren().get(0)).setText(text);
     }
 
     /**
@@ -173,23 +173,23 @@ public class GameController extends AbstractController {
      */
     private void removeModifier(StackPane box) {
         box.getStyleClass().clear();
-        ((Label)box.getChildren().get(0)).setText("");
+        ((Label) box.getChildren().get(0)).setText("");
     }
 
     /**
      * Sets the dragging behaviour for a given list
      *
-     * @param list list to set
-     * @param isDeck boolean, changes the behaviour in some situations
+     * @param list    list to set
+     * @param isDeck  boolean, changes the behaviour in some situations
      * @param isBonus boolean, changes the behaviour in some situations
      */
     private void setDragForList(List<StackPane> list, boolean isDeck, boolean isBonus) {
-        for(StackPane ap : list) {
+        for (StackPane ap : list) {
             ap.setOnDragDetected(this::handleOnDragDetected);
             ap.setOnDragEntered(this::handleOnDragEntered);
-            if(isDeck)
+            if (isDeck)
                 ap.setOnDragOver(this::handleOnDragOverDeck);
-            else if(isBonus)
+            else if (isBonus)
                 ap.setOnDragOver(this::handleOnDragOverBonus);
             else
                 ap.setOnDragOver(this::handleOnDragOver);
@@ -206,12 +206,12 @@ public class GameController extends AbstractController {
     private void handleOnDragDetected(MouseEvent event) {
         StackPane source = (StackPane) event.getSource();
 
-        if(source.getChildren().size() < 2) {
+        if (source.getChildren().size() < 2) {
             event.consume();
             return;
         }
 
-        GTile tile = (GTile)source.getChildren().get(1);
+        GTile tile = (GTile) source.getChildren().get(1);
         Dragboard db = source.startDragAndDrop(TransferMode.MOVE);
 
         SnapshotParameters parameters = new SnapshotParameters();
@@ -245,7 +245,7 @@ public class GameController extends AbstractController {
     private void handleOnDragOver(DragEvent event) {
         StackPane source = (StackPane) event.getSource();
 
-        if(source.getChildren().size() < 2) {
+        if (source.getChildren().size() < 2) {
             event.acceptTransferModes(TransferMode.MOVE);
         }
         event.consume();
@@ -259,9 +259,9 @@ public class GameController extends AbstractController {
     private void handleOnDragOverDeck(DragEvent event) {
         StackPane source = (StackPane) event.getSource();
 
-        if(source.getChildren().size() < 2) {
+        if (source.getChildren().size() < 2) {
             Dragboard db = event.getDragboard();
-            if(db.hasContent(tileFormat) && !((Tile)db.getContent(tileFormat)).isBonus())
+            if (db.hasContent(tileFormat) && !((Tile) db.getContent(tileFormat)).isBonus())
                 event.acceptTransferModes(TransferMode.MOVE);
         }
         event.consume();
@@ -275,9 +275,9 @@ public class GameController extends AbstractController {
     private void handleOnDragOverBonus(DragEvent event) {
         StackPane source = (StackPane) event.getSource();
 
-        if(source.getChildren().size() < 2) {
+        if (source.getChildren().size() < 2) {
             Dragboard db = event.getDragboard();
-            if(db.hasContent(tileFormat) && ((Tile)db.getContent(tileFormat)).isBonus())
+            if (db.hasContent(tileFormat) && ((Tile) db.getContent(tileFormat)).isBonus())
                 event.acceptTransferModes(TransferMode.MOVE);
         }
         event.consume();
@@ -294,7 +294,7 @@ public class GameController extends AbstractController {
 
         boolean success = false;
         if (db.hasContent(tileFormat)) {
-            source.getChildren().add(1, new GTile((Tile)db.getContent(tileFormat)));
+            source.getChildren().add(1, new GTile((Tile) db.getContent(tileFormat)));
             source.getStyleClass().add("covered");
             success = true;
         }
@@ -327,7 +327,7 @@ public class GameController extends AbstractController {
         for (int i = 0; i < listDest.size(); i++) {
 
             // Empty the StackPane if not already empty
-            if(listDest.get(i).getChildren().size() > 1)
+            if (listDest.get(i).getChildren().size() > 1)
                 listDest.get(i).getChildren().remove(1);
 
             // Fills the StackPane
@@ -341,8 +341,8 @@ public class GameController extends AbstractController {
      * Updates the opponent list, there are a lot of different expected behaviours
      *
      * @param isYourTurn boolean true if it is the user turn, false otherwise
-     * @param listFrom list of Tile to add in the StackPanes
-     * @param square list of bonus on the StackPanes
+     * @param listFrom   list of Tile to add in the StackPanes
+     * @param square     list of bonus on the StackPanes
      */
     private void updateOpponentComposition(boolean isYourTurn, List<Tile> listFrom, List<Composition.Square> square) {
         for (int i = 0; i < adversaryList.size(); i++) {
@@ -355,7 +355,7 @@ public class GameController extends AbstractController {
                 }
                 if (!listFrom.isEmpty() && i < listFrom.size()) {
                     adversaryList.get(i).getChildren().add(1, new GTile(listFrom.get(i)));
-                    if(square.get(i) != Composition.Square.NORMAL) {
+                    if (square.get(i) != Composition.Square.NORMAL) {
                         adversaryList.get(i).getStyleClass().add("covered");
                     }
                 }
@@ -392,7 +392,7 @@ public class GameController extends AbstractController {
      */
     private void cleanList(List<StackPane> list) {
         for (int i = 0; i < list.size(); i++) {
-            if(list.get(i).getChildren().size() < 2) {
+            if (list.get(i).getChildren().size() < 2) {
                 continue;
             }
             list.get(i).getChildren().remove(1);
@@ -428,7 +428,7 @@ public class GameController extends AbstractController {
      */
     public void updateGame(Game g) {
         gameID = g.getID();
-        if(!g.isYourTurn()) {
+        if (!g.isYourTurn()) {
             btnPlay.setDisable(true);
             btnDiscard.setDisable(true);
         } else {
@@ -459,8 +459,8 @@ public class GameController extends AbstractController {
      */
     private Composition getPlay() {
         Composition composition = new Composition();
-        for (StackPane st: userList) {
-            if(st.getChildren().size() >= 2) {
+        for (StackPane st : userList) {
+            if (st.getChildren().size() >= 2) {
                 st.getStyleClass().remove("covered");
                 composition.push(((GTile) st.getChildren().get(1)).getModel());
             }
@@ -488,8 +488,8 @@ public class GameController extends AbstractController {
      */
     private void shuffleHand() {
         ArrayList<Tile> temp = new ArrayList<>();
-        for (StackPane st: deckList) {
-            if(st.getChildren().size() < 2) {
+        for (StackPane st : deckList) {
+            if (st.getChildren().size() < 2) {
                 continue;
             }
             temp.add(((GTile) st.getChildren().get(1)).getModel());

@@ -10,79 +10,78 @@ import java.util.Date;
 @Table(name = "message", catalog = "pdg")
 public class Message extends AbstractData implements java.io.Serializable {
 
-	private Chat chat;
-	private User user;
-	private String content;
-	private Date created;
+    private Chat chat;
+    private User user;
+    private String content;
+    private Date created;
 
-	public Message() {
-	}
+    public Message() {
+    }
 
-	public Message(Chat chat, User user, String content, Date created) {
-		this.chat = chat;
-		this.user = user;
-		this.content = content;
-		this.created = created;
-	}
+    public Message(Chat chat, User user, String content, Date created) {
+        this.chat = chat;
+        this.user = user;
+        this.content = content;
+        this.created = created;
+    }
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "chat", nullable = false)
-	public Chat getChat() {
-		return this.chat;
-	}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "chat", nullable = false)
+    public Chat getChat() {
+        return this.chat;
+    }
 
-	public void setChat(Chat chat) {
-		this.chat = chat;
-	}
+    public void setChat(Chat chat) {
+        this.chat = chat;
+    }
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user", nullable = false)
-	public User getUser() {
-		return this.user;
-	}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user", nullable = false)
+    public User getUser() {
+        return this.user;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-	@Column(name = "content", nullable = false, length = 45)
-	public String getContent() {
-		return this.content;
-	}
+    @Column(name = "content", nullable = false, length = 45)
+    public String getContent() {
+        return this.content;
+    }
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "created", nullable = false, length = 19)
-	public Date getCreated() {
-		return this.created;
-	}
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created", nullable = false, length = 19)
+    public Date getCreated() {
+        return this.created;
+    }
 
-	public void setCreated(Date created) {
-		this.created = created;
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if(!(obj instanceof Message))
-		{
-			return false;
-		}
-			
-		Message b = (Message) obj;
-		
-		return id == b.getId() &&
-				chat.equals(b.getChat()) &&
-				content.equals(b.getContent()) &&
-				created.equals(b.getCreated()) &&
-				user.equals(b.getUser());
-	}
-	
-	@Override
-	public String toString() {
-		return id + ", " + chat + ", " +  content + ", " +  created + ", " + user;
-	}
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Message)) {
+            return false;
+        }
+
+        Message b = (Message) obj;
+
+        return id == b.getId() &&
+                chat.equals(b.getChat()) &&
+                content.equals(b.getContent()) &&
+                created.equals(b.getCreated()) &&
+                user.equals(b.getUser());
+    }
+
+    @Override
+    public String toString() {
+        return id + ", " + chat + ", " + content + ", " + created + ", " + user;
+    }
 
 }

@@ -7,19 +7,19 @@ package pdg5.common.protocol;
  */
 public class SignIn extends Message {
 
-   /**
-    * username trying to log in
-    */
-    private String username;
-    
     /**
-    * password trying to log in
-    */
+     * username trying to log in
+     */
+    private String username;
+
+    /**
+     * password trying to log in
+     */
     private String password;
 
     /**
      * Constructor
-     * 
+     *
      * @param username used to try to log in
      * @param password used to try to log in
      */
@@ -30,6 +30,7 @@ public class SignIn extends Message {
 
     /**
      * return the username used to log in
+     *
      * @return the username used to log in
      */
     public String getUsername() {
@@ -38,7 +39,7 @@ public class SignIn extends Message {
 
     /**
      * return the password used to log in
-     * 
+     *
      * @return the password used to log in
      */
     public String getPassword() {
@@ -47,7 +48,7 @@ public class SignIn extends Message {
 
     /**
      * return a string representation of this instance
-     * 
+     *
      * @return a string representation of this instance
      */
     @Override

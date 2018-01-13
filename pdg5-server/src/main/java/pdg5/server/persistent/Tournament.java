@@ -12,94 +12,93 @@ import java.util.Set;
 @Table(name = "tournament", catalog = "pdg")
 public class Tournament extends AbstractData implements java.io.Serializable {
 
-	private String title;
-	private Date created;
-	private Set chats = new HashSet(0);
-	private Set matchlists = new HashSet(0);
-	private Set games = new HashSet(0);
+    private String title;
+    private Date created;
+    private Set chats = new HashSet(0);
+    private Set matchlists = new HashSet(0);
+    private Set games = new HashSet(0);
 
-	public Tournament() {
-	}
+    public Tournament() {
+    }
 
-	public Tournament(String title, Date created) {
-		this.title = title;
-		this.created = created;
-	}
+    public Tournament(String title, Date created) {
+        this.title = title;
+        this.created = created;
+    }
 
-	public Tournament(String title, Date created, Set chats, Set matchlists, Set games) {
-		this.title = title;
-		this.created = created;
-		this.chats = chats;
-		this.matchlists = matchlists;
-		this.games = games;
-	}
+    public Tournament(String title, Date created, Set chats, Set matchlists, Set games) {
+        this.title = title;
+        this.created = created;
+        this.chats = chats;
+        this.matchlists = matchlists;
+        this.games = games;
+    }
 
-	@Column(name = "title", nullable = false, length = 45)
-	public String getTitle() {
-		return this.title;
-	}
+    @Column(name = "title", nullable = false, length = 45)
+    public String getTitle() {
+        return this.title;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "created", nullable = false, length = 19)
-	public Date getCreated() {
-		return this.created;
-	}
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created", nullable = false, length = 19)
+    public Date getCreated() {
+        return this.created;
+    }
 
-	public void setCreated(Date created) {
-		this.created = created;
-	}
+    public void setCreated(Date created) {
+        this.created = created;
+    }
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tournament")
-	public Set getChats() {
-		return this.chats;
-	}
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tournament")
+    public Set getChats() {
+        return this.chats;
+    }
 
-	public void setChats(Set chats) {
-		this.chats = chats;
-	}
+    public void setChats(Set chats) {
+        this.chats = chats;
+    }
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tournament")
-	public Set getMatchlists() {
-		return this.matchlists;
-	}
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tournament")
+    public Set getMatchlists() {
+        return this.matchlists;
+    }
 
-	public void setMatchlists(Set matchlists) {
-		this.matchlists = matchlists;
-	}
+    public void setMatchlists(Set matchlists) {
+        this.matchlists = matchlists;
+    }
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tournament")
-	public Set getGames() {
-		return this.games;
-	}
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tournament")
+    public Set getGames() {
+        return this.games;
+    }
 
-	public void setGames(Set games) {
-		this.games = games;
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if(!(obj instanceof Tournament))
-		{
-			return false;
-		}
-			
-		Tournament b = (Tournament) obj;
-		
-		return id == b.getId() &&
-				chats.equals(b.getChats()) &&
-				((created == null && b.getCreated() == null ) || created.equals(b.getCreated())) &&
-				games.equals(b.getGames()) &&
-				matchlists.equals(b.getMatchlists()) &&
-				((title == null && b.getTitle() == null ) || title.equals(b.getTitle()));
-	}
-	
-	@Override
-	public String toString() {
-		return id + ", " + title + ", " + created;
-	}
+    public void setGames(Set games) {
+        this.games = games;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Tournament)) {
+            return false;
+        }
+
+        Tournament b = (Tournament) obj;
+
+        return id == b.getId() &&
+                chats.equals(b.getChats()) &&
+                ((created == null && b.getCreated() == null) || created.equals(b.getCreated())) &&
+                games.equals(b.getGames()) &&
+                matchlists.equals(b.getMatchlists()) &&
+                ((title == null && b.getTitle() == null) || title.equals(b.getTitle()));
+    }
+
+    @Override
+    public String toString() {
+        return id + ", " + title + ", " + created;
+    }
 
 }

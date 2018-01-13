@@ -16,6 +16,7 @@ import java.io.ObjectOutputStream;
  */
 public class ClientHandler implements Runnable {
 
+    private static int id;
     private SSLSocket socket;
     private ObjectOutputStream out;
     private ObjectInputStream in;
@@ -23,11 +24,10 @@ public class ClientHandler implements Runnable {
     private MessageQueue queueIn;
     private MessageQueue queueOut;
     private ServerActiveUser activeUser;
-    private static int id;
     private Integer playerId;
 
     private DatabaseManagers databaseManagers;
-    
+
     public ClientHandler(SSLSocket socket, ServerActiveUser activeUser, GameController gameController) {
         if (socket == null) {
             return;
@@ -99,26 +99,26 @@ public class ClientHandler implements Runnable {
         }).start();
     }
 
-   public void setPlayerId(Integer playerId) {
-      this.playerId = playerId;
-   }
+    public Integer getPlayerId() throws NullPointerException {
+        if (playerId == null) {
+            throw new NullPointerException("the clientHandler has no associated client (playerId in ClientHandler null)");
+        }
+        return playerId;
+    }
 
-   public Integer getPlayerId() throws NullPointerException {
-      if (playerId == null) {
-         throw new NullPointerException("the clientHandler has no associated client (playerId in ClientHandler null)");
-      }
-      return playerId;
-   }
-   
-   public boolean isConnected() {
-      return playerId != null;
-   }
+    public void setPlayerId(Integer playerId) {
+        this.playerId = playerId;
+    }
+
+    public boolean isConnected() {
+        return playerId != null;
+    }
 
 
-    public DatabaseManagers getDatabaseManagers(){
+    public DatabaseManagers getDatabaseManagers() {
         return databaseManagers;
     }
-    
+
     public class DatabaseManagers {
         private final ManageUser manageUser;
         private final ManageGame manageGame;

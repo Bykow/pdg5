@@ -22,7 +22,7 @@ public class Manager {
     }
 
     private SessionFactory getFactory() {
-        if(factory == null) {
+        if (factory == null) {
             try {
                 factory = new Configuration().configure().buildSessionFactory();
             } catch (Throwable ex) {
@@ -36,10 +36,11 @@ public class Manager {
 
     /**
      * Used to get a global session
+     *
      * @return
      */
     public synchronized Session getSession() {
-        if(session == null) {
+        if (session == null) {
             session = getFactory().openSession();
         }
         return session;
@@ -49,7 +50,7 @@ public class Manager {
      * To call when we are done talking to the DB
      */
     public void closeConversation() {
-        if(session != null) {
+        if (session != null) {
             session.close();
         }
     }
@@ -63,7 +64,7 @@ public class Manager {
             abstractData.setId(id);
             transaction.commit();
         } catch (HibernateException e) {
-            if (transaction !=null) transaction.rollback();
+            if (transaction != null) transaction.rollback();
             e.printStackTrace();
         }
 
@@ -79,7 +80,7 @@ public class Manager {
 
             transaction.commit();
         } catch (HibernateException e) {
-            if (transaction!=null) transaction.rollback();
+            if (transaction != null) transaction.rollback();
             e.printStackTrace();
         }
         return list;
@@ -93,7 +94,7 @@ public class Manager {
             getSession().update(abstractData);
             transaction.commit();
         } catch (HibernateException e) {
-            if (transaction!=null) transaction.rollback();
+            if (transaction != null) transaction.rollback();
             code = Protocol.ERROR;
             e.printStackTrace();
         }
@@ -109,7 +110,7 @@ public class Manager {
             getSession().delete(abstractData);
             transaction.commit();
         } catch (HibernateException e) {
-            if (transaction!=null) transaction.rollback();
+            if (transaction != null) transaction.rollback();
             code = Protocol.ERROR;
             e.printStackTrace();
         }

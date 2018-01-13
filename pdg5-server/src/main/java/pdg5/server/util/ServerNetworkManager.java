@@ -23,16 +23,16 @@ import java.util.logging.Logger;
  */
 public class ServerNetworkManager {
 
-    private ServerSocket serverSocket;
-    private Socket socket;
     private final ServerActiveUser activeUser;
     private final GameController gameController;
+    private ServerSocket serverSocket;
+    private Socket socket;
 
     public ServerNetworkManager() {
         System.out.println("START ServerNetworkManager");
         activeUser = new ServerActiveUser();
         gameController = new GameController(activeUser);
-        
+
         new Manager().getSession();
         System.out.println("Hibernate Connected");
     }
@@ -74,7 +74,7 @@ public class ServerNetworkManager {
                 sslSocket.setUseClientMode(false);
 
                 sslSocket.setEnabledCipherSuites(sslSocket.getSupportedCipherSuites());
-                                
+
                 // Use the sslSocket InputStream/OutputStream as usual.
                 new Thread(new ClientHandler(sslSocket, activeUser, gameController)).start();
             }

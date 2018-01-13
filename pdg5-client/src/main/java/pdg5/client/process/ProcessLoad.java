@@ -15,7 +15,7 @@ public class ProcessLoad implements GenericProcess {
     /**
      * Ctor
      *
-     * @param load message load
+     * @param load           message load
      * @param mainController link to Main controller
      */
     public ProcessLoad(Load load, MainController mainController) {

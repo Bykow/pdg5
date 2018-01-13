@@ -15,7 +15,7 @@ public class ProcessGame implements GenericProcess {
     /**
      * Ctor
      *
-     * @param game message game
+     * @param game           message game
      * @param mainController link to Main controller
      */
     public ProcessGame(Game game, MainController mainController) {

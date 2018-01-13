@@ -21,28 +21,31 @@ public interface Protocol {
     final int OK = 200;
     final int ERROR = 400;
     final int COULDNOTADDUSER = 401;
-
-    public enum Languages {LANG_FR ("fr");
-      private final String lang;
-
-      /**
-       * constructor
-       * @param lang string for a langage
-       */
-      private Languages(final String lang) {
-          this.lang = lang;
-      }
-
-      /**
-       * return the string associated to the langage
-       * @return the string associated to the langage
-       */
-      @Override
-      public String toString() {
-          return lang;
-      }
-    };
-    
     final int TOAST_BOTTOM_DIST = 50;
+
+    ;
     final int TOAST_DEFAULT_DURATION = 5000;
+    public enum Languages {
+        LANG_FR("fr");
+        private final String lang;
+
+        /**
+         * constructor
+         *
+         * @param lang string for a langage
+         */
+        private Languages(final String lang) {
+            this.lang = lang;
+        }
+
+        /**
+         * return the string associated to the langage
+         *
+         * @return the string associated to the langage
+         */
+        @Override
+        public String toString() {
+            return lang;
+        }
+    }
 }

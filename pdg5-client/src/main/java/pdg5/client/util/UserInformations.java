@@ -4,6 +4,10 @@ package pdg5.client.util;
  * Small singleton to save user information across the program
  */
 public class UserInformations {
+    /**
+     * Unique instance. Null by default
+     */
+    private static UserInformations INSTANCE = null;
     private String username;
     private String mail;
     private int idGameDisplayed;
@@ -11,22 +15,17 @@ public class UserInformations {
     /**
      * Private Ctor
      */
-    private UserInformations()
-    {}
-
-    /**
-     * Unique instance. Null by default
-     */
-    private static UserInformations INSTANCE = null;
+    private UserInformations() {
+    }
 
     /** Point d'accès pour l'instance unique du singleton */
+
     /**
      * Access to singleton
      *
      * @return UserInformations
      */
-    public static UserInformations getInstance()
-    {
+    public static UserInformations getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new UserInformations();
         }

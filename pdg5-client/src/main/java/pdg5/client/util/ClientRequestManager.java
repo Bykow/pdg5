@@ -18,6 +18,7 @@ public class ClientRequestManager {
 
     /**
      * Calls the right Process considering the incoming message
+     *
      * @param o incoming message
      * @return the process of the message
      */

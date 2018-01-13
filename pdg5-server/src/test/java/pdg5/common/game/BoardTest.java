@@ -15,96 +15,95 @@ import java.util.Date;
 import java.util.List;
 
 /**
- *
  * @author Miguel-Portable
  */
 public class BoardTest {
-   
-   Board board;
-   Composition comp;
-   GameModel game;
-   
-   public BoardTest() {
-   }
-   
-   @Before
-   public void setUp() {
-      Board[] boards = new Board[]{new Board("Test1", 13), new Board("Test2", 17)};
 
-      game = new GameModel(boards, 5, new Date(), 0);
-      board = game.getBoard(GameModel.PlayerBoard.PLAYER1);
-      comp = board.getComposition();
-      
-      comp.setSquare(new Composition.Square[]{
-         Composition.Square.NORMAL,
-         Composition.Square.DOUBLE,
-         Composition.Square.NORMAL,
-         Composition.Square.NORMAL,
-         Composition.Square.TRIPLE,
-         Composition.Square.NORMAL,
-         Composition.Square.BONUS
-      });
-   }
-   
-   @Test
-   public void itShouldReturnACorrectValue() {
-      comp.push(new Tile('A', 1));
-      comp.push(new Tile('A', 2));
-      comp.push(new Tile('A', 1));
-      comp.push(new Tile('A', 1));
-      comp.push(new Tile('A', 2));
-      comp.push(new Tile('A', 1));
-      comp.push(new Tile('A', 1));
+    Board board;
+    Composition comp;
+    GameModel game;
 
-      int val = board.getValue();
-      assert val == 50;
+    public BoardTest() {
+    }
 
-      List<Tile> bonus = new ArrayList<>();
-      bonus.add(new Tile('C', 2));
-      board.setBonus(bonus);
+    @Before
+    public void setUp() {
+        Board[] boards = new Board[]{new Board("Test1", 13), new Board("Test2", 17)};
 
-      val = board.getValue();
-      assert val == 23;
-   }
+        game = new GameModel(boards, 5, new Date(), 0);
+        board = game.getBoard(GameModel.PlayerBoard.PLAYER1);
+        comp = board.getComposition();
 
-   @Test
-   public void anIncompleteWordShouldThrowIllegalStateException() {
-      comp.push(new Tile('A', 1));
-      comp.push(new Tile('A', 2));
-      comp.push(new Tile('A', 1));
-      comp.push(new Tile('A', 1));
-      comp.push(new Tile('A', 2));
+        comp.setSquare(new Composition.Square[]{
+                Composition.Square.NORMAL,
+                Composition.Square.DOUBLE,
+                Composition.Square.NORMAL,
+                Composition.Square.NORMAL,
+                Composition.Square.TRIPLE,
+                Composition.Square.NORMAL,
+                Composition.Square.BONUS
+        });
+    }
 
-      comp.remove(2);
+    @Test
+    public void itShouldReturnACorrectValue() {
+        comp.push(new Tile('A', 1));
+        comp.push(new Tile('A', 2));
+        comp.push(new Tile('A', 1));
+        comp.push(new Tile('A', 1));
+        comp.push(new Tile('A', 2));
+        comp.push(new Tile('A', 1));
+        comp.push(new Tile('A', 1));
 
-      IllegalStateException e = Assertions.assertThrows(
-        IllegalStateException.class, () -> {
-           board.getValue();
-        }
-      );
-      
-      assert(e.getMessage().contains("This isn't a valid word"));
-   }
+        int val = board.getValue();
+        assert val == 50;
 
-   @Test
-   public void aWordTooShortShouldThrowIllegalStateException() {
-      comp.push(new Tile('A', 1));
+        List<Tile> bonus = new ArrayList<>();
+        bonus.add(new Tile('C', 2));
+        board.setBonus(bonus);
 
-      IllegalStateException e = Assertions.assertThrows(
-        IllegalStateException.class, () -> {
-           board.getValue();
-        }
-      );
-      
-      assert(e.getMessage().contains("This isn't a valid word"));
-   }
-   
-   @After
-   public void tearDown() {
-   }
+        val = board.getValue();
+        assert val == 23;
+    }
 
-   @Test
-   public void testSomeMethod() {
-   }
-   
+    @Test
+    public void anIncompleteWordShouldThrowIllegalStateException() {
+        comp.push(new Tile('A', 1));
+        comp.push(new Tile('A', 2));
+        comp.push(new Tile('A', 1));
+        comp.push(new Tile('A', 1));
+        comp.push(new Tile('A', 2));
+
+        comp.remove(2);
+
+        IllegalStateException e = Assertions.assertThrows(
+                IllegalStateException.class, () -> {
+                    board.getValue();
+                }
+        );
+
+        assert (e.getMessage().contains("This isn't a valid word"));
+    }
+
+    @Test
+    public void aWordTooShortShouldThrowIllegalStateException() {
+        comp.push(new Tile('A', 1));
+
+        IllegalStateException e = Assertions.assertThrows(
+                IllegalStateException.class, () -> {
+                    board.getValue();
+                }
+        );
+
+        assert (e.getMessage().contains("This isn't a valid word"));
+    }
+
+    @After
+    public void tearDown() {
+    }
+
+    @Test
+    public void testSomeMethod() {
+    }
+
 }

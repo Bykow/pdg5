@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * @author Maxime Guillod
- *
+ * <p>
  * Class sended through the connection  by the server representing
  * a full game with two players.
  */
@@ -28,17 +28,7 @@ public class Game extends Message {
     private final List<Tile> lastWordPlayed;
     private final int scoreLastWordPlayed;
     private final boolean yourTurn;
-
-    public Result getResult() {
-        return result;
-    }
-
-    public void setResult(Result result) {
-        this.result = result;
-    }
-
     private Result result;
-
     private State state;
 
     public Game(int ID, Date created, Date lastActivity,
@@ -58,8 +48,17 @@ public class Game extends Message {
         this.result = Result.NONE;
     }
 
+    public Result getResult() {
+        return result;
+    }
+
+    public void setResult(Result result) {
+        this.result = result;
+    }
+
     /**
      * return the unique ID of a game
+     *
      * @return the unique ID of a game
      */
     public int getID() {
@@ -138,11 +137,11 @@ public class Game extends Message {
         this.state = state;
     }
 
-    public List<Square> getSquare(){
+    public List<Square> getSquare() {
         return Arrays.asList(board.getComposition().getSquare());
     }
 
-    public List<Square> getOpponentSquare(){
+    public List<Square> getOpponentSquare() {
         return Arrays.asList(opponentBoard.getComposition().getSquare());
     }
 

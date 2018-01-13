@@ -54,12 +54,13 @@ public class SignInController extends AbstractController {
     private ClientSender sender;
     private ClientListener listener;
 
-    @FXML
-    public void initialize() {}
-
     public SignInController() {
         this.sender = new ClientSender();
         this.listener = new ClientListener();
+    }
+
+    @FXML
+    public void initialize() {
     }
 
     /**

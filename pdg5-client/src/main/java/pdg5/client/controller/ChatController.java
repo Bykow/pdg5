@@ -20,18 +20,15 @@ import java.util.List;
  */
 public class ChatController {
 
-    // Container of the messages
-    @FXML
-    private VBox msgContainer;
-
-    // Scrolling panel
-    @FXML
-    private ScrollPane scrollPane;
-
     // Input window to send new messages
     @FXML
     TextField msgInput;
-
+    // Container of the messages
+    @FXML
+    private VBox msgContainer;
+    // Scrolling panel
+    @FXML
+    private ScrollPane scrollPane;
     // Sender, used to send message to server
     private ClientSender sender;
 
@@ -77,7 +74,7 @@ public class ChatController {
         msgContainer.getChildren().add(msg);
 
         // Remove old messages
-        if(msgContainer.getChildren().size() > Protocol.DISPLAY_CHAT_MESSAGES) {
+        if (msgContainer.getChildren().size() > Protocol.DISPLAY_CHAT_MESSAGES) {
             msgContainer.getChildren().remove(0);
         }
 
@@ -118,7 +115,7 @@ public class ChatController {
      * @param c Chat to convert
      * @return ChatMessage
      */
-    private ChatMessage convertChatToChatMessage (Chat c) {
+    private ChatMessage convertChatToChatMessage(Chat c) {
         ChatMessage.Type type;
 
         // Where does is display, left or right

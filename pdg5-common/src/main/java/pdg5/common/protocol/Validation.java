@@ -8,26 +8,26 @@ import pdg5.common.game.Composition;
  */
 public class Validation extends Message {
 
-   /**
-    * the composition that the client want to validate
-    */
-   private final Composition composition;
-   
-   /**
-    * Constructor
-    * 
-    * @param composition the composition that the client want to validate
-    */
+    /**
+     * the composition that the client want to validate
+     */
+    private final Composition composition;
+
+    /**
+     * Constructor
+     *
+     * @param composition the composition that the client want to validate
+     */
     public Validation(Composition composition) {
-       this.composition = composition;
+        this.composition = composition;
     }
 
     /**
      * return the composition that the client want to validate
-     * 
+     *
      * @return the composition that the client want to validate
      */
-   public Composition getComposition() {
-      return composition;
-   }
+    public Composition getComposition() {
+        return composition;
+    }
 }

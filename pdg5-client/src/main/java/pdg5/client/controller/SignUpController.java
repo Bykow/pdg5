@@ -1,16 +1,16 @@
 /**
- -----------------------------------------------------------------------------------
- Laboratoire : <nn>
- Fichier     : SignInController.java
- Auteur(s)   : Andrea Cotza
- Date        : 06.11.2017
-
- But         : <‡ complÈter>
-
- Remarque(s) : <‡ complÈter>
-
- Compilateur : jdk1.8.0_60
- -----------------------------------------------------------------------------------
+ * -----------------------------------------------------------------------------------
+ * Laboratoire : <nn>
+ * Fichier     : SignInController.java
+ * Auteur(s)   : Andrea Cotza
+ * Date        : 06.11.2017
+ * <p>
+ * But         : <‡ complÈter>
+ * <p>
+ * Remarque(s) : <‡ complÈter>
+ * <p>
+ * Compilateur : jdk1.8.0_60
+ * -----------------------------------------------------------------------------------
  */
 
 package pdg5.client.controller;
@@ -68,7 +68,7 @@ public class SignUpController extends AbstractController {
      */
     @FXML
     private void handleSwitch(ActionEvent actionEvent) {
-        Stage stage = (Stage)btnRegister.getScene().getWindow();
+        Stage stage = (Stage) btnRegister.getScene().getWindow();
         stage.setScene(signInScene);
     }
 
@@ -79,7 +79,7 @@ public class SignUpController extends AbstractController {
      */
     @FXML
     private void handleRegister(ActionEvent actionEvent) {
-        Stage stage = (Stage)btnRegister.getScene().getWindow();
+        Stage stage = (Stage) btnRegister.getScene().getWindow();
         boolean isSent = false;
 
         // Basic check if both password and confirmation are equals
@@ -95,7 +95,7 @@ public class SignUpController extends AbstractController {
         }
 
         // Wait for response
-        if(isSent) {
+        if (isSent) {
             Message msg = listener.take();
 
             if (msg instanceof ErrorMessage) {

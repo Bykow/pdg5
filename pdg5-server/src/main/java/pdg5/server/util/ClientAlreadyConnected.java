@@ -6,7 +6,6 @@
 package pdg5.server.util;
 
 /**
- *
  * @author Miguel-Portable
  */
 public class ClientAlreadyConnected extends Exception {

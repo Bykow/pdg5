@@ -1,17 +1,17 @@
 /**
- -----------------------------------------------------------------------------------
- Laboratoire : <nn>
- Fichier     : Tile.java
- Auteur(s)   : Andrea Cotza
- Date        : 24.10.2017
- 
- But         : <‡ complÈter>
- 
- Remarque(s) : <‡ complÈter>
- 
- Compilateur : jdk1.8.0_60
- -----------------------------------------------------------------------------------
-*/
+ * -----------------------------------------------------------------------------------
+ * Laboratoire : <nn>
+ * Fichier     : Tile.java
+ * Auteur(s)   : Andrea Cotza
+ * Date        : 24.10.2017
+ * <p>
+ * But         : <‡ complÈter>
+ * <p>
+ * Remarque(s) : <‡ complÈter>
+ * <p>
+ * Compilateur : jdk1.8.0_60
+ * -----------------------------------------------------------------------------------
+ */
 
 package pdg5.client.view;
 
@@ -38,17 +38,6 @@ public class GTile extends Pane {
     private Label point;
 
     /**
-     * FXMLLoader
-     *
-     * @return Loader
-     */
-    private static FXMLLoader initLoader() {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Client.class.getResource("/fxml/tile.fxml"));
-        return loader;
-    }
-
-    /**
      * Ctor
      *
      * @param model tile to generate
@@ -70,11 +59,22 @@ public class GTile extends Pane {
     }
 
     /**
+     * FXMLLoader
+     *
+     * @return Loader
+     */
+    private static FXMLLoader initLoader() {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Client.class.getResource("/fxml/tile.fxml"));
+        return loader;
+    }
+
+    /**
      * Initialize the GTile
      */
     @FXML
     public void initialize() {
-        if(model.isBonus())
+        if (model.isBonus())
             this.getStyleClass().add("bonus");
         letter.setText(String.valueOf(model.getLetter()));
         point.setText(String.valueOf(model.getValue()));

@@ -16,14 +16,15 @@ public class Load extends Message {
      * List of available games a player have (even finished ones)
      */
     private final List<Game> games;
-    private final Map<Integer, List<Chat> > historic;
+    private final Map<Integer, List<Chat>> historic;
 
     /**
      * Constructor
-     * @param games list of available games
+     *
+     * @param games    list of available games
      * @param historic
      */
-    public Load(List<Game> games, Map<Integer, List<Chat> > historic) {
+    public Load(List<Game> games, Map<Integer, List<Chat>> historic) {
         this.games = games;
         this.historic = historic;
     }
@@ -38,21 +39,21 @@ public class Load extends Message {
 
     /**
      * return the list of available games of a player
-     * 
+     *
      * @return the list of available games of a player
      */
     public List<Game> getGames() {
         return games;
     }
-    
+
     /**
      * return the list of chat message of one game
-     * 
+     *
      * @param idGame unique id of the game we want the historic
      * @return the list of chat message of one game
      */
     public List<Chat> getHistoricOfGame(int idGame) {
-       return historic.get(idGame);
+        return historic.get(idGame);
     }
 
 

@@ -42,7 +42,7 @@ public class Game extends AbstractData implements java.io.Serializable {
     }
 
     public Game(Tournament tournament, User userByPlayer2, User userByPlayer1, String title, Date created,
-            Date lastActivity, Set chats) {
+                Date lastActivity, Set chats) {
         this.tournament = tournament;
         this.userByPlayer2 = userByPlayer2;
         this.userByPlayer1 = userByPlayer1;
@@ -134,9 +134,17 @@ public class Game extends AbstractData implements java.io.Serializable {
         return this.gameState;
     }
 
+    public void setGameState(Blob gameState) {
+        this.gameState = gameState;
+    }
+
     @Column(name = "turn_manager", nullable = true)
     public Blob getTurnManager() {
         return this.turnManager;
+    }
+
+    public void setTurnManager(Blob turnManager) {
+        this.turnManager = turnManager;
     }
 
     public Serializable getGameStateAsSerializable() {
@@ -153,14 +161,6 @@ public class Game extends AbstractData implements java.io.Serializable {
 
     public void setTurnManager(Serializable turnManager) {
         setTurnManager(serialize(turnManager));
-    }
-
-    public void setGameState(Blob gameState) {
-        this.gameState = gameState;
-    }
-    
-    public void setTurnManager(Blob turnManager) {
-        this.turnManager = turnManager;
     }
 
     @Override

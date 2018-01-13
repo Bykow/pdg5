@@ -19,8 +19,8 @@ public class ProcessSignIn implements GenericProcess {
     private final ClientHandler clientHandler;
 
     public ProcessSignIn(SignIn signIn, ManageUser manager,
-            ServerActiveUser activeUser, GameController gameController,
-            ClientHandler clientHandler) {
+                         ServerActiveUser activeUser, GameController gameController,
+                         ClientHandler clientHandler) {
         this.signIn = signIn;
         this.manager = manager;
         this.activeUser = activeUser;
@@ -40,9 +40,9 @@ public class ProcessSignIn implements GenericProcess {
 
                 // Will be receive by the SignInController
                 clientHandler.addToQueue(new SignInOK());
-                
+
                 gameController.dataLoad(idUser);
-                
+
                 //clientHandler.addToQueue(new Dictionnary(gameController.getDictionnary()));
                 return new Load(gameController.findGamesOf(idUser), gameController.getAllChatsOfPlayer(idUser));
             } catch (ClientAlreadyConnected ex) {

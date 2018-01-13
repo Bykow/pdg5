@@ -54,10 +54,6 @@ public class MainController extends AbstractController {
 
     private AnchorPane layout;
 
-    @FXML
-    public void initialize() {
-    }
-
     /**
      * Ctor
      */
@@ -66,6 +62,10 @@ public class MainController extends AbstractController {
         sender = new ClientSender();
 
         this.requestManager = new ClientRequestManager(this);
+    }
+
+    @FXML
+    public void initialize() {
     }
 
     /**
@@ -126,7 +126,7 @@ public class MainController extends AbstractController {
             loader.setLocation(MainController.class.getResource("/fxml/chatView.fxml"));
             loader.setController(chatController);
             layout = loader.load();
-            Platform.runLater(()->chatContainer.getChildren().add(layout));
+            Platform.runLater(() -> chatContainer.getChildren().add(layout));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -201,7 +201,7 @@ public class MainController extends AbstractController {
         // Show the scene containing the root layout.
         Scene scene = new Scene(layout);
 
-        Stage stage = (Stage)gameContainer.getScene().getWindow();
+        Stage stage = (Stage) gameContainer.getScene().getWindow();
 
         // Switches the scene
         stage.hide();

@@ -1,17 +1,17 @@
 /**
- -----------------------------------------------------------------------------------
- Laboratoire : <nn>
- Fichier     : Toast.java
- Auteur(s)   : Andrea Cotza
- Date        : 13.11.2017
- 
- But         : <‡ complÈter>
- 
- Remarque(s) : <‡ complÈter>
- 
- Compilateur : jdk1.8.0_60
- -----------------------------------------------------------------------------------
-*/
+ * -----------------------------------------------------------------------------------
+ * Laboratoire : <nn>
+ * Fichier     : Toast.java
+ * Auteur(s)   : Andrea Cotza
+ * Date        : 13.11.2017
+ * <p>
+ * But         : <‡ complÈter>
+ * <p>
+ * Remarque(s) : <‡ complÈter>
+ * <p>
+ * Compilateur : jdk1.8.0_60
+ * -----------------------------------------------------------------------------------
+ */
 
 package pdg5.client.util;
 

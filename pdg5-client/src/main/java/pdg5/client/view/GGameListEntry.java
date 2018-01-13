@@ -1,17 +1,17 @@
 /**
- -----------------------------------------------------------------------------------
- Laboratoire : <nn>
- Fichier     : Tile.java
- Auteur(s)   : Andrea Cotza
- Date        : 24.10.2017
- 
- But         : <‡ complÈter>
- 
- Remarque(s) : <‡ complÈter>
- 
- Compilateur : jdk1.8.0_60
- -----------------------------------------------------------------------------------
-*/
+ * -----------------------------------------------------------------------------------
+ * Laboratoire : <nn>
+ * Fichier     : Tile.java
+ * Auteur(s)   : Andrea Cotza
+ * Date        : 24.10.2017
+ * <p>
+ * But         : <‡ complÈter>
+ * <p>
+ * Remarque(s) : <‡ complÈter>
+ * <p>
+ * Compilateur : jdk1.8.0_60
+ * -----------------------------------------------------------------------------------
+ */
 
 package pdg5.client.view;
 
@@ -52,17 +52,6 @@ public class GGameListEntry extends AnchorPane {
     private EventHandler<? super ActionEvent> deleteHandler;
 
     /**
-     * Initalizes the loader for UI thread
-     *
-     * @return FXMLLoader
-     */
-    private static FXMLLoader initLoader() {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Client.class.getResource("/fxml/gameListEntry.fxml"));
-        return loader;
-    }
-
-    /**
      * Ctor
      *
      * @param model game
@@ -85,6 +74,17 @@ public class GGameListEntry extends AnchorPane {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Initalizes the loader for UI thread
+     *
+     * @return FXMLLoader
+     */
+    private static FXMLLoader initLoader() {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Client.class.getResource("/fxml/gameListEntry.fxml"));
+        return loader;
     }
 
     /**
@@ -111,7 +111,7 @@ public class GGameListEntry extends AnchorPane {
         // Update the visual status with state of game
         switch (model.getState()) {
             case IN_PROGRESS:
-                int numberOfTilesAtBeginOfGame = Protocol.NUMBER_OF_TUILES_PER_GAME-(Protocol.NUMBER_OF_PLAYERS*Protocol.NUMBER_OF_TUILES_PER_PLAYER + Protocol.NUMBER_OF_EXTRA_TUILES);
+                int numberOfTilesAtBeginOfGame = Protocol.NUMBER_OF_TUILES_PER_GAME - (Protocol.NUMBER_OF_PLAYERS * Protocol.NUMBER_OF_TUILES_PER_PLAYER + Protocol.NUMBER_OF_EXTRA_TUILES);
                 if (model.getNbLeftTile() == numberOfTilesAtBeginOfGame) {
                     msg.setText("Nouvelle partie");
                     break;

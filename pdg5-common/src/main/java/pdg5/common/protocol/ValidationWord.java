@@ -2,18 +2,19 @@ package pdg5.common.protocol;
 
 /**
  * Class sent through the connection by the server representing
- * the answer to a Validation request wich explain to a client 
+ * the answer to a Validation request wich explain to a client
  * if a word is valid or not.
  */
 public class ValidationWord extends Message {
 
-   /**
-    * Answer to a Validation.java request
-    */
+    /**
+     * Answer to a Validation.java request
+     */
     private boolean isValid;
 
     /**
      * Constructor
+     *
      * @param isValid boolean representing the answer : is the word valid?
      */
     public ValidationWord(boolean isValid) {
@@ -22,7 +23,7 @@ public class ValidationWord extends Message {
 
     /**
      * Return a boolean representing the answer : is the word valid?
-     * 
+     *
      * @return a boolean representing the answer : is the word valid?
      */
     public boolean isIsValid() {

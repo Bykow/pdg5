@@ -30,7 +30,7 @@ public class LobyController extends AbstractController {
     private ArrayList<Game> gameModelList;
 
     // Chat history is managed by the loby
-    private Map<Integer, List<Chat> > historic;
+    private Map<Integer, List<Chat>> historic;
 
     // Graphical list
     private GGameListEntry selected;
@@ -107,7 +107,7 @@ public class LobyController extends AbstractController {
         gameList.getChildren().add(titleFinished);
         gameList.getChildren().addAll(genGraphicalEntry(g -> g.getState() == GameModel.State.FINISHED));
 
-        if(selected != null) {
+        if (selected != null) {
             Optional<Node> selBefRefresh = gameList.getChildren().stream()
                     .filter(g -> g instanceof GGameListEntry)
                     .filter(g -> ((GGameListEntry) g).getModel().getID() == selected.getModel().getID())
@@ -125,12 +125,13 @@ public class LobyController extends AbstractController {
      * Unselect the last selected item in the list
      */
     private void unselectLast() {
-        if(selected != null)
+        if (selected != null)
             selected.setSelected(false);
     }
 
     /**
      * Behaviour on logout button clicked
+     *
      * @param actionEvent
      */
     @FXML
@@ -157,7 +158,7 @@ public class LobyController extends AbstractController {
      * @param event
      */
     private void handleMouseClick(MouseEvent event) {
-        GGameListEntry element = (GGameListEntry)event.getSource();
+        GGameListEntry element = (GGameListEntry) event.getSource();
         unselectLast();
         selected = element;
         element.setSelected(true);
@@ -178,8 +179,8 @@ public class LobyController extends AbstractController {
      * @param event
      */
     private void handleDelete(ActionEvent event) {
-        Node btn = (Node)event.getSource();
-        GGameListEntry element = (GGameListEntry)btn.getParent();
+        Node btn = (Node) event.getSource();
+        GGameListEntry element = (GGameListEntry) btn.getParent();
     }
 
     /**

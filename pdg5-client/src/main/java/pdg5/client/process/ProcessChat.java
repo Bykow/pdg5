@@ -15,7 +15,7 @@ public class ProcessChat implements GenericProcess {
     /**
      * Ctor
      *
-     * @param chat message Chat
+     * @param chat           message Chat
      * @param mainController link to Main controller
      */
     public ProcessChat(Chat chat, MainController mainController) {

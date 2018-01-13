@@ -10,25 +10,25 @@ import static org.junit.Assert.assertTrue;
 
 public class PersistentMatchlistTest {
 
-	@Test
-	public void testEqualsMatchList() {
-		Tournament t1 = new Tournament();
-		t1.setId(1);
-		Tournament t2 = new Tournament();
-		t2.setId(2);
-		
-		User u1 = new User("a", "b");
-		User u2 = new User("c","d");
-		u1.setPass("p1");
-		u2.setPass("p2");
-		
-		Matchlist a = new Matchlist(t1, u1);
-		Matchlist b = new Matchlist(t1, u1);
-		Matchlist c = new Matchlist(t2, u1);
-		Matchlist d = new Matchlist(t1, u2);
-		
-		assertTrue(a.equals(b));
-		assertFalse(a.equals(c));
-		assertFalse(a.equals(d));
-	}
+    @Test
+    public void testEqualsMatchList() {
+        Tournament t1 = new Tournament();
+        t1.setId(1);
+        Tournament t2 = new Tournament();
+        t2.setId(2);
+
+        User u1 = new User("a", "b");
+        User u2 = new User("c", "d");
+        u1.setPass("p1");
+        u2.setPass("p2");
+
+        Matchlist a = new Matchlist(t1, u1);
+        Matchlist b = new Matchlist(t1, u1);
+        Matchlist c = new Matchlist(t2, u1);
+        Matchlist d = new Matchlist(t1, u2);
+
+        assertTrue(a.equals(b));
+        assertFalse(a.equals(c));
+        assertFalse(a.equals(d));
+    }
 }

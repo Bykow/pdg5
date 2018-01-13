@@ -6,7 +6,6 @@ import pdg5.common.protocol.Noop;
 /**
  * ProcessNoop, behaviour for client when receiving a Noop message
  * Noop is not an operation
- *
  */
 public class ProcessNoop implements GenericProcess {
 

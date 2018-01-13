@@ -8,7 +8,7 @@ Button {
     -fx-font-weight: 800;
     -fx-text-fill: #fff;
     -fx-font-size: 16px;
-
+    -fx-background-insets: 0 0 1px 0;
 }
 
 Button:hover {

@@ -2,12 +2,11 @@
 
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.*?>
-<SplitPane prefHeight="600.0" minWidth="1115.0" prefWidth="1115.0" maxWidth="1115.0" stylesheets="@../css/mainView.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane prefHeight="600.0" minWidth="1115.0" prefWidth="1115.0" maxWidth="1115.0" stylesheets="@../css/mainView.css" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1">
    <items>
-      <AnchorPane minHeight="0.0" minWidth="524.0" prefHeight="598.0" prefWidth="524.0" maxWidth="524.0" style="-fx-background-color: #3caef5;">
+      <AnchorPane fx:id="gameContainer" id="game" minHeight="0.0" minWidth="524.0" prefHeight="598.0" prefWidth="524.0" maxWidth="524.0" style="-fx-background-color: #3caef5;">
          <children>
             <AnchorPane layoutY="543.0" prefHeight="55.0" prefWidth="595.0" style="-fx-background-color: #ffbd00;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-            <AnchorPane fx:id="gameContainer" id="game" prefHeight="543.0" prefWidth="524.0" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="lobyContainer" minHeight="0.0" minWidth="290.0" prefHeight="290.0" prefWidth="290.0" maxWidth="290.0" style="-fx-background-color: #34495e;" />

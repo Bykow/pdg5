@@ -18,8 +18,11 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-import pdg5.common.game.Result;
+<<<<<<< HEAD
 import pdg5.server.manage.ManageChat;
+=======
+import pdg5.common.game.Result;
+>>>>>>> c564e6dd51c952d2c63b29eaf8bf2380ddd1a347
 import pdg5.server.manage.ManageGame;
 import pdg5.server.manage.ManageMessage;
 import pdg5.server.manage.ManageUser;
@@ -399,6 +402,7 @@ public class GameController {
         GameModel gm = games.get(idGame);
         Board boardOfClient = new Board(gm.getBoardById(idClient));
         Board opponentBoard = gm.getOpponentBoard(idClient);
+        
         Board cleanedOpponentBoard = new Board(opponentBoard);
         cleanedOpponentBoard.getLetters().clear();
         cleanedOpponentBoard.getBonus().forEach((t) -> t.setBonus(true));

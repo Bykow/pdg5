@@ -8,6 +8,7 @@ import pdg5.common.game.Tile;
 import java.util.Date;
 import java.util.List;
 import pdg5.common.game.Composition.Square;
+import pdg5.common.game.Result;
 
 /**
  * @author Maxime Guillod
@@ -17,16 +18,27 @@ import pdg5.common.game.Composition.Square;
  */
 public class Game extends Message {
 
-    private int ID;
-    private Date created;
-    private Date lastActivity;
-    private int tournament;
-    private Board board;
-    private Board opponentBoard;
-    private int nbLeftTile;
-    private List<Tile> lastWordPlayed;
-    private int scoreLastWordPlayed;
-    private boolean yourTurn;
+    private final int ID;
+    private final Date created;
+    private final Date lastActivity;
+    private final int tournament;
+    private final Board board;
+    private final Board opponentBoard;
+    private final int nbLeftTile;
+    private final List<Tile> lastWordPlayed;
+    private final int scoreLastWordPlayed;
+    private final boolean yourTurn;
+
+    public Result getResult() {
+        return result;
+    }
+
+    public void setResult(Result result) {
+        this.result = result;
+    }
+
+    private Result result;
+
     private State state;
 
     public Game(int ID, Date created, Date lastActivity,
@@ -43,7 +55,7 @@ public class Game extends Message {
         this.scoreLastWordPlayed = scoreLastWordPlayed;
         this.yourTurn = yourTurn;
         this.state = state;
-
+        this.result = Result.NONE;
     }
 
     /**
@@ -121,13 +133,17 @@ public class Game extends Message {
     public State getState() {
         return state;
     }
-    
-    public List<Square> getSquare(){
-       return Arrays.asList(board.getComposition().getSquare());
+
+    public void setState(State state) {
+        this.state = state;
     }
-    
+
+    public List<Square> getSquare(){
+        return Arrays.asList(board.getComposition().getSquare());
+    }
+
     public List<Square> getOpponentSquare(){
-       return Arrays.asList(opponentBoard.getComposition().getSquare());
+        return Arrays.asList(opponentBoard.getComposition().getSquare());
     }
 
     public String toString() {
@@ -139,7 +155,7 @@ public class Game extends Message {
         output += "isYourTurn:      " + yourTurn + "\n";
         output += "Last Word Played " + lastWordPlayed.toString() + "\n";
         output += "Bonus            " + getBonusLetters().toString() + "\n";
-        output += "Opponent Bonus   " + getOpponentBonusLetters().toString() + "\n";
+        output += "Opponent Bonus   " + getOpponentBonusLetters().toString();
 
         return output;
     }

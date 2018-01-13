@@ -12,21 +12,23 @@ import javafx.scene.paint.Color;
 import pdg5.client.ClientSender;
 import pdg5.client.view.GTile;
 import pdg5.common.game.Composition;
+import pdg5.common.game.GameModel;
 import pdg5.common.game.Tile;
-import pdg5.common.protocol.Chat;
-import pdg5.common.protocol.Game;
-import pdg5.common.protocol.Pass;
-import pdg5.common.protocol.Play;
+import pdg5.common.protocol.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import pdg5.common.game.Result;
 
 public class GameController extends AbstractController {
 
     private static final DataFormat tileFormat = new DataFormat("tile.model");
     private final String LEFTTILESINGLE = " tuille restante";
     private final String LEFTTILEPLURAL = " tuilles restantes";
+    private final String ENDWIN         = "Bravo ! Tu as gagné !";
+    private final String ENDLOSE        = "Tu as perdu la partie... ";
+    private final String ENDEQUALITY    = "Equalité !";
 
     @FXML
     private List<StackPane> deckList;
@@ -63,7 +65,6 @@ public class GameController extends AbstractController {
     public GameController(ClientSender sender, MainController mainController) {
         this.sender = sender;
         this.mainController = mainController;
-
     }
 
     @FXML
@@ -267,7 +268,6 @@ public class GameController extends AbstractController {
         if(!g.isYourTurn()) {
             btnPlay.setDisable(true);
             btnDiscard.setDisable(true);
-            mainController.getChatController().addChat(constructLogLastPlayed(g));
         } else {
             btnPlay.setDisable(false);
             btnDiscard.setDisable(false);
@@ -333,8 +333,20 @@ public class GameController extends AbstractController {
         cleanList(adversaryList);
     }
 
-    private Chat constructLogLastPlayed(Game g) {
-        String temp = mainController.upperCaseFirstLetter(g.getNamePlayer()) + " a joué " + Tile.tilesToString(g.getLastWordPlayed()) + " pour " + g.getScoreLastWordPlayed() + " points.";
-        return new Chat(temp, gameID, Chat.SENDER.USER);
+    public void displayEndState(Result result) {
+        Platform.runLater(() -> {
+                    switch (result) {
+                        case WIN:
+                            remainingTiles.setText(String.valueOf(ENDWIN));
+                            break;
+                        case LOSE:
+                            remainingTiles.setText(String.valueOf(ENDLOSE));
+                            break;
+                        case EQUALITY:
+                            remainingTiles.setText(String.valueOf(ENDEQUALITY));
+                            break;
+                    }
+                }
+        );
     }
 }

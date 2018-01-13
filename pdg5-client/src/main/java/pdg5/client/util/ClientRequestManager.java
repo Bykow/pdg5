@@ -19,6 +19,7 @@ public class ClientRequestManager {
     public Message execute(Message o) {
         System.out.println("Message received : ");
         System.out.println(o.toString());
+        System.out.println();
         if (o instanceof ErrorMessage) {
             return new ProcessErrorMessage((ErrorMessage) o, mainController).execute();
         } else if (o instanceof Noop) {
@@ -29,6 +30,8 @@ public class ClientRequestManager {
             return new ProcessGame((Game) o, mainController).execute();
         } else if (o instanceof Chat) {
             return new ProcessChat((Chat) o, mainController).execute();
+        } else if (o instanceof End) {
+            return new ProcessEnd((End) o, mainController).execute();
         }
 
         return new ErrorMessage("Unable to check Message Type");

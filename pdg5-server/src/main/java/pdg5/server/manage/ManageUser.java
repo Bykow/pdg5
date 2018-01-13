@@ -7,7 +7,7 @@ import pdg5.server.persistent.User;
 import java.util.List;
 
 /**
- * Manager to stock and load users from/to de database
+ * Manager to stock and load users from/to the database
  */
 public class ManageUser extends Manager {
 
@@ -45,9 +45,9 @@ public class ManageUser extends Manager {
     }
 
     /**
-     * Get the User whose email is given from the DB
+     * Get the User, whose email is given, from the DB
      *
-     * @param email the email
+     * @param email the user's email
      * @return a corresponding User instance
      */
     public User getUserByEmail(String email) {
@@ -62,7 +62,7 @@ public class ManageUser extends Manager {
     }
 
     /**
-     * Get the User whose username is given from the DB
+     * Get the User, whose username is given, from the DB
      *
      * @param username the username
      * @return a corresponding User instance
@@ -135,7 +135,7 @@ public class ManageUser extends Manager {
      * update informations of a specified user
      * 
      * @param user the new informations of the user
-     * @return Protocol.OK if the transaction succeed or Protocol.Error else
+     * @return Protocol.OK if the transaction succeeded or Protocol.Error otherwise
      */
     public int updateUser(User user) {
         return updateToDB(user);
@@ -144,8 +144,8 @@ public class ManageUser extends Manager {
     /**
      * delete from the database a specified user
      * 
-     * @param user the user we wish to delete from database
-     * @return Protocol.OK if the transaction succeed or Protocol.Error else
+     * @param user the user we wish to delete from the database
+     * @return Protocol.OK if the transaction succeeded or Protocol.Error otherwise
      */
     public int deleteUser(User user) {
         return deleteToDB(user);

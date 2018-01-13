@@ -7,7 +7,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Manager to stock and load the blacklist from/to de database
+ * Manager to stock and load the blacklist from/to the database
+ * 
+ * It's a link for a User that doesn't want to see another
  */
 public class ManageBlacklist extends Manager {
 
@@ -16,7 +18,7 @@ public class ManageBlacklist extends Manager {
     * 
     * @param fromUser the user adding a player in his blacklist
     * @param toUser the choosen blacklisted player
-    * @return a BlackList that will be stocked in the database
+    * @return a BlackList that will be stored in the database
     */
     public Blacklist addBlacklist(User fromUser, User toUser) {
         return (Blacklist) addToDB(new Blacklist(fromUser, toUser, new Date()));
@@ -25,17 +27,17 @@ public class ManageBlacklist extends Manager {
     /**
      * return all the blacklist contained in the database
      * 
-     * @return all the blacklist contained in the database
+     * @return list of the blacklists contained in the database
      */
     public List<Blacklist> listBlacklist() {
         return (List<Blacklist>) getListFromDB("FROM Blacklist");
     }
 
     /**
-     * updatew an existing BlackList in the database
+     * update an existing BlackList in the database
      * 
-     * @param blacklist the new blacklist informations
-     * @return Protocol.OK if the transaction succeed or Protocol.Error else
+     * @param blacklist the updated blacklist
+     * @return Protocol.OK if the transaction succeeded or Protocol.Error otherwise
      */
     public int updateBlacklist(Blacklist blacklist) {
         return updateToDB(blacklist);
@@ -45,7 +47,7 @@ public class ManageBlacklist extends Manager {
      * delete a blacklist from the database
      * 
      * @param blacklist the blacklist we want to delete
-     * @return Protocol.OK if the transaction succeed or Protocol.Error else
+     * @return Protocol.OK if the transaction succeeded or Protocol.Error otherwise
      */
     public int deleteBlacklist(Blacklist blacklist) {
         return deleteToDB(blacklist);

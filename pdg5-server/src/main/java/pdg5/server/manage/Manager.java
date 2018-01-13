@@ -11,8 +11,8 @@ import pdg5.server.persistent.AbstractData;
 import java.util.List;
 
 /**
- * Manager who gets from hibernate the session to allow us to do transactions.
- * All the transactions possible are implemented in this class.
+ * Manager who gets from hibernate's session Factory the session to allow us to do
+ * transactions. All the transactions possible are implemented in this class.
  * The type of the data used to do transaction is AbstractData, 
  * it means that any data that wish to be in the database has to extends AbstractData.
  */
@@ -24,7 +24,7 @@ public class Manager {
     private static SessionFactory factory;
     
     /**
-     * session configured with default value's of the SessionFactory of hibernate
+     * session configured with default value's from the SessionFactory of hibernate
      */
     private Session session;
     
@@ -70,7 +70,7 @@ public class Manager {
     }
 
     /**
-     * Used to get a global session
+     * Used to get a session and get one from the factory if missing
      *
      * @return the global session
      */

@@ -12,6 +12,9 @@ import java.util.Random;
  */
 public class TurnManager implements Serializable {
 
+   /**
+    * square cycle of a normal game
+    */
     private final static Composition.Square[][] POSSIBLE_ARRAY_SQUARES = {
             {Square.DOUBLE, Square.NORMAL, Square.NORMAL, Square.W, Square.NORMAL, Square.W, Square.BONUS},
             {Square.NORMAL, Square.NORMAL, Square.W, Square.NORMAL, Square.W, Square.TRIPLE, Square.BONUS},
@@ -21,6 +24,9 @@ public class TurnManager implements Serializable {
             {Square.W, Square.NORMAL, Square.NORMAL, Square.TRIPLE, Square.NORMAL, Square.W, Square.BONUS}
     };
 
+    /**
+     * first square of a tournament game
+     */
     private final static Composition.Square[] FIRST_SQUARE_OF_TOURNAMENT = {
             Square.NORMAL,
             Square.NORMAL,
@@ -31,10 +37,29 @@ public class TurnManager implements Serializable {
             Square.BONUS
     };
 
+    /**
+     * unique id of one of the player
+     */
     private int idPlayer1;
+    
+    /**
+     * unique id of the other player
+     */
     private int idPlayer2;
+    
+    /**
+     * current player who has to choose an action to do in game
+     */
     private int currentPlayer;
+    
+    /**
+     * random used to choose the first player
+     */
     private Random rand;
+    
+    /**
+     * current turn
+     */
     private int turn;
 
     /**

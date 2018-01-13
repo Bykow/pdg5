@@ -78,7 +78,7 @@ public class GameController {
     /**
      * stock the list of chat message for a given unique id of game
      */
-    private final Map<Integer, List<ChatServerSide>> chats;
+    private final Map<Integer, List<ChatServerSide>> serverChats;
 
     /**
      * current player waiting for an other random player
@@ -111,7 +111,7 @@ public class GameController {
         clientGames = new HashMap<>();
         tileStacks = new HashMap<>();
         playerTurnManager = new HashMap<>();
-        chats = new HashMap<>();
+        serverChats = new HashMap<>();
         matchMaking = new ArrayList<>();
 
         InputStream inputStream = TST.class.getResourceAsStream("/dico/fr_dico.dic");
@@ -145,18 +145,19 @@ public class GameController {
                 .map(GameModel::getGameId).collect(Collectors.toList()));
 
         listGameOfPlayer.forEach((game) -> {
-            if (!chats.containsKey(game.getId())) {
+            if (!serverChats.containsKey(game.getId())) {
                 List<ChatServerSide> listChat = new ArrayList<>();
                 game.getChats().stream().findFirst().ifPresent((c) -> {
-                    c.getMessages().forEach((m) -> {
+                    c.getMessages().stream().sorted((m, n) -> Integer.compare(m.getId(), n.getId())).forEach((m) -> {
                         listChat.add(new ChatServerSide(m.getCreated().getTime(), m.getUser().getId(), Chat.SENDER.USER, m.getContent(), game.getId()));
                     });
                 });
-                chats.put(game.getId(), listChat);
+                serverChats.put(game.getId(), listChat);
             }
         });
     }
 
+    
     public void addChat(ChatServerSide chatServer) {
         addChat(chatServer, true);
     }
@@ -183,24 +184,24 @@ public class GameController {
                 .findAny()
                 .get();
         
-
-        // we create a list if it's the first message of the game
-        List<ChatServerSide> list;
-        if (!chats.containsKey(idGame)) {
-
-            // add chat to DB
-            manageChat.addChatGame(game);
-
-            // add chat to Map
-            chats.put(idGame, new ArrayList<>());
-        }
         
-        game.getChats().stream().findFirst().ifPresent((c) -> {
-            manageMessage.addMessage(chatServer.getMessage(), manageUser.getUserById(idPlayer), c);
-        });
+        // saving message in database
+        pdg5.server.persistent.Chat databaseChat = game
+                .getChats()
+                .stream()
+                .findFirst()
+                .orElseGet(() -> {
+                    serverChats.put(idGame, new ArrayList<>());
+                    manageChat.addChatGame(game);
+                    manageGame.updateGame(game);
+                    return manageChat.listChats().stream().findAny().get();
+                });
+        
+        manageMessage.addMessage(chatServer.getMessage(), manageUser.getUserById(idPlayer), databaseChat);
+        manageChat.updateChat(databaseChat);
 
-        list = chats.get(idGame);
-        list.add(chatServer);
+        // adding message in memory
+        serverChats.get(idGame).add(chatServer);
 
         // tell to other player
         int idSecondPlayer = games.get(idGame).getOpponentBoardById(chatServer.getIdSender()).getPlayerId();
@@ -243,7 +244,7 @@ public class GameController {
         List<Integer> userGames = clientGames.get(playerID);
         userGames.forEach((idGame) -> {
             List<Chat> chatList = new ArrayList<>();
-            List<ChatServerSide> messagesChat = chats.get(idGame);
+            List<ChatServerSide> messagesChat = serverChats.get(idGame);
             if (messagesChat != null) {
                 messagesChat.forEach((chatServerSide) -> {
                     chatList.add(chatServerToChat(playerID, chatServerSide));
@@ -407,7 +408,6 @@ public class GameController {
         Board opponentBoard = gm.getOpponentBoard(idClient);
         Board cleanedOpponentBoard = new Board(opponentBoard);
         cleanedOpponentBoard.getLetters().clear();
-        cleanedOpponentBoard.getBonus().forEach((t) -> t.setBonus(true));
 
         TileStack ts = tileStacks.get(gm.getGameId());
         TurnManager tm = playerTurnManager.get(gm.getGameId());

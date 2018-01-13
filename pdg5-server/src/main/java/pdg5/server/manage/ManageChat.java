@@ -20,13 +20,13 @@ public class ManageChat extends Manager {
 	public Chat addChatTournament(Tournament tournament) {
 		Chat chat = new Chat();
 		chat.setTournament(tournament);
-		return (Chat) addToDB(tournament);
+		return (Chat) addToDB(chat);
 	}
 	
 	public Chat addChatGame(Game game) {
 		Chat chat = new Chat();
 		chat.setGame(game);
-		return (Chat) addToDB(game);
+		return (Chat) addToDB(chat);
 	}
 	
 	public List<Chat> listChats() {

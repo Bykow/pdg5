@@ -54,11 +54,11 @@ public class Board implements Serializable {
       playerName = board.playerName;
       playerId = board.playerId;
       lastAction = board.lastAction;
-      
       score = board.score;
+      
       composition = new Composition(board.composition);
-      bonus = (ArrayList<Tile>) board.bonus.clone();
-      letters = (ArrayList<Tile>) board.letters.clone();
+      bonus = new ArrayList<>(board.bonus);
+      letters =  new ArrayList<>(board.letters);
    }
 
    /**

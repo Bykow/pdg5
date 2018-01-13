@@ -111,11 +111,15 @@ public class Game extends Message {
     }
 
     public List<Tile> getBonusLetters() {
-        return board.getBonus();
+      List<Tile> bonusTiles =  board.getBonus();
+      bonusTiles.forEach((t) -> t.setBonus(true));
+      return bonusTiles;
     }
 
     public List<Tile> getOpponentBonusLetters() {
-        return opponentBoard.getBonus();
+      List<Tile> bonusTiles =  opponentBoard.getBonus();
+      bonusTiles.forEach((t) -> t.setBonus(true));
+      return bonusTiles;
     }
 
     public boolean isYourTurn() {

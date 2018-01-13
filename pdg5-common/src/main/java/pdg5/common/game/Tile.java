@@ -34,6 +34,7 @@ public class Tile implements Serializable{
     public Tile(Tile t){
        this.letter = t.letter;
        this.value = t.value;
+       this.bonus = t.bonus;
     }
     
     /**

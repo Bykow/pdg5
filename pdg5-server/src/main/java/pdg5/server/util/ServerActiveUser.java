@@ -45,5 +45,4 @@ public class ServerActiveUser {
     public ClientHandler.DatabaseManagers getDatabaseManagers(Integer user){
         return getClientHandler(user).getDatabaseManagers();
     }
-
 }

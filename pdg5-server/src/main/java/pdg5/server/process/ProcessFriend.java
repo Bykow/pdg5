@@ -9,24 +9,42 @@ import pdg5.server.manage.ManageUser;
 import pdg5.server.util.ClientHandler;
 
 /**
- * @author Jimmy Verdasca
- *
  * Class who execute the specific action of a Friend request. Can be to add or
  * remove, favorite or blackList
  */
 public class ProcessFriend implements GenericProcess {
 
+   /**
+    * to store blacklist datas in the database
+    */
     private ManageBlacklist manageBlacklist;
+    
+    /**
+    * to store friends datas in the database
+    */
     private ManageFriend manageFriend;
+    
+    /**
+    * to store/get users datas in the database
+    */
     private ManageUser manageUser;
+    
+    /**
+     * the original Friend that the server received
+     */
     private Friend friend;
+    
+    /**
+     * manager of the socket where we received the Friend
+     */
     private final ClientHandler clientHandler;
 
     /**
      * Constructor
      *
-     * @param friend the Friend protocole we handle
+     * @param friend the original Friend that the server received
      * @param manageUser the user manager used to manipulate users
+     * @param clientHandler manager of the socket where we received the Friend
      */
     public ProcessFriend(Friend friend, ManageUser manageUser, ClientHandler clientHandler) {
         this.manageBlacklist = new ManageBlacklist();
@@ -39,7 +57,7 @@ public class ProcessFriend implements GenericProcess {
     /**
      * Apply the specified objective in friend to the database
      *
-     * @return nothing if worked else an error message
+     * @return Noop if worked else an error message
      */
     @Override
     public Message execute() {

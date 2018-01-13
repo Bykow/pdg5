@@ -12,23 +12,31 @@ import pdg5.server.util.ServerActiveUser;
  */
 public class ProcessPlay implements GenericProcess {
 
+   /**
+    * original Play request received by the server
+    */
     private final Play play;
+    
+    /**
+     * GameController that will try to play the move
+     */
     private final GameController gameController;
-    private final ServerActiveUser activeUser;
+    
+    /**
+     * manager of the manager of the socket where we received the Play
+     */
     private final ClientHandler clientHandler;
 
     /**
      * Constructor
      *
-     * @param play the protocol item containing the composition that a client wants
-     * to play
+     * @param play original Play request received by the server
      * @param gameController GameController that will try to play the move
-     * @param activeUser
+     * @param clientHandler manager of the socket where we received the Play
      */
-    public ProcessPlay(Play play, GameController gameController, ServerActiveUser activeUser, ClientHandler clientHandler) {
+    public ProcessPlay(Play play, GameController gameController, ClientHandler clientHandler) {
         this.play = play;
         this.gameController = gameController;
-        this.activeUser = activeUser;
         this.clientHandler = clientHandler;
     }
 

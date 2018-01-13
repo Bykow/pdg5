@@ -13,9 +13,24 @@ import pdg5.server.util.ServerActiveUser;
  */
 public class ProcessNewGame implements GenericProcess {
 
+   /**
+    * GameController that will create and stock the new game
+    */
     private final GameController gameController;
+    
+    /**
+     * contains id of players who will play the new game
+     */
     private final NewGame newGame;
+    
+    /**
+     * manager of the user who are connected
+     */
     private final ServerActiveUser activeUser;
+    
+    /**
+     * manager of the socket where we received the NewGame
+     */
     private final ClientHandler clientHandler;
 
     /**
@@ -23,7 +38,8 @@ public class ProcessNewGame implements GenericProcess {
      *
      * @param newGame contains id of players who will play the new game
      * @param gm GameController that will create and stock the new game
-     * @param activeUser
+     * @param activeUser manager of the user who are connected
+     * @param clientHandler manager of the socket where we received the NewGame
      */
     public ProcessNewGame(NewGame newGame, GameController gm, ServerActiveUser activeUser, ClientHandler clientHandler) {
         this.newGame = newGame;
@@ -35,7 +51,7 @@ public class ProcessNewGame implements GenericProcess {
     /**
      * add the idClient to the matchmaking queue.
      *
-     * @return to the client a message to signal we are treating his request
+     * @return to the client an ErrorMessage to signal we are treating his request
      */
     @Override
     public Message execute() {

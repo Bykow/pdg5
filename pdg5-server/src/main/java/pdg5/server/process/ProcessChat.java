@@ -14,21 +14,43 @@ import pdg5.server.model.GameController;
 import pdg5.server.util.ClientHandler;
 
 /**
- *
- * @author Jimmy Verdasca
+ * class buils when the server receiv a Chat to store and share
  */
 public class ProcessChat implements GenericProcess {
 
+   /**
+    * original Chat received
+    */
     private final Chat chat;
+    
+    /**
+     * gameController that contains the logic where and when to store the message
+     */
     private final GameController gameController;
+    
+    /**
+     * manager of the socket where we received the Chat
+     */
     private final ClientHandler clientHandler;
 
+    /**
+     * Constructor
+     * 
+     * @param chat original Chat received
+     * @param gameController gameController that contains the logic where and when to store the message
+     * @param clientHandler manager of the socket where we received the Chat
+     */
     public ProcessChat(Chat chat, GameController gameController, ClientHandler clientHandler) {
         this.chat = chat;
         this.gameController = gameController;
         this.clientHandler = clientHandler;
     }
 
+    /**
+     * transfert the message to the gameController
+     * 
+     * @return an ErrorMessage if the message isn't valid, Noop otherwhise
+     */
     @Override
     public Message execute() {
         if (chat.getSender() != Chat.SENDER.USER) {

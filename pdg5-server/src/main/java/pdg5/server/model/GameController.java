@@ -639,7 +639,7 @@ public class GameController {
         }
         boardOpponent.setBonus(newBonusTile);
         tm.turnEnded(); // turn in turnManager
-        Composition comp = board.getComposition(); // Squares
+        Composition comp = board.getComposition(); // Setting the Squares
         comp.setSquare(tm.getSquares(playerID));
         comp.removeAll(); // remove composition letters and bonus letters
 
@@ -649,7 +649,7 @@ public class GameController {
         TileStack ts = tileStacks.get(gameID);
         List<Tile> newLetters = board.getLetters();
         for (int i = 0; i < word.size(); i++) {
-            if (ts.getTileLeft() > 0) {
+            if (ts.getTileLeft() > 0 && !word.get(i).isBonus()) {
                 newLetters.add(ts.getNextTuile());
             }
         }

@@ -8,31 +8,65 @@ import pdg5.server.util.ClientHandler;
 import pdg5.server.util.ServerActiveUser;
 
 /**
- * Created on 31.10.17 by Bykow
+ * class built by the server when he receive the request SignIn
+ * Then the server wil try to sign in the client who sent this request
  */
 public class ProcessSignIn implements GenericProcess {
 
+   /**
+    * the original SignIn request received
+    */
     private final SignIn signIn;
-    private final ManageUser manager;
+    
+    /**
+     * to store/get users datas in the database
+     */
+    private final ManageUser managerUser;
+    
+    /**
+     * manager of the user who are connected
+     */
     private final ServerActiveUser activeUser;
+    
+    /**
+     * GameController that will send all the games informations if the sign in succed to the client
+     */
     private final GameController gameController;
+    
+    /**
+     * manager of the manager of the socket where we received the SignIn
+     */
     private final ClientHandler clientHandler;
 
-    public ProcessSignIn(SignIn signIn, ManageUser manager,
+    /**
+     * Constructor
+     * 
+     * @param signIn the original SignIn request received
+     * @param managerUser to store/get users datas in the database
+     * @param activeUser manager of the user who are connected
+     * @param gameController GameController that will send all the games informations if the sign in succed to the client
+     * @param clientHandler manager of the manager of the socket where we received the SignIn
+     */
+    public ProcessSignIn(SignIn signIn, ManageUser managerUser,
         ServerActiveUser activeUser, GameController gameController,
         ClientHandler clientHandler) {
         this.signIn = signIn;
-        this.manager = manager;
+        this.managerUser = managerUser;
         this.activeUser = activeUser;
         this.gameController = gameController;
         this.clientHandler = clientHandler;
     }
 
+    /**
+     * try to log in the client who requested it with the informations he gave us
+     * 
+     * @return a SignInOk if succeed, an ErrorMessage otherwise
+     */
     @Override
     public Message execute() {
-        if (manager.isCorrectPassword(signIn.getUsername(), signIn.getPassword())) {
+        if (managerUser.isCorrectPassword(signIn.getUsername(), signIn.getPassword())) {
 
-            int idUser = manager.getUserByUsername(signIn.getUsername()).getId();
+            int idUser = managerUser.getUserByUsername(signIn.getUsername()).getId();
 
             try {
                 activeUser.add(idUser, clientHandler);

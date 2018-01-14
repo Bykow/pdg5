@@ -10,17 +10,40 @@ import pdg5.server.util.ClientHandler;
 import pdg5.server.util.ServerActiveUser;
 
 /**
- * Created on 31.10.17 by Bykow
+ * class built by the server when he receive the request SignUp
+ * Then the server wil try to sign up the client who sent this request
  */
 public class ProcessSignUp implements GenericProcess {
 
+   /**
+    * the original SignUp request received
+    */
     private final SignUp signUp;
+    
+    /**
+     * to store/get users datas in the database
+     */
     private final ManageUser manager;
+    
+    /**
+     * manager of the user who are connected
+     */
     private final ServerActiveUser activeUser;
+    
+    /**
+     * manager of the manager of the socket where we received the SignIn
+     */
     private final ClientHandler clientHandler;
-    private GameController gameController;
 
-    public ProcessSignUp(SignUp signUp, GameController gameController, ManageUser manageUser, ServerActiveUser activeUser, ClientHandler clientHandler) {
+    /**
+     * Constructor
+     * 
+     * @param signUp the original SignUp request received
+     * @param manageUser to store/get users datas in the database
+     * @param activeUser manager of the user who are connected
+     * @param clientHandler manager of the manager of the socket where we received the SignIn
+     */
+    public ProcessSignUp(SignUp signUp, ManageUser manageUser, ServerActiveUser activeUser, ClientHandler clientHandler) {
         this.signUp = signUp;
         this.manager = manageUser;
         this.activeUser = activeUser;

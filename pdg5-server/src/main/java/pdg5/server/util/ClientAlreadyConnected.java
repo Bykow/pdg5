@@ -6,11 +6,13 @@
 package pdg5.server.util;
 
 /**
- * @author Miguel-Portable
+ * Exception that happen when a client try to sign in multiple times
  */
 public class ClientAlreadyConnected extends Exception {
 
     /**
+     * Constructor
+     * 
      * Creates a new instance of <code>ClientAlreadyConnected</code> without detail
      * message.
      */
@@ -18,6 +20,8 @@ public class ClientAlreadyConnected extends Exception {
     }
 
     /**
+     * Constructor
+     * 
      * Constructs an instance of <code>ClientAlreadyConnected</code> with the
      * specified detail message.
      *

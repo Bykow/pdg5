@@ -18,16 +18,32 @@ import java.util.logging.Logger;
 /**
  * Listen the network on the DEFAULT_PORT, and start a {@link ClientHandler} when a
  * new connection is detected.
- *
- * @author Maxime Guillod
  */
 public class ServerNetworkManager {
 
+   /**
+    * manager of the user who are connected
+    */
     private final ServerActiveUser activeUser;
+    
+    /**
+     * the unique instance of the game logic
+     */
     private final GameController gameController;
+    
+    /**
+     * the socket who listen for new connections
+     */
     private ServerSocket serverSocket;
+    
+    /**
+     * the socket where a stocked the new connection
+     */
     private Socket socket;
 
+    /**
+     * Constructor
+     */
     public ServerNetworkManager() {
         System.out.println("START ServerNetworkManager");
         activeUser = new ServerActiveUser();
@@ -37,6 +53,9 @@ public class ServerNetworkManager {
         System.out.println("Hibernate Connected");
     }
 
+    /**
+     * run the server, then he begin to listen the network DEFAULT_PORT
+     */
     public void begin() {
         try {
             ServerSocketFactory ssf = ServerSocketFactory.getDefault();
@@ -85,6 +104,9 @@ public class ServerNetworkManager {
         }
     }
 
+    /**
+     * close the server socket's
+     */
     public void close() {
         try {
             serverSocket.close();

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pdg5.server.process;
 
 import pdg5.common.protocol.Message;
@@ -14,8 +9,16 @@ import pdg5.server.model.GameController;
  */
 public class ProcessValidation implements GenericProcess {
 
-    private final GameController gameController;
+    /**
+     * the original Validation request
+     */
     private final Validation validation;
+    
+   /**
+    * gameController that will do the check of the Composition
+    */
+    private final GameController gameController;
+    
 
     /**
      * Constructor

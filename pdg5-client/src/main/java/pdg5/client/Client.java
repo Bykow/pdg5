@@ -11,7 +11,11 @@ import pdg5.common.Protocol;
 
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Properties;
 
 public class Client extends Application {
 
@@ -47,10 +51,22 @@ public class Client extends Application {
         System.setProperty("javax.net.ssl.trustStore", "clientKeyStore.jks");
         System.setProperty("javax.net.ssl.trustStorePassword", "pdg5Password");
 
+        File configFile = new File(System.getProperty("user.dir") + File.separator + Protocol.CONFIG_FILE);
+        Properties config = new Properties();
+
+        // Try to load properties file
+        try {
+            config.load(new BufferedInputStream(new FileInputStream(configFile)));
+        } catch (IOException e) {}
+
+        // Get properties if exist or use default value
+        String serverAddr = config.getProperty("SERVER_ADRR", Protocol.DEFAULT_SERVER);
+        int serverPort = Integer.getInteger(config.getProperty("SERVER_PORT"), Protocol.DEFAULT_PORT);
+
         // Try connect
         try {
             SSLSocketFactory factory = (SSLSocketFactory) SSLSocketFactory.getDefault();
-            this.socket = (SSLSocket) factory.createSocket(Protocol.DEFAULT_SERVER, Protocol.DEFAULT_PORT);
+            this.socket = (SSLSocket) factory.createSocket(serverAddr, serverPort);
 
             socket.setEnabledCipherSuites(socket.getSupportedCipherSuites());
 

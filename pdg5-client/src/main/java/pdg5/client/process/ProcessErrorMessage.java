@@ -30,8 +30,9 @@ public class ProcessErrorMessage implements GenericProcess {
      */
     @Override
     public Message execute() {
-        mainController.displayToast(message.getError());
-        System.out.println("ErrorMessage : " + message.getError());
+        if (! message.getError().equals("Unhandled ErrorMessage is ServerRequestManager, default reached are you connected?")) {
+            mainController.displayToast(message.getError());
+        }
         return null;
     }
 }

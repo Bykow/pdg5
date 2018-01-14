@@ -8,6 +8,8 @@ public interface Protocol {
     /**
      * Socket
      */
+    final String CONFIG_FILE = "client.properties";
+
     final String DEFAULT_SERVER = "localhost"; // modify for tests
     final int DEFAULT_PORT = 44555;
 

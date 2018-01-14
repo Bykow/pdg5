@@ -154,6 +154,7 @@ public class GameController extends AbstractController {
         // Client will receive a new game after it sends this message to server. All the logic is server side.
         sender.add(new Pass(gameID));
         cleanList(adversaryList);
+        cleanList(userList);
     }
 
     /**

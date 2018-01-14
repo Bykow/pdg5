@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import pdg5.client.controller.MainController;
 import pdg5.client.util.ClientRequestManager;
@@ -46,6 +47,9 @@ public class Client extends Application {
 
         // Set app icon
         this.primaryStage.getIcons().add(new Image(Client.class.getResourceAsStream("/img/icon.png")));
+
+        Font.loadFont(Client.class.getResource("/font/OpenSans-Bold.ttf").toExternalForm(), 20);
+        Font.loadFont(Client.class.getResource("/font/OpenSans-Regular.ttf").toExternalForm(), 20);
 
         initRootLayout();
 

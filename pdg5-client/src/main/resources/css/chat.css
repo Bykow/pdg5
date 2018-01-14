@@ -40,7 +40,7 @@ VBox {
 }
 
 TextFlow {
-    -fx-font-family: "Helvetica";
+    -fx-font-family: "Open Sans";
     -fx-font-weight: bold;
     -fx-border-color: #ffffff;
     -fx-border-radius: 10;

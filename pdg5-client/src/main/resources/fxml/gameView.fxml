@@ -128,31 +128,31 @@
         <Label fx:id="userName" alignment="CENTER_RIGHT" contentDisplay="TOP" layoutX="398.0" layoutY="272.0"
                prefHeight="17.0" prefWidth="117.0" text="Username" textFill="#2c3e50">
             <font>
-                <Font name="Helvetica Bold" size="14.0"/>
+                <Font name="Open Sans Bold" size="14.0"/>
             </font>
         </Label>
         <Label fx:id="adversaryName" contentDisplay="TOP" layoutX="9.0" layoutY="176.0" prefHeight="17.0"
                prefWidth="117.0" text="Username" textFill="#2c3e50">
             <font>
-                <Font name="Helvetica Bold" size="14.0"/>
+                <Font name="Open Sans Bold" size="14.0"/>
             </font>
         </Label>
         <Label fx:id="adversaryScore" alignment="CENTER" layoutX="210.0" layoutY="175.0" prefHeight="36.0"
                prefWidth="105.0" text="0" textFill="#1e70a5">
             <font>
-                <Font name="Helvetica Bold" size="30.0"/>
+                <Font name="Open Sans Bold" size="30.0"/>
             </font>
         </Label>
         <Label fx:id="userScore" alignment="CENTER" layoutX="210.0" layoutY="236.0" prefHeight="36.0" prefWidth="105.0"
                text="0" textFill="#84cdf6">
             <font>
-                <Font name="Helvetica Bold" size="30.0"/>
+                <Font name="Open Sans Bold" size="30.0"/>
             </font>
         </Label>
         <Label fx:id="remainingTiles" alignment="CENTER" layoutX="140.0" layoutY="204.0" prefHeight="36.0"
                prefWidth="245.0" text="0 tuiles restantes" textFill="#f7f6f6">
             <font>
-                <Font name="Helvetica Bold" size="18.0"/>
+                <Font name="Open Sans Bold" size="18.0"/>
             </font>
         </Label>
         <AnchorPane id="bottom-bar" layoutY="543.0" prefHeight="55.0" prefWidth="524.0">

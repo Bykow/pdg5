@@ -3,6 +3,7 @@ package pdg5.client;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import pdg5.client.controller.MainController;
@@ -45,6 +46,9 @@ public class Client extends Application {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("WordOn Desktop");
         this.primaryStage.setResizable(false);
+
+        // Set app icon
+        this.primaryStage.getIcons().add(new Image(Client.class.getResourceAsStream("/img/icon.png")));
 
         initRootLayout();
 

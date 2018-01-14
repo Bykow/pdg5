@@ -496,6 +496,7 @@ public class GameController extends AbstractController {
             temp.add(((GTile) st.getChildren().get(1)).getModel());
         }
         Collections.shuffle(temp);
+        cleanList(userList);
         updateList(temp, deckList);
     }
 

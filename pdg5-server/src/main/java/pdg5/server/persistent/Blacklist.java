@@ -10,16 +10,16 @@ import java.util.Date;
 @Table(name = "blacklist", catalog = "pdg")
 public class Blacklist extends AbstractData implements java.io.Serializable {
 
-   /**
-    * user who added in black list a user
-    */
+    /**
+     * user who added in black list a user
+     */
     private User userByToUser;
-    
+
     /**
      * the targetted blacklisted user
      */
     private User userByFromUser;
-    
+
     /**
      * date of the last modification of this blacklist
      */
@@ -33,10 +33,10 @@ public class Blacklist extends AbstractData implements java.io.Serializable {
 
     /**
      * Constructor
-     * 
-     * @param userByToUser user who added in black list a user
+     *
+     * @param userByToUser   user who added in black list a user
      * @param userByFromUser the targetted blacklisted user
-     * @param lastMod date of the last modification of this blacklist
+     * @param lastMod        date of the last modification of this blacklist
      */
     public Blacklist(User userByToUser, User userByFromUser, Date lastMod) {
         this.userByToUser = userByToUser;
@@ -46,7 +46,7 @@ public class Blacklist extends AbstractData implements java.io.Serializable {
 
     /**
      * return the user who added in black list a user
-     * 
+     *
      * @return the user who added in black list a user
      */
     @ManyToOne(fetch = FetchType.LAZY)
@@ -57,7 +57,7 @@ public class Blacklist extends AbstractData implements java.io.Serializable {
 
     /**
      * modify the user who added in black list a user
-     * 
+     *
      * @param userByToUser the new user who added in black list a user
      */
     public void setUserByToUser(User userByToUser) {
@@ -66,7 +66,7 @@ public class Blacklist extends AbstractData implements java.io.Serializable {
 
     /**
      * return the targetted blacklisted user
-     * 
+     *
      * @return the targetted blacklisted user
      */
     @ManyToOne(fetch = FetchType.LAZY)
@@ -77,7 +77,7 @@ public class Blacklist extends AbstractData implements java.io.Serializable {
 
     /**
      * modify the targetted blacklisted user
-     * 
+     *
      * @param userByFromUser the new targetted blacklisted user
      */
     public void setUserByFromUser(User userByFromUser) {
@@ -86,7 +86,7 @@ public class Blacklist extends AbstractData implements java.io.Serializable {
 
     /**
      * return the date of the last modification of this blacklist
-     * 
+     *
      * @return the date of the last modification of this blacklist
      */
     @Temporal(TemporalType.TIMESTAMP)
@@ -97,7 +97,7 @@ public class Blacklist extends AbstractData implements java.io.Serializable {
 
     /**
      * modify the date of the last modification of this blacklist
-     * 
+     *
      * @param lastMod the new date of the last modification of this blacklist
      */
     public void setLastMod(Date lastMod) {
@@ -106,7 +106,7 @@ public class Blacklist extends AbstractData implements java.io.Serializable {
 
     /**
      * check if an Object is the same than this instance of Blacklist
-     * 
+     *
      * @param obj the object we check equality
      * @return true if they are identical
      */
@@ -119,13 +119,14 @@ public class Blacklist extends AbstractData implements java.io.Serializable {
         Blacklist b = (Blacklist) obj;
 
         return id == b.getId()
-            && userByFromUser.equals(b.getUserByFromUser())
-            && userByToUser.equals(b.getUserByToUser())
-            && lastMod.equals(b.getLastMod());
+                && userByFromUser.equals(b.getUserByFromUser())
+                && userByToUser.equals(b.getUserByToUser())
+                && lastMod.equals(b.getLastMod());
     }
 
     /**
      * override the print of this class
+     *
      * @return a string with the id, the date of last modification and both users
      */
     @Override

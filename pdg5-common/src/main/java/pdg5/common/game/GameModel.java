@@ -13,47 +13,27 @@ import java.util.List;
 public class GameModel implements Serializable {
 
     /**
-     * enum to differenciate players
+     * Date when the game as been created
      */
-    public enum PlayerBoard {
-        PLAYER1, PLAYER2
-    }
-
-    /**
-     * enum to identifiate the State of the game
-     */
-    public enum State {
-        IN_PROGRESS, END_MODE, FINISHED, OUTDATED
-    }
-
+    private final Date creation;
     private int scoreLastWordPlayed;
     private List<Tile> lastWordPlayed;
-
     /**
      * Unique id of the game
      */
     private int gameId;
-
     /**
      * current state of the game
      */
     private State state;
-
     /**
      * unique id of the Tournament, 0 if it is not a Tournament
      */
     private int idTournament;
-
     /**
      * Two parts of the game one for each player
      */
     private Board[] boards;
-
-    /**
-     * Date when the game as been created
-     */
-    private final Date creation;
-
     /**
      * Date of the last word played by a player
      */
@@ -62,8 +42,8 @@ public class GameModel implements Serializable {
     /**
      * Constructor
      *
-     * @param boards array of two Board representing the two sides of the game
-     * @param gameId unique id for the game
+     * @param boards       array of two Board representing the two sides of the game
+     * @param gameId       unique id for the game
      * @param creationDate Date of creation
      * @param idTournament Tournament Id
      * @throws IllegalArgumentException if the array has wrong length, should be 2
@@ -190,6 +170,15 @@ public class GameModel implements Serializable {
     }
 
     /**
+     * set the current state of the game
+     *
+     * @param state the new state of the game
+     */
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    /**
      * return the date we created this game
      *
      * @return the date we created this game
@@ -226,6 +215,10 @@ public class GameModel implements Serializable {
         return lastWordPlayed;
     }
 
+    public void setLastWordPlayed(List<Tile> lastWordPlayed) {
+        this.lastWordPlayed = lastWordPlayed;
+    }
+
     /**
      * return the score of the last played word by a player
      *
@@ -235,21 +228,8 @@ public class GameModel implements Serializable {
         return scoreLastWordPlayed;
     }
 
-    public void setLastWordPlayed(List<Tile> lastWordPlayed) {
-        this.lastWordPlayed = lastWordPlayed;
-    }
-
     public void setScoreLastWordPlayed(int scoreLastWordPlayed) {
         this.scoreLastWordPlayed = scoreLastWordPlayed;
-    }
-
-    /**
-     * set the current state of the game
-     *
-     * @param state the new state of the game
-     */
-    public void setState(State state) {
-        this.state = state;
     }
 
     /**
@@ -262,10 +242,10 @@ public class GameModel implements Serializable {
     @Override
     public boolean equals(Object o) {
         return getClass().isInstance(o)
-            && getClass() == o.getClass()
-            && boards[PlayerBoard.PLAYER1.ordinal()].equals(((GameModel) o).boards[PlayerBoard.PLAYER1.ordinal()])
-            && boards[PlayerBoard.PLAYER2.ordinal()].equals(((GameModel) o).boards[PlayerBoard.PLAYER2.ordinal()])
-            && gameId == ((GameModel) o).gameId;
+                && getClass() == o.getClass()
+                && boards[PlayerBoard.PLAYER1.ordinal()].equals(((GameModel) o).boards[PlayerBoard.PLAYER1.ordinal()])
+                && boards[PlayerBoard.PLAYER2.ordinal()].equals(((GameModel) o).boards[PlayerBoard.PLAYER2.ordinal()])
+                && gameId == ((GameModel) o).gameId;
     }
 
     /**
@@ -279,5 +259,19 @@ public class GameModel implements Serializable {
         hash = 71 * hash + this.gameId;
         hash = 71 * hash + Arrays.deepHashCode(this.boards);
         return hash;
+    }
+
+    /**
+     * enum to differenciate players
+     */
+    public enum PlayerBoard {
+        PLAYER1, PLAYER2
+    }
+
+    /**
+     * enum to identifiate the State of the game
+     */
+    public enum State {
+        IN_PROGRESS, END_MODE, FINISHED, OUTDATED
     }
 }

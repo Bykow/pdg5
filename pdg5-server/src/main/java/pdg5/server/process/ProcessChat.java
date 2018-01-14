@@ -18,16 +18,16 @@ import pdg5.server.util.ClientHandler;
  */
 public class ProcessChat implements GenericProcess {
 
-   /**
-    * original Chat received
-    */
+    /**
+     * original Chat received
+     */
     private final Chat chat;
-    
+
     /**
      * gameController that contains the logic where and when to store the message
      */
     private final GameController gameController;
-    
+
     /**
      * manager of the socket where we received the Chat
      */
@@ -35,10 +35,10 @@ public class ProcessChat implements GenericProcess {
 
     /**
      * Constructor
-     * 
-     * @param chat original Chat received
+     *
+     * @param chat           original Chat received
      * @param gameController gameController that contains the logic where and when to store the message
-     * @param clientHandler manager of the socket where we received the Chat
+     * @param clientHandler  manager of the socket where we received the Chat
      */
     public ProcessChat(Chat chat, GameController gameController, ClientHandler clientHandler) {
         this.chat = chat;
@@ -48,7 +48,7 @@ public class ProcessChat implements GenericProcess {
 
     /**
      * transfert the message to the gameController
-     * 
+     *
      * @return an ErrorMessage if the message isn't valid, Noop otherwhise
      */
     @Override

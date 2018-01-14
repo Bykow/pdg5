@@ -1,14 +1,14 @@
 package pdg5.common.protocol;
 
-import java.util.Arrays;
 import pdg5.common.game.Board;
+import pdg5.common.game.Composition.Square;
 import pdg5.common.game.GameModel.State;
+import pdg5.common.game.Result;
 import pdg5.common.game.Tile;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import pdg5.common.game.Composition.Square;
-import pdg5.common.game.Result;
 
 /**
  * Class sent through the connection by the server representing a full game with two
@@ -79,22 +79,22 @@ public class Game extends Message {
     /**
      * Constructor
      *
-     * @param ID unique id of the game
-     * @param created date of creation of the original GameModel
-     * @param lastActivity date of the last action of a player (throw, play pass)
-     * @param tournament unique id of the tournament associated
-     * @param board board of the player who will get this point of view
-     * @param opponentBoard board of the opponent player (don't contain Tiles)
-     * @param nbLeftTile number of Tiles left in the Tile Stack
-     * @param lastWordPlayed Tiles of the last word played (in order)
+     * @param ID                  unique id of the game
+     * @param created             date of creation of the original GameModel
+     * @param lastActivity        date of the last action of a player (throw, play pass)
+     * @param tournament          unique id of the tournament associated
+     * @param board               board of the player who will get this point of view
+     * @param opponentBoard       board of the opponent player (don't contain Tiles)
+     * @param nbLeftTile          number of Tiles left in the Tile Stack
+     * @param lastWordPlayed      Tiles of the last word played (in order)
      * @param scoreLastWordPlayed the tabulated score with the last word played
-     * @param yourTurn indicate if it's the turn's player
-     * @param state the current State of the game (IN_PROGRESS, END_MODE, FINISHED,
-     * OUTDATED)
+     * @param yourTurn            indicate if it's the turn's player
+     * @param state               the current State of the game (IN_PROGRESS, END_MODE, FINISHED,
+     *                            OUTDATED)
      */
     public Game(int ID, Date created, Date lastActivity,
-        int tournament, Board board, Board opponentBoard, int nbLeftTile,
-        List<Tile> lastWordPlayed, int scoreLastWordPlayed, boolean yourTurn, State state) {
+                int tournament, Board board, Board opponentBoard, int nbLeftTile,
+                List<Tile> lastWordPlayed, int scoreLastWordPlayed, boolean yourTurn, State state) {
         this.ID = ID;
         this.created = created;
         this.lastActivity = lastActivity;
@@ -280,6 +280,17 @@ public class Game extends Message {
     }
 
     /**
+     * allow to change the current State of the game (IN_PROGRESS, END_MODE,
+     * FINISHED, OUTDATED) improve the rapidity of answer of the server
+     *
+     * @param state the new current State of the game (IN_PROGRESS, END_MODE,
+     *              FINISHED, OUTDATED)
+     */
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    /**
      * return the squares of the player who will get this point of view
      *
      * @return the squares of the player who will get this point of view
@@ -304,17 +315,6 @@ public class Game extends Message {
      */
     public Result getResult() {
         return result;
-    }
-
-    /**
-     * allow to change the current State of the game (IN_PROGRESS, END_MODE,
-     * FINISHED, OUTDATED) improve the rapidity of answer of the server
-     *
-     * @param state the new current State of the game (IN_PROGRESS, END_MODE,
-     * FINISHED, OUTDATED)
-     */
-    public void setState(State state) {
-        this.state = state;
     }
 
     /**

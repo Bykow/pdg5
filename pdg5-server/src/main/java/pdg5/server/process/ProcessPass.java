@@ -11,16 +11,16 @@ import pdg5.server.util.ClientHandler;
  */
 public class ProcessPass implements GenericProcess {
 
-   /**
-    * the orignal Pass request received by the server
-    */
+    /**
+     * the orignal Pass request received by the server
+     */
     private final Pass pass;
-    
+
     /**
      * GameController that will choose to pass or throw
      */
     private final GameController gameController;
-    
+
     /**
      * manager of the socket where we received the Pass
      */
@@ -28,10 +28,10 @@ public class ProcessPass implements GenericProcess {
 
     /**
      * Constructor
-     * 
-     * @param pass the orignal Pass request received by the server
+     *
+     * @param pass           the orignal Pass request received by the server
      * @param gameController GameController that will choose to pass or throw
-     * @param clientHandler manager of the socket where we received the Pass
+     * @param clientHandler  manager of the socket where we received the Pass
      */
     public ProcessPass(Pass pass, GameController gameController, ClientHandler clientHandler) {
         this.pass = pass;
@@ -41,7 +41,7 @@ public class ProcessPass implements GenericProcess {
 
     /**
      * try to pass or throw depending on the state of the game
-     * 
+     *
      * @return a Game with the new state of the game
      */
     @Override

@@ -17,30 +17,26 @@ import java.util.stream.Stream;
  */
 public class TileStack {
 
-   /**
-    * stack of the Tiles
-    */
-    private Stack<Tile> stack = new Stack<>();
-    
-    /**
-     * the full size of the stack
-     */
-    private int size;
-    
-    /**
-     * the current size of the stack
-     */
-    private int tileLeft;
-    
-    /**
-     * map who link a caracter to his value
-     */
-    private HashMap<Character, Integer> map = new HashMap<>();
-    
     /**
      * random used to shuffle the stack or pick randomly Tiles in
      */
     private final Random r;
+    /**
+     * stack of the Tiles
+     */
+    private Stack<Tile> stack = new Stack<>();
+    /**
+     * the full size of the stack
+     */
+    private int size;
+    /**
+     * the current size of the stack
+     */
+    private int tileLeft;
+    /**
+     * map who link a caracter to his value
+     */
+    private HashMap<Character, Integer> map = new HashMap<>();
 
     /**
      * Constructor
@@ -74,8 +70,8 @@ public class TileStack {
 
     /**
      * Constructor
-     * 
-     * @param lang langage of the game
+     *
+     * @param lang    langage of the game
      * @param letters initial letters of the stack
      */
     public TileStack(String lang, String letters) {
@@ -86,16 +82,16 @@ public class TileStack {
 
         InputStream inputStream = TileStack.class.getResourceAsStream("/dico/" + lang + "_stackInit.txt");
         new BufferedReader(new InputStreamReader(inputStream)).lines()
-            // Fills the map with letter and values. '0' stands for a joker
-            .forEach(s -> map.put(s.charAt(0), Integer.parseInt(s.substring(5, 7))));
+                // Fills the map with letter and values. '0' stands for a joker
+                .forEach(s -> map.put(s.charAt(0), Integer.parseInt(s.substring(5, 7))));
 
         letters.chars()
-            .mapToObj(c -> (char) c)
-            .map((Character c) -> new Tile((char) c, map.get(c)))
-            .forEach((t) -> {
-                size++;
-                stack.push(new Tile(t));
-            });
+                .mapToObj(c -> (char) c)
+                .map((Character c) -> new Tile((char) c, map.get(c)))
+                .forEach((t) -> {
+                    size++;
+                    stack.push(new Tile(t));
+                });
 
         tileLeft = size;
     }
@@ -112,15 +108,15 @@ public class TileStack {
 
         InputStream inputStream = TileStack.class.getResourceAsStream("/dico/" + lang + "_stackInit.txt");
         new BufferedReader(new InputStreamReader(inputStream)).lines()
-            // Fills the map with letter and values. '0' stands for a joker
-            .peek(s -> map.put(s.charAt(0), Integer.parseInt(s.substring(5, 7))))
-            // For each line of the config file, adds the number of letters to stack
-            .forEach(s -> {
-                for (int i = Integer.parseInt(s.substring(2, 4)); i > 0; i--) {
-                    size++;
-                    this.stack.push(new Tile(s.charAt(0), Integer.parseInt(s.substring(5, 7))));
-                }
-            });
+                // Fills the map with letter and values. '0' stands for a joker
+                .peek(s -> map.put(s.charAt(0), Integer.parseInt(s.substring(5, 7))))
+                // For each line of the config file, adds the number of letters to stack
+                .forEach(s -> {
+                    for (int i = Integer.parseInt(s.substring(2, 4)); i > 0; i--) {
+                        size++;
+                        this.stack.push(new Tile(s.charAt(0), Integer.parseInt(s.substring(5, 7))));
+                    }
+                });
 
         // Shuffles the stack
         Collections.shuffle(stack, r);
@@ -173,7 +169,7 @@ public class TileStack {
 
     /**
      * return the full initial size of the stack
-     * 
+     *
      * @return the full initial size of the stack
      */
     public int getSize() {
@@ -182,7 +178,7 @@ public class TileStack {
 
     /**
      * return the current size of the stack
-     * 
+     *
      * @return the current size of the stack
      */
     public int getTileLeft() {

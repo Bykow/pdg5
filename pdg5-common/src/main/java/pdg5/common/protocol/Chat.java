@@ -9,27 +9,17 @@ import java.util.Date;
 public class Chat extends Message {
 
     /**
-     * enum representing the type of the person who created this Chat originally
-     */
-    public enum SENDER {
-        USER, OPPONENT, SERVER
-    }
-
-    /**
      * the type of the person who created this Chat originally
      */
     private SENDER sender;
-
     /**
      * time when this instance was created
      */
     private long timeStamp;
-
     /**
      * String representing the message
      */
     private String message;
-
     /**
      * unique id of the game
      */
@@ -39,7 +29,7 @@ public class Chat extends Message {
      * Constructor for client creating new messages
      *
      * @param message the message or historic we want to send
-     * @param gameId the unique ID of the message
+     * @param gameId  the unique ID of the message
      */
     public Chat(String message, int gameId) {
         this(message, gameId, new Date().getTime(), SENDER.USER);
@@ -49,8 +39,8 @@ public class Chat extends Message {
      * Constructor for client creating new messages
      *
      * @param message the message or historic we want to send
-     * @param gameId the unique ID of the message
-     * @param sender the type of the person who created this Chat originally
+     * @param gameId  the unique ID of the message
+     * @param sender  the type of the person who created this Chat originally
      */
     public Chat(String message, int gameId, SENDER sender) {
         this(message, gameId, new Date().getTime(), sender);
@@ -59,10 +49,10 @@ public class Chat extends Message {
     /**
      * Constructor for server sending stocked messages
      *
-     * @param message the message or historic we want to send
-     * @param gameId the unique ID of the message
+     * @param message   the message or historic we want to send
+     * @param gameId    the unique ID of the message
      * @param timeStamp date of the message creation
-     * @param sender the type of the person who created this Chat originally
+     * @param sender    the type of the person who created this Chat originally
      */
     public Chat(String message, int gameId, long timeStamp, SENDER sender) {
         this.message = message;
@@ -114,6 +104,13 @@ public class Chat extends Message {
      */
     public void setSender(SENDER sender) {
         this.sender = sender;
+    }
+
+    /**
+     * enum representing the type of the person who created this Chat originally
+     */
+    public enum SENDER {
+        USER, OPPONENT, SERVER
     }
 
 }

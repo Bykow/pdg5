@@ -15,16 +15,16 @@ import java.util.List;
  */
 public class ManageGame extends Manager {
 
-   /**
-    * Constructor
-    */
+    /**
+     * Constructor
+     */
     public ManageGame() {
         super();
     }
 
     /**
      * Constructor
-     * 
+     *
      * @param session the session used by the manager to do transactions
      */
     public ManageGame(Session session) {
@@ -33,11 +33,11 @@ public class ManageGame extends Manager {
 
     /**
      * add a tournament game and all it's informations to the database
-     * 
-     * @param title of the game
-     * @param player1 one of the players
-     * @param player2 the other player
-     * @param tournament the tournament informations to link with this game
+     *
+     * @param title            of the game
+     * @param player1          one of the players
+     * @param player2          the other player
+     * @param tournament       the tournament informations to link with this game
      * @param remainingLetters the letters left in the stack
      * @return the game added to the database
      */
@@ -56,10 +56,10 @@ public class ManageGame extends Manager {
 
     /**
      * add a game and all it's informations to the database
-     * 
-     * @param title of the game
-     * @param player1 one of the players
-     * @param player2 the other player
+     *
+     * @param title            of the game
+     * @param player1          one of the players
+     * @param player2          the other player
      * @param remainingLetters the letters left in the stack
      * @return the game added to the database
      */
@@ -77,7 +77,7 @@ public class ManageGame extends Manager {
 
     /**
      * return a list of all games contained in the database
-     * 
+     *
      * @return a list of all games contained in the database
      */
     public List<Game> listGame() {
@@ -86,7 +86,7 @@ public class ManageGame extends Manager {
 
     /**
      * return a list of all games of a User
-     * 
+     *
      * @param user the User we wish to get the games
      * @return a list of all games of a User
      */
@@ -98,9 +98,9 @@ public class ManageGame extends Manager {
         try {
             tx = session.beginTransaction();
             games = session.createQuery("FROM Game WHERE player1 =:p1 OR player2 =:p2")
-                .setParameter("p1", user.getId())
-                .setParameter("p2", user.getId())
-                .list();
+                    .setParameter("p1", user.getId())
+                    .setParameter("p2", user.getId())
+                    .list();
 
             tx.commit();
         } catch (HibernateException e) {
@@ -114,7 +114,7 @@ public class ManageGame extends Manager {
 
     /**
      * update informations about a game in the database
-     * 
+     *
      * @param game the game with new information
      * @return Protocol.OK if the transaction succeeded or Protocol.Error otherwise
      */
@@ -124,7 +124,7 @@ public class ManageGame extends Manager {
 
     /**
      * delete a game informations in the database
-     * 
+     *
      * @param game the game we wish to delete the informations in the database
      * @return Protocol.OK if the transaction succeeded or Protocol.Error otherwise
      */

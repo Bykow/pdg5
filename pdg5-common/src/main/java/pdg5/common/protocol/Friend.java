@@ -7,22 +7,9 @@ package pdg5.common.protocol;
 public class Friend extends Message {
 
     /**
-     * This enum specify the signification of this Friend instance ADD_FRIEND, Add a
-     * favorite player REMOVE_FRIEND, Remove a favorite player ADD_BLACKLIST, Add a
-     * player to the BlackList REMOVE_BLACKLIST Remove a player to the BlackList
-     */
-    public enum TYPE {
-        ADD_FRIEND,
-        REMOVE_FRIEND,
-        ADD_BLACKLIST,
-        REMOVE_BLACKLIST
-    }
-
-    /**
      * signification of this Friend instance (see enum Friend.TYPE)
      */
     private TYPE type;
-
     /**
      * unique id of the player concerned by the action
      */
@@ -31,7 +18,7 @@ public class Friend extends Message {
     /**
      * Constructor
      *
-     * @param type objective of the message
+     * @param type              objective of the message
      * @param idTargettedPlayer unique ID of the player concerned by the objective
      */
     public Friend(TYPE type, int idTargettedPlayer) {
@@ -55,5 +42,17 @@ public class Friend extends Message {
      */
     public TYPE getType() {
         return type;
+    }
+
+    /**
+     * This enum specify the signification of this Friend instance ADD_FRIEND, Add a
+     * favorite player REMOVE_FRIEND, Remove a favorite player ADD_BLACKLIST, Add a
+     * player to the BlackList REMOVE_BLACKLIST Remove a player to the BlackList
+     */
+    public enum TYPE {
+        ADD_FRIEND,
+        REMOVE_FRIEND,
+        ADD_BLACKLIST,
+        REMOVE_BLACKLIST
     }
 }

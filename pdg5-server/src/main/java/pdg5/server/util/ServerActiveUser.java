@@ -10,9 +10,9 @@ import java.util.Map;
  */
 public class ServerActiveUser {
 
-   /**
-    * a map where the key is a unique id of a connected player and the value his ClientHandler
-    */
+    /**
+     * a map where the key is a unique id of a connected player and the value his ClientHandler
+     */
     private final Map<Integer, ClientHandler> map;
 
     /**
@@ -24,8 +24,8 @@ public class ServerActiveUser {
 
     /**
      * add a newly connected client to the map
-     * 
-     * @param user unique id of the newly connected player
+     *
+     * @param user          unique id of the newly connected player
      * @param clientHandler the client handler who will manage him
      * @throws ClientAlreadyConnected if we try to add a client multiple times to the map
      */
@@ -38,7 +38,7 @@ public class ServerActiveUser {
 
     /**
      * check if a client is in the map with his unique id
-     * 
+     *
      * @param user unique id of the client
      * @return true if he is in the map
      */
@@ -48,7 +48,7 @@ public class ServerActiveUser {
 
     /**
      * remove a connected client to the map
-     * 
+     *
      * @param user unique id of the client
      */
     public void remove(Integer user) {
@@ -57,7 +57,7 @@ public class ServerActiveUser {
 
     /**
      * return the client handler of a specified unique id of a client
-     * 
+     *
      * @param user unique id of a connected client
      * @return the ClientHandler of the client, or null if he isn't in the map
      */
@@ -67,9 +67,9 @@ public class ServerActiveUser {
 
     /**
      * send a protocol.Message to a client
-     * 
+     *
      * @param user unique id of the client
-     * @param m Protocol.Message we wish to send him
+     * @param m    Protocol.Message we wish to send him
      */
     public void giveToClientHandler(Integer user, Message m) {
         ClientHandler client = getClientHandler(user);
@@ -80,7 +80,7 @@ public class ServerActiveUser {
 
     /**
      * return the managers of one client (managers needs to be run in a single thread)
-     * 
+     *
      * @param user unique id of the client
      * @return a class containing all the created instance of possible managers for a client
      */

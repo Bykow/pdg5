@@ -11,16 +11,16 @@ import java.util.Set;
 @Table(name = "chat", catalog = "pdg")
 public class Chat extends AbstractData implements java.io.Serializable {
 
-   /**
-    * game associated to this chat
-    */
+    /**
+     * game associated to this chat
+     */
     private Game game;
-    
+
     /**
      * tournament associated to this chat
      */
     private Tournament tournament;
-    
+
     /**
      * set of message contained in this chat
      */
@@ -34,10 +34,10 @@ public class Chat extends AbstractData implements java.io.Serializable {
 
     /**
      * Constructor
-     * 
-     * @param game game associated to this chat
+     *
+     * @param game       game associated to this chat
      * @param tournament tournament associated to this chat
-     * @param messages set of message contained in this chat
+     * @param messages   set of message contained in this chat
      */
     public Chat(Game game, Tournament tournament, Set<Message> messages) {
         this.game = game;
@@ -47,7 +47,7 @@ public class Chat extends AbstractData implements java.io.Serializable {
 
     /**
      * return the game associated to this chat
-     * 
+     *
      * @return the game associated to this chat
      */
     @ManyToOne(fetch = FetchType.LAZY)
@@ -58,7 +58,7 @@ public class Chat extends AbstractData implements java.io.Serializable {
 
     /**
      * modify the game associated to this chat
-     * 
+     *
      * @param game the new game associated to this chat
      */
     public void setGame(Game game) {
@@ -67,7 +67,7 @@ public class Chat extends AbstractData implements java.io.Serializable {
 
     /**
      * return the tournament associated to this chat
-     * 
+     *
      * @return the tournament associated to this chat
      */
     @ManyToOne(fetch = FetchType.LAZY)
@@ -78,7 +78,7 @@ public class Chat extends AbstractData implements java.io.Serializable {
 
     /**
      * modify the tournament associated to this chat
-     * 
+     *
      * @param tournament the new tournament associated to this chat
      */
     public void setTournament(Tournament tournament) {
@@ -87,7 +87,7 @@ public class Chat extends AbstractData implements java.io.Serializable {
 
     /**
      * return the set of message contained in this chat
-     * 
+     *
      * @return the set of message contained in this chat
      */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "chat")
@@ -97,7 +97,7 @@ public class Chat extends AbstractData implements java.io.Serializable {
 
     /**
      * modify the set of message contained in this chat
-     * 
+     *
      * @param messages the new set of message contained in this chat
      */
     public void setMessages(Set<Message> messages) {
@@ -106,7 +106,7 @@ public class Chat extends AbstractData implements java.io.Serializable {
 
     /**
      * check if an object is equivalent to this instance
-     * 
+     *
      * @param obj the object we are checking the equality
      * @return true if they are identical
      */
@@ -119,14 +119,14 @@ public class Chat extends AbstractData implements java.io.Serializable {
         Chat b = (Chat) obj;
 
         return id == b.getId()
-            && ((game == null && b.getGame() == null) || game.equals(b.getGame()))
-            && ((tournament == null && b.getTournament() == null) || tournament.equals(b.getTournament()))
-            && messages.equals(b.getMessages());
+                && ((game == null && b.getGame() == null) || game.equals(b.getGame()))
+                && ((tournament == null && b.getTournament() == null) || tournament.equals(b.getTournament()))
+                && messages.equals(b.getMessages());
     }
 
     /**
      * override the print of this class
-     * 
+     *
      * @return a string with the unique id, the game and the tournament associated
      */
     @Override

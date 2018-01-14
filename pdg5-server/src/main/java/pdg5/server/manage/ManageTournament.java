@@ -10,19 +10,19 @@ import java.util.List;
  */
 public class ManageTournament extends Manager {
 
-   /**
-    * add a new tournament to the database
-    * 
-    * @param title of the tournament
-    * @return the new created tournament
-    */
+    /**
+     * add a new tournament to the database
+     *
+     * @param title of the tournament
+     * @return the new created tournament
+     */
     public Tournament addTournament(String title) {
         return (Tournament) addToDB(new Tournament(title, new Date()));
     }
 
     /**
      * return all the tournament in the database
-     * 
+     *
      * @return all the tournament in the database
      */
     public List<Tournament> listTournaments() {
@@ -31,7 +31,7 @@ public class ManageTournament extends Manager {
 
     /**
      * update informations of a specified tournament
-     * 
+     *
      * @param tournament the new informations of the tournament
      * @return Protocol.OK if the transaction succeeded or Protocol.Error otherwise
      */
@@ -41,7 +41,7 @@ public class ManageTournament extends Manager {
 
     /**
      * delete a specified tournament contained in the database
-     * 
+     *
      * @param tournament the tournament we wish to delete
      * @return Protocol.OK if the transaction succeeded or Protocol.Error otherwise
      */

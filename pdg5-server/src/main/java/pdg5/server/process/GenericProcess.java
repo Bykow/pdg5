@@ -7,10 +7,10 @@ import pdg5.common.protocol.Message;
  */
 public interface GenericProcess {
 
-   /**
-    * method to implement so the server know what to do when he receiv a message
-    * 
-    * @return the answer Message built by the server, Noop for an empty Message
-    */
+    /**
+     * method to implement so the server know what to do when he receiv a message
+     *
+     * @return the answer Message built by the server, Noop for an empty Message
+     */
     public Message execute();
 }

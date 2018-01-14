@@ -21,21 +21,21 @@ import java.util.logging.Logger;
  */
 public class ServerNetworkManager {
 
-   /**
-    * manager of the user who are connected
-    */
+    /**
+     * manager of the user who are connected
+     */
     private final ServerActiveUser activeUser;
-    
+
     /**
      * the unique instance of the game logic
      */
     private final GameController gameController;
-    
+
     /**
      * the socket who listen for new connections
      */
     private ServerSocket serverSocket;
-    
+
     /**
      * the socket where a stocked the new connection
      */
@@ -72,10 +72,10 @@ public class ServerNetworkManager {
                     keyStore.load(is, JKS_PASSWORD);
                 }
                 final KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory
-                    .getDefaultAlgorithm());
+                        .getDefaultAlgorithm());
                 kmf.init(keyStore, KEY_PASSWORD);
                 final TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory
-                    .getDefaultAlgorithm());
+                        .getDefaultAlgorithm());
                 tmf.init(keyStore);
 
                 /*
@@ -89,7 +89,7 @@ public class ServerNetworkManager {
                 // The host name doesn't really matter, since we're turning it into a server socket
                 // (No need to match the host name to the certificate on this side).
                 SSLSocket sslSocket = (SSLSocket) sslSf.createSocket(socket, null,
-                    socket.getPort(), false);
+                        socket.getPort(), false);
                 sslSocket.setUseClientMode(false);
 
                 sslSocket.setEnabledCipherSuites(sslSocket.getSupportedCipherSuites());

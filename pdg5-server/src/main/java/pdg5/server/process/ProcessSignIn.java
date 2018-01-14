@@ -13,26 +13,26 @@ import pdg5.server.util.ServerActiveUser;
  */
 public class ProcessSignIn implements GenericProcess {
 
-   /**
-    * the original SignIn request received
-    */
+    /**
+     * the original SignIn request received
+     */
     private final SignIn signIn;
-    
+
     /**
      * to store/get users datas in the database
      */
     private final ManageUser managerUser;
-    
+
     /**
      * manager of the user who are connected
      */
     private final ServerActiveUser activeUser;
-    
+
     /**
      * GameController that will send all the games informations if the sign in succed to the client
      */
     private final GameController gameController;
-    
+
     /**
      * manager of the manager of the socket where we received the SignIn
      */
@@ -40,16 +40,16 @@ public class ProcessSignIn implements GenericProcess {
 
     /**
      * Constructor
-     * 
-     * @param signIn the original SignIn request received
-     * @param managerUser to store/get users datas in the database
-     * @param activeUser manager of the user who are connected
+     *
+     * @param signIn         the original SignIn request received
+     * @param managerUser    to store/get users datas in the database
+     * @param activeUser     manager of the user who are connected
      * @param gameController GameController that will send all the games informations if the sign in succed to the client
-     * @param clientHandler manager of the manager of the socket where we received the SignIn
+     * @param clientHandler  manager of the manager of the socket where we received the SignIn
      */
     public ProcessSignIn(SignIn signIn, ManageUser managerUser,
-        ServerActiveUser activeUser, GameController gameController,
-        ClientHandler clientHandler) {
+                         ServerActiveUser activeUser, GameController gameController,
+                         ClientHandler clientHandler) {
         this.signIn = signIn;
         this.managerUser = managerUser;
         this.activeUser = activeUser;
@@ -59,7 +59,7 @@ public class ProcessSignIn implements GenericProcess {
 
     /**
      * try to log in the client who requested it with the informations he gave us
-     * 
+     *
      * @return a SignInOk if succeed, an ErrorMessage otherwise
      */
     @Override

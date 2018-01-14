@@ -13,37 +13,37 @@ import java.util.List;
 /**
  * Manager who gets from hibernate's session Factory the session to allow us to do
  * transactions. All the transactions possible are implemented in this class.
- * The type of the data used to do transaction is AbstractData, 
+ * The type of the data used to do transaction is AbstractData,
  * it means that any data that wish to be in the database has to extends AbstractData.
  */
 public class Manager {
 
-   /**
-    * class used by hibernate to give us a session
-    */
+    /**
+     * class used by hibernate to give us a session
+     */
     private static SessionFactory factory;
-    
+
     /**
      * session configured with default value's from the SessionFactory of hibernate
      */
     private Session session;
-    
+
     /**
      * used to do transaction with the session
      */
     private Transaction transaction;
-    
+
     /**
      * Constructor
      */
     public Manager() {
         this(null);
     }
-    
+
     /**
      * Constructor
-     * 
-     * @param session 
+     *
+     * @param session
      */
     public Manager(Session session) {
         transaction = null;
@@ -53,7 +53,7 @@ public class Manager {
 
     /**
      * get from hibernate the SessionFactory configured with default parameters
-     * 
+     *
      * @return the initialized SessionFactory created by hibernate
      */
     private SessionFactory getFactory() {
@@ -92,7 +92,7 @@ public class Manager {
 
     /**
      * allow to add any data who extends from AbstractData to the database
-     * 
+     *
      * @param abstractData the data we wish to add to the database
      * @return the new created data
      */
@@ -116,9 +116,9 @@ public class Manager {
 
     /**
      * allow to do a request to the database
-     * 
+     *
      * @param query the request as a String
-     * @return 
+     * @return
      */
     public List<? extends AbstractData> getListFromDB(String query) {
         List<AbstractData> list = null;
@@ -139,7 +139,7 @@ public class Manager {
 
     /**
      * allow to update any data who extends from AbstractData to the database
-     * 
+     *
      * @param abstractData the data we wish to update
      * @return Protocol.OK if the transaction succeed or Protocol.Error else
      */
@@ -163,7 +163,7 @@ public class Manager {
 
     /**
      * allow to delete any data who extends from AbstractData to the database
-     * 
+     *
      * @param abstractData the data we wish to delete
      * @return Protocol.OK if the transaction succeed or Protocol.Error else
      */

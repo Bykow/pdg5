@@ -11,20 +11,20 @@ import java.util.List;
  */
 public class ManageMatchlist extends Manager {
 
-   /**
-    * add a list of matches for a specified tournament to the database
-    * 
-    * @param tournament the tournament which we add the list of matches to
-    * @param user the user linked to this list of match
-    * @return the new list of matches created
-    */
+    /**
+     * add a list of matches for a specified tournament to the database
+     *
+     * @param tournament the tournament which we add the list of matches to
+     * @param user       the user linked to this list of match
+     * @return the new list of matches created
+     */
     public Matchlist addMatchlist(Tournament tournament, User user) {
         return (Matchlist) addToDB(new Matchlist(tournament, user));
     }
 
     /**
      * return all the list of matches contained in the database
-     * 
+     *
      * @return all the list of matches contained in the database
      */
     public List<Matchlist> listMatchlist() {
@@ -33,7 +33,7 @@ public class ManageMatchlist extends Manager {
 
     /**
      * update informations of a list of matches
-     * 
+     *
      * @param matchlist the new informations of list of match
      * @return Protocol.OK if the transaction succeeded or Protocol.Error otherwise
      */
@@ -43,7 +43,7 @@ public class ManageMatchlist extends Manager {
 
     /**
      * delete a match list from the database
-     * 
+     *
      * @param matchlist the list of matches we wish to delete
      * @return Protocol.OK if the transaction succeeded or Protocol.Error otherwise
      */

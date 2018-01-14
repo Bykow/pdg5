@@ -2,12 +2,14 @@ package pdg5.server.model;
 
 import pdg5.common.Protocol;
 import pdg5.common.TST;
-import pdg5.common.game.Board;
-import pdg5.common.game.Composition;
-import pdg5.common.game.GameModel;
+import pdg5.common.game.*;
 import pdg5.common.game.GameModel.State;
-import pdg5.common.game.Tile;
 import pdg5.common.protocol.*;
+import pdg5.server.manage.ManageChat;
+import pdg5.server.manage.ManageGame;
+import pdg5.server.manage.ManageMessage;
+import pdg5.server.manage.ManageUser;
+import pdg5.server.persistent.User;
 import pdg5.server.util.ServerActiveUser;
 
 import java.io.BufferedReader;
@@ -18,86 +20,67 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-import pdg5.common.game.Result;
-import pdg5.server.manage.ManageChat;
-import pdg5.server.manage.ManageGame;
-import pdg5.server.manage.ManageMessage;
-import pdg5.server.manage.ManageUser;
-import pdg5.server.persistent.User;
 
 /**
  * this Class manage all the games created by the server
  */
 public class GameController {
 
-    /**
-     * Schedular that each minutes check if the games are outdated
-     */
-    private final ScheduledExecutorService checkGamesOutdatedScheduler;
-
     private final static int KEY_CHATS = 9999;
-
     /**
      * Max time to play (72 hours in millisecond)
      */
     private static final int OUTDATE_TIME = 72 * 60 * 60 * 1000;
-
     /**
-     * number of letters left in a TileStack 
+     * number of letters left in a TileStack
      * befor the game changes to check-end-mode
      */
     private static final int TILE_LEFT_END_MODE_HARD = 2;
     /**
-     * number of letters left in a TileStack 
+     * number of letters left in a TileStack
      * befor the game changes to check-end-mode if two players throw in a row
      */
     private static final int TILE_LEFT_END_MODE_LAZY = 10;
-
     /**
      * number of Tiles thrown when a player use the action throw
      */
     private static final int TILE_THROWN = 2;
-
-    /**
-     * random used for Square position random
-     */
-    private final Random rand = new Random();
-
-    /**
-     * stock the model of the game, the hash use the id of the game
-     */
-    private final Map<Integer, GameModel> games;
-
-    /**
-     * stock for an id of client all his id games
-     */
-    private final Map<Integer, List<Integer>> clientGames;
-
-    /**
-     * stock the tileStack of a game, the hash use the id of the game
-     */
-    private final Map<Integer, TileStack> tileStacks;
-
-    /**
-     * stock the turn manager for a given unique id of game
-     */
-    private final Map<Integer, TurnManager> playerTurnManager;
-
-    /**
-     * stock the list of chat message for a given unique id of game
-     */
-    private final Map<Integer, List<ChatServerSide>> serverChats;
-
-    /**
-     * current player waiting for an other random player
-     */
-    private final List<Integer> matchMaking;
-
     /**
      * message sent if we added someone to the matchmaking list
      */
     private static final String MESSAGE_LOOKING_OPPONENT = "Nous recherchons actuellement un adversaire";
-
+    /**
+     * Schedular that each minutes check if the games are outdated
+     */
+    private final ScheduledExecutorService checkGamesOutdatedScheduler;
+    /**
+     * random used for Square position random
+     */
+    private final Random rand = new Random();
+    /**
+     * stock the model of the game, the hash use the id of the game
+     */
+    private final Map<Integer, GameModel> games;
+    /**
+     * stock for an id of client all his id games
+     */
+    private final Map<Integer, List<Integer>> clientGames;
+    /**
+     * stock the tileStack of a game, the hash use the id of the game
+     */
+    private final Map<Integer, TileStack> tileStacks;
+    /**
+     * stock the turn manager for a given unique id of game
+     */
+    private final Map<Integer, TurnManager> playerTurnManager;
+    /**
+     * stock the list of chat message for a given unique id of game
+     */
+    private final Map<Integer, List<ChatServerSide>> serverChats;
+    /**
+     * current player waiting for an other random player
+     */
+    private final List<Integer> matchMaking;
     /**
      * dictionary containing the playable words
      */
@@ -112,7 +95,7 @@ public class GameController {
      * Constructor
      *
      * @param activeUser The activeUsers contains informations about all the users
-     * online
+     *                   online
      */
     public GameController(ServerActiveUser activeUser) {
         games = new HashMap<>();
@@ -124,7 +107,7 @@ public class GameController {
 
         InputStream inputStream = TST.class.getResourceAsStream("/dico/fr_dico.dic");
         new BufferedReader(new InputStreamReader(inputStream)).lines()
-            .forEach(dictionary::put);
+                .forEach(dictionary::put);
         this.activeUser = activeUser;
 
         checkGamesOutdatedScheduler = Executors.newScheduledThreadPool(1);
@@ -145,12 +128,12 @@ public class GameController {
 
         List<pdg5.server.persistent.Game> listGameOfPlayer = manageGame.getGamesByUser(user);
         clientGames.put(idPlayer, listGameOfPlayer
-            .stream()
-            .peek((g) -> tileStacks.put(g.getId(), new TileStack(Protocol.Languages.LANG_FR.toString(), g.getRemainingLetters())))
-            .peek((g) -> playerTurnManager.put(g.getId(), (TurnManager) g.getTurnManagerAsSerializable()))
-            .map((g) -> (GameModel) g.getGameStateAsSerializable())
-            .peek((g) -> games.put(g.getGameId(), g))
-            .map(GameModel::getGameId).collect(Collectors.toList()));
+                .stream()
+                .peek((g) -> tileStacks.put(g.getId(), new TileStack(Protocol.Languages.LANG_FR.toString(), g.getRemainingLetters())))
+                .peek((g) -> playerTurnManager.put(g.getId(), (TurnManager) g.getTurnManagerAsSerializable()))
+                .map((g) -> (GameModel) g.getGameStateAsSerializable())
+                .peek((g) -> games.put(g.getGameId(), g))
+                .map(GameModel::getGameId).collect(Collectors.toList()));
 
         listGameOfPlayer.forEach((game) -> {
             if (!serverChats.containsKey(game.getId())) {
@@ -167,7 +150,7 @@ public class GameController {
 
     /**
      * add a chat message to the map chats
-     * 
+     *
      * @param chatServer chat we wish to add
      */
     public void addChat(ChatServerSide chatServer) {
@@ -190,23 +173,23 @@ public class GameController {
         ManageMessage manageMessage = activeUser.getDatabaseManagers(idPlayer).getManageMessage();
 
         pdg5.server.persistent.Game game = manageGame
-            .getGamesByUser(manageUser.getUserById(idPlayer))
-            .stream()
-            .filter((g) -> g.getId() == idGame)
-            .findAny()
-            .get();
+                .getGamesByUser(manageUser.getUserById(idPlayer))
+                .stream()
+                .filter((g) -> g.getId() == idGame)
+                .findAny()
+                .get();
 
         // saving message in database
         pdg5.server.persistent.Chat databaseChat = game
-            .getChats()
-            .stream()
-            .findFirst()
-            .orElseGet(() -> {
-                serverChats.put(idGame, new ArrayList<>());
-                manageChat.addChatGame(game);
-                manageGame.updateGame(game);
-                return manageChat.listChats().stream().findAny().get();
-            });
+                .getChats()
+                .stream()
+                .findFirst()
+                .orElseGet(() -> {
+                    serverChats.put(idGame, new ArrayList<>());
+                    manageChat.addChatGame(game);
+                    manageGame.updateGame(game);
+                    return manageChat.listChats().stream().findAny().get();
+                });
 
         manageMessage.addMessage(chatServer.getMessage(), manageUser.getUserById(idPlayer), databaseChat);
         manageChat.updateChat(databaseChat);
@@ -311,9 +294,9 @@ public class GameController {
 
         // add new GameModel to the Map
         Board[] boards = new Board[]{initBoard(ts, idPlayer1),
-            initBoard(ts, idPlayer2)};
+                initBoard(ts, idPlayer2)};
         GameModel model = new GameModel(
-            boards, idGame, new Date(), 0
+                boards, idGame, new Date(), 0
         );
         model.getBoardById(idPlayer1).getComposition().setSquare(tm.getSquares(idPlayer1));
         model.getBoardById(idPlayer2).getComposition().setSquare(tm.getSquares(idPlayer2));
@@ -354,7 +337,7 @@ public class GameController {
     /**
      * return a new Board filled with Tiles of a given TileStack
      *
-     * @param ts TileStack used to fill the new Board
+     * @param ts       TileStack used to fill the new Board
      * @param idPlayer unique id of the player
      * @return a new Board filled with Tiles
      */
@@ -373,7 +356,7 @@ public class GameController {
      * add a GameModel to the list of games of a client !!!carefull this don't add
      * the game to the Map of games!!!
      *
-     * @param gm the GameModel we want to add
+     * @param gm       the GameModel we want to add
      * @param idPlayer the player participating at this game
      */
     private void addGameForClient(GameModel gm, int idPlayer) {
@@ -409,7 +392,7 @@ public class GameController {
      * found with the id of a game the Game created is the point of view of the
      * client given by idClient
      *
-     * @param idGame unique id of the game we use to build the protocol.Game
+     * @param idGame   unique id of the game we use to build the protocol.Game
      * @param idClient unique id that will be the point of view of the Game created
      * @return the protocol.Game created
      */
@@ -428,9 +411,9 @@ public class GameController {
         lastWordPlayed = gm.getLastWordPlayed();
 
         Game game = new Game(gm.getGameId(), gm.getCreation(),
-            gm.getLastMove(), gm.getIdTournament(), boardOfClient,
-            cleanedOpponentBoard, ts.getTileLeft(),
-            lastWordPlayed, gm.getScoreLastWordPlayed(), hisTurn, gm.getState());
+                gm.getLastMove(), gm.getIdTournament(), boardOfClient,
+                cleanedOpponentBoard, ts.getTileLeft(),
+                lastWordPlayed, gm.getScoreLastWordPlayed(), hisTurn, gm.getState());
         return game;
     }
 
@@ -452,7 +435,7 @@ public class GameController {
      * A player try to pass his turn, depending on the context (endGameMode) we will
      * pass or throw tiles
      *
-     * @param gameID unique id of the game
+     * @param gameID   unique id of the game
      * @param playerID unique id of the player trying to pass
      * @return an ErrorMessage if he can't pass, or a Game with the updates
      */
@@ -493,7 +476,7 @@ public class GameController {
 
             // update the DB game
             pdg5.server.persistent.Game game
-                = manageGame.getGamesByUser(manageUser.getUserById(playerID))
+                    = manageGame.getGamesByUser(manageUser.getUserById(playerID))
                     .stream()
                     .filter((f) -> f.id == gameID)
                     .findAny()
@@ -512,10 +495,10 @@ public class GameController {
 
     /**
      * do the action "pass" in a specified GameModel
-     * 
-     * @param model the GameModel where we want to do Pass as next action
+     *
+     * @param model    the GameModel where we want to do Pass as next action
      * @param playerID unique id who try to pass currently
-     * @param ts the TileStack associated with this GameModel
+     * @param ts       the TileStack associated with this GameModel
      */
     private void pass(GameModel model, int playerID, TileStack ts) {
 
@@ -532,15 +515,15 @@ public class GameController {
 
         // Save Last Action for Chat
         addChat(new ChatServerSide(new Date().getTime(), playerID, Chat.SENDER.USER,
-            board.getPlayerName() + " a passé et perdu " + lostScore + " points", model.getGameId()));
+                board.getPlayerName() + " a passé et perdu " + lostScore + " points", model.getGameId()));
     }
 
     /**
      * do the action "throw" in a specified GameModel
-     * 
-     * @param model the GameModel where we want to do throw as next action
+     *
+     * @param model    the GameModel where we want to do throw as next action
      * @param playerID unique id who try to throw currently
-     * @param ts the TileStack associated with this GameModel
+     * @param ts       the TileStack associated with this GameModel
      */
     private void throwAction(GameModel model, int playerID, TileStack ts) {
         System.out.println("Game State : Throwing");
@@ -577,8 +560,8 @@ public class GameController {
         });
 
         addChat(new ChatServerSide(new Date().getTime(), playerID, Chat.SENDER.USER,
-            board.getPlayerName() + " a jeté "
-            + wordAsString.toString() + " et perdu " + lostScore + " points", model.getGameId()));
+                board.getPlayerName() + " a jeté "
+                        + wordAsString.toString() + " et perdu " + lostScore + " points", model.getGameId()));
     }
 
     /**
@@ -587,8 +570,8 @@ public class GameController {
      * 3) Check if the composition is a valide word Structure 4) Check if the word is
      * in the dictionary 5) Check if the player possess the word letters
      *
-     * @param gameID unique id of the game
-     * @param playerID unique id of the player trying the move
+     * @param gameID      unique id of the game
+     * @param playerID    unique id of the player trying the move
      * @param composition containing the word
      * @return an ErrorMessage if a check fails or a Game with the new State because
      * the word has been played
@@ -680,7 +663,7 @@ public class GameController {
 
         // update the DB game
         pdg5.server.persistent.Game game
-            = manageGame.getGamesByUser(manageUser.getUserById(playerID))
+                = manageGame.getGamesByUser(manageUser.getUserById(playerID))
                 .stream()
                 .filter((f) -> f.id == gameID)
                 .findAny()
@@ -697,16 +680,16 @@ public class GameController {
         });
 
         addChat(new ChatServerSide(new Date().getTime(), playerID, Chat.SENDER.USER,
-            board.getPlayerName() + " a joué "
-            + wordAsString.toString() + " pour " + scoreToAdd + " points", gameID));
+                board.getPlayerName() + " a joué "
+                        + wordAsString.toString() + " pour " + scoreToAdd + " points", gameID));
 
         activeUser.giveToClientHandler(opponentId, getGameFromModel(gameID, opponentId));
         return getGameFromModel(gameID, playerID);
     }
 
     /**
-     * finish a game, calcul and send the result of a specified GameModel and send the result to concerned players 
-     * 
+     * finish a game, calcul and send the result of a specified GameModel and send the result to concerned players
+     *
      * @param model the GameModel of the game that we currently considere as finish
      */
     private void sendScoreResults(GameModel model) {
@@ -732,30 +715,30 @@ public class GameController {
 
         ManageGame manageGame = activeUser.getDatabaseManagers(player1Id).getManageGame();
         manageGame.listGame()
-            .stream()
-            .filter((g) -> g.getId() == model.getGameId())
-            .findFirst()
-            .ifPresent((g) -> {
-                g.setGameState(model);
-                manageGame.updateGame(g);
-            });
+                .stream()
+                .filter((g) -> g.getId() == model.getGameId())
+                .findFirst()
+                .ifPresent((g) -> {
+                    g.setGameState(model);
+                    manageGame.updateGame(g);
+                });
 
     }
 
     /**
      * check if a game should be in END_MODE
-     * 
+     *
      * @param model the GameModel we are checking
-     * @param ts the associated TileStack for this game
+     * @param ts    the associated TileStack for this game
      * @return true if a game should be in END_MODE, false otherwise
      */
     private boolean isEndMode(GameModel model, TileStack ts) {
         int tilesLeft = ts.getTileLeft();
         // not end-mode yet
         if (tilesLeft <= TILE_LEFT_END_MODE_HARD
-            || tilesLeft <= TILE_LEFT_END_MODE_LAZY
-            && model.getBoard(GameModel.PlayerBoard.PLAYER1).getLastAction() == Board.LAST_ACTION.THROW
-            && model.getBoard(GameModel.PlayerBoard.PLAYER2).getLastAction() == Board.LAST_ACTION.THROW) {
+                || tilesLeft <= TILE_LEFT_END_MODE_LAZY
+                && model.getBoard(GameModel.PlayerBoard.PLAYER1).getLastAction() == Board.LAST_ACTION.THROW
+                && model.getBoard(GameModel.PlayerBoard.PLAYER2).getLastAction() == Board.LAST_ACTION.THROW) {
             model.setState(State.END_MODE);
         }
 
@@ -766,7 +749,7 @@ public class GameController {
      * return true if the game has ended
      *
      * @param model the GameModel of the game we are checking
-     * @param ts the TilesStack of the game we are checking
+     * @param ts    the TilesStack of the game we are checking
      * @return true if the game has ended
      */
     private boolean gameEnded(GameModel model, TileStack ts) {
@@ -777,13 +760,13 @@ public class GameController {
             return false;
             // two players passed -> end of game
         } else if (model.getBoard(GameModel.PlayerBoard.PLAYER1).getLastAction() == Board.LAST_ACTION.PASS
-            && model.getBoard(GameModel.PlayerBoard.PLAYER2).getLastAction() == Board.LAST_ACTION.PASS) {
+                && model.getBoard(GameModel.PlayerBoard.PLAYER2).getLastAction() == Board.LAST_ACTION.PASS) {
             return true;
             // the tileStacke is empty and a player used all his Tiles -> end of game
         } else {
             return tilesLeft == 0
-                && (model.getBoard(GameModel.PlayerBoard.PLAYER1).getLetters().isEmpty()
-                || model.getBoard(GameModel.PlayerBoard.PLAYER2).getLetters().isEmpty());
+                    && (model.getBoard(GameModel.PlayerBoard.PLAYER1).getLetters().isEmpty()
+                    || model.getBoard(GameModel.PlayerBoard.PLAYER2).getLetters().isEmpty());
         }
     }
 
@@ -802,10 +785,10 @@ public class GameController {
         // if the container don't have the character in the map
         // or has less occurence of contained then it's false
         return occurenceContained
-            .keySet()
-            .stream()
-            .noneMatch((character) -> (!occurenceContainer.containsKey(character)
-            || occurenceContained.get(character) > occurenceContainer.get(character)));
+                .keySet()
+                .stream()
+                .noneMatch((character) -> (!occurenceContainer.containsKey(character)
+                        || occurenceContained.get(character) > occurenceContainer.get(character)));
     }
 
     /**
@@ -864,7 +847,7 @@ public class GameController {
                         int idPlayer2 = gameModel.getBoard(GameModel.PlayerBoard.PLAYER2).getPlayerId();
                         // update the DB game
                         pdg5.server.persistent.Game game
-                            = manageGame.getGamesByUser(manageUser.getUserById(idPlayer1))
+                                = manageGame.getGamesByUser(manageUser.getUserById(idPlayer1))
                                 .stream()
                                 .filter((f) -> Objects.equals(f.id, gameID))
                                 .findAny()

@@ -8,14 +8,14 @@ import pdg5.common.protocol.Noop;
  */
 public class ProcessNoop implements GenericProcess {
 
-   /**
-    * the original Noop received
-    */
+    /**
+     * the original Noop received
+     */
     private Noop noop;
 
     /**
      * Constructor
-     * 
+     *
      * @param noop the original Noop received
      */
     public ProcessNoop(Noop noop) {
@@ -24,7 +24,7 @@ public class ProcessNoop implements GenericProcess {
 
     /**
      * does nothing but print a sentence for debug
-     * 
+     *
      * @return null, or send back the Noop to the client
      */
     @Override

@@ -11,16 +11,16 @@ import pdg5.server.util.ServerActiveUser;
  */
 public class ProcessLogout implements GenericProcess {
 
-   /**
-    * the original log out request received
-    */
+    /**
+     * the original log out request received
+     */
     private Logout logout;
-    
+
     /**
      * manager of the user who are connected
      */
     private ServerActiveUser activeUser;
-    
+
     /**
      * manager of the manager of the socket where we received the Logout
      */
@@ -28,9 +28,9 @@ public class ProcessLogout implements GenericProcess {
 
     /**
      * Constructor
-     * 
-     * @param logout the original log out request received
-     * @param activeUser manager of the user who are connected
+     *
+     * @param logout        the original log out request received
+     * @param activeUser    manager of the user who are connected
      * @param clientHandler manager of the socket where we received the Logout
      */
     public ProcessLogout(Logout logout, ServerActiveUser activeUser, ClientHandler clientHandler) {
@@ -41,7 +41,7 @@ public class ProcessLogout implements GenericProcess {
 
     /**
      * log out a user
-     * 
+     *
      * @return Noop
      */
     @Override

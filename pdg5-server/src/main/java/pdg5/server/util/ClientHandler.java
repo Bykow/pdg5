@@ -1,69 +1,57 @@
 package pdg5.server.util;
 
+import org.hibernate.Session;
 import pdg5.common.MessageQueue;
 import pdg5.common.protocol.Message;
+import pdg5.server.manage.*;
 import pdg5.server.model.GameController;
 
 import javax.net.ssl.SSLSocket;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import org.hibernate.Session;
-import pdg5.server.manage.ManageChat;
-import pdg5.server.manage.ManageGame;
-import pdg5.server.manage.ManageMessage;
-import pdg5.server.manage.ManageUser;
-import pdg5.server.manage.Manager;
 
 /**
  * manager of the socket of one client
  * it creates the threads necessary to send, receive and execute requests
- * 
- * it contains too an inner class who contains 
+ * <p>
+ * it contains too an inner class who contains
  * all the managers instances to store/get datas in the database
  */
 public class ClientHandler implements Runnable {
 
-   /**
-    * the socket associated at this client
-    */
-    private SSLSocket socket;
-    
-    /**
-     * output stream to serialize requests
-     */
-    private ObjectOutputStream out;
-    
-    /**
-     * input stream to deserialize requests
-     */
-    private ObjectInputStream in;
-    
-    /**
-     * request manager to handle correctly each type of requests
-     */
-    private ServerRequestManager requestManager;
-    
-    /**
-     * the queue of requests sent from the client
-     */
-    private MessageQueue queueIn;
-    
-    /**
-     * the queue of requests we want to send to the client
-     */
-    private MessageQueue queueOut;
-    
-    /**
-     * manager of the user who are connected
-     */
-    private ServerActiveUser activeUser;
-    
     /**
      * next unique id free
      */
     private static int id;
-    
+    /**
+     * the socket associated at this client
+     */
+    private SSLSocket socket;
+    /**
+     * output stream to serialize requests
+     */
+    private ObjectOutputStream out;
+    /**
+     * input stream to deserialize requests
+     */
+    private ObjectInputStream in;
+    /**
+     * request manager to handle correctly each type of requests
+     */
+    private ServerRequestManager requestManager;
+    /**
+     * the queue of requests sent from the client
+     */
+    private MessageQueue queueIn;
+    /**
+     * the queue of requests we want to send to the client
+     */
+    private MessageQueue queueOut;
+    /**
+     * manager of the user who are connected
+     */
+    private ServerActiveUser activeUser;
     /**
      * unique id of the client associated to this socket, null if noone
      */
@@ -76,9 +64,9 @@ public class ClientHandler implements Runnable {
 
     /**
      * Constructor
-     * 
-     * @param socket the socket associated at this client
-     * @param activeUser manager of the user who are connected
+     *
+     * @param socket         the socket associated at this client
+     * @param activeUser     manager of the user who are connected
      * @param gameController gameController where the games and game logique are stored (necessary to build a correct ServerRequestManager)
      */
     public ClientHandler(SSLSocket socket, ServerActiveUser activeUser, GameController gameController) {
@@ -105,8 +93,8 @@ public class ClientHandler implements Runnable {
 
     /**
      * add a protocol.Message to send to the client
-     * 
-     * @param message protocol.Message we wish to send 
+     *
+     * @param message protocol.Message we wish to send
      */
     public void addToQueue(Message message) {
         queueOut.add(message);
@@ -126,10 +114,10 @@ public class ClientHandler implements Runnable {
         // Process message
         while (true) {
             queueOut.add(
-                requestManager.execute(
-                    queueIn.take(),
-                    this
-                )
+                    requestManager.execute(
+                            queueIn.take(),
+                            this
+                    )
             );
         }
     }
@@ -167,17 +155,8 @@ public class ClientHandler implements Runnable {
     }
 
     /**
-     * modify the unique id of the client associated to this instance
-     * 
-     * @param playerId the new unique id of the client associated to this instance
-     */
-    public void setPlayerId(Integer playerId) {
-        this.playerId = playerId;
-    }
-
-    /**
      * return the unique id of the client associated to this instance
-     * 
+     *
      * @return the unique id of the client associated to this instance
      * @throws NullPointerException if the playerId has not be initialized yet with setPlayerId
      */
@@ -189,8 +168,17 @@ public class ClientHandler implements Runnable {
     }
 
     /**
+     * modify the unique id of the client associated to this instance
+     *
+     * @param playerId the new unique id of the client associated to this instance
+     */
+    public void setPlayerId(Integer playerId) {
+        this.playerId = playerId;
+    }
+
+    /**
      * return true if the playerId has been initialized yet with setPlayerId, false otherwise
-     * 
+     *
      * @return true if the playerId has been initialized yet with setPlayerId, false otherwise
      */
     public boolean isConnected() {
@@ -199,7 +187,7 @@ public class ClientHandler implements Runnable {
 
     /**
      * return the class containing all the managers instances
-     * 
+     *
      * @return the class containing all the managers instances
      */
     public DatabaseManagers getDatabaseManagers() {
@@ -211,21 +199,21 @@ public class ClientHandler implements Runnable {
      */
     public class DatabaseManagers {
 
-       /**
-        * to store/get users datas in the database
-        */
+        /**
+         * to store/get users datas in the database
+         */
         private final ManageUser manageUser;
-        
+
         /**
          * to store/get games datas in the database
          */
         private final ManageGame manageGame;
-        
+
         /**
          * to store/get chats datas in the database
          */
         private final ManageChat manageChat;
-        
+
         /**
          * to store/get messages datas in the database
          */
@@ -246,7 +234,7 @@ public class ClientHandler implements Runnable {
 
         /**
          * return the manager who to store/get users datas in the database
-         * 
+         *
          * @return the manager who to store/get users datas in the database
          */
         public ManageUser getManageUser() {
@@ -255,7 +243,7 @@ public class ClientHandler implements Runnable {
 
         /**
          * return the manager who to store/get games datas in the database
-         * 
+         *
          * @return the manager who to store/get games datas in the database
          */
         public ManageGame getManageGame() {
@@ -264,7 +252,7 @@ public class ClientHandler implements Runnable {
 
         /**
          * return the manager who to store/get users chats in the database
-         * 
+         *
          * @return the manager who to store/get chats datas in the database
          */
         public ManageChat getManageChat() {
@@ -273,7 +261,7 @@ public class ClientHandler implements Runnable {
 
         /**
          * return the manager who to store/get users messages in the database
-         * 
+         *
          * @return the manager who to store/get users messages in the database
          */
         public ManageMessage getManageMessage() {

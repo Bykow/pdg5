@@ -12,26 +12,26 @@ import pdg5.server.process.*;
  */
 public class ServerRequestManager {
 
-   /**
-    * to store/get users datas in the database
-    */
+    /**
+     * to store/get users datas in the database
+     */
     private final ManageUser manageUser;
-    
+
     /**
      * manager of the user who are connected
      */
     private final ServerActiveUser activeUser;
-    
+
     /**
-     * where the games and game logique are store 
+     * where the games and game logique are store
      */
     private final GameController gameController;
 
     /**
      * Constructor
-     * 
-     * @param activeUser manager of the user who are connected
-     * @param gameController where the games and game logique are store 
+     *
+     * @param activeUser     manager of the user who are connected
+     * @param gameController where the games and game logique are store
      */
     public ServerRequestManager(ServerActiveUser activeUser, GameController gameController) {
         this.manageUser = new ManageUser();
@@ -43,10 +43,10 @@ public class ServerRequestManager {
      * handle the requests comming from clients
      * she reacts, bluids correct classes and calls the correct methods
      * depending on the request type
-     * 
+     * <p>
      * Then send back to the client the answer in a protocol.Message child class
-     * 
-     * @param o the Message received
+     *
+     * @param o  the Message received
      * @param ch the ClientHandler associated at the client who sent the request
      * @return Message to be send
      */

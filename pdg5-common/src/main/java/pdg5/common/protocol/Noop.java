@@ -7,14 +7,6 @@ package pdg5.common.protocol;
 public class Noop extends Message {
 
     /**
-     * sender can only be a CLIENT or a SERVER
-     */
-    public enum Sender {
-        SERVER,
-        CLIENT
-    }
-
-    /**
      * who sent this instance
      */
     private Sender sender;
@@ -35,5 +27,13 @@ public class Noop extends Message {
      */
     public Sender getSender() {
         return sender;
+    }
+
+    /**
+     * sender can only be a CLIENT or a SERVER
+     */
+    public enum Sender {
+        SERVER,
+        CLIENT
     }
 }

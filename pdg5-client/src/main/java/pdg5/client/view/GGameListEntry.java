@@ -54,9 +54,9 @@ public class GGameListEntry extends AnchorPane {
     /**
      * Ctor
      *
-     * @param model game
+     * @param model             game
      * @param mouseClickHandler EventHandler
-     * @param deleteHandler EventHandler
+     * @param deleteHandler     EventHandler
      */
     public GGameListEntry(Game model, EventHandler<? super MouseEvent> mouseClickHandler, EventHandler<? super ActionEvent> deleteHandler) {
         super();

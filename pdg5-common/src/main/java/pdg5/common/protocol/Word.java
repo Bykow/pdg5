@@ -30,10 +30,10 @@ public class Word implements Serializable {
     /**
      * Constructor
      *
-     * @param word String representing the word
-     * @param play associated play to the word, can be null
+     * @param word       String representing the word
+     * @param play       associated play to the word, can be null
      * @param validation associated validation to the word, can be null
-     * @param gameId unique ID where the word context is
+     * @param gameId     unique ID where the word context is
      */
     public Word(String word, Play play, Validation validation, int gameId) {
         this.word = word;

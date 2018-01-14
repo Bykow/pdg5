@@ -23,7 +23,7 @@ public class SignUp extends Message {
     /**
      * Constructor
      *
-     * @param email used to sign up
+     * @param email    used to sign up
      * @param username used to sign up
      * @param password used to sign up
      */

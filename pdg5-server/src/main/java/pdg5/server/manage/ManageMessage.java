@@ -1,28 +1,28 @@
 package pdg5.server.manage;
 
+import org.hibernate.Session;
 import pdg5.server.persistent.Chat;
 import pdg5.server.persistent.Message;
 import pdg5.server.persistent.User;
 
 import java.util.Date;
 import java.util.List;
-import org.hibernate.Session;
 
 /**
  * Manager to stock and load messages from/to the database
  */
 public class ManageMessage extends Manager {
 
-   /**
-    * constructor
-    */
+    /**
+     * constructor
+     */
     public ManageMessage() {
         super();
     }
 
     /**
      * Constructor
-     * 
+     *
      * @param session the session used by the manager to do transactions
      */
     public ManageMessage(Session session) {
@@ -31,10 +31,10 @@ public class ManageMessage extends Manager {
 
     /**
      * add a message in a specified chat from a specified user to the database
-     * 
+     *
      * @param content of the message
-     * @param user the user who sent the message
-     * @param chat the associated chat where is writen the message
+     * @param user    the user who sent the message
+     * @param chat    the associated chat where is writen the message
      * @return the new message created
      */
     public Message addMessage(String content, User user, Chat chat) {
@@ -43,7 +43,7 @@ public class ManageMessage extends Manager {
 
     /**
      * return all the messages in the database
-     * 
+     *
      * @return all the messages in the database
      */
     public List<Message> listMessages() {
@@ -52,7 +52,7 @@ public class ManageMessage extends Manager {
 
     /**
      * change informations of a specific message in the database
-     * 
+     *
      * @param message the new informations of the message
      * @return Protocol.OK if the transaction succeeded or Protocol.Error otherwise
      */
@@ -62,7 +62,7 @@ public class ManageMessage extends Manager {
 
     /**
      * delete a specified message in the database
-     * 
+     *
      * @param message the message we wish to delete
      * @return Protocol.OK if the transaction succeeded or Protocol.Error otherwise
      */

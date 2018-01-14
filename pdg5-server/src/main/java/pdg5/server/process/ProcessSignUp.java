@@ -3,7 +3,6 @@ package pdg5.server.process;
 import pdg5.common.Protocol;
 import pdg5.common.protocol.*;
 import pdg5.server.manage.ManageUser;
-import pdg5.server.model.GameController;
 import pdg5.server.persistent.User;
 import pdg5.server.util.ClientAlreadyConnected;
 import pdg5.server.util.ClientHandler;
@@ -15,21 +14,21 @@ import pdg5.server.util.ServerActiveUser;
  */
 public class ProcessSignUp implements GenericProcess {
 
-   /**
-    * the original SignUp request received
-    */
+    /**
+     * the original SignUp request received
+     */
     private final SignUp signUp;
-    
+
     /**
      * to store/get users datas in the database
      */
     private final ManageUser manager;
-    
+
     /**
      * manager of the user who are connected
      */
     private final ServerActiveUser activeUser;
-    
+
     /**
      * manager of the manager of the socket where we received the SignIn
      */
@@ -37,10 +36,10 @@ public class ProcessSignUp implements GenericProcess {
 
     /**
      * Constructor
-     * 
-     * @param signUp the original SignUp request received
-     * @param manageUser to store/get users datas in the database
-     * @param activeUser manager of the user who are connected
+     *
+     * @param signUp        the original SignUp request received
+     * @param manageUser    to store/get users datas in the database
+     * @param activeUser    manager of the user who are connected
      * @param clientHandler manager of the manager of the socket where we received the SignIn
      */
     public ProcessSignUp(SignUp signUp, ManageUser manageUser, ServerActiveUser activeUser, ClientHandler clientHandler) {

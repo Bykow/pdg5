@@ -37,7 +37,7 @@ public class Toast {
     /**
      * Ctor Default, construct a toast given a stage and its message
      *
-     * @param stage stage to display a toast
+     * @param stage   stage to display a toast
      * @param message message to display
      */
     public Toast(final Stage stage, final String message) {
@@ -47,8 +47,8 @@ public class Toast {
     /**
      * Ctor with timer to fade out
      *
-     * @param stage stage to display a toast
-     * @param message message to display
+     * @param stage    stage to display a toast
+     * @param message  message to display
      * @param duration timeout fade
      */
     public Toast(final Stage stage, final String message, int duration) {

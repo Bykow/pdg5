@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * A Tile represents a letter and its value on in the game. The value is
  * directly linked to the langage of the game.
- * An id is necessary to recognize two same letters  with same value, 
+ * An id is necessary to recognize two same letters  with same value,
  * when one is a bonus tile and an other is a normal letter.
  */
 public class Tile implements Serializable {
@@ -19,7 +19,7 @@ public class Tile implements Serializable {
      * Constructor
      *
      * @param letter character of the tile
-     * @param value of the tile
+     * @param value  of the tile
      */
     public Tile(char letter, int value) {
         this.letter = letter;
@@ -35,6 +35,14 @@ public class Tile implements Serializable {
         this.letter = t.letter;
         this.value = t.value;
         this.bonus = t.bonus;
+    }
+
+    public static String tilesToString(List<Tile> list) {
+        String temp = "";
+        for (Tile t : list) {
+            temp += t.letter;
+        }
+        return temp;
     }
 
     /**
@@ -92,10 +100,10 @@ public class Tile implements Serializable {
      */
     public boolean equals(Object o) {
         return getClass().isInstance(o)
-            && getClass() == o.getClass()
-            && bonus == ((Tile) o).bonus
-            && letter == ((Tile) o).letter
-            && value == ((Tile) o).value;
+                && getClass() == o.getClass()
+                && bonus == ((Tile) o).bonus
+                && letter == ((Tile) o).letter
+                && value == ((Tile) o).value;
     }
 
     @Override
@@ -105,13 +113,5 @@ public class Tile implements Serializable {
         hash = 53 * hash + this.value;
         hash = 53 * hash + (this.bonus ? 1 : 0);
         return hash;
-    }
-
-    public static String tilesToString(List<Tile> list) {
-        String temp = "";
-        for (Tile t : list) {
-            temp += t.letter;
-        }
-        return temp;
     }
 }

@@ -17,7 +17,7 @@ public class Dictionnary extends Message {
      * Constructor
      *
      * @param dictionnary object that allow to check by his own the validity of a
-     * word
+     *                    word
      */
     public Dictionnary(TST dictionnary) {
         this.dictionnary = dictionnary;

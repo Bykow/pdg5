@@ -10,21 +10,21 @@ import java.util.Date;
 @Table(name = "message", catalog = "pdg")
 public class Message extends AbstractData implements java.io.Serializable {
 
-   /**
-    * the associated chat
-    */
+    /**
+     * the associated chat
+     */
     private Chat chat;
-    
+
     /**
      * the user who wrote this message
      */
     private User user;
-    
+
     /**
      * the content of the message
      */
     private String content;
-    
+
     /**
      * the date when was created the message
      */
@@ -38,9 +38,9 @@ public class Message extends AbstractData implements java.io.Serializable {
 
     /**
      * Constructor
-     * 
-     * @param chat the associated chat
-     * @param user the user who wrote this message
+     *
+     * @param chat    the associated chat
+     * @param user    the user who wrote this message
      * @param content the content of the message
      * @param created the date when was created the message
      */
@@ -53,7 +53,7 @@ public class Message extends AbstractData implements java.io.Serializable {
 
     /**
      * return the chat associated chat
-     * 
+     *
      * @return the chat associated chat
      */
     @ManyToOne(fetch = FetchType.LAZY)
@@ -64,7 +64,7 @@ public class Message extends AbstractData implements java.io.Serializable {
 
     /**
      * modify the chat associated chat
-     * 
+     *
      * @param chat thenew  chat associated chat
      */
     public void setChat(Chat chat) {
@@ -73,7 +73,7 @@ public class Message extends AbstractData implements java.io.Serializable {
 
     /**
      * return the user who wrote this message
-     * 
+     *
      * @return the user who wrote this message
      */
     @ManyToOne(fetch = FetchType.LAZY)
@@ -84,7 +84,7 @@ public class Message extends AbstractData implements java.io.Serializable {
 
     /**
      * modify the user who wrote this message
-     * 
+     *
      * @param user the new user who wrote this message
      */
     public void setUser(User user) {
@@ -93,7 +93,7 @@ public class Message extends AbstractData implements java.io.Serializable {
 
     /**
      * return the content of the message
-     * 
+     *
      * @return the content of the message
      */
     @Column(name = "content", nullable = false, length = 45)
@@ -103,7 +103,7 @@ public class Message extends AbstractData implements java.io.Serializable {
 
     /**
      * modify the content of the message
-     * 
+     *
      * @param content the new content of the message
      */
     public void setContent(String content) {
@@ -112,7 +112,7 @@ public class Message extends AbstractData implements java.io.Serializable {
 
     /**
      * return the date when was created the message
-     * 
+     *
      * @return the date when was created the message
      */
     @Temporal(TemporalType.TIMESTAMP)
@@ -123,7 +123,7 @@ public class Message extends AbstractData implements java.io.Serializable {
 
     /**
      * modify the date when was created the message
-     * 
+     *
      * @param created the new date when was created the message
      */
     public void setCreated(Date created) {
@@ -132,7 +132,7 @@ public class Message extends AbstractData implements java.io.Serializable {
 
     /**
      * check if an object is equivalent to this instance
-     * 
+     *
      * @param obj the object we are checking the equality
      * @return true if they are identicals
      */
@@ -145,17 +145,17 @@ public class Message extends AbstractData implements java.io.Serializable {
         Message b = (Message) obj;
 
         return id == b.getId()
-            && chat.equals(b.getChat())
-            && content.equals(b.getContent())
-            && created.equals(b.getCreated())
-            && user.equals(b.getUser());
+                && chat.equals(b.getChat())
+                && content.equals(b.getContent())
+                && created.equals(b.getCreated())
+                && user.equals(b.getUser());
     }
 
     /**
      * override the print of this class. Usefull for debug
-     * 
-     * @return a string with the id, the title, userwho created the message, 
-     *   the date of creation, his content and the associated chat where he appear
+     *
+     * @return a string with the id, the title, userwho created the message,
+     * the date of creation, his content and the associated chat where he appear
      */
     @Override
     public String toString() {

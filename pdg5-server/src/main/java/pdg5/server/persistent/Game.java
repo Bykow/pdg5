@@ -19,51 +19,51 @@ import java.util.logging.Logger;
 @Table(name = "game", catalog = "pdg")
 public class Game extends AbstractData implements java.io.Serializable {
 
-   /**
-    * tournament associated to the game
-    */
+    /**
+     * tournament associated to the game
+     */
     private Tournament tournament;
-    
+
     /**
      * one user playing at the game
      */
     private User userByPlayer2;
-    
+
     /**
      * other user playing at the game
      */
     private User userByPlayer1;
-    
+
     /**
      * title of the game
      */
     private String title;
-    
+
     /**
      * date when was created the game
      */
     private Date created;
-    
+
     /**
      * date of last valide action of one of both players
      */
     private Date lastActivity;
-    
+
     /**
      * letters left in the stack
      */
     private String remainingLetters;
-    
+
     /**
      * state of the game
      */
     private Blob gameState;
-    
+
     /**
      * the turnmanager associated to the game
      */
     private Blob turnManager;
-    
+
     /**
      * chats associated at the game
      */
@@ -77,12 +77,12 @@ public class Game extends AbstractData implements java.io.Serializable {
 
     /**
      * Constructor
-     * 
+     *
      * @param userByPlayer2 one of the user playing at the game
      * @param userByPlayer1 other user playing at the game
-     * @param title of the game
-     * @param created date when was created the game
-     * @param lastActivity date of last valide action of one of both players
+     * @param title         of the game
+     * @param created       date when was created the game
+     * @param lastActivity  date of last valide action of one of both players
      */
     public Game(User userByPlayer2, User userByPlayer1, String title, Date created, Date lastActivity) {
         this.userByPlayer2 = userByPlayer2;
@@ -94,17 +94,17 @@ public class Game extends AbstractData implements java.io.Serializable {
 
     /**
      * Constructor
-     * 
-     * @param tournament associated to the game
+     *
+     * @param tournament    associated to the game
      * @param userByPlayer2 one of the user playing at the game
      * @param userByPlayer1 other user playing at the game
-     * @param title of the game
-     * @param created date when was created the game
-     * @param lastActivity date of last valide action of one of both players
-     * @param chats chats associated at the game
+     * @param title         of the game
+     * @param created       date when was created the game
+     * @param lastActivity  date of last valide action of one of both players
+     * @param chats         chats associated at the game
      */
     public Game(Tournament tournament, User userByPlayer2, User userByPlayer1, String title, Date created,
-        Date lastActivity, Set<Chat> chats) {
+                Date lastActivity, Set<Chat> chats) {
         this.tournament = tournament;
         this.userByPlayer2 = userByPlayer2;
         this.userByPlayer1 = userByPlayer1;
@@ -116,7 +116,7 @@ public class Game extends AbstractData implements java.io.Serializable {
 
     /**
      * return the tournament associated to the game
-     * 
+     *
      * @return the tournament associated to the game
      */
     @ManyToOne(fetch = FetchType.LAZY)
@@ -127,7 +127,7 @@ public class Game extends AbstractData implements java.io.Serializable {
 
     /**
      * modify the tournament associated to the game
-     * 
+     *
      * @param tournament the new tournament associated to the game
      */
     public void setTournament(Tournament tournament) {
@@ -136,7 +136,7 @@ public class Game extends AbstractData implements java.io.Serializable {
 
     /**
      * return one of the user playing at the game
-     * 
+     *
      * @return one of the user playing at the game
      */
     @ManyToOne(fetch = FetchType.LAZY)
@@ -147,7 +147,7 @@ public class Game extends AbstractData implements java.io.Serializable {
 
     /**
      * modify one user playing at the game
-     * 
+     *
      * @param userByPlayer2 the new  one user playing at the game
      */
     public void setUserByPlayer2(User userByPlayer2) {
@@ -156,7 +156,7 @@ public class Game extends AbstractData implements java.io.Serializable {
 
     /**
      * return the other user playing at the game
-     * 
+     *
      * @return other user playing at the game
      */
     @ManyToOne(fetch = FetchType.LAZY)
@@ -167,7 +167,7 @@ public class Game extends AbstractData implements java.io.Serializable {
 
     /**
      * modify the other user playing at the game
-     * 
+     *
      * @param userByPlayer1 the new other user playing at the game
      */
     public void setUserByPlayer1(User userByPlayer1) {
@@ -176,7 +176,7 @@ public class Game extends AbstractData implements java.io.Serializable {
 
     /**
      * return the title of the game
-     * 
+     *
      * @return the title of the game
      */
     @Column(name = "title", nullable = false, length = 45)
@@ -186,7 +186,7 @@ public class Game extends AbstractData implements java.io.Serializable {
 
     /**
      * modify the title of the game
-     * 
+     *
      * @param title the new title of the game
      */
     public void setTitle(String title) {
@@ -195,7 +195,7 @@ public class Game extends AbstractData implements java.io.Serializable {
 
     /**
      * return the letters left in the stack
-     * 
+     *
      * @return the letters left in the stack
      */
     @Column(name = "remaining_letters", nullable = false, length = 120)
@@ -205,7 +205,7 @@ public class Game extends AbstractData implements java.io.Serializable {
 
     /**
      * modify the letters left in the stack
-     * 
+     *
      * @param remainingLetters the new letters left in the stack
      */
     public void setRemainingLetters(String remainingLetters) {
@@ -214,7 +214,7 @@ public class Game extends AbstractData implements java.io.Serializable {
 
     /**
      * return the date when was created the game
-     * 
+     *
      * @return the date when was created the game
      */
     @Temporal(TemporalType.TIMESTAMP)
@@ -225,7 +225,7 @@ public class Game extends AbstractData implements java.io.Serializable {
 
     /**
      * modify the date when was created the game
-     * 
+     *
      * @param created the new date when was created the game
      */
     public void setCreated(Date created) {
@@ -234,7 +234,7 @@ public class Game extends AbstractData implements java.io.Serializable {
 
     /**
      * return the date of last valide action of one of both players
-     * 
+     *
      * @return the date of last valide action of one of both players
      */
     @Temporal(TemporalType.TIMESTAMP)
@@ -245,7 +245,7 @@ public class Game extends AbstractData implements java.io.Serializable {
 
     /**
      * modify the date of last valide action of one of both players
-     * 
+     *
      * @param lastActivity the new date of last valide action of one of both players
      */
     public void setLastActivity(Date lastActivity) {
@@ -254,7 +254,7 @@ public class Game extends AbstractData implements java.io.Serializable {
 
     /**
      * return the chats associated at the game
-     * 
+     *
      * @return the chats associated at the game
      */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "game")
@@ -264,7 +264,7 @@ public class Game extends AbstractData implements java.io.Serializable {
 
     /**
      * modify the chats associated at the game
-     * 
+     *
      * @param chats the new chats associated at the game
      */
     public void setChats(Set<Chat> chats) {
@@ -273,17 +273,26 @@ public class Game extends AbstractData implements java.io.Serializable {
 
     /**
      * return the state of the game
-     * 
+     *
      * @return the state of the game
      */
     @Column(name = "game_state", nullable = true)
     public Blob getGameState() {
         return this.gameState;
     }
-    
+
+    /**
+     * modify the game state with a new the game state in his Serializable form
+     *
+     * @param gameState the new game state in his Serializable form
+     */
+    public void setGameState(Serializable gameState) {
+        setGameState(serialize(gameState));
+    }
+
     /**
      * modify the state of the game
-     * 
+     *
      * @param gameState the new state of the game
      */
     public void setGameState(Blob gameState) {
@@ -292,17 +301,26 @@ public class Game extends AbstractData implements java.io.Serializable {
 
     /**
      * modify the state of the game
-     * 
+     *
      * @return the new state of the game
      */
     @Column(name = "turn_manager", nullable = true)
     public Blob getTurnManager() {
         return this.turnManager;
     }
-    
+
+    /**
+     * modify the turnManager associated to this game with a new one in his Serializable form
+     *
+     * @param turnManager the new turnManager associated to this game in his Serializable form
+     */
+    public void setTurnManager(Serializable turnManager) {
+        setTurnManager(serialize(turnManager));
+    }
+
     /**
      * modify the turnManager associated to the game
-     * 
+     *
      * @param turnManager the new turnManager associated to the game
      */
     public void setTurnManager(Blob turnManager) {
@@ -311,7 +329,7 @@ public class Game extends AbstractData implements java.io.Serializable {
 
     /**
      * return the game state from his Serializable form
-     * 
+     *
      * @return the game state from his Serializable form
      */
     public Serializable getGameStateAsSerializable() {
@@ -319,17 +337,8 @@ public class Game extends AbstractData implements java.io.Serializable {
     }
 
     /**
-     * modify the game state with a new the game state in his Serializable form
-     * 
-     * @param gameState the new game state in his Serializable form
-     */
-    public void setGameState(Serializable gameState) {
-        setGameState(serialize(gameState));
-    }
-
-    /**
      * return the turnManager associated in his Serializable form
-     * 
+     *
      * @return the turnManager associated in his Serializable form
      */
     public Serializable getTurnManagerAsSerializable() {
@@ -337,17 +346,8 @@ public class Game extends AbstractData implements java.io.Serializable {
     }
 
     /**
-     * modify the turnManager associated to this game with a new one in his Serializable form
-     * 
-     * @param turnManager the new turnManager associated to this game in his Serializable form
-     */
-    public void setTurnManager(Serializable turnManager) {
-        setTurnManager(serialize(turnManager));
-    }
-
-    /**
      * check if an object is equivalent to this instance
-     * 
+     *
      * @param obj the object we are checking the equality
      * @return true if they are identicals
      */
@@ -360,19 +360,19 @@ public class Game extends AbstractData implements java.io.Serializable {
         Game b = (Game) obj;
 
         return id == b.getId()
-            && ((tournament == null && b.getTournament() == null) || tournament.equals(b.getTournament()))
-            && ((userByPlayer1 == null && b.getUserByPlayer1() == null) || userByPlayer1.equals(b.getUserByPlayer1()))
-            && ((userByPlayer2 == null && b.getUserByPlayer2() == null) || userByPlayer2.equals(b.getUserByPlayer2()))
-            && ((title == null && b.getTitle() == null) || title.equals(b.getTitle()))
-            && ((remainingLetters == null && b.getRemainingLetters() == null) || remainingLetters.equals(b.getRemainingLetters()))
-            && ((created == null && b.getCreated() == null) || created.equals(b.getCreated()))
-            && ((lastActivity == null && b.getLastActivity() == null) || lastActivity.equals(b.getLastActivity()))
-            && chats.equals(b.getChats());
+                && ((tournament == null && b.getTournament() == null) || tournament.equals(b.getTournament()))
+                && ((userByPlayer1 == null && b.getUserByPlayer1() == null) || userByPlayer1.equals(b.getUserByPlayer1()))
+                && ((userByPlayer2 == null && b.getUserByPlayer2() == null) || userByPlayer2.equals(b.getUserByPlayer2()))
+                && ((title == null && b.getTitle() == null) || title.equals(b.getTitle()))
+                && ((remainingLetters == null && b.getRemainingLetters() == null) || remainingLetters.equals(b.getRemainingLetters()))
+                && ((created == null && b.getCreated() == null) || created.equals(b.getCreated()))
+                && ((lastActivity == null && b.getLastActivity() == null) || lastActivity.equals(b.getLastActivity()))
+                && chats.equals(b.getChats());
     }
 
     /**
      * return an hashcode number valid for any different instance of this class
-     * 
+     *
      * @return an hashcode number valid for any different instance of this class
      */
     @Override
@@ -391,9 +391,9 @@ public class Game extends AbstractData implements java.io.Serializable {
 
     /**
      * override the print of this class. Usefull for debug
-     * 
-     * @return a string with the id, the title, users playing at the game, 
-     *     the date when was created the game and the associated tournament
+     *
+     * @return a string with the id, the title, users playing at the game,
+     * the date when was created the game and the associated tournament
      */
     @Override
     public String toString() {
@@ -402,7 +402,7 @@ public class Game extends AbstractData implements java.io.Serializable {
 
     /**
      * Serialize any Serializable given
-     * 
+     *
      * @param s the Serializable we want to Serialize
      * @return the Serializable serialized
      */
@@ -433,7 +433,7 @@ public class Game extends AbstractData implements java.io.Serializable {
 
     /**
      * Deserialize
-     * 
+     *
      * @param b the Blob we want to deserialize
      * @return the Serializable deserialized
      */

@@ -9,16 +9,16 @@ import javax.persistence.*;
 @Table(name = "matchlist", catalog = "pdg")
 public class Matchlist extends AbstractData implements java.io.Serializable {
 
-   /**
-    * the unique id of this matchlist
-    */
+    /**
+     * the unique id of this matchlist
+     */
     private Integer id;
-    
+
     /**
      * tournament associated to this matchlist
      */
     private Tournament tournament;
-    
+
     /**
      * the user who possess this matchlist
      */
@@ -32,9 +32,9 @@ public class Matchlist extends AbstractData implements java.io.Serializable {
 
     /**
      * Constructor
-     * 
+     *
      * @param tournament associated to this matchlist
-     * @param user who possess this matchlist
+     * @param user       who possess this matchlist
      */
     public Matchlist(Tournament tournament, User user) {
         this.tournament = tournament;
@@ -43,7 +43,7 @@ public class Matchlist extends AbstractData implements java.io.Serializable {
 
     /**
      * return the tournament associated to this matchlist
-     * 
+     *
      * @return the tournament associated to this matchlist
      */
     @ManyToOne(fetch = FetchType.LAZY)
@@ -54,7 +54,7 @@ public class Matchlist extends AbstractData implements java.io.Serializable {
 
     /**
      * modify the tournament associated to this matchlist
-     * 
+     *
      * @param tournament the new tournament associated to this matchlist
      */
     public void setTournament(Tournament tournament) {
@@ -63,7 +63,7 @@ public class Matchlist extends AbstractData implements java.io.Serializable {
 
     /**
      * return the user who possess this matchlist
-     * 
+     *
      * @return the user who possess this matchlist
      */
     @ManyToOne(fetch = FetchType.LAZY)
@@ -74,7 +74,7 @@ public class Matchlist extends AbstractData implements java.io.Serializable {
 
     /**
      * modify the user who possess this matchlist
-     * 
+     *
      * @param user the new user who possess this matchlist
      */
     public void setUser(User user) {
@@ -83,7 +83,7 @@ public class Matchlist extends AbstractData implements java.io.Serializable {
 
     /**
      * check if an object is equivalent to this instance
-     * 
+     *
      * @param obj the object we are checking the equality
      * @return true if they are identicals
      */
@@ -96,15 +96,15 @@ public class Matchlist extends AbstractData implements java.io.Serializable {
         Matchlist b = (Matchlist) obj;
 
         return id == b.getId()
-            && tournament.equals(b.getTournament())
-            && user.equals(b.getUser());
+                && tournament.equals(b.getTournament())
+                && user.equals(b.getUser());
     }
 
     /**
      * override the print of this class. Usefull for debug
-     * 
+     *
      * @return a string with the id, the user who possess this matchlist
-     *     and the associated tournament
+     * and the associated tournament
      */
     @Override
     public String toString() {

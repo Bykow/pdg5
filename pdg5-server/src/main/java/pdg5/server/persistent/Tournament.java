@@ -12,26 +12,26 @@ import java.util.Set;
 @Table(name = "tournament", catalog = "pdg")
 public class Tournament extends AbstractData implements java.io.Serializable {
 
-   /**
-    * title of the tournament
-    */
+    /**
+     * title of the tournament
+     */
     private String title;
-    
+
     /**
      * date when was created the tournament
      */
     private Date created;
-    
+
     /**
      * chats associated at the tournament
      */
     private Set chats = new HashSet(0);
-    
+
     /**
      * matchlists contained in this tournament
      */
     private Set matchlists = new HashSet(0);
-    
+
     /**
      * games played in this tournament
      */
@@ -45,8 +45,8 @@ public class Tournament extends AbstractData implements java.io.Serializable {
 
     /**
      * Constructor
-     * 
-     * @param title of the tournament
+     *
+     * @param title   of the tournament
      * @param created date when was created the tournament
      */
     public Tournament(String title, Date created) {
@@ -55,13 +55,11 @@ public class Tournament extends AbstractData implements java.io.Serializable {
     }
 
     /**
-     * 
-     * 
-     * @param title of the tournament
-     * @param created date when was created the tournament
-     * @param chats associated at the tournament
+     * @param title      of the tournament
+     * @param created    date when was created the tournament
+     * @param chats      associated at the tournament
      * @param matchlists contained in this tournament
-     * @param games played in this tournament
+     * @param games      played in this tournament
      */
     public Tournament(String title, Date created, Set chats, Set matchlists, Set games) {
         this.title = title;
@@ -73,7 +71,7 @@ public class Tournament extends AbstractData implements java.io.Serializable {
 
     /**
      * return the title of the tournament
-     * 
+     *
      * @return the title of the tournament
      */
     @Column(name = "title", nullable = false, length = 45)
@@ -83,7 +81,7 @@ public class Tournament extends AbstractData implements java.io.Serializable {
 
     /**
      * modify the title of the tournament
-     * 
+     *
      * @param title the new title of the tournament
      */
     public void setTitle(String title) {
@@ -92,7 +90,7 @@ public class Tournament extends AbstractData implements java.io.Serializable {
 
     /**
      * return the date when was created the tournament
-     * 
+     *
      * @return the date when was created the tournament
      */
     @Temporal(TemporalType.TIMESTAMP)
@@ -103,7 +101,7 @@ public class Tournament extends AbstractData implements java.io.Serializable {
 
     /**
      * modify the date when was created the tournament
-     * 
+     *
      * @param created the new date when was created the tournament
      */
     public void setCreated(Date created) {
@@ -112,7 +110,7 @@ public class Tournament extends AbstractData implements java.io.Serializable {
 
     /**
      * return the chats associated at the tournament
-     * 
+     *
      * @return the chats associated at the tournament
      */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tournament")
@@ -122,7 +120,7 @@ public class Tournament extends AbstractData implements java.io.Serializable {
 
     /**
      * modify the chats associated at the tournament
-     * 
+     *
      * @param chats the new chats associated at the tournament
      */
     public void setChats(Set chats) {
@@ -131,7 +129,7 @@ public class Tournament extends AbstractData implements java.io.Serializable {
 
     /**
      * return the matchlists contained in this tournament
-     * 
+     *
      * @return the matchlists contained in this tournament
      */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tournament")
@@ -141,7 +139,7 @@ public class Tournament extends AbstractData implements java.io.Serializable {
 
     /**
      * modify the matchlists contained in this tournament
-     * 
+     *
      * @param matchlists the new matchlists contained in this tournament
      */
     public void setMatchlists(Set matchlists) {
@@ -150,7 +148,7 @@ public class Tournament extends AbstractData implements java.io.Serializable {
 
     /**
      * return the games played in this tournament
-     * 
+     *
      * @return the games played in this tournament
      */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tournament")
@@ -160,7 +158,7 @@ public class Tournament extends AbstractData implements java.io.Serializable {
 
     /**
      * modify the games played in this tournament
-     * 
+     *
      * @param games the new games played in this tournament
      */
     public void setGames(Set games) {
@@ -169,7 +167,7 @@ public class Tournament extends AbstractData implements java.io.Serializable {
 
     /**
      * check if an object is equivalent to this instance
-     * 
+     *
      * @param obj the object we are checking the equality
      * @return true if they are identicals
      */
@@ -182,16 +180,16 @@ public class Tournament extends AbstractData implements java.io.Serializable {
         Tournament b = (Tournament) obj;
 
         return id == b.getId()
-            && chats.equals(b.getChats())
-            && ((created == null && b.getCreated() == null) || created.equals(b.getCreated()))
-            && games.equals(b.getGames())
-            && matchlists.equals(b.getMatchlists())
-            && ((title == null && b.getTitle() == null) || title.equals(b.getTitle()));
+                && chats.equals(b.getChats())
+                && ((created == null && b.getCreated() == null) || created.equals(b.getCreated()))
+                && games.equals(b.getGames())
+                && matchlists.equals(b.getMatchlists())
+                && ((title == null && b.getTitle() == null) || title.equals(b.getTitle()));
     }
 
     /**
      * override the print of this class. Usefull for debug
-     * 
+     *
      * @return a string with the id, the title and the date when was created the game
      */
     @Override

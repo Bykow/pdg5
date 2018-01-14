@@ -24,6 +24,7 @@ public interface Protocol {
     final int TOAST_BOTTOM_DIST = 50;
 
     final int TOAST_DEFAULT_DURATION = 5000;
+
     public enum Languages {
         LANG_FR("fr");
         private final String lang;

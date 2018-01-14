@@ -20,35 +20,19 @@ public class NewGame extends Message {
     private TYPE type;
 
     /**
-     * This enum specify the signification of this NewGame instance RANDOM The player
-     * want to add himself to the matchmaking REQUEST Can be used by the client or
-     * the server, if it's the client means he want to play with a specific player,
-     * if it's the server we annonce to the player someone wants to play with him.
-     * ACCEPT The specified player accept the challenge REFUSE The specified player
-     * refuse the challenge PENDING The matchmaking is working CANCEL Cancel the
-     * request
-     */
-    public enum TYPE {
-        RANDOM,
-        REQUEST,
-        ACCEPT,
-        REFUSE,
-        PENDING,
-        CANCEL
-    };
-
-    /**
      * Constructor for random opponent
      */
     public NewGame() {
         this(Utils.RANDOM_OPPONENT, TYPE.RANDOM);
     }
 
+    ;
+
     /**
      * Constructor for specific opponent
      *
      * @param idOpponentWished the id of the opponent, 0 reserved for a random
-     * @param type objective of this instance
+     * @param type             objective of this instance
      */
     public NewGame(int idOpponentWished, TYPE type) {
         this.idOpponentWished = idOpponentWished;
@@ -80,5 +64,23 @@ public class NewGame extends Message {
      */
     public void setType(TYPE type) {
         this.type = type;
+    }
+
+    /**
+     * This enum specify the signification of this NewGame instance RANDOM The player
+     * want to add himself to the matchmaking REQUEST Can be used by the client or
+     * the server, if it's the client means he want to play with a specific player,
+     * if it's the server we annonce to the player someone wants to play with him.
+     * ACCEPT The specified player accept the challenge REFUSE The specified player
+     * refuse the challenge PENDING The matchmaking is working CANCEL Cancel the
+     * request
+     */
+    public enum TYPE {
+        RANDOM,
+        REQUEST,
+        ACCEPT,
+        REFUSE,
+        PENDING,
+        CANCEL
     }
 }

@@ -11,31 +11,25 @@ import java.util.Objects;
  */
 public class Board implements Serializable {
 
-    public enum LAST_ACTION {
-        PLAY, THROW, PASS
-    }
-
-    private LAST_ACTION lastAction;
-
     /**
      * Word in progress for this client
      */
     private final Composition composition;
-
-    private ArrayList<Tile> bonus; // bonus letters
-    private ArrayList<Tile> letters; // normal letters
     private final int playerId; // id of the player associated
     private final String playerName; // name of the player associated
+    private LAST_ACTION lastAction;
+    private ArrayList<Tile> bonus; // bonus letters
+    private ArrayList<Tile> letters; // normal letters
     private int score; // score of the player associated
-
     /**
      * Constructor
      *
      * @param playerName name of the associated player
-     * @param playerId unique id of the associated player
+     * @param playerId   unique id of the associated player
      */
     public Board(String playerName, int playerId) {
-        this.playerName = playerName.substring(0, 1).toUpperCase() + playerName.substring(1).toLowerCase();;
+        this.playerName = playerName.substring(0, 1).toUpperCase() + playerName.substring(1).toLowerCase();
+        ;
         this.playerId = playerId;
 
         bonus = new ArrayList<>();
@@ -66,6 +60,15 @@ public class Board implements Serializable {
     }
 
     /**
+     * set the list of bonus letters to a new one given
+     *
+     * @param bonus list of the new Tiles
+     */
+    public void setBonus(List<Tile> bonus) {
+        this.bonus = new ArrayList<>(bonus);
+    }
+
+    /**
      * return the player last action
      *
      * @return the player last action
@@ -75,12 +78,30 @@ public class Board implements Serializable {
     }
 
     /**
+     * set the player last action
+     *
+     * @param lastAction the new player last action
+     */
+    public void setLastAction(LAST_ACTION lastAction) {
+        this.lastAction = lastAction;
+    }
+
+    /**
      * return the list of normal letters
      *
      * @return the list of normal letters
      */
     public List<Tile> getLetters() {
         return letters;
+    }
+
+    /**
+     * set the list of normal letters to a new one given
+     *
+     * @param letters list of the new Tiles
+     */
+    public void setLetters(List<Tile> letters) {
+        this.letters = new ArrayList<>(letters);
     }
 
     /**
@@ -102,6 +123,15 @@ public class Board implements Serializable {
     }
 
     /**
+     * set the score of the associated player
+     *
+     * @param score the new score of the player
+     */
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    /**
      * return the unique id of the associated player
      *
      * @return the unique id of the associated player
@@ -117,42 +147,6 @@ public class Board implements Serializable {
      */
     public Composition getComposition() {
         return composition;
-    }
-
-    /**
-     * set the list of bonus letters to a new one given
-     *
-     * @param bonus list of the new Tiles
-     */
-    public void setBonus(List<Tile> bonus) {
-        this.bonus = new ArrayList<>(bonus);
-    }
-
-    /**
-     * set the player last action
-     *
-     * @param lastAction the new player last action
-     */
-    public void setLastAction(LAST_ACTION lastAction) {
-        this.lastAction = lastAction;
-    }
-
-    /**
-     * set the score of the associated player
-     *
-     * @param score the new score of the player
-     */
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    /**
-     * set the list of normal letters to a new one given
-     *
-     * @param letters list of the new Tiles
-     */
-    public void setLetters(List<Tile> letters) {
-        this.letters = new ArrayList<>(letters);
     }
 
     public boolean replayWord(List<Tile> word) {
@@ -190,14 +184,14 @@ public class Board implements Serializable {
      */
     public boolean equals(Object o) {
         return getClass().isInstance(o)
-            && getClass() == o.getClass()
-            && bonus.equals(((Board) o).bonus)
-            && letters.equals(((Board) o).letters)
-            && playerId == ((Board) o).playerId
-            && playerName.equals(((Board) o).playerName)
-            && score == ((Board) o).score
-            && composition.equals(((Board) o).composition)
-            && lastAction == ((Board) o).lastAction;
+                && getClass() == o.getClass()
+                && bonus.equals(((Board) o).bonus)
+                && letters.equals(((Board) o).letters)
+                && playerId == ((Board) o).playerId
+                && playerName.equals(((Board) o).playerName)
+                && score == ((Board) o).score
+                && composition.equals(((Board) o).composition)
+                && lastAction == ((Board) o).lastAction;
     }
 
     @Override
@@ -211,5 +205,9 @@ public class Board implements Serializable {
         hash = 67 * hash + this.score;
         hash = 67 * hash + Objects.hashCode(this.lastAction);
         return hash;
+    }
+
+    public enum LAST_ACTION {
+        PLAY, THROW, PASS
     }
 }

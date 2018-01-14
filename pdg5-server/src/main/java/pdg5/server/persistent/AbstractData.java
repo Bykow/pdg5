@@ -11,16 +11,16 @@ import static javax.persistence.GenerationType.IDENTITY;
  */
 public class AbstractData {
 
-   /**
-    * unique data of the data
-    */
+    /**
+     * unique data of the data
+     */
     @Id
     @GeneratedValue(strategy = IDENTITY)
     public Integer id;
 
     /**
      * return the unique id of the data
-     * 
+     *
      * @return the unique id of the data
      */
     @Column(name = "id", unique = true, nullable = false)
@@ -30,7 +30,7 @@ public class AbstractData {
 
     /**
      * change the unique id of the data
-     * 
+     *
      * @param id the new unique id of the data
      */
     public void setId(Integer id) {

@@ -13,21 +13,21 @@ import pdg5.server.util.ServerActiveUser;
  */
 public class ProcessNewGame implements GenericProcess {
 
-   /**
-    * GameController that will create and stock the new game
-    */
+    /**
+     * GameController that will create and stock the new game
+     */
     private final GameController gameController;
-    
+
     /**
      * contains id of players who will play the new game
      */
     private final NewGame newGame;
-    
+
     /**
      * manager of the user who are connected
      */
     private final ServerActiveUser activeUser;
-    
+
     /**
      * manager of the socket where we received the NewGame
      */
@@ -36,9 +36,9 @@ public class ProcessNewGame implements GenericProcess {
     /**
      * Constructor
      *
-     * @param newGame contains id of players who will play the new game
-     * @param gm GameController that will create and stock the new game
-     * @param activeUser manager of the user who are connected
+     * @param newGame       contains id of players who will play the new game
+     * @param gm            GameController that will create and stock the new game
+     * @param activeUser    manager of the user who are connected
      * @param clientHandler manager of the socket where we received the NewGame
      */
     public ProcessNewGame(NewGame newGame, GameController gm, ServerActiveUser activeUser, ClientHandler clientHandler) {

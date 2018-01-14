@@ -17,22 +17,22 @@ public class ManageUser extends Manager {
     public ManageUser() {
         super();
     }
-    
-   /**
-    * Constructor
-    * 
-    * @param session the session used by the manager to do transactions
-    */
+
+    /**
+     * Constructor
+     *
+     * @param session the session used by the manager to do transactions
+     */
     public ManageUser(Session session) {
         super(session);
     }
-    
+
     /**
      * add a user to the database
-     * 
-     * @param email of the user
+     *
+     * @param email    of the user
      * @param username of the user
-     * @param pass the password of the user
+     * @param pass     the password of the user
      * @return the new created user
      */
     public User addUser(String email, String username, String pass) {
@@ -55,7 +55,7 @@ public class ManageUser extends Manager {
         email = email.toLowerCase();
         session.beginTransaction();
         User u = session.createQuery("from User where email=:email", User.class)
-            .setParameter("email", email).uniqueResult();
+                .setParameter("email", email).uniqueResult();
         session.getTransaction().commit();
 
         return u;
@@ -72,7 +72,7 @@ public class ManageUser extends Manager {
         username = username.toLowerCase();
         session.beginTransaction();
         User u = session.createQuery("from User where username=:username", User.class)
-            .setParameter("username", username).uniqueResult();
+                .setParameter("username", username).uniqueResult();
         session.getTransaction().commit();
 
         return u;
@@ -80,7 +80,7 @@ public class ManageUser extends Manager {
 
     /**
      * Get the User whose unique id is given from the DB
-     * 
+     *
      * @param idPlayer unique id of the user
      * @return the found user
      */
@@ -88,15 +88,15 @@ public class ManageUser extends Manager {
         Session session = getSession();
         session.beginTransaction();
         User u = session.createQuery("from User where id=:id", User.class)
-            .setParameter("id", idPlayer).uniqueResult();
+                .setParameter("id", idPlayer).uniqueResult();
         session.getTransaction().commit();
 
         return u;
     }
-    
+
     /**
      * return a list of all user contained in the database
-     * 
+     *
      * @return a list of all user contained in the database
      */
     public List<User> listUser() {
@@ -122,9 +122,9 @@ public class ManageUser extends Manager {
     /**
      * method who check if the password once hashed
      * is the hashed password
-     * 
+     *
      * @param candidate the password tried hashed
-     * @param hashed the password real password hashed
+     * @param hashed    the password real password hashed
      * @return true if they are equals, false otherwise
      */
     private boolean isExpectedPassword(String candidate, String hashed) {
@@ -133,7 +133,7 @@ public class ManageUser extends Manager {
 
     /**
      * update informations of a specified user
-     * 
+     *
      * @param user the new informations of the user
      * @return Protocol.OK if the transaction succeeded or Protocol.Error otherwise
      */
@@ -143,7 +143,7 @@ public class ManageUser extends Manager {
 
     /**
      * delete from the database a specified user
-     * 
+     *
      * @param user the user we wish to delete from the database
      * @return Protocol.OK if the transaction succeeded or Protocol.Error otherwise
      */

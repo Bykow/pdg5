@@ -9,14 +9,13 @@ import pdg5.common.game.Result;
 public class End extends Message {
 
     /**
-     * unique id of the game we are updating
-     */
-    private int idGame;
-
-    /**
      * current result of the game
      */
     private final Result result;
+    /**
+     * unique id of the game we are updating
+     */
+    private int idGame;
 
     /**
      * Constructor

@@ -12,7 +12,7 @@ public class ClientAlreadyConnected extends Exception {
 
     /**
      * Constructor
-     * 
+     * <p>
      * Creates a new instance of <code>ClientAlreadyConnected</code> without detail
      * message.
      */
@@ -21,7 +21,7 @@ public class ClientAlreadyConnected extends Exception {
 
     /**
      * Constructor
-     * 
+     * <p>
      * Constructs an instance of <code>ClientAlreadyConnected</code> with the
      * specified detail message.
      *

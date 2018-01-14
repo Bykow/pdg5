@@ -24,7 +24,7 @@ public class Load extends Message {
     /**
      * Constructor
      *
-     * @param games list of available games
+     * @param games    list of available games
      * @param historic the chat historic
      */
     public Load(List<Game> games, Map<Integer, List<Chat>> historic) {

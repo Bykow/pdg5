@@ -1,27 +1,27 @@
 package pdg5.server.manage;
 
+import org.hibernate.Session;
 import pdg5.server.persistent.Chat;
 import pdg5.server.persistent.Game;
 import pdg5.server.persistent.Tournament;
 
 import java.util.List;
-import org.hibernate.Session;
 
 /**
  * Manager to stock and load the Chats from/to the database
  */
 public class ManageChat extends Manager {
 
-   /**
-    * Constructor
-    */
+    /**
+     * Constructor
+     */
     public ManageChat() {
         super();
     }
 
     /**
      * Constructor
-     * 
+     *
      * @param session the session used by the manager to do transactions
      */
     public ManageChat(Session session) {
@@ -30,7 +30,7 @@ public class ManageChat extends Manager {
 
     /**
      * add a new chat for a specified tournament
-     * 
+     *
      * @param tournament the tournament we wish to add a chat to
      * @return the chat created and added to the database
      */
@@ -42,7 +42,7 @@ public class ManageChat extends Manager {
 
     /**
      * add a new chat for a specified game
-     * 
+     *
      * @param game the game we wish to add a chat to
      * @return the chat created and added to the database
      */
@@ -54,7 +54,7 @@ public class ManageChat extends Manager {
 
     /**
      * return all the chats of the database
-     * 
+     *
      * @return all the chats of the database
      */
     public List<Chat> listChats() {
@@ -63,6 +63,7 @@ public class ManageChat extends Manager {
 
     /**
      * update an existing chat with informations of a new one
+     *
      * @param chat the chat with updated informations
      * @return Protocol.OK if the transaction succeeded or Protocol.Error otherwise
      */
@@ -72,6 +73,7 @@ public class ManageChat extends Manager {
 
     /**
      * delete a chat in the database
+     *
      * @param chat the chat we wish to delete
      * @return Protocol.OK if the transaction succeeded or Protocol.Error otherwise
      */

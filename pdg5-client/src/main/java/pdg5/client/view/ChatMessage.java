@@ -12,7 +12,7 @@ public class ChatMessage extends AnchorPane {
         TextFlow tf = new TextFlow(new Text(msg));
         this.getChildren().add(tf);
 
-        switch(type) {
+        switch (type) {
             case TIME:
             case INFO:
                 AnchorPane.setRightAnchor(tf, 0.0);

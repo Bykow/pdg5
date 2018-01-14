@@ -59,14 +59,14 @@ public class ServerRequestManager {
         } else if (o instanceof SignIn) {
             return new ProcessSignIn((SignIn) o, manageUser, activeUser, gameController, ch).execute();
 
+        } else if (o instanceof Noop) {
+           return new ProcessNoop((Noop) o).execute();
+
         } else if (ch.isConnected()) {
-            if (o instanceof Noop) {
-                return new ProcessNoop((Noop) o).execute();
+           if (o instanceof NewGame) {
+              return new ProcessNewGame((NewGame) o, gameController, activeUser, ch).execute();
 
-            } else if (o instanceof NewGame) {
-                return new ProcessNewGame((NewGame) o, gameController, activeUser, ch).execute();
-
-            } else if (o instanceof Validation) {
+           } else if (o instanceof Validation) {
                 return new ProcessValidation((Validation) o, gameController).execute();
 
             } else if (o instanceof Play) {
@@ -87,7 +87,8 @@ public class ServerRequestManager {
             }
         }
 
-        return new ErrorMessage("Unhandled ErrorMessage is ServerRequestManager, default reached are you connected?");
+        System.err.println("Unhandled ErrorMessage is ServerRequestManager, default reached are you connected?");
+        return new Noop(Noop.Sender.SERVER);
     }
 
 }

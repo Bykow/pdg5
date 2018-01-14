@@ -345,27 +345,25 @@ public class GameController extends AbstractController {
      * @param square     list of bonus on the StackPanes
      */
     private void updateOpponentComposition(boolean isYourTurn, List<Tile> listFrom, List<Composition.Square> square) {
+        cleanList(adversaryList);
+
         for (int i = 0; i < adversaryList.size(); i++) {
+
+            // Makes sure the bonus on the StackPanes are correct
+            if (square.get(i) != Composition.Square.NORMAL) {
+                setModifier(adversaryList.get(i), square.get(i).name(), square.get(i).getText());
+            } else {
+                removeModifier(adversaryList.get(i));
+            }
 
             // Displays the last word play by the opponent
             if (isYourTurn) {
-                if (adversaryList.get(i).getChildren().size() > 1) {
-                    adversaryList.get(i).getChildren().remove(1);
-                    adversaryList.get(i).getStyleClass().remove("covered");
-                }
                 if (!listFrom.isEmpty() && i < listFrom.size()) {
                     adversaryList.get(i).getChildren().add(1, new GTile(listFrom.get(i)));
                     if (square.get(i) != Composition.Square.NORMAL) {
                         adversaryList.get(i).getStyleClass().add("covered");
                     }
                 }
-            } else {
-                cleanList(adversaryList);
-            }
-
-            // Makes sure the bonus on the StackPanes are correct
-            if (square.get(i) != Composition.Square.NORMAL) {
-                setModifier(adversaryList.get(i), square.get(i).name(), square.get(i).getText());
             }
         }
     }

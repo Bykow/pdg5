@@ -26,7 +26,6 @@ import java.util.stream.Collectors;
  */
 public class GameController {
 
-    private final static int KEY_CHATS = 9999;
     /**
      * Max time to play (72 hours in millisecond)
      */
@@ -185,17 +184,24 @@ public class GameController {
                 .stream()
                 .findFirst()
                 .orElseGet(() -> {
-                    serverChats.put(idGame, new ArrayList<>());
                     manageChat.addChatGame(game);
                     manageGame.updateGame(game);
                     return manageChat.listChats().stream().findAny().get();
                 });
+        
 
         manageMessage.addMessage(chatServer.getMessage(), manageUser.getUserById(idPlayer), databaseChat);
         manageChat.updateChat(databaseChat);
 
         // adding message in memory
-        serverChats.get(idGame).add(chatServer);
+        List<ChatServerSide> listChats = serverChats.get(idGame);
+            
+        if(listChats == null){
+           listChats = new ArrayList<>();
+           serverChats.put(idGame, listChats);
+        }
+        
+        listChats.add(chatServer);
 
         // tell to other player
         int idSecondPlayer = games.get(idGame).getOpponentBoardById(chatServer.getIdSender()).getPlayerId();

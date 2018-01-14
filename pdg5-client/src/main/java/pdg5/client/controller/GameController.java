@@ -29,8 +29,8 @@ public class GameController extends AbstractController {
 
     private static final DataFormat tileFormat = new DataFormat("tile.model");
     // Constants string to display
-    private final String LEFTTILESINGLE = " tuille restante";
-    private final String LEFTTILEPLURAL = " tuilles restantes";
+    private final String LEFTTILESINGLE = " tuile restante";
+    private final String LEFTTILEPLURAL = " tuiles restantes";
     private final String ENDWIN = "Bravo ! Tu as gagné !";
     private final String ENDLOSE = "Tu as perdu la partie... ";
     private final String ENDEQUALITY = "Equalité !";

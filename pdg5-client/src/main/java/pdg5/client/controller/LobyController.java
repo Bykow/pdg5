@@ -223,10 +223,13 @@ public class LobyController extends AbstractController {
     public void updateGame(Game game) {
         gameModelList.removeIf((o) -> o.getID() == game.getID());
         addGame(game);
-        if (game.getState() == GameModel.State.FINISHED) {
-            mainController.getGameController().displayEndState(game.getResult());
-        } else if (mainController.getGameController().getGameID() == game.getID()) {
-            mainController.getGameController().updateGame(game);
+
+        if (mainController.getGameController().getGameID() == game.getID()) {
+            if (game.getState() == GameModel.State.FINISHED) {
+                mainController.getGameController().displayEndState(game.getResult());
+            } else {
+                mainController.getGameController().updateGame(game);
+            }
         }
 
         if (!historic.containsKey(game.getID())) {

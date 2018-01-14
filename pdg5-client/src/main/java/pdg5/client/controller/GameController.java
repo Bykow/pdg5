@@ -70,6 +70,8 @@ public class GameController extends AbstractController {
     private Button btnPlay;
     @FXML
     private Button btnDiscard;
+    @FXML
+    private Button btnSwap;
 
     // ID of the current game displayed
     private int gameID;
@@ -502,6 +504,9 @@ public class GameController extends AbstractController {
      * @param result Result of the game
      */
     public void displayEndState(Result result) {
+        btnPlay.setDisable(true);
+        btnDiscard.setDisable(true);
+        btnSwap.setDisable(true);
         Platform.runLater(() -> {
                     switch (result) {
                         case WIN:

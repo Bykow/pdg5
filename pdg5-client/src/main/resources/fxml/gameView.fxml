@@ -150,7 +150,7 @@
             </font>
         </Label>
         <Label fx:id="remainingTiles" alignment="CENTER" layoutX="140.0" layoutY="204.0" prefHeight="36.0"
-               prefWidth="245.0" text="0 tuilles restantes" textFill="#f7f6f6">
+               prefWidth="245.0" text="0 tuiles restantes" textFill="#f7f6f6">
             <font>
                 <Font name="Helvetica Bold" size="18.0"/>
             </font>

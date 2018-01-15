@@ -87,7 +87,7 @@ public class LobyController extends AbstractController {
     private List<GGameListEntry> genGraphicalEntry(Predicate<Game> state) {
         return gameModelList.stream()
                 .filter(state)
-                .sorted(Comparator.comparing(Game::getLastActivity))
+                .sorted(Comparator.comparing(Game::getLastActivity).reversed())
                 .map(m -> new GGameListEntry(m, this::handleMouseClick, this::handleDelete))
                 .collect(Collectors.toList());
     }

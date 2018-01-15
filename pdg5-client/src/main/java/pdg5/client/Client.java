@@ -3,18 +3,17 @@ package pdg5.client;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import pdg5.client.controller.MainController;
 import pdg5.client.util.ClientRequestManager;
 import pdg5.common.Protocol;
 
-import javax.net.ssl.SSLSocket;
-import javax.net.ssl.SSLSocketFactory;
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import javax.net.ssl.*;
+import java.io.*;
+import java.security.KeyStore;
 import java.util.Properties;
 
 public class Client extends Application {
@@ -46,10 +45,13 @@ public class Client extends Application {
         this.primaryStage.setTitle("WordOn Desktop");
         this.primaryStage.setResizable(false);
 
-        initRootLayout();
+        // Set app icon
+        this.primaryStage.getIcons().add(new Image(Client.class.getResourceAsStream("/img/icon.png")));
 
-        System.setProperty("javax.net.ssl.trustStore", "clientKeyStore.jks");
-        System.setProperty("javax.net.ssl.trustStorePassword", "pdg5Password");
+        Font.loadFont(Client.class.getResource("/font/OpenSans-Bold.ttf").toExternalForm(), 20);
+        Font.loadFont(Client.class.getResource("/font/OpenSans-Regular.ttf").toExternalForm(), 20);
+
+        initRootLayout();
 
         File configFile = new File(System.getProperty("user.dir") + File.separator + Protocol.CONFIG_FILE);
         Properties config = new Properties();
@@ -65,7 +67,16 @@ public class Client extends Application {
 
         // Try connect
         try {
-            SSLSocketFactory factory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+            TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+            KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
+            InputStream keystoreStream = Client.class.getClassLoader().getResourceAsStream("ClientKeyStore.jks");
+            keystore.load(keystoreStream, "pdg5Password".toCharArray());
+            trustManagerFactory.init(keystore);
+            TrustManager[] trustManagers = trustManagerFactory.getTrustManagers();
+            SSLContext ctx = SSLContext.getInstance("TLS");
+            ctx.init(null, trustManagers, null);
+
+            SSLSocketFactory factory = ctx.getSocketFactory();
             this.socket = (SSLSocket) factory.createSocket(serverAddr, serverPort);
 
             socket.setEnabledCipherSuites(socket.getSupportedCipherSuites());
@@ -78,6 +89,7 @@ public class Client extends Application {
             isConnected = true;
         } catch (Exception e) {
             System.err.println("Connection error");
+            e.printStackTrace();
         }
     }
 

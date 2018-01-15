@@ -138,7 +138,6 @@ public class LobyController extends AbstractController {
     private void logout(ActionEvent actionEvent) {
         // Will bring back the SignIn panel
         mainController.logout();
-        sender.add(new Logout());
     }
 
     /**

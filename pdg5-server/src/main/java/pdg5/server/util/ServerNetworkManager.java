@@ -64,7 +64,7 @@ public class ServerNetworkManager {
                 socket = serverSocket.accept();
 
                 final char[] JKS_PASSWORD = "pdg5Password".toCharArray();
-                final char[] KEY_PASSWORD = "psg5Password".toCharArray();
+                final char[] KEY_PASSWORD = "pdg5Password".toCharArray();
 
                 /* Get the JKS contents */
                 final KeyStore keyStore = KeyStore.getInstance("JKS");

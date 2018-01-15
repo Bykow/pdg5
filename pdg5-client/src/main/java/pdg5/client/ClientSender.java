@@ -57,7 +57,6 @@ public class ClientSender implements Runnable {
 
         while (true) {
             launch = true;
-            System.out.println("ClientSender.run");
             try {
                 out.writeObject(queue.take());
             } catch (IOException e) {

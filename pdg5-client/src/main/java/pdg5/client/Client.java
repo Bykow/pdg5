@@ -59,7 +59,6 @@ public class Client extends Application {
         // Get properties file inside working dir
         File configFile = new File(System.getProperty("user.dir") + File.separator + Protocol.CONFIG_FILE);
         Properties config = new Properties();
-        System.out.println(configFile.getPath());
 
         // Try to load properties file
         try {

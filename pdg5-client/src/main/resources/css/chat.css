@@ -86,7 +86,6 @@ TextFlow {
 
 .user TextFlow {
     -fx-max-width: 200px;
-    -fx-text-alignment: right;
     -fx-background-color: #34495E;
     -fx-padding: 5px 10px 4px 10px;
 }

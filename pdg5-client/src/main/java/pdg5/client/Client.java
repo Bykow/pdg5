@@ -53,8 +53,13 @@ public class Client extends Application {
 
         initRootLayout();
 
+        // To use if jar will be packaged into a mac OS .app
+        //File configFile = new File(new File(System.getProperty("user.dir")).getParentFile().getParent() + File.separator + Protocol.CONFIG_FILE);
+
+        // Get properties file inside working dir
         File configFile = new File(System.getProperty("user.dir") + File.separator + Protocol.CONFIG_FILE);
         Properties config = new Properties();
+        System.out.println(configFile.getPath());
 
         // Try to load properties file
         try {
@@ -63,8 +68,8 @@ public class Client extends Application {
         }
 
         // Get properties if exist or use default value
-        String serverAddr = config.getProperty("SERVER_ADRR", Protocol.DEFAULT_SERVER);
-        int serverPort = Integer.getInteger(config.getProperty("SERVER_PORT"), Protocol.DEFAULT_PORT);
+        String serverAddr = config.getProperty("SERVER_ADDR", Protocol.DEFAULT_SERVER);
+        int serverPort = Integer.parseInt(config.getProperty("SERVER_PORT", String.valueOf(Protocol.DEFAULT_PORT)));
 
         // Try connect
         try {

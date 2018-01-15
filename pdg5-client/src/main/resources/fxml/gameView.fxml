@@ -10,7 +10,7 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="543.0" prefWidth="524.0" visible="false"
             style="-fx-background-color: #3caef5;" xmlns="http://javafx.com/javafx/8.0.131">
     <children>
-        <HBox layoutY="393.0" prefHeight="80.0" prefWidth="524.0" styleClass="table">
+        <HBox layoutY="390.0" prefHeight="80.0" prefWidth="524.0" styleClass="table">
             <children>
                 <StackPane fx:id="ugbox0" prefHeight="200.0" prefWidth="200.0"/>
                 <StackPane fx:id="ugbox1" prefHeight="200.0" prefWidth="200.0"/>

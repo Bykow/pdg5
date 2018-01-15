@@ -282,21 +282,21 @@ public class Game extends AbstractData implements java.io.Serializable {
     }
 
     /**
-     * modify the game state with a new the game state in his Serializable form
-     *
-     * @param gameState the new game state in his Serializable form
-     */
-    public void setGameState(Serializable gameState) {
-        setGameState(serialize(gameState));
-    }
-
-    /**
      * modify the state of the game
      *
      * @param gameState the new state of the game
      */
     public void setGameState(Blob gameState) {
         this.gameState = gameState;
+    }
+
+    /**
+     * modify the game state with a new the game state in his Serializable form
+     *
+     * @param gameState the new game state in his Serializable form
+     */
+    public void setGameState(Serializable gameState) {
+        setGameState(serialize(gameState));
     }
 
     /**
@@ -310,21 +310,21 @@ public class Game extends AbstractData implements java.io.Serializable {
     }
 
     /**
-     * modify the turnManager associated to this game with a new one in his Serializable form
-     *
-     * @param turnManager the new turnManager associated to this game in his Serializable form
-     */
-    public void setTurnManager(Serializable turnManager) {
-        setTurnManager(serialize(turnManager));
-    }
-
-    /**
      * modify the turnManager associated to the game
      *
      * @param turnManager the new turnManager associated to the game
      */
     public void setTurnManager(Blob turnManager) {
         this.turnManager = turnManager;
+    }
+
+    /**
+     * modify the turnManager associated to this game with a new one in his Serializable form
+     *
+     * @param turnManager the new turnManager associated to this game in his Serializable form
+     */
+    public void setTurnManager(Serializable turnManager) {
+        setTurnManager(serialize(turnManager));
     }
 
     /**

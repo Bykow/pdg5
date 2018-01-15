@@ -60,13 +60,13 @@ public class ServerRequestManager {
             return new ProcessSignIn((SignIn) o, manageUser, activeUser, gameController, ch).execute();
 
         } else if (o instanceof Noop) {
-           return new ProcessNoop((Noop) o).execute();
+            return new ProcessNoop((Noop) o).execute();
 
         } else if (ch.isConnected()) {
-           if (o instanceof NewGame) {
-              return new ProcessNewGame((NewGame) o, gameController, activeUser, ch).execute();
+            if (o instanceof NewGame) {
+                return new ProcessNewGame((NewGame) o, gameController, activeUser, ch).execute();
 
-           } else if (o instanceof Validation) {
+            } else if (o instanceof Validation) {
                 return new ProcessValidation((Validation) o, gameController).execute();
 
             } else if (o instanceof Play) {

@@ -432,9 +432,11 @@ public class GameController extends AbstractController {
         if (!g.isYourTurn()) {
             btnPlay.setDisable(true);
             btnDiscard.setDisable(true);
+            btnSwap.setDisable(true);
         } else {
             btnPlay.setDisable(false);
             btnDiscard.setDisable(false);
+            btnSwap.setDisable(false);
         }
 
         // Call to the UI thread to display new infos

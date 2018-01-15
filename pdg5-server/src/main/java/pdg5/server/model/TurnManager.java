@@ -131,21 +131,45 @@ public class TurnManager implements Serializable {
 
     /**
      * return the array of Square associated to the unique id player given
-     *
-     * @param idPlayer unique id of a player
-     * @return the array of Square associated to the unique id player given
+     * 
+     * @param idPlayer
+     * @return the array of Square associated to the unique id player given for current turn
      * @throws IllegalArgumentException if the id isn't one of the players
      */
     public Composition.Square[] getSquares(int idPlayer) throws IllegalArgumentException {
+       return getSquares(idPlayer, turn);
+    }
+    
+    /**
+     * return the array of Square associated to the unique id player given
+     * 
+     * @param idPlayer unique id of a player
+     * @return the array of Square associated to the unique id player given for previous turn
+     * @throws IllegalArgumentException if the id isn't one of the players
+     */
+    public Composition.Square[] getPreviousSquares(int idPlayer) throws IllegalArgumentException {
+       return getSquares(idPlayer, turn - 1);
+    }
+    
+    /**
+     * return the array of Square associated to the unique id player given
+     * for a specific turn
+     *
+     * @param idPlayer unique id of a player
+     * @param turnWished the turn we want the Squares
+     * @return the array of Square associated to the unique id player given for given turn
+     * @throws IllegalArgumentException if the id isn't one of the players
+     */
+    private Composition.Square[] getSquares(int idPlayer, int turnWished) throws IllegalArgumentException {
         checkIdPlayerInGame(idPlayer);
         int size = POSSIBLE_ARRAY_SQUARES.length;
         int position;
         if (isAnAIGame() && idPlayer == idPlayer2) {
-            position = (size - 2 - turn) % size;
+            position = (size - 2 - turnWished) % size;
         } else if (idPlayer == idPlayer2) {
-            position = (size - 1 - turn) % size;
+            position = (size - 1 - turnWished) % size;
         } else {
-            position = turn % size;
+            position = turnWished % size;
         }
 
         Square[] squares;

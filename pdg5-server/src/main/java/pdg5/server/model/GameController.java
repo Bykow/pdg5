@@ -415,6 +415,14 @@ public class GameController {
 
         List<Tile> lastWordPlayed;
         lastWordPlayed = gm.getLastWordPlayed();
+        
+        if(hisTurn) {
+           cleanedOpponentBoard.getComposition().setSquare(tm.getPreviousSquares(idGame));
+           boardOfClient.getComposition().setSquare(tm.getSquares(idGame));
+        } else {
+           boardOfClient.getComposition().setSquare(tm.getPreviousSquares(idGame));
+           cleanedOpponentBoard.getComposition().setSquare(tm.getSquares(idGame));
+        }
 
         Game game = new Game(gm.getGameId(), gm.getCreation(),
                 gm.getLastMove(), gm.getIdTournament(), boardOfClient,

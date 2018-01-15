@@ -59,7 +59,8 @@ public class Client extends Application {
         // Try to load properties file
         try {
             config.load(new BufferedInputStream(new FileInputStream(configFile)));
-        } catch (IOException e) {}
+        } catch (IOException e) {
+        }
 
         // Get properties if exist or use default value
         String serverAddr = config.getProperty("SERVER_ADRR", Protocol.DEFAULT_SERVER);

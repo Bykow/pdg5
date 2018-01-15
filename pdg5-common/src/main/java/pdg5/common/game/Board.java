@@ -21,6 +21,7 @@ public class Board implements Serializable {
     private ArrayList<Tile> bonus; // bonus letters
     private ArrayList<Tile> letters; // normal letters
     private int score; // score of the player associated
+
     /**
      * Constructor
      *

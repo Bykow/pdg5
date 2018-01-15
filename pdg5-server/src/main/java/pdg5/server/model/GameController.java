@@ -188,19 +188,19 @@ public class GameController {
                     manageGame.updateGame(game);
                     return manageChat.listChats().stream().findAny().get();
                 });
-        
+
 
         manageMessage.addMessage(chatServer.getMessage(), manageUser.getUserById(idPlayer), databaseChat);
         manageChat.updateChat(databaseChat);
 
         // adding message in memory
         List<ChatServerSide> listChats = serverChats.get(idGame);
-            
-        if(listChats == null){
-           listChats = new ArrayList<>();
-           serverChats.put(idGame, listChats);
+
+        if (listChats == null) {
+            listChats = new ArrayList<>();
+            serverChats.put(idGame, listChats);
         }
-        
+
         listChats.add(chatServer);
 
         // tell to other player

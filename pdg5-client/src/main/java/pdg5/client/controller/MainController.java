@@ -157,9 +157,6 @@ public class MainController extends AbstractController {
      * @return Game Controller
      */
     public GameController getGameController() {
-        if (!gameContainer.getChildren().get(1).isVisible()) {
-            gameContainer.getChildren().get(1).setVisible(true);
-        }
         return gameController;
     }
 
@@ -180,6 +177,7 @@ public class MainController extends AbstractController {
     public ChatController getChatController() {
         if (!chatContainer.getChildren().get(1).isVisible()) {
             chatContainer.getChildren().get(1).setVisible(true);
+            gameContainer.getChildren().get(1).setVisible(true);
         }
         return chatController;
     }

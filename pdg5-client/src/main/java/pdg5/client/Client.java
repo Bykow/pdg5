@@ -3,6 +3,7 @@ package pdg5.client;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
@@ -95,6 +96,13 @@ public class Client extends Application {
         } catch (Exception e) {
             System.err.println("Connection error");
             e.printStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur de connexion");
+            alert.setHeaderText("Impossible de se connecter au serveur");
+            alert.setContentText("Veuillez vérifier que le serveur soit lancé ainsi que la configuration du client 'client.properties'");
+            alert.showAndWait();
+            System.exit(0);
         }
     }
 

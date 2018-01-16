@@ -58,16 +58,16 @@
 
 ## Itération 12: *12 décembre 2017*
 > - [x] Ajout et implémentation du chat dans la partie
-> - [ ] Déroulement basique d'une partie
+> - [x] Déroulement basique d'une partie
 
 ## Itération 13: *19 décembre 2017*
-> - [ ] Lancer une recherche de partie
+> - [x] Lancer une recherche de partie
 > - [ ] Ajout des fonctionnalités 
->   - [ ] Bonus
->   - [ ] Mélanger les tuiles
->   - [ ] Gestion de la liste d'ami
->   - [ ] Historique utilisateur
->   - [ ] Statistiques utilisateur
+>   - [x] Bonus
+>   - [x] Mélanger les tuiles
+>   - [ ] Gestion de la liste d'ami (Serveur oui mais pas d'affichage client)
+>   - [x] Historique utilisateur
+>   - [ ] Statistiques utilisateur ( Serveur oui mais pas d'affichage client)
 
 <hr/>
 <center><b>Vacances</b></center>
@@ -75,22 +75,30 @@
 
 ## Itération 14: *9 janvier 2018*
 > - [ ] Ajout des fonctionnalités 
->   - [ ] Jeter les tuiles
+>   - [x] Jeter les tuiles
 >   - [ ] Aperçu des tuiles de l'adversaire
 >   - [ ] Ajout des notifications windows
 >   - [ ] Parrainage
 > - [ ] Mode tournoi
 >   - [ ] Implémentation d'une IA
->   - [ ] Propre logique du jeu
+>   - [x] Propre logique du jeu
 >   - [ ] Adaptation du modèle du jeu
-> - [ ] Rapport et finalisation
+> - [x] Rapport et finalisation
 
 ## Itération 15: *16 janvier 2018*
-> - [ ] Rapport et finalisation
-> - [ ] **\* Rendu final du projet**
+> - [x] Rapport et finalisation
+> - [x] **\* Rendu final du projet**
 
 ## Itération 16: *23 janvier 2018*
 > - [ ] **\* Défense orale**
 
-
 *\* : élément itératif imposé*
+
+# Commentaires
+
+## 13 novembre
+Nous sommes en retard d'environ une semaine sur certains points, on replanifie les tâches non effectuées plus loin afin de rattrapé ce retard. On en profite pour mieux déinir les itérations pour avoir une meilleures visibilités des choses à faire.
+
+## 12 décembre
+Nous n'avons pas réussi à récupérer le retard pris le 13 novembre, la fin du projet approchant, on décide de décaler toute notre planification une semaine plus tard. Ceci dans le but de ne pas aggraver le retard mais de le garder à une semaine, et de profiter du fait que lors de notre planification initial, nous avions prévu un tampon à la fin du projet pour pouvoir gérer ce genre de cas
+
